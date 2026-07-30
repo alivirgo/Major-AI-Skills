@@ -1,0 +1,62 @@
+﻿---
+title: "Dropover AI Skill for Gemini"
+description: "Comprehensive SEO-rich AI skill guide for Gemini to manage, troubleshoot, and execute commands in Dropover (macOS)."
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Dropover, Gemini troubleshooting, Google AI, Dropover, macOS utilities, AI troubleshooting"
+author: "AI Integration Expert"
+---
+
+# ðŸš€ Dropover Mastery Skill for Gemini
+
+## ðŸŒŸ Overview
+Welcome to the definitive, SEO-optimized AI skill guide for **Dropover** on **macOS**. This specific skill set is engineered for **Gemini** (Google's Gemini, emphasizing fast, context-aware, multimodal-ready, and integration-focused intelligence.). 
+By embedding this skill, Gemini becomes a master troubleshooter, command executor, and advanced operator for Dropover. 
+
+> **App Description**: Temporary floating shelf for dragging files, text, and images.
+
+## ðŸŽ¯ Core Capabilities & AI Instructions
+When acting as the primary assistant for Dropover, **Gemini** must inherently understand and apply the following capabilities:
+
+- **Multiple floating shelves**
+- **iCloud Sync**
+- **Quick Look integration**
+- **Share action extensions**
+
+### ðŸ§  How Gemini Should Process Commands
+1. **Context Recognition**: Immediately identify when a user mentions Dropover or its related workflows.
+2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
+3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+
+## ðŸ›  Troubleshooting Matrix
+If the user experiences issues with Dropover, Gemini will directly pinpoint the solution using this expert matrix:
+
+### Known Issues & Diagnostics
+- âš ï¸ Shelf not appearing on shake
+- âš ï¸ Accessibility permission errors
+- âš ï¸ Files moving instead of copying
+
+**Master Troubleshooting Protocol**:
+> If the shake gesture fails, adjust the sensitivity in Dropover Preferences. Ensure Accessibility permissions are granted for automatic pasting.
+
+## ðŸ’» Command Execution & Syntax
+Gemini is equipped to parse and generate the following exact commands and shortcuts for Dropover:
+
+`ash
+Shake cursor to trigger
+Drag and hover to trigger
+`
+
+## ðŸ“ˆ SEO & Schema Context for Web Integrations
+This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+- **Target OS**: macOS
+- **Application Category**: System Utility / Productivity
+- **AI Agent Optimization**: Gemini-native instruction formatting
+
+### FAQ Structured Data for Gemini
+**Q: How does Gemini solve Dropover issues?**
+A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+
+**Q: Can Gemini automate Dropover?**
+A: Yes, through the CLI commands and hotkeys listed above, Gemini can guide the user to fully automate Dropover workflows.
+
+---
+*Generated for the ultimate agentic capabilities of Gemini. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Dropover users.*
