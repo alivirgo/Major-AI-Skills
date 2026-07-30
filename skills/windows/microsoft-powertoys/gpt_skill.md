@@ -1,7 +1,7 @@
 ---
 title: "Microsoft PowerToys AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Microsoft PowerToys on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Microsoft PowerToys, ChatGPT troubleshooting, GPT automation, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Microsoft PowerToys, ChatGPT troubleshooting, GPT automation, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,9 +14,20 @@ This document serves as the official operational skill guide for **Microsoft Pow
 - **Category**: Power-User Operating System Utilities
 - **Platform**: Windows
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, Text Extractor, and Color Picker.
+> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, and Text Extractor.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
@@ -33,8 +44,6 @@ The GPT model can assist users in configuring and executing the following capabi
 - **FancyZones window grid layout management**
 - **PowerToys Run quick launcher (Alt+Space)**
 - **Text Extractor OCR utility (Win+Shift+T)**
-- **Color Picker system-wide eyedropper (Win+Shift+C)**
-- **Awake keep-awake system utility & File Locksmith process analyzer**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding Microsoft PowerToys, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Microsoft PowerToys, GPT 
 
 If Microsoft PowerToys encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] FancyZones fails to snap elevated (Administrator) windows
-- **Root Cause**: PowerToys process running with standard user permissions.
+#### [Issue] FancyZones fails to snap elevated windows
+- **Root Cause**: PowerToys process running as standard user.
 - **Resolution Pathway**: Enable 'Always run as administrator' in PowerToys General settings.
-
-#### [Issue] PowerToys Run lags or fails to open
-- **Root Cause**: Corrupted plugin index or background process lockup.
-- **Resolution Pathway**: Kill PowerToys.PowerLauncher.exe in Task Manager and restart PowerToys.
 
 
 ---
@@ -66,7 +71,6 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 PowerToys.exe
-PowerToys.ColorPicker.exe
 PowerToys.PowerLauncher.exe
 ```
 
@@ -74,7 +78,6 @@ PowerToys.PowerLauncher.exe
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
-- `%LOCALAPPDATA%\Microsoft\PowerToys\FancyZones\zones-settings.json`
 
 ---
 
@@ -94,4 +97,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

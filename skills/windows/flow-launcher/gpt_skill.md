@@ -1,7 +1,7 @@
 ---
 title: "Flow Launcher AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Flow Launcher on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Flow Launcher, ChatGPT troubleshooting, GPT automation, Flow Launcher, Windows utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Flow Launcher, ChatGPT troubleshooting, GPT automation, Flow Launcher, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,16 +14,27 @@ This document serves as the official operational skill guide for **Flow Launcher
 - **Category**: Productivity Application & File Launcher
 - **Platform**: Windows
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-> **Core Purpose**: Extensible, open-source application launcher for Windows with deep Everything and Python integration.
+> **Core Purpose**: Extensible open-source application launcher with deep Everything and Python plugin integration.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with Flow Launcher, GPT must understand its underlying technical framework:
 
-C# / WPF framework with isolated Python runtime environment for plugins and IPC connection to Voidtools Everything.
+C# / WPF framework with isolated Python runtime environment for third-party plugins.
 
 ---
 
@@ -31,10 +42,8 @@ C# / WPF framework with isolated Python runtime environment for plugins and IPC 
 The GPT model can assist users in configuring and executing the following capabilities of Flow Launcher:
 
 - **Instant app launching and Everything file search integration**
-- **Rich C# and Python plugin ecosystem with auto-updating**
+- **Rich C# and Python plugin ecosystem**
 - **Web search triggers, bookmark queries, and inline calculator**
-- **Customizable themes, keybindings, and action keywords**
-- **Direct shell command execution via '>' prefix**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding Flow Launcher, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Flow Launcher, GPT must e
 
 If Flow Launcher encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] Python plugins crash or fail to load
-- **Root Cause**: Flow Launcher cannot locate a valid Python interpreter in PATH.
-- **Resolution Pathway**: Specify exact python.exe path under Flow Launcher Settings -> Plugin Store -> Python Settings.
-
-#### [Issue] Local file search unresponsive
-- **Root Cause**: Everything IPC service lost connection.
-- **Resolution Pathway**: Ensure Everything service is running in background and IPC is enabled.
+#### [Issue] Python plugins fail to load
+- **Root Cause**: Flow Launcher cannot locate Python interpreter in PATH.
+- **Resolution Pathway**: Specify exact python.exe path in Flow Settings -> Plugin Store -> Python Settings.
 
 
 ---
@@ -66,7 +71,6 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 Flow.Launcher.exe
-Flow.Launcher.exe --hide
 Flow.Launcher.exe --query "g github flow launcher"
 ```
 
@@ -74,7 +78,6 @@ Flow.Launcher.exe --query "g github flow launcher"
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `%APPDATA%\FlowLauncher\Settings\Settings.json`
-- `%APPDATA%\FlowLauncher\Plugins`
 
 ---
 
@@ -94,4 +97,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

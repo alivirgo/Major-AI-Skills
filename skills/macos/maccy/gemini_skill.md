@@ -1,7 +1,7 @@
 ---
 title: "MacCy AI Skill Guide for Gemini"
 description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate MacCy on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacCy, Gemini troubleshooting, Google AI, MacCy, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacCy, Gemini troubleshooting, Google AI, MacCy, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -20,21 +20,30 @@ This document serves as the official operational skill guide for **MacCy** on **
 
 ---
 
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
+
+---
+
 ## Architectural Deep Dive
 When interacting with MacCy, Gemini must understand its underlying technical framework:
 
-Monitors macOS NSPasteboard change events and stores historical data in SQLite / CoreData storage.
+Monitors macOS NSPasteboard change events and stores historical data in SQLite storage.
 
 ---
 
 ## Key Features and Operational Capabilities
 The Gemini model can assist users in configuring and executing the following capabilities of MacCy:
 
-- **Searchable clipboard history with fuzzy search algorithms**
-- **Support for plain text, rich text, images, and file paths**
-- **Pinning clips to prevent automated history cleanup**
+- **Searchable clipboard history with fuzzy search**
 - **Secure Input detection ignoring password managers**
-- **Custom keybindings and menu bar popover customization**
+- **Pinning clips to prevent cleanup**
 
 ### Gemini Processing and Execution Guidelines
 When a user issues commands or requests help regarding MacCy, Gemini must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding MacCy, Gemini must execut
 
 If MacCy encounters operational failures, Gemini must analyze issues using the resolution pathways below:
 
-#### [Issue] MacCy stops saving copied items
-- **Root Cause**: An app (e.g. 1Password or Terminal) has active Secure Input locked.
-- **Resolution Pathway**: Run 'ioreg -l -w 0 | grep SecureInput' in Terminal to identify and close the locking application.
-
-#### [Issue] High RAM usage from clipboard history
-- **Root Cause**: Large uncompressed image clips stored in history database.
-- **Resolution Pathway**: Limit maximum history size or disable image storage in MacCy Preferences -> Pasteboard.
+#### [Issue] Clips not saving
+- **Root Cause**: Secure Input lock active by password manager.
+- **Resolution Pathway**: Run 'ioreg -l -w 0 | grep SecureInput' to find locking app.
 
 
 ---
@@ -66,14 +71,12 @@ The Gemini model can generate or execute the following terminal and shell comman
 
 ```bash
 open -a MacCy
-defaults read org.pavelgroup.MacCy
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, Gemini should point users to the following file locations:
 
 - `~/Library/Preferences/org.pavelgroup.MacCy.plist`
-- `~/Library/Containers/org.pavelgroup.MacCy`
 
 ---
 
@@ -93,4 +96,4 @@ A: Gemini inspects execution permissions, process status, configuration paths, a
 A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

@@ -1,7 +1,7 @@
 ---
 title: "MacWhisper AI Skill Guide for Gemini"
 description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate MacWhisper on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacWhisper, Gemini troubleshooting, Google AI, MacWhisper, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacWhisper, Gemini troubleshooting, Google AI, MacWhisper, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -16,25 +16,34 @@ This document serves as the official operational skill guide for **MacWhisper** 
 - **Target AI Agent**: Gemini
 - **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
 
-> **Core Purpose**: On-device AI speech transcription app using OpenAI's Whisper model optimized for Apple Silicon (CoreML / Metal acceleration) with 100% offline privacy.
+> **Core Purpose**: On-device AI speech transcription app using OpenAI's Whisper model optimized for Apple Silicon with 100% offline privacy.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with MacWhisper, Gemini must understand its underlying technical framework:
 
-Swift application binding OpenAI Whisper.cpp / CoreML C++ library, utilizing Apple Neural Engine (ANE) for 30x real-time transcription speeds.
+Swift application binding Whisper.cpp / CoreML C++ library utilizing Apple Neural Engine (ANE).
 
 ---
 
 ## Key Features and Operational Capabilities
 The Gemini model can assist users in configuring and executing the following capabilities of MacWhisper:
 
-- **Drag-and-drop audio/video transcription (MP3, WAV, MP4, MOV)**
-- **Real-time microphone dictation & system audio recording**
-- **SRT, VTT, CSV, PDF, and TXT subtitle export options**
-- **Automatic language translation to English**
-- **Speaker diarization (speaker separation and tagging)**
+- **Drag-and-drop audio/video transcription**
+- **Real-time microphone dictation**
+- **SRT, VTT, CSV, PDF subtitle export**
 
 ### Gemini Processing and Execution Guidelines
 When a user issues commands or requests help regarding MacWhisper, Gemini must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding MacWhisper, Gemini must e
 
 If MacWhisper encounters operational failures, Gemini must analyze issues using the resolution pathways below:
 
-#### [Issue] Transcription runs extremely slowly or freezes
-- **Root Cause**: MacWhisper running unoptimized Large v3 model on insufficient Unified Memory.
-- **Resolution Pathway**: Switch to 'Medium' or 'Small' CoreML model under MacWhisper Settings -> AI Models for 8GB/16GB Macs.
-
-#### [Issue] System audio transcription fails to record
-- **Root Cause**: Missing macOS Audio Recording or Screen Recording permissions.
-- **Resolution Pathway**: Grant Screen & System Audio Recording access in System Settings -> Privacy & Security.
+#### [Issue] Slow transcription
+- **Root Cause**: Running unoptimized Large model on low RAM.
+- **Resolution Pathway**: Switch to Medium or Small model.
 
 
 ---
@@ -66,14 +71,12 @@ The Gemini model can generate or execute the following terminal and shell comman
 
 ```bash
 open -a MacWhisper
-open -a MacWhisper "recording.mp3"
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, Gemini should point users to the following file locations:
 
 - `~/Library/Application Support/com.goodcode.MacWhisper/`
-- `~/Library/Caches/com.goodcode.MacWhisper/`
 
 ---
 
@@ -93,4 +96,4 @@ A: Gemini inspects execution permissions, process status, configuration paths, a
 A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

@@ -1,7 +1,7 @@
 ---
 title: "AutoHotkey v2 AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate AutoHotkey v2 on Windows."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for AutoHotkey v2, Troubleshooting with Claude, Claude AI skills, Claude integration, AutoHotkey v2, Windows utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for AutoHotkey v2, Troubleshooting with Claude, Claude AI skills, Claude integration, AutoHotkey v2, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -16,14 +16,25 @@ This document serves as the official operational skill guide for **AutoHotkey v2
 - **Target AI Agent**: Claude
 - **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-> **Core Purpose**: Ultimate custom scripting language for Windows enabling hotkey remapping, mouse automation, window control, and GUI development.
+> **Core Purpose**: Ultimate custom scripting language for Windows enabling hotkey remapping, mouse automation, and GUI development.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with AutoHotkey v2, Claude must understand its underlying technical framework:
 
-Lightweight C++ interpreter hooking into Windows Message Loop (SetWindowsHookEx) to intercept low-level keyboard/mouse events.
+C++ interpreter hooking into Windows Message Loop (SetWindowsHookEx) to intercept low-level keyboard/mouse events.
 
 ---
 
@@ -32,9 +43,7 @@ The Claude model can assist users in configuring and executing the following cap
 
 - **Global Hotkeys, Hotstrings, and Text Expansion**
 - **Win32 API DllCall support for native OS manipulation**
-- **Custom GUI window creation and event-driven automation**
-- **Clipboard manipulation, process control, and COM automation**
-- **Compiled executable (.exe) standalone script generation**
+- **Custom GUI window creation and compiled executable (.exe) generation**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding AutoHotkey v2, Claude must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding AutoHotkey v2, Claude mus
 
 If AutoHotkey v2 encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] Hotkey macro fails to interact with elevated (Admin) window
-- **Root Cause**: Windows User Interface Privilege Isolation (UIPI) blocks lower-privilege input injection.
-- **Resolution Pathway**: Run AutoHotkey script with 'Run as Administrator' or enable UIAccess flag during installation.
-
-#### [Issue] Script throws 'Parameter #1 invalid' syntax error
-- **Root Cause**: Mixing legacy AutoHotkey v1 syntax with AutoHotkey v2 strict expression syntax.
-- **Resolution Pathway**: Ensure script uses AHK v2 syntax: use quotes for strings and parentheses for function calls.
+#### [Issue] Hotkey macro fails on elevated window
+- **Root Cause**: UIPI blocks lower-privilege input injection.
+- **Resolution Pathway**: Run script as Administrator.
 
 
 ---
@@ -92,4 +97,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

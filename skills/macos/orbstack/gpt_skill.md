@@ -1,7 +1,7 @@
 ---
 title: "OrbStack AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate OrbStack on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for OrbStack, ChatGPT troubleshooting, GPT automation, OrbStack, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for OrbStack, ChatGPT troubleshooting, GPT automation, OrbStack, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,27 +14,36 @@ This document serves as the official operational skill guide for **OrbStack** on
 - **Category**: Fast Docker & Linux VM Runtime
 - **Platform**: macOS
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-> **Core Purpose**: Ultra-fast, lightweight Docker Desktop and Linux VM replacement engineered natively for Apple Silicon with instant boot times and sub-100MB RAM usage.
+> **Core Purpose**: Ultra-fast, lightweight Docker Desktop and Linux VM replacement engineered natively for Apple Silicon.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with OrbStack, GPT must understand its underlying technical framework:
 
-Native Swift app utilizing macOS Hypervisor.framework and custom lightweight Linux micro-kernel booting in under 2 seconds.
+Native Swift app utilizing Hypervisor.framework and custom lightweight Linux micro-kernel booting in under 2 seconds.
 
 ---
 
 ## Key Features and Operational Capabilities
 The GPT model can assist users in configuring and executing the following capabilities of OrbStack:
 
-- **Drop-in replacement for Docker Desktop CLI (docker & docker-compose)**
-- **Native Linux Virtual Machines (orb create ubuntu) with instant shell access**
-- **Zero-configuration local domain routing (.orb.local) for web containers**
-- **Ultra-low CPU and RAM overhead (<100MB idle RAM usage)**
-- **Seamless Rosetta 2 x86_64 emulation on Apple Silicon M-series chips**
+- **Drop-in replacement for Docker Desktop CLI (docker)**
+- **Native Linux Virtual Machines (orb create ubuntu)**
+- **Zero-config local domain routing (.orb.local)**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding OrbStack, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding OrbStack, GPT must execut
 
 If OrbStack encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] Docker CLI cannot connect to OrbStack daemon
-- **Root Cause**: DOCKER_HOST environment variable pointing to legacy Docker Desktop socket.
-- **Resolution Pathway**: Run 'export DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock' in shell profile.
-
-#### [Issue] Linux VM internet connectivity failing
-- **Root Cause**: macOS VPN or custom DNS resolver interfering with Hypervisor virtual bridge.
-- **Resolution Pathway**: Toggle 'Network Passthrough' under OrbStack Settings -> Network Settings.
+#### [Issue] Docker CLI connection error
+- **Root Cause**: DOCKER_HOST variable pointing to legacy socket.
+- **Resolution Pathway**: Set 'export DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock'.
 
 
 ---
@@ -66,7 +71,6 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 orb create ubuntu my-vm
-orb start my-vm
 orb shell my-vm
 orb docker ps
 ```
@@ -75,7 +79,6 @@ orb docker ps
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `~/.orbstack/`
-- `~/Library/Application Support/dev.kdrag0n.MacVirt/`
 
 ---
 
@@ -95,4 +98,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

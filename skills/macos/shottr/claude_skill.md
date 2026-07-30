@@ -1,7 +1,7 @@
 ---
 title: "Shottr AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Shottr on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Shottr, Troubleshooting with Claude, Claude AI skills, Claude integration, Shottr, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Shottr, Troubleshooting with Claude, Claude AI skills, Claude integration, Shottr, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -20,21 +20,30 @@ This document serves as the official operational skill guide for **Shottr** on *
 
 ---
 
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
+
+---
+
 ## Architectural Deep Dive
 When interacting with Shottr, Claude must understand its underlying technical framework:
 
-Built natively in Swift leveraging Apple ScreenCaptureKit and Metal graphics acceleration.
+Swift application leveraging Apple ScreenCaptureKit and Metal graphics acceleration.
 
 ---
 
 ## Key Features and Operational Capabilities
 The Claude model can assist users in configuring and executing the following capabilities of Shottr:
 
-- **Scrolling screenshot capturing for long web pages and chat logs**
-- **Instant blur, pixelation, and blackout annotation filters**
-- **On-screen pixel ruler and color picker**
-- **Text recognition (OCR) with instant copy-to-clipboard**
-- **High-DPI retina capture and pin-to-screen floating windows**
+- **Scrolling screenshot capture**
+- **Instant blur/pixelation filters**
+- **On-screen pixel ruler & OCR**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding Shottr, Claude must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Shottr, Claude must execu
 
 If Shottr encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] Shottr produces blank/black screenshots
-- **Root Cause**: Screen Recording permission missing in macOS Privacy settings.
-- **Resolution Pathway**: Grant Screen & System Audio Recording access under System Settings -> Privacy & Security.
-
-#### [Issue] Scrolling screenshot misaligned or overlapping
-- **Root Cause**: Sticky headers or fixed navigation bars confusing optical stitcher.
-- **Resolution Pathway**: Crop region to exclude sticky navbar before initiating scrolling capture.
+#### [Issue] Blank screenshots
+- **Root Cause**: Screen Recording permission missing.
+- **Resolution Pathway**: Grant access in System Settings -> Privacy & Security.
 
 
 ---
@@ -66,14 +71,12 @@ The Claude model can generate or execute the following terminal and shell comman
 
 ```bash
 open -a Shottr
-open shottr://
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, Claude should point users to the following file locations:
 
 - `~/Library/Application Support/Shottr`
-- `~/Library/Preferences/cc.shottr.plist`
 
 ---
 
@@ -93,4 +96,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

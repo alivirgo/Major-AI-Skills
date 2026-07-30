@@ -1,7 +1,7 @@
 ---
 title: "AppCleaner AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate AppCleaner on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for AppCleaner, ChatGPT troubleshooting, GPT automation, AppCleaner, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for AppCleaner, ChatGPT troubleshooting, GPT automation, AppCleaner, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,27 +14,36 @@ This document serves as the official operational skill guide for **AppCleaner** 
 - **Category**: Complete Application Uninstaller
 - **Platform**: macOS
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-> **Core Purpose**: Thorough application uninstaller that hunts down hidden preferences, caches, and support files.
+> **Core Purpose**: Thorough application uninstaller hunting down hidden preferences, caches, and support files.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with AppCleaner, GPT must understand its underlying technical framework:
 
-Objective-C / Swift application directory indexer scanning ~/Library domains and background daemons.
+Scans ~/Library domains and system launch daemons for matching bundle identifiers.
 
 ---
 
 ## Key Features and Operational Capabilities
 The GPT model can assist users in configuring and executing the following capabilities of AppCleaner:
 
-- **SmartDelete background daemon detecting trashed applications**
-- **Deep filesystem scanning across ~/Library and system domains**
-- **Widget, plugin, and preference pane removal**
-- **Drag-and-drop batch uninstallation interface**
-- **Protection list preventing accidental system file deletion**
+- **SmartDelete background daemon**
+- **Deep filesystem scanning across ~/Library**
+- **Drag-and-drop batch uninstallation**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding AppCleaner, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding AppCleaner, GPT must exec
 
 If AppCleaner encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] AppCleaner misses leftover application support files
-- **Root Cause**: AppCleaner lacks Full Disk Access permission.
-- **Resolution Pathway**: Grant Full Disk Access under macOS System Settings -> Privacy & Security.
-
-#### [Issue] Cannot uninstall system apps
-- **Root Cause**: macOS System Integrity Protection (SIP) protects default apps.
-- **Resolution Pathway**: AppCleaner intentionally restricts deleting SIP-protected binaries in /System/Applications.
+#### [Issue] Leftover files missed
+- **Root Cause**: Full Disk Access permission missing.
+- **Resolution Pathway**: Grant Full Disk Access in Privacy Settings.
 
 
 ---
@@ -66,14 +71,12 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 open -a AppCleaner
-open -a AppCleaner /Applications/TargetApp.app
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `~/Library/Application Support/AppCleaner`
-- `~/Library/Preferences/net.freemacsoft.AppCleaner.plist`
 
 ---
 
@@ -93,4 +96,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

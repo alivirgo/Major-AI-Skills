@@ -1,7 +1,7 @@
 ---
 title: "Ventoy AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Ventoy on Cross-Platform."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Ventoy, Troubleshooting with Claude, Claude AI skills, Claude integration, Ventoy, Cross-Platform utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Ventoy, Troubleshooting with Claude, Claude AI skills, Claude integration, Ventoy, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -16,14 +16,25 @@ This document serves as the official operational skill guide for **Ventoy** on *
 - **Target AI Agent**: Claude
 - **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-> **Core Purpose**: Revolutionary open-source tool that turns USB drives into multiboot systems by simply copying ISO/WIM/IMG/VHD files directly onto the drive.
+> **Core Purpose**: Revolutionary open-source tool turning USB drives into multiboot systems by copying ISO files directly onto the drive.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with Ventoy, Claude must understand its underlying technical framework:
 
-Installs custom GRUB2 bootloader on EFI/MBR system partition of USB drive, hooks ISO file system in memory dynamically during boot.
+Installs custom GRUB2 bootloader on EFI/MBR partition, hooking ISO file system in memory dynamically during boot.
 
 ---
 
@@ -32,9 +43,7 @@ The Claude model can assist users in configuring and executing the following cap
 
 - **Direct ISO file drag-and-drop multiboot support**
 - **x86 Legacy BIOS & UEFI (Secure Boot supported) compatibility**
-- **Data persistence plugin support for Linux Live distributions**
-- **Automated OS installation script injection (unattend.xml / kickstart)**
-- **VHD, VHDX, and VTOY disk image booting capabilities**
+- **Data persistence plugin support for Linux Live distros**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding Ventoy, Claude must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Ventoy, Claude must execu
 
 If Ventoy encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] UEFI Secure Boot blocks Ventoy bootloader
-- **Root Cause**: Motherboard UEFI firmware rejecting unsigned GRUB2 EFI binary.
-- **Resolution Pathway**: Enable 'Secure Boot Support' during Ventoy installation or enroll Ventoy MOK key in UEFI firmware.
-
-#### [Issue] ISO image fails to boot or hangs at black screen
-- **Root Cause**: ISO file fragmented on USB flash drive.
-- **Resolution Pathway**: Run a defragmentation tool on the USB drive or re-copy the ISO file cleanly.
+#### [Issue] UEFI Secure Boot blocks bootloader
+- **Root Cause**: Unsigned GRUB2 binary rejected.
+- **Resolution Pathway**: Enroll Ventoy MOK key in UEFI firmware.
 
 
 ---
@@ -66,7 +71,6 @@ The Claude model can generate or execute the following terminal and shell comman
 
 ```bash
 Ventoy2Disk.exe -i G:
-sudo ./Ventoy2Disk.sh -i /dev/sdb
 ```
 
 ### Configuration and Data Storage Paths
@@ -92,4 +96,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

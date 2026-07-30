@@ -1,7 +1,7 @@
 ---
 title: "WizTree AI Skill Guide for Gemini"
 description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate WizTree on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for WizTree, Gemini troubleshooting, Google AI, WizTree, Windows utilities, AI troubleshooting, productivity tools"
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for WizTree, Gemini troubleshooting, Google AI, WizTree, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -16,14 +16,25 @@ This document serves as the official operational skill guide for **WizTree** on 
 - **Target AI Agent**: Gemini
 - **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
 
-> **Core Purpose**: Lightning-fast disk space visualizer that reads the Master File Table (MFT) directly to scan hard drives in seconds.
+> **Core Purpose**: Lightning-fast disk space visualizer reading the Master File Table (MFT) directly to scan hard drives in seconds.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with WizTree, Gemini must understand its underlying technical framework:
 
-Bypasses standard Windows File System APIs by directly parsing raw NTFS MFT bytes ( file), allowing it to analyze millions of files in under 2 seconds. Falls back to Win32 directory traversal for non-NTFS drives.
+Bypasses standard Windows File System APIs by directly parsing raw NTFS MFT bytes ($MFT file), analyzing millions of files in under 2 seconds. Falls back to Win32 directory traversal for non-NTFS drives.
 
 ---
 
@@ -55,10 +66,6 @@ If WizTree encounters operational failures, Gemini must analyze issues using the
 #### [Issue] Network drives (SMB/NFS) scan very slowly
 - **Root Cause**: MFT direct reading is unsupported over remote network shares.
 - **Resolution Pathway**: Allow WizTree to automatically fall back to standard Win32 directory walking API.
-
-#### [Issue] Size mismatch between WizTree and Windows Explorer
-- **Root Cause**: Explorer hides system VSS shadow copies, , swapfile.sys, and hiberfil.sys.
-- **Resolution Pathway**: Check 'Allocated' space column in WizTree rather than raw file size for actual disk usage.
 
 
 ---
@@ -98,4 +105,4 @@ A: Gemini inspects execution permissions, process status, configuration paths, a
 A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

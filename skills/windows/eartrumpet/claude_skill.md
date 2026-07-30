@@ -1,7 +1,7 @@
 ---
 title: "EarTrumpet AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate EarTrumpet on Windows."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for EarTrumpet, Troubleshooting with Claude, Claude AI skills, Claude integration, EarTrumpet, Windows utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for EarTrumpet, Troubleshooting with Claude, Claude AI skills, Claude integration, EarTrumpet, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -20,10 +20,21 @@ This document serves as the official operational skill guide for **EarTrumpet** 
 
 ---
 
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
+
+---
+
 ## Architectural Deep Dive
 When interacting with EarTrumpet, Claude must understand its underlying technical framework:
 
-Built on Windows Audio Session API (WASAPI) and WinRT Audio Endpoints, enabling runtime hook into software audio streams.
+Built on Windows Audio Session API (WASAPI) and WinRT Audio Endpoints to dynamically manage application audio streams.
 
 ---
 
@@ -33,8 +44,6 @@ The Claude model can assist users in configuring and executing the following cap
 - **Per-application volume adjustment & mute toggles**
 - **Dynamic default audio playback device switching**
 - **Native UWP / WinUI modern interface matching Windows 11**
-- **Multi-channel audio endpoint management**
-- **Custom global keybindings for audio management**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding EarTrumpet, Claude must execute the following protocol:
@@ -48,17 +57,9 @@ When a user issues commands or requests help regarding EarTrumpet, Claude must e
 
 If EarTrumpet encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] Application missing from EarTrumpet volume mixer
+#### [Issue] Application missing from mixer
 - **Root Cause**: Application has no active WASAPI audio session playing.
-- **Resolution Pathway**: Trigger sound/audio playback in the application to force Windows audio session registration.
-
-#### [Issue] EarTrumpet icon missing from system tray
-- **Root Cause**: Windows notification tray icon hidden or process suspended.
-- **Resolution Pathway**: Check Taskbar corner overflow settings or restart process via shell:AppsFolder.
-
-#### [Issue] Conflict with default Windows volume flyout
-- **Root Cause**: Both Windows default mixer and EarTrumpet tray icons enabled.
-- **Resolution Pathway**: Hide default 'Volume' icon under Windows Taskbar system icons setting.
+- **Resolution Pathway**: Trigger sound/audio playback in the application to register audio session.
 
 
 ---
@@ -70,14 +71,12 @@ The Claude model can generate or execute the following terminal and shell comman
 
 ```bash
 Start-Process -FilePath "shell:AppsFolder\41808File-Save.EarTrumpet_10tokenms02j!App"
-powershell -Command "Get-Process EarTrumpet | Stop-Process"
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, Claude should point users to the following file locations:
 
 - `%LOCALAPPDATA%\Packages\41808File-Save.EarTrumpet_10tokenms02j\LocalSettings`
-- `HKCU\Software\EarTrumpet`
 
 ---
 
@@ -97,4 +96,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

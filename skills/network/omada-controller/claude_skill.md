@@ -1,7 +1,7 @@
 ---
 title: "Omada Controller AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Omada Controller on Network Platform."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Omada Controller, Troubleshooting with Claude, Claude AI skills, Claude integration, Omada Controller, Network Platform utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Omada Controller, Troubleshooting with Claude, Claude AI skills, Claude integration, Omada Controller, Network Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -20,6 +20,17 @@ This document serves as the official operational skill guide for **Omada Control
 
 ---
 
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
+
+---
+
 ## Architectural Deep Dive
 When interacting with Omada Controller, Claude must understand its underlying technical framework:
 
@@ -33,8 +44,6 @@ The Claude model can assist users in configuring and executing the following cap
 - **Centralized EAP Wi-Fi 6/6E/7 Provisioning & Mesh Topology**
 - **JetStream Switch Port Profiles, 802.1Q VLANs, and LACP**
 - **Omada Gateway Multi-WAN Load Balancing & WireGuard/IPSec VPNs**
-- **Captive Portal & RADIUS 802.1X Authentication**
-- **OpenAPI REST API Automation and Syslog Telemetry**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding Omada Controller, Claude must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Omada Controller, Claude 
 
 If Omada Controller encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] Device Stuck in 'Pending' or 'Adoption Failed' State
-- **Root Cause**: Device credentials mismatch or firewall blocking ports 29810-29814.
-- **Resolution Pathway**: Verify fallback admin credentials or SSH into device and run 'set-inform https://<CONTROLLER_IP>:29814/inform'.
-
-#### [Issue] REST API Request Fails with 'Invalid Token' or HTTP 401
-- **Root Cause**: Missing or expired CSRF token (omadac_token) in request headers.
-- **Resolution Pathway**: Re-authenticate at /api/v2/login and pass 'Csrf-Token' header in subsequent requests.
+#### [Issue] Device Stuck in Pending state
+- **Root Cause**: Credentials mismatch or firewall blocking ports 29810-29814.
+- **Resolution Pathway**: Run set-inform command over SSH.
 
 
 ---
@@ -66,14 +71,12 @@ The Claude model can generate or execute the following terminal and shell comman
 
 ```bash
 curl -k -X POST "https://<CONTROLLER_IP>:8043/api/v2/login" -d '{\"username\":\"admin\",\"password\":\"secret\"}'
-ssh admin@192.168.1.150 "set-inform https://192.168.1.100:29814/inform"
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, Claude should point users to the following file locations:
 
 - `/opt/tplink/EAPController/logs/server.log`
-- `%PROGRAMFILES%\TP-LINK\EAP Controller\logs\server.log`
 
 ---
 
@@ -93,4 +96,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

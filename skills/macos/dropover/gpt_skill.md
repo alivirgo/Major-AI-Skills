@@ -1,7 +1,7 @@
 ---
 title: "Dropover AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Dropover on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Dropover, ChatGPT troubleshooting, GPT automation, Dropover, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Dropover, ChatGPT troubleshooting, GPT automation, Dropover, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,27 +14,36 @@ This document serves as the official operational skill guide for **Dropover** on
 - **Category**: Temporary Floating Drag Shelf Utility
 - **Platform**: macOS
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
 > **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with Dropover, GPT must understand its underlying technical framework:
 
-Custom floating NSPanel windows rendering on top of space boundaries, hooking into macOS drag-and-drop sessions.
+Custom floating NSPanel windows rendering across spaces boundaries.
 
 ---
 
 ## Key Features and Operational Capabilities
 The GPT model can assist users in configuring and executing the following capabilities of Dropover:
 
-- **Floating shelf triggerable via cursor shake or drag-and-hover**
-- **Multi-file collection shelves across macOS Spaces**
-- **Quick Look preview and instant file sharing links (iCloud/Dropbox)**
-- **Stash items for batch processing or zip creation**
-- **Integration with macOS Share Extensions and Shortcuts**
+- **Floating shelf triggerable via cursor shake**
+- **Multi-file collection shelves across Spaces**
+- **Quick Look preview and instant web link sharing**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding Dropover, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Dropover, GPT must execut
 
 If Dropover encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] Cursor shake gesture fails to open shelf
-- **Root Cause**: Gesture sensitivity threshold set too high.
-- **Resolution Pathway**: Adjust shake sensitivity in Dropover Preferences -> Shortcuts & Gestures.
-
-#### [Issue] Dropped files move instead of copying
-- **Root Cause**: Modifier key settings overriding default drag action.
-- **Resolution Pathway**: Hold Option key while dragging to force duplicate/copy behavior on the shelf.
+#### [Issue] Shake gesture fails
+- **Root Cause**: Sensitivity set too high.
+- **Resolution Pathway**: Adjust sensitivity in Dropover Preferences.
 
 
 ---
@@ -66,14 +71,12 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 open -a Dropover
-defaults read com.extendedmac.Dropover-mac
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
-- `~/Library/Containers/com.extendedmac.Dropover-mac`
 
 ---
 
@@ -93,4 +96,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

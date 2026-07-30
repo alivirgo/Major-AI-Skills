@@ -1,7 +1,7 @@
 ---
 title: "Velja AI Skill Guide for GPT"
 description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Velja on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Velja, ChatGPT troubleshooting, GPT automation, Velja, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Velja, ChatGPT troubleshooting, GPT automation, Velja, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -14,27 +14,36 @@ This document serves as the official operational skill guide for **Velja** on **
 - **Category**: Smart Browser Picker & URL Router
 - **Platform**: macOS
 - **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-> **Core Purpose**: Intelligent browser picker that routes specific links to specific browsers or web apps automatically.
+> **Core Purpose**: Intelligent browser picker routing specific links to specific browsers or web apps automatically.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with Velja, GPT must understand its underlying technical framework:
 
-Registers as macOS http / https Launch Services default handler (LSSetDefaultHandlerForURLScheme).
+Registers as macOS http/https Launch Services default handler (LSSetDefaultHandlerForURLScheme).
 
 ---
 
 ## Key Features and Operational Capabilities
 The GPT model can assist users in configuring and executing the following capabilities of Velja:
 
-- **Domain and URL pattern matching browser routing rules**
-- **App-specific routing (e.g., open Figma links directly in Figma App)**
-- **Automatic tracking parameter removal (UTM, gclid, fbclid stripping)**
-- **Handoff support between iOS and macOS web browsers**
-- **Menu bar prompt when clicking links while holding custom modifier keys**
+- **Domain and URL pattern matching routing rules**
+- **App-specific routing (e.g., Figma links to Figma App)**
+- **Automatic tracking parameter removal (UTM, gclid stripping)**
 
 ### GPT Processing and Execution Guidelines
 When a user issues commands or requests help regarding Velja, GPT must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Velja, GPT must execute t
 
 If Velja encounters operational failures, GPT must analyze issues using the resolution pathways below:
 
-#### [Issue] Links open in default browser without prompting Velja
-- **Root Cause**: Velja is not registered as macOS Default Web Browser.
-- **Resolution Pathway**: Set Velja as Default Browser under macOS System Settings -> Desktop & Dock.
-
-#### [Issue] OAuth logins fail due to stripped URL parameters
-- **Root Cause**: Velja tracking parameter stripper removing authentication tokens.
-- **Resolution Pathway**: Add domain exception rule under Velja Preferences -> Tracking Parameters.
+#### [Issue] Links open in wrong browser
+- **Root Cause**: Not set as default browser.
+- **Resolution Pathway**: Set Velja as Default Browser in System Settings.
 
 
 ---
@@ -66,14 +71,12 @@ The GPT model can generate or execute the following terminal and shell commands 
 
 ```bash
 open -a Velja
-defaults read com.sindresorhus.Velja
 ```
 
 ### Configuration and Data Storage Paths
 To inspect or repair corrupted settings, GPT should point users to the following file locations:
 
 - `~/Library/Preferences/com.sindresorhus.Velja.plist`
-- `~/Library/Containers/com.sindresorhus.Velja`
 
 ---
 
@@ -93,4 +96,4 @@ A: GPT inspects execution permissions, process status, configuration paths, and 
 A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

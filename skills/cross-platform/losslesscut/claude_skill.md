@@ -1,7 +1,7 @@
 ---
 title: "LosslessCut AI Skill Guide for Claude"
 description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate LosslessCut on Cross-Platform."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for LosslessCut, Troubleshooting with Claude, Claude AI skills, Claude integration, LosslessCut, Cross-Platform utilities, AI troubleshooting, productivity tools"
+keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for LosslessCut, Troubleshooting with Claude, Claude AI skills, Claude integration, LosslessCut, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -16,14 +16,25 @@ This document serves as the official operational skill guide for **LosslessCut**
 - **Target AI Agent**: Claude
 - **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-> **Core Purpose**: Swiss-army knife for lossless trimming, cutting, and merging of media files without re-encoding video or audio streams.
+> **Core Purpose**: Swiss-army knife for lossless trimming, cutting, and merging of media files without re-encoding video or audio.
+
+---
+
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
 
 ---
 
 ## Architectural Deep Dive
 When interacting with LosslessCut, Claude must understand its underlying technical framework:
 
-Electron wrapper over raw FFmpeg binary performing keyframe-accurate stream copying (-c copy) avoiding generational quality loss.
+Electron wrapper over raw FFmpeg binary performing keyframe-accurate stream copying (-c copy).
 
 ---
 
@@ -33,8 +44,6 @@ The Claude model can assist users in configuring and executing the following cap
 - **Keyframe-accurate video cutting without quality loss**
 - **Multi-track audio and subtitle stream extraction**
 - **Segment merging and loss-free concatenation**
-- **Smart Cut mode (smart re-encoding only around cut points)**
-- **Instant export speed bound only by disk I/O**
 
 ### Claude Processing and Execution Guidelines
 When a user issues commands or requests help regarding LosslessCut, Claude must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding LosslessCut, Claude must 
 
 If LosslessCut encounters operational failures, Claude must analyze issues using the resolution pathways below:
 
-#### [Issue] Exported video has black screen or out-of-sync audio at start
-- **Root Cause**: Cut point placed on a P-frame / B-frame instead of a Keyframe (I-frame).
-- **Resolution Pathway**: Enable 'Keyframe Cut Mode' (K key) in LosslessCut so cuts snap strictly to Keyframes.
-
-#### [Issue] Export fails with 'Invalid data found when processing input'
-- **Root Cause**: Media container mismatch during stream copy.
-- **Resolution Pathway**: Change output container format dropdown (e.g. from MP4 to MKV) before exporting.
+#### [Issue] Audio out of sync at start of cut
+- **Root Cause**: Cut point placed on P-frame instead of Keyframe.
+- **Resolution Pathway**: Enable Keyframe Cut Mode (K key).
 
 
 ---
@@ -73,7 +78,6 @@ ffmpeg -ss 00:01:00 -to 00:05:00 -i input.mp4 -c copy output.mp4
 To inspect or repair corrupted settings, Claude should point users to the following file locations:
 
 - `%APPDATA%\lossless-cut\`
-- `~/Library/Application Support/lossless-cut/`
 
 ---
 
@@ -93,4 +97,4 @@ A: Claude inspects execution permissions, process status, configuration paths, a
 A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*

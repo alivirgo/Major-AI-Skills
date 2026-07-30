@@ -1,7 +1,7 @@
 ---
 title: "Raycast AI Skill Guide for Gemini"
 description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Raycast on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Raycast, Gemini troubleshooting, Google AI, Raycast, macOS utilities, AI troubleshooting, productivity tools"
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Raycast, Gemini troubleshooting, Google AI, Raycast, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
 author: "AI Systems Engineering Team"
 ---
 
@@ -20,6 +20,17 @@ This document serves as the official operational skill guide for **Raycast** on 
 
 ---
 
+## IDE & Agentic Execution Ecosystem Optimization
+This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
+
+- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
+- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
+- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
+- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
+- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
+
+---
+
 ## Architectural Deep Dive
 When interacting with Raycast, Gemini must understand its underlying technical framework:
 
@@ -30,11 +41,9 @@ Native Swift macOS app with React/TypeScript Extension runtime backed by Node.js
 ## Key Features and Operational Capabilities
 The Gemini model can assist users in configuring and executing the following capabilities of Raycast:
 
-- **Native Swift architecture with low latency**
-- **React/TypeScript Extension API with Node.js runtime support**
-- **Bash, Shell, Python, and AppleScript command execution**
-- **Built-in Clipboard History, Window Management, and Snippets**
-- **Raycast AI integration and custom deep-linking URL schemes**
+- **Native Swift low-latency architecture**
+- **React/TypeScript Extension API**
+- **Built-in Clipboard History & Window Management**
 
 ### Gemini Processing and Execution Guidelines
 When a user issues commands or requests help regarding Raycast, Gemini must execute the following protocol:
@@ -48,13 +57,9 @@ When a user issues commands or requests help regarding Raycast, Gemini must exec
 
 If Raycast encounters operational failures, Gemini must analyze issues using the resolution pathways below:
 
-#### [Issue] Raycast cannot manage windows or paste text
-- **Root Cause**: macOS Accessibility permissions revoked or disabled.
-- **Resolution Pathway**: Navigate to System Settings -> Privacy & Security -> Accessibility and re-toggle Raycast.
-
-#### [Issue] Script Commands fail with 'command not found'
-- **Root Cause**: Raycast execution environment missing custom PATH environment variables.
-- **Resolution Pathway**: Export full PATH in script header or set environment variables inside script command configuration.
+#### [Issue] Raycast window commands fail
+- **Root Cause**: Accessibility permissions revoked.
+- **Resolution Pathway**: Re-enable Raycast in macOS System Settings -> Accessibility.
 
 
 ---
@@ -66,7 +71,6 @@ The Gemini model can generate or execute the following terminal and shell comman
 
 ```bash
 open raycast://
-open raycast://extensions/raycast/clipboard-history/clipboard-history
 open raycast://conf/
 ```
 
@@ -74,7 +78,6 @@ open raycast://conf/
 To inspect or repair corrupted settings, Gemini should point users to the following file locations:
 
 - `~/Library/Application Support/com.raycast.macos`
-- `~/Library/Preferences/com.raycast.macos.plist`
 
 ---
 
@@ -94,4 +97,4 @@ A: Gemini inspects execution permissions, process status, configuration paths, a
 A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
+*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
