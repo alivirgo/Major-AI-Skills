@@ -1,62 +1,96 @@
-﻿---
-title: "Velja AI Skill for Claude"
-description: "Comprehensive SEO-rich AI skill guide for Claude to manage, troubleshoot, and execute commands in Velja (macOS)."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Velja, Troubleshooting with Claude, Claude AI skills, Claude integration, Velja, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Velja AI Skill Guide for Claude"
+description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Velja on macOS."
+keywords: "Claude AI, Anthropic Claude, Claude prompt for Velja, Troubleshooting with Claude, Claude AI skills, Claude integration, Velja, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Velja Mastery Skill for Claude
+# Velja AI Skill Guide for Claude
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Velja** on **macOS**. This specific skill set is engineered for **Claude** (Anthropic's Claude, emphasizing safe, nuanced, and extremely detailed step-by-step analytical troubleshooting.). 
-By embedding this skill, Claude becomes a master troubleshooter, command executor, and advanced operator for Velja. 
+## Overview
+This document serves as the official operational skill guide for **Velja** on **macOS**, specifically engineered for **Claude**.
 
-> **App Description**: Intelligent browser picker to open specific links in specific browsers automatically.
+- **Application Name**: Velja
+- **Category**: Smart Browser Picker & URL Router
+- **Platform**: macOS
+- **Target AI Agent**: Claude
+- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Velja, **Claude** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Intelligent browser picker that routes specific links to specific browsers or web apps automatically.
 
-- **Rule-based routing (Domains/URLs)**
-- **App-specific routing**
-- **Removes tracking parameters**
-- **Deep link support**
+---
 
-### ðŸ§  How Claude Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Velja or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Velja, Claude must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Velja, Claude will directly pinpoint the solution using this expert matrix:
+Registers as macOS http / https Launch Services default handler (LSSetDefaultHandlerForURLScheme).
 
-### Known Issues & Diagnostics
-- âš ï¸ Not set as default browser
-- âš ï¸ Redirect loops
-- âš ï¸ Rules conflicting (overlapping domains)
-- âš ï¸ Safari extensions bypassing Velja
+---
 
-**Master Troubleshooting Protocol**:
-> Velja MUST be set as the default macOS browser to intercept links. If links open in the wrong browser, check rule hierarchy and ensure no overlapping wildcard rules exist.
+## Key Features and Operational Capabilities
+The Claude model can assist users in configuring and executing the following capabilities of Velja:
 
-## ðŸ’» Command Execution & Syntax
-Claude is equipped to parse and generate the following exact commands and shortcuts for Velja:
+- **Domain and URL pattern matching browser routing rules**
+- **App-specific routing (e.g., open Figma links directly in Figma App)**
+- **Automatic tracking parameter removal (UTM, gclid, fbclid stripping)**
+- **Handoff support between iOS and macOS web browsers**
+- **Menu bar prompt when clicking links while holding custom modifier keys**
 
-`ash
-Configure via UI, works passively as default browser
-`
+### Claude Processing and Execution Guidelines
+When a user issues commands or requests help regarding Velja, Claude must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Velja, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Velja encounters operational failures, Claude must analyze issues using the resolution pathways below:
+
+#### [Issue] Links open in default browser without prompting Velja
+- **Root Cause**: Velja is not registered as macOS Default Web Browser.
+- **Resolution Pathway**: Set Velja as Default Browser under macOS System Settings -> Desktop & Dock.
+
+#### [Issue] OAuth logins fail due to stripped URL parameters
+- **Root Cause**: Velja tracking parameter stripper removing authentication tokens.
+- **Resolution Pathway**: Add domain exception rule under Velja Preferences -> Tracking Parameters.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Claude model can generate or execute the following terminal and shell commands for Velja:
+
+```bash
+open -a Velja
+defaults read com.sindresorhus.Velja
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Claude should point users to the following file locations:
+
+- `~/Library/Preferences/com.sindresorhus.Velja.plist`
+- `~/Library/Containers/com.sindresorhus.Velja`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Claude-native instruction formatting
+- **Optimization Strategy**: Claude-Native Vector Search
 
-### FAQ Structured Data for Claude
-**Q: How does Claude solve Velja issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Claude automate Velja?**
-A: Yes, through the CLI commands and hotkeys listed above, Claude can guide the user to fully automate Velja workflows.
+**Q: How does Claude troubleshoot Velja issues on macOS?**
+A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Claude generate automated CLI commands for Velja?**
+A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Claude. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Velja users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

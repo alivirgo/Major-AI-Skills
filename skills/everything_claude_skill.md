@@ -1,64 +1,102 @@
-﻿---
-title: "Everything AI Skill for Claude"
-description: "Comprehensive SEO-rich AI skill guide for Claude to manage, troubleshoot, and execute commands in Everything (Windows)."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Everything, Troubleshooting with Claude, Claude AI skills, Claude integration, Everything, Windows utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Everything AI Skill Guide for Claude"
+description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Everything on Windows."
+keywords: "Claude AI, Anthropic Claude, Claude prompt for Everything, Troubleshooting with Claude, Claude AI skills, Claude integration, Everything, Windows utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Everything Mastery Skill for Claude
+# Everything AI Skill Guide for Claude
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Everything** on **Windows**. This specific skill set is engineered for **Claude** (Anthropic's Claude, emphasizing safe, nuanced, and extremely detailed step-by-step analytical troubleshooting.). 
-By embedding this skill, Claude becomes a master troubleshooter, command executor, and advanced operator for Everything. 
+## Overview
+This document serves as the official operational skill guide for **Everything** on **Windows**, specifically engineered for **Claude**.
 
-> **App Description**: Instant, real-time file search engine that indexes NTFS drives instantly.
+- **Application Name**: Everything
+- **Category**: Real-Time File Search & Indexing Engine
+- **Platform**: Windows
+- **Target AI Agent**: Claude
+- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Everything, **Claude** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Instant real-time search utility that indexes file names across all NTFS and ReFS drives instantly.
 
-- **Instant NTFS Indexing**
-- **Regex Support**
-- **IPC/Command Line**
-- **HTTP Server**
+---
 
-### ðŸ§  How Claude Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Everything or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Everything, Claude must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Everything, Claude will directly pinpoint the solution using this expert matrix:
+Monitors the NTFS USN (Update Sequence Number) Change Journal. Maintains an in-memory index of file metadata with near-zero CPU and RAM overhead.
 
-### Known Issues & Diagnostics
-- âš ï¸ Everything service not running
-- âš ï¸ Outdated index requiring a rebuild
-- âš ï¸ Missing network shares
-- âš ï¸ Regex syntax errors
+---
 
-**Master Troubleshooting Protocol**:
-> If files are missing, force a rebuild of the database via Options -> Indexes -> Force Rebuild. Ensure the 'Everything Service' is running to avoid UAC prompts.
+## Key Features and Operational Capabilities
+The Claude model can assist users in configuring and executing the following capabilities of Everything:
 
-## ðŸ’» Command Execution & Syntax
-Claude is equipped to parse and generate the following exact commands and shortcuts for Everything:
+- **Instant NTFS USN Change Journal Indexing**
+- **Complex Boolean operators, wildcards, and Regex support**
+- **Built-in HTTP, ETP, and FTP servers for network file retrieval**
+- **C++ SDK and IPC interface (WM_COPYDATA) for external app integration**
+- **Custom bookmarking and saved search filters**
 
-`ash
-Everything.exe -search "<query>"
-Everything.exe -admin
-Everything.exe -update
-`
+### Claude Processing and Execution Guidelines
+When a user issues commands or requests help regarding Everything, Claude must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Everything, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Everything encounters operational failures, Claude must analyze issues using the resolution pathways below:
+
+#### [Issue] Everything service not responding or missing results
+- **Root Cause**: Background service stopped or USN journal index corrupted.
+- **Resolution Pathway**: Run 'Everything.exe -svc-start' or navigate to Options -> Indexes -> Force Rebuild.
+
+#### [Issue] UAC prompt appears every time Everything opens
+- **Root Cause**: App running in elevated user mode instead of as a background service.
+- **Resolution Pathway**: Enable 'Everything Service' in settings and disable 'Run as administrator'.
+
+#### [Issue] Network shares not appearing in search results
+- **Root Cause**: USN Journal indexing unavailable on network shares.
+- **Resolution Pathway**: Add network folders under Options -> Indexes -> Folders for periodic indexing.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Claude model can generate or execute the following terminal and shell commands for Everything:
+
+```bash
+Everything.exe -search "ext:zip;rar size:>1gb"
+Everything.exe -svc-start -admin
+Everything.exe -reindex -export-csv "C:\index_dump.csv"
+Everything.exe -startup -minimized
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Claude should point users to the following file locations:
+
+- `%APPDATA%\Everything\Everything.ini`
+- `%APPDATA%\Everything\Everything.db`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: Windows
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Claude-native instruction formatting
+- **Optimization Strategy**: Claude-Native Vector Search
 
-### FAQ Structured Data for Claude
-**Q: How does Claude solve Everything issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Claude automate Everything?**
-A: Yes, through the CLI commands and hotkeys listed above, Claude can guide the user to fully automate Everything workflows.
+**Q: How does Claude troubleshoot Everything issues on Windows?**
+A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Claude generate automated CLI commands for Everything?**
+A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Claude. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Everything users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

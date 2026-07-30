@@ -1,64 +1,97 @@
-﻿---
-title: "Raycast AI Skill for Gemini"
-description: "Comprehensive SEO-rich AI skill guide for Gemini to manage, troubleshoot, and execute commands in Raycast (macOS)."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Raycast, Gemini troubleshooting, Google AI, Raycast, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Raycast AI Skill Guide for Gemini"
+description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Raycast on macOS."
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Raycast, Gemini troubleshooting, Google AI, Raycast, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Raycast Mastery Skill for Gemini
+# Raycast AI Skill Guide for Gemini
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Raycast** on **macOS**. This specific skill set is engineered for **Gemini** (Google's Gemini, emphasizing fast, context-aware, multimodal-ready, and integration-focused intelligence.). 
-By embedding this skill, Gemini becomes a master troubleshooter, command executor, and advanced operator for Raycast. 
+## Overview
+This document serves as the official operational skill guide for **Raycast** on **macOS**, specifically engineered for **Gemini**.
 
-> **App Description**: High-performance, extensible replacement for Spotlight and Alfred on macOS.
+- **Application Name**: Raycast
+- **Category**: Spotlight & Productivity Launcher Replacement
+- **Platform**: macOS
+- **Target AI Agent**: Gemini
+- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Raycast, **Gemini** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Extensible Swift-native launcher for macOS providing instant control over apps, scripts, and extensions.
 
-- **Native Extensions**
-- **Script Commands (Bash/Python/AppleScript)**
-- **Window Management**
-- **Clipboard History**
+---
 
-### ðŸ§  How Gemini Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Raycast or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Raycast, Gemini must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Raycast, Gemini will directly pinpoint the solution using this expert matrix:
+Native Swift macOS app with React/TypeScript Extension runtime backed by Node.js and macOS Accessibility API.
 
-### Known Issues & Diagnostics
-- âš ï¸ Accessibility permissions revoked
-- âš ï¸ Script timeouts
-- âš ï¸ Node.js environment issues for extensions
-- âš ï¸ High memory leak on heavy extensions
+---
 
-**Master Troubleshooting Protocol**:
-> If Raycast fails to manage windows or type text, remove and re-add Raycast in System Settings -> Privacy & Security -> Accessibility.
+## Key Features and Operational Capabilities
+The Gemini model can assist users in configuring and executing the following capabilities of Raycast:
 
-## ðŸ’» Command Execution & Syntax
-Gemini is equipped to parse and generate the following exact commands and shortcuts for Raycast:
+- **Native Swift architecture with low latency**
+- **React/TypeScript Extension API with Node.js runtime support**
+- **Bash, Shell, Python, and AppleScript command execution**
+- **Built-in Clipboard History, Window Management, and Snippets**
+- **Raycast AI integration and custom deep-linking URL schemes**
 
-`ash
-raycast://
-raycast://extensions/author/extension-name
-Script Commands via aliases
-`
+### Gemini Processing and Execution Guidelines
+When a user issues commands or requests help regarding Raycast, Gemini must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Raycast, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Raycast encounters operational failures, Gemini must analyze issues using the resolution pathways below:
+
+#### [Issue] Raycast cannot manage windows or paste text
+- **Root Cause**: macOS Accessibility permissions revoked or disabled.
+- **Resolution Pathway**: Navigate to System Settings -> Privacy & Security -> Accessibility and re-toggle Raycast.
+
+#### [Issue] Script Commands fail with 'command not found'
+- **Root Cause**: Raycast execution environment missing custom PATH environment variables.
+- **Resolution Pathway**: Export full PATH in script header or set environment variables inside script command configuration.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Gemini model can generate or execute the following terminal and shell commands for Raycast:
+
+```bash
+open raycast://
+open raycast://extensions/raycast/clipboard-history/clipboard-history
+open raycast://conf/
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Gemini should point users to the following file locations:
+
+- `~/Library/Application Support/com.raycast.macos`
+- `~/Library/Preferences/com.raycast.macos.plist`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Gemini-native instruction formatting
+- **Optimization Strategy**: Gemini-Native Vector Search
 
-### FAQ Structured Data for Gemini
-**Q: How does Gemini solve Raycast issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Gemini automate Raycast?**
-A: Yes, through the CLI commands and hotkeys listed above, Gemini can guide the user to fully automate Raycast workflows.
+**Q: How does Gemini troubleshoot Raycast issues on macOS?**
+A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Gemini generate automated CLI commands for Raycast?**
+A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Gemini. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Raycast users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

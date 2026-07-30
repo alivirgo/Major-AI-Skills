@@ -1,62 +1,96 @@
-﻿---
-title: "MacCy AI Skill for Claude"
-description: "Comprehensive SEO-rich AI skill guide for Claude to manage, troubleshoot, and execute commands in MacCy (macOS)."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for MacCy, Troubleshooting with Claude, Claude AI skills, Claude integration, MacCy, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "MacCy AI Skill Guide for Claude"
+description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate MacCy on macOS."
+keywords: "Claude AI, Anthropic Claude, Claude prompt for MacCy, Troubleshooting with Claude, Claude AI skills, Claude integration, MacCy, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ MacCy Mastery Skill for Claude
+# MacCy AI Skill Guide for Claude
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **MacCy** on **macOS**. This specific skill set is engineered for **Claude** (Anthropic's Claude, emphasizing safe, nuanced, and extremely detailed step-by-step analytical troubleshooting.). 
-By embedding this skill, Claude becomes a master troubleshooter, command executor, and advanced operator for MacCy. 
+## Overview
+This document serves as the official operational skill guide for **MacCy** on **macOS**, specifically engineered for **Claude**.
 
-> **App Description**: Lightweight, open-source clipboard history manager for macOS.
+- **Application Name**: MacCy
+- **Category**: Clipboard History Manager
+- **Platform**: macOS
+- **Target AI Agent**: Claude
+- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for MacCy, **Claude** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Lightweight open-source clipboard history manager keeping searchable history of text, images, and files.
 
-- **Image/Text clipboard history**
-- **Fuzzy Search**
-- **Pinning clips**
-- **Secure input ignoring**
+---
 
-### ðŸ§  How Claude Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions MacCy or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with MacCy, Claude must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with MacCy, Claude will directly pinpoint the solution using this expert matrix:
+Monitors macOS NSPasteboard change events and stores historical data in SQLite / CoreData storage.
 
-### Known Issues & Diagnostics
-- âš ï¸ Not recording clipboard due to Secure Input locks
-- âš ï¸ Memory bloat with large images
-- âš ï¸ Search hotkey conflict
+---
 
-**Master Troubleshooting Protocol**:
-> If MacCy isn't saving clips, an app (like a password manager or terminal) is holding a 'Secure Input' lock. Identify and close the locking app.
+## Key Features and Operational Capabilities
+The Claude model can assist users in configuring and executing the following capabilities of MacCy:
 
-## ðŸ’» Command Execution & Syntax
-Claude is equipped to parse and generate the following exact commands and shortcuts for MacCy:
+- **Searchable clipboard history with fuzzy search algorithms**
+- **Support for plain text, rich text, images, and file paths**
+- **Pinning clips to prevent automated history cleanup**
+- **Secure Input detection ignoring password managers**
+- **Custom keybindings and menu bar popover customization**
 
-`ash
-Trigger via hotkey (Cmd+Shift+C default)
-Use arrow keys and enter to paste
-`
+### Claude Processing and Execution Guidelines
+When a user issues commands or requests help regarding MacCy, Claude must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to MacCy, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If MacCy encounters operational failures, Claude must analyze issues using the resolution pathways below:
+
+#### [Issue] MacCy stops saving copied items
+- **Root Cause**: An app (e.g. 1Password or Terminal) has active Secure Input locked.
+- **Resolution Pathway**: Run 'ioreg -l -w 0 | grep SecureInput' in Terminal to identify and close the locking application.
+
+#### [Issue] High RAM usage from clipboard history
+- **Root Cause**: Large uncompressed image clips stored in history database.
+- **Resolution Pathway**: Limit maximum history size or disable image storage in MacCy Preferences -> Pasteboard.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Claude model can generate or execute the following terminal and shell commands for MacCy:
+
+```bash
+open -a MacCy
+defaults read org.pavelgroup.MacCy
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Claude should point users to the following file locations:
+
+- `~/Library/Preferences/org.pavelgroup.MacCy.plist`
+- `~/Library/Containers/org.pavelgroup.MacCy`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Claude-native instruction formatting
+- **Optimization Strategy**: Claude-Native Vector Search
 
-### FAQ Structured Data for Claude
-**Q: How does Claude solve MacCy issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Claude automate MacCy?**
-A: Yes, through the CLI commands and hotkeys listed above, Claude can guide the user to fully automate MacCy workflows.
+**Q: How does Claude troubleshoot MacCy issues on macOS?**
+A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Claude generate automated CLI commands for MacCy?**
+A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Claude. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for MacCy users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

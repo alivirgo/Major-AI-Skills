@@ -1,64 +1,101 @@
-﻿---
-title: "WizTree AI Skill for Gemini"
-description: "Comprehensive SEO-rich AI skill guide for Gemini to manage, troubleshoot, and execute commands in WizTree (Windows)."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for WizTree, Gemini troubleshooting, Google AI, WizTree, Windows utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "WizTree AI Skill Guide for Gemini"
+description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate WizTree on Windows."
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for WizTree, Gemini troubleshooting, Google AI, WizTree, Windows utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ WizTree Mastery Skill for Gemini
+# WizTree AI Skill Guide for Gemini
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **WizTree** on **Windows**. This specific skill set is engineered for **Gemini** (Google's Gemini, emphasizing fast, context-aware, multimodal-ready, and integration-focused intelligence.). 
-By embedding this skill, Gemini becomes a master troubleshooter, command executor, and advanced operator for WizTree. 
+## Overview
+This document serves as the official operational skill guide for **WizTree** on **Windows**, specifically engineered for **Gemini**.
 
-> **App Description**: Lightning-fast disk space visualizer utilizing MFT (Master File Table) for instant scanning.
+- **Application Name**: WizTree
+- **Category**: Disk Space Visualizer & Storage Diagnostics
+- **Platform**: Windows
+- **Target AI Agent**: Gemini
+- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for WizTree, **Gemini** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Lightning-fast disk space visualizer that reads the Master File Table (MFT) directly to scan hard drives in seconds.
 
-- **MFT Scanning**
-- **Visual Treemap**
-- **CSV Export**
-- **Command Line Interface**
+---
 
-### ðŸ§  How Gemini Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions WizTree or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with WizTree, Gemini must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with WizTree, Gemini will directly pinpoint the solution using this expert matrix:
+Bypasses standard Windows File System APIs by directly parsing raw NTFS MFT bytes ( file), allowing it to analyze millions of files in under 2 seconds. Falls back to Win32 directory traversal for non-NTFS drives.
 
-### Known Issues & Diagnostics
-- âš ï¸ Inaccurate scanning without Admin rights
-- âš ï¸ Network drive scanning latency
-- âš ï¸ MFT reading errors on corrupted drives
-- âš ï¸ High memory usage on massive arrays
+---
 
-**Master Troubleshooting Protocol**:
-> Always ensure WizTree is run as Administrator to access the MFT directly. For network drives, fallback to standard API scanning.
+## Key Features and Operational Capabilities
+The Gemini model can assist users in configuring and executing the following capabilities of WizTree:
 
-## ðŸ’» Command Execution & Syntax
-Gemini is equipped to parse and generate the following exact commands and shortcuts for WizTree:
+- **MFT Direct Scanning (100x faster than WinDirStat)**
+- **Visual Treemap representation of storage allocation**
+- **CSV/Text export for automated disk usage auditing**
+- **Command line automation with silent background flags**
+- **Duplication detection & file extension breakdown**
 
-`ash
-wiztree64.exe /admin=1
-wiztree64.exe /export=report.csv
-wiztree64.exe C: /treemap
-`
+### Gemini Processing and Execution Guidelines
+When a user issues commands or requests help regarding WizTree, Gemini must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to WizTree, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If WizTree encounters operational failures, Gemini must analyze issues using the resolution pathways below:
+
+#### [Issue] Inaccurate scan results or missing system files
+- **Root Cause**: WizTree executed without Administrator privileges, blocking MFT access.
+- **Resolution Pathway**: Launch WizTree using 'Run as Administrator' or pass /admin=1 in CLI.
+
+#### [Issue] Network drives (SMB/NFS) scan very slowly
+- **Root Cause**: MFT direct reading is unsupported over remote network shares.
+- **Resolution Pathway**: Allow WizTree to automatically fall back to standard Win32 directory walking API.
+
+#### [Issue] Size mismatch between WizTree and Windows Explorer
+- **Root Cause**: Explorer hides system VSS shadow copies, , swapfile.sys, and hiberfil.sys.
+- **Resolution Pathway**: Check 'Allocated' space column in WizTree rather than raw file size for actual disk usage.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Gemini model can generate or execute the following terminal and shell commands for WizTree:
+
+```bash
+wiztree64.exe C: /export="C:\reports\disk_report.csv" /admin=1
+wiztree64.exe D:\Data /filetypes=1 /dumpmft
+wiztree64.exe /admin=1 /select="C:\Windows\Temp"
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Gemini should point users to the following file locations:
+
+- `%APPDATA%\WizTree\WizTree.ini`
+- `HKCU\Software\WizTree`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: Windows
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Gemini-native instruction formatting
+- **Optimization Strategy**: Gemini-Native Vector Search
 
-### FAQ Structured Data for Gemini
-**Q: How does Gemini solve WizTree issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Gemini automate WizTree?**
-A: Yes, through the CLI commands and hotkeys listed above, Gemini can guide the user to fully automate WizTree workflows.
+**Q: How does Gemini troubleshoot WizTree issues on Windows?**
+A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Gemini generate automated CLI commands for WizTree?**
+A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Gemini. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for WizTree users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

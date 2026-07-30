@@ -1,62 +1,96 @@
-﻿---
-title: "Dropover AI Skill for GPT"
-description: "Comprehensive SEO-rich AI skill guide for GPT to manage, troubleshoot, and execute commands in Dropover (macOS)."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Dropover, ChatGPT troubleshooting, GPT automation, Dropover, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Dropover AI Skill Guide for GPT"
+description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Dropover on macOS."
+keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Dropover, ChatGPT troubleshooting, GPT automation, Dropover, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Dropover Mastery Skill for GPT
+# Dropover AI Skill Guide for GPT
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Dropover** on **macOS**. This specific skill set is engineered for **GPT** (OpenAI's ChatGPT (GPT-4), emphasizing actionable, concise, code-heavy, and direct problem-solving capabilities.). 
-By embedding this skill, GPT becomes a master troubleshooter, command executor, and advanced operator for Dropover. 
+## Overview
+This document serves as the official operational skill guide for **Dropover** on **macOS**, specifically engineered for **GPT**.
 
-> **App Description**: Temporary floating shelf for dragging files, text, and images.
+- **Application Name**: Dropover
+- **Category**: Temporary Floating Drag Shelf Utility
+- **Platform**: macOS
+- **Target AI Agent**: GPT
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Dropover, **GPT** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
 
-- **Multiple floating shelves**
-- **iCloud Sync**
-- **Quick Look integration**
-- **Share action extensions**
+---
 
-### ðŸ§  How GPT Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Dropover or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Dropover, GPT must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Dropover, GPT will directly pinpoint the solution using this expert matrix:
+Custom floating NSPanel windows rendering on top of space boundaries, hooking into macOS drag-and-drop sessions.
 
-### Known Issues & Diagnostics
-- âš ï¸ Shelf not appearing on shake
-- âš ï¸ Accessibility permission errors
-- âš ï¸ Files moving instead of copying
+---
 
-**Master Troubleshooting Protocol**:
-> If the shake gesture fails, adjust the sensitivity in Dropover Preferences. Ensure Accessibility permissions are granted for automatic pasting.
+## Key Features and Operational Capabilities
+The GPT model can assist users in configuring and executing the following capabilities of Dropover:
 
-## ðŸ’» Command Execution & Syntax
-GPT is equipped to parse and generate the following exact commands and shortcuts for Dropover:
+- **Floating shelf triggerable via cursor shake or drag-and-hover**
+- **Multi-file collection shelves across macOS Spaces**
+- **Quick Look preview and instant file sharing links (iCloud/Dropbox)**
+- **Stash items for batch processing or zip creation**
+- **Integration with macOS Share Extensions and Shortcuts**
 
-`ash
-Shake cursor to trigger
-Drag and hover to trigger
-`
+### GPT Processing and Execution Guidelines
+When a user issues commands or requests help regarding Dropover, GPT must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Dropover, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Dropover encounters operational failures, GPT must analyze issues using the resolution pathways below:
+
+#### [Issue] Cursor shake gesture fails to open shelf
+- **Root Cause**: Gesture sensitivity threshold set too high.
+- **Resolution Pathway**: Adjust shake sensitivity in Dropover Preferences -> Shortcuts & Gestures.
+
+#### [Issue] Dropped files move instead of copying
+- **Root Cause**: Modifier key settings overriding default drag action.
+- **Resolution Pathway**: Hold Option key while dragging to force duplicate/copy behavior on the shelf.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The GPT model can generate or execute the following terminal and shell commands for Dropover:
+
+```bash
+open -a Dropover
+defaults read com.extendedmac.Dropover-mac
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, GPT should point users to the following file locations:
+
+- `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
+- `~/Library/Containers/com.extendedmac.Dropover-mac`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: GPT-native instruction formatting
+- **Optimization Strategy**: GPT-Native Vector Search
 
-### FAQ Structured Data for GPT
-**Q: How does GPT solve Dropover issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can GPT automate Dropover?**
-A: Yes, through the CLI commands and hotkeys listed above, GPT can guide the user to fully automate Dropover workflows.
+**Q: How does GPT troubleshoot Dropover issues on macOS?**
+A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can GPT generate automated CLI commands for Dropover?**
+A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of GPT. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Dropover users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

@@ -1,65 +1,97 @@
-﻿---
-title: "Microsoft PowerToys AI Skill for GPT"
-description: "Comprehensive SEO-rich AI skill guide for GPT to manage, troubleshoot, and execute commands in Microsoft PowerToys (Windows)."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Microsoft_PowerToys, ChatGPT troubleshooting, GPT automation, Microsoft_PowerToys, Windows utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Microsoft PowerToys AI Skill Guide for GPT"
+description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Microsoft PowerToys on Windows."
+keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for Microsoft PowerToys, ChatGPT troubleshooting, GPT automation, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Microsoft PowerToys Mastery Skill for GPT
+# Microsoft PowerToys AI Skill Guide for GPT
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Microsoft PowerToys** on **Windows**. This specific skill set is engineered for **GPT** (OpenAI's ChatGPT (GPT-4), emphasizing actionable, concise, code-heavy, and direct problem-solving capabilities.). 
-By embedding this skill, GPT becomes a master troubleshooter, command executor, and advanced operator for Microsoft PowerToys. 
+## Overview
+This document serves as the official operational skill guide for **Microsoft PowerToys** on **Windows**, specifically engineered for **GPT**.
 
-> **App Description**: Power-user toolkit for Windows, featuring FancyZones, Text Extractor, and Color Picker.
+- **Application Name**: Microsoft PowerToys
+- **Category**: Power-User Operating System Utilities
+- **Platform**: Windows
+- **Target AI Agent**: GPT
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Microsoft PowerToys, **GPT** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, Text Extractor, and Color Picker.
 
-- **FancyZones window manager**
-- **PowerToys Run launcher**
-- **Text Extractor OCR**
-- **Color Picker**
-- **Awake**
+---
 
-### ðŸ§  How GPT Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Microsoft PowerToys or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Microsoft PowerToys, GPT must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Microsoft PowerToys, GPT will directly pinpoint the solution using this expert matrix:
+C++ / WinUI 3 modular runtime hooking into Windows Win32 API shell hooks (SetWindowsHookEx).
 
-### Known Issues & Diagnostics
-- âš ï¸ FancyZones not snapping elevated (Admin) apps
-- âš ï¸ PowerToys Run lagging
-- âš ï¸ Settings sync issues across machines
+---
 
-**Master Troubleshooting Protocol**:
-> To snap Admin apps with FancyZones, PowerToys must also be run as Administrator. Restart the PowerToys process if 'Run' becomes unresponsive.
+## Key Features and Operational Capabilities
+The GPT model can assist users in configuring and executing the following capabilities of Microsoft PowerToys:
 
-## ðŸ’» Command Execution & Syntax
-GPT is equipped to parse and generate the following exact commands and shortcuts for Microsoft PowerToys:
+- **FancyZones window grid layout management**
+- **PowerToys Run quick launcher (Alt+Space)**
+- **Text Extractor OCR utility (Win+Shift+T)**
+- **Color Picker system-wide eyedropper (Win+Shift+C)**
+- **Awake keep-awake system utility & File Locksmith process analyzer**
 
-`ash
-powertoys.exe
-Win+Shift+T (Text Extractor)
-Win+Shift+C (Color Picker)
-Alt+Space (PowerToys Run)
-`
+### GPT Processing and Execution Guidelines
+When a user issues commands or requests help regarding Microsoft PowerToys, GPT must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Microsoft PowerToys, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Microsoft PowerToys encounters operational failures, GPT must analyze issues using the resolution pathways below:
+
+#### [Issue] FancyZones fails to snap elevated (Administrator) windows
+- **Root Cause**: PowerToys process running with standard user permissions.
+- **Resolution Pathway**: Enable 'Always run as administrator' in PowerToys General settings.
+
+#### [Issue] PowerToys Run lags or fails to open
+- **Root Cause**: Corrupted plugin index or background process lockup.
+- **Resolution Pathway**: Kill PowerToys.PowerLauncher.exe in Task Manager and restart PowerToys.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The GPT model can generate or execute the following terminal and shell commands for Microsoft PowerToys:
+
+```bash
+PowerToys.exe
+PowerToys.ColorPicker.exe
+PowerToys.PowerLauncher.exe
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, GPT should point users to the following file locations:
+
+- `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
+- `%LOCALAPPDATA%\Microsoft\PowerToys\FancyZones\zones-settings.json`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: Windows
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: GPT-native instruction formatting
+- **Optimization Strategy**: GPT-Native Vector Search
 
-### FAQ Structured Data for GPT
-**Q: How does GPT solve Microsoft PowerToys issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can GPT automate Microsoft PowerToys?**
-A: Yes, through the CLI commands and hotkeys listed above, GPT can guide the user to fully automate Microsoft PowerToys workflows.
+**Q: How does GPT troubleshoot Microsoft PowerToys issues on Windows?**
+A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can GPT generate automated CLI commands for Microsoft PowerToys?**
+A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of GPT. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Microsoft PowerToys users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

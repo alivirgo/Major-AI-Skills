@@ -1,65 +1,97 @@
-﻿---
-title: "Microsoft PowerToys AI Skill for Gemini"
-description: "Comprehensive SEO-rich AI skill guide for Gemini to manage, troubleshoot, and execute commands in Microsoft PowerToys (Windows)."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Microsoft_PowerToys, Gemini troubleshooting, Google AI, Microsoft_PowerToys, Windows utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Microsoft PowerToys AI Skill Guide for Gemini"
+description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Microsoft PowerToys on Windows."
+keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Microsoft PowerToys, Gemini troubleshooting, Google AI, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Microsoft PowerToys Mastery Skill for Gemini
+# Microsoft PowerToys AI Skill Guide for Gemini
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Microsoft PowerToys** on **Windows**. This specific skill set is engineered for **Gemini** (Google's Gemini, emphasizing fast, context-aware, multimodal-ready, and integration-focused intelligence.). 
-By embedding this skill, Gemini becomes a master troubleshooter, command executor, and advanced operator for Microsoft PowerToys. 
+## Overview
+This document serves as the official operational skill guide for **Microsoft PowerToys** on **Windows**, specifically engineered for **Gemini**.
 
-> **App Description**: Power-user toolkit for Windows, featuring FancyZones, Text Extractor, and Color Picker.
+- **Application Name**: Microsoft PowerToys
+- **Category**: Power-User Operating System Utilities
+- **Platform**: Windows
+- **Target AI Agent**: Gemini
+- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Microsoft PowerToys, **Gemini** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, Text Extractor, and Color Picker.
 
-- **FancyZones window manager**
-- **PowerToys Run launcher**
-- **Text Extractor OCR**
-- **Color Picker**
-- **Awake**
+---
 
-### ðŸ§  How Gemini Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Microsoft PowerToys or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Microsoft PowerToys, Gemini must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Microsoft PowerToys, Gemini will directly pinpoint the solution using this expert matrix:
+C++ / WinUI 3 modular runtime hooking into Windows Win32 API shell hooks (SetWindowsHookEx).
 
-### Known Issues & Diagnostics
-- âš ï¸ FancyZones not snapping elevated (Admin) apps
-- âš ï¸ PowerToys Run lagging
-- âš ï¸ Settings sync issues across machines
+---
 
-**Master Troubleshooting Protocol**:
-> To snap Admin apps with FancyZones, PowerToys must also be run as Administrator. Restart the PowerToys process if 'Run' becomes unresponsive.
+## Key Features and Operational Capabilities
+The Gemini model can assist users in configuring and executing the following capabilities of Microsoft PowerToys:
 
-## ðŸ’» Command Execution & Syntax
-Gemini is equipped to parse and generate the following exact commands and shortcuts for Microsoft PowerToys:
+- **FancyZones window grid layout management**
+- **PowerToys Run quick launcher (Alt+Space)**
+- **Text Extractor OCR utility (Win+Shift+T)**
+- **Color Picker system-wide eyedropper (Win+Shift+C)**
+- **Awake keep-awake system utility & File Locksmith process analyzer**
 
-`ash
-powertoys.exe
-Win+Shift+T (Text Extractor)
-Win+Shift+C (Color Picker)
-Alt+Space (PowerToys Run)
-`
+### Gemini Processing and Execution Guidelines
+When a user issues commands or requests help regarding Microsoft PowerToys, Gemini must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Microsoft PowerToys, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Microsoft PowerToys encounters operational failures, Gemini must analyze issues using the resolution pathways below:
+
+#### [Issue] FancyZones fails to snap elevated (Administrator) windows
+- **Root Cause**: PowerToys process running with standard user permissions.
+- **Resolution Pathway**: Enable 'Always run as administrator' in PowerToys General settings.
+
+#### [Issue] PowerToys Run lags or fails to open
+- **Root Cause**: Corrupted plugin index or background process lockup.
+- **Resolution Pathway**: Kill PowerToys.PowerLauncher.exe in Task Manager and restart PowerToys.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Gemini model can generate or execute the following terminal and shell commands for Microsoft PowerToys:
+
+```bash
+PowerToys.exe
+PowerToys.ColorPicker.exe
+PowerToys.PowerLauncher.exe
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Gemini should point users to the following file locations:
+
+- `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
+- `%LOCALAPPDATA%\Microsoft\PowerToys\FancyZones\zones-settings.json`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: Windows
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Gemini-native instruction formatting
+- **Optimization Strategy**: Gemini-Native Vector Search
 
-### FAQ Structured Data for Gemini
-**Q: How does Gemini solve Microsoft PowerToys issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Gemini automate Microsoft PowerToys?**
-A: Yes, through the CLI commands and hotkeys listed above, Gemini can guide the user to fully automate Microsoft PowerToys workflows.
+**Q: How does Gemini troubleshoot Microsoft PowerToys issues on Windows?**
+A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Gemini generate automated CLI commands for Microsoft PowerToys?**
+A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Gemini. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Microsoft PowerToys users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

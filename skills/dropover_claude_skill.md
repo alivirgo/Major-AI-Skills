@@ -1,62 +1,96 @@
-﻿---
-title: "Dropover AI Skill for Claude"
-description: "Comprehensive SEO-rich AI skill guide for Claude to manage, troubleshoot, and execute commands in Dropover (macOS)."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Dropover, Troubleshooting with Claude, Claude AI skills, Claude integration, Dropover, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Dropover AI Skill Guide for Claude"
+description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Dropover on macOS."
+keywords: "Claude AI, Anthropic Claude, Claude prompt for Dropover, Troubleshooting with Claude, Claude AI skills, Claude integration, Dropover, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Dropover Mastery Skill for Claude
+# Dropover AI Skill Guide for Claude
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Dropover** on **macOS**. This specific skill set is engineered for **Claude** (Anthropic's Claude, emphasizing safe, nuanced, and extremely detailed step-by-step analytical troubleshooting.). 
-By embedding this skill, Claude becomes a master troubleshooter, command executor, and advanced operator for Dropover. 
+## Overview
+This document serves as the official operational skill guide for **Dropover** on **macOS**, specifically engineered for **Claude**.
 
-> **App Description**: Temporary floating shelf for dragging files, text, and images.
+- **Application Name**: Dropover
+- **Category**: Temporary Floating Drag Shelf Utility
+- **Platform**: macOS
+- **Target AI Agent**: Claude
+- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Dropover, **Claude** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
 
-- **Multiple floating shelves**
-- **iCloud Sync**
-- **Quick Look integration**
-- **Share action extensions**
+---
 
-### ðŸ§  How Claude Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Dropover or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Dropover, Claude must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Dropover, Claude will directly pinpoint the solution using this expert matrix:
+Custom floating NSPanel windows rendering on top of space boundaries, hooking into macOS drag-and-drop sessions.
 
-### Known Issues & Diagnostics
-- âš ï¸ Shelf not appearing on shake
-- âš ï¸ Accessibility permission errors
-- âš ï¸ Files moving instead of copying
+---
 
-**Master Troubleshooting Protocol**:
-> If the shake gesture fails, adjust the sensitivity in Dropover Preferences. Ensure Accessibility permissions are granted for automatic pasting.
+## Key Features and Operational Capabilities
+The Claude model can assist users in configuring and executing the following capabilities of Dropover:
 
-## ðŸ’» Command Execution & Syntax
-Claude is equipped to parse and generate the following exact commands and shortcuts for Dropover:
+- **Floating shelf triggerable via cursor shake or drag-and-hover**
+- **Multi-file collection shelves across macOS Spaces**
+- **Quick Look preview and instant file sharing links (iCloud/Dropbox)**
+- **Stash items for batch processing or zip creation**
+- **Integration with macOS Share Extensions and Shortcuts**
 
-`ash
-Shake cursor to trigger
-Drag and hover to trigger
-`
+### Claude Processing and Execution Guidelines
+When a user issues commands or requests help regarding Dropover, Claude must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Dropover, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Dropover encounters operational failures, Claude must analyze issues using the resolution pathways below:
+
+#### [Issue] Cursor shake gesture fails to open shelf
+- **Root Cause**: Gesture sensitivity threshold set too high.
+- **Resolution Pathway**: Adjust shake sensitivity in Dropover Preferences -> Shortcuts & Gestures.
+
+#### [Issue] Dropped files move instead of copying
+- **Root Cause**: Modifier key settings overriding default drag action.
+- **Resolution Pathway**: Hold Option key while dragging to force duplicate/copy behavior on the shelf.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Claude model can generate or execute the following terminal and shell commands for Dropover:
+
+```bash
+open -a Dropover
+defaults read com.extendedmac.Dropover-mac
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Claude should point users to the following file locations:
+
+- `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
+- `~/Library/Containers/com.extendedmac.Dropover-mac`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Claude-native instruction formatting
+- **Optimization Strategy**: Claude-Native Vector Search
 
-### FAQ Structured Data for Claude
-**Q: How does Claude solve Dropover issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Claude automate Dropover?**
-A: Yes, through the CLI commands and hotkeys listed above, Claude can guide the user to fully automate Dropover workflows.
+**Q: How does Claude troubleshoot Dropover issues on macOS?**
+A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Claude generate automated CLI commands for Dropover?**
+A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Claude. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Dropover users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

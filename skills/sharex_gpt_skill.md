@@ -1,64 +1,102 @@
-﻿---
-title: "ShareX AI Skill for GPT"
-description: "Comprehensive SEO-rich AI skill guide for GPT to manage, troubleshoot, and execute commands in ShareX (Windows)."
-keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for ShareX, ChatGPT troubleshooting, GPT automation, ShareX, Windows utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "ShareX AI Skill Guide for GPT"
+description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate ShareX on Windows."
+keywords: "ChatGPT, GPT-4, OpenAI GPT, GPT prompt for ShareX, ChatGPT troubleshooting, GPT automation, ShareX, Windows utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ ShareX Mastery Skill for GPT
+# ShareX AI Skill Guide for GPT
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **ShareX** on **Windows**. This specific skill set is engineered for **GPT** (OpenAI's ChatGPT (GPT-4), emphasizing actionable, concise, code-heavy, and direct problem-solving capabilities.). 
-By embedding this skill, GPT becomes a master troubleshooter, command executor, and advanced operator for ShareX. 
+## Overview
+This document serves as the official operational skill guide for **ShareX** on **Windows**, specifically engineered for **GPT**.
 
-> **App Description**: Advanced screen capture, recording, OCR, and file sharing tool.
+- **Application Name**: ShareX
+- **Category**: Screen Capture, OCR, Video Recording & File Sharing
+- **Platform**: Windows
+- **Target AI Agent**: GPT
+- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for ShareX, **GPT** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Comprehensive open-source screen capture, file sharing, and productivity tool.
 
-- **Screen Capture/Recording**
-- **FFmpeg integration**
-- **OCR (Optical Character Recognition)**
-- **Custom Uploaders/Workflows**
+---
 
-### ðŸ§  How GPT Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions ShareX or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with ShareX, GPT must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with ShareX, GPT will directly pinpoint the solution using this expert matrix:
+Leverages FFmpeg binaries for video encoding and Windows OCR / Tesseract engines for optical character recognition.
 
-### Known Issues & Diagnostics
-- âš ï¸ Hotkey conflicts with other software
-- âš ï¸ FFmpeg audio recording failures
-- âš ï¸ Uploader authentication expiry
-- âš ï¸ High CPU usage during encoding
+---
 
-**Master Troubleshooting Protocol**:
-> For FFmpeg audio issues, ensure 'Virtual-audio-capturer' is installed and selected in Task Settings. Re-authorize Imgur/Custom destinations if uploads fail.
+## Key Features and Operational Capabilities
+The GPT model can assist users in configuring and executing the following capabilities of ShareX:
 
-## ðŸ’» Command Execution & Syntax
-GPT is equipped to parse and generate the following exact commands and shortcuts for ShareX:
+- **Screen capture (region, window, full screen, scrolling capture)**
+- **Integrated FFmpeg screen and audio recording (GIF/MP4/WebM)**
+- **Optical Character Recognition (OCR) via Windows/Tesseract APIs**
+- **Customizable uploaders with JSON API payload support (S3, Imgur, Custom Webhooks)**
+- **Image annotation editor, color picker, and ruler tools**
 
-`ash
-sharex.exe -workflow "Screen record"
-sharex.exe -imageeditor "path_to_image"
-sharex.exe -ocr
-`
+### GPT Processing and Execution Guidelines
+When a user issues commands or requests help regarding ShareX, GPT must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to ShareX, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If ShareX encounters operational failures, GPT must analyze issues using the resolution pathways below:
+
+#### [Issue] FFmpeg audio recording fails or yields silent video
+- **Root Cause**: Virtual audio capture device missing or incorrectly configured.
+- **Resolution Pathway**: Install 'virtual-audio-capturer' via ShareX Task Settings -> Screen Recording Options.
+
+#### [Issue] Custom uploader failing with HTTP 401/403 errors
+- **Root Cause**: API token or OAuth authorization header expired.
+- **Resolution Pathway**: Re-authenticate destination key in ShareX Destinations -> Custom Uploader Settings.
+
+#### [Issue] Hotkey conflicts with games or heavy applications
+- **Root Cause**: Global keyboard hook hijacked by foreground application.
+- **Resolution Pathway**: Rebind key combination under ShareX Hotkey Settings.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The GPT model can generate or execute the following terminal and shell commands for ShareX:
+
+```bash
+ShareX.exe -ScreenCaptureRegion
+ShareX.exe -ScreenRecorder
+ShareX.exe -OCR
+ShareX.exe -ImageEditor "C:\path\to\image.png"
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, GPT should point users to the following file locations:
+
+- `%DOCUMENTS%\ShareX\ApplicationConfig.json`
+- `%DOCUMENTS%\ShareX\UploadersConfig.json`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: Windows
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: GPT-native instruction formatting
+- **Optimization Strategy**: GPT-Native Vector Search
 
-### FAQ Structured Data for GPT
-**Q: How does GPT solve ShareX issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can GPT automate ShareX?**
-A: Yes, through the CLI commands and hotkeys listed above, GPT can guide the user to fully automate ShareX workflows.
+**Q: How does GPT troubleshoot ShareX issues on Windows?**
+A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can GPT generate automated CLI commands for ShareX?**
+A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of GPT. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for ShareX users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*

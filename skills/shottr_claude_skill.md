@@ -1,62 +1,96 @@
-﻿---
-title: "Shottr AI Skill for Claude"
-description: "Comprehensive SEO-rich AI skill guide for Claude to manage, troubleshoot, and execute commands in Shottr (macOS)."
-keywords: "Claude AI, Anthropic Claude, Claude prompt for Shottr, Troubleshooting with Claude, Claude AI skills, Claude integration, Shottr, macOS utilities, AI troubleshooting"
-author: "AI Integration Expert"
+---
+title: "Shottr AI Skill Guide for Claude"
+description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Shottr on macOS."
+keywords: "Claude AI, Anthropic Claude, Claude prompt for Shottr, Troubleshooting with Claude, Claude AI skills, Claude integration, Shottr, macOS utilities, AI troubleshooting, productivity tools"
+author: "AI Systems Engineering Team"
 ---
 
-# ðŸš€ Shottr Mastery Skill for Claude
+# Shottr AI Skill Guide for Claude
 
-## ðŸŒŸ Overview
-Welcome to the definitive, SEO-optimized AI skill guide for **Shottr** on **macOS**. This specific skill set is engineered for **Claude** (Anthropic's Claude, emphasizing safe, nuanced, and extremely detailed step-by-step analytical troubleshooting.). 
-By embedding this skill, Claude becomes a master troubleshooter, command executor, and advanced operator for Shottr. 
+## Overview
+This document serves as the official operational skill guide for **Shottr** on **macOS**, specifically engineered for **Claude**.
 
-> **App Description**: Fast screenshot, pixelation, OCR, and ruler utility optimized for Apple Silicon.
+- **Application Name**: Shottr
+- **Category**: Screen Capture & Image Annotation Utility
+- **Platform**: macOS
+- **Target AI Agent**: Claude
+- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
 
-## ðŸŽ¯ Core Capabilities & AI Instructions
-When acting as the primary assistant for Shottr, **Claude** must inherently understand and apply the following capabilities:
+> **Core Purpose**: Fast screenshot, pixelation, ruler, and OCR utility optimized for Apple Silicon.
 
-- **Scrolling Screenshots**
-- **Instant Pixelation/Blur**
-- **On-screen Ruler**
-- **Text Recognition (OCR)**
+---
 
-### ðŸ§  How Claude Should Process Commands
-1. **Context Recognition**: Immediately identify when a user mentions Shottr or its related workflows.
-2. **Actionable Execution**: Formulate direct, copy-pasteable commands or exact UI navigation paths.
-3. **Proactive Diagnostics**: Anticipate common failure points and suggest checks before the user asks.
+## Architectural Deep Dive
+When interacting with Shottr, Claude must understand its underlying technical framework:
 
-## ðŸ›  Troubleshooting Matrix
-If the user experiences issues with Shottr, Claude will directly pinpoint the solution using this expert matrix:
+Built natively in Swift leveraging Apple ScreenCaptureKit and Metal graphics acceleration.
 
-### Known Issues & Diagnostics
-- âš ï¸ Screen Recording permission denied
-- âš ï¸ Scrolling screenshot overlapping/failing on dynamic pages
-- âš ï¸ Shortcut conflict with macOS default
+---
 
-**Master Troubleshooting Protocol**:
-> For scrolling screenshot failures, ensure no sticky headers are confusing the stitcher. Re-grant Screen Recording permission if captures are blank.
+## Key Features and Operational Capabilities
+The Claude model can assist users in configuring and executing the following capabilities of Shottr:
 
-## ðŸ’» Command Execution & Syntax
-Claude is equipped to parse and generate the following exact commands and shortcuts for Shottr:
+- **Scrolling screenshot capturing for long web pages and chat logs**
+- **Instant blur, pixelation, and blackout annotation filters**
+- **On-screen pixel ruler and color picker**
+- **Text recognition (OCR) with instant copy-to-clipboard**
+- **High-DPI retina capture and pin-to-screen floating windows**
 
-`ash
-shottr://
-Triggered mainly via customizable hotkeys (e.g., Cmd+Shift+2)
-`
+### Claude Processing and Execution Guidelines
+When a user issues commands or requests help regarding Shottr, Claude must execute the following protocol:
+1. **Context Identification**: Instantly recognize references to Shottr, its processes, and associated configuration files.
+2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
+3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
 
-## ðŸ“ˆ SEO & Schema Context for Web Integrations
-This markdown document is structured with rich semantic HTML/Markdown equivalents to ensure high visibility and machine readability. 
+---
+
+## Technical Troubleshooting Matrix
+
+If Shottr encounters operational failures, Claude must analyze issues using the resolution pathways below:
+
+#### [Issue] Shottr produces blank/black screenshots
+- **Root Cause**: Screen Recording permission missing in macOS Privacy settings.
+- **Resolution Pathway**: Grant Screen & System Audio Recording access under System Settings -> Privacy & Security.
+
+#### [Issue] Scrolling screenshot misaligned or overlapping
+- **Root Cause**: Sticky headers or fixed navigation bars confusing optical stitcher.
+- **Resolution Pathway**: Crop region to exclude sticky navbar before initiating scrolling capture.
+
+
+---
+
+## Command Line Syntax and Configuration
+
+### Executable and Terminal Commands
+The Claude model can generate or execute the following terminal and shell commands for Shottr:
+
+```bash
+open -a Shottr
+open shottr://
+```
+
+### Configuration and Data Storage Paths
+To inspect or repair corrupted settings, Claude should point users to the following file locations:
+
+- `~/Library/Application Support/Shottr`
+- `~/Library/Preferences/cc.shottr.plist`
+
+---
+
+## SEO and Schema Metadata Context
+This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
+
+- **Schema Type**: TechnicalArticle / SoftwareApplication
 - **Target OS**: macOS
-- **Application Category**: System Utility / Productivity
-- **AI Agent Optimization**: Claude-native instruction formatting
+- **Optimization Strategy**: Claude-Native Vector Search
 
-### FAQ Structured Data for Claude
-**Q: How does Claude solve Shottr issues?**
-A: By utilizing direct command injection, understanding exact UI layouts, and applying the Master Troubleshooting Protocol specified in this document.
+### Knowledge Base FAQ
 
-**Q: Can Claude automate Shottr?**
-A: Yes, through the CLI commands and hotkeys listed above, Claude can guide the user to fully automate Shottr workflows.
+**Q: How does Claude troubleshoot Shottr issues on macOS?**
+A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
+
+**Q: Can Claude generate automated CLI commands for Shottr?**
+A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
 
 ---
-*Generated for the ultimate agentic capabilities of Claude. Designed to seamlessly integrate into knowledge bases, providing unmatched resolution speed for Shottr users.*
+*Created for automated agentic deployment. Designed for seamless RAG ingestion and instant knowledge retrieval.*
