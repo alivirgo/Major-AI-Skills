@@ -1,638 +1,902 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Major AI Skills Documentation</title>
-  <meta name="description" content="Technical documentation and engineering reference for 425+ software automation skills and prompt specifications.">
+  <title>Major AI Skills — 425+ Production-Grade AI Automation Blueprints</title>
+  <meta name="description" content="Technical documentation and engineering reference for 425+ software automation skills and prompt specifications across 76 applications and 18 domains.">
   <meta name="author" content="Ali Virgo">
   <link rel="canonical" href="https://alivirgo.github.io/Major-AI-Skills/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    /* ═══════════════════════════════════════════════════
+       OMARCHY-INSPIRED DARK TERMINAL DESIGN SYSTEM
+       Deep blacks, monospaced typography, neon accents
+       ═══════════════════════════════════════════════════ */
+
     :root {
-      --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      --font-code: 'IBM Plex Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      --font-mono: 'IBM Plex Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       
-      --bg-app: #ffffff;
-      --bg-sidebar: #f6f8fa;
-      --bg-card: #ffffff;
-      --bg-code: #f6f8fa;
-      --bg-active: #e1e4e8;
-      --bg-hover: #eaecef;
+      /* Dark Theme (Default) */
+      --bg-body: #0a0a0a;
+      --bg-surface: #111111;
+      --bg-card: #161616;
+      --bg-card-hover: #1c1c1c;
+      --bg-code: #0d0d0d;
+      --bg-input: #1a1a1a;
+      --bg-notification: #1a1a1a;
       
-      --text-main: #24292e;
-      --text-heading: #1b1f23;
-      --text-muted: #586069;
-      --text-link: #0366d6;
+      --text-primary: #e8e8e8;
+      --text-secondary: #888888;
+      --text-heading: #ffffff;
+      --text-dim: #555555;
+      --text-link: #6cc644;
       
-      --border-color: #e1e4e8;
-      --border-strong: #d1d5da;
+      --accent-green: #6cc644;
+      --accent-cyan: #79c0ff;
+      --accent-purple: #d2a8ff;
+      --accent-orange: #ffa657;
+      --accent-red: #ff7b72;
+      --accent-yellow: #e3b341;
       
-      --sidebar-width: 290px;
-      --toc-width: 220px;
-      --header-height: 56px;
+      --border-color: #222222;
+      --border-subtle: #1a1a1a;
+      --border-active: #6cc644;
+      
+      --glow-green: 0 0 20px rgba(108, 198, 68, 0.15);
+      --glow-cyan: 0 0 20px rgba(121, 192, 255, 0.15);
+      
+      --sidebar-width: 280px;
+      --toc-width: 200px;
+      --header-height: 44px;
+      --notification-height: 36px;
     }
 
-    [data-theme="dark"] {
-      --bg-app: #0d1117;
-      --bg-sidebar: #161b22;
-      --bg-card: #0d1117;
-      --bg-code: #161b22;
-      --bg-active: #21262d;
-      --bg-hover: #30363d;
+    [data-theme="light"] {
+      --bg-body: #fafafa;
+      --bg-surface: #ffffff;
+      --bg-card: #f5f5f5;
+      --bg-card-hover: #ebebeb;
+      --bg-code: #f0f0f0;
+      --bg-input: #ffffff;
+      --bg-notification: #f0f0f0;
       
-      --text-main: #c9d1d9;
-      --text-heading: #f0f6fc;
-      --text-muted: #8b949e;
-      --text-link: #58a6ff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --text-heading: #000000;
+      --text-dim: #999999;
+      --text-link: #2ea043;
       
-      --border-color: #30363d;
-      --border-strong: #484f58;
+      --accent-green: #2ea043;
+      --accent-cyan: #0969da;
+      --accent-purple: #8250df;
+      --accent-orange: #bf8700;
+      --accent-red: #cf222e;
+      --accent-yellow: #9a6700;
+      
+      --border-color: #d8d8d8;
+      --border-subtle: #e8e8e8;
+      --border-active: #2ea043;
+      
+      --glow-green: none;
+      --glow-cyan: none;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* ─── RESET ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html { scroll-behavior: smooth; }
+    
     body {
-      font-family: var(--font-body);
-      background-color: var(--bg-app);
-      color: var(--text-main);
-      line-height: 1.6;
-      font-size: 15px;
+      font-family: var(--font-mono);
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.65;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header {
-      height: var(--header-height);
-      background-color: var(--bg-sidebar);
+    a { color: var(--text-link); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent-cyan); }
+
+    ::selection { background: rgba(108, 198, 68, 0.25); color: #fff; }
+
+    /* ─── NOTIFICATION BAR ───────────────────────────── */
+    .notification-bar {
+      height: var(--notification-height);
+      background: var(--bg-notification);
       border-bottom: 1px solid var(--border-color);
-      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+    .notification-bar a {
+      color: var(--accent-green);
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    /* ─── TOP HEADER ─────────────────────────────────── */
+    .site-header {
+      height: var(--header-height);
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
-    .header-left {
+    .header-brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      cursor: pointer;
     }
 
-    .site-title {
-      font-size: 15px;
+    .header-logo {
+      font-family: var(--font-mono);
+      font-size: 14px;
       font-weight: 700;
       color: var(--text-heading);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      letter-spacing: -0.02em;
     }
 
-    .version-badge {
-      font-family: var(--font-code);
-      font-size: 11px;
+    .header-version {
+      font-size: 10px;
       font-weight: 500;
       padding: 2px 6px;
-      background: var(--bg-active);
-      color: var(--text-muted);
-      border-radius: 10px;
-      border: 1px solid var(--border-strong);
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-github {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-heading);
-      background: var(--bg-app);
-      border: 1px solid var(--border-strong);
-      border-radius: 4px;
-      text-decoration: none;
-    }
-
-    .btn-github:hover {
-      background: var(--bg-hover);
-    }
-
-    .star-count-pill {
-      font-family: var(--font-code);
-      font-size: 11px;
-      font-weight: 600;
-      background: var(--bg-active);
-      padding: 1px 6px;
-      border-radius: 10px;
-      margin-left: 2px;
+      background: var(--bg-card);
+      color: var(--text-dim);
+      border-radius: 3px;
       border: 1px solid var(--border-color);
     }
 
-    .theme-toggle {
-      background: var(--bg-app);
-      border: 1px solid var(--border-strong);
-      border-radius: 4px;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-size: 13px;
-      color: var(--text-muted);
-      font-family: var(--font-body);
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
 
+    .header-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .header-nav-btn:hover {
+      color: var(--text-heading);
+      background: var(--bg-card);
+      border-color: var(--border-color);
+    }
+
+    .header-nav-btn svg { width: 14px; height: 14px; }
+
+    .header-nav-btn.primary {
+      color: var(--accent-green);
+      border-color: var(--border-color);
+      background: var(--bg-card);
+    }
+    .header-nav-btn.primary:hover {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+    }
+
+    .star-pill {
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--bg-body);
+      padding: 1px 5px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+    }
+
+    /* ─── APP LAYOUT ─────────────────────────────────── */
     .app-layout {
       display: flex;
-      margin-top: var(--header-height);
-      min-height: calc(100vh - var(--header-height));
+      min-height: calc(100vh - var(--header-height) - var(--notification-height));
     }
 
+    /* ─── SIDEBAR ────────────────────────────────────── */
     .sidebar {
       width: var(--sidebar-width);
-      background-color: var(--bg-sidebar);
+      background: var(--bg-surface);
       border-right: 1px solid var(--border-color);
       position: fixed;
-      top: var(--header-height);
+      top: calc(var(--header-height) + var(--notification-height));
       bottom: 0;
       left: 0;
       overflow-y: auto;
-      padding: 16px 0;
+      padding: 12px 0;
       z-index: 500;
     }
 
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+
     .sidebar-search {
-      padding: 0 16px 12px;
+      padding: 0 12px 10px;
       border-bottom: 1px solid var(--border-color);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .search-input {
       width: 100%;
       padding: 7px 10px;
-      font-size: 13px;
-      font-family: var(--font-body);
-      background: var(--bg-app);
-      border: 1px solid var(--border-strong);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
       border-radius: 4px;
-      color: var(--text-main);
+      color: var(--text-primary);
       outline: none;
+      transition: border-color 0.2s;
     }
-
-    .search-input:focus {
-      border-color: var(--text-link);
-    }
+    .search-input::placeholder { color: var(--text-dim); }
+    .search-input:focus { border-color: var(--accent-green); box-shadow: var(--glow-green); }
 
     .nav-section-title {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-      padding: 10px 16px 4px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      padding: 10px 14px 4px;
     }
 
-    .nav-list {
-      list-style: none;
-      margin-bottom: 12px;
-    }
+    .nav-list { list-style: none; margin-bottom: 8px; }
 
     .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 6px 16px;
-      font-size: 13.5px;
-      color: var(--text-main);
+      padding: 5px 14px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
       text-decoration: none;
       cursor: pointer;
-      border-left: 3px solid transparent;
-      user-select: none;
+      border-left: 2px solid transparent;
+      transition: all 0.15s;
     }
-
     .nav-item:hover {
-      background-color: var(--bg-hover);
-      color: var(--text-heading);
+      color: var(--text-primary);
+      background: var(--bg-card);
     }
-
     .nav-item.active {
-      background-color: var(--bg-active);
-      color: var(--text-link);
+      color: var(--accent-green);
       font-weight: 600;
-      border-left-color: var(--text-link);
+      border-left-color: var(--accent-green);
+      background: rgba(108, 198, 68, 0.05);
     }
 
     .nav-badge {
-      font-size: 11px;
-      font-family: var(--font-code);
-      color: var(--text-muted);
+      font-size: 10px;
+      color: var(--text-dim);
+      font-weight: 500;
     }
 
+    /* ─── CONTENT AREA ───────────────────────────────── */
     .content-area {
       margin-left: var(--sidebar-width);
       margin-right: var(--toc-width);
       flex: 1;
-      padding: 40px 48px;
-      max-width: 960px;
+      padding: 32px 40px;
+      max-width: 920px;
     }
 
     .breadcrumb {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      font-family: var(--font-code);
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
     }
 
     .doc-title {
-      font-size: 30px;
-      font-weight: 700;
+      font-family: var(--font-sans);
+      font-size: 28px;
+      font-weight: 800;
       color: var(--text-heading);
-      line-height: 1.25;
-      margin-bottom: 12px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 12px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
     }
 
     .doc-lead {
-      font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.6;
     }
 
-    /* Model Selection Tabs */
+    /* ─── MODEL TABS ─────────────────────────────────── */
     .model-tabs {
       display: flex;
       border-bottom: 1px solid var(--border-color);
       margin-bottom: 24px;
-      gap: 4px;
+      gap: 0;
     }
 
     .model-tab-btn {
       padding: 8px 16px;
-      font-size: 13.5px;
+      font-family: var(--font-mono);
+      font-size: 12px;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--text-dim);
       background: transparent;
       border: 1px solid transparent;
       border-bottom: none;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
       cursor: pointer;
-      font-family: var(--font-body);
+      transition: all 0.15s;
     }
-
-    .model-tab-btn:hover {
-      color: var(--text-heading);
-      background: var(--bg-hover);
-    }
-
+    .model-tab-btn:hover { color: var(--text-primary); background: var(--bg-card); }
     .model-tab-btn.active {
-      color: var(--text-heading);
-      background: var(--bg-app);
+      color: var(--accent-green);
+      background: var(--bg-body);
       border-color: var(--border-color);
       margin-bottom: -1px;
-      border-bottom: 1px solid var(--bg-app);
+      border-bottom: 1px solid var(--bg-body);
     }
 
+    /* ─── SECTION HEADINGS ───────────────────────────── */
     h2.section-heading {
-      font-size: 21px;
-      font-weight: 600;
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 700;
       color: var(--text-heading);
-      margin: 32px 0 14px;
+      margin: 28px 0 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border-color);
+      letter-spacing: -0.02em;
     }
 
     h3.sub-heading {
-      font-size: 16px;
+      font-family: var(--font-sans);
+      font-size: 15px;
       font-weight: 600;
       color: var(--text-heading);
       margin: 20px 0 10px;
     }
 
-    p {
-      margin-bottom: 14px;
-      color: var(--text-main);
-    }
+    p { margin-bottom: 14px; color: var(--text-primary); font-size: 13px; }
 
-    ul, ol {
-      margin: 0 0 16px 24px;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
+    ul, ol { margin: 0 0 16px 20px; font-size: 13px; }
+    li { margin-bottom: 5px; }
 
     pre {
-      background-color: var(--bg-code);
+      background: var(--bg-code);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       padding: 14px 16px;
       overflow-x: auto;
-      font-family: var(--font-code);
-      font-size: 13px;
+      font-family: var(--font-mono);
+      font-size: 12px;
       line-height: 1.5;
       margin-bottom: 18px;
+      color: var(--accent-green);
     }
 
     code {
-      font-family: var(--font-code);
+      font-family: var(--font-mono);
       font-size: 85%;
       padding: 0.2em 0.4em;
-      background-color: var(--bg-active);
+      background: var(--bg-card);
       border-radius: 3px;
+      color: var(--accent-cyan);
     }
 
-    pre code {
-      background: transparent;
-      padding: 0;
-      font-size: inherit;
-    }
+    pre code { background: transparent; padding: 0; font-size: inherit; color: inherit; }
 
+    /* ─── CALLOUT ─────────────────────────────────────── */
     .callout {
       padding: 14px 18px;
-      background-color: var(--bg-sidebar);
-      border-left: 4px solid var(--text-link);
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent-green);
       border-radius: 0 4px 4px 0;
       margin-bottom: 20px;
-      font-size: 14px;
+      font-size: 13px;
+    }
+    .callout-title { font-weight: 600; color: var(--accent-green); margin-bottom: 4px; }
+
+    /* ─── DOC TABLE ───────────────────────────────────── */
+    table.doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 12px;
+    }
+    table.doc-table th, table.doc-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+    table.doc-table th {
+      background: var(--bg-card);
+      font-weight: 600;
+      color: var(--text-heading);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.06em;
     }
 
-    .callout-title {
+    /* ─── APP CARDS GRID ─────────────────────────────── */
+    .app-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 16px 0 28px;
+    }
+
+    .app-file-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+    }
+    .app-file-card:hover {
+      border-color: var(--accent-green);
+      box-shadow: var(--glow-green);
+      transform: translateY(-1px);
+    }
+
+    .app-file-title {
+      font-family: var(--font-sans);
+      font-size: 14px;
       font-weight: 600;
       color: var(--text-heading);
       margin-bottom: 4px;
     }
 
-    table.doc-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 24px;
-      font-size: 13.5px;
-    }
-
-    table.doc-table th, table.doc-table td {
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      text-align: left;
-    }
-
-    table.doc-table th {
-      background-color: var(--bg-sidebar);
-      font-weight: 600;
-      color: var(--text-heading);
-    }
-
-    table.doc-table tr:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.015);
-    }
-
-    /* App Cards Grid */
-    .app-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin: 20px 0 32px;
-    }
-
-    .app-file-card {
-      background: var(--bg-sidebar);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .app-file-card:hover {
-      border-color: var(--border-strong);
-    }
-
-    .app-file-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-heading);
-      margin-bottom: 6px;
-    }
-
     .app-file-desc {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
       flex-grow: 1;
       line-height: 1.4;
     }
 
-    .app-file-links {
+    .app-file-links { display: flex; gap: 4px; flex-wrap: wrap; }
+
+    .file-link-btn {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 7px;
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      color: var(--text-link);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .file-link-btn:hover { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
+
+    /* ─── HOME PAGE: ASCII ART HERO ──────────────────── */
+    .hero-section {
+      text-align: center;
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 32px;
+    }
+
+    .ascii-logo {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      line-height: 1.15;
+      color: var(--accent-green);
+      white-space: pre;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 24px;
+      opacity: 0.85;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-sans);
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text-heading);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .hero-tagline .highlight { color: var(--accent-green); }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .hero-stats {
       display: flex;
-      gap: 6px;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 28px;
       flex-wrap: wrap;
     }
 
-    .file-link-btn {
-      font-family: var(--font-code);
-      font-size: 11px;
-      padding: 3px 8px;
-      background: var(--bg-app);
-      border: 1px solid var(--border-strong);
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-family: var(--font-sans);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.03em;
+    }
+    .hero-stat-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
       border-radius: 4px;
-      color: var(--text-link);
       text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+    }
+    .hero-btn svg { width: 14px; height: 14px; }
+    .hero-btn.green {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+    }
+    .hero-btn.green:hover { background: #5ab83a; box-shadow: var(--glow-green); }
+    .hero-btn.outline {
+      background: transparent;
+      color: var(--text-primary);
+    }
+    .hero-btn.outline:hover { background: var(--bg-card); color: var(--text-heading); }
+
+    /* ─── HOME PAGE: CATEGORY GRID ───────────────────── */
+    .category-grid-section {
+      margin-bottom: 36px;
     }
 
-    .file-link-btn:hover {
-      background: var(--bg-hover);
-      text-decoration: underline;
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
     }
 
-    /* Community Dashboard */
+    .category-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .category-card:hover {
+      border-color: var(--accent-green);
+      box-shadow: var(--glow-green);
+      transform: translateY(-2px);
+    }
+
+    .category-card-icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+    .category-card-title {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .category-card-count {
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+    .category-card-apps {
+      font-size: 10.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    /* ─── HOME PAGE: HOW IT WORKS ────────────────────── */
+    .how-section {
+      margin-bottom: 36px;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .how-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+    .how-card-num {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-green);
+      margin-bottom: 8px;
+    }
+    .how-card-title {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+    .how-card-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ─── HOME PAGE: INSTALL SECTION ─────────────────── */
+    .install-section {
+      margin-bottom: 36px;
+    }
+    .install-block {
+      background: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .install-block pre {
+      margin: 0;
+      border: none;
+      padding: 0;
+      background: transparent;
+    }
+    .install-comment { color: var(--text-dim); }
+    .install-cmd { color: var(--accent-green); }
+
+    /* ─── COMMUNITY DASHBOARD ────────────────────────── */
     .community-dashboard {
-      background: var(--bg-sidebar);
+      background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 20px;
-      margin: 20px 0 28px;
+      margin: 16px 0 28px;
     }
 
     .metrics-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .metric-card {
-      background: var(--bg-app);
+      background: var(--bg-body);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 12px 14px;
+      padding: 12px;
       text-align: center;
     }
 
     .metric-val {
-      font-family: var(--font-code);
+      font-family: var(--font-sans);
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-heading);
     }
 
     .metric-label {
-      font-size: 11px;
-      color: var(--text-muted);
+      font-size: 9px;
+      color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       margin-top: 2px;
     }
 
     .chart-container {
-      background: var(--bg-app);
+      background: var(--bg-body);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       padding: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .chart-svg {
-      width: 100%;
-      height: 160px;
-      display: block;
-    }
+    .chart-svg { width: 100%; height: 140px; display: block; }
 
     .stargazers-list {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     .stargazer-avatar {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 1px solid var(--border-strong);
-      transition: transform 0.15s ease;
+      border: 1px solid var(--border-color);
+      transition: all 0.15s;
     }
-
     .stargazer-avatar:hover {
-      transform: scale(1.15);
-      border-color: var(--text-link);
+      transform: scale(1.2);
+      border-color: var(--accent-green);
+      box-shadow: var(--glow-green);
     }
 
     .dashboard-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-family: var(--font-code);
-      padding-top: 12px;
+      font-size: 10px;
+      color: var(--text-dim);
+      padding-top: 10px;
       border-top: 1px solid var(--border-color);
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
-    /* Right TOC */
+    /* ─── RIGHT TOC ──────────────────────────────────── */
     .toc-sidebar {
       width: var(--toc-width);
       position: fixed;
-      top: var(--header-height);
+      top: calc(var(--header-height) + var(--notification-height));
       right: 0;
       bottom: 0;
-      padding: 32px 20px 20px;
+      padding: 28px 16px 16px;
       overflow-y: auto;
     }
 
     .toc-title {
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 10px;
     }
 
-    .toc-list {
-      list-style: none;
-    }
+    .toc-list { list-style: none; }
 
     .toc-link {
       display: block;
-      padding: 4px 0;
-      font-size: 13px;
-      color: var(--text-muted);
+      padding: 3px 0;
+      font-size: 11px;
+      color: var(--text-dim);
       text-decoration: none;
       line-height: 1.4;
       cursor: pointer;
+      transition: color 0.15s;
     }
+    .toc-link:hover { color: var(--accent-green); }
 
-    .toc-link:hover {
-      color: var(--text-link);
-    }
-
+    /* ─── RESPONSIVE ─────────────────────────────────── */
     @media (max-width: 1100px) {
       .toc-sidebar { display: none; }
       .content-area { margin-right: 0; }
     }
 
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.2s ease;
-      }
-      .sidebar.open { transform: translateX(0); }
-      .content-area { margin-left: 0; padding: 24px 16px; }
+    @media (max-width: 900px) {
+      .how-grid { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+      .sidebar.open { transform: translateX(0); }
+      .content-area { margin-left: 0; padding: 20px 16px; }
+      .hero-tagline { font-size: 24px; }
+      .ascii-logo { font-size: 5px; }
+      .hero-stats { gap: 16px; }
+      .category-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+      .header-nav { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 6px 8px;
+      cursor: pointer;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeInUp 0.4s ease-out forwards; }
   </style>
 </head>
 <body>
 
+  <!-- Notification Bar -->
+  <div class="notification-bar">
+    <span>425+ production-grade AI skills for 76 applications —</span>
+    <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">Star on GitHub →</a>
+  </div>
+
   <!-- Top Header -->
-  <header>
-    <div class="header-left">
-      <a href="#" class="site-title" onclick="loadDoc('overview')">
-        <span>Major AI Skills</span>
-        <span class="version-badge">v1.0.0</span>
-      </a>
+  <header class="site-header">
+    <div class="header-brand" onclick="loadDoc('overview')">
+      <span class="header-logo">Major AI Skills</span>
+      <span class="header-version">v1.0.0</span>
     </div>
-    <div class="header-right">
-      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">Theme: Dark</button>
-      <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"></path>
-        </svg>
-        <span>Star</span>
-        <span class="star-count-pill" id="starCount">0</span>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    <nav class="header-nav">
+      <a class="header-nav-btn" onclick="loadDoc('overview', event)">
+        <svg viewBox="0 0 32 32"><path d="m0 4.49992c0-.3978.158025-.77931.439312-1.0606s.662798-.43931 1.060598-.43931h8.50549c2.4538 0 4.6337 1.17992 5.9996 3.00181.6982-.9334 1.6047-1.69085 2.6474-2.212 1.0426-.52115 2.1926-.7916 3.3582-.78981h8.4895c.3978 0 .7793.15802 1.0606.43931s.4393.6628.4393 1.0606v20.99868c0 .3978-.158.7793-.4393 1.0606s-.6628.4393-1.0606.4393h-9.0134c-.591 0-1.1761.1164-1.722.3425-.546.2261-1.042.5576-1.4598.9754l-1.244 1.2419c-.2812.2809-.6624.4387-1.0599.4387s-.7787-.1578-1.0599-.4387l-1.244-1.2419c-.4178-.4178-.9138-.7493-1.4598-.9754-.5459-.2261-1.131-.3425-1.722-.3425h-9.01539c-.3978 0-.779311-.158-1.060598-.4393s-.439312-.6628-.439312-1.0606z" fill="currentColor"/></svg>
+        <span>Manual</span>
       </a>
-      <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-        </svg>
-        GitHub
+      <a class="header-nav-btn" href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span>GitHub</span>
+        <span class="star-pill" id="starCount">0</span>
       </a>
-    </div>
+      <button class="header-nav-btn" onclick="toggleTheme()">
+        <span id="themeIcon">◐</span>
+      </button>
+    </nav>
   </header>
 
   <div class="app-layout">
     
     <!-- Left Navigation Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-search">
-        <input type="text" id="docSearch" class="search-input" placeholder="Filter navigation..." oninput="filterNav()">
+        <input type="text" id="docSearch" class="search-input" placeholder="/ Search..." oninput="filterNav()">
       </div>
 
       <div class="nav-section-title">Getting Started</div>
@@ -641,8 +905,9 @@
         <li><a class="nav-item" onclick="loadDoc('usage', event)"><span>Installation & Integration</span></a></li>
       </ul>
 
-      <div class="nav-section-title">Application Domains (75 Tools)</div>
+      <div class="nav-section-title">Application Domains (76 Tools)</div>
       <ul class="nav-list" id="appsNavList">
+        <li><a class="nav-item" onclick="loadDoc('linux', event)"><span>Linux Desktop Distribution</span> <span class="nav-badge">1</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cad', event)"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('video-editing', event)"><span>Video Editing & NLE Post</span> <span class="nav-badge">3</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('3d', event)"><span>3D Animation & VFX</span> <span class="nav-badge">4</span></a></li>
@@ -650,7 +915,7 @@
         <li><a class="nav-item" onclick="loadDoc('macos', event)"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cross-platform', event)"><span>Cross-Platform Tools</span> <span class="nav-badge">9</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('plc-industrial', event)"><span>PLC & Industrial Automation</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('scientific', event)"><span>Scientific Computing & Simulation</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('scientific', event)"><span>Scientific Computing</span> <span class="nav-badge">4</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('music', event)"><span>Music Production & DAWs</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('eda', event)"><span>Electronic Design (EDA)</span> <span class="nav-badge">4</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('erp', event)"><span>Enterprise ERP, PLM & EAM</span> <span class="nav-badge">6</span></a></li>
@@ -667,53 +932,55 @@
       </ul>
     </aside>
 
-    <!-- Center Content Reader -->
+    <!-- Center Content -->
     <main class="content-area" id="docContent">
       <div class="breadcrumb" id="docBreadcrumb">Docs / Getting Started / Overview</div>
-      <h1 class="doc-title" id="docHeading">Major AI Skills Technical Documentation</h1>
-      <p class="doc-lead" id="docDescription">A curated repository of 425+ production-grade AI skills, prompt engineering specifications, and token optimization blueprints across 75 software applications and 17 domain categories.</p>
+      <h1 class="doc-title" id="docHeading">Major AI Skills</h1>
+      <p class="doc-lead" id="docDescription"></p>
 
-      <!-- Model Switcher Tabs (Shown for application specs) -->
       <div class="model-tabs" id="modelTabContainer">
         <button class="model-tab-btn active" id="tabBtnClaude" onclick="switchModelTab('claude')">Claude Specification</button>
         <button class="model-tab-btn" id="tabBtnGemini" onclick="switchModelTab('gemini')">Gemini Specification</button>
         <button class="model-tab-btn" id="tabBtnGpt" onclick="switchModelTab('gpt')">GPT & Codex Specification</button>
       </div>
 
-      <div id="dynamicBody">
-        <!-- Injected via loadDoc() -->
-      </div>
+      <div id="dynamicBody"></div>
     </main>
 
-    <!-- Right Table of Contents Sidebar -->
+    <!-- Right TOC Sidebar -->
     <aside class="toc-sidebar">
       <div class="toc-title">On this page</div>
-      <ul class="toc-list" id="tocList">
-        <!-- Injected via renderToc() -->
-      </ul>
+      <ul class="toc-list" id="tocList"></ul>
     </aside>
 
   </div>
 
   <script>
+    // ═══════════════════════════════════════════════════
     // Theme Management
+    // ═══════════════════════════════════════════════════
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      document.getElementById('themeToggle').innerText = `Theme: ${next === 'dark' ? 'Dark' : 'Light'}`;
+      document.getElementById('themeIcon').innerText = next === 'dark' ? '◐' : '◑';
       localStorage.setItem('theme', next);
       drawLiveChart();
     }
 
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('themeToggle').innerText = `Theme: ${savedTheme === 'dark' ? 'Dark' : 'Light'}`;
+    document.getElementById('themeIcon').innerText = savedTheme === 'dark' ? '◐' : '◑';
+
+    // Sidebar Toggle (Mobile)
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
 
     // GitHub Base URL
     const GH_BASE = "https://github.com/alivirgo/Major-AI-Skills/blob/master";
 
-    // Helper: Card Generator for Applications
+    // Helper: Card Generator
     function renderAppCards(catPath, apps) {
       return `<div class="app-cards-grid">` + apps.map(app => `
         <div class="app-file-card">
@@ -728,123 +995,181 @@
       `).join('') + `</div>`;
     }
 
-    // Dynamic Documentation Database
+    // Category Cards for Homepage
+    const categoryData = [
+      { key: 'linux', icon: '🐧', title: 'Linux Desktop', count: '1 App', apps: 'Omarchy (Arch + Hyprland + Quickshell)' },
+      { key: 'cad', icon: '⚙️', title: 'CAD & Design', count: '5 Apps', apps: 'SolidWorks, CATIA, NX, Fusion 360, Rhino' },
+      { key: 'video-editing', icon: '🎬', title: 'Video Editing', count: '3 Apps', apps: 'DaVinci Resolve, Final Cut Pro, VEGAS Pro' },
+      { key: '3d', icon: '🎨', title: '3D & VFX', count: '4 Apps', apps: 'Houdini, Cinema 4D, ZBrush, Substance 3D' },
+      { key: 'windows', icon: '🪟', title: 'Windows Utilities', count: '10 Apps', apps: 'AHK v2, Everything, PowerToys, ShareX...' },
+      { key: 'macos', icon: '🍎', title: 'macOS Productivity', count: '9 Apps', apps: 'Raycast, OrbStack, Rectangle, Shottr...' },
+      { key: 'cross-platform', icon: '🌐', title: 'Cross-Platform', count: '9 Apps', apps: 'FFmpeg, Wireshark, Nginx, Tailscale...' },
+      { key: 'plc-industrial', icon: '🏭', title: 'PLC & Industrial', count: '3 Apps', apps: 'TIA Portal, Studio 5000, CODESYS' },
+      { key: 'scientific', icon: '🔬', title: 'Scientific', count: '4 Apps', apps: 'MATLAB, COMSOL, LabVIEW, OriginPro' },
+      { key: 'music', icon: '🎵', title: 'Music & DAWs', count: '5 Apps', apps: 'Ableton, Cubase, FL Studio, Logic Pro...' },
+      { key: 'eda', icon: '📟', title: 'Electronic Design', count: '4 Apps', apps: 'Altium, KiCad, Cadence, LTspice' },
+      { key: 'erp', icon: '🏢', title: 'Enterprise ERP', count: '6 Apps', apps: 'SAP GUI, Oracle EBS, Dynamics NAV...' },
+      { key: 'digital-forensics', icon: '🔍', title: 'Digital Forensics', count: '3 Apps', apps: 'Autopsy, EnCase, FTK' },
+      { key: 'gis', icon: '🗺️', title: 'GIS & Medical', count: '5 Apps', apps: 'ArcGIS, QGIS, 3D Slicer, OsiriX, Horos' },
+      { key: 'game-engines', icon: '🎮', title: 'Game Engines', count: '3 Apps', apps: 'Godot, CryEngine, RPG Maker' },
+      { key: 'network', icon: '📡', title: 'Network SDN', count: '1 App', apps: 'TP-Link Omada SDN Controller' },
+    ];
+
+    function renderCategoryGrid() {
+      return `<div class="category-grid">` + categoryData.map(cat => `
+        <div class="category-card" onclick="loadDoc('${cat.key}')">
+          <div class="category-card-icon">${cat.icon}</div>
+          <div class="category-card-title">${cat.title}</div>
+          <div class="category-card-count">${cat.count}</div>
+          <div class="category-card-apps">${cat.apps}</div>
+        </div>
+      `).join('') + `</div>`;
+    }
+
+    // ═══════════════════════════════════════════════════
+    // Documentation Database
+    // ═══════════════════════════════════════════════════
     const docs = {
       overview: {
         breadcrumb: 'Docs / Getting Started / Overview',
-        heading: 'Major AI Skills Technical Documentation',
-        description: 'A curated repository of 425+ production-grade AI skills, prompt engineering specifications, and token optimization blueprints across 75 software applications.',
+        heading: 'Major AI Skills',
+        description: '',
         hasModels: false,
         toc: [
-          { id: 'sec-about', title: '1. About This Repository' },
-          { id: 'sec-structure', title: '2. Directory Structure' },
-          { id: 'sec-quickstart', title: '3. Command Line Integration' },
-          { id: 'sec-matrix', title: '4. Application Coverage Matrix' },
-          { id: 'sec-community', title: '5. Community & Stargazers' }
+          { id: 'sec-hero', title: 'Overview' },
+          { id: 'sec-categories', title: 'Application Domains' },
+          { id: 'sec-how', title: 'How It Works' },
+          { id: 'sec-install', title: 'Quick Start' },
+          { id: 'sec-matrix', title: 'Coverage Matrix' },
+          { id: 'sec-handbooks', title: 'Reference Handbooks' },
+          { id: 'sec-community', title: 'Community' }
         ],
         body: `
-          <h2 class="section-heading" id="sec-about">1. About This Repository</h2>
-          <p>This repository provides deterministic, production-grade technical blueprints for AI models (Claude, ChatGPT, Gemini, Codex, and local LLMs) to accurately automate, script, and troubleshoot professional software applications without boilerplate or hallucinations.</p>
-          <div class="callout">
-            <div class="callout-title">Architecture Philosophy</div>
-            <p>Every file is handcrafted with complete code recipes (Python, C#, C++, PowerShell, AutoHotkey v2, IEC 61131-3 Structured Text, MATLAB), real-world troubleshooting matrices, and strict agent operational directives.</p>
+          <div class="hero-section" id="sec-hero">
+            <div class="ascii-logo">
+ ███╗   ███╗ █████╗      ██╗ ██████╗ ██████╗      █████╗ ██╗    ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+ ████╗ ████║██╔══██╗     ██║██╔═══██╗██╔══██╗    ██╔══██╗██║    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+ ██╔████╔██║███████║     ██║██║   ██║██████╔╝    ███████║██║    ███████╗█████╔╝ ██║██║     ██║     ███████╗
+ ██║╚██╔╝██║██╔══██║██   ██║██║   ██║██╔══██╗    ██╔══██║██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+ ██║ ╚═╝ ██║██║  ██║╚█████╔╝╚██████╔╝██║  ██║    ██║  ██║██║    ███████║██║  ██╗██║███████╗███████╗███████║
+ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝</div>
+            <h2 class="hero-tagline">Production-Grade AI <span class="highlight">Automation Blueprints</span></h2>
+            <p class="hero-subtitle">Deterministic, expert-level skill specifications for Claude, Gemini, GPT & Codex across 76 professional applications. Zero boilerplate. Zero hallucinations.</p>
+            <div class="hero-stats">
+              <div class="hero-stat"><div class="hero-stat-value">425+</div><div class="hero-stat-label">Skill Specs</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">76</div><div class="hero-stat-label">Applications</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">18</div><div class="hero-stat-label">Domains</div></div>
+              <div class="hero-stat"><div class="hero-stat-value" id="heroStars">0</div><div class="hero-stat-label">GitHub Stars</div></div>
+            </div>
+            <div class="hero-buttons">
+              <a class="hero-btn green" href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                Star on GitHub
+              </a>
+              <a class="hero-btn outline" onclick="loadDoc('usage')">
+                <svg viewBox="0 0 32 32" width="14" height="14"><path d="m9.47363 4.01687c.77167.00015 1.39727.62585 1.39747 1.39747 0 .7718-.6257 1.39829-1.39747 1.39843h-4.625c-.66518.00006-1.17367.17068-1.52539.5127-.34225.34225-.51364.86071-.51367 1.55469v14.24194c0 .694.17139 1.2124.51367 1.5547.35173.3517.86001.5282 1.52539.5283h22.28807c.6561 0 1.1599-.1766 1.5117-.5283.3613-.3423.542-.8607.542-1.5547v-14.24194c0-.69398-.1807-1.21244-.542-1.55469-.3517-.34214-.8558-.5127-1.5117-.5127h-4.624c-.7719 0-1.3984-.62654-1.3984-1.39843.0002-.77171.6266-1.39747 1.3984-1.39747h4.8096c1.5402.00002 2.705.3903 3.4941 1.16993.789.77963 1.1836 1.93518 1.1836 3.46582v14.71258c0 1.5305-.3947 2.6853-1.1836 3.4649-.7891.7796-1.9539 1.1699-3.4941 1.1699h-22.64457c-1.54021 0-2.70501-.3903-3.49414-1.1699-.788897-.7796-1.18354196-1.9344-1.18359-3.4649v-14.71258c0-1.53064.394563-2.68619 1.18359-3.46582.78913-.77963 1.95393-1.16991 3.49414-1.16993z" fill="currentColor"/><path d="m16.0078 0c.3832.00005683.7111.136008.9834.408203.2825.27241.4238.590889.4238.954097v14.2481l-.1211 2.2548.8018-.9687 2.1494-2.2998c.2522-.2825.5652-.4238.9385-.4238.3429 0 .6358.1156.8779.3476.2522.2321.378.5203.378.8633-.0001.3328-.1314.6359-.3936.9082l-4.9785 4.7969c-.1816.1715-.3588.2926-.5303.3632-.1714.0706-.3478.1065-.5293.1065-.1816 0-.3587-.0358-.5303-.1065-.1714-.0706-.3533-.1918-.5449-.3632l-4.96385-4.7969c-.27233-.2723-.40812-.5754-.4082-.9082 0-.343.12114-.6312.36328-.8633.24207-.2319.53497-.3476.87797-.3476.3933 0 .711.1413.9531.4238l2.164 2.2998.8028.9687-.1211-2.2548v-14.2481c0-.363208.1358-.681687.4082-.954097.2824-.27226.6157-.408203.999-.408203z" fill="currentColor"/></svg>
+                Download Skills
+              </a>
+            </div>
           </div>
-          
-          <h2 class="section-heading" id="sec-structure">2. Repository Directory Structure</h2>
-          <pre><code>Major AI Skills/
-├── skills/                      # 225 Application Skill Guides (75 Apps x 3 Models across 17 Categories)
-│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
-│   ├── video-editing/           # DaVinci Resolve, Final Cut Pro, VEGAS Pro
-│   ├── 3d/                      # Houdini, Cinema 4D, ZBrush, Substance 3D
-│   ├── windows/                 # AutoHotkey v2, Everything, PowerToys, System Informer, etc.
-│   ├── macos/                   # Raycast, Shottr, OrbStack, MacWhisper, Rectangle, etc.
-│   ├── cross-platform/          # FFmpeg, Wireshark, Nginx, Tailscale, Rclone, Bruno
-│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, CODESYS
-│   ├── scientific/              # MATLAB, COMSOL, LabVIEW, OriginPro
-│   └── music/                   # Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools
-├── efficiency ai skills/        # 100 Token Optimization & Context Pruning Rules
-└── common sense ai skills/     # 100 Factual Grounding & Everyday AI Habits</code></pre>
 
-          <h2 class="section-heading" id="sec-quickstart">3. Command Line Integration</h2>
-          <p>You can clone and ingest the skill definitions directly into your local development environment:</p>
-          <pre><code># Clone the complete repository
-git clone https://github.com/alivirgo/Major-AI-Skills.git
+          <h2 class="section-heading" id="sec-categories">Application Domains</h2>
+          <p>18 curated engineering categories spanning CAD, VFX, audio, security, industrial automation, and OS-level system utilities:</p>
+          ${renderCategoryGrid()}
 
-# Ingest specific application skill into Claude Code CLI or Cursor rules
-cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules</code></pre>
+          <h2 class="section-heading" id="sec-how">How It Works</h2>
+          <div class="how-grid">
+            <div class="how-card">
+              <div class="how-card-num">01</div>
+              <div class="how-card-title">Pick a Skill</div>
+              <div class="how-card-desc">Browse 76 applications across 18 domains. Each skill is a self-contained expert blueprint.</div>
+            </div>
+            <div class="how-card">
+              <div class="how-card-num">02</div>
+              <div class="how-card-title">Choose Your Model</div>
+              <div class="how-card-desc">3 specifications per app — Claude (deep architecture), Gemini (visual diagnostics), GPT (scripting).</div>
+            </div>
+            <div class="how-card">
+              <div class="how-card-num">03</div>
+              <div class="how-card-title">Ingest & Automate</div>
+              <div class="how-card-desc">Drop into Cursor rules, Claude Code, or local RAG. Get deterministic, hallucination-free results.</div>
+            </div>
+          </div>
 
-          <h2 class="section-heading" id="sec-matrix">4. Application Coverage Matrix</h2>
+          <h2 class="section-heading" id="sec-install">Quick Start</h2>
+          <div class="install-block">
+            <pre><code><span class="install-comment"># Clone the complete repository</span>
+<span class="install-cmd">git clone https://github.com/alivirgo/Major-AI-Skills.git</span>
+
+<span class="install-comment"># Ingest a skill into Cursor rules</span>
+<span class="install-cmd">cat "skills/windows/everything/claude_skill.md" >> .cursorrules</span>
+
+<span class="install-comment"># Or use with Claude Code CLI</span>
+<span class="install-cmd">cp "skills/cross-platform/ffmpeg/claude_skill.md" ./CLAUDE.md</span>
+
+<span class="install-comment"># Or Omarchy Linux skill for Hyprland automation</span>
+<span class="install-cmd">cat "skills/linux/omarchy/claude_skill.md" >> .cursorrules</span></code></pre>
+          </div>
+
+          <h2 class="section-heading" id="sec-matrix">Application Coverage Matrix</h2>
           <table class="doc-table">
             <thead>
-              <tr>
-                <th>Domain Category</th>
-                <th>Primary Software Applications</th>
-                <th>Supported Interfaces</th>
-              </tr>
+              <tr><th>Domain</th><th>Applications</th><th>Interfaces</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td>CAD & Mechanical</td>
-                <td>SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino</td>
-                <td>COM API, C# VSTA, Python, Open C/C++</td>
-              </tr>
-              <tr>
-                <td>Video & NLE Post</td>
-                <td>DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro</td>
-                <td>Python API, Fusion VFX, FCPXML, C# ScriptPortal</td>
-              </tr>
-              <tr>
-                <td>Systems & Kernel</td>
-                <td>Everything, System Informer, PowerToys, AHK v2</td>
-                <td>C-SDK ctypes, Win32 NTDLL, WASAPI, C# IPlugin</td>
-              </tr>
-              <tr>
-                <td>Industrial & PLC</td>
-                <td>Siemens TIA Portal, Rockwell Studio 5000, CODESYS</td>
-                <td>TIA Openness, CIP Pycomm3, IEC 61131-3 ST</td>
-              </tr>
-              <tr>
-                <td>Scientific Computing</td>
-                <td>MATLAB, COMSOL Multiphysics, LabVIEW, OriginPro</td>
-                <td>MEX C++, mph Python, DAQmx, PyOrigin</td>
-              </tr>
+              <tr><td>Linux Desktop</td><td>Omarchy (Arch + Hyprland + Quickshell)</td><td>Bash, Hyprland IPC, QML, Lua</td></tr>
+              <tr><td>CAD & Mechanical</td><td>SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino</td><td>COM API, C# VSTA, Python, Open C/C++</td></tr>
+              <tr><td>Video & NLE Post</td><td>DaVinci Resolve, Final Cut Pro, VEGAS Pro</td><td>Python API, Fusion VFX, FCPXML, C#</td></tr>
+              <tr><td>3D & VFX</td><td>Houdini, Cinema 4D, ZBrush, Substance 3D</td><td>HOM Python, VEX, ZScript, Substance API</td></tr>
+              <tr><td>Windows Systems</td><td>AHK v2, Everything, PowerToys, System Informer...</td><td>Win32, NTDLL, WASAPI, C# IPlugin</td></tr>
+              <tr><td>macOS Productivity</td><td>Raycast, OrbStack, MacWhisper, Rectangle...</td><td>React/TS, AXUIElement, CoreML, Swift</td></tr>
+              <tr><td>Cross-Platform</td><td>FFmpeg, Wireshark, Nginx, Tailscale, Rclone...</td><td>CLI, pcapng, config, WireGuard</td></tr>
+              <tr><td>Industrial & PLC</td><td>TIA Portal, Studio 5000, CODESYS</td><td>TIA Openness, CIP Pycomm3, IEC 61131-3</td></tr>
+              <tr><td>Scientific</td><td>MATLAB, COMSOL, LabVIEW, OriginPro</td><td>MEX C++, mph Python, DAQmx, PyOrigin</td></tr>
+              <tr><td>Music & DAWs</td><td>Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools</td><td>MIDI Remote Scripts, OSC, JavaScript MIDI FX</td></tr>
+              <tr><td>EDA & PCB</td><td>Altium Designer, KiCad, Cadence Virtuoso, LTspice</td><td>DelphiScript, pcbnew Python, SKILL, SPICE</td></tr>
+              <tr><td>Enterprise</td><td>SAP GUI, Oracle EBS, Dynamics NAV, Maximo, Windchill</td><td>VBScript, OA Framework, AL, REST/SOAP</td></tr>
+              <tr><td>Digital Forensics</td><td>Autopsy, EnCase, FTK</td><td>Python Ingest, EnScript, PostgreSQL</td></tr>
+              <tr><td>GIS & Medical</td><td>ArcGIS, QGIS, 3D Slicer, OsiriX, Horos</td><td>ArcPy, PyQGIS, MRML, Cocoa/Swift</td></tr>
+              <tr><td>Game Engines</td><td>Godot 4, CryEngine 5, RPG Maker MZ</td><td>GDScript, C#, C++, JavaScript ES6</td></tr>
+              <tr><td>Network SDN</td><td>TP-Link Omada Controller</td><td>OpenAPI REST, Token Auth</td></tr>
             </tbody>
           </table>
 
-          <h2 class="section-heading" id="sec-community">5. Community & Stargazers Growth</h2>
-          <p>Live repository community activity tracked directly from the GitHub API with hourly auto-sync:</p>
-          
+          <h2 class="section-heading" id="sec-handbooks">Reference Handbooks</h2>
+          <div class="app-cards-grid">
+            <div class="app-file-card" onclick="loadDoc('efficiency')" style="cursor:pointer">
+              <div class="app-file-title">⚡ Token & Cost Efficiency</div>
+              <div class="app-file-desc">100 rules for context window optimization, AST skeletonization, prompt cache splitting, and stop-sequence truncation. Cut inference costs by 40-70%.</div>
+              <div class="app-file-links">
+                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="file-link-btn">Browse 100 Rules →</a>
+              </div>
+            </div>
+            <div class="app-file-card" onclick="loadDoc('commonsense')" style="cursor:pointer">
+              <div class="app-file-title">🧠 Prompt Engineering</div>
+              <div class="app-file-desc">100 practical habits for factual grounding, hallucination elimination, output schema enforcement, and role-perspective stacking.</div>
+              <div class="app-file-links">
+                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="file-link-btn">Browse 100 Habits →</a>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="section-heading" id="sec-community">Community & Stargazers</h2>
+          <p>Live repository stats synced from GitHub API:</p>
           <div class="community-dashboard">
             <div class="metrics-row">
-              <div class="metric-card">
-                <div class="metric-val" id="metricStars">0</div>
-                <div class="metric-label">Stargazers</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-val" id="metricForks">0</div>
-                <div class="metric-label">Forks</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-val" id="metricWatchers">0</div>
-                <div class="metric-label">Watchers</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-val" id="metricSpecs">425+</div>
-                <div class="metric-label">Skill Specs</div>
-              </div>
+              <div class="metric-card"><div class="metric-val" id="metricStars">0</div><div class="metric-label">Stargazers</div></div>
+              <div class="metric-card"><div class="metric-val" id="metricForks">0</div><div class="metric-label">Forks</div></div>
+              <div class="metric-card"><div class="metric-val" id="metricWatchers">0</div><div class="metric-label">Watchers</div></div>
+              <div class="metric-card"><div class="metric-val" id="metricSpecs">425+</div><div class="metric-label">Skill Specs</div></div>
             </div>
-
             <div class="chart-container">
-              <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 160" preserveAspectRatio="none">
-                <!-- Injected via drawLiveChart() -->
-              </svg>
+              <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 140" preserveAspectRatio="none"></svg>
             </div>
-
             <div id="stargazersAvatars" class="stargazers-list"></div>
-
             <div class="dashboard-footer">
-              <span>● Synced directly via GitHub API (Hourly Auto-Refresh)</span>
-              <a href="https://github.com/alivirgo/Major-AI-Skills/stargazers" target="_blank" style="color: var(--text-link);">Star on GitHub &rarr;</a>
+              <span>● Synced via GitHub API (Hourly)</span>
+              <a href="https://github.com/alivirgo/Major-AI-Skills/stargazers" target="_blank" style="color: var(--accent-green);">Star on GitHub →</a>
             </div>
           </div>
         `
@@ -873,15 +1198,30 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
           <p>All skill files feature standard YAML frontmatter tags (<code>category</code>, <code>tags</code>, <code>description</code>) optimized for local vector embeddings in ChromaDB, Qdrant, or LM Studio document indexing.</p>
         `
       },
-      cad: {
-        breadcrumb: 'Docs / Applications / CAD & Parametric Design',
-        heading: 'CAD & Parametric Design (5 Applications)',
-        description: 'Parametric solid feature trees, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.',
+      linux: {
+        breadcrumb: 'Docs / Applications / Linux Desktop Distribution',
+        heading: 'Linux Desktop Distribution (1 Application)',
+        description: 'Omarchy — the omakase Arch Linux distribution by DHH. Hyprland tiling compositor, Quickshell QML panels, Neovim, Ghostty, and 30+ curated CLI tools.',
         hasModels: true,
         toc: [
           { id: 'sec-overview', title: '1. Domain Overview' },
           { id: 'sec-apps', title: '2. Application Skill Files' }
         ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Complete Linux desktop distribution automation covering Wayland compositor configuration (Hyprland), QML desktop panel development (Quickshell), tiling window management, Neovim Lua plugin authoring, Zsh shell customization, theme creation, and Arch Linux system administration.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('linux', [
+            { name: 'Omarchy by DHH', slug: 'omarchy', desc: 'Omakase Arch Linux distribution with Hyprland tiling compositor, Quickshell QML panels, Ghostty terminal, Neovim, and 30+ curated development tools. Bash/Zsh automation, Hyprland IPC socket programming, theme creation, and system administration.' }
+          ])}
+        `
+      },
+      cad: {
+        breadcrumb: 'Docs / Applications / CAD & Parametric Design',
+        heading: 'CAD & Parametric Design (5 Applications)',
+        description: 'Parametric solid feature trees, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.',
+        hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
         body: `
           <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
           <p>CAD and parametric modeling skills provide deterministic code for 3D engineering, mechanical parts creation, automated drawings generation, and geometric kernel manipulation.</p>
@@ -900,10 +1240,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
         heading: 'Video Editing & NLE Post-Production (3 Applications)',
         description: 'DaVinci Resolve scripting API, Fusion VFX nodes, FCPXML v1.11 timelines, and VEGAS C# batch rendering scripts.',
         hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
         body: `
           <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
           <p>Automate video editing timelines, color grading node trees, audio sync, and batch rendering across major non-linear editors.</p>
@@ -916,405 +1253,103 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
         `
       },
       '3d': {
-        breadcrumb: 'Docs / Applications / 3D Animation & VFX',
-        heading: '3D Animation, Sculpting & Visual Effects (4 Applications)',
-        description: 'Houdini VEX/Python geometry nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance PBR texture baking.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Procedural visual effects generation, high-poly digital sculpting, PBR material baking, and animation rigging automation.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('3d', [
-            { name: 'SideFX Houdini', slug: 'houdini', desc: 'Houdini Object Model (HOM) Python, VEX attribute wrangles, and SOP/DOP simulation graphs.' },
-            { name: 'Maxon Cinema 4D', slug: 'cinema-4d', desc: 'C4D Python SDK, MoGraph cloner effectors, and Redshift shader network generation.' },
-            { name: 'Pixologic / Maxon ZBrush', slug: 'zbrush', desc: 'ZScript macro automation, DynaMesh decimation routines, and multi-map displacement export.' },
-            { name: 'Adobe Substance 3D Painter', slug: 'substance-painter', desc: 'Substance Painter Python API, smart material layering, and PBR texture map baking.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / 3D Animation & VFX', heading: '3D Animation, Sculpting & Visual Effects (4 Applications)', description: 'Houdini VEX/Python geometry nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance PBR texture baking.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Procedural visual effects generation, high-poly digital sculpting, PBR material baking, and animation rigging automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('3d', [{ name: 'SideFX Houdini', slug: 'houdini', desc: 'Houdini Object Model (HOM) Python, VEX attribute wrangles, and SOP/DOP simulation graphs.' }, { name: 'Maxon Cinema 4D', slug: 'cinema-4d', desc: 'C4D Python SDK, MoGraph cloner effectors, and Redshift shader network generation.' }, { name: 'Pixologic / Maxon ZBrush', slug: 'zbrush', desc: 'ZScript macro automation, DynaMesh decimation routines, and multi-map displacement export.' }, { name: 'Adobe Substance 3D Painter', slug: 'substance-painter', desc: 'Substance Painter Python API, smart material layering, and PBR texture map baking.' }])}`
       },
       windows: {
-        breadcrumb: 'Docs / Applications / Windows Utilities & Kernel',
-        heading: 'Windows Utilities & Kernel Systems (10 Applications)',
-        description: 'Low-level Win32 NTDLL diagnostics, NTFS MFT search engines, WASAPI per-application audio, AutoHotkey v2 window management, and application isolation sandboxes.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Deep Windows operating system internals, direct Master File Table ($MFT) parsing, kernel driver troubleshooting, and system automation.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('windows', [
-            { name: 'AutoHotkey v2', slug: 'autohotkey-v2', desc: 'Strict v2 expression syntax, Win32 DllCall memory telemetry, and UIPI elevation handling.' },
-            { name: 'voidtools Everything', slug: 'everything', desc: 'Real-time NTFS MFT / USN Change Journal IPC client and Everything64.dll C-SDK.' },
-            { name: 'System Informer', slug: 'system-informer', desc: 'NTDLL Process Basic Information, PEB command-line extraction, and KSystemInformer.sys kernel driver.' },
-            { name: 'Antibody WizTree', slug: 'wiztree', desc: 'Direct physical volume MFT binary parsing, Cushion Treemap layouts, and headless CSV storage auditing.' },
-            { name: 'EarTrumpet', slug: 'eartrumpet', desc: 'Windows Core Audio (WASAPI) session enumeration, per-process peak meters, and endpoint redirection.' },
-            { name: 'Sandboxie-Plus', slug: 'sandboxie-plus', desc: 'Kernel filesystem virtualization (SbieDrv.sys), Sandboxie.ini security policies, and disposable test runners.' },
-            { name: 'Scoop Package Manager', slug: 'scoop', desc: 'User-space package manager, Git bucket manifests, Aria2 download acceleration, and shims management.' },
-            { name: 'ShareX', slug: 'sharex', desc: 'Screen capture engine, DirectShow audio recording, and Custom Uploader REST profiles (.sxcu).' },
-            { name: 'Microsoft PowerToys', slug: 'microsoft-powertoys', desc: 'FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (IPlugin), and Awake power management.' },
-            { name: 'Flow Launcher', slug: 'flow-launcher', desc: 'Python JSON-RPC stdin/stdout plugins, C# IPlugin interfaces, and Everything search integration.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Windows Utilities & Kernel', heading: 'Windows Utilities & Kernel Systems (10 Applications)', description: 'Low-level Win32 NTDLL diagnostics, NTFS MFT search engines, WASAPI per-application audio, AutoHotkey v2 window management, and application isolation sandboxes.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Deep Windows operating system internals, direct Master File Table ($MFT) parsing, kernel driver troubleshooting, and system automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('windows', [{ name: 'AutoHotkey v2', slug: 'autohotkey-v2', desc: 'Strict v2 expression syntax, Win32 DllCall memory telemetry, and UIPI elevation handling.' }, { name: 'voidtools Everything', slug: 'everything', desc: 'Real-time NTFS MFT / USN Change Journal IPC client and Everything64.dll C-SDK.' }, { name: 'System Informer', slug: 'system-informer', desc: 'NTDLL Process Basic Information, PEB command-line extraction, and KSystemInformer.sys kernel driver.' }, { name: 'Antibody WizTree', slug: 'wiztree', desc: 'Direct physical volume MFT binary parsing, Cushion Treemap layouts, and headless CSV storage auditing.' }, { name: 'EarTrumpet', slug: 'eartrumpet', desc: 'Windows Core Audio (WASAPI) session enumeration, per-process peak meters, and endpoint redirection.' }, { name: 'Sandboxie-Plus', slug: 'sandboxie-plus', desc: 'Kernel filesystem virtualization (SbieDrv.sys), Sandboxie.ini security policies, and disposable test runners.' }, { name: 'Scoop Package Manager', slug: 'scoop', desc: 'User-space package manager, Git bucket manifests, Aria2 download acceleration, and shims management.' }, { name: 'ShareX', slug: 'sharex', desc: 'Screen capture engine, DirectShow audio recording, and Custom Uploader REST profiles (.sxcu).' }, { name: 'Microsoft PowerToys', slug: 'microsoft-powertoys', desc: 'FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (IPlugin), and Awake power management.' }, { name: 'Flow Launcher', slug: 'flow-launcher', desc: 'Python JSON-RPC stdin/stdout plugins, C# IPlugin interfaces, and Everything search integration.' }])}`
       },
       macos: {
-        breadcrumb: 'Docs / Applications / macOS Productivity',
-        heading: 'macOS Native Productivity & Systems (9 Applications)',
-        description: 'Raycast React extensions, Accessibility API window snapping, Apple Silicon Docker/Linux VM runtime, and CoreML transcription.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Apple Silicon native software automation, Accessibility (AXUIElement) APIs, Swift scripting, and lightweight containerization.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('macos', [
-            { name: 'Raycast', slug: 'raycast', desc: 'Node.js/React Extension API, Raycast CLI script commands, and window management.' },
-            { name: 'OrbStack', slug: 'orbstack', desc: 'Fast, lightweight Apple Silicon Docker engine, Linux VM orchestration, and Rosetta 2 bridging.' },
-            { name: 'MacWhisper', slug: 'macwhisper', desc: 'CoreML / Metal accelerated on-device AI speech-to-text audio transcription.' },
-            { name: 'Rectangle', slug: 'rectangle', desc: 'macOS Accessibility AXUIElement window snapping and custom keybinding automation.' },
-            { name: 'Shottr', slug: 'shottr', desc: 'ScreenCaptureKit scrolling screenshots, OCR extraction, and pixelation redaction.' },
-            { name: 'AppCleaner', slug: 'appcleaner', desc: 'Deep ~/Library uninstallation, container cache removal, and orphaned preference hunting.' },
-            { name: 'Velja', slug: 'velja', desc: 'LaunchServices URL routing, browser redirection, and tracking parameter stripping.' },
-            { name: 'Dropover', slug: 'dropover', desc: 'Transient drag-and-drop floating shelves across macOS Spaces and multi-monitors.' },
-            { name: 'Maccy', slug: 'maccy', desc: 'NSPasteboard clipboard history management, search filtering, and SecureInput detection.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / macOS Productivity', heading: 'macOS Native Productivity & Systems (9 Applications)', description: 'Raycast React extensions, Accessibility API window snapping, Apple Silicon Docker/Linux VM runtime, and CoreML transcription.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Apple Silicon native software automation, Accessibility (AXUIElement) APIs, Swift scripting, and lightweight containerization.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('macos', [{ name: 'Raycast', slug: 'raycast', desc: 'Node.js/React Extension API, Raycast CLI script commands, and window management.' }, { name: 'OrbStack', slug: 'orbstack', desc: 'Fast, lightweight Apple Silicon Docker engine, Linux VM orchestration, and Rosetta 2 bridging.' }, { name: 'MacWhisper', slug: 'macwhisper', desc: 'CoreML / Metal accelerated on-device AI speech-to-text audio transcription.' }, { name: 'Rectangle', slug: 'rectangle', desc: 'macOS Accessibility AXUIElement window snapping and custom keybinding automation.' }, { name: 'Shottr', slug: 'shottr', desc: 'ScreenCaptureKit scrolling screenshots, OCR extraction, and pixelation redaction.' }, { name: 'AppCleaner', slug: 'appcleaner', desc: 'Deep ~/Library uninstallation, container cache removal, and orphaned preference hunting.' }, { name: 'Velja', slug: 'velja', desc: 'LaunchServices URL routing, browser redirection, and tracking parameter stripping.' }, { name: 'Dropover', slug: 'dropover', desc: 'Transient drag-and-drop floating shelves across macOS Spaces and multi-monitors.' }, { name: 'Maccy', slug: 'maccy', desc: 'NSPasteboard clipboard history management, search filtering, and SecureInput detection.' }])}`
       },
       'cross-platform': {
-        breadcrumb: 'Docs / Applications / Cross-Platform Tools',
-        heading: 'Cross-Platform Infrastructure & Networking (9 Applications)',
-        description: 'FFmpeg hardware encoding, Wireshark packet capture, Nginx reverse proxying, Tailscale mesh VPN, and Rclone cloud sync.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Cross-platform command-line engines, high-throughput network analysis, cloud storage synchronization, and zero-config mesh VPNs.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('cross-platform', [
-            { name: 'FFmpeg', slug: 'ffmpeg', desc: 'Hardware-accelerated transcoding (NVENC, QSV, VideoToolbox), filtergraphs, and audio muxing.' },
-            { name: 'Wireshark & tshark', slug: 'wireshark', desc: 'Deep packet inspection (DPI), pcapng analysis, and automated tshark capture filters.' },
-            { name: 'Nginx', slug: 'nginx', desc: 'High-concurrency HTTP reverse proxying, SSL/TLS termination, and upstream load balancing.' },
-            { name: 'Tailscale', slug: 'tailscale', desc: 'Zero-config WireGuard mesh VPN, MagicDNS subnet routing, and exit node administration.' },
-            { name: 'Rclone', slug: 'rclone', desc: 'Multi-cloud storage synchronization (S3, GDrive, Azure), FUSE mounting, and bandwidth throttling.' },
-            { name: 'Bruno', slug: 'bruno', desc: 'Git-native, offline-first API testing client using plain text .bru request files.' },
-            { name: 'Sniffnet', slug: 'sniffnet', desc: 'Rust-based network telemetry, application protocol categorization, and real-time bandwidth auditing.' },
-            { name: 'LosslessCut', slug: 'losslesscut', desc: 'Keyframe-accurate video cutting and stream extraction without re-encoding quality loss.' },
-            { name: 'Ventoy', slug: 'ventoy', desc: 'Multiboot USB drive generation by direct ISO/WIM image drag-and-drop partitioning.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Cross-Platform Tools', heading: 'Cross-Platform Infrastructure & Networking (9 Applications)', description: 'FFmpeg hardware encoding, Wireshark packet capture, Nginx reverse proxying, Tailscale mesh VPN, and Rclone cloud sync.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Cross-platform command-line engines, high-throughput network analysis, cloud storage synchronization, and zero-config mesh VPNs.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('cross-platform', [{ name: 'FFmpeg', slug: 'ffmpeg', desc: 'Hardware-accelerated transcoding (NVENC, QSV, VideoToolbox), filtergraphs, and audio muxing.' }, { name: 'Wireshark & tshark', slug: 'wireshark', desc: 'Deep packet inspection (DPI), pcapng analysis, and automated tshark capture filters.' }, { name: 'Nginx', slug: 'nginx', desc: 'High-concurrency HTTP reverse proxying, SSL/TLS termination, and upstream load balancing.' }, { name: 'Tailscale', slug: 'tailscale', desc: 'Zero-config WireGuard mesh VPN, MagicDNS subnet routing, and exit node administration.' }, { name: 'Rclone', slug: 'rclone', desc: 'Multi-cloud storage synchronization (S3, GDrive, Azure), FUSE mounting, and bandwidth throttling.' }, { name: 'Bruno', slug: 'bruno', desc: 'Git-native, offline-first API testing client using plain text .bru request files.' }, { name: 'Sniffnet', slug: 'sniffnet', desc: 'Rust-based network telemetry, application protocol categorization, and real-time bandwidth auditing.' }, { name: 'LosslessCut', slug: 'losslesscut', desc: 'Keyframe-accurate video cutting and stream extraction without re-encoding quality loss.' }, { name: 'Ventoy', slug: 'ventoy', desc: 'Multiboot USB drive generation by direct ISO/WIM image drag-and-drop partitioning.' }])}`
       },
       'plc-industrial': {
-        breadcrumb: 'Docs / Applications / PLC & Industrial Automation',
-        heading: 'PLC & Industrial Automation (3 Applications)',
-        description: 'IEC 61131-3 Structured Text, Siemens TIA Openness, Rockwell CIP multi-tag communication, and CODESYS OPC UA controllers.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Industrial automation controllers, Programmable Logic Controller (PLC) programming in IEC 61131-3 Structured Text, and SCADA connectivity.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('plc-industrial', [
-            { name: 'Siemens TIA Portal', slug: 'siemens-tia-portal', desc: 'TIA Openness C# API, SCL Structured Control Language, and S7-1500 hardware configuration.' },
-            { name: 'Rockwell Studio 5000', slug: 'rockwell-studio-5000', desc: 'ControlLogix / CompactLogix Structured Text, L5X XML generation, and Pycomm3 CIP drivers.' },
-            { name: 'CODESYS V3.5', slug: 'codesys', desc: 'Hardware-independent IEC 61131-3 PLC programming, SoftPLC runtime, and OPC UA server configuration.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / PLC & Industrial Automation', heading: 'PLC & Industrial Automation (3 Applications)', description: 'IEC 61131-3 Structured Text, Siemens TIA Openness, Rockwell CIP multi-tag communication, and CODESYS OPC UA controllers.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Industrial automation controllers, Programmable Logic Controller (PLC) programming in IEC 61131-3 Structured Text, and SCADA connectivity.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('plc-industrial', [{ name: 'Siemens TIA Portal', slug: 'siemens-tia-portal', desc: 'TIA Openness C# API, SCL Structured Control Language, and S7-1500 hardware configuration.' }, { name: 'Rockwell Studio 5000', slug: 'rockwell-studio-5000', desc: 'ControlLogix / CompactLogix Structured Text, L5X XML generation, and Pycomm3 CIP drivers.' }, { name: 'CODESYS V3.5', slug: 'codesys', desc: 'Hardware-independent IEC 61131-3 PLC programming, SoftPLC runtime, and OPC UA server configuration.' }])}`
       },
       scientific: {
-        breadcrumb: 'Docs / Applications / Scientific Computing',
-        heading: 'Scientific Computing & Simulation (4 Applications)',
-        description: 'MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Numerical computing, finite element multiphysics analysis, instrument control, and scientific publication-ready data analysis.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('scientific', [
-            { name: 'MathWorks MATLAB', slug: 'matlab', desc: 'Numerical matrix math, Simulink models, MEX C++ compiled bridges, and GPU ArrayFire acceleration.' },
-            { name: 'COMSOL Multiphysics', slug: 'comsol', desc: 'Finite Element Analysis (FEA), multi-physics field coupling, and MPH-Java API automation.' },
-            { name: 'National Instruments LabVIEW', slug: 'labview', desc: 'Virtual Instrument (VI) dataflow programming, NI-DAQmx hardware data streaming, and VISA serial.' },
-            { name: 'OriginLab OriginPro', slug: 'originpro', desc: 'Publication-quality scientific graphing, non-linear curve fitting, and PyOrigin Python automation.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Scientific Computing', heading: 'Scientific Computing & Simulation (4 Applications)', description: 'MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Numerical computing, finite element multiphysics analysis, instrument control, and scientific publication-ready data analysis.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('scientific', [{ name: 'MathWorks MATLAB', slug: 'matlab', desc: 'Numerical matrix math, Simulink models, MEX C++ compiled bridges, and GPU ArrayFire acceleration.' }, { name: 'COMSOL Multiphysics', slug: 'comsol', desc: 'Finite Element Analysis (FEA), multi-physics field coupling, and MPH-Java API automation.' }, { name: 'National Instruments LabVIEW', slug: 'labview', desc: 'Virtual Instrument (VI) dataflow programming, NI-DAQmx hardware data streaming, and VISA serial.' }, { name: 'OriginLab OriginPro', slug: 'originpro', desc: 'Publication-quality scientific graphing, non-linear curve fitting, and PyOrigin Python automation.' }])}`
       },
       music: {
-        breadcrumb: 'Docs / Applications / Music Production & DAWs',
-        heading: 'Music Production & Digital Audio Workstations (5 Applications)',
-        description: 'Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Digital audio workstations, MIDI controller scripting, OSC remote protocol automation, and professional studio mixing APIs.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('music', [
-            { name: 'Ableton Live', slug: 'ableton-live', desc: 'Live Python MIDI Remote Scripts, Max for Live (M4L), and Open Sound Control (OSC) automation.' },
-            { name: 'Steinberg Cubase', slug: 'cubase', desc: 'MIDI Logical Editor presets, Project Logical Editor macros, and Generic Remote integration.' },
-            { name: 'Image-Line FL Studio', slug: 'fl-studio', desc: 'FL Studio Python MIDI Controller API, Piano Roll scripting, and Mixer automation.' },
-            { name: 'Apple Logic Pro', slug: 'logic-pro', desc: 'Logic Pro JavaScript MIDI FX Scripter plugins, Smart Controls, and Environment routing.' },
-            { name: 'Avid Pro Tools', slug: 'pro-tools', desc: 'Pro Tools Scripting SDK (PTSL), C++/Python gRPC automation, and EuCon surface control.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Music Production & DAWs', heading: 'Music Production & Digital Audio Workstations (5 Applications)', description: 'Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Digital audio workstations, MIDI controller scripting, OSC remote protocol automation, and professional studio mixing APIs.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('music', [{ name: 'Ableton Live', slug: 'ableton-live', desc: 'Live Python MIDI Remote Scripts, Max for Live (M4L), and Open Sound Control (OSC) automation.' }, { name: 'Steinberg Cubase', slug: 'cubase', desc: 'MIDI Logical Editor presets, Project Logical Editor macros, and Generic Remote integration.' }, { name: 'Image-Line FL Studio', slug: 'fl-studio', desc: 'FL Studio Python MIDI Controller API, Piano Roll scripting, and Mixer automation.' }, { name: 'Apple Logic Pro', slug: 'logic-pro', desc: 'Logic Pro JavaScript MIDI FX Scripter plugins, Smart Controls, and Environment routing.' }, { name: 'Avid Pro Tools', slug: 'pro-tools', desc: 'Pro Tools Scripting SDK (PTSL), C++/Python gRPC automation, and EuCon surface control.' }])}`
       },
       eda: {
-        breadcrumb: 'Docs / Applications / Electronic Design (EDA)',
-        heading: 'Electronic Design Automation & PCB (4 Applications)',
-        description: 'Altium DelphiScript automation, KiCad PCB Python API, Cadence Virtuoso SKILL scripting, and LTspice raw simulation parsing.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Schematic capture, PCB layout routing, SPICE analog circuit simulation, and IC layout automation.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('eda', [
-            { name: 'Altium Designer', slug: 'altium-designer', desc: 'DelphiScript / JavaScript PCB automation, design rule checking (DRC), and automated Gerber output.' },
-            { name: 'KiCad EDA', slug: 'kicad', desc: 'Open-source PCB design, pcbnew Python API scripting, footprint placement, and BOM generation.' },
-            { name: 'Cadence Virtuoso', slug: 'cadence-virtuoso', desc: 'Analog/mixed-signal IC layout, SKILL language automation, and Spectre SPICE netlist simulation.' },
-            { name: 'Analog Devices LTspice', slug: 'ltspice', desc: 'SPICE transient/AC circuit simulation, headless batch execution, and raw binary waveform parsing.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Electronic Design (EDA)', heading: 'Electronic Design Automation & PCB (4 Applications)', description: 'Altium DelphiScript automation, KiCad PCB Python API, Cadence Virtuoso SKILL scripting, and LTspice raw simulation parsing.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Schematic capture, PCB layout routing, SPICE analog circuit simulation, and IC layout automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('eda', [{ name: 'Altium Designer', slug: 'altium-designer', desc: 'DelphiScript / JavaScript PCB automation, design rule checking (DRC), and automated Gerber output.' }, { name: 'KiCad EDA', slug: 'kicad', desc: 'Open-source PCB design, pcbnew Python API scripting, footprint placement, and BOM generation.' }, { name: 'Cadence Virtuoso', slug: 'cadence-virtuoso', desc: 'Analog/mixed-signal IC layout, SKILL language automation, and Spectre SPICE netlist simulation.' }, { name: 'Analog Devices LTspice', slug: 'ltspice', desc: 'SPICE transient/AC circuit simulation, headless batch execution, and raw binary waveform parsing.' }])}`
       },
       erp: {
-        breadcrumb: 'Docs / Applications / Enterprise ERP, PLM & EAM',
-        heading: 'Enterprise ERP, PLM & EAM Systems (6 Applications)',
-        description: 'SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Enterprise Resource Planning, Product Lifecycle Management (PLM), Enterprise Asset Management (EAM), and IT Service Management.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('erp', [
-            { name: 'SAP GUI', slug: 'sap-gui', desc: 'SAP GUI Scripting API (VBScript/Python), transaction execution (T-Codes), and batch data entry.' },
-            { name: 'Oracle E-Business Suite', slug: 'oracle-ebs', desc: 'Oracle Forms Automation, OA Framework scripting, and Concurrent Program management.' },
-            { name: 'Microsoft Dynamics NAV', slug: 'dynamics-nav', desc: 'Dynamics 365 Business Central / NAV C/AL and AL code, page extensions, and OData web services.' }
-          ])}
-          <h3 class="sub-heading">Enterprise PLM, EAM & ITSM</h3>
-          ${renderAppCards('enterprise', [
-            { name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Enterprise Asset Management NextGen REST/JSON APIs, work order lifecycle, and automation scripts.' },
-            { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'Product Lifecycle Management Info*Engine SOAP/REST APIs, CAD document checkout, and change management.' },
-            { name: 'ServiceNow Desktop', slug: 'servicenow-desktop', desc: 'ServiceNow Table REST APIs, incident automation, catalog request processing, and GlideRecord scripts.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Enterprise ERP, PLM & EAM', heading: 'Enterprise ERP, PLM & EAM Systems (6 Applications)', description: 'SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Enterprise Resource Planning, Product Lifecycle Management (PLM), Enterprise Asset Management (EAM), and IT Service Management.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('erp', [{ name: 'SAP GUI', slug: 'sap-gui', desc: 'SAP GUI Scripting API (VBScript/Python), transaction execution (T-Codes), and batch data entry.' }, { name: 'Oracle E-Business Suite', slug: 'oracle-ebs', desc: 'Oracle Forms Automation, OA Framework scripting, and Concurrent Program management.' }, { name: 'Microsoft Dynamics NAV', slug: 'dynamics-nav', desc: 'Dynamics 365 Business Central / NAV C/AL and AL code, page extensions, and OData web services.' }])}<h3 class="sub-heading">Enterprise PLM, EAM & ITSM</h3>${renderAppCards('enterprise', [{ name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Enterprise Asset Management NextGen REST/JSON APIs, work order lifecycle, and automation scripts.' }, { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'Product Lifecycle Management Info*Engine SOAP/REST APIs, CAD document checkout, and change management.' }, { name: 'ServiceNow Desktop', slug: 'servicenow-desktop', desc: 'ServiceNow Table REST APIs, incident automation, catalog request processing, and GlideRecord scripts.' }])}`
       },
       'digital-forensics': {
-        breadcrumb: 'Docs / Applications / Digital Forensics & IR',
-        heading: 'Digital Forensics & Incident Response (3 Applications)',
-        description: 'Autopsy Python ingest modules, EnCase EnScript evidence processing, and FTK case database extraction pipelines.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Forensic disk image analysis (E01, RAW/DD), evidence timeline extraction, artifact carving, and incident response automation.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('digital-forensics', [
-            { name: 'The Sleuth Kit Autopsy', slug: 'autopsy', desc: 'Autopsy Python Ingest Modules, blackboard artifact posting, and automated triage reporting.' },
-            { name: 'OpenText EnCase Forensic', slug: 'encase', desc: 'EnScript compiled OOP forensic programming, file signature analysis, and recursive evidence parsing.' },
-            { name: 'Exterro FTK (Forensic Toolkit)', slug: 'ftk', desc: 'FTK PostgreSQL case database extraction, distributed processing engine, and artifact indexing.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Digital Forensics & IR', heading: 'Digital Forensics & Incident Response (3 Applications)', description: 'Autopsy Python ingest modules, EnCase EnScript evidence processing, and FTK case database extraction pipelines.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Forensic disk image analysis (E01, RAW/DD), evidence timeline extraction, artifact carving, and incident response automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('digital-forensics', [{ name: 'The Sleuth Kit Autopsy', slug: 'autopsy', desc: 'Autopsy Python Ingest Modules, blackboard artifact posting, and automated triage reporting.' }, { name: 'OpenText EnCase Forensic', slug: 'encase', desc: 'EnScript compiled OOP forensic programming, file signature analysis, and recursive evidence parsing.' }, { name: 'Exterro FTK (Forensic Toolkit)', slug: 'ftk', desc: 'FTK PostgreSQL case database extraction, distributed processing engine, and artifact indexing.' }])}`
       },
       gis: {
-        breadcrumb: 'Docs / Applications / GIS & Medical Imaging',
-        heading: 'GIS & Medical DICOM Imaging (5 Applications)',
-        description: 'ArcGIS ArcPy geoprocessing, QGIS spatial algorithms, 3D Slicer volume segmentation, and OsiriX DICOM radiology workstations.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Geospatial analysis, raster/vector transformations, medical DICOM imaging, and 3D volumetric anatomical segmentation.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('gis', [
-            { name: 'Esri ArcGIS Pro', slug: 'arcgis-pro', desc: 'ArcPy spatial analyst geoprocessing, geodatabase feature class manipulation, and map layout export.' },
-            { name: 'QGIS Desktop', slug: 'qgis', desc: 'PyQGIS processing algorithms, vector layer styling, spatial joins, and standalone GIS scripts.' }
-          ])}
-          <h3 class="sub-heading">Medical DICOM & Volumetric Imaging</h3>
-          ${renderAppCards('medical', [
-            { name: '3D Slicer', slug: '3d-slicer', desc: 'Python Slicer MRML scene node tree manipulation, CT/MRI volume rendering, and segmentation.' },
-            { name: 'OsiriX MD', slug: 'osirix', desc: 'macOS DICOM medical imaging workstation, Cocoa Objective-C / Swift plugin architecture, and PACS routing.' },
-            { name: 'Horos Project', slug: 'horos', desc: 'Open-source 64-bit medical DICOM viewer, multi-planar reconstruction (MPR), and 3D volume rendering.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / GIS & Medical Imaging', heading: 'GIS & Medical DICOM Imaging (5 Applications)', description: 'ArcGIS ArcPy geoprocessing, QGIS spatial algorithms, 3D Slicer volume segmentation, and OsiriX DICOM radiology workstations.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Geospatial analysis, raster/vector transformations, medical DICOM imaging, and 3D volumetric anatomical segmentation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('gis', [{ name: 'Esri ArcGIS Pro', slug: 'arcgis-pro', desc: 'ArcPy spatial analyst geoprocessing, geodatabase feature class manipulation, and map layout export.' }, { name: 'QGIS Desktop', slug: 'qgis', desc: 'PyQGIS processing algorithms, vector layer styling, spatial joins, and standalone GIS scripts.' }])}<h3 class="sub-heading">Medical DICOM & Volumetric Imaging</h3>${renderAppCards('medical', [{ name: '3D Slicer', slug: '3d-slicer', desc: 'Python Slicer MRML scene node tree manipulation, CT/MRI volume rendering, and segmentation.' }, { name: 'OsiriX MD', slug: 'osirix', desc: 'macOS DICOM medical imaging workstation, Cocoa Objective-C / Swift plugin architecture, and PACS routing.' }, { name: 'Horos Project', slug: 'horos', desc: 'Open-source 64-bit medical DICOM viewer, multi-planar reconstruction (MPR), and 3D volume rendering.' }])}`
       },
       'game-engines': {
-        breadcrumb: 'Docs / Applications / Game Engines & Runtimes',
-        heading: 'Game Engines & Interactive Runtimes (3 Applications)',
-        description: 'Godot GDScript 2.0 & C# bindings, CryEngine Schematyc node systems, and RPG Maker JavaScript event scripting.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Game engine architecture, scene tree lifecycle management, real-time shaders, and event scripting.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('game-engines', [
-            { name: 'Godot Engine 4', slug: 'godot', desc: 'GDScript 2.0 static typing, C# bindings, scene tree lifecycle, and custom GDExtension C++ nodes.' },
-            { name: 'Crytek CryEngine 5', slug: 'cryengine', desc: 'CryEngine C++ entity components, Schematyc visual logic, and real-time physical rendering.' },
-            { name: 'Gotcha Gotcha Games RPG Maker MZ', slug: 'rpg-maker', desc: 'JavaScript ES6 plugin architecture, battle engine state machine hooks, and event interpreter.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Game Engines & Runtimes', heading: 'Game Engines & Interactive Runtimes (3 Applications)', description: 'Godot GDScript 2.0 & C# bindings, CryEngine Schematyc node systems, and RPG Maker JavaScript event scripting.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Game engine architecture, scene tree lifecycle management, real-time shaders, and event scripting.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('game-engines', [{ name: 'Godot Engine 4', slug: 'godot', desc: 'GDScript 2.0 static typing, C# bindings, scene tree lifecycle, and custom GDExtension C++ nodes.' }, { name: 'Crytek CryEngine 5', slug: 'cryengine', desc: 'CryEngine C++ entity components, Schematyc visual logic, and real-time physical rendering.' }, { name: 'Gotcha Gotcha Games RPG Maker MZ', slug: 'rpg-maker', desc: 'JavaScript ES6 plugin architecture, battle engine state machine hooks, and event interpreter.' }])}`
       },
       network: {
-        breadcrumb: 'Docs / Applications / Network SDN Controllers',
-        heading: 'Software-Defined Network Controllers (1 Platform)',
-        description: 'TP-Link Omada Software-Defined Networking REST OpenAPI, multi-site provisioning, VLAN isolation, and device reboot telemetry.',
-        hasModels: true,
-        toc: [
-          { id: 'sec-overview', title: '1. Domain Overview' },
-          { id: 'sec-apps', title: '2. Application Skill Files' }
-        ],
-        body: `
-          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
-          <p>Centralized network controller automation, REST OpenAPI orchestration, VLAN subnet routing, and enterprise hardware management.</p>
-          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
-          ${renderAppCards('network', [
-            { name: 'TP-Link Omada SDN Controller', slug: 'omada-controller', desc: 'Omada Controller OpenAPI REST client, token authentication, multi-site provisioning, and device reboot.' }
-          ])}
-        `
+        breadcrumb: 'Docs / Applications / Network SDN Controllers', heading: 'Software-Defined Network Controllers (1 Platform)', description: 'TP-Link Omada Software-Defined Networking REST OpenAPI, multi-site provisioning, VLAN isolation, and device reboot telemetry.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Centralized network controller automation, REST OpenAPI orchestration, VLAN subnet routing, and enterprise hardware management.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('network', [{ name: 'TP-Link Omada SDN Controller', slug: 'omada-controller', desc: 'Omada Controller OpenAPI REST client, token authentication, multi-site provisioning, and device reboot.' }])}`
       },
       efficiency: {
-        breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency',
-        heading: 'Token & Context Efficiency Handbook (100 Rules)',
-        description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.',
-        hasModels: false,
-        toc: [
-          { id: 'sec-overview', title: '1. Token Reduction Principles' },
-          { id: 'sec-rules', title: '2. Core Optimization Rules' },
-          { id: 'sec-files', title: '3. Browse All 100 Rules' }
-        ],
+        breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency', heading: 'Token & Context Efficiency Handbook (100 Rules)', description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Token Reduction Principles' }, { id: 'sec-rules', title: '2. Core Optimization Rules' }, { id: 'sec-files', title: '3. Browse All 100 Rules' }],
         body: `
           <h2 class="section-heading" id="sec-overview">1. Token Reduction Principles</h2>
           <p>Context window efficiency is critical for cost-effective LLM operations. Every rule in this handbook provides actionable prompt compression techniques.</p>
-          
           <h2 class="section-heading" id="sec-rules">2. Core Optimization Rules</h2>
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Rule Name</th>
-                <th>Target Mechanism</th>
-                <th>Estimated Token Reduction</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>AST Code Skeletonization</td>
-                <td>Strip function bodies, keep signatures & docstrings</td>
-                <td>-65% per code view</td>
-              </tr>
-              <tr>
-                <td>Line-Bounded File Reads</td>
-                <td>Constrain IO to specific line offsets (slice notation)</td>
-                <td>-80% over full-file dumps</td>
-              </tr>
-              <tr>
-                <td>Prompt Cache-Control Headers</td>
-                <td>Static prefix splitting for Anthropic/OpenAI caching</td>
-                <td>-90% cached input cost</td>
-              </tr>
-              <tr>
-                <td>Zero-Boilerplate Imports</td>
-                <td>Suppress standard library imports in prompt context</td>
-                <td>-15% token overhead</td>
-              </tr>
-              <tr>
-                <td>Stop-Sequence Truncation</td>
-                <td>Halt generation upon deterministic completion token</td>
-                <td>-30% output tokens</td>
-              </tr>
-            </tbody>
-          </table>
-
+          <table class="doc-table"><thead><tr><th>Rule</th><th>Mechanism</th><th>Reduction</th></tr></thead><tbody>
+            <tr><td>AST Code Skeletonization</td><td>Strip function bodies, keep signatures & docstrings</td><td>-65% per view</td></tr>
+            <tr><td>Line-Bounded File Reads</td><td>Constrain IO to specific line offsets</td><td>-80% over full-file</td></tr>
+            <tr><td>Prompt Cache-Control</td><td>Static prefix splitting for Anthropic/OpenAI caching</td><td>-90% cached cost</td></tr>
+            <tr><td>Zero-Boilerplate Imports</td><td>Suppress standard library imports in context</td><td>-15% overhead</td></tr>
+            <tr><td>Stop-Sequence Truncation</td><td>Halt generation upon deterministic token</td><td>-30% output</td></tr>
+          </tbody></table>
           <h2 class="section-heading" id="sec-files">3. Browse All 100 Rules</h2>
-          <p>Access the complete directory of 100 standalone markdown efficiency rules on GitHub:</p>
-          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="btn-github">Browse 100 Efficiency Markdown Files on GitHub &rarr;</a></p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Efficiency Rules on GitHub →</a></p>
         `
       },
       commonsense: {
-        breadcrumb: 'Docs / Handbooks / Prompt Engineering',
-        heading: 'Prompt Engineering & Factual Grounding Handbook (100 Habits)',
-        description: 'Practical, human-tested techniques for non-technical users to ground LLM reasoning and prevent hallucinations without prompt bloat.',
-        hasModels: false,
-        toc: [
-          { id: 'sec-overview', title: '1. Factual Grounding Framework' },
-          { id: 'sec-habits', title: '2. Core Prompting Habits' },
-          { id: 'sec-files', title: '3. Browse All 100 Habits' }
-        ],
+        breadcrumb: 'Docs / Handbooks / Prompt Engineering', heading: 'Prompt Engineering & Factual Grounding Handbook (100 Habits)', description: 'Practical, human-tested techniques for non-technical users to ground LLM reasoning and prevent hallucinations without prompt bloat.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Factual Grounding Framework' }, { id: 'sec-habits', title: '2. Core Prompting Habits' }, { id: 'sec-files', title: '3. Browse All 100 Habits' }],
         body: `
           <h2 class="section-heading" id="sec-overview">1. Factual Grounding Framework</h2>
           <p>Proven techniques to eliminate hallucinations, enforce deterministic schemas, and get precise results on the first prompt attempt.</p>
-          
           <h2 class="section-heading" id="sec-habits">2. Core Prompting Habits</h2>
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Habit Name</th>
-                <th>Technique Description</th>
-                <th>Outcome</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Factual Source Anchoring</td>
-                <td>Explicit source text referencing before reasoning</td>
-                <td>Zero hallucinations</td>
-              </tr>
-              <tr>
-                <td>Negative Prompt Constraints</td>
-                <td>Strict declaration of forbidden formats or assumptions</td>
-                <td>High precision output</td>
-              </tr>
-              <tr>
-                <td>One-Shot Standard Templating</td>
-                <td>Provide exact target output schema before generation</td>
-                <td>Deterministic formatting</td>
-              </tr>
-              <tr>
-                <td>Role & Perspective Stacking</td>
-                <td>Layer subject matter expertise constraints</td>
-                <td>Authentic domain voice</td>
-              </tr>
-            </tbody>
-          </table>
-
+          <table class="doc-table"><thead><tr><th>Habit</th><th>Technique</th><th>Outcome</th></tr></thead><tbody>
+            <tr><td>Factual Source Anchoring</td><td>Explicit source text referencing before reasoning</td><td>Zero hallucinations</td></tr>
+            <tr><td>Negative Prompt Constraints</td><td>Strict declaration of forbidden formats</td><td>High precision output</td></tr>
+            <tr><td>One-Shot Standard Templating</td><td>Provide exact target output schema</td><td>Deterministic formatting</td></tr>
+            <tr><td>Role & Perspective Stacking</td><td>Layer subject matter expertise constraints</td><td>Authentic domain voice</td></tr>
+          </tbody></table>
           <h2 class="section-heading" id="sec-files">3. Browse All 100 Habits</h2>
-          <p>Access the complete directory of 100 practical plain-English prompt specifications on GitHub:</p>
-          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="btn-github">Browse 100 Common Sense Markdown Files on GitHub &rarr;</a></p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Common Sense Habits on GitHub →</a></p>
         `
       }
     };
@@ -1332,20 +1367,15 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       document.getElementById('modelTabContainer').style.display = data.hasModels ? 'flex' : 'none';
       document.getElementById('dynamicBody').innerHTML = data.body;
 
-      // Update sidebar active link
       document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
       if (ev && ev.target) {
         const item = ev.target.closest('.nav-item');
         if (item) item.classList.add('active');
       }
 
-      // Render Dynamic Table of Contents on the right
       renderToc(data.toc || []);
 
-      if (key === 'overview') {
-        updateCommunityData();
-      }
-
+      if (key === 'overview') { updateCommunityData(); }
       window.scrollTo(0, 0);
     }
 
@@ -1353,10 +1383,9 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       const list = document.getElementById('tocList');
       if (!list) return;
       if (items.length === 0) {
-        list.innerHTML = `<li><span class="toc-link" style="color: var(--text-muted);">No section headers</span></li>`;
+        list.innerHTML = `<li><span class="toc-link">No sections</span></li>`;
         return;
       }
-
       list.innerHTML = items.map(item => `
         <li><a onclick="scrollToSection('${item.id}')" class="toc-link">${item.title}</a></li>
       `).join('');
@@ -1364,9 +1393,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
 
     function scrollToSection(id) {
       const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function switchModelTab(model) {
@@ -1375,19 +1402,16 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       document.getElementById('tabBtnGemini').classList.toggle('active', model === 'gemini');
       document.getElementById('tabBtnGpt').classList.toggle('active', model === 'gpt');
 
-      // Update all visible app card links to highlight selected model
-      const cards = document.querySelectorAll('.app-file-card');
-      cards.forEach(card => {
-        const links = card.querySelectorAll('.file-link-btn');
-        links.forEach(l => {
+      document.querySelectorAll('.app-file-card').forEach(card => {
+        card.querySelectorAll('.file-link-btn').forEach(l => {
           if (l.innerText.startsWith(model)) {
-            l.style.background = 'var(--text-link)';
-            l.style.color = '#ffffff';
-            l.style.borderColor = 'var(--text-link)';
+            l.style.background = 'var(--accent-green)';
+            l.style.color = '#000';
+            l.style.borderColor = 'var(--accent-green)';
           } else {
-            l.style.background = 'var(--bg-app)';
+            l.style.background = 'var(--bg-body)';
             l.style.color = 'var(--text-link)';
-            l.style.borderColor = 'var(--border-strong)';
+            l.style.borderColor = 'var(--border-color)';
           }
         });
       });
@@ -1401,20 +1425,22 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       });
     }
 
-    // Community Stats Auto-Fetcher
+    // ═══════════════════════════════════════════════════
+    // Community Stats
+    // ═══════════════════════════════════════════════════
     let currentRepoData = null;
     let currentStargazers = [];
 
     function updateCommunityData() {
       const CACHE_KEY = 'major_ai_repo_cache';
       const TIMESTAMP_KEY = 'major_ai_repo_timestamp';
-      const ONE_HOUR_MS = 60 * 60 * 1000;
+      const ONE_HOUR = 60 * 60 * 1000;
       const now = Date.now();
 
       const cached = localStorage.getItem(CACHE_KEY);
       const cachedTime = localStorage.getItem(TIMESTAMP_KEY);
 
-      if (cached && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
+      if (cached && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR) {
         try {
           const parsed = JSON.parse(cached);
           currentRepoData = parsed.repo;
@@ -1456,6 +1482,9 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       const starEl = document.getElementById('starCount');
       if (starEl) starEl.innerText = stars;
 
+      const heroStars = document.getElementById('heroStars');
+      if (heroStars) heroStars.innerText = stars;
+
       const mStars = document.getElementById('metricStars');
       if (mStars) mStars.innerText = stars;
       const mForks = document.getElementById('metricForks');
@@ -1479,30 +1508,28 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       if (!svg || !currentRepoData) return;
 
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const lineColor = isDark ? '#58a6ff' : '#0366d6';
-      const gridColor = isDark ? '#21262d' : '#eaecef';
-      const textColor = isDark ? '#8b949e' : '#586069';
+      const lineColor = isDark ? '#6cc644' : '#2ea043';
+      const gridColor = isDark ? '#1a1a1a' : '#e8e8e8';
+      const textColor = isDark ? '#555555' : '#999999';
 
       const stars = Math.max(currentRepoData.stargazers_count || 1, 1);
 
       svg.innerHTML = `
-        <line x1="40" y1="30" x2="720" y2="30" stroke="${gridColor}" stroke-dasharray="4,4" />
-        <line x1="40" y1="85" x2="720" y2="85" stroke="${gridColor}" stroke-dasharray="4,4" />
-        <line x1="40" y1="130" x2="720" y2="130" stroke="${gridColor}" />
-
-        <text x="35" y="34" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">${stars}★</text>
-        <text x="35" y="134" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">0★</text>
-        <text x="40" y="152" font-size="11" fill="${textColor}" font-family="sans-serif">Repository Launch</text>
-        <text x="720" y="152" font-size="11" fill="${textColor}" text-anchor="end" font-family="sans-serif">Current (${stars} Star${stars === 1 ? '' : 's'})</text>
-
-        <polygon points="40,130 720,30 720,130 40,130" fill="${lineColor}" opacity="0.12" />
-        <line x1="40" y1="130" x2="720" y2="30" stroke="${lineColor}" stroke-width="3" stroke-linecap="round" />
-        <circle cx="720" cy="30" r="5" fill="${lineColor}" stroke="${isDark ? '#0d1117' : '#ffffff'}" stroke-width="2" />
-        <circle cx="40" cy="130" r="4" fill="${lineColor}" />
+        <line x1="40" y1="20" x2="720" y2="20" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="70" x2="720" y2="70" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="115" x2="720" y2="115" stroke="${gridColor}" />
+        <text x="35" y="24" font-size="9" fill="${textColor}" text-anchor="end" font-family="monospace">${stars}★</text>
+        <text x="35" y="119" font-size="9" fill="${textColor}" text-anchor="end" font-family="monospace">0★</text>
+        <text x="40" y="135" font-size="10" fill="${textColor}" font-family="monospace">Launch</text>
+        <text x="720" y="135" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">Now (${stars}★)</text>
+        <polygon points="40,115 720,20 720,115 40,115" fill="${lineColor}" opacity="0.08" />
+        <line x1="40" y1="115" x2="720" y2="20" stroke="${lineColor}" stroke-width="2" stroke-linecap="round" />
+        <circle cx="720" cy="20" r="4" fill="${lineColor}" stroke="${isDark ? '#0a0a0a' : '#ffffff'}" stroke-width="2" />
+        <circle cx="40" cy="115" r="3" fill="${lineColor}" />
       `;
     }
 
-    // Initialize document
+    // Initialize
     loadDoc('overview');
     setInterval(updateCommunityData, 60 * 60 * 1000);
   </script>
