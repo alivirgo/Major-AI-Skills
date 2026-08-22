@@ -68,7 +68,6 @@
       font-size: 15px;
     }
 
-    /* Header */
     header {
       height: var(--header-height);
       background-color: var(--bg-sidebar);
@@ -157,14 +156,12 @@
       font-family: var(--font-body);
     }
 
-    /* Layout Structure */
     .app-layout {
       display: flex;
       margin-top: var(--header-height);
       min-height: calc(100vh - var(--header-height));
     }
 
-    /* Left Sidebar Navigation */
     .sidebar {
       width: var(--sidebar-width);
       background-color: var(--bg-sidebar);
@@ -245,7 +242,6 @@
       color: var(--text-muted);
     }
 
-    /* Main Content Area */
     .content-area {
       margin-left: var(--sidebar-width);
       margin-right: var(--toc-width);
@@ -261,13 +257,8 @@
       font-family: var(--font-code);
     }
 
-    .breadcrumb a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
     .doc-title {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 700;
       color: var(--text-heading);
       line-height: 1.25;
@@ -279,7 +270,7 @@
     .doc-lead {
       font-size: 16px;
       color: var(--text-muted);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     /* Model Selection Tabs */
@@ -317,25 +308,24 @@
       border-bottom: 1px solid var(--bg-app);
     }
 
-    /* Prose Sections */
     h2.section-heading {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 600;
       color: var(--text-heading);
-      margin: 36px 0 16px;
+      margin: 32px 0 14px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border-color);
     }
 
     h3.sub-heading {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
       color: var(--text-heading);
-      margin: 24px 0 10px;
+      margin: 20px 0 10px;
     }
 
     p {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       color: var(--text-main);
     }
 
@@ -347,17 +337,16 @@
       margin-bottom: 6px;
     }
 
-    /* Code Blocks */
     pre {
       background-color: var(--bg-code);
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      padding: 16px;
+      padding: 14px 16px;
       overflow-x: auto;
       font-family: var(--font-code);
       font-size: 13px;
       line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     code {
@@ -374,7 +363,6 @@
       font-size: inherit;
     }
 
-    /* Callout Boxes */
     .callout {
       padding: 14px 18px;
       background-color: var(--bg-sidebar);
@@ -390,7 +378,6 @@
       margin-bottom: 4px;
     }
 
-    /* Data Tables */
     table.doc-table {
       width: 100%;
       border-collapse: collapse;
@@ -414,7 +401,65 @@
       background-color: rgba(0, 0, 0, 0.015);
     }
 
-    /* Native Community Stars & Metrics Dashboard */
+    /* App Cards Grid */
+    .app-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0 32px;
+    }
+
+    .app-file-card {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-file-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .app-file-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 6px;
+    }
+
+    .app-file-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .app-file-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .file-link-btn {
+      font-family: var(--font-code);
+      font-size: 11px;
+      padding: 3px 8px;
+      background: var(--bg-app);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      color: var(--text-link);
+      text-decoration: none;
+    }
+
+    .file-link-btn:hover {
+      background: var(--bg-hover);
+      text-decoration: underline;
+    }
+
+    /* Community Dashboard */
     .community-dashboard {
       background: var(--bg-sidebar);
       border: 1px solid var(--border-color);
@@ -463,7 +508,7 @@
 
     .chart-svg {
       width: 100%;
-      height: 180px;
+      height: 160px;
       display: block;
     }
 
@@ -501,7 +546,7 @@
       gap: 8px;
     }
 
-    /* Right Sidebar Table of Contents */
+    /* Right TOC */
     .toc-sidebar {
       width: var(--toc-width);
       position: fixed;
@@ -532,13 +577,13 @@
       color: var(--text-muted);
       text-decoration: none;
       line-height: 1.4;
+      cursor: pointer;
     }
 
     .toc-link:hover {
       color: var(--text-link);
     }
 
-    /* Responsive */
     @media (max-width: 1100px) {
       .toc-sidebar { display: none; }
       .content-area { margin-right: 0; }
@@ -559,7 +604,7 @@
   <!-- Top Header -->
   <header>
     <div class="header-left">
-      <a href="#" class="site-title">
+      <a href="#" class="site-title" onclick="loadDoc('overview')">
         <span>Major AI Skills</span>
         <span class="version-badge">v1.0.0</span>
       </a>
@@ -582,44 +627,43 @@
     </div>
   </header>
 
-  <!-- App Layout -->
   <div class="app-layout">
     
     <!-- Left Navigation Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-search">
-        <input type="text" id="docSearch" class="search-input" placeholder="Search documentation..." oninput="filterNav()">
+        <input type="text" id="docSearch" class="search-input" placeholder="Filter navigation..." oninput="filterNav()">
       </div>
 
       <div class="nav-section-title">Getting Started</div>
       <ul class="nav-list">
-        <li><a class="nav-item active" onclick="loadDoc('overview')"><span>Overview & Architecture</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('usage')"><span>Installation & Integration</span></a></li>
+        <li><a class="nav-item active" onclick="loadDoc('overview', event)"><span>Overview & Architecture</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('usage', event)"><span>Installation & Integration</span></a></li>
       </ul>
 
-      <div class="nav-section-title">Application Domains (75 Apps)</div>
+      <div class="nav-section-title">Application Domains (75 Tools)</div>
       <ul class="nav-list" id="appsNavList">
-        <li><a class="nav-item" onclick="loadDoc('cad')"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('video-editing')"><span>Video Editing & NLE</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('3d')"><span>3D Animation & VFX</span> <span class="nav-badge">4</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('windows')"><span>Windows Utilities & Kernel</span> <span class="nav-badge">10</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('macos')"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('cross-platform')"><span>Cross-Platform Infrastructure</span> <span class="nav-badge">9</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('plc-industrial')"><span>PLC & Industrial Automation</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('scientific')"><span>Scientific & Simulation</span> <span class="nav-badge">4</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('music')"><span>Music Production & DAWs</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('eda')"><span>Electronic Design (EDA)</span> <span class="nav-badge">4</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('erp')"><span>Enterprise ERP & PLM</span> <span class="nav-badge">6</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('digital-forensics')"><span>Digital Forensics & IR</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('gis')"><span>GIS & Medical Imaging</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('game-engines')"><span>Game Engines & Runtimes</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('network')"><span>Network SDN Controllers</span> <span class="nav-badge">1</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('cad', event)"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('video-editing', event)"><span>Video Editing & NLE Post</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('3d', event)"><span>3D Animation & VFX</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('windows', event)"><span>Windows Utilities & Kernel</span> <span class="nav-badge">10</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('macos', event)"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('cross-platform', event)"><span>Cross-Platform Tools</span> <span class="nav-badge">9</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('plc-industrial', event)"><span>PLC & Industrial Automation</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('scientific', event)"><span>Scientific Computing & Simulation</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('music', event)"><span>Music Production & DAWs</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('eda', event)"><span>Electronic Design (EDA)</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('erp', event)"><span>Enterprise ERP, PLM & EAM</span> <span class="nav-badge">6</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('digital-forensics', event)"><span>Digital Forensics & IR</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('gis', event)"><span>GIS & Medical Imaging</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('game-engines', event)"><span>Game Engines & Runtimes</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('network', event)"><span>Network SDN Controllers</span> <span class="nav-badge">1</span></a></li>
       </ul>
 
       <div class="nav-section-title">Reference Handbooks</div>
       <ul class="nav-list">
-        <li><a class="nav-item" onclick="loadDoc('efficiency')"><span>Token & Cost Efficiency</span> <span class="nav-badge">100</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('commonsense')"><span>Prompt Engineering Handbook</span> <span class="nav-badge">100</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('efficiency', event)"><span>Token & Cost Efficiency</span> <span class="nav-badge">100</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('commonsense', event)"><span>Prompt Engineering Handbook</span> <span class="nav-badge">100</span></a></li>
       </ul>
     </aside>
 
@@ -631,13 +675,13 @@
 
       <!-- Model Switcher Tabs (Shown for application specs) -->
       <div class="model-tabs" id="modelTabContainer">
-        <button class="model-tab-btn active" onclick="switchModel('claude')">Claude Specification</button>
-        <button class="model-tab-btn" onclick="switchModel('gemini')">Gemini Specification</button>
-        <button class="model-tab-btn" onclick="switchModel('gpt')">GPT & Codex Specification</button>
+        <button class="model-tab-btn active" id="tabBtnClaude" onclick="switchModelTab('claude')">Claude Specification</button>
+        <button class="model-tab-btn" id="tabBtnGemini" onclick="switchModelTab('gemini')">Gemini Specification</button>
+        <button class="model-tab-btn" id="tabBtnGpt" onclick="switchModelTab('gpt')">GPT & Codex Specification</button>
       </div>
 
       <div id="dynamicBody">
-        <!-- Injected via JS loadDoc() -->
+        <!-- Injected via loadDoc() -->
       </div>
     </main>
 
@@ -645,11 +689,7 @@
     <aside class="toc-sidebar">
       <div class="toc-title">On this page</div>
       <ul class="toc-list" id="tocList">
-        <li><a href="#sec-about" class="toc-link">1. About This Repository</a></li>
-        <li><a href="#sec-structure" class="toc-link">2. Directory Structure</a></li>
-        <li><a href="#sec-quickstart" class="toc-link">3. Quickstart & Usage</a></li>
-        <li><a href="#sec-matrix" class="toc-link">4. Coverage Matrix</a></li>
-        <li><a href="#sec-community" class="toc-link">5. Community & Stargazers</a></li>
+        <!-- Injected via renderToc() -->
       </ul>
     </aside>
 
@@ -670,134 +710,38 @@
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').innerText = `Theme: ${savedTheme === 'dark' ? 'Dark' : 'Light'}`;
 
-    // Native Community Metrics & SVG Graph Auto-Updater (1-Hour Cache)
-    let currentRepoData = null;
-    let currentStargazers = [];
+    // GitHub Base URL
+    const GH_BASE = "https://github.com/alivirgo/Major-AI-Skills/blob/master";
 
-    function updateCommunityData() {
-      const CACHE_KEY = 'major_ai_repo_cache';
-      const TIMESTAMP_KEY = 'major_ai_repo_timestamp';
-      const ONE_HOUR_MS = 60 * 60 * 1000;
-      const now = Date.now();
-
-      const cached = localStorage.getItem(CACHE_KEY);
-      const cachedTime = localStorage.getItem(TIMESTAMP_KEY);
-
-      if (cached && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
-        try {
-          const parsed = JSON.parse(cached);
-          currentRepoData = parsed.repo;
-          currentStargazers = parsed.stargazers || [];
-          renderDashboard();
-          return;
-        } catch (e) {}
-      }
-
-      // Fetch fresh metrics directly from GitHub API
-      Promise.all([
-        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills').then(r => r.json()),
-        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills/stargazers', {
-          headers: { 'Accept': 'application/vnd.github.v3.star+json' }
-        }).then(r => r.json()).catch(() => [])
-      ]).then(([repo, stargazers]) => {
-        if (repo && typeof repo.stargazers_count === 'number') {
-          currentRepoData = repo;
-          currentStargazers = Array.isArray(stargazers) ? stargazers : [];
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ repo, stargazers: currentStargazers }));
-          localStorage.setItem(TIMESTAMP_KEY, now.toString());
-          renderDashboard();
-        }
-      }).catch(() => {
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          currentRepoData = parsed.repo;
-          renderDashboard();
-        }
-      });
+    // Helper: Card Generator for Applications
+    function renderAppCards(catPath, apps) {
+      return `<div class="app-cards-grid">` + apps.map(app => `
+        <div class="app-file-card">
+          <div class="app-file-title">${app.name}</div>
+          <div class="app-file-desc">${app.desc}</div>
+          <div class="app-file-links">
+            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/claude_skill.md" target="_blank" class="file-link-btn">claude_skill.md</a>
+            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/gemini_skill.md" target="_blank" class="file-link-btn">gemini_skill.md</a>
+            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/gpt_skill.md" target="_blank" class="file-link-btn">gpt_skill.md</a>
+          </div>
+        </div>
+      `).join('') + `</div>`;
     }
 
-    function renderDashboard() {
-      if (!currentRepoData) return;
-
-      const stars = currentRepoData.stargazers_count || 0;
-      const forks = currentRepoData.forks_count || 0;
-      const watchers = currentRepoData.watchers_count || 0;
-      const issues = currentRepoData.open_issues_count || 0;
-
-      // Update Header Star Pill
-      const starEl = document.getElementById('starCount');
-      if (starEl) starEl.innerText = stars;
-
-      // Update Metric Values in Dashboard
-      const mStars = document.getElementById('metricStars');
-      if (mStars) mStars.innerText = stars;
-      const mForks = document.getElementById('metricForks');
-      if (mForks) mForks.innerText = forks;
-      const mWatchers = document.getElementById('metricWatchers');
-      if (mWatchers) mWatchers.innerText = watchers;
-      const mSpecs = document.getElementById('metricSpecs');
-      if (mSpecs) mSpecs.innerText = "425+";
-
-      // Render Stargazer Avatars if available
-      const avatarContainer = document.getElementById('stargazersAvatars');
-      if (avatarContainer && currentStargazers.length > 0) {
-        avatarContainer.innerHTML = currentStargazers.slice(0, 10).map(s => {
-          const u = s.user || s;
-          return `<a href="${u.html_url}" target="_blank" title="${u.login}"><img class="stargazer-avatar" src="${u.avatar_url}" alt="${u.login}" /></a>`;
-        }).join('');
-      }
-
-      drawLiveChart();
-    }
-
-    function drawLiveChart() {
-      const svg = document.getElementById('liveGrowthSvg');
-      if (!svg || !currentRepoData) return;
-
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const lineColor = isDark ? '#58a6ff' : '#0366d6';
-      const gridColor = isDark ? '#21262d' : '#eaecef';
-      const textColor = isDark ? '#8b949e' : '#586069';
-
-      const stars = Math.max(currentRepoData.stargazers_count || 1, 1);
-
-      // Construct native timeline points
-      const points = [
-        { label: 'Launch', val: 0, x: 40, y: 140 },
-        { label: 'v1.0.0', val: Math.max(1, stars), x: 720, y: 30 }
-      ];
-
-      svg.innerHTML = `
-        <!-- Horizontal Grid Lines -->
-        <line x1="40" y1="30" x2="720" y2="30" stroke="${gridColor}" stroke-dasharray="4,4" />
-        <line x1="40" y1="85" x2="720" y2="85" stroke="${gridColor}" stroke-dasharray="4,4" />
-        <line x1="40" y1="140" x2="720" y2="140" stroke="${gridColor}" />
-
-        <!-- Axis Labels -->
-        <text x="35" y="34" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">${stars}★</text>
-        <text x="35" y="144" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">0★</text>
-        <text x="40" y="165" font-size="11" fill="${textColor}" font-family="sans-serif">Repository Launch</text>
-        <text x="720" y="165" font-size="11" fill="${textColor}" text-anchor="end" font-family="sans-serif">Current (${stars} Star${stars === 1 ? '' : 's'})</text>
-
-        <!-- Area Fill -->
-        <polygon points="40,140 720,30 720,140 40,140" fill="${lineColor}" opacity="0.12" />
-
-        <!-- Progression Line -->
-        <line x1="40" y1="140" x2="720" y2="30" stroke="${lineColor}" stroke-width="3" stroke-linecap="round" />
-
-        <!-- Endpoint Circle -->
-        <circle cx="720" cy="30" r="6" fill="${lineColor}" stroke="${isDark ? '#0d1117' : '#ffffff'}" stroke-width="2" />
-        <circle cx="40" cy="140" r="4" fill="${lineColor}" />
-      `;
-    }
-
-    // Documentation Dynamic Database
+    // Dynamic Documentation Database
     const docs = {
       overview: {
         breadcrumb: 'Docs / Getting Started / Overview',
         heading: 'Major AI Skills Technical Documentation',
         description: 'A curated repository of 425+ production-grade AI skills, prompt engineering specifications, and token optimization blueprints across 75 software applications.',
         hasModels: false,
+        toc: [
+          { id: 'sec-about', title: '1. About This Repository' },
+          { id: 'sec-structure', title: '2. Directory Structure' },
+          { id: 'sec-quickstart', title: '3. Command Line Integration' },
+          { id: 'sec-matrix', title: '4. Application Coverage Matrix' },
+          { id: 'sec-community', title: '5. Community & Stargazers' }
+        ],
         body: `
           <h2 class="section-heading" id="sec-about">1. About This Repository</h2>
           <p>This repository provides deterministic, production-grade technical blueprints for AI models (Claude, ChatGPT, Gemini, Codex, and local LLMs) to accurately automate, script, and troubleshoot professional software applications without boilerplate or hallucinations.</p>
@@ -891,7 +835,7 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
             </div>
 
             <div class="chart-container">
-              <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 180" preserveAspectRatio="none">
+              <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 160" preserveAspectRatio="none">
                 <!-- Injected via drawLiveChart() -->
               </svg>
             </div>
@@ -905,41 +849,363 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
           </div>
         `
       },
+      usage: {
+        breadcrumb: 'Docs / Getting Started / Installation & Integration',
+        heading: 'Installation, Workflows & Agentic Integration',
+        description: 'How to ingest Major AI Skills into Claude Code, Cursor, Antigravity, OpenClaw, and local LLM agents.',
+        hasModels: false,
+        toc: [
+          { id: 'sec-cursor', title: '1. Cursor & VS Code Integration' },
+          { id: 'sec-claude', title: '2. Claude Code CLI Integration' },
+          { id: 'sec-lmstudio', title: '3. LM Studio & Local RAG' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-cursor">1. Cursor & VS Code Integration</h2>
+          <p>To provide instant context for a specific tool in Cursor or VS Code Copilot, append the target skill file to your workspace rules:</p>
+          <pre><code># Append SolidWorks skill to Cursor rules
+cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
+          
+          <h2 class="section-heading" id="sec-claude">2. Claude Code CLI Integration</h2>
+          <p>Claude Code reads markdown instructions natively in project directories. Copy the desired skill file as <code>CLAUDE.md</code> in your project root:</p>
+          <pre><code>cp "skills/cross-platform/ffmpeg/claude_skill.md" ./CLAUDE.md</code></pre>
+
+          <h2 class="section-heading" id="sec-lmstudio">3. LM Studio & Local RAG Ingestion</h2>
+          <p>All skill files feature standard YAML frontmatter tags (<code>category</code>, <code>tags</code>, <code>description</code>) optimized for local vector embeddings in ChromaDB, Qdrant, or LM Studio document indexing.</p>
+        `
+      },
+      cad: {
+        breadcrumb: 'Docs / Applications / CAD & Parametric Design',
+        heading: 'CAD & Parametric Design (5 Applications)',
+        description: 'Parametric solid feature trees, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>CAD and parametric modeling skills provide deterministic code for 3D engineering, mechanical parts creation, automated drawings generation, and geometric kernel manipulation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('cad', [
+            { name: 'Dassault SolidWorks', slug: 'solidworks', desc: 'VBA/C# COM automation, feature tree traversal, and parametric drawing generation.' },
+            { name: 'Dassault CATIA V5 / 3DX', slug: 'catia', desc: 'Hybrid GSD surface modeling, Knowledge Pattern scripting, and product structure assembly.' },
+            { name: 'Siemens NX', slug: 'siemens-nx', desc: 'NX Open Python/C++ automation, synchronous modeling, and manufacturing CAM operations.' },
+            { name: 'Autodesk Fusion 360', slug: 'fusion-360', desc: 'Cloud-integrated Python CAD/CAM API, component sketches, and toolpath post-processing.' },
+            { name: 'Robert McNeel Rhino 3D', slug: 'rhino', desc: 'RhinoCommon .NET & Python scripting, Grasshopper algorithmic design, and NURBS mesh optimization.' }
+          ])}
+        `
+      },
+      'video-editing': {
+        breadcrumb: 'Docs / Applications / Video Editing & NLE Post',
+        heading: 'Video Editing & NLE Post-Production (3 Applications)',
+        description: 'DaVinci Resolve scripting API, Fusion VFX nodes, FCPXML v1.11 timelines, and VEGAS C# batch rendering scripts.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Automate video editing timelines, color grading node trees, audio sync, and batch rendering across major non-linear editors.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('video-editing', [
+            { name: 'DaVinci Resolve Studio', slug: 'davinci-resolve', desc: 'Python/Lua DaVinciResolveScript API, Fusion VFX node pipelines, and render queue orchestration.' },
+            { name: 'Apple Final Cut Pro', slug: 'final-cut-pro', desc: 'FCPXML v1.11 timeline synthesis, asset tracking, and AVFoundation export automation.' },
+            { name: 'MAGIX VEGAS Pro', slug: 'vegas-pro', desc: 'ScriptPortal C# .NET API, multi-track timeline manipulation, and hardware-accelerated batch rendering.' }
+          ])}
+        `
+      },
+      '3d': {
+        breadcrumb: 'Docs / Applications / 3D Animation & VFX',
+        heading: '3D Animation, Sculpting & Visual Effects (4 Applications)',
+        description: 'Houdini VEX/Python geometry nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance PBR texture baking.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Procedural visual effects generation, high-poly digital sculpting, PBR material baking, and animation rigging automation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('3d', [
+            { name: 'SideFX Houdini', slug: 'houdini', desc: 'Houdini Object Model (HOM) Python, VEX attribute wrangles, and SOP/DOP simulation graphs.' },
+            { name: 'Maxon Cinema 4D', slug: 'cinema-4d', desc: 'C4D Python SDK, MoGraph cloner effectors, and Redshift shader network generation.' },
+            { name: 'Pixologic / Maxon ZBrush', slug: 'zbrush', desc: 'ZScript macro automation, DynaMesh decimation routines, and multi-map displacement export.' },
+            { name: 'Adobe Substance 3D Painter', slug: 'substance-painter', desc: 'Substance Painter Python API, smart material layering, and PBR texture map baking.' }
+          ])}
+        `
+      },
       windows: {
         breadcrumb: 'Docs / Applications / Windows Utilities & Kernel',
         heading: 'Windows Utilities & Kernel Systems (10 Applications)',
         description: 'Low-level Win32 NTDLL diagnostics, NTFS MFT search engines, WASAPI per-application audio, AutoHotkey v2 window management, and application isolation sandboxes.',
         hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
         body: `
-          <h2 class="section-heading" id="sec-apps">Covered Applications</h2>
-          <ul>
-            <li><strong>Everything (voidtools)</strong>: Real-time NTFS MFT / USN Change Journal IPC client and <code>Everything64.dll</code> C-SDK.</li>
-            <li><strong>System Informer (Process Hacker)</strong>: NTDLL Process Basic Information, PEB command-line extraction, and <code>KSystemInformer.sys</code> kernel driver.</li>
-            <li><strong>WizTree</strong>: Direct physical volume MFT binary parsing, Cushion Treemap layouts, and headless CSV storage auditing.</li>
-            <li><strong>AutoHotkey v2</strong>: Strict v2 expression syntax, Win32 <code>DllCall</code> memory telemetry, and UIPI elevation handling.</li>
-            <li><strong>EarTrumpet</strong>: Windows Core Audio (WASAPI) session enumeration, per-process peak meters, and endpoint redirection.</li>
-            <li><strong>Sandboxie-Plus</strong>: Kernel filesystem virtualization (<code>SbieDrv.sys</code>), <code>Sandboxie.ini</code> security policies, and disposable test runners.</li>
-            <li><strong>Scoop</strong>: User-space package manager, Git bucket manifests, Aria2 download acceleration, and shims management.</li>
-            <li><strong>ShareX</strong>: Screen capture engine, DirectShow audio recording, and Custom Uploader REST profiles (<code>.sxcu</code>).</li>
-            <li><strong>PowerToys</strong>: FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (<code>IPlugin</code>), and Awake power management.</li>
-            <li><strong>Flow Launcher</strong>: Python JSON-RPC stdin/stdout plugins, C# <code>IPlugin</code> interfaces, and Everything search integration.</li>
-          </ul>
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Deep Windows operating system internals, direct Master File Table ($MFT) parsing, kernel driver troubleshooting, and system automation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('windows', [
+            { name: 'AutoHotkey v2', slug: 'autohotkey-v2', desc: 'Strict v2 expression syntax, Win32 DllCall memory telemetry, and UIPI elevation handling.' },
+            { name: 'voidtools Everything', slug: 'everything', desc: 'Real-time NTFS MFT / USN Change Journal IPC client and Everything64.dll C-SDK.' },
+            { name: 'System Informer', slug: 'system-informer', desc: 'NTDLL Process Basic Information, PEB command-line extraction, and KSystemInformer.sys kernel driver.' },
+            { name: 'Antibody WizTree', slug: 'wiztree', desc: 'Direct physical volume MFT binary parsing, Cushion Treemap layouts, and headless CSV storage auditing.' },
+            { name: 'EarTrumpet', slug: 'eartrumpet', desc: 'Windows Core Audio (WASAPI) session enumeration, per-process peak meters, and endpoint redirection.' },
+            { name: 'Sandboxie-Plus', slug: 'sandboxie-plus', desc: 'Kernel filesystem virtualization (SbieDrv.sys), Sandboxie.ini security policies, and disposable test runners.' },
+            { name: 'Scoop Package Manager', slug: 'scoop', desc: 'User-space package manager, Git bucket manifests, Aria2 download acceleration, and shims management.' },
+            { name: 'ShareX', slug: 'sharex', desc: 'Screen capture engine, DirectShow audio recording, and Custom Uploader REST profiles (.sxcu).' },
+            { name: 'Microsoft PowerToys', slug: 'microsoft-powertoys', desc: 'FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (IPlugin), and Awake power management.' },
+            { name: 'Flow Launcher', slug: 'flow-launcher', desc: 'Python JSON-RPC stdin/stdout plugins, C# IPlugin interfaces, and Everything search integration.' }
+          ])}
         `
       },
-      cad: {
-        breadcrumb: 'Docs / Applications / CAD & Parametric Design',
-        heading: 'CAD & Parametric Modeling Engineering Suite (5 Applications)',
-        description: 'Parametric solid feature trees, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.',
+      macos: {
+        breadcrumb: 'Docs / Applications / macOS Productivity',
+        heading: 'macOS Native Productivity & Systems (9 Applications)',
+        description: 'Raycast React extensions, Accessibility API window snapping, Apple Silicon Docker/Linux VM runtime, and CoreML transcription.',
         hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
         body: `
-          <h2 class="section-heading" id="sec-apps">Covered Applications</h2>
-          <ul>
-            <li><strong>Dassault SolidWorks</strong>: VBA/C# COM automation, feature tree traversal, and parametric drawing generation.</li>
-            <li><strong>Dassault CATIA V5 / 3DEXPERIENCE</strong>: Hybrid GSD surface modeling, Knowledge Pattern scripting, and product structure assembly.</li>
-            <li><strong>Siemens NX</strong>: NX Open Python/C++ automation, synchronous modeling, and manufacturing CAM operations.</li>
-            <li><strong>Autodesk Fusion 360</strong>: Cloud-integrated Python CAD/CAM API, component sketches, and toolpath post-processing.</li>
-            <li><strong>Robert McNeel Rhino 3D</strong>: RhinoCommon .NET & Python scripting, Grasshopper algorithmic design, and NURBS mesh optimization.</li>
-          </ul>
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Apple Silicon native software automation, Accessibility (AXUIElement) APIs, Swift scripting, and lightweight containerization.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('macos', [
+            { name: 'Raycast', slug: 'raycast', desc: 'Node.js/React Extension API, Raycast CLI script commands, and window management.' },
+            { name: 'OrbStack', slug: 'orbstack', desc: 'Fast, lightweight Apple Silicon Docker engine, Linux VM orchestration, and Rosetta 2 bridging.' },
+            { name: 'MacWhisper', slug: 'macwhisper', desc: 'CoreML / Metal accelerated on-device AI speech-to-text audio transcription.' },
+            { name: 'Rectangle', slug: 'rectangle', desc: 'macOS Accessibility AXUIElement window snapping and custom keybinding automation.' },
+            { name: 'Shottr', slug: 'shottr', desc: 'ScreenCaptureKit scrolling screenshots, OCR extraction, and pixelation redaction.' },
+            { name: 'AppCleaner', slug: 'appcleaner', desc: 'Deep ~/Library uninstallation, container cache removal, and orphaned preference hunting.' },
+            { name: 'Velja', slug: 'velja', desc: 'LaunchServices URL routing, browser redirection, and tracking parameter stripping.' },
+            { name: 'Dropover', slug: 'dropover', desc: 'Transient drag-and-drop floating shelves across macOS Spaces and multi-monitors.' },
+            { name: 'Maccy', slug: 'maccy', desc: 'NSPasteboard clipboard history management, search filtering, and SecureInput detection.' }
+          ])}
+        `
+      },
+      'cross-platform': {
+        breadcrumb: 'Docs / Applications / Cross-Platform Tools',
+        heading: 'Cross-Platform Infrastructure & Networking (9 Applications)',
+        description: 'FFmpeg hardware encoding, Wireshark packet capture, Nginx reverse proxying, Tailscale mesh VPN, and Rclone cloud sync.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Cross-platform command-line engines, high-throughput network analysis, cloud storage synchronization, and zero-config mesh VPNs.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('cross-platform', [
+            { name: 'FFmpeg', slug: 'ffmpeg', desc: 'Hardware-accelerated transcoding (NVENC, QSV, VideoToolbox), filtergraphs, and audio muxing.' },
+            { name: 'Wireshark & tshark', slug: 'wireshark', desc: 'Deep packet inspection (DPI), pcapng analysis, and automated tshark capture filters.' },
+            { name: 'Nginx', slug: 'nginx', desc: 'High-concurrency HTTP reverse proxying, SSL/TLS termination, and upstream load balancing.' },
+            { name: 'Tailscale', slug: 'tailscale', desc: 'Zero-config WireGuard mesh VPN, MagicDNS subnet routing, and exit node administration.' },
+            { name: 'Rclone', slug: 'rclone', desc: 'Multi-cloud storage synchronization (S3, GDrive, Azure), FUSE mounting, and bandwidth throttling.' },
+            { name: 'Bruno', slug: 'bruno', desc: 'Git-native, offline-first API testing client using plain text .bru request files.' },
+            { name: 'Sniffnet', slug: 'sniffnet', desc: 'Rust-based network telemetry, application protocol categorization, and real-time bandwidth auditing.' },
+            { name: 'LosslessCut', slug: 'losslesscut', desc: 'Keyframe-accurate video cutting and stream extraction without re-encoding quality loss.' },
+            { name: 'Ventoy', slug: 'ventoy', desc: 'Multiboot USB drive generation by direct ISO/WIM image drag-and-drop partitioning.' }
+          ])}
+        `
+      },
+      'plc-industrial': {
+        breadcrumb: 'Docs / Applications / PLC & Industrial Automation',
+        heading: 'PLC & Industrial Automation (3 Applications)',
+        description: 'IEC 61131-3 Structured Text, Siemens TIA Openness, Rockwell CIP multi-tag communication, and CODESYS OPC UA controllers.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Industrial automation controllers, Programmable Logic Controller (PLC) programming in IEC 61131-3 Structured Text, and SCADA connectivity.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('plc-industrial', [
+            { name: 'Siemens TIA Portal', slug: 'siemens-tia-portal', desc: 'TIA Openness C# API, SCL Structured Control Language, and S7-1500 hardware configuration.' },
+            { name: 'Rockwell Studio 5000', slug: 'rockwell-studio-5000', desc: 'ControlLogix / CompactLogix Structured Text, L5X XML generation, and Pycomm3 CIP drivers.' },
+            { name: 'CODESYS V3.5', slug: 'codesys', desc: 'Hardware-independent IEC 61131-3 PLC programming, SoftPLC runtime, and OPC UA server configuration.' }
+          ])}
+        `
+      },
+      scientific: {
+        breadcrumb: 'Docs / Applications / Scientific Computing',
+        heading: 'Scientific Computing & Simulation (4 Applications)',
+        description: 'MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Numerical computing, finite element multiphysics analysis, instrument control, and scientific publication-ready data analysis.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('scientific', [
+            { name: 'MathWorks MATLAB', slug: 'matlab', desc: 'Numerical matrix math, Simulink models, MEX C++ compiled bridges, and GPU ArrayFire acceleration.' },
+            { name: 'COMSOL Multiphysics', slug: 'comsol', desc: 'Finite Element Analysis (FEA), multi-physics field coupling, and MPH-Java API automation.' },
+            { name: 'National Instruments LabVIEW', slug: 'labview', desc: 'Virtual Instrument (VI) dataflow programming, NI-DAQmx hardware data streaming, and VISA serial.' },
+            { name: 'OriginLab OriginPro', slug: 'originpro', desc: 'Publication-quality scientific graphing, non-linear curve fitting, and PyOrigin Python automation.' }
+          ])}
+        `
+      },
+      music: {
+        breadcrumb: 'Docs / Applications / Music Production & DAWs',
+        heading: 'Music Production & Digital Audio Workstations (5 Applications)',
+        description: 'Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Digital audio workstations, MIDI controller scripting, OSC remote protocol automation, and professional studio mixing APIs.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('music', [
+            { name: 'Ableton Live', slug: 'ableton-live', desc: 'Live Python MIDI Remote Scripts, Max for Live (M4L), and Open Sound Control (OSC) automation.' },
+            { name: 'Steinberg Cubase', slug: 'cubase', desc: 'MIDI Logical Editor presets, Project Logical Editor macros, and Generic Remote integration.' },
+            { name: 'Image-Line FL Studio', slug: 'fl-studio', desc: 'FL Studio Python MIDI Controller API, Piano Roll scripting, and Mixer automation.' },
+            { name: 'Apple Logic Pro', slug: 'logic-pro', desc: 'Logic Pro JavaScript MIDI FX Scripter plugins, Smart Controls, and Environment routing.' },
+            { name: 'Avid Pro Tools', slug: 'pro-tools', desc: 'Pro Tools Scripting SDK (PTSL), C++/Python gRPC automation, and EuCon surface control.' }
+          ])}
+        `
+      },
+      eda: {
+        breadcrumb: 'Docs / Applications / Electronic Design (EDA)',
+        heading: 'Electronic Design Automation & PCB (4 Applications)',
+        description: 'Altium DelphiScript automation, KiCad PCB Python API, Cadence Virtuoso SKILL scripting, and LTspice raw simulation parsing.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Schematic capture, PCB layout routing, SPICE analog circuit simulation, and IC layout automation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('eda', [
+            { name: 'Altium Designer', slug: 'altium-designer', desc: 'DelphiScript / JavaScript PCB automation, design rule checking (DRC), and automated Gerber output.' },
+            { name: 'KiCad EDA', slug: 'kicad', desc: 'Open-source PCB design, pcbnew Python API scripting, footprint placement, and BOM generation.' },
+            { name: 'Cadence Virtuoso', slug: 'cadence-virtuoso', desc: 'Analog/mixed-signal IC layout, SKILL language automation, and Spectre SPICE netlist simulation.' },
+            { name: 'Analog Devices LTspice', slug: 'ltspice', desc: 'SPICE transient/AC circuit simulation, headless batch execution, and raw binary waveform parsing.' }
+          ])}
+        `
+      },
+      erp: {
+        breadcrumb: 'Docs / Applications / Enterprise ERP, PLM & EAM',
+        heading: 'Enterprise ERP, PLM & EAM Systems (6 Applications)',
+        description: 'SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Enterprise Resource Planning, Product Lifecycle Management (PLM), Enterprise Asset Management (EAM), and IT Service Management.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('erp', [
+            { name: 'SAP GUI', slug: 'sap-gui', desc: 'SAP GUI Scripting API (VBScript/Python), transaction execution (T-Codes), and batch data entry.' },
+            { name: 'Oracle E-Business Suite', slug: 'oracle-ebs', desc: 'Oracle Forms Automation, OA Framework scripting, and Concurrent Program management.' },
+            { name: 'Microsoft Dynamics NAV', slug: 'dynamics-nav', desc: 'Dynamics 365 Business Central / NAV C/AL and AL code, page extensions, and OData web services.' }
+          ])}
+          <h3 class="sub-heading">Enterprise PLM, EAM & ITSM</h3>
+          ${renderAppCards('enterprise', [
+            { name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Enterprise Asset Management NextGen REST/JSON APIs, work order lifecycle, and automation scripts.' },
+            { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'Product Lifecycle Management Info*Engine SOAP/REST APIs, CAD document checkout, and change management.' },
+            { name: 'ServiceNow Desktop', slug: 'servicenow-desktop', desc: 'ServiceNow Table REST APIs, incident automation, catalog request processing, and GlideRecord scripts.' }
+          ])}
+        `
+      },
+      'digital-forensics': {
+        breadcrumb: 'Docs / Applications / Digital Forensics & IR',
+        heading: 'Digital Forensics & Incident Response (3 Applications)',
+        description: 'Autopsy Python ingest modules, EnCase EnScript evidence processing, and FTK case database extraction pipelines.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Forensic disk image analysis (E01, RAW/DD), evidence timeline extraction, artifact carving, and incident response automation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('digital-forensics', [
+            { name: 'The Sleuth Kit Autopsy', slug: 'autopsy', desc: 'Autopsy Python Ingest Modules, blackboard artifact posting, and automated triage reporting.' },
+            { name: 'OpenText EnCase Forensic', slug: 'encase', desc: 'EnScript compiled OOP forensic programming, file signature analysis, and recursive evidence parsing.' },
+            { name: 'Exterro FTK (Forensic Toolkit)', slug: 'ftk', desc: 'FTK PostgreSQL case database extraction, distributed processing engine, and artifact indexing.' }
+          ])}
+        `
+      },
+      gis: {
+        breadcrumb: 'Docs / Applications / GIS & Medical Imaging',
+        heading: 'GIS & Medical DICOM Imaging (5 Applications)',
+        description: 'ArcGIS ArcPy geoprocessing, QGIS spatial algorithms, 3D Slicer volume segmentation, and OsiriX DICOM radiology workstations.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Geospatial analysis, raster/vector transformations, medical DICOM imaging, and 3D volumetric anatomical segmentation.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('gis', [
+            { name: 'Esri ArcGIS Pro', slug: 'arcgis-pro', desc: 'ArcPy spatial analyst geoprocessing, geodatabase feature class manipulation, and map layout export.' },
+            { name: 'QGIS Desktop', slug: 'qgis', desc: 'PyQGIS processing algorithms, vector layer styling, spatial joins, and standalone GIS scripts.' }
+          ])}
+          <h3 class="sub-heading">Medical DICOM & Volumetric Imaging</h3>
+          ${renderAppCards('medical', [
+            { name: '3D Slicer', slug: '3d-slicer', desc: 'Python Slicer MRML scene node tree manipulation, CT/MRI volume rendering, and segmentation.' },
+            { name: 'OsiriX MD', slug: 'osirix', desc: 'macOS DICOM medical imaging workstation, Cocoa Objective-C / Swift plugin architecture, and PACS routing.' },
+            { name: 'Horos Project', slug: 'horos', desc: 'Open-source 64-bit medical DICOM viewer, multi-planar reconstruction (MPR), and 3D volume rendering.' }
+          ])}
+        `
+      },
+      'game-engines': {
+        breadcrumb: 'Docs / Applications / Game Engines & Runtimes',
+        heading: 'Game Engines & Interactive Runtimes (3 Applications)',
+        description: 'Godot GDScript 2.0 & C# bindings, CryEngine Schematyc node systems, and RPG Maker JavaScript event scripting.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Game engine architecture, scene tree lifecycle management, real-time shaders, and event scripting.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('game-engines', [
+            { name: 'Godot Engine 4', slug: 'godot', desc: 'GDScript 2.0 static typing, C# bindings, scene tree lifecycle, and custom GDExtension C++ nodes.' },
+            { name: 'Crytek CryEngine 5', slug: 'cryengine', desc: 'CryEngine C++ entity components, Schematyc visual logic, and real-time physical rendering.' },
+            { name: 'Gotcha Gotcha Games RPG Maker MZ', slug: 'rpg-maker', desc: 'JavaScript ES6 plugin architecture, battle engine state machine hooks, and event interpreter.' }
+          ])}
+        `
+      },
+      network: {
+        breadcrumb: 'Docs / Applications / Network SDN Controllers',
+        heading: 'Software-Defined Network Controllers (1 Platform)',
+        description: 'TP-Link Omada Software-Defined Networking REST OpenAPI, multi-site provisioning, VLAN isolation, and device reboot telemetry.',
+        hasModels: true,
+        toc: [
+          { id: 'sec-overview', title: '1. Domain Overview' },
+          { id: 'sec-apps', title: '2. Application Skill Files' }
+        ],
+        body: `
+          <h2 class="section-heading" id="sec-overview">1. Domain Overview</h2>
+          <p>Centralized network controller automation, REST OpenAPI orchestration, VLAN subnet routing, and enterprise hardware management.</p>
+          <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
+          ${renderAppCards('network', [
+            { name: 'TP-Link Omada SDN Controller', slug: 'omada-controller', desc: 'Omada Controller OpenAPI REST client, token authentication, multi-site provisioning, and device reboot.' }
+          ])}
         `
       },
       efficiency: {
@@ -947,8 +1213,16 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
         heading: 'Token & Context Efficiency Handbook (100 Rules)',
         description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.',
         hasModels: false,
+        toc: [
+          { id: 'sec-overview', title: '1. Token Reduction Principles' },
+          { id: 'sec-rules', title: '2. Core Optimization Rules' },
+          { id: 'sec-files', title: '3. Browse All 100 Rules' }
+        ],
         body: `
-          <h2 class="section-heading" id="sec-rules">Core Token Optimization Rules</h2>
+          <h2 class="section-heading" id="sec-overview">1. Token Reduction Principles</h2>
+          <p>Context window efficiency is critical for cost-effective LLM operations. Every rule in this handbook provides actionable prompt compression techniques.</p>
+          
+          <h2 class="section-heading" id="sec-rules">2. Core Optimization Rules</h2>
           <table class="doc-table">
             <thead>
               <tr>
@@ -985,6 +1259,10 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
               </tr>
             </tbody>
           </table>
+
+          <h2 class="section-heading" id="sec-files">3. Browse All 100 Rules</h2>
+          <p>Access the complete directory of 100 standalone markdown efficiency rules on GitHub:</p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="btn-github">Browse 100 Efficiency Markdown Files on GitHub &rarr;</a></p>
         `
       },
       commonsense: {
@@ -992,8 +1270,16 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
         heading: 'Prompt Engineering & Factual Grounding Handbook (100 Habits)',
         description: 'Practical, human-tested techniques for non-technical users to ground LLM reasoning and prevent hallucinations without prompt bloat.',
         hasModels: false,
+        toc: [
+          { id: 'sec-overview', title: '1. Factual Grounding Framework' },
+          { id: 'sec-habits', title: '2. Core Prompting Habits' },
+          { id: 'sec-files', title: '3. Browse All 100 Habits' }
+        ],
         body: `
-          <h2 class="section-heading" id="sec-habits">Core Prompt Engineering Habits</h2>
+          <h2 class="section-heading" id="sec-overview">1. Factual Grounding Framework</h2>
+          <p>Proven techniques to eliminate hallucinations, enforce deterministic schemas, and get precise results on the first prompt attempt.</p>
+          
+          <h2 class="section-heading" id="sec-habits">2. Core Prompting Habits</h2>
           <table class="doc-table">
             <thead>
               <tr>
@@ -1025,12 +1311,21 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
               </tr>
             </tbody>
           </table>
+
+          <h2 class="section-heading" id="sec-files">3. Browse All 100 Habits</h2>
+          <p>Access the complete directory of 100 practical plain-English prompt specifications on GitHub:</p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="btn-github">Browse 100 Common Sense Markdown Files on GitHub &rarr;</a></p>
         `
       }
     };
 
-    function loadDoc(key) {
+    let activeDocKey = 'overview';
+    let activeModel = 'claude';
+
+    function loadDoc(key, ev) {
+      activeDocKey = key;
       const data = docs[key] || docs.overview;
+
       document.getElementById('docBreadcrumb').innerText = data.breadcrumb;
       document.getElementById('docHeading').innerText = data.heading;
       document.getElementById('docDescription').innerText = data.description;
@@ -1039,16 +1334,63 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
 
       // Update sidebar active link
       document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-      const activeItem = event && event.target ? event.target.closest('.nav-item') : null;
-      if (activeItem) activeItem.classList.add('active');
+      if (ev && ev.target) {
+        const item = ev.target.closest('.nav-item');
+        if (item) item.classList.add('active');
+      }
 
-      updateCommunityData();
+      // Render Dynamic Table of Contents on the right
+      renderToc(data.toc || []);
+
+      if (key === 'overview') {
+        updateCommunityData();
+      }
+
       window.scrollTo(0, 0);
     }
 
-    function switchModel(model) {
-      document.querySelectorAll('.model-tab-btn').forEach(btn => btn.classList.remove('active'));
-      if (event && event.target) event.target.classList.add('active');
+    function renderToc(items) {
+      const list = document.getElementById('tocList');
+      if (!list) return;
+      if (items.length === 0) {
+        list.innerHTML = `<li><span class="toc-link" style="color: var(--text-muted);">No section headers</span></li>`;
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <li><a onclick="scrollToSection('${item.id}')" class="toc-link">${item.title}</a></li>
+      `).join('');
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function switchModelTab(model) {
+      activeModel = model;
+      document.getElementById('tabBtnClaude').classList.toggle('active', model === 'claude');
+      document.getElementById('tabBtnGemini').classList.toggle('active', model === 'gemini');
+      document.getElementById('tabBtnGpt').classList.toggle('active', model === 'gpt');
+
+      // Update all visible app card links to highlight selected model
+      const cards = document.querySelectorAll('.app-file-card');
+      cards.forEach(card => {
+        const links = card.querySelectorAll('.file-link-btn');
+        links.forEach(l => {
+          if (l.innerText.startsWith(model)) {
+            l.style.background = 'var(--text-link)';
+            l.style.color = '#ffffff';
+            l.style.borderColor = 'var(--text-link)';
+          } else {
+            l.style.background = 'var(--bg-app)';
+            l.style.color = 'var(--text-link)';
+            l.style.borderColor = 'var(--border-strong)';
+          }
+        });
+      });
     }
 
     function filterNav() {
@@ -1059,7 +1401,108 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
       });
     }
 
-    // Initialize document and start 1-hour star update interval
+    // Community Stats Auto-Fetcher
+    let currentRepoData = null;
+    let currentStargazers = [];
+
+    function updateCommunityData() {
+      const CACHE_KEY = 'major_ai_repo_cache';
+      const TIMESTAMP_KEY = 'major_ai_repo_timestamp';
+      const ONE_HOUR_MS = 60 * 60 * 1000;
+      const now = Date.now();
+
+      const cached = localStorage.getItem(CACHE_KEY);
+      const cachedTime = localStorage.getItem(TIMESTAMP_KEY);
+
+      if (cached && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
+        try {
+          const parsed = JSON.parse(cached);
+          currentRepoData = parsed.repo;
+          currentStargazers = parsed.stargazers || [];
+          renderDashboard();
+          return;
+        } catch (e) {}
+      }
+
+      Promise.all([
+        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills').then(r => r.json()),
+        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills/stargazers', {
+          headers: { 'Accept': 'application/vnd.github.v3.star+json' }
+        }).then(r => r.json()).catch(() => [])
+      ]).then(([repo, stargazers]) => {
+        if (repo && typeof repo.stargazers_count === 'number') {
+          currentRepoData = repo;
+          currentStargazers = Array.isArray(stargazers) ? stargazers : [];
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ repo, stargazers: currentStargazers }));
+          localStorage.setItem(TIMESTAMP_KEY, now.toString());
+          renderDashboard();
+        }
+      }).catch(() => {
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          currentRepoData = parsed.repo;
+          renderDashboard();
+        }
+      });
+    }
+
+    function renderDashboard() {
+      if (!currentRepoData) return;
+
+      const stars = currentRepoData.stargazers_count || 0;
+      const forks = currentRepoData.forks_count || 0;
+      const watchers = currentRepoData.watchers_count || 0;
+
+      const starEl = document.getElementById('starCount');
+      if (starEl) starEl.innerText = stars;
+
+      const mStars = document.getElementById('metricStars');
+      if (mStars) mStars.innerText = stars;
+      const mForks = document.getElementById('metricForks');
+      if (mForks) mForks.innerText = forks;
+      const mWatchers = document.getElementById('metricWatchers');
+      if (mWatchers) mWatchers.innerText = watchers;
+
+      const avatarContainer = document.getElementById('stargazersAvatars');
+      if (avatarContainer && currentStargazers.length > 0) {
+        avatarContainer.innerHTML = currentStargazers.slice(0, 10).map(s => {
+          const u = s.user || s;
+          return `<a href="${u.html_url}" target="_blank" title="${u.login}"><img class="stargazer-avatar" src="${u.avatar_url}" alt="${u.login}" /></a>`;
+        }).join('');
+      }
+
+      drawLiveChart();
+    }
+
+    function drawLiveChart() {
+      const svg = document.getElementById('liveGrowthSvg');
+      if (!svg || !currentRepoData) return;
+
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const lineColor = isDark ? '#58a6ff' : '#0366d6';
+      const gridColor = isDark ? '#21262d' : '#eaecef';
+      const textColor = isDark ? '#8b949e' : '#586069';
+
+      const stars = Math.max(currentRepoData.stargazers_count || 1, 1);
+
+      svg.innerHTML = `
+        <line x1="40" y1="30" x2="720" y2="30" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="85" x2="720" y2="85" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="130" x2="720" y2="130" stroke="${gridColor}" />
+
+        <text x="35" y="34" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">${stars}★</text>
+        <text x="35" y="134" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">0★</text>
+        <text x="40" y="152" font-size="11" fill="${textColor}" font-family="sans-serif">Repository Launch</text>
+        <text x="720" y="152" font-size="11" fill="${textColor}" text-anchor="end" font-family="sans-serif">Current (${stars} Star${stars === 1 ? '' : 's'})</text>
+
+        <polygon points="40,130 720,30 720,130 40,130" fill="${lineColor}" opacity="0.12" />
+        <line x1="40" y1="130" x2="720" y2="30" stroke="${lineColor}" stroke-width="3" stroke-linecap="round" />
+        <circle cx="720" cy="30" r="5" fill="${lineColor}" stroke="${isDark ? '#0d1117' : '#ffffff'}" stroke-width="2" />
+        <circle cx="40" cy="130" r="4" fill="${lineColor}" />
+      `;
+    }
+
+    // Initialize document
     loadDoc('overview');
     setInterval(updateCommunityData, 60 * 60 * 1000);
   </script>
