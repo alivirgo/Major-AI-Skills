@@ -1,0 +1,10 @@
+theme: jekyll-theme-cayman
+title: "Major AI Skills"
+description: "Curated collection of 425+ production AI skills, prompt engineering specs, and token optimization blueprints for Claude, ChatGPT, Gemini, and local LLMs."
+show_downloads: true
+url: "https://alivirgo.github.io"
+baseurl: "/Major-AI-Skills"
+markdown: kramdown
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
