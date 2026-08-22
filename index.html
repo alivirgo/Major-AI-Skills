@@ -3,75 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Major AI Skills — Technical Specifications & System Prompts</title>
-  <meta name="description" content="An open technical registry of 425+ specialized AI skills, system prompt specifications, and context efficiency rules across 75 software applications.">
-  <meta name="keywords" content="AI skills, system prompts, prompt engineering, context optimization, Claude, ChatGPT, Gemini, developer tools, CAD automation, video editing scripts">
+  <title>Major AI Skills Documentation</title>
+  <meta name="description" content="Technical documentation and engineering reference for 425+ software automation skills and prompt specifications.">
   <meta name="author" content="Ali Virgo">
   <link rel="canonical" href="https://alivirgo.github.io/Major-AI-Skills/">
 
-  <!-- Open Graph / Meta -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://alivirgo.github.io/Major-AI-Skills/">
-  <meta property="og:title" content="Major AI Skills — Technical Specifications & System Prompts">
-  <meta property="og:description" content="Open-source repository of 425+ engineering specifications and system prompt blueprints across 75 software suites.">
-  <meta property="og:image" content="https://alivirgo.github.io/Major-AI-Skills/og-preview.png">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://alivirgo.github.io/Major-AI-Skills/">
-  <meta name="twitter:title" content="Major AI Skills — Technical Specifications & System Prompts">
-  <meta name="twitter:description" content="Open-source repository of 425+ engineering specifications and system prompt blueprints across 75 software suites.">
-
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",
-    "name": "Major AI Skills",
-    "description": "Technical repository of 425+ specialized AI skill specifications, system prompt blueprints, and context optimization rules.",
-    "codeRepository": "https://github.com/alivirgo/Major-AI-Skills",
-    "author": {
-      "@type": "Person",
-      "name": "Ali Virgo",
-      "url": "https://github.com/alivirgo"
-    },
-    "programmingLanguage": ["Python", "C#", "C++", "PowerShell", "AutoHotkey v2", "Structured Text", "MATLAB"]
-  }
-  </script>
-
-  <!-- Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-canvas: #0d1117;
-      --bg-surface: #161b22;
-      --bg-surface-hover: #1f242c;
-      --bg-subtle: #21262d;
-      --border-default: #30363d;
-      --border-muted: #21262d;
-      --text-primary: #c9d1d9;
+      --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-code: 'IBM Plex Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      
+      --bg-app: #ffffff;
+      --bg-sidebar: #f6f8fa;
+      --bg-card: #ffffff;
+      --bg-code: #f6f8fa;
+      --bg-active: #e1e4e8;
+      --bg-hover: #eaecef;
+      
+      --text-main: #24292e;
+      --text-heading: #1b1f23;
+      --text-muted: #586069;
+      --text-link: #0366d6;
+      
+      --border-color: #e1e4e8;
+      --border-strong: #d1d5da;
+      
+      --sidebar-width: 290px;
+      --toc-width: 220px;
+      --header-height: 56px;
+    }
+
+    [data-theme="dark"] {
+      --bg-app: #0d1117;
+      --bg-sidebar: #161b22;
+      --bg-card: #0d1117;
+      --bg-code: #161b22;
+      --bg-active: #21262d;
+      --bg-hover: #30363d;
+      
+      --text-main: #c9d1d9;
       --text-heading: #f0f6fc;
       --text-muted: #8b949e;
-      --text-faint: #484f58;
-      --brand-blue: #58a6ff;
-      --brand-blue-hover: #79b8ff;
-      --tag-green-bg: rgba(46, 160, 67, 0.15);
-      --tag-green-border: rgba(46, 160, 67, 0.4);
-      --tag-green-text: #3fb950;
-      --tag-orange-bg: rgba(219, 109, 40, 0.15);
-      --tag-orange-border: rgba(219, 109, 40, 0.4);
-      --tag-orange-text: #f0883e;
-      --tag-blue-bg: rgba(56, 139, 253, 0.15);
-      --tag-blue-border: rgba(56, 139, 253, 0.4);
-      --tag-blue-text: #58a6ff;
-      --tag-purple-bg: rgba(187, 128, 255, 0.15);
-      --tag-purple-border: rgba(187, 128, 255, 0.4);
-      --tag-purple-text: #bc8cff;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      --text-link: #58a6ff;
+      
+      --border-color: #30363d;
+      --border-strong: #484f58;
     }
 
     * {
@@ -81,1158 +61,770 @@
     }
 
     body {
-      font-family: var(--font-sans);
-      background-color: var(--bg-canvas);
-      color: var(--text-primary);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--font-body);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 15px;
     }
 
-    a {
-      color: var(--brand-blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Top Navigation Bar */
+    /* Header */
     header {
-      background-color: var(--bg-surface);
-      border-bottom: 1px solid var(--border-default);
-      position: sticky;
+      height: var(--header-height);
+      background-color: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      position: fixed;
       top: 0;
-      z-index: 100;
-    }
-
-    .header-nav {
+      left: 0;
+      right: 0;
+      z-index: 1000;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      height: 64px;
+      padding: 0 20px;
     }
 
-    .brand-link {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-heading);
-      font-weight: 600;
-      font-size: 1rem;
+      gap: 16px;
     }
 
-    .brand-icon {
-      width: 28px;
-      height: 28px;
-      background: #21262d;
-      border: 1px solid var(--border-default);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--brand-blue);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
+    .site-title {
+      font-size: 15px;
       font-weight: 700;
-    }
-
-    .nav-actions {
+      color: var(--text-heading);
+      text-decoration: none;
       display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-outline {
-      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
-      font-size: 0.8125rem;
+    }
+
+    .version-badge {
+      font-family: var(--font-code);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 6px;
+      background: var(--bg-active);
+      color: var(--text-muted);
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--text-heading);
-      background-color: var(--bg-subtle);
-      border: 1px solid var(--border-default);
-      border-radius: 6px;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      background: var(--bg-app);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
       text-decoration: none;
     }
 
-    .btn-outline:hover {
-      background-color: #30363d;
-      border-color: #8b949e;
-      text-decoration: none;
+    .btn-github:hover {
+      background: var(--bg-hover);
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 56px 0 40px;
-      border-bottom: 1px solid var(--border-muted);
-    }
-
-    .hero-pretitle {
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      color: var(--brand-blue);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .hero-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--text-heading);
-      line-height: 1.2;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-subtitle {
-      font-size: 1.125rem;
+    .theme-toggle {
+      background: var(--bg-app);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 13px;
       color: var(--text-muted);
-      max-width: 820px;
-      margin-bottom: 28px;
-      line-height: 1.6;
+      font-family: var(--font-body);
     }
 
-    /* Quick Install / Clone Box */
-    .terminal-box {
+    /* Layout Structure */
+    .app-layout {
+      display: flex;
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Left Sidebar Navigation */
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: var(--header-height);
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      padding: 16px 0;
+      z-index: 500;
+    }
+
+    .sidebar-search {
+      padding: 0 16px 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 12px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-family: var(--font-body);
+      background: var(--bg-app);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--text-link);
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 10px 16px 4px;
+    }
+
+    .nav-list {
+      list-style: none;
+      margin-bottom: 12px;
+    }
+
+    .nav-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-default);
-      border-radius: 8px;
-      padding: 12px 18px;
-      max-width: 680px;
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      color: #7ee787;
-      margin-bottom: 36px;
-    }
-
-    .terminal-code {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow-x: auto;
-    }
-
-    .terminal-prompt {
-      color: var(--text-faint);
+      padding: 6px 16px;
+      font-size: 13.5px;
+      color: var(--text-main);
+      text-decoration: none;
+      cursor: pointer;
+      border-left: 3px solid transparent;
       user-select: none;
     }
 
-    .copy-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-family: var(--font-sans);
-      transition: color 0.15s ease;
-    }
-
-    .copy-btn:hover {
+    .nav-item:hover {
+      background-color: var(--bg-hover);
       color: var(--text-heading);
-      background: var(--bg-subtle);
     }
 
-    /* Stats Banner */
-    .stats-bar {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
+    .nav-item.active {
+      background-color: var(--bg-active);
+      color: var(--text-link);
+      font-weight: 600;
+      border-left-color: var(--text-link);
     }
 
-    .stat-block {
-      display: flex;
-      flex-direction: column;
+    .nav-badge {
+      font-size: 11px;
+      font-family: var(--font-code);
+      color: var(--text-muted);
     }
 
-    .stat-val {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
+    /* Main Content Area */
+    .content-area {
+      margin-left: var(--sidebar-width);
+      margin-right: var(--toc-width);
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 960px;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-family: var(--font-code);
+    }
+
+    .breadcrumb a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .doc-title {
+      font-size: 32px;
       font-weight: 700;
       color: var(--text-heading);
+      line-height: 1.25;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
     }
 
-    .stat-desc {
-      font-size: 0.8125rem;
+    .doc-lead {
+      font-size: 16px;
       color: var(--text-muted);
+      margin-bottom: 28px;
     }
 
-    /* Search & Filter Toolbar */
-    .toolbar-section {
-      padding: 32px 0 20px;
-    }
-
-    .search-row {
+    /* Model Selection Tabs */
+    .model-tabs {
       display: flex;
-      gap: 16px;
+      border-bottom: 1px solid var(--border-color);
       margin-bottom: 24px;
-      flex-wrap: wrap;
+      gap: 4px;
     }
 
-    .search-field {
-      flex: 1;
-      min-width: 280px;
-      position: relative;
-    }
-
-    .search-field input {
-      width: 100%;
-      height: 44px;
-      padding: 0 16px 0 42px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-default);
-      border-radius: 6px;
-      color: var(--text-heading);
-      font-size: 0.9375rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    .search-field input:focus {
-      border-color: var(--brand-blue);
-      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
-    }
-
-    .search-icon-svg {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    .kbd-shortcut {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-default);
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* Filter Tabs */
-    .filter-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-muted);
-    }
-
-    .filter-tab {
+    .model-tab-btn {
       padding: 8px 16px;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 13.5px;
+      font-weight: 600;
       color: var(--text-muted);
       background: transparent;
       border: 1px solid transparent;
-      border-radius: 6px;
+      border-bottom: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
       cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s ease;
+      font-family: var(--font-body);
     }
 
-    .filter-tab:hover {
+    .model-tab-btn:hover {
       color: var(--text-heading);
-      background: var(--bg-surface);
+      background: var(--bg-hover);
     }
 
-    .filter-tab.active {
+    .model-tab-btn.active {
       color: var(--text-heading);
-      background: var(--bg-surface);
-      border-color: var(--border-default);
+      background: var(--bg-app);
+      border-color: var(--border-color);
+      margin-bottom: -1px;
+      border-bottom: 1px solid var(--bg-app);
     }
 
-    /* Main Grid Layout */
-    .content-section {
-      padding: 24px 0 64px;
+    /* Prose Sections */
+    h2.section-heading {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin: 36px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .results-count {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
+    h3.sub-heading {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin: 24px 0 10px;
+    }
+
+    p {
       margin-bottom: 16px;
-      font-family: var(--font-mono);
+      color: var(--text-main);
     }
 
-    .directory-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 20px;
+    ul, ol {
+      margin: 0 0 16px 24px;
     }
 
-    /* Card Component */
-    .skill-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-default);
-      border-radius: 8px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.15s ease, background-color 0.15s ease;
+    li {
+      margin-bottom: 6px;
     }
 
-    .skill-card:hover {
-      border-color: #8b949e;
-      background: var(--bg-surface-hover);
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
-    }
-
-    .card-title-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-domain-badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: var(--bg-subtle);
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid var(--border-default);
-    }
-
-    .card-heading {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text-heading);
-    }
-
-    .card-description {
-      font-size: 0.875rem;
-      color: var(--text-muted);
+    /* Code Blocks */
+    pre {
+      background-color: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: var(--font-code);
+      font-size: 13px;
       line-height: 1.5;
-      margin-bottom: 16px;
-      flex-grow: 1;
-    }
-
-    .app-tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-
-    .app-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      background: var(--bg-canvas);
-      border: 1px solid var(--border-default);
-      border-radius: 4px;
-      color: var(--text-primary);
-    }
-
-    .card-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-muted);
-      font-size: 0.8125rem;
-    }
-
-    .model-pills {
-      display: flex;
-      gap: 6px;
-    }
-
-    .model-pill {
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      border: 1px solid;
-    }
-
-    .pill-claude {
-      background: var(--tag-orange-bg);
-      border-color: var(--tag-orange-border);
-      color: var(--tag-orange-text);
-    }
-
-    .pill-gemini {
-      background: var(--tag-blue-bg);
-      border-color: var(--tag-blue-border);
-      color: var(--tag-blue-text);
-    }
-
-    .pill-gpt {
-      background: var(--tag-green-bg);
-      border-color: var(--tag-green-border);
-      color: var(--tag-green-text);
-    }
-
-    .card-direct-link {
-      color: var(--brand-blue);
-      font-weight: 500;
-      font-size: 0.8125rem;
-    }
-
-    .card-direct-link:hover {
-      color: var(--brand-blue-hover);
-    }
-
-    /* Hub Modules Section */
-    .hubs-section {
-      padding: 0 0 64px;
-    }
-
-    .section-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--text-heading);
       margin-bottom: 20px;
-      letter-spacing: -0.01em;
     }
 
-    .hubs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-      gap: 24px;
+    code {
+      font-family: var(--font-code);
+      font-size: 85%;
+      padding: 0.2em 0.4em;
+      background-color: var(--bg-active);
+      border-radius: 3px;
     }
 
-    .hub-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-default);
-      border-radius: 8px;
-      padding: 28px;
+    pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
     }
 
-    .hub-box h3 {
-      font-size: 1.15rem;
+    /* Callout Boxes */
+    .callout {
+      padding: 14px 18px;
+      background-color: var(--bg-sidebar);
+      border-left: 4px solid var(--text-link);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .callout-title {
       font-weight: 600;
       color: var(--text-heading);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
-    .hub-box p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-      line-height: 1.5;
-    }
-
-    .spec-table {
+    /* Data Tables */
+    table.doc-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8125rem;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
     }
 
-    .spec-table th, .spec-table td {
-      padding: 8px 12px;
+    table.doc-table th, table.doc-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
       text-align: left;
-      border-bottom: 1px solid var(--border-muted);
     }
 
-    .spec-table th {
-      color: var(--text-faint);
-      font-family: var(--font-mono);
+    table.doc-table th {
+      background-color: var(--bg-sidebar);
       font-weight: 600;
-    }
-
-    .spec-table td {
-      color: var(--text-primary);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-default);
-      background-color: var(--bg-surface);
-      padding: 40px 0;
-      color: var(--text-muted);
-      font-size: 0.8125rem;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-    }
-
-    .footer-links a:hover {
       color: var(--text-heading);
+    }
+
+    table.doc-table tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+
+    /* Right Sidebar Table of Contents */
+    .toc-sidebar {
+      width: var(--toc-width);
+      position: fixed;
+      top: var(--header-height);
+      right: 0;
+      bottom: 0;
+      padding: 32px 20px 20px;
+      overflow-y: auto;
+    }
+
+    .toc-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 4px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      line-height: 1.4;
+    }
+
+    .toc-link:hover {
+      color: var(--text-link);
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .toc-sidebar { display: none; }
+      .content-area { margin-right: 0; }
     }
 
     @media (max-width: 768px) {
-      .hero-title { font-size: 1.85rem; }
-      .directory-grid { grid-template-columns: 1fr; }
-      .hubs-grid { grid-template-columns: 1fr; }
-      .terminal-box { font-size: 0.8rem; }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .content-area { margin-left: 0; padding: 24px 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Top Header -->
   <header>
-    <div class="container header-nav">
-      <a href="#" class="brand-link">
-        <div class="brand-icon">/</div>
+    <div class="header-left">
+      <a href="#" class="site-title">
         <span>Major AI Skills</span>
+        <span class="version-badge">v1.0.0</span>
       </a>
-      <div class="nav-actions">
-        <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          alivirgo/Major-AI-Skills
-        </a>
-      </div>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">Theme: Dark</button>
+      <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        GitHub
+      </a>
     </div>
   </header>
 
-  <!-- Hero -->
-  <div class="hero">
-    <div class="container">
-      <div class="hero-pretitle">Open Engineering Registry</div>
-      <h1 class="hero-title">Technical specifications and prompt blueprints for 75 professional applications.</h1>
-      <p class="hero-subtitle">A curated open-source index of 425+ modular AI skills, token optimization rules, and software automation scripts tailored for Claude Code, ChatGPT, Gemini, and local LLM agents.</p>
-
-      <!-- Terminal Clone Widget -->
-      <div class="terminal-box">
-        <div class="terminal-code">
-          <span class="terminal-prompt">$</span>
-          <span id="cloneCmd">git clone https://github.com/alivirgo/Major-AI-Skills.git</span>
-        </div>
-        <button class="copy-btn" id="copyBtn" onclick="copyClone()">Copy</button>
+  <!-- App Layout -->
+  <div class="app-layout">
+    
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-search">
+        <input type="text" id="docSearch" class="search-input" placeholder="Search documentation..." oninput="filterNav()">
       </div>
 
-      <!-- Stats Bar -->
-      <div class="stats-bar">
-        <div class="stat-block">
-          <span class="stat-val">425+</span>
-          <span class="stat-desc">Production Skill Specs</span>
-        </div>
-        <div class="stat-block">
-          <span class="stat-val">75</span>
-          <span class="stat-desc">Software Suites</span>
-        </div>
-        <div class="stat-block">
-          <span class="stat-val">17</span>
-          <span class="stat-desc">Domain Categories</span>
-        </div>
-        <div class="stat-block">
-          <span class="stat-val">MIT</span>
-          <span class="stat-desc">Open Source License</span>
-        </div>
+      <div class="nav-section-title">Getting Started</div>
+      <ul class="nav-list">
+        <li><a class="nav-item active" onclick="loadDoc('overview')"><span>Overview & Architecture</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('usage')"><span>Installation & Integration</span></a></li>
+      </ul>
+
+      <div class="nav-section-title">Application Domains (75 Apps)</div>
+      <ul class="nav-list" id="appsNavList">
+        <li><a class="nav-item" onclick="loadDoc('cad')"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('video-editing')"><span>Video Editing & NLE</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('3d')"><span>3D Animation & VFX</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('windows')"><span>Windows Utilities & Kernel</span> <span class="nav-badge">10</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('macos')"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('cross-platform')"><span>Cross-Platform Infrastructure</span> <span class="nav-badge">9</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('plc-industrial')"><span>PLC & Industrial Automation</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('scientific')"><span>Scientific & Simulation</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('music')"><span>Music Production & DAWs</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('eda')"><span>Electronic Design (EDA)</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('erp')"><span>Enterprise ERP & PLM</span> <span class="nav-badge">6</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('digital-forensics')"><span>Digital Forensics & IR</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('gis')"><span>GIS & Medical Imaging</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('game-engines')"><span>Game Engines & Runtimes</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('network')"><span>Network SDN Controllers</span> <span class="nav-badge">1</span></a></li>
+      </ul>
+
+      <div class="nav-section-title">Reference Handbooks</div>
+      <ul class="nav-list">
+        <li><a class="nav-item" onclick="loadDoc('efficiency')"><span>Token & Cost Efficiency</span> <span class="nav-badge">100</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('commonsense')"><span>Prompt Engineering Handbook</span> <span class="nav-badge">100</span></a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Content Reader -->
+    <main class="content-area" id="docContent">
+      <div class="breadcrumb" id="docBreadcrumb">Docs / Getting Started / Overview</div>
+      <h1 class="doc-title" id="docHeading">Major AI Skills Technical Documentation</h1>
+      <p class="doc-lead" id="docDescription">A curated repository of 425+ production-grade AI skills, prompt engineering specifications, and token optimization blueprints across 75 software applications and 17 domain categories.</p>
+
+      <!-- Model Switcher Tabs (Shown for application specs) -->
+      <div class="model-tabs" id="modelTabContainer">
+        <button class="model-tab-btn active" onclick="switchModel('claude')">Claude Specification</button>
+        <button class="model-tab-btn" onclick="switchModel('gemini')">Gemini Specification</button>
+        <button class="model-tab-btn" onclick="switchModel('gpt')">GPT & Codex Specification</button>
       </div>
-    </div>
+
+      <div id="dynamicBody">
+        <h2 class="section-heading" id="sec-about">1. About This Repository</h2>
+        <p>This repository provides deterministic, production-grade technical blueprints for AI models (Claude, ChatGPT, Gemini, Codex, and local LLMs) to accurately automate, script, and troubleshoot professional software applications without boilerplate or hallucinations.</p>
+        
+        <div class="callout">
+          <div class="callout-title">Architecture Philosophy</div>
+          <p>Every file is handcrafted with complete code recipes (Python, C#, C++, PowerShell, AutoHotkey v2, IEC 61131-3 Structured Text, MATLAB), real-world troubleshooting matrices, and strict agent operational directives.</p>
+        </div>
+
+        <h2 class="section-heading" id="sec-structure">2. Repository Directory Structure</h2>
+        <pre><code>Major AI Skills/
+├── skills/                      # 225 Application Skill Guides (75 Apps x 3 Models across 17 Categories)
+│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
+│   ├── video-editing/           # DaVinci Resolve, Final Cut Pro, VEGAS Pro
+│   ├── 3d/                      # Houdini, Cinema 4D, ZBrush, Substance 3D
+│   ├── windows/                 # AutoHotkey v2, Everything, PowerToys, System Informer, etc.
+│   ├── macos/                   # Raycast, Shottr, OrbStack, MacWhisper, Rectangle, etc.
+│   ├── cross-platform/          # FFmpeg, Wireshark, Nginx, Tailscale, Rclone, Bruno
+│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, CODESYS
+│   ├── scientific/              # MATLAB, COMSOL, LabVIEW, OriginPro
+│   └── music/                   # Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools
+├── efficiency ai skills/        # 100 Token Optimization & Context Pruning Rules
+└── common sense ai skills/     # 100 Factual Grounding & Everyday AI Habits</code></pre>
+
+        <h2 class="section-heading" id="sec-quickstart">3. Command Line Integration</h2>
+        <p>You can clone and ingest the skill definitions directly into your local development environment:</p>
+        <pre><code># Clone the complete repository
+git clone https://github.com/alivirgo/Major-AI-Skills.git
+
+# Ingest specific application skill into Claude Code CLI or Cursor rules
+cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules</code></pre>
+
+        <h2 class="section-heading" id="sec-matrix">4. Application Coverage Matrix</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Domain Category</th>
+              <th>Primary Software Applications</th>
+              <th>Supported Interfaces</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CAD & Mechanical</td>
+              <td>SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino</td>
+              <td>COM API, C# VSTA, Python, Open C/C++</td>
+            </tr>
+            <tr>
+              <td>Video & NLE Post</td>
+              <td>DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro</td>
+              <td>Python API, Fusion VFX, FCPXML, C# ScriptPortal</td>
+            </tr>
+            <tr>
+              <td>Systems & Kernel</td>
+              <td>Everything, System Informer, PowerToys, AHK v2</td>
+              <td>C-SDK ctypes, Win32 NTDLL, WASAPI, C# IPlugin</td>
+            </tr>
+            <tr>
+              <td>Industrial & PLC</td>
+              <td>Siemens TIA Portal, Rockwell Studio 5000, CODESYS</td>
+              <td>TIA Openness, CIP Pycomm3, IEC 61131-3 ST</td>
+            </tr>
+            <tr>
+              <td>Scientific Computing</td>
+              <td>MATLAB, COMSOL Multiphysics, LabVIEW, OriginPro</td>
+              <td>MEX C++, mph Python, DAQmx, PyOrigin</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Right Table of Contents Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list" id="tocList">
+        <li><a href="#sec-about" class="toc-link">1. About This Repository</a></li>
+        <li><a href="#sec-structure" class="toc-link">2. Directory Structure</a></li>
+        <li><a href="#sec-quickstart" class="toc-link">3. Quickstart & Usage</a></li>
+        <li><a href="#sec-matrix" class="toc-link">4. Coverage Matrix</a></li>
+      </ul>
+    </aside>
+
   </div>
 
-  <!-- Search and Directory Filter -->
-  <div class="toolbar-section">
-    <div class="container">
-      <div class="search-row">
-        <div class="search-field">
-          <svg class="search-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="filterInput" placeholder="Filter by application (e.g. SolidWorks, DaVinci, FFmpeg, MATLAB)...">
-          <span class="kbd-shortcut">/</span>
-        </div>
-      </div>
+  <script>
+    // Theme Management
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.getElementById('themeToggle').innerText = `Theme: ${next === 'dark' ? 'Dark' : 'Light'}`;
+      localStorage.setItem('theme', next);
+    }
 
-      <div class="filter-tabs">
-        <button class="filter-tab active" data-filter="all">All Domains (17)</button>
-        <button class="filter-tab" data-filter="cad">CAD & 3D (9)</button>
-        <button class="filter-tab" data-filter="media">Video & Audio (8)</button>
-        <button class="filter-tab" data-filter="systems">Windows & Mac (19)</button>
-        <button class="filter-tab" data-filter="industrial">PLC & Industrial (3)</button>
-        <button class="filter-tab" data-filter="science">Scientific & EDA (8)</button>
-        <button class="filter-tab" data-filter="enterprise">ERP & Forensics (9)</button>
-      </div>
-    </div>
-  </div>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeToggle').innerText = `Theme: ${savedTheme === 'dark' ? 'Dark' : 'Light'}`;
 
-  <!-- Main Directory Grid -->
-  <div class="content-section">
-    <div class="container">
-      <div class="results-count" id="resultsCount">Showing 17 domain categories (75 applications)</div>
-      
-      <div class="directory-grid" id="directoryGrid">
+    // Documentation Dynamic Database
+    const docs = {
+      overview: {
+        breadcrumb: 'Docs / Getting Started / Overview',
+        heading: 'Major AI Skills Technical Documentation',
+        description: 'A curated repository of 425+ production-grade AI skills, prompt engineering specifications, and token optimization blueprints across 75 software applications.',
+        hasModels: false,
+        body: `
+          <h2 class="section-heading" id="sec-about">1. About This Repository</h2>
+          <p>This repository provides deterministic, production-grade technical blueprints for AI models (Claude, ChatGPT, Gemini, Codex, and local LLMs) to accurately automate, script, and troubleshoot professional software applications without boilerplate or hallucinations.</p>
+          <div class="callout">
+            <div class="callout-title">Architecture Philosophy</div>
+            <p>Every file is handcrafted with complete code recipes (Python, C#, C++, PowerShell, AutoHotkey v2, IEC 61131-3 Structured Text, MATLAB), real-world troubleshooting matrices, and strict agent operational directives.</p>
+          </div>
+          <h2 class="section-heading" id="sec-structure">2. Repository Directory Structure</h2>
+          <pre><code>Major AI Skills/
+├── skills/                      # 225 Application Skill Guides (75 Apps x 3 Models across 17 Categories)
+│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
+│   ├── video-editing/           # DaVinci Resolve, Final Cut Pro, VEGAS Pro
+│   ├── 3d/                      # Houdini, Cinema 4D, ZBrush, Substance 3D
+│   ├── windows/                 # AutoHotkey v2, Everything, PowerToys, System Informer, etc.
+│   ├── macos/                   # Raycast, Shottr, OrbStack, MacWhisper, Rectangle, etc.
+│   ├── cross-platform/          # FFmpeg, Wireshark, Nginx, Tailscale, Rclone, Bruno
+│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, CODESYS
+│   ├── scientific/              # MATLAB, COMSOL, LabVIEW, OriginPro
+│   └── music/                   # Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools
+├── efficiency ai skills/        # 100 Token Optimization & Context Pruning Rules
+└── common sense ai skills/     # 100 Factual Grounding & Everyday AI Habits</code></pre>
+        `
+      },
+      windows: {
+        breadcrumb: 'Docs / Applications / Windows Utilities & Kernel',
+        heading: 'Windows Utilities & Kernel Systems (10 Applications)',
+        description: 'Low-level Win32 NTDLL diagnostics, NTFS MFT search engines, WASAPI per-application audio, AutoHotkey v2 window management, and application isolation sandboxes.',
+        hasModels: true,
+        body: `
+          <h2 class="section-heading" id="sec-apps">Covered Applications</h2>
+          <p>This category includes in-depth guides for 10 premier Windows power-user utilities:</p>
+          <ul>
+            <li><strong>Everything (voidtools)</strong>: Real-time NTFS MFT / USN Change Journal IPC client and <code>Everything64.dll</code> C-SDK.</li>
+            <li><strong>System Informer (Process Hacker)</strong>: NTDLL Process Basic Information, PEB command-line extraction, and <code>KSystemInformer.sys</code> kernel driver.</li>
+            <li><strong>WizTree</strong>: Direct physical volume MFT binary parsing, Cushion Treemap layouts, and headless CSV storage auditing.</li>
+            <li><strong>AutoHotkey v2</strong>: Strict v2 expression syntax, Win32 <code>DllCall</code> memory telemetry, and UIPI elevation handling.</li>
+            <li><strong>EarTrumpet</strong>: Windows Core Audio (WASAPI) session enumeration, per-process peak meters, and endpoint redirection.</li>
+            <li><strong>Sandboxie-Plus</strong>: Kernel filesystem virtualization (<code>SbieDrv.sys</code>), <code>Sandboxie.ini</code> security policies, and disposable test runners.</li>
+            <li><strong>Scoop</strong>: User-space package manager, Git bucket manifests, Aria2 download acceleration, and shims management.</li>
+            <li><strong>ShareX</strong>: Screen capture engine, DirectShow audio recording, and Custom Uploader REST profiles (<code>.sxcu</code>).</li>
+            <li><strong>PowerToys</strong>: FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (<code>IPlugin</code>), and Awake power management.</li>
+            <li><strong>Flow Launcher</strong>: Python JSON-RPC stdin/stdout plugins, C# <code>IPlugin</code> interfaces, and Everything search integration.</li>
+          </ul>
+          <h2 class="section-heading" id="sec-code">Sample Win32 Implementation (Everything C-SDK Python)</h2>
+          <pre><code>import ctypes
+from ctypes import wintypes
 
-        <!-- CAD -->
-        <div class="skill-card" data-domain="cad" data-keywords="solidworks catia nx siemens fusion rhino parametric mechanical 3d nurbs step iges">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">cad/</span>
-              <h2 class="card-heading">CAD & Parametric Modeling</h2>
-            </div>
-          </div>
-          <p class="card-description">Mechanical part modeling, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">SolidWorks</span>
-            <span class="app-tag">CATIA</span>
-            <span class="app-tag">Siemens NX</span>
-            <span class="app-tag">Fusion 360</span>
-            <span class="app-tag">Rhino 3D</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cad" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
+everything = ctypes.WinDLL("Everything64.dll")
+everything.Everything_SetSearchW.argtypes = [wintypes.LPCWSTR]
+everything.Everything_QueryW.argtypes = [wintypes.BOOL]
+everything.Everything_QueryW.restype = wintypes.BOOL
 
-        <!-- Video Editing -->
-        <div class="skill-card" data-domain="media" data-keywords="davinci resolve final cut pro vegas video editing post production timeline fcpxml edl render">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">video-editing/</span>
-              <h2 class="card-heading">Video Editing & Post-Production</h2>
-            </div>
-          </div>
-          <p class="card-description">DaVinci Resolve scripting API, Fusion VFX nodes, FCPXML v1.11 timelines, and VEGAS C# batch rendering scripts.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">DaVinci Resolve</span>
-            <span class="app-tag">Final Cut Pro</span>
-            <span class="app-tag">VEGAS Pro</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/video-editing" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- 3D Animation -->
-        <div class="skill-card" data-domain="cad" data-keywords="houdini cinema4d zbrush substance painter 3d animation vfx pbr procedural mograph">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">3d/</span>
-              <h2 class="card-heading">3D Animation & Visual Effects</h2>
-            </div>
-          </div>
-          <p class="card-description">Houdini VEX/Python geometry nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance PBR texture baking.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Houdini</span>
-            <span class="app-tag">Cinema 4D</span>
-            <span class="app-tag">ZBrush</span>
-            <span class="app-tag">Substance 3D</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/3d" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Windows Systems -->
-        <div class="skill-card" data-domain="systems" data-keywords="autohotkey powertoys everything eartrumpet system informer wiztree sandboxie scoop sharex windows win32 ntdll mft">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">windows/</span>
-              <h2 class="card-heading">Windows Utilities & Kernel Internals</h2>
-            </div>
-          </div>
-          <p class="card-description">NTDLL process diagnostics, raw MFT storage visualizers, WASAPI audio routing, AHK v2 managers, and isolation sandboxes.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">AutoHotkey v2</span>
-            <span class="app-tag">PowerToys</span>
-            <span class="app-tag">Everything</span>
-            <span class="app-tag">System Informer</span>
-            <span class="app-tag">WizTree</span>
-            <span class="app-tag">Sandboxie</span>
-            <span class="app-tag">Scoop</span>
-            <span class="app-tag">ShareX</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/windows" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- macOS Productivity -->
-        <div class="skill-card" data-domain="systems" data-keywords="raycast shottr rectangle orbstack macwhisper appcleaner velja maccy macos apple silicon swift metal">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">macos/</span>
-              <h2 class="card-heading">macOS Native Productivity</h2>
-            </div>
-          </div>
-          <p class="card-description">Raycast React extensions, Accessibility API window snapping, Apple Silicon Docker/Linux VM runtime, and CoreML transcription.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Raycast</span>
-            <span class="app-tag">OrbStack</span>
-            <span class="app-tag">MacWhisper</span>
-            <span class="app-tag">Rectangle</span>
-            <span class="app-tag">Shottr</span>
-            <span class="app-tag">Velja</span>
-            <span class="app-tag">Maccy</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/macos" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Cross-Platform Infrastructure -->
-        <div class="skill-card" data-domain="systems" data-keywords="ffmpeg wireshark nginx tailscale rclone bruno sniffnet losslesscut ventoy network packet proxy wireguard">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">cross-platform/</span>
-              <h2 class="card-heading">Cross-Platform Infrastructure</h2>
-            </div>
-          </div>
-          <p class="card-description">FFmpeg hardware encoding, Wireshark packet capture, Nginx reverse proxying, Tailscale mesh VPN, and Rclone cloud sync.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">FFmpeg</span>
-            <span class="app-tag">Wireshark</span>
-            <span class="app-tag">Nginx</span>
-            <span class="app-tag">Tailscale</span>
-            <span class="app-tag">Rclone</span>
-            <span class="app-tag">Bruno</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cross-platform" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- PLC & Industrial -->
-        <div class="skill-card" data-domain="industrial" data-keywords="siemens tia portal rockwell studio 5000 codesys plc industrial automation iec 61131 structured text opc ua scada">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">plc-industrial/</span>
-              <h2 class="card-heading">PLC & Industrial Automation</h2>
-            </div>
-          </div>
-          <p class="card-description">IEC 61131-3 Structured Text, Siemens TIA Openness, Rockwell CIP multi-tag communication, and CODESYS OPC UA controllers.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Siemens TIA</span>
-            <span class="app-tag">Studio 5000</span>
-            <span class="app-tag">CODESYS</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/plc-industrial" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Scientific Computing -->
-        <div class="skill-card" data-domain="science" data-keywords="matlab comsol labview originpro scientific computing numerical simulation fea daq physics">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">scientific/</span>
-              <h2 class="card-heading">Scientific Computing & Simulation</h2>
-            </div>
-          </div>
-          <p class="card-description">MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">MATLAB</span>
-            <span class="app-tag">COMSOL</span>
-            <span class="app-tag">LabVIEW</span>
-            <span class="app-tag">OriginPro</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/scientific" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Music & Audio -->
-        <div class="skill-card" data-domain="media" data-keywords="ableton live cubase fl studio logic pro tools audio daw midi mixing mastering dsp">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">music/</span>
-              <h2 class="card-heading">Digital Audio Workstations (DAWs)</h2>
-            </div>
-          </div>
-          <p class="card-description">Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Ableton Live</span>
-            <span class="app-tag">Cubase</span>
-            <span class="app-tag">FL Studio</span>
-            <span class="app-tag">Logic Pro</span>
-            <span class="app-tag">Pro Tools</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/music" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Electronic Design (EDA) -->
-        <div class="skill-card" data-domain="science" data-keywords="altium kicad cadence ltspice eda pcb schematic spice circuit simulation ic">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">eda/</span>
-              <h2 class="card-heading">Electronic Design Automation</h2>
-            </div>
-          </div>
-          <p class="card-description">Altium DelphiScript automation, KiCad PCB Python API, Cadence Virtuoso SKILL scripting, and LTspice raw simulation parsing.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Altium</span>
-            <span class="app-tag">KiCad</span>
-            <span class="app-tag">Cadence</span>
-            <span class="app-tag">LTspice</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/eda" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Enterprise ERP & PLM -->
-        <div class="skill-card" data-domain="enterprise" data-keywords="sap gui oracle ebs dynamics nav maximo windchill servicenow erp plm eam enterprise database">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">erp/ & enterprise/</span>
-              <h2 class="card-heading">Enterprise ERP, PLM & EAM</h2>
-            </div>
-          </div>
-          <p class="card-description">SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">SAP GUI</span>
-            <span class="app-tag">Oracle EBS</span>
-            <span class="app-tag">Dynamics NAV</span>
-            <span class="app-tag">IBM Maximo</span>
-            <span class="app-tag">Windchill</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/erp" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Digital Forensics -->
-        <div class="skill-card" data-domain="enterprise" data-keywords="autopsy encase ftk digital forensics incident response disk image evidence memory timeline">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">digital-forensics/</span>
-              <h2 class="card-heading">Digital Forensics & IR</h2>
-            </div>
-          </div>
-          <p class="card-description">Autopsy Python ingest modules, EnCase EnScript evidence processing, and FTK case database extraction pipelines.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Autopsy</span>
-            <span class="app-tag">EnCase</span>
-            <span class="app-tag">FTK</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/digital-forensics" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- GIS & Medical Imaging -->
-        <div class="skill-card" data-domain="science" data-keywords="arcgis qgis 3d slicer osirix horos gis geospatial dicom medical radiology spatial">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">gis/ & medical/</span>
-              <h2 class="card-heading">GIS & Medical DICOM Imaging</h2>
-            </div>
-          </div>
-          <p class="card-description">ArcGIS ArcPy geoprocessing, QGIS spatial algorithms, 3D Slicer volume segmentation, and OsiriX DICOM radiology workstations.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">ArcGIS Pro</span>
-            <span class="app-tag">QGIS</span>
-            <span class="app-tag">3D Slicer</span>
-            <span class="app-tag">OsiriX</span>
-            <span class="app-tag">Horos</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/gis" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Game Engines -->
-        <div class="skill-card" data-domain="cad" data-keywords="godot cryengine rpg maker game engine gdscript c++ lua interactive 3d">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">game-engines/</span>
-              <h2 class="card-heading">Game Engines & Interactive Runtimes</h2>
-            </div>
-          </div>
-          <p class="card-description">Godot GDScript 2.0 & C# bindings, CryEngine Schematyc node systems, and RPG Maker JavaScript event scripting.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Godot Engine 4</span>
-            <span class="app-tag">CryEngine 5</span>
-            <span class="app-tag">RPG Maker MZ</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/game-engines" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Network SDN -->
-        <div class="skill-card" data-domain="systems" data-keywords="omada tp-link controller sdn eap switch gateway vlan openapi rest">
-          <div class="card-top">
-            <div class="card-title-group">
-              <span class="card-domain-badge">network/</span>
-              <h2 class="card-heading">Network SDN Controllers</h2>
-            </div>
-          </div>
-          <p class="card-description">TP-Link Omada Software-Defined Networking REST OpenAPI, multi-site provisioning, VLAN isolation, and device reboot telemetry.</p>
-          <div class="app-tag-list">
-            <span class="app-tag">Omada Controller</span>
-            <span class="app-tag">JetStream Switch</span>
-            <span class="app-tag">Omada Gateway</span>
-          </div>
-          <div class="card-actions">
-            <div class="model-pills">
-              <span class="model-pill pill-claude">Claude</span>
-              <span class="model-pill pill-gemini">Gemini</span>
-              <span class="model-pill pill-gpt">GPT</span>
-            </div>
-            <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/network" target="_blank" class="card-direct-link">Browse files &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Specialized Handbooks / Hubs Section -->
-  <div class="hubs-section">
-    <div class="container">
-      <h2 class="section-title">Context Optimization & Prompt Engineering Handbooks</h2>
-
-      <div class="hubs-grid">
-        <!-- Efficiency Hub -->
-        <div class="hub-box">
-          <h3>Token & Context Efficiency Specifications (100 Rules)</h3>
-          <p>Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and eliminate context window bloat.</p>
-          <table class="spec-table">
+def search_files(query: str):
+    everything.Everything_SetSearchW(query)
+    everything.Everything_QueryW(True)
+    count = everything.Everything_GetNumResults()
+    print(f"Found {count} matches for '{query}' across NTFS volumes.")</code></pre>
+        `
+      },
+      cad: {
+        breadcrumb: 'Docs / Applications / CAD & Parametric Design',
+        heading: 'CAD & Parametric Modeling Engineering Suite (5 Applications)',
+        description: 'Parametric solid feature trees, NURBS curves, B-Rep geometries, Python CAD API bridges, and PLM lifecycle pipelines.',
+        hasModels: true,
+        body: `
+          <h2 class="section-heading" id="sec-apps">Covered Applications</h2>
+          <ul>
+            <li><strong>Dassault SolidWorks</strong>: VBA/C# COM automation, feature tree traversal, and parametric drawing generation.</li>
+            <li><strong>Dassault CATIA V5 / 3DEXPERIENCE</strong>: Hybrid GSD surface modeling, Knowledge Pattern scripting, and product structure assembly.</li>
+            <li><strong>Siemens NX</strong>: NX Open Python/C++ automation, synchronous modeling, and manufacturing CAM operations.</li>
+            <li><strong>Autodesk Fusion 360</strong>: Cloud-integrated Python CAD/CAM API, component sketches, and toolpath post-processing.</li>
+            <li><strong>Robert McNeel Rhino 3D</strong>: RhinoCommon .NET & Python scripting, Grasshopper algorithmic design, and NURBS mesh optimization.</li>
+          </ul>
+        `
+      },
+      efficiency: {
+        breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency',
+        heading: 'Token & Context Efficiency Handbook (100 Rules)',
+        description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.',
+        hasModels: false,
+        body: `
+          <h2 class="section-heading" id="sec-rules">Core Token Optimization Rules</h2>
+          <table class="doc-table">
             <thead>
               <tr>
-                <th>Category</th>
-                <th>Rule Description</th>
-                <th>Expected Impact</th>
+                <th>Rule Name</th>
+                <th>Target Mechanism</th>
+                <th>Estimated Token Reduction</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Context Pruning</td>
-                <td>AST Skeletonization & Line-Bounded File IO</td>
-                <td>-65% tokens per read</td>
+                <td>AST Code Skeletonization</td>
+                <td>Strip function bodies, keep signatures & docstrings</td>
+                <td>-65% per code view</td>
               </tr>
               <tr>
-                <td>Prompt Caching</td>
-                <td>Static Prefix Splitting & Cache-Control Headers</td>
+                <td>Line-Bounded File Reads</td>
+                <td>Constrain IO to specific line offsets (slice notation)</td>
+                <td>-80% over full-file dumps</td>
+              </tr>
+              <tr>
+                <td>Prompt Cache-Control Headers</td>
+                <td>Static prefix splitting for Anthropic/OpenAI caching</td>
                 <td>-90% cached input cost</td>
               </tr>
               <tr>
-                <td>Diff Optimization</td>
-                <td>Targeted Patching & Zero Full-File Dumps</td>
-                <td>-75% generation tokens</td>
+                <td>Zero-Boilerplate Imports</td>
+                <td>Suppress standard library imports in prompt context</td>
+                <td>-15% token overhead</td>
+              </tr>
+              <tr>
+                <td>Stop-Sequence Truncation</td>
+                <td>Halt generation upon deterministic completion token</td>
+                <td>-30% output tokens</td>
               </tr>
             </tbody>
           </table>
-          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="btn-outline">Browse 100 Efficiency Rules &rarr;</a>
-        </div>
-
-        <!-- Common Sense Hub -->
-        <div class="hub-box">
-          <h3>Prompt Engineering & Grounding Habits (100 Specs)</h3>
-          <p>Practical, human-tested techniques for non-technical users to ground LLM reasoning and prevent hallucinations without prompt bloat.</p>
-          <table class="spec-table">
+        `
+      },
+      commonsense: {
+        breadcrumb: 'Docs / Handbooks / Prompt Engineering',
+        heading: 'Prompt Engineering & Factual Grounding Handbook (100 Habits)',
+        description: 'Practical, human-tested techniques for non-technical users to ground LLM reasoning and prevent hallucinations without prompt bloat.',
+        hasModels: false,
+        body: `
+          <h2 class="section-heading" id="sec-habits">Core Prompt Engineering Habits</h2>
+          <table class="doc-table">
             <thead>
               <tr>
-                <th>Technique</th>
-                <th>Protocol Description</th>
-                <th>Result</th>
+                <th>Habit Name</th>
+                <th>Technique Description</th>
+                <th>Outcome</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Factual Grounding</td>
-                <td>Strict Verification Checks & Source Anchoring</td>
-                <td>Zero Hallucinations</td>
+                <td>Factual Source Anchoring</td>
+                <td>Explicit source text referencing before reasoning</td>
+                <td>Zero hallucinations</td>
               </tr>
               <tr>
-                <td>Role Stacking</td>
-                <td>Domain Persona & Constraint Layering</td>
-                <td>Precise Tone Calibration</td>
+                <td>Negative Prompt Constraints</td>
+                <td>Strict declaration of forbidden formats or assumptions</td>
+                <td>High precision output</td>
               </tr>
               <tr>
-                <td>One-Shot Templating</td>
-                <td>Reusable Standard Markdown Patterns</td>
-                <td>Deterministic Outputs</td>
+                <td>One-Shot Standard Templating</td>
+                <td>Provide exact target output schema before generation</td>
+                <td>Deterministic formatting</td>
+              </tr>
+              <tr>
+                <td>Role & Perspective Stacking</td>
+                <td>Layer subject matter expertise constraints</td>
+                <td>Authentic domain voice</td>
               </tr>
             </tbody>
           </table>
-          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="btn-outline">Browse 100 Common Sense Specs &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
+        `
+      }
+    };
 
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-content">
-      <div>
-        <span>Major AI Skills — Maintained by <a href="https://github.com/alivirgo" target="_blank">Ali Virgo</a>. Released under the MIT License.</span>
-      </div>
-      <div class="footer-links">
-        <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">GitHub Repository</a>
-        <a href="https://github.com/alivirgo/Major-AI-Skills/releases" target="_blank">Releases (v1.0.0)</a>
-        <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/sitemap.xml" target="_blank">Sitemap</a>
-      </div>
-    </div>
-  </footer>
+    function loadDoc(key) {
+      const data = docs[key] || docs.overview;
+      document.getElementById('docBreadcrumb').innerText = data.breadcrumb;
+      document.getElementById('docHeading').innerText = data.heading;
+      document.getElementById('docDescription').innerText = data.description;
+      document.getElementById('modelTabContainer').style.display = data.hasModels ? 'flex' : 'none';
+      document.getElementById('dynamicBody').innerHTML = data.body;
 
-  <!-- Search & Filter Logic -->
-  <script>
-    const filterInput = document.getElementById('filterInput');
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const cards = document.querySelectorAll('.skill-card');
-    const resultsCount = document.getElementById('resultsCount');
+      // Update sidebar active link
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      const activeItem = event && event.target ? event.target.closest('.nav-item') : null;
+      if (activeItem) activeItem.classList.add('active');
 
-    let currentDomain = 'all';
-
-    function updateDirectory() {
-      const query = filterInput.value.toLowerCase().trim();
-      let matchCount = 0;
-
-      cards.forEach(card => {
-        const domain = card.getAttribute('data-domain');
-        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
-        const text = card.textContent.toLowerCase();
-
-        const matchesSearch = query === '' || keywords.includes(query) || text.includes(query);
-        const matchesDomain = currentDomain === 'all' || domain === currentDomain;
-
-        if (matchesSearch && matchesDomain) {
-          card.style.display = 'flex';
-          matchCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      resultsCount.textContent = `Showing ${matchCount} category card(s) matching filter`;
+      window.scrollTo(0, 0);
     }
 
-    filterInput.addEventListener('input', updateDirectory);
+    function switchModel(model) {
+      document.querySelectorAll('.model-tab-btn').forEach(btn => btn.classList.remove('active'));
+      if (event && event.target) event.target.classList.add('active');
+    }
 
-    filterTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        filterTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentDomain = tab.getAttribute('data-filter');
-        updateDirectory();
-      });
-    });
-
-    // Keyboard shortcut '/' to focus search input
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement !== filterInput) {
-        e.preventDefault();
-        filterInput.focus();
-      }
-    });
-
-    // Copy Clone Command
-    function copyClone() {
-      const text = document.getElementById('cloneCmd').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('copyBtn');
-        btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+    function filterNav() {
+      const query = document.getElementById('docSearch').value.toLowerCase().trim();
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.parentElement.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
       });
     }
   </script>
