@@ -1,5 +1,10 @@
 # Major AI Skills
 
+[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?color=blue&label=version)](https://github.com/alivirgo/Major-AI-Skills/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Skills: 425+](https://img.shields.io/badge/Skills-425%2B%20Specs-blueviolet)](https://github.com/alivirgo/Major-AI-Skills)
+[![Website: Live](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
+
 A curated repository of 425+ production-ready AI skills, system prompt specs, and token-optimization blueprints. Built for developers, power users, and domain specialists using tools like Claude Code, ChatGPT, LM Studio, OpenClaw, Antigravity, and VS Code.
 
 ---
