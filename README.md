@@ -100,9 +100,13 @@ Ingest the `skills/` or `efficiency ai skills/` folders into your local vector d
 
 ---
 
-## Star History
+## Community & Stargazers
 
-[![Star History Chart](https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date)](https://star-history.com/#alivirgo/Major-AI-Skills&Date)
+[![GitHub Stars](https://img.shields.io/github/stars/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/network/members)
+[![GitHub Watchers](https://img.shields.io/github/watchers/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/watchers)
+
+Track live repository community growth and recent stargazers directly on [GitHub Stargazers](https://github.com/alivirgo/Major-AI-Skills/stargazers) or via the [Interactive Documentation Portal](https://alivirgo.github.io/Major-AI-Skills/).
 
 ---
 

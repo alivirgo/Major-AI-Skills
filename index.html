@@ -414,33 +414,91 @@
       background-color: rgba(0, 0, 0, 0.015);
     }
 
-    /* Star Graph Card */
-    .star-graph-wrapper {
+    /* Native Community Stars & Metrics Dashboard */
+    .community-dashboard {
       background: var(--bg-sidebar);
       border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 16px;
+      border-radius: 8px;
+      padding: 20px;
       margin: 20px 0 28px;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .metric-card {
+      background: var(--bg-app);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 12px 14px;
       text-align: center;
     }
 
-    .star-graph-img {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      background: var(--bg-app);
+    .metric-val {
+      font-family: var(--font-code);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-heading);
     }
 
-    .star-graph-meta {
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    .chart-container {
+      background: var(--bg-app);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 180px;
+      display: block;
+    }
+
+    .stargazers-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .stargazer-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      transition: transform 0.15s ease;
+    }
+
+    .stargazer-avatar:hover {
+      transform: scale(1.15);
+      border-color: var(--text-link);
+    }
+
+    .dashboard-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
       font-size: 12px;
       color: var(--text-muted);
       font-family: var(--font-code);
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* Right Sidebar Table of Contents */
@@ -591,7 +649,7 @@
         <li><a href="#sec-structure" class="toc-link">2. Directory Structure</a></li>
         <li><a href="#sec-quickstart" class="toc-link">3. Quickstart & Usage</a></li>
         <li><a href="#sec-matrix" class="toc-link">4. Coverage Matrix</a></li>
-        <li><a href="#sec-community" class="toc-link">5. Community Stars Graph</a></li>
+        <li><a href="#sec-community" class="toc-link">5. Community & Stargazers</a></li>
       </ul>
     </aside>
 
@@ -605,53 +663,132 @@
       document.documentElement.setAttribute('data-theme', next);
       document.getElementById('themeToggle').innerText = `Theme: ${next === 'dark' ? 'Dark' : 'Light'}`;
       localStorage.setItem('theme', next);
+      drawLiveChart();
     }
 
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').innerText = `Theme: ${savedTheme === 'dark' ? 'Dark' : 'Light'}`;
 
-    // Community Stars Counter with 1-Hour Auto-Update Cache
-    function updateCommunityStars() {
-      const CACHE_KEY = 'major_ai_stars_count';
-      const TIMESTAMP_KEY = 'major_ai_stars_timestamp';
+    // Native Community Metrics & SVG Graph Auto-Updater (1-Hour Cache)
+    let currentRepoData = null;
+    let currentStargazers = [];
+
+    function updateCommunityData() {
+      const CACHE_KEY = 'major_ai_repo_cache';
+      const TIMESTAMP_KEY = 'major_ai_repo_timestamp';
       const ONE_HOUR_MS = 60 * 60 * 1000;
       const now = Date.now();
 
-      const cachedStars = localStorage.getItem(CACHE_KEY);
+      const cached = localStorage.getItem(CACHE_KEY);
       const cachedTime = localStorage.getItem(TIMESTAMP_KEY);
 
-      if (cachedStars && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
-        renderStars(cachedStars);
-      } else {
-        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills')
-          .then(res => res.json())
-          .then(data => {
-            if (data && typeof data.stargazers_count === 'number') {
-              const stars = data.stargazers_count;
-              localStorage.setItem(CACHE_KEY, stars);
-              localStorage.setItem(TIMESTAMP_KEY, now.toString());
-              renderStars(stars);
-            }
-          })
-          .catch(() => {
-            if (cachedStars) renderStars(cachedStars);
-          });
+      if (cached && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
+        try {
+          const parsed = JSON.parse(cached);
+          currentRepoData = parsed.repo;
+          currentStargazers = parsed.stargazers || [];
+          renderDashboard();
+          return;
+        } catch (e) {}
       }
 
-      // Refresh Star History Chart cache-buster hourly
-      const chartImg = document.getElementById('starHistoryImg');
-      if (chartImg) {
-        const hourBucket = Math.floor(now / ONE_HOUR_MS);
-        chartImg.src = `https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date&v=${hourBucket}`;
-      }
+      // Fetch fresh metrics directly from GitHub API
+      Promise.all([
+        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills').then(r => r.json()),
+        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills/stargazers', {
+          headers: { 'Accept': 'application/vnd.github.v3.star+json' }
+        }).then(r => r.json()).catch(() => [])
+      ]).then(([repo, stargazers]) => {
+        if (repo && typeof repo.stargazers_count === 'number') {
+          currentRepoData = repo;
+          currentStargazers = Array.isArray(stargazers) ? stargazers : [];
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ repo, stargazers: currentStargazers }));
+          localStorage.setItem(TIMESTAMP_KEY, now.toString());
+          renderDashboard();
+        }
+      }).catch(() => {
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          currentRepoData = parsed.repo;
+          renderDashboard();
+        }
+      });
     }
 
-    function renderStars(count) {
+    function renderDashboard() {
+      if (!currentRepoData) return;
+
+      const stars = currentRepoData.stargazers_count || 0;
+      const forks = currentRepoData.forks_count || 0;
+      const watchers = currentRepoData.watchers_count || 0;
+      const issues = currentRepoData.open_issues_count || 0;
+
+      // Update Header Star Pill
       const starEl = document.getElementById('starCount');
-      if (starEl) starEl.innerText = count;
-      const metaEl = document.getElementById('liveStarMeta');
-      if (metaEl) metaEl.innerText = `Current Stars: ${count} | Auto-synced hourly`;
+      if (starEl) starEl.innerText = stars;
+
+      // Update Metric Values in Dashboard
+      const mStars = document.getElementById('metricStars');
+      if (mStars) mStars.innerText = stars;
+      const mForks = document.getElementById('metricForks');
+      if (mForks) mForks.innerText = forks;
+      const mWatchers = document.getElementById('metricWatchers');
+      if (mWatchers) mWatchers.innerText = watchers;
+      const mSpecs = document.getElementById('metricSpecs');
+      if (mSpecs) mSpecs.innerText = "425+";
+
+      // Render Stargazer Avatars if available
+      const avatarContainer = document.getElementById('stargazersAvatars');
+      if (avatarContainer && currentStargazers.length > 0) {
+        avatarContainer.innerHTML = currentStargazers.slice(0, 10).map(s => {
+          const u = s.user || s;
+          return `<a href="${u.html_url}" target="_blank" title="${u.login}"><img class="stargazer-avatar" src="${u.avatar_url}" alt="${u.login}" /></a>`;
+        }).join('');
+      }
+
+      drawLiveChart();
+    }
+
+    function drawLiveChart() {
+      const svg = document.getElementById('liveGrowthSvg');
+      if (!svg || !currentRepoData) return;
+
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const lineColor = isDark ? '#58a6ff' : '#0366d6';
+      const gridColor = isDark ? '#21262d' : '#eaecef';
+      const textColor = isDark ? '#8b949e' : '#586069';
+
+      const stars = Math.max(currentRepoData.stargazers_count || 1, 1);
+
+      // Construct native timeline points
+      const points = [
+        { label: 'Launch', val: 0, x: 40, y: 140 },
+        { label: 'v1.0.0', val: Math.max(1, stars), x: 720, y: 30 }
+      ];
+
+      svg.innerHTML = `
+        <!-- Horizontal Grid Lines -->
+        <line x1="40" y1="30" x2="720" y2="30" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="85" x2="720" y2="85" stroke="${gridColor}" stroke-dasharray="4,4" />
+        <line x1="40" y1="140" x2="720" y2="140" stroke="${gridColor}" />
+
+        <!-- Axis Labels -->
+        <text x="35" y="34" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">${stars}★</text>
+        <text x="35" y="144" font-size="10" fill="${textColor}" text-anchor="end" font-family="monospace">0★</text>
+        <text x="40" y="165" font-size="11" fill="${textColor}" font-family="sans-serif">Repository Launch</text>
+        <text x="720" y="165" font-size="11" fill="${textColor}" text-anchor="end" font-family="sans-serif">Current (${stars} Star${stars === 1 ? '' : 's'})</text>
+
+        <!-- Area Fill -->
+        <polygon points="40,140 720,30 720,140 40,140" fill="${lineColor}" opacity="0.12" />
+
+        <!-- Progression Line -->
+        <line x1="40" y1="140" x2="720" y2="30" stroke="${lineColor}" stroke-width="3" stroke-linecap="round" />
+
+        <!-- Endpoint Circle -->
+        <circle cx="720" cy="30" r="6" fill="${lineColor}" stroke="${isDark ? '#0d1117' : '#ffffff'}" stroke-width="2" />
+        <circle cx="40" cy="140" r="4" fill="${lineColor}" />
+      `;
     }
 
     // Documentation Dynamic Database
@@ -730,15 +867,40 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
             </tbody>
           </table>
 
-          <h2 class="section-heading" id="sec-community">5. Community Stars Graph</h2>
-          <p>Live repository star growth tracked over time, automatically refreshed every hour via GitHub API:</p>
-          <div class="star-graph-wrapper">
-            <a href="https://star-history.com/#alivirgo/Major-AI-Skills&Date" target="_blank" rel="noopener noreferrer">
-              <img id="starHistoryImg" class="star-graph-img" src="https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date" alt="Major AI Skills Star History Chart" />
-            </a>
-            <div class="star-graph-meta">
-              <span id="liveStarMeta">Auto-synced hourly with GitHub API</span>
-              <a href="https://github.com/alivirgo/Major-AI-Skills/stargazers" target="_blank" style="color: var(--text-link);">View Stargazers on GitHub &rarr;</a>
+          <h2 class="section-heading" id="sec-community">5. Community & Stargazers Growth</h2>
+          <p>Live repository community activity tracked directly from the GitHub API with hourly auto-sync:</p>
+          
+          <div class="community-dashboard">
+            <div class="metrics-row">
+              <div class="metric-card">
+                <div class="metric-val" id="metricStars">0</div>
+                <div class="metric-label">Stargazers</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val" id="metricForks">0</div>
+                <div class="metric-label">Forks</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val" id="metricWatchers">0</div>
+                <div class="metric-label">Watchers</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-val" id="metricSpecs">425+</div>
+                <div class="metric-label">Skill Specs</div>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 180" preserveAspectRatio="none">
+                <!-- Injected via drawLiveChart() -->
+              </svg>
+            </div>
+
+            <div id="stargazersAvatars" class="stargazers-list"></div>
+
+            <div class="dashboard-footer">
+              <span>● Synced directly via GitHub API (Hourly Auto-Refresh)</span>
+              <a href="https://github.com/alivirgo/Major-AI-Skills/stargazers" target="_blank" style="color: var(--text-link);">Star on GitHub &rarr;</a>
             </div>
           </div>
         `
@@ -880,7 +1042,7 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
       const activeItem = event && event.target ? event.target.closest('.nav-item') : null;
       if (activeItem) activeItem.classList.add('active');
 
-      updateCommunityStars();
+      updateCommunityData();
       window.scrollTo(0, 0);
     }
 
@@ -899,7 +1061,7 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
 
     // Initialize document and start 1-hour star update interval
     loadDoc('overview');
-    setInterval(updateCommunityStars, 60 * 60 * 1000);
+    setInterval(updateCommunityData, 60 * 60 * 1000);
   </script>
 </body>
 </html>
