@@ -1,44 +1,96 @@
 ---
-title: "Tell AI When You Are In a Rush AI Skill"
-description: "Use 'give me the bottom line only, I am in a hurry' for immediate short answers."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, tell-ai-when-in-a-rush"
-category: "Common Sense Everyday AI"
+title: "Tell AI When You Are in a Rush (High-Velocity Triage) AI Skill"
+description: "How to trigger Emergency High-Velocity Mode for instant 3-second answers during live client meetings, outages, and negotiation standoffs."
+category: "Cost-Saving & Waste Prevention"
+tags: ["emergency-mode", "high-velocity", "incident-response", "quick-answers", "triage", "prompt-engineering"]
 ---
 
-# Tell AI When You Are In a Rush (AI Skill)
+# Tell AI When You Are in a Rush (High-Velocity Triage) (AI Skill)
 
 ## Overview
-Use 'give me the bottom line only, I am in a hurry' for immediate short answers.
+When you are on an active customer call, in an executive meeting, or debugging a live production outage, you do not have 45 seconds to wait for an AI to generate a multi-paragraph essay. You need the **exact answer or CLI command on line 1 within 3 seconds**.
+
+The **High-Velocity Emergency Protocol** signals extreme urgency to the model, instantly cutting off all discursive explanations and outputting pure tactical solutions.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## Standard Chat vs. High-Velocity Emergency Mode
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Emergency Response Velocity                 │
+│                                                             │
+│  Standard Query ("How do I kill PostgreSQL backend?"):      │
+│  "PostgreSQL provides administrative functions for managing │
+│   client connections. In order to terminate a backend..."   │
+│  ↳ 25-Second Generation Time $\rightarrow$ Production Outage Stalls │
+│                                                             │
+│  Emergency Directive ("EMERGENCY - COMMAND ONLY"):          │
+│  `SELECT pg_terminate_backend(pid) FROM pg_stat_activity...`│
+│  ↳ 2-Second Generation Time $\rightarrow$ Production Outage Fixed │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master High-Velocity Prompt Templates
+
+### Pattern 1: The Outage & SRE Emergency Fix (Code / Terminal)
+```markdown
+🚨 EMERGENCY FIX NEEDED:
+[DESCRIBE CRASH / ISSUE]
+
+Rules:
+- Give the EXACT command / SQL query on line 1.
+- No greetings, no explanations. I will ask questions after it is resolved.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Live Meeting Fact-Check (Executive / Client Call)
+```markdown
+⚡ IN A LIVE MEETING - 1-LINE ANSWER ONLY:
+[INSERT QUESTION: e.g. Does California require overtime pay after 8 hours in a day or 40 hours in a week?]
+
+Format:
+- Line 1: Direct Yes/No or Fact.
+- Line 2: The governing statutory rule.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+### Pattern 3: The Live Negotiation Counter-Script
+```markdown
+⚡ LIVE NEGOTIATION - GIVE ME 1 SPOKEN LINE:
+The client just said: "[PASTE CLIENT OBJECTION / PUSHBACK]".
+
+Give me the single best 1-sentence de-escalating counter-phrase I can say right now.
+```
+
+---
+
+## Real-World Case Study
+
+### Scenario: Live Incident Response (Postgres Database Lock)
+
+#### Standard Prompt (Too Slow for an Outage)
+> **User**: *"How do I find and kill stuck queries in Postgres?"*
+> ❌ *AI outputs 400 words explaining lock types, table locks, and row-level locks.*
+
+#### Emergency Mode Prompt (Instant Fix)
+> **User**: *"🚨 EMERGENCY - SERVER DOWN: Give me the SQL query to find and kill all queries running $> 60$ seconds. SQL ONLY."*
+
+**AI Response**:
+```sql
+SELECT pg_terminate_backend(pid), query, state, age(clock_timestamp(), query_start)
+FROM pg_stat_activity
+WHERE state != 'idle' 
+  AND query_start < now() - interval '60 seconds'
+  AND pid <> pg_backend_pid();
+```
+
+---
+
+## Summary Best Practices
+- **Use the `⚡` or `🚨 EMERGENCY` flag**: Prefixing prompts with urgent visual flags anchors the model to brevity.
+- **Demand "Line 1" execution**: Always state *"Provide the command on line 1; zero explanation"*.

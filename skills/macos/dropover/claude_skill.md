@@ -1,99 +1,127 @@
 ---
-title: "Dropover AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Dropover on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Dropover, Troubleshooting with Claude, Claude AI skills, Claude integration, Dropover, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Dropover macOS Drag Shelf Utility AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Dropover, floating NSPanel shelf windows, CGEventTap shake gestures, and URL scheme integrations."
+category: "Temporary Floating Drag Shelf Utility"
+tags: ["dropover", "macos", "nspanel", "cgeventtap", "drag-and-drop", "url-scheme", "claude"]
 ---
 
-# Dropover AI Skill Guide for Claude
+# Dropover macOS Drag Shelf Utility AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Dropover** on **macOS**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Dropover is a modular macOS productivity utility that provides temporary floating drag shelves to aggregate files, images, snippets, and web links across Mission Control Spaces and full-screen apps. Dropover operates via custom **`NSPanel` floating windows** styled with `.nonactivatingPanel` and `.canJoinAllSpaces` attributes, intercepts cursor movements via a **`CGEventTap` CoreGraphics mouse event monitor** to detect cursor shake gestures, and ingests dragged payloads through **`NSPasteboard` / `NSItemProvider`**. Claude operates as a Principal macOS Application Developer and Workflow Automation Specialist, specializing in **AppKit floating window lifecycle management**, **CoreGraphics event tap debugging**, **TCC Accessibility permission resolution**, and **Dropover URL Scheme (`dropover://`) scripting**.
 
-- **Application Name**: Dropover
-- **Category**: Temporary Floating Drag Shelf Utility
-- **Platform**: macOS
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Dropover Window & Event Ingestion Architecture
 
-> **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Dropover, Claude must understand its underlying technical framework:
-
-Custom floating NSPanel windows rendering across spaces boundaries.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Dropover Engine Architecture                │
+│                                                             │
+│  Event Monitoring & Gesture Trigger Layer                   │
+│  ├── `CGEventTap` Mouse Delta Vector Tracker (Shake Sensor) │
+│  ├── Global Hotkey Listener (`NSEvent.addGlobalMonitor...`) │
+│  └── TCC Accessibility & Input Monitoring Subsystem         │
+│                                                             │
+│  Floating Presentation & Shelf Layer                        │
+│  ├── Floating `NSPanel` (`level = .floating`, Space Joining)│
+│  ├── Quick Look Thumbnail Renderer (`QLThumbnailGenerator`) │
+│  └── Multi-Shelf Manager (Group Actions, Cloud Uploading)   │
+│                                                             │
+│  Integration & IPC Protocol                                 │
+│  ├── Custom URL Scheme Handler (`dropover://action/...`)    │
+│  └── macOS Shortcuts & AppleScript Dispatch Interface       │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Dropover:
+## Operational Capabilities & Agent Directives
 
-- **Floating shelf triggerable via cursor shake**
-- **Multi-file collection shelves across Spaces**
-- **Quick Look preview and instant web link sharing**
+1. **Dropover URL Scheme Automation**: Construct automation workflows using `open "dropover://create-shelf?files=..."` to programmatically spawn floating shelves from scripts.
+2. **Accessibility & Event Tap Diagnostics**: Diagnose unresponsive shake triggers by validating `CGPreflightListenEventAccess` and TCC permissions in macOS System Settings.
+3. **Multi-Space Shelf Persistence**: Configure `NSWindow.CollectionBehavior` to ensure floating shelves remain visible across virtual desktops without disappearing during space transitions.
+4. **Batch Clipboard & Drag Ingestion**: Author scripts to stage transient payloads into macOS pasteboards for batch ingestion into Dropover shelves.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Dropover, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Dropover, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated File Stager & Dropover Shelf Dispatcher
+
+Save this script as `stage_to_dropover.py` to collect files and programmatically open a Dropover floating shelf via its URL scheme:
+
+```python
+"""
+Dropover macOS URL Scheme Dispatcher
+Collects target files and triggers a new floating shelf in Dropover.
+"""
+
+import sys
+import os
+import urllib.parse
+import subprocess
+
+def create_dropover_shelf(file_paths: list):
+    valid_paths = [os.path.abspath(p) for p in file_paths if os.path.exists(p)]
+    if not valid_paths:
+        print("Error: No valid file paths provided.")
+        return
+
+    print(f"--- [DISPATCHING {len(valid_paths)} FILES TO DROPOVER SHELF] ---")
+    for p in valid_paths:
+        print(f"  • {p}")
+
+    # Build Dropover URL Scheme payload
+    # Format: dropover://create-shelf?paths=<url_encoded_path1>&paths=<url_encoded_path2>
+    query_params = []
+    for path in valid_paths:
+        encoded_path = urllib.parse.quote(path)
+        query_params.append(f"paths={encoded_path}")
+
+    url = f"dropover://create-shelf?{'&'.join(query_params)}"
+    
+    # Trigger URL via macOS open command
+    try:
+        subprocess.run(["open", url], check=True)
+        print("✅ Dropover shelf created successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"🚨 Failed to launch Dropover URL scheme: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python3 stage_to_dropover.py file1.png file2.pdf ...")
+        sys.exit(1)
+    create_dropover_shelf(sys.argv[1:])
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Dropover encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Shake gesture fails
-- **Root Cause**: Sensitivity set too high.
-- **Resolution Pathway**: Adjust sensitivity in Dropover Preferences.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Shake Gesture Fails to Open Shelf** | Dropover lacks macOS Accessibility / Input Monitoring permissions to capture global cursor velocity. | 1. Open *System Settings $\rightarrow$ Privacy & Security $\rightarrow$ Accessibility*.<br>2. Enable **Dropover**.<br>3. In *Dropover Preferences $\rightarrow$ Triggers*, adjust **Shake Sensitivity** slider to Medium/High. |
+| **Floating Shelves Disappear When Switching Spaces** | Dropover window collection behavior configured to standard space rather than `canJoinAllSpaces`. | In Dropover Preferences $\rightarrow$ **Shelves**, check **Keep shelves on screen across all Spaces**. |
+| **`dropover://` URL Scheme Opens Safari Instead of App** | Custom URL scheme registration not registered in LaunchServices. | Run `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain user`. |
+| **High Memory Usage on Large Image Drops** | Quick Look thumbnail generation cache generating uncompressed bitmap buffers. | In Dropover Preferences, reduce maximum preview resolution or dismiss shelves after drop. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Dropover:
+## Command Line Syntax & macOS Terminal Recipes
 
 ```bash
+# 1. Trigger Dropover Launch via macOS Terminal
 open -a Dropover
+
+# 2. Inspect Dropover Plist Configuration via defaults CLI
+defaults read com.extendedmac.Dropover-mac
+
+# 3. Create a New Empty Shelf via URL Scheme
+open "dropover://create-shelf"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Dropover issues on macOS?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Dropover?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Dropover Preferences**: `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
+- **Application Support Cache**: `~/Library/Application Support/com.extendedmac.Dropover-mac`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Verify that Dropover is granted Accessibility permissions in macOS System Settings before diagnosing shake gesture failures. Use encoded file paths when constructing `dropover://` URL schemes.

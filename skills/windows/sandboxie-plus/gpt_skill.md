@@ -1,100 +1,140 @@
 ---
-title: "Sandboxie Plus AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Sandboxie Plus on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Sandboxie Plus, ChatGPT troubleshooting, GPT automation, Sandboxie Plus, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Sandboxie-Plus Application Isolation AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Sandboxie-Plus, SbieDll.dll C/C++ API, SbieIni.exe automation, and automated malware analysis sandboxing."
+category: "Application Sandboxing & Isolation Engine"
+tags: ["sandboxie-plus", "sbiedll-api", "sbieini-automation", "sandboxed-testing", "gpt-codex", "windows-security-dev"]
 ---
 
-# Sandboxie Plus AI Skill Guide for GPT
+# Sandboxie-Plus Application Isolation AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Sandboxie Plus** on **Windows**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Sandboxie-Plus provides developer APIs and command-line automation interfaces via the **Sandboxie User-Mode API (`SbieDll.dll`)**, the **`SbieIni.exe` Configuration Parser**, and **`Start.exe` parameter switches**. GPT/Codex acts as a Principal Windows Systems Security Developer and Sandbox Automation Specialist, delivering **`SbieDll.dll` C++ / Python wrappers**, **unattended test execution scripts**, **programmatic INI policy generators**, and **automated malware analysis containment pipelines**.
 
-- **Application Name**: Sandboxie Plus
-- **Category**: Application Sandboxing & Isolation Engine
-- **Platform**: Windows
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & SbieDll API Stack
 
-> **Core Purpose**: Open-source sandbox isolation software preventing applications from making permanent changes to your system.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Sandboxie Plus, GPT must understand its underlying technical framework:
-
-Kernel-level filesystem and registry virtualization driver redirecting disk and registry writes to isolated sandbox folders.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Sandboxie Developer Platform                │
+│                                                             │
+│  SbieDll API & Kernel Bridge (`SbieDll.dll`)                │
+│  ├── `SbieApi_QueryProcessPath` (Verify Process Sandbox)    │
+│  ├── `SbieApi_EnumBoxes` (Query Active Sandbox Names)       │
+│  └── `SbieApi_QueryBoxPath` (Locate Root Storage Directory) │
+│                                                             │
+│  CLI Tooling & IPC Management                               │
+│  ├── `Start.exe` Execution Controller (`/box:... /wait`)    │
+│  ├── `SbieIni.exe` Runtime Config Re-loader (`/reload`)     │
+│  └── Ephemeral Snapshot & Volume Shadow Copy Automation     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Sandboxie Plus:
+## Operational Capabilities & Agent Directives
 
-- **Isolated application execution & malware containment**
-- **Virtual filesystem and registry redirection**
-- **Snapshot management and memory isolation**
+1. **`SbieDll.dll` API Development**: Author C++ and Python ctypes modules binding to `SbieDll.dll` exported functions to programmatically verify if the current process is sandboxed (`SbieApi_QueryProcessPath`).
+2. **Automated Batch Test Pipelines**: Construct scripts spinning up isolated sandboxes, executing automated UI tests across software builds, and resetting sandbox environments between test runs.
+3. **`Sandboxie.ini` Rule Synthesis**: Generate custom INI blocks defining granular process access permissions (`OpenPipePath`, `ClosedFilePath`, `FakeAdminRights`).
+4. **Automated Sandbox Snapshotting**: Script snapshot backups of the virtualized sandbox root folder (`C:\Sandbox\%USER%\%BOX%\`) to enable rapid state reversion.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Sandboxie Plus, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Sandboxie Plus, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Sandboxed Process Verification Client (`SbieDll.dll`)
+
+Save this script as `check_sandbox_status.py` (requires `SbieDll.dll` in system path):
+
+```python
+"""
+Sandboxie-Plus Native API Client (ctypes)
+Queries SbieDll.dll to verify whether a given process is running inside an isolated sandbox.
+"""
+
+import sys
+import os
+import ctypes
+from ctypes import wintypes
+
+SBIEDLL_PATH = r"C:\Program Files\Sandboxie-Plus\SbieDll.dll"
+
+def check_sandbox_containment(pid: int = None):
+    print("--- [INITIALIZING SBIEDLL SANDBOX INSPECTION] ---")
+
+    if not os.path.exists(SBIEDLL_PATH):
+        print(f"Notice: SbieDll.dll not found at standard location ({SBIEDLL_PATH}).")
+        return
+
+    try:
+        sbiedll = ctypes.WinDLL(SBIEDLL_PATH)
+
+        # Function Signature: SbieApi_QueryProcessPath(HANDLE ProcessId, WCHAR *BoxName, WCHAR *ImagePath, WCHAR *SidString, ULONG *SessionId)
+        sbiedll.SbieApi_QueryProcessPath.argtypes = [
+            wintypes.HANDLE,
+            wintypes.LPWSTR,
+            wintypes.LPWSTR,
+            wintypes.LPWSTR,
+            ctypes.POINTER(wintypes.ULONG)
+        ]
+        sbiedll.SbieApi_QueryProcessPath.restype = wintypes.LONG
+
+        box_name_buf = ctypes.create_unicode_buffer(128)
+        image_path_buf = ctypes.create_unicode_buffer(512)
+        sid_buf = ctypes.create_unicode_buffer(128)
+        session_id = wintypes.ULONG()
+
+        target_handle = wintypes.HANDLE(pid) if pid else wintypes.HANDLE(0) # 0 = Current Process
+
+        res = sbiedll.SbieApi_QueryProcessPath(
+            target_handle,
+            box_name_buf,
+            image_path_buf,
+            sid_buf,
+            ctypes.byref(session_id)
+        )
+
+        if res == 0:
+            print("🛡️ STATUS: Process is RUNNING INSIDE SANDBOX!")
+            print(f"• Sandbox Box Name: '{box_name_buf.value}'")
+            print(f"• Image Path:       '{image_path_buf.value}'")
+            print(f"• Windows Session:  {session_id.value}")
+        else:
+            print(f"⚠️ STATUS: Process is NOT sandboxed (API Code: {res}).")
+
+    except Exception as e:
+        print(f"Failed to query SbieDll: {e}")
+
+if __name__ == "__main__":
+    target_pid = int(sys.argv[1]) if len(sys.argv) > 1 else None
+    check_sandbox_containment(target_pid)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Sandboxie Plus encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Sandboxed app fails to start
-- **Root Cause**: Driver communication blocked or sandbox path locked.
-- **Resolution Pathway**: Empty sandbox or restart SbieSrv service.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`SbieApi_QueryProcessPath` Returns `0xC0000008`** | Invalid process handle passed to API. | Ensure target PID exists and process has not exited before invocation. |
+| **`SbieIni.exe /reload` Does Not Update Live Box** | Changes made to temporary memory rather than writing to `Sandboxie.ini` file on disk. | Write modifications directly to `C:\Windows\Sandboxie.ini` before issuing `/reload`. |
+| **Automated Pipeline Hangs on `Start.exe`** | Executable spawned a child background process keeping the sandbox open. | Launch with `/wait` parameter and set a hard timeout in Python `subprocess.run()`. |
+| **Virtual Registry Silo Corruption** | Multiple threads concurrently modifying same virtual registry keys. | Isolate parallel test instances into distinct named sandboxes (e.g. `TestBox_01`, `TestBox_02`). |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Sandboxie Plus:
+## Command Line Syntax & Batch Processing
 
 ```bash
-Start-Process "C:\Program Files\Sandboxie-Plus\SandMan.exe"
-SbieIni.exe /reload
+# Launch Application with Specific Sandbox and Wait for Exit
+"C:\Program Files\Sandboxie-Plus\Start.exe" /box:AutomatedTest /wait "C:\App\test_runner.exe"
+
+# Query Installed Sandboxie Version
+"C:\Program Files\Sandboxie-Plus\Start.exe" /version
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `C:\Windows\Sandboxie.ini`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Sandboxie Plus issues on Windows?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Sandboxie Plus?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Core DLL**: `C:\Program Files\Sandboxie-Plus\SbieDll.dll`
+- **CLI Launcher**: `C:\Program Files\Sandboxie-Plus\Start.exe`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For automated testing pipelines running in parallel, always provision dynamically named sandbox instances (`TestBox_<ThreadID>`) to prevent file silo contention.

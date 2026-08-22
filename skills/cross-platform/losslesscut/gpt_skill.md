@@ -1,100 +1,157 @@
 ---
-title: "LosslessCut AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate LosslessCut on Cross-Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for LosslessCut, ChatGPT troubleshooting, GPT automation, LosslessCut, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "LosslessCut Stream Editor AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize LosslessCut batch pipelines, .llc project schemas, and automated silence trimming."
+category: "Lossless Video/Audio Trimmer & Stream Editor"
+tags: ["losslesscut", "silence-cutter", "stream-copy", "gpt-codex", "llc-schema", "media-automation"]
 ---
 
-# LosslessCut AI Skill Guide for GPT
+# LosslessCut Stream Editor AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **LosslessCut** on **Cross-Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+LosslessCut is an Electron-based GUI wrapping FFmpeg's stream-copying capabilities. GPT/Codex acts as a Principal Media Automation Developer and Tooling Architect, delivering **automated silence-detection and cutting scripts**, **LosslessCut `.llc` project format generators**, **batch EDL/CSV converters**, and **headless stream manipulation utilities**.
 
-- **Application Name**: LosslessCut
-- **Category**: Lossless Video/Audio Trimmer & Stream Editor
-- **Platform**: Cross-Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Pipeline Architecture & Developer Layer
 
-> **Core Purpose**: Swiss-army knife for lossless trimming, cutting, and merging of media files without re-encoding video or audio.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with LosslessCut, GPT must understand its underlying technical framework:
-
-Electron wrapper over raw FFmpeg binary performing keyframe-accurate stream copying (-c copy).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 LosslessCut Developer Stack                 │
+│                                                             │
+│  Data Formats & Segment Manifests                           │
+│  ├── `.llc` JSON Project Schema (Cut Segment Arrays)        │
+│  ├── CSV / TSV / EDL (Edit Decision List) Import/Export     │
+│  └── Chapter Markers & Metadata Extraction                  │
+│                                                             │
+│  Automation & Pipeline Interfaces                           │
+│  ├── Automated Silence Detection (`silencedetect` filter)   │
+│  ├── Headless Batch Trimmer & Concat Multiplexer            │
+│  └── Electron CLI Launch Flags (`lossless-cut --open ...`)  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of LosslessCut:
+## Operational Capabilities & Agent Directives
 
-- **Keyframe-accurate video cutting without quality loss**
-- **Multi-track audio and subtitle stream extraction**
-- **Segment merging and loss-free concatenation**
+1. **Automated Silence Removal**: Author Python scripts combining FFmpeg's `silencedetect` audio filter with LosslessCut `.llc` manifest generation to automatically strip dead silence from podcasts and tutorials.
+2. **EDL & CSV Format Conversion**: Script converters between Premiere/DaVinci Edit Decision Lists (`.edl`), YouTube timestamp chapters, and LosslessCut `.llc` formats.
+3. **Lossless Multi-Segment Concat Slicing**: Build end-to-end automation pipelines that slice 20+ highlights from a raw recording and concatenate them into a single file with zero generational quality loss.
+4. **Header Healing & Muxing**: Remediate damaged container timebases and missing audio track headers before batch slicing.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding LosslessCut, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to LosslessCut, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Auto-Silence Detector & LosslessCut Project Generator
+
+Run this script to scan a video/audio file for silence ($<-30\text{dB}$ for $>0.8\text{s}$) and automatically generate a LosslessCut project file containing all active speech segments:
+
+```python
+"""
+Automated Silence Detector & LosslessCut Project Generator
+Uses FFmpeg silencedetect to build a non-destructive .llc project.
+"""
+
+import sys
+import os
+import subprocess
+import re
+import json
+
+def detect_speech_segments(media_path: str, noise_threshold_db: float = -30.0, min_silence_sec: float = 0.8):
+    # 1. Run FFmpeg silencedetect
+    cmd = [
+        "ffmpeg", "-i", media_path,
+        "-af", f"silencedetect=noise={noise_threshold_db}dB:d={min_silence_sec}",
+        "-f", "null", "-"
+    ]
+    
+    print(f"Scanning {media_path} for active speech segments...")
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    
+    # 2. Parse Silence Start and End Timestamps
+    silence_starts = []
+    silence_ends = []
+    
+    for line in res.stderr.splitlines():
+        if "silence_start:" in line:
+            match = re.search(r"silence_start:\s*([\d\.]+)", line)
+            if match:
+                silence_starts.append(float(match.group(1)))
+        elif "silence_end:" in line:
+            match = re.search(r"silence_end:\s*([\d\.]+)", line)
+            if match:
+                silence_ends.append(float(match.group(1)))
+
+    # Get total media duration
+    dur_cmd = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", media_path]
+    dur_res = subprocess.run(dur_cmd, capture_output=True, text=True)
+    total_duration = float(dur_res.stdout.strip()) if dur_res.stdout else 0.0
+
+    # 3. Calculate Speech Invert Segments
+    speech_segments = []
+    current_time = 0.0
+
+    for s_start, s_end in zip(silence_starts, silence_ends):
+        if s_start > current_time:
+            speech_segments.append((current_time, s_start))
+        current_time = s_end
+
+    if current_time < total_duration:
+        speech_segments.append((current_time, total_duration))
+
+    print(f"Identified {len(speech_segments)} active speech segments.")
+    return speech_segments
+
+def generate_llc_file(media_path: str, segments: list, output_llc: str):
+    project_json = {
+        "version": 1,
+        "mediaFileName": os.path.basename(media_path),
+        "cutSegments": [
+            {"start": start, "end": end, "name": f"Speech_Chunk_{i+1}", "color": "#2196f3"}
+            for i, (start, end) in enumerate(segments)
+        ]
+    }
+    with open(output_llc, "w", encoding="utf-8") as f:
+        json.dump(project_json, f, indent=2)
+    print(f"Successfully created LosslessCut project: {output_llc}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python auto_silence_cut.py <input_video.mp4>")
+        sys.exit(1)
+    
+    input_file = sys.argv[1]
+    llc_target = f"{input_file}-proj.llc"
+    speech = detect_speech_segments(input_file)
+    generate_llc_file(input_file, speech, llc_target)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If LosslessCut encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Audio out of sync at start of cut
-- **Root Cause**: Cut point placed on P-frame instead of Keyframe.
-- **Resolution Pathway**: Enable Keyframe Cut Mode (K key).
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Error: Segment export failed with exit code 1`** | Output filename contains forbidden OS characters or target path is write-protected. | 1. In LosslessCut Settings, check **Output file name template**.<br>2. Ensure path does not contain illegal characters (`:`, `?`, `*`, `"`).<br>3. Verify disk space for combined segment size. |
+| **Concatenated Output Has Desynced Audio** | Individual spliced segments had differing timebase fractions or initial audio PTS offsets. | 1. In LosslessCut, enable **Merge with standard concat demuxer**.<br>2. Ensure all segments originated from the exact same source file.<br>3. Set Audio Stream handling to `Copy`. |
+| **Imported CSV Timestamps Shift by Several Seconds** | CSV was formatted in NTSC Drop-Frame timecode (29.97 DF) while LosslessCut parsed it as decimal seconds. | Convert all timestamps to raw decimal seconds (`SS.MMM` or `HH:MM:SS.mmm`) prior to generating `.llc` JSON or CSV imports. |
+| **LosslessCut Fails to Launch on Linux Wayland** | Electron Chromium hardware acceleration incompatibility on Wayland display servers. | Launch with ozone platform flags: `lossless-cut --ozone-platform=wayland --enable-features=UseOzonePlatform`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for LosslessCut:
+## Command Line Syntax & Batch Processing
 
 ```bash
-lossless-cut "input.mp4"
-ffmpeg -ss 00:01:00 -to 00:05:00 -i input.mp4 -c copy output.mp4
+# Launch LosslessCut with Pre-Generated Project
+lossless-cut "C:\Media\Podcast.mp4" "C:\Media\Podcast.mp4-proj.llc"
+
+# Batch Merge Cut Segments via Concat Protocol
+ffmpeg -f concat -safe 0 -i cut_manifest.txt -c copy -movflags +faststart final_cut.mp4
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `%APPDATA%\lossless-cut\`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot LosslessCut issues on Cross-Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for LosslessCut?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Windows User Settings**: `%APPDATA%\lossless-cut`
+- **Linux User Settings**: `~/.config/lossless-cut`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When generating LosslessCut manifests, format cut segments into standard `.llc` JSON schemas with floating-point seconds. Always specify `-avoid_negative_ts make_zero` when executing downstream FFmpeg concat operations.

@@ -1,44 +1,86 @@
 ---
-title: "Write a Step-by-Step How-To AI Skill"
-description: "Ask AI for a numbered guide on how to perform a task in software or around the house."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, write-step-by-step-how-to"
-category: "Common Sense Everyday AI"
+title: "Write Step-by-Step SOP How-To Guides AI Skill"
+description: "How to generate bulletproof Standard Operating Procedures (SOPs) and technical tutorials with exact click paths, expected visual results, and failure troubleshooting."
+category: "Daily Productivity & Workflow"
+tags: ["sop-creation", "tutorials", "how-to-guides", "documentation", "procedural-clarity", "prompt-engineering"]
 ---
 
-# Write a Step-by-Step How-To (AI Skill)
+# Write Step-by-Step SOP How-To Guides (AI Skill)
 
 ## Overview
-Ask AI for a numbered guide on how to perform a task in software or around the house.
+Generic how-to guides (*"Go to settings and configure your domain"*) frequently fail users because they omit exact button names, skip prerequisite permission steps, and fail to describe what the screen should look like after a successful action.
+
+The **Linear SOP Protocol** structures every procedural tutorial into the industrial **Standard Operating Procedure (SOP) Schema**: specifying the **Exact Click/CLI Path**, the **Expected System State**, and the **Troubleshooting Pitfall** for each step.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 4-Component SOP Step Architecture
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 The 4-Component SOP Step                    │
+│                                                             │
+│  [ STEP NUMBER & GOAL ]: Step 2 - Configure CNAME Record    │
+│  • EXACT ACTION: Click "Add Record" ──► Select "CNAME"      │
+│  • INPUT VALUES: Name = "app", Target = "cname.vercel-dns"  │
+│  • EXPECTED STATE: Green checkmark badge "DNS Active"       │
+│  • PITFALL / GOTCHA: Turn OFF the orange Cloudflare proxy!  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master SOP Generator Prompt Templates
+
+### Pattern 1: The Industrial SOP / Software Tutorial Generator
+Use for software onboarding, devops guides, or employee workflows:
+
+```markdown
+Write a step-by-step Standard Operating Procedure (SOP) for [PROCEDURAL TASK: e.g. Setting up AWS S3 Bucket with Private Read Access and CloudFront CDN].
+
+Target Audience: Junior DevOps Engineer.
+
+Structure the guide strictly using this format:
+1. **Prerequisites & Required Permissions** (Bullet list of tools/accounts needed).
+2. **Sequential Numbered Steps**:
+   For EACH step provide:
+   - **Action**: Exact UI button clicks or CLI command.
+   - **Configuration Values**: Table/list of exact parameters to enter.
+   - **Expected Verification**: What the user should see on screen to confirm success.
+   - **⚠️ Common Gotcha**: The #1 mistake users make on this specific step.
+3. **End-to-End Smoke Test** (1 command or test click to verify the entire system is working).
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Pointing a Custom Domain to a Vercel Web App via Cloudflare DNS
+
+#### Weak Tutorial (Vague & Frustrating)
+> *"Log into Cloudflare, go to DNS, and add a CNAME record pointing to Vercel. Then wait for it to propagate."*
+> ❌ *(Omitted proxy toggle; creates infinite SSL redirect loop error 521).*
+
+#### Linear SOP Output (Bulletproof Execution)
+
+```markdown
+### 🛠️ Step 1: Add the Root CNAME Record
+- **Action**: Navigate to **Cloudflare Dashboard** $\rightarrow$ Click **DNS** $\rightarrow$ **Records** $\rightarrow$ Click **Add Record**.
+- **Fields to Enter**:
+  - **Type**: `CNAME`
+  - **Name**: `@` (or `subdomain`)
+  - **Target**: `cname.vercel-dns.com`
+  - **Proxy Status**: **DNS ONLY (Grey Cloud)** ⚠️ *CRITICAL*
+- **Expected Verification**: Record appears in the table with status `DNS only`.
+- **⚠️ Common Gotcha**: If Proxy status is set to *Proxied (Orange Cloud)*, Cloudflare's SSL will conflict with Vercel's SSL, causing an `ERR_TOO_MANY_REDIRECTS` crash.
+
+### 🩺 Step 2: Verification Smoke Test
+- In your terminal, run: `dig +short yourdomain.com`
+- Expected output: `cname.vercel-dns.com` (Returns in $<100\text{ms}$).
+```
+
+---
+
+## Summary Best Practices
+- **Never write "Go to settings" without the full breadcrumb**: Write `Settings > Team > Billing > Invoices`.
+- **Always include the "Common Gotcha"**: Pointing out the failure mode saves 30 minutes of frustrated debugging.

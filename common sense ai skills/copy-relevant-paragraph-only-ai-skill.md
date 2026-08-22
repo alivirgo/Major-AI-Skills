@@ -1,44 +1,95 @@
 ---
-title: "Copy Relevant Paragraph Only AI Skill"
-description: "Highlight and paste only the specific paragraph you need help with."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, copy-relevant-paragraph-only"
-category: "Common Sense Everyday AI"
+title: "Copy Relevant Paragraph Only (Context Sniping) AI Skill"
+description: "How to use Context Sniping to prevent 'Lost-in-the-Middle' attention degradation, save input tokens, and get laser-accurate answers from long documents."
+category: "Cost-Saving & Waste Prevention"
+tags: ["context-sniping", "token-savings", "attention-optimization", "lost-in-the-middle", "efficiency", "prompt-engineering"]
 ---
 
-# Copy Relevant Paragraph Only (AI Skill)
+# Copy Relevant Paragraph Only (Context Sniping) (AI Skill)
 
 ## Overview
-Highlight and paste only the specific paragraph you need help with.
+When users have a question about a contract, manual, or article, the common reflex is to paste the entire 20-page document. 
+
+However, LLMs suffer from the **"Lost in the Middle" effect**—attention is sharpest at the very beginning and very end of a prompt, but degrades significantly in the middle of giant context dumps. Pasting entire documents also wastes thousands of input tokens and slows down generation speed.
+
+**Context Sniping** is the practice of copying *only* the specific 1 to 3 relevant paragraphs along with a single line of background framing.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## Document Dumping vs. Context Sniping
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Document Dump vs. Context Snipe             │
+│                                                             │
+│  Document Dump (Pasting 15,000 words):                      │
+│  • High input token cost                                    │
+│  • Model suffers from "Lost in the Middle" attention loss   │
+│  • Higher risk of confusing unrelated clauses               │
+│                                                             │
+│  Context Snipe (Pasting 250 words):                         │
+│  • 98% token savings                                        │
+│  • 100% focused attention on the exact target sentence      │
+│  • Instant, laser-accurate response                         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Context Sniping Prompt Templates
+
+### Pattern 1: The Sniped Clause Audit (Legal / Policy)
+
+```markdown
+Context: I am reviewing our SaaS vendor agreement regarding data deletion upon termination.
+
+Here is the exact paragraph from Section 11.2:
+"[PASTE ONLY THE 1-2 TARGET PARAGRAPHS]"
+
+Question:
+Does the vendor automatically delete our data within 30 days of contract termination, or do we have to submit a written request? Explain based strictly on the text above.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Sniped Function Refactor (Code)
+
+```markdown
+Context: Python 3.12 FastAPI async route handler.
+
+Here is the specific function that is timing out:
+```python
+[PASTE ONLY THE 20-LINE FUNCTION]
+```
+
+Task: Optimize this function to prevent database connection pool starvation. Do not write the rest of the application.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Checking an Insurance Policy for Water Damage Coverage
+
+#### The Wasteful Document Dump
+> **User**: Pastes 45 pages of a homeowner's insurance policy ($12,000$ tokens) with: *"Am I covered for a burst pipe in the basement?"*
+>
+> ❌ *Result: AI skims, confuses general "flood" exclusions with internal "plumbing discharge" coverage, and provides an ambiguous, hesitant answer.*
+
+#### The Context Snipe
+> **User**: *"Context: Homeowner's insurance policy in New York.
+> Here is Section 3.B (Water Damage):
+> 'We cover sudden and accidental discharge or overflow of water from within a plumbing, heating, or air conditioning system. We do not cover water damage caused by external surface flooding, tidal water, or sewer backup.'
+> 
+> Question: My internal bathroom copper pipe burst and flooded the hallway. Is this covered under this clause?"*
+
+**AI Response**:
+> **Yes, this is covered.** 
+> Section 3.B explicitly covers *"sudden and accidental discharge... from within a plumbing system."* The exclusion applies only to external floods and sewer backups, not internal pipe bursts.
+
+---
+
+## Summary Best Practices
+1. **Locate with `Ctrl + F` first**: Search your document for keywords like *"termination"*, *"warranty"*, or *"liability"*.
+2. **Copy the target block + 1 surrounding sentence**: Gives the AI just enough context without drowning it in noise.
+3. **State the document type upfront**: Always provide 1 line of context (*"This is from our AWS enterprise agreement"*).

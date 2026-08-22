@@ -1,102 +1,122 @@
 ---
-title: "Tailscale AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Tailscale on Cross-Platform."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Tailscale, Troubleshooting with Claude, Claude AI skills, Claude integration, Tailscale, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Tailscale Mesh VPN AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Tailscale mesh VPN networks, WireGuard tunnels, DERP relays, subnet routers, and MagicDNS."
+category: "Zero-Config Mesh VPN & Mesh Networking"
+tags: ["tailscale", "wireguard", "mesh-vpn", "derp-relay", "magicdns", "subnet-router", "claude"]
 ---
 
-# Tailscale AI Skill Guide for Claude
+# Tailscale Mesh VPN AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Tailscale** on **Cross-Platform**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Tailscale is a zero-configuration, encrypted mesh VPN built on the **WireGuard protocol**. Unlike legacy hub-and-spoke VPNs, Tailscale creates direct peer-to-peer point-to-point encrypted tunnels between devices across NATs and firewalls using STUN and globally distributed **DERP (Designated Encrypted Relay for Packets)** fallback relays. Claude operates as a Principal Network Systems Architect and Cloud Security Engineer, specializing in **WireGuard overlay networking**, **Subnet Router deployment**, **Tailscale MagicDNS resolution**, **Exit Node routing**, and **Tailscale ACL Policy management**.
 
-- **Application Name**: Tailscale
-- **Category**: Zero-Config Mesh VPN & Mesh Networking
-- **Platform**: Cross-Platform
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Tailscale Mesh Architecture & Control Plane
 
-> **Core Purpose**: Zero-configuration VPN creating secure, encrypted peer-to-peer mesh networks based on WireGuard.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Tailscale, Claude must understand its underlying technical framework:
-
-Go user-space WireGuard engine communicating with central coordination server for NAT traversal (DERP relays).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Tailscale Mesh Topology                     │
+│                                                             │
+│  Control Plane (Tailscale Coordination Server / Headscale)  │
+│  ├── Node Key Exchange & WireGuard Public Key Distribution  │
+│  └── Declarative ACL & Tag-Based Access Control Policies    │
+│                                                             │
+│  Data Plane (Point-to-Point WireGuard Encryption)           │
+│  ├── Direct Peer-to-Peer Tunnel (Zero-Hop UDP Port 41641)   │
+│  ├── DERP Encrypted Fallback Relay (If symmetric NAT blocks)│
+│  └── Subnet Routers (Expose entire 192.168.x.x LANs to Mesh)│
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Tailscale:
+## Operational Capabilities & Agent Directives
 
-- **Automatic NAT traversal and direct peer-to-peer connection**
-- **Tailscale MagicDNS for automatic hostname resolution**
-- **Subnet routing and Exit Node internet traffic routing**
+1. **Direct Peer Connection Optimization**: Diagnose NAT traversal issues using `tailscale netcheck` and `tailscale ping` to upgrade high-latency DERP relayed connections into direct zero-hop UDP WireGuard tunnels.
+2. **Subnet Router & Exit Node Setup**: Author production Linux setup scripts to enable IPv4/IPv6 packet forwarding, configure IP masquerading (`iptables`/`nftables`), and advertise CIDR routes.
+3. **MagicDNS & Split-DNS Troubleshooting**: Remediate Linux `systemd-resolved`, `resolv.conf`, and Windows DNS search order conflicts to ensure `.ts.net` and `100.x.y.z` hostnames resolve instantly.
+4. **Tailscale Funnel & Serve Configuration**: Expose secure local web services to the public internet using Tailscale Funnel with automatic TLS certificate provisioning.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Tailscale, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Tailscale, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Bash Automation: High-Availability Subnet Router Installer
+
+Save this script as `setup_subnet_router.sh` on Linux to configure an enterprise Tailscale Subnet Router with IP forwarding and firewall NAT rules:
+
+```bash
+#!/usr/bin/env bash
+# Production Tailscale Subnet Router Installer
+set -euo pipefail
+
+SUBNET_CIDR="192.168.1.0/24"
+AUTH_KEY="${TAILSCALE_AUTH_KEY:-}"
+
+echo "[1/4] Enabling Linux Kernel IPv4/IPv6 Forwarding..."
+cat <<EOF | sudo tee /etc/sysctl.d/99-tailscale.conf
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.forwarding = 1
+EOF
+sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
+
+echo "[2/4] Configuring IP Masquerading (NAT) for Subnet..."
+DEFAULT_IFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
+sudo iptables -t nat -A POSTROUTING -o "$DEFAULT_IFACE" -j MASQUERADE
+
+# Enable UDP Port 41641 for Direct WireGuard P2P
+sudo iptables -A INPUT -p udp --dport 41641 -j ACCEPT
+
+echo "[3/4] Installing Tailscale Package..."
+if ! command -v tailscale &> /dev/null; then
+    curl -fsSL https://tailscale.com/install.sh | sh
+fi
+
+echo "[4/4] Authenticating and Advertising Subnet Routes..."
+if [ -n "$AUTH_KEY" ]; then
+    sudo tailscale up --authkey="$AUTH_KEY" --advertise-routes="$SUBNET_CIDR" --accept-routes --snat-subnet-routes=false
+else
+    echo "Authenticate interactively in your browser:"
+    sudo tailscale up --advertise-routes="$SUBNET_CIDR" --accept-routes --snat-subnet-routes=false
+fi
+
+echo "--- [Tailscale Subnet Router Configured Successfully] ---"
+sudo tailscale status
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Tailscale encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Slow throughput via DERP relay
-- **Root Cause**: Direct UDP connection blocked by strict NAT/firewall.
-- **Resolution Pathway**: Enable UPnP or open UDP port 41641.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **High Latency (>150ms) / Slow Speed on Local Network** | Traffic is routing through a distant DERP relay due to symmetric NAT or firewall blocking direct UDP packets. | 1. Run `tailscale netcheck` to diagnose NAT mapping.<br>2. Run `tailscale ping <target-node>` to inspect if connection is `direct` or `via DERP(...)`.<br>3. Open UDP port **41641** on your router/firewall. |
+| **Subnet Router Advertises Route but Devices Cannot Ping LAN IPs** | Linux host has `net.ipv4.ip_forward` disabled, or route approval is pending in Tailscale Admin Console. | 1. Check `sysctl net.ipv4.ip_forward` (must equal 1).<br>2. In **Tailscale Admin Console** $\rightarrow$ *Machines*, click the router node $\rightarrow$ *Edit Route Settings* $\rightarrow$ **Approve Route**.<br>3. On client nodes, ensure `tailscale up --accept-routes` is enabled. |
+| **MagicDNS Fails to Resolve Hostnames on Linux** | Conflict between Tailscale DNS and local `systemd-resolved` or network manager. | 1. Check `/etc/resolv.conf` (should link to `/run/systemd/resolve/stub-resolv.conf`).<br>2. Run `systemctl restart systemd-resolved`.<br>3. Set `tailscale up --accept-dns=true`. |
+| **Windows TUN Adapter Fails: `Wintun error`** | Conflicting VPN drivers (OpenVPN, NordVPN) locked the Wintun network adapter. | 1. Open Device Manager $\rightarrow$ Network Adapters $\rightarrow$ Uninstall **Tailscale Tunnel / Wintun**.<br>2. Restart Tailscale Windows Service (`net stop Tailscale && net start Tailscale`). |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Tailscale:
+## Command Line Syntax & Operational Recipes
 
 ```bash
-tailscale up
-tailscale status
-tailscale up --advertise-routes=192.168.1.0/24
+# 1. Inspect Real-Time Connection Topology (Direct vs DERP Relay)
+tailscale status --peers=true
+
+# 2. Network Latency & Path Diagnostic Check
+tailscale netcheck
+
+# 3. Expose Local HTTP Port 3000 to Public Internet via Tailscale Funnel
+tailscale funnel --bg 3000
+
+# 4. Configure Machine as High-Bandwidth Exit Node for Full Internet Routing
+sudo tailscale up --advertise-exit-node
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `/var/lib/tailscale/`
-- `%LOCALAPPDATA%\Tailscale\`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Tailscale issues on Cross-Platform?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Tailscale?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File & State Locations
+- **Linux State Directory**: `/var/lib/tailscale/tailscaled.state`
+- **Linux Daemon Socket**: `/var/run/tailscale/tailscaled.sock`
+- **Windows Configuration**: `%LOCALAPPDATA%\Tailscale`
+- **macOS App Container**: `~/Library/Containers/io.tailscale.ipn.macos`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When setting up Subnet Routers or Exit Nodes on Linux, always persist `net.ipv4.ip_forward = 1` in `/etc/sysctl.d/` and remind users to approve advertised routes in the Tailscale Admin Console.

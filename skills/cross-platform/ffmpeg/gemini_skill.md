@@ -1,100 +1,126 @@
 ---
-title: "FFmpeg AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate FFmpeg on Cross-Platform."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for FFmpeg, Gemini troubleshooting, Google AI, FFmpeg, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "FFmpeg Media Engineering AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot FFmpeg video artifacts, macroblocking, interlacing, and complex filtergraphs."
+category: "Multimedia Transcoding & Stream Processing Engine"
+tags: ["ffmpeg", "video-diagnostics", "filtergraphs", "gemini", "artifact-analysis", "deinterlacing"]
 ---
 
-# FFmpeg AI Skill Guide for Gemini
+# FFmpeg Media Engineering AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **FFmpeg** on **Cross-Platform**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+FFmpeg is the foundational multimedia engine for video and audio processing across the internet. Gemini acts as an AI Video Quality Analyst and Filtergraph Architect, specializing in **multimodal video compression artifact diagnosis (macroblocking, banding, ringing)**, **interlaced field remediation (YADIF/Bwdif)**, **complex visual overlay filtergraphs**, and **perceptual quality metric evaluation (VMAF, SSIM, PSNR)**.
 
-- **Application Name**: FFmpeg
-- **Category**: Multimedia Transcoding & Stream Processing Engine
-- **Platform**: Cross-Platform
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Processing Pipeline & Filter Structure
 
-> **Core Purpose**: Universal CLI framework for transcoding, encoding, streaming, filtering, and manipulating video and audio.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with FFmpeg, Gemini must understand its underlying technical framework:
-
-C libraries (libavcodec, libavformat, libavfilter, libswscale) supporting hardware acceleration (NVENC, QSV, VideoToolbox).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 FFmpeg Video Processing Stack               │
+│                                                             │
+│  Input & Demuxing Stream                                    │
+│  ├── Container Streams (Audio, Video, Subtitles, Data)      │
+│  └── Stream Selection & Mapping Syntax (`-map 0:v:0`)       │
+│                                                             │
+│  Filtergraph Subsystem (`libavfilter`)                      │
+│  ├── Simple Filters (`-vf scale=1920:1080,fps=60`)          │
+│  ├── Complex Multi-Stream Graphs (`-filter_complex`)        │
+│  └── Quality Metric Computations (libvmaf, ssim, psnr)      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of FFmpeg:
+## Operational Capabilities & Agent Directives
 
-- **Universal video/audio format conversion & container remuxing**
-- **Hardware-accelerated encoding (H.264, HEVC, AV1)**
-- **Complex audio/video filtering graphs and stream splitting**
+1. **Multimodal Visual Compression Triage**: Evaluate screenshots and video frame sequences to identify compression artifacts: 8x8 DCT macroblocking, 8-bit color banding, comb-like interlacing lines, and motion judder.
+2. **Deinterlacing & Telecine Remediation**: Configure adaptive deinterlacers (`-vf yadif=mode=1:parity=-1:deint=1` or `bwdif`) and inverse telecine (`pullup`, `decimate`) for broadcast content.
+3. **Complex Filtergraph Construction**: Build multi-stream overlays, Picture-in-Picture (PiP), side-by-side video comparisons, color lut applications, and animated text overlays.
+4. **VMAF Perceptual Quality Benchmarking**: Script automated video quality scoring pipelines comparing encoded video against the uncompressed reference file using `libvmaf`.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding FFmpeg, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to FFmpeg, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Video Quality Benchmark (VMAF / SSIM)
+
+Execute this script to calculate VMAF and SSIM scores comparing a compressed transcode against the pristine source:
+
+```python
+"""
+FFmpeg VMAF & SSIM Quality Benchmark Pipeline
+Compares distorted/encoded video against reference source.
+"""
+
+import sys
+import subprocess
+import json
+import re
+
+def compute_vmaf_score(reference: str, distorted: str):
+    # Scale and synchronize streams for VMAF evaluation
+    filter_graph = (
+        "[1:v][0:v]scale2ref=flags=bicubic[dist][ref]; "
+        "[dist]setpts=PTS-STARTPTS[distpts]; "
+        "[ref]setpts=PTS-STARTPTS[refpts]; "
+        "[distpts][refpts]libvmaf=log_fmt=json:log_path=vmaf_output.json:model=version=vmaf_v0.6.1"
+    )
+
+    cmd = [
+        "ffmpeg", "-i", reference, "-i", distorted,
+        "-filter_complex", filter_graph,
+        "-f", "null", "-"
+    ]
+
+    print(f"Running VMAF Analysis: {distorted} vs {reference}...")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    
+    # Parse VMAF log file
+    try:
+        with open("vmaf_output.json", "r", encoding="utf-8") as f:
+            vmaf_data = json.load(f)
+            mean_vmaf = vmaf_data["pooled_metrics"]["vmaf"]["mean"]
+            print(f"--- [PERCEPTUAL QUALITY RESULT] ---")
+            print(f"Mean VMAF Score: {mean_vmaf:.2f} / 100.0")
+            if mean_vmaf >= 93.0:
+                print("Rating: Excellent (Imperceptible compression artifacts)")
+            elif mean_vmaf >= 80.0:
+                print("Rating: Good (Acceptable for web streaming)")
+            else:
+                print("Rating: Poor (Noticeable visual degradation)")
+    except Exception as e:
+        print(f"Could not read VMAF log: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Usage: python vmaf_benchmark.py <reference.mp4> <transcoded.mp4>")
+        sys.exit(1)
+    compute_vmaf_score(sys.argv[1], sys.argv[2])
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If FFmpeg encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Unknown encoder error
-- **Root Cause**: Selected encoder (e.g. h264_nvenc) not supported by hardware/GPU driver.
-- **Resolution Pathway**: Fallback to software encoder 'libx264' or update GPU drivers.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Horizontal Comb Lines During Fast Motion (Interlacing)** | Video source is interlaced (1080i/480i) and displayed on a progressive scan monitor without deinterlacing. | Apply motion-adaptive deinterlacing: `-vf bwdif=mode=1` or `-vf yadif=mode=1`. |
+| **Color Banding / Stepping in Dark Gradients / Skies** | 8-bit quantization steps are too coarse in flat gradients. | 1. Encode in 10-bit color: `-c:v libx264 -pix_fmt yuv420p10le`.<br>2. Add subtle temporal dithering before encoding: `-vf deband`.<br>3. Lower CRF value (e.g. 18–20). |
+| **Severe Pixelation / Macroblocking during High Motion** | Encoder bitrate budget is constrained, or VBR buffer size is too small (`-bufsize`). | 1. Increase video bitrate or decrease CRF.<br>2. Ensure `-bufsize` is set to 1.5x–2x the `-maxrate`.<br>3. Use `-preset slow` for advanced motion estimation. |
+| **Filtergraph Error: `Filter scale has an unconnected output`** | Complex filtergraph syntax error; an intermediate labeled pad was left unmapped. | 1. Ensure all `[tag]` outputs are consumed by subsequent filter inputs or mapped via `-map "[tag]"`.<br>2. Verify semicolons between parallel filter statements. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for FFmpeg:
+## Command Line Syntax & Filtergraph Recipes
 
 ```bash
-ffmpeg -i input.mp4 -c:v libx264 -crf 23 -c:a copy output.mp4
-ffmpeg -i input.mp4 -vn -ab 320k output.mp3
+# 1. Side-by-Side Video Comparison (Original vs Compressed)
+ffmpeg -i reference.mp4 -i encoded.mp4 -filter_complex "[0:v]pad=iw*2:ih[bg]; [bg][1:v]overlay=w" -c:v libx264 -crf 18 comparison.mp4
+
+# 2. Picture-in-Picture (PiP) Overlay with Rounded Corners & Border
+ffmpeg -i main.mp4 -i overlay.mp4 -filter_complex "[1:v]scale=480:-1[pip]; [0:v][pip]overlay=main_w-overlay_w-20:main_h-overlay_h-20" -c:a copy pip_output.mp4
+
+# 3. High-Quality Animated GIF with Two-Pass Palette Generation
+ffmpeg -i input.mp4 -vf "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output.gif
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/.ffmpeg/`
-
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot FFmpeg issues on Cross-Platform?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for FFmpeg?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When diagnosing visual compression defects, check bit depth (10-bit eliminates gradient banding) and scan mode (apply `bwdif` deinterlacing to interlaced sources). Use two-pass palette generation for GIF exports.

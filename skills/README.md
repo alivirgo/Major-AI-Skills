@@ -1,49 +1,105 @@
-# Application Skills (`skills/`)
+# Specialized Application AI Skills Ecosystem (`skills/`)
 
-This directory contains technical skill specifications for 30 applications across Windows, macOS, Cross-Platform, and Network platforms.
+This directory contains production-grade, expert-level AI Skill specifications and automation architectures for 75 professional applications across 15 engineering and creative domain categories.
 
-Each application features three targeted model guides:
-- `claude_skill.md`: Tailored for Anthropic Claude & Claude Code CLI (focuses on step-by-step diagnostic reasoning, system safety, and structured REST payloads).
-- `gpt_skill.md`: Tailored for OpenAI ChatGPT & Codex (focuses on fast Python automation scripts, cURL commands, and quick operational fixes).
-- `gemini_skill.md`: Tailored for Google Gemini (focuses on visual dashboard inspection, topology map verification, and cross-platform multi-site telemetry).
+Each tool ecosystem includes three specialized AI engineering specifications:
+- **`claude_skill.md`**: Tailored for Anthropic Claude (deep system architecture, deterministic algorithms, kernel drivers, socket communication, and CI/CD pipelines).
+- **`gemini_skill.md`**: Tailored for Google Gemini (multimodal UI inspection, canvas verification, visual diagnostic scopes, and telemetry monitoring).
+- **`gpt_skill.md`**: Tailored for OpenAI GPT & Codex (C#/C++ native plugin development, Python automation bridges, JSON-RPC adapters, and declarative schemas).
 
 ---
 
-## Directory Index
+## Domain Architecture & Category Directory Map
 
-### Windows Utilities (`skills/windows/`)
-- **`wiztree/`**: Master File Table (MFT) raw disk scanning & CSV export.
-- **`everything/`**: Instant NTFS USN Change Journal search & IPC indexing.
-- **`eartrumpet/`**: Per-app WASAPI audio volume mixer & endpoint switcher.
-- **`sharex/`**: FFmpeg recording, OCR, and custom webhook uploaders.
-- **`flow-launcher/`**: Python/C# plugin launcher & Everything search integration.
-- **`microsoft-powertoys/`**: FancyZones layout management, PowerToys Run, and Text Extractor.
-- **`system-informer/`**: Process, thread, handle, DLL, and memory inspection.
-- **`autohotkey-v2/`**: GUI automation, Win32 `DllCall` interop, and custom hotkey scripting.
-- **`scoop/`**: Permission-less developer package management.
-- **`sandboxie-plus/`**: Application isolation & filesystem virtualization.
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                 Specialized Application AI Skills Architecture              │
+│                                                                             │
+│  [1] 3D Animation & VFX (`skills/3d/`)                                      │
+│  • Cinema 4D, Houdini, Substance 3D Painter, ZBrush                         │
+│                                                                             │
+│  [2] CAD & Parametric Modeling (`skills/cad/`)                              │
+│  • Autodesk Fusion 360, CATIA V5/3DEXPERIENCE, Rhino 3D, Siemens NX,        │
+│    Dassault SolidWorks                                                      │
+│                                                                             │
+│  [3] Cross-Platform Tools & Infrastructure (`skills/cross-platform/`)       │
+│  • Bruno, FFmpeg, LosslessCut, Nginx, Rclone, Sniffnet, Tailscale,          │
+│    Ventoy, Wireshark                                                        │
+│                                                                             │
+│  [4] Digital Forensics & Incident Response (`skills/digital-forensics/`)    │
+│  • Autopsy, EnCase Forensic, Exterro FTK                                    │
+│                                                                             │
+│  [5] Electronic Design Automation (`skills/eda/`)                           │
+│  • Altium Designer, Cadence Virtuoso, KiCad EDA, Analog Devices LTspice     │
+│                                                                             │
+│  [6] Enterprise Asset & Service Management (`skills/enterprise/`)           │
+│  • IBM Maximo EAM, PTC Windchill PLM, ServiceNow Desktop Agent              │
+│                                                                             │
+│  [7] Enterprise Resource Planning (`skills/erp/`)                           │
+│  • Microsoft Dynamics NAV / Business Central, Oracle E-Business Suite,      │
+│    SAP GUI / SAP S/4HANA                                                    │
+│                                                                             │
+│  [8] Game Engines & Interactive Runtime (`skills/game-engines/`)            │
+│  • CryEngine 5, Godot Engine 4, RPG Maker MZ                                │
+│                                                                             │
+│  [9] Geographic Information Systems (`skills/gis/`)                         │
+│  • Esri ArcGIS Pro, QGIS Desktop                                            │
+│                                                                             │
+│  [10] macOS Productivity (`skills/macos/`)                                  │
+│  • AppCleaner, Dropover, Maccy, MacWhisper, OrbStack, Raycast, Rectangle,   │
+│    Shottr, Velja                                                            │
+│                                                                             │
+│  [11] Medical Imaging & DICOM Visualization (`skills/medical/`)             │
+│  • 3D Slicer, Horos, OsiriX MD                                              │
+│                                                                             │
+│  [12] Music Production & Digital Audio Workstations (`skills/music/`)       │
+│  • Ableton Live, Steinberg Cubase, Image-Line FL Studio, Apple Logic Pro,   │
+│    Avid Pro Tools                                                           │
+│                                                                             │
+│  [13] Network Controller Platforms (`skills/network/`)                      │
+│  • TP-Link Omada SDN Controller                                             │
+│                                                                             │
+│  [14] PLC & Industrial Automation (`skills/plc-industrial/`)                │
+│  • CODESYS V3.5, Rockwell Studio 5000, Siemens TIA Portal V19               │
+│                                                                             │
+│  [15] Scientific Computing & Multiphysics (`skills/scientific/`)            │
+│  • COMSOL Multiphysics, NI LabVIEW, MathWorks MATLAB, OriginLab OriginPro    │
+│                                                                             │
+│  [16] Video Editing & Post-Production (`skills/video-editing/`)             │
+│  • Blackmagic DaVinci Resolve Studio, Apple Final Cut Pro, MAGIX VEGAS Pro  │
+│                                                                             │
+│  [17] Windows Systems & Utilities (`skills/windows/`)                       │
+│  • AutoHotkey v2, EarTrumpet, Everything, Flow Launcher,                    │
+│    Microsoft PowerToys, Sandboxie-Plus, Scoop, ShareX,                      │
+│    System Informer, WizTree                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
-### macOS Productivity (`skills/macos/`)
-- **`raycast/`**: Low-latency Swift launcher, Node.js React extension API, and window management.
-- **`shottr/`**: ScreenCaptureKit integration, scrolling screenshots, pixelation, and OCR.
-- **`appcleaner/`**: Deep `~/Library` uninstallation and preference hunting.
-- **`rectangle/`**: Accessibility API (`AXUIElement`) window snapping and keybindings.
-- **`maccy/`**: `NSPasteboard` clipboard history management and Secure Input detection.
-- **`dropover/`**: Floating drag-and-drop shelves across spaces.
-- **`velja/`**: Launch Services URL routing and tracking parameter stripping.
-- **`orbstack/`**: Light-speed Apple Silicon Docker & Linux VM runtime.
-- **`macwhisper/`**: Offline CoreML / Metal accelerated AI Speech-to-Text transcription.
+---
 
-### Cross-Platform Engineering (`skills/cross-platform/`)
-- **`losslesscut/`**: Keyframe-accurate video cutting without re-encoding.
-- **`ventoy/`**: Multiboot USB creation by direct ISO file drag-and-drop.
-- **`wireshark/`**: Deep packet inspection, pcapng capture, and `tshark` CLI filters.
-- **`ffmpeg/`**: Hardware-accelerated video/audio transcoding and stream filters.
-- **`rclone/`**: Cloud storage sync (`rclone copy`/`sync`) and FUSE mounting.
-- **`tailscale/`**: Zero-config WireGuard mesh VPN, MagicDNS, and exit nodes.
-- **`nginx/`**: High-concurrency HTTP reverse proxying and load balancing.
-- **`bruno/`**: Offline-first Git-native `.bru` API testing.
-- **`sniffnet/`**: Real-time Rust network bandwidth & traffic analysis.
+## Master Category Reference Table
 
-### Network Platforms (`skills/network/`)
-- **`omada-controller/`**: Centralized OpenAPI REST automation & device management for TP-Link Omada EAPs, JetStream Switches, and Gateways.
+| Category Directory | Domain Focus | Applications Covered |
+| :--- | :--- | :--- |
+| **[3d/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/3d)** | 3D Animation & VFX | Cinema 4D, Houdini, Substance Painter, ZBrush |
+| **[cad/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/cad)** | CAD & Mechanical Engineering | Fusion 360, CATIA, Rhino 3D, Siemens NX, SolidWorks |
+| **[cross-platform/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/cross-platform)** | Multi-OS Infrastructure | Bruno, FFmpeg, LosslessCut, Nginx, Rclone, Sniffnet, Tailscale, Ventoy, Wireshark |
+| **[digital-forensics/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/digital-forensics)** | Incident Response & Forensics | Autopsy, EnCase, FTK |
+| **[eda/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/eda)** | Electronic Design & Circuits | Altium Designer, Cadence Virtuoso, KiCad, LTspice |
+| **[enterprise/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/enterprise)** | Enterprise PLM, EAM & ITSM | IBM Maximo, PTC Windchill, ServiceNow Desktop |
+| **[erp/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/erp)** | Enterprise Resource Planning | Dynamics NAV / Business Central, Oracle EBS, SAP GUI |
+| **[game-engines/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/game-engines)** | Game Development & Simulation | CryEngine 5, Godot Engine 4, RPG Maker MZ |
+| **[gis/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/gis)** | Geospatial Data & Mapping | ArcGIS Pro, QGIS Desktop |
+| **[macos/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/macos)** | macOS Native Productivity | AppCleaner, Dropover, Maccy, MacWhisper, OrbStack, Raycast, Rectangle, Shottr, Velja |
+| **[medical/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/medical)** | DICOM & Medical Imaging | 3D Slicer, Horos, OsiriX MD |
+| **[music/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/music)** | DAWs & Audio Engineering | Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools |
+| **[network/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/network)** | Software-Defined Networking | TP-Link Omada SDN Controller |
+| **[plc-industrial/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/plc-industrial)** | Industrial Automation & PLC | CODESYS V3.5, Rockwell Studio 5000, Siemens TIA Portal |
+| **[scientific/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/scientific)** | Scientific Computing & DAQ | COMSOL Multiphysics, NI LabVIEW, MATLAB, OriginPro |
+| **[video-editing/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/video-editing)** | NLE & Video Post-Production | DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro |
+| **[windows/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/windows)** | Windows Systems & Utilities | AutoHotkey v2, EarTrumpet, Everything, Flow Launcher, PowerToys, Sandboxie-Plus, Scoop, ShareX, System Informer, WizTree |
+
+---
+
+## Integration Guidelines
+These skill guides are engineered for direct ingestion into AI pair-programming assistants, local LLMs (Ollama, LM Studio, vLLM), autonomous agent workflows (Claude Code, Antigravity, OpenClaw), and vector RAG databases. Ingest the target model guide (`claude_skill.md`, `gemini_skill.md`, or `gpt_skill.md`) into system prompts for immediate, deterministic domain-expert execution.

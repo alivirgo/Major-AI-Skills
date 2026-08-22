@@ -1,44 +1,71 @@
 ---
-title: "Keep Instructions Direct AI Skill"
-description: "Use clear action verbs ('Draft', 'Summarize', 'Compare') at the start of your prompt."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, keep-instructions-direct"
-category: "Common Sense Everyday AI"
+title: "Keep Instructions Direct (The Imperative Lead Protocol) AI Skill"
+description: "Why leading with precise imperative action verbs ('Refactor', 'Audit', 'Synthesize') maximizes model attention and eliminates preamble fluff."
+category: "Communication & Asking Clarity"
+tags: ["imperative-prompting", "action-verbs", "clarity", "prompt-engineering", "efficiency", "focus"]
 ---
 
-# Keep Instructions Direct (AI Skill)
+# Keep Instructions Direct (The Imperative Lead Protocol) (AI Skill)
 
 ## Overview
-Use clear action verbs ('Draft', 'Summarize', 'Compare') at the start of your prompt.
+Starting a prompt with polite conversational preambles (*"Hey there! I was wondering if you might have time to possibly help me review..."*) burns initial prompt token weights on meaningless social pleasantries. 
+
+Because Large Language Models attend most heavily to the first tokens of a message, leading with an **Imperative Action Verb** immediately focuses the model's neural attention on the exact cognitive operation required.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## Conversational Hesitation vs. Imperative Command
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 Attention Weight Optimization               │
+│                                                             │
+│  Conversational Hesitation:                                 │
+│  "Could you maybe look at this text and see if it's okay?"  │
+│  ↳ Diffuse, weak attention on editing rules                 │
+│                                                             │
+│  Imperative Lead:                                           │
+│  "AUDIT this draft for passive voice and cut word count 30%"│
+│  ↳ 100% Focused, crisp, deterministic execution             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## The Power Verb Taxonomy
+
+Replace weak, passive verbs with high-leverage imperative commands:
+
+| Weak / Vague Verb | High-Precision Imperative Verb | Exact Action Triggered in LLM |
+| :--- | :--- | :--- |
+| *"Look at this"* | **AUDIT** | Evaluates systematically against criteria/rules. |
+| *"Make it better"* | **REFACTOR** | Restructures architecture/code without breaking logic. |
+| *"Explain this"* | **SYNTHESIZE** | Condenses key points into high-density takeaways. |
+| *"Give me ideas"* | **BRAINSTORM [X] ANGLES** | Generates high-contrast divergent options. |
+| *"Fix mistakes"* | **REDLINE** | Shows exact deletions and insertions. |
+| *"Put together"* | **SCAFFOLD** | Creates structural skeletons and starter templates. |
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Transformations
+
+### Example 1: Code Review
+- ❌ **Passive**: *"Can you check this python code and tell me what you think?"*
+- ✅ **Imperative**: *"**AUDIT** this Python function for thread safety and memory leaks. Provide the refactored code."*
+
+### Example 2: Market Analysis
+- ❌ **Passive**: *"I need some information on the EV market."*
+- ✅ **Imperative**: *"**SYNTHESIZE** the top 3 supply chain bottlenecks in the US EV battery market into a 3-column table."*
+
+### Example 3: Copy Editing
+- ❌ **Passive**: *"Help me rewrite this email so it sounds nicer."*
+- ✅ **Imperative**: *"**REWRITE** this email to sound warm and collaborative. Keep it under 75 words."*
+
+---
+
+## The 3-Word Prompt Opener Formula
+Structure the first 3 words of every prompt as:
+> **`[IMPERATIVE VERB] + [EXACT TARGET] + [PRIMARY CONSTRAINT]`**
+> 
+> *Example*: `"**DRAFT** [a 2-paragraph memo] [for executive leadership]..."`
+> *Example*: `"**EXTRACT** [all dollar amounts] [into a TSV code block]..."`

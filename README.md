@@ -1,6 +1,6 @@
 # Major AI Skills
 
-A curated repository of 260+ production-ready AI skills, system prompt specs, and token-optimization blueprints. Built for developers, power users, and everyday teams using tools like Claude Code, ChatGPT, LM Studio, OpenClaw, Antigravity, and VS Code.
+A curated repository of 425+ production-ready AI skills, system prompt specs, and token-optimization blueprints. Built for developers, power users, and domain specialists using tools like Claude Code, ChatGPT, LM Studio, OpenClaw, Antigravity, and VS Code.
 
 ---
 
@@ -9,7 +9,7 @@ A curated repository of 260+ production-ready AI skills, system prompt specs, an
 Most AI instructions out there are either too generic or bloated with fluff. We built **Major AI Skills** to solve a simple problem: how do you give AI models (Claude, GPT-4, Gemini, and local LLMs) exact, actionable context so they actually fix issues, execute shell commands, and automate software without wasting tokens?
 
 This repo is split into three main hubs:
-1. **Application Skills (`skills/`)**: Deep technical guides for 30 top Windows, macOS, Cross-Platform, and Network utilities.
+1. **Application Skills (`skills/`)**: Deep technical guides for 75 top software applications across CAD, Video Editing, 3D, GIS, Scientific, Medical, Music, Game Engines, EDA, ERP, Enterprise, Digital Forensics, PLC/Industrial, Windows, macOS, Cross-Platform, and Network platforms.
 2. **Efficiency AI Skills (`efficiency ai skills/`)**: 100 token-saving techniques focused on prompt compression, context window pruning, line-bounded edits, and API caching.
 3. **Common Sense AI Skills (`common sense ai skills/`)**: 100 practical, plain-English habits designed for non-technical users to get better results from AI while spending less.
 
@@ -19,7 +19,20 @@ This repo is split into three main hubs:
 
 ```text
 Major AI Skills/
-├── skills/                      # 90 Application Skill Specifications (30 Apps x 3 Models)
+├── skills/                      # 225 Application Skill Specifications (75 Apps x 3 Models across 17 Categories)
+│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
+│   ├── video-editing/           # DaVinci Resolve, VEGAS Pro, Final Cut Pro
+│   ├── 3d/                      # Cinema 4D, Houdini, ZBrush, Substance Painter
+│   ├── gis/                     # ArcGIS Pro, QGIS
+│   ├── scientific/              # MATLAB, COMSOL, OriginPro, LabVIEW
+│   ├── medical/                 # 3D Slicer, OsiriX, Horos
+│   ├── music/                   # Cubase, Ableton Live, FL Studio, Logic Pro, Pro Tools
+│   ├── game-engines/            # CryEngine, Godot, RPG Maker
+│   ├── eda/                     # Altium Designer, KiCad, Cadence Virtuoso, LTspice
+│   ├── erp/                     # SAP GUI, Oracle EBS, Microsoft Dynamics NAV
+│   ├── enterprise/              # IBM Maximo, ServiceNow Desktop, PTC Windchill
+│   ├── digital-forensics/       # Autopsy, EnCase, FTK
+│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, Codesys
 │   ├── windows/                 # WizTree, Everything, ShareX, PowerToys, System Informer, AHK v2, etc.
 │   ├── macos/                   # Raycast, Shottr, AppCleaner, Rectangle, MacCy, OrbStack, MacWhisper, etc.
 │   ├── cross-platform/          # LosslessCut, Ventoy, Wireshark, FFmpeg, rclone, Tailscale, Nginx, Bruno
@@ -35,10 +48,15 @@ Major AI Skills/
 ### 1. Application Skill Guides (`skills/`)
 Every application folder contains three distinct model specifications (`claude_skill.md`, `gpt_skill.md`, `gemini_skill.md`):
 
-- **Windows Power Tools**: Deep dives into MFT reading with WizTree, USN journal indexing with Everything, system audio session routing in EarTrumpet, process/kernel inspection via System Informer, and GUI automation with AutoHotkey v2.
-- **macOS Productivity**: Swift-native workflows for Raycast, ScreenCaptureKit integration in Shottr, hidden file cleanup in AppCleaner, local AI transcription with MacWhisper, and container virtualization via OrbStack.
-- **Cross-Platform Developer Tools**: Command line & API workflows for FFmpeg, Wireshark packet capture, rclone cloud mounts, Tailscale mesh VPNs, Nginx proxying, and Bruno API collections.
-- **Network SDN Controller**: Full REST OpenAPI payload definitions for TP-Link Omada Controllers (device adoption, VLAN profiles, WLAN channel optimization, and gateway policy routing).
+- **CAD & Engineering**: SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino.
+- **Video & Audio Post-Production**: DaVinci Resolve, VEGAS Pro, Final Cut Pro, Cubase, Ableton Live, FL Studio, Logic Pro, Pro Tools.
+- **3D & Visual Effects**: Cinema 4D, Houdini, ZBrush, Substance Painter.
+- **GIS & Scientific Computing**: ArcGIS Pro, QGIS, MATLAB, COMSOL, OriginPro, LabVIEW.
+- **Medical Imaging & DICOM**: 3D Slicer, OsiriX, Horos.
+- **Game Engines & EDA**: CryEngine, Godot, RPG Maker, Altium Designer, KiCad, Cadence Virtuoso, LTspice.
+- **ERP & Enterprise Asset Management**: SAP GUI, Oracle EBS, Microsoft Dynamics NAV, IBM Maximo, ServiceNow Desktop, PTC Windchill.
+- **Digital Forensics & Industrial Automation**: Autopsy, EnCase, FTK, Siemens TIA Portal, Rockwell Studio 5000, Codesys.
+- **Desktop & Systems Utilities**: Windows Power Tools, macOS Productivity, Cross-Platform tools, and Omada SDN Network Controllers.
 
 ### 2. Efficiency AI Skills (`efficiency ai skills/`)
 A collection of 100 modular rules to keep your AI context lean and fast:

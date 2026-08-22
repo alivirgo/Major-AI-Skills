@@ -1,44 +1,98 @@
 ---
-title: "Format Unstructured Data into Tables AI Skill"
-description: "Paste messy lists and ask AI to arrange them into Excel-ready columns."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, format-data-to-copy-paste-tables"
-category: "Common Sense Everyday AI"
+title: "Format Unstructured Data into Copy-Paste Tables AI Skill"
+description: "How to use AI as an instant ETL engine to parse messy raw text, emails, and receipts into clean, spreadsheet-ready TSV/CSV tables."
+category: "Cost-Saving & Waste Prevention"
+tags: ["data-formatting", "etl", "spreadsheets", "csv", "tsv", "data-cleaning", "prompt-engineering"]
 ---
 
-# Format Unstructured Data into Tables (AI Skill)
+# Format Unstructured Data into Copy-Paste Tables (AI Skill)
 
 ## Overview
-Paste messy lists and ask AI to arrange them into Excel-ready columns.
+Manually copying and pasting names, dates, amounts, and notes from 50 different emails or receipt PDFs into Excel or Google Sheets is tedious, error-prone manual labor.
+
+The **Unstructured-to-Tabular ETL Protocol** transforms raw, chaotic text dumps into clean, standardized, copy-pasteable **TSV (Tab-Separated Values)** or **Markdown tables** in seconds.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Unstructured-to-Tabular ETL Pipeline
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Unstructured-to-Table Pipeline              │
+│                                                             │
+│  [ RAW UNSTRUCTURED TEXT / INVOICES / CHAT LOGS ]           │
+│  "Paid John $450 on June 12 for logo design via PayPal..."  │
+│                           │                                 │
+│                           ▼                                 │
+│  [ AI PARSER & SANITIZATION ENGINE ]                        │
+│  • Standardize Dates $\rightarrow$ `YYYY-MM-DD`             │
+│  • Clean Currency $\rightarrow$ Clean Float / Integer       │
+│  • Normalize Categories $\rightarrow$ Fixed Enum List       │
+│                           │                                 │
+│                           ▼                                 │
+│  [ TSV / MARKDOWN TABLE: 1-Click Direct Paste into Excel ]  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Data Formatting Prompt Templates
+
+### Pattern 1: The Direct 1-Click Excel TSV Converter
+Outputs text separated by tabs (`\t`), allowing you to copy the block and hit `Ctrl + V` directly into Excel or Google Sheets with zero import wizard hassle:
+
+```markdown
+Here is messy unstructured text:
+[PASTE MESSY DATA]
+
+Task:
+Extract and normalize this into a TSV (Tab-Separated Values) code block with these exact columns:
+1. `Date (YYYY-MM-DD)`
+2. `Vendor / Person`
+3. `Category (Design / Development / Marketing / Operations)`
+4. `Amount (USD Number Only)`
+5. `Status (Paid / Pending)`
+
+Rules:
+- Output ONLY the raw TSV code block.
+- Format numbers cleanly (no `$` signs or commas in the number column so math formulas work in Excel).
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Customer Feedback Categorization Matrix
+
+```markdown
+Convert these customer feedback snippets into a Markdown table:
+[PASTE CUSTOMER REVIEWS]
+
+Columns:
+| Customer ID | Sentiment (Positive/Neutral/Negative) | Primary Feature Mentioned | Core Friction Point | Actionable Recommendation |
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Parsing Freelance Expense Receipts
+
+#### Raw Unstructured Text Dump
+> *"Spent $120 on Figma subscription on 05/10/24. Also bought domain from Namecheap for $14.50 on May 11th. Paid Sarah $800 on May 14 for landing page copy. AWS bill was $245.80 on May 31."*
+
+#### AI Tabular Extraction (Markdown & TSV Ready)
+
+```markdown
+| Date | Vendor | Category | Amount ($) | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **2024-05-10** | Figma | Software / SaaS | 120.00 | Monthly team design subscription |
+| **2024-05-11** | Namecheap | Infrastructure | 14.50 | Domain name registration |
+| **2024-05-14** | Sarah | Contractor | 800.00 | Landing page copywriting deliverable |
+| **2024-05-31** | AWS | Hosting | 245.80 | Cloud infrastructure monthly bill |
+```
+
+---
+
+## 3 Secrets for Flawless Spreadsheet Pasting
+1. **Request TSV over CSV**: When pasting into Google Sheets, copying TSV from a markdown code block pastes instantly across cells without triggering comma-split bugs in addresses or notes.
+2. **Enforce ISO Dates (`YYYY-MM-DD`)**: Prevents US/UK date format confusion (`05/06` vs `06/05`).
+3. **Strip currency symbols from numeric columns**: Keeps numbers formatted as pure digits (`120.00` instead of `$120.00`) so spreadsheet `=SUM()` formulas work instantly.

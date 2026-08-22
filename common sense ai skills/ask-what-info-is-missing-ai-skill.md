@@ -1,44 +1,89 @@
 ---
 title: "Ask What Information Is Missing AI Skill"
-description: "Prompt 'what key details am I missing that could change your advice?'."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, ask-what-info-is-missing"
-category: "Common Sense Everyday AI"
+description: "How to use Context Gap Discovery and the Interview-Me pattern to stop AI from hallucinating missing variables and uncover blind spots."
+category: "Communication & Asking Clarity"
+tags: ["context-discovery", "gap-analysis", "interview-pattern", "blind-spots", "clarification", "prompt-engineering"]
 ---
 
 # Ask What Information Is Missing (AI Skill)
 
 ## Overview
-Prompt 'what key details am I missing that could change your advice?'.
+By default, when an AI is given an underspecified prompt (e.g., *"How should I price my consulting services?"*), it will rarely pause to say, *"I don't know your industry, target client, or operating costs."* Instead, it **silently fills the gaps with assumptions**, resulting in generic, disconnected advice.
+
+The **Context Gap Discovery Protocol** turns this dynamic upside down: it explicitly commands the AI to identify missing parameters and interview you *before* finalizing its recommendation.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Context Gap Discovery Loop
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 Context Gap Discovery Loop                  │
+│                                                             │
+│  User Raw Prompt ──► [ AI Context Diagnostic Check ]        │
+│                                │                            │
+│                                ▼                            │
+│  [ Lists Top 3-5 Missing Variables & Why They Matter ]      │
+│                                │                            │
+│                                ▼                            │
+│  User Answers Gaps ──► [ Tailored, Zero-Assumption Output ] │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master Gap Discovery Prompts
+
+### Pattern 1: The "Interview Me First" Pattern
+Use this at the beginning of any complex strategy, design, or business task:
+
+```markdown
+I want to [INSERT GOAL / PROJECT].
+
+Before giving me advice or solutions:
+1. Ask me the **top 3 to 5 questions** you need answered to give a tailored, expert recommendation.
+2. For each question, briefly explain *why* that detail changes the outcome.
+3. Wait for my answers before writing the final plan.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+### Pattern 2: The "Blind-Spot Audit" (Post-Draft Check)
+Use this after receiving an initial draft or plan:
+
+```markdown
+Review the advice you just gave.
+- What critical information did I omit from my original prompt that could invalidate your recommendations?
+- What edge cases or assumptions are you making about my budget, timeline, or tech stack?
+```
+
+---
+
+## Real-World Case Study
+
+### Scenario: Setting Up an LLC / Business Entity
+
+#### Weak Direct Prompt (Silent Assumption Trap)
+> **User**: *"Should I form an LLC or an S-Corp?"*
+>
+> ❌ *AI dumps a generic textbook comparison of pass-through taxation without knowing revenue, state, or owner count.*
+
+#### The "Interview Me" Prompt & Result
+> **User**: *"I am starting a new business and deciding between an LLC and S-Corp. Ask me the 4 essential questions you need to advise me properly."*
+
+**AI Response**:
+> To give you the exact financial and tax comparison, please answer these 4 questions:
+> 1. **Expected Net Profit**: What is your projected net profit in Year 1? *(If under $60k-$80k, S-Corp payroll and accounting overhead often outweighs tax savings).*
+> 2. **State / Jurisdiction**: Which US state are you operating in? *(States like California levy annual franchise fees and specific S-Corp requirements).*
+> 3. **Ownership Structure**: Will you have foreign investors, venture capital, or multiple partners? *(S-Corps have strict limits: max 100 shareholders, all US citizens/residents).*
+> 4. **Active vs. Passive Involvement**: Will you be actively working in the business, or is this passive investment?
+
+---
+
+## Key Benefits
+
+| Aspect | Unchecked Prompting | With Missing-Info Discovery |
+| :--- | :--- | :--- |
+| **Relevance** | 40% generic filler | 100% targeted to your exact constraints |
+| **Assumptions** | Hidden & unstated | Explicitly surfaced and answered |
+| **Token Waste** | 3–4 back-and-forth correction turns | One diagnostic round $\rightarrow$ Perfect deliverable |

@@ -1,99 +1,111 @@
 ---
-title: "Sniffnet AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Sniffnet on Cross-Platform."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Sniffnet, Gemini troubleshooting, Google AI, Sniffnet, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Sniffnet Network Traffic Monitor AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, configure, and troubleshoot Sniffnet network traffic charts, protocol breakdowns, and ASN geolocation."
+category: "Cross-Platform Network Traffic Monitor"
+tags: ["sniffnet", "network-monitoring", "gemini", "traffic-graphs", "protocol-analysis", "asn-lookup"]
 ---
 
-# Sniffnet AI Skill Guide for Gemini
+# Sniffnet Network Traffic Monitor AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Sniffnet** on **Cross-Platform**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Sniffnet provides real-time, zero-copy network traffic monitoring with intuitive graphical visualizations across network adapters. Gemini acts as an AI Network Traffic Analyst and Security Auditor, specializing in **multimodal bandwidth graph analysis**, **protocol distribution diagnostics (TCP, UDP, ICMP, DNS, TLS)**, **suspicious ASN / country traffic triage**, and **network anomaly detection**.
 
-- **Application Name**: Sniffnet
-- **Category**: Cross-Platform Network Traffic Monitor
-- **Platform**: Cross-Platform
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Packet Aggregation Stack
 
-> **Core Purpose**: Multi-platform application to monitor and analyze network traffic with intuitive real-time graphics and filter rules.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Sniffnet, Gemini must understand its underlying technical framework:
-
-Written in Rust using iced GUI library and pcap/npcap bindings for zero-copy network packet inspection.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Sniffnet Visual Processing Stack            │
+│                                                             │
+│  Traffic Aggregation Layer                                  │
+│  ├── Per-Host IP & Port Flow Tracker (Bytes/sec, Pkts/sec)  │
+│  ├── Transport Protocol Breakdown (TCP vs UDP vs QUIC)      │
+│  └── ASN (Autonomous System Number) & Geolocation Mapping   │
+│                                                             │
+│  Visualization & Notification Engine                        │
+│  ├── Real-Time Vector Bandwidth Waveform Visualizer         │
+│  ├── Application Protocol Identification (HTTP, SSH, NTP)   │
+│  └── Visual & Audio Event Notification System               │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Sniffnet:
+## Operational Capabilities & Agent Directives
 
-- **Real-time network bandwidth graphs and traffic analysis**
-- **IP geolocation, ASN inspection, and domain resolution**
-- **Custom audio & visual alerts for network events**
+1. **Multimodal Traffic Chart Interpretation**: Analyze screenshots of Sniffnet real-time bandwidth charts to detect abnormal traffic bursts, sustained background uploads, and micro-burst packet floods.
+2. **Protocol & Port Distribution Auditing**: Inspect protocol breakdown pies to identify unexpected non-standard port traffic (*e.g. UDP traffic on port 4444 or plain HTTP on external IPs*).
+3. **Country & ASN Geolocation Triage**: Verify external remote IP addresses against legitimate CDN providers (Cloudflare, Fastly, AWS CloudFront) vs suspicious geographic destinations.
+4. **Adapter Selection Diagnostics**: Guide users to select the correct physical adapter (Wi-Fi, Ethernet, Tailscale/VPN virtual tunnel adapter).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Sniffnet, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Sniffnet, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Port Scan & Traffic Detector
+
+Run this script to monitor local network sockets and detect unexpected outbound network connections in real-time:
+
+```python
+"""
+Real-Time Network Socket & Connection Auditor
+Monitors active TCP/UDP connections and resolves remote hostnames.
+"""
+
+import socket
+import psutil
+import time
+
+def audit_active_connections():
+    print(f"{'PID':<8} {'Process Name':<20} {'Local Address':<22} {'Remote Address':<22} {'Status':<12}")
+    print("=" * 88)
+
+    connections = psutil.net_connections(kind="inet")
+    for conn in connections:
+        if conn.status == psutil.CONN_ESTABLISHED:
+            pid = conn.pid or "-"
+            pname = "-"
+            if conn.pid:
+                try:
+                    pname = psutil.Process(conn.pid).name()
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pname = "System/Protected"
+
+            l_addr = f"{conn.laddr.ip}:{conn.laddr.port}"
+            r_addr = f"{conn.raddr.ip}:{conn.raddr.port}" if conn.raddr else "-"
+            
+            print(f"{str(pid):<8} {pname[:18]:<20} {l_addr:<22} {r_addr:<22} {conn.status:<12}")
+
+if __name__ == "__main__":
+    audit_active_connections()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Sniffnet encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] No network adapters detected
-- **Root Cause**: Npcap (Windows) or libpcap (macOS/Linux) missing.
-- **Resolution Pathway**: Install Npcap with WinPcap API compatibility.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Bandwidth Graph Flatlines at 0 KB/s** | Selected network interface is inactive, or traffic is routed through an unselected VPN/WireGuard tunnel. | 1. In Sniffnet Settings, switch adapter dropdown to the active interface (e.g. `eth0` / `wlan0` / `utun3`).<br>2. Look for the interface showing active IP addresses. |
+| **Spike in UDP Port 443 Traffic (QUIC / HTTP/3)** | Modern web browsers utilizing HTTP/3 over UDP rather than standard TCP TLS. | 1. Confirm traffic is destined for known CDN ASNs (Google, Cloudflare).<br>2. This is expected modern web behavior (HTTP/3 / QUIC protocol). |
+| **High Background Data Usage When Idle** | Background cloud sync daemons (OneDrive, Dropbox, Steam) or OS telemetry. | 1. Filter Sniffnet view by highest bytes transferred.<br>2. Inspect remote host domain names.<br>3. Terminate or pause background synchronization services. |
+| **Sniffnet App Window Renders with Graphical Glitches** | Iced GUI / WGPU graphics driver incompatibility with local GPU hardware acceleration. | Launch with software rendering fallback: `WGPU_BACKEND=gl sniffnet` or update graphics drivers. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Sniffnet:
+## Command Line Syntax & Configuration
 
 ```bash
-sniffnet
+# Launch Sniffnet with Explicit OpenGL Graphics Backend
+WGPU_BACKEND=gl sniffnet
+
+# List Active Network Adapters via PowerShell
+Get-NetAdapter | Select-Object Name, InterfaceDescription, Status, LinkSpeed
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/.config/sniffnet/`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Sniffnet issues on Cross-Platform?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Sniffnet?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Windows User Settings**: `%APPDATA%\sniffnet`
+- **Linux Configuration**: `~/.config/sniffnet/`
+- **macOS Preferences**: `~/Library/Application Support/sniffnet`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When diagnosing flatlined network graphs in Sniffnet, verify whether the user has active VPN/Tailscale tunnels and instruct them to select the corresponding virtual tunnel adapter in the interface dropdown.

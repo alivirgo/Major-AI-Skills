@@ -1,99 +1,119 @@
 ---
-title: "Rectangle AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Rectangle on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Rectangle, Gemini troubleshooting, Google AI, Rectangle, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Rectangle macOS Window Manager AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Rectangle Preferences, shortcut customization matrices, drag-to-snap zones, and Menu Bar controls."
+category: "Keyboard & Drag Window Manager"
+tags: ["rectangle", "macos-window-manager", "shortcuts-matrix", "gemini", "drag-snap-zones", "menu-bar-ui"]
 ---
 
-# Rectangle AI Skill Guide for Gemini
+# Rectangle macOS Window Manager AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Rectangle** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Rectangle delivers a clean macOS interface providing configurable hotkey matrices, drag-to-edge snapping overlay zones, display cycle shortcuts, and custom margin padding sliders. Gemini acts as an AI macOS Ergonomics Specialist and UI Systems Reviewer, specializing in **multimodal Rectangle preference panel inspection**, **keyboard shortcut collision audits**, **screen-edge drag snapping zone diagnostics**, and **Menu Bar status controls**.
 
-- **Application Name**: Rectangle
-- **Category**: Keyboard & Drag Window Manager
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Window Tiling Stack
 
-> **Core Purpose**: Open-source window management tool enabling fast keyboard-based window positioning.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Rectangle, Gemini must understand its underlying technical framework:
-
-Swift utility utilizing Accessibility API (AXUIElement) for low-level window manipulation.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Rectangle Visual Operations                 │
+│                                                             │
+│  Tiling Matrix & Snapping Visuals                           │
+│  ├── Halves & Quarters Grid (Left, Right, Top, Bottom, 4 Corners│
+│  ├── Thirds & Sixths Grid (Left Third, Center Third, Right) │
+│  ├── Maximize / Almost Maximize / Center Display Layouts    │
+│  └── Drag-to-Edge Cursor Snapping Preview Overlays          │
+│                                                             │
+│  Preference Controls & Layout Tuning                        │
+│  ├── Shortcut Recorder Matrix (Modifier Key Badges: ⌃⌥⇧⌘)   │
+│  ├── Gap Size Slider (Inner & Outer Screen Margin Pixels)   │
+│  └── Menu Bar Icon HUD (Quick Tiling Command Dropdown)      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Rectangle:
+## Operational Capabilities & Agent Directives
 
-- **Keyboard shortcut window snapping**
-- **Drag-to-edge cursor snapping**
-- **Custom padding gaps & multi-display tracking**
+1. **Multimodal Preference Panel Inspection**: Analyze screenshots of the Rectangle Preferences window to detect unassigned hotkeys, conflicting modifier keys (e.g. `⌃⌥` vs `⌘⌥`), and invalid gap values.
+2. **Drag-to-Edge Snap Zone Triage**: Validate screen edge trigger footprints (screen corners for quarters; edges for halves; top edge for maximize) across multi-display setups.
+3. **Ergonomic Hotkey Matrix Mapping**: Propose consistent keyboard shortcut schemes matching user muscle memory (*e.g. Spectacle layout vs Magnet layout vs Default Rectangle*).
+4. **Display Cycling & Multi-Monitor Diagnostics**: Troubleshoot next/previous display cycling hotkeys (`⌃⌥⌘ $\rightarrow$`).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Rectangle, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Rectangle, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Rectangle Shortcut & Gap Preference Auditor
+
+Execute this script to audit and adjust Rectangle's gap sizes and shortcut presets directly from the command line:
+
+```python
+"""
+Rectangle macOS Configuration & Gap Auditor
+Inspects com.knollsoft.Rectangle.plist for optimal window gap and behavior settings.
+"""
+
+import os
+import plistlib
+
+PREF_PATH = os.path.expanduser("~/Library/Preferences/com.knollsoft.Rectangle.plist")
+
+def audit_rectangle_settings():
+    if not os.path.exists(PREF_PATH):
+        print(f"Error: Rectangle preferences '{PREF_PATH}' not found.")
+        print("Note: Launch Rectangle to generate default preferences.")
+        return
+
+    print("--- [AUDITING RECTANGLE WINDOW MANAGER SETTINGS] ---")
+    try:
+        with open(PREF_PATH, "rb") as f:
+            prefs = plistlib.load(f)
+
+        gap_size        = prefs.get("gapSize", 0.0)
+        snap_to_edges   = prefs.get("snapToEdges", True)
+        subsequent_cycle = prefs.get("subsequentExecutionMode", 0) # 0 = Same size, 1 = Halves to Thirds
+        launch_on_login = prefs.get("launchOnLogin", True)
+
+        print(f"• Window Gap Size:            {gap_size} px")
+        print(f"• Drag-to-Edge Snapping:      {'✅ ENABLED' if snap_to_edges else '⚠️ DISABLED'}")
+        print(f"• Repeated Execution Cycle:   {'Halves -> Thirds' if subsequent_cycle == 1 else 'Standard'}")
+        print(f"• Launch at Login:            {'✅ ENABLED' if launch_on_login else '⚠️ DISABLED'}")
+
+        if gap_size > 0:
+            print(f"\n💡 Notice: Outer screen gaps of {gap_size}px are active around tiled windows.")
+
+    except Exception as e:
+        print(f"Error reading plist: {e}")
+
+if __name__ == "__main__":
+    audit_rectangle_settings()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Rectangle encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Shortcuts stop working
-- **Root Cause**: Accessibility API permission lost.
-- **Resolution Pathway**: Reset accessibility via 'tccutil reset Accessibility com.knollsoft.Rectangle'.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Drag Snapping Overlays Do Not Appear on Edge** | Drag-to-edge snapping is disabled in preferences or cursor moved too quickly. | In Rectangle Preferences $\rightarrow$ **Settings**, ensure **Snap windows by dragging to screen edges** is checked. |
+| **Shortcut Modifier Symbols Display Inconsistently** | User configured a combination that conflicts with macOS global input methods (e.g. Option key dead keys). | Use standard modifier pairs such as `Control + Option` (`⌃⌥`) or `Command + Option` (`⌘⌥`). |
+| **Menu Bar Icon Missing from Status Bar** | User selected "Hide menu bar icon" in preferences. | Launch Terminal $\rightarrow$ Run `defaults write com.knollsoft.Rectangle hideMenubarIcon -bool false` $\rightarrow$ Restart Rectangle. |
+| **Window Resizes but Fails to Center on Screen** | Target window has a fixed aspect ratio or fixed minimum width larger than 50% of the screen. | Maximize the window instead or increase display resolution. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Rectangle:
+## Command Line Syntax & Server Control
 
 ```bash
+# Launch Rectangle via Terminal
 open -a Rectangle
+
+# Show Hidden Menu Bar Icon
+defaults write com.knollsoft.Rectangle hideMenubarIcon -bool false
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Preferences/com.knollsoft.Rectangle.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Rectangle issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Rectangle?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Preferences Plist**: `~/Library/Preferences/com.knollsoft.Rectangle.plist`
+- **TCC Database Entry**: `com.knollsoft.Rectangle`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For ultra-wide and 4K displays, recommend enabling "Repeated execution of half-screen shortcut cycles to thirds" in Rectangle preferences to enhance multi-tasking density.

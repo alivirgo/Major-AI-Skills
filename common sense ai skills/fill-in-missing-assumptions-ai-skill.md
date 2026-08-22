@@ -1,44 +1,101 @@
 ---
-title: "Ask AI to List Its Assumptions AI Skill"
-description: "Ask the AI 'what assumptions did you make?' to uncover hidden gaps in its logic."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, fill-in-missing-assumptions"
-category: "Common Sense Everyday AI"
+title: "Ask AI to List Its Hidden Assumptions AI Skill"
+description: "How to use Assumption Surfacing and Sensitivity Analysis to uncover silent presuppositions, prevent architectural failure, and stress-test recommendations."
+category: "Fact-Checking & Safety Habits"
+tags: ["assumptions", "risk-management", "sensitivity-analysis", "architecture", "decision-making", "prompt-engineering"]
 ---
 
-# Ask AI to List Its Assumptions (AI Skill)
+# Ask AI to List Its Hidden Assumptions (AI Skill)
 
 ## Overview
-Ask the AI 'what assumptions did you make?' to uncover hidden gaps in its logic.
+Every time an AI answers a strategic, financial, or technical question, it silently fills undefined variables with default assumptions (*e.g., assuming you have infinite bandwidth, a $50k monthly budget, standard US legal jurisdiction, or a team of 10 senior engineers*).
+
+The **Assumption Surfacing Protocol** forces the AI to declare all latent premises underneath its analysis—allowing you to adjust flawed presuppositions before making expensive decisions.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Assumption Extraction Framework
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Assumption Surfacing Engine                 │
+│                                                             │
+│  [ RECOMMENDATION / PLAN ]                                  │
+│              │                                              │
+│              ▼                                              │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │ 1. INFRASTRUCTURE & TECH: Versions, tools assumed     │  │
+│  │ 2. TRAFFIC & SCALE: Requests/sec, database size       │  │
+│  │ 3. BUDGET & RESOURCES: Team headcount, licensing cost │  │
+│  │ 4. USER BEHAVIOR: Conversion rates, latency tolerance │  │
+│  └───────────────────────────────────────────────────────┘  │
+│              │                                              │
+│              ▼                                              │
+│  [ Sensitivity Check: If Assumption X changes $\rightarrow$ Impact ]│
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Assumption-Audit Prompt Templates
+
+### Pattern 1: The Pre-Flight Assumption Audit
+Use whenever receiving a complex technical, business, or marketing plan:
+
+```markdown
+Review the plan you just proposed above.
+
+List your **Top 4 Core Assumptions** across these categories:
+1. **Technical / Environment Assumptions**: (e.g. cloud provider, SDK versions, OS)
+2. **Scale & Traffic Assumptions**: (e.g. daily active users, requests per second)
+3. **Resource & Team Assumptions**: (e.g. implementation hours, skillset required)
+4. **Economic & Cost Assumptions**: (e.g. ongoing SaaS fees, egress costs)
+
+For each assumption, answer:
+*"If this assumption is false, what is the single biggest risk to the plan?"*
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Sensitivity Inversion Test
+Use when testing whether a plan holds up under extreme constraints:
+
+```markdown
+What happens to your proposed architecture if:
+- Our budget is reduced by 50%?
+- Our traffic spikes by 10x overnight?
+- We cannot use proprietary third-party APIs?
+
+Provide the modified, fail-safe recommendations.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Recommending an Elasticsearch Cluster
+
+#### Unstated Assumptions (The Hidden Trap)
+> **User**: *"What search solution should we use for our e-commerce store with 500,000 products?"*
+> 
+> **AI Default Recommendation**: *"Set up an Elasticsearch cluster on AWS OpenSearch with 3 master nodes and 6 data nodes."*
+> 
+> *(Hidden Assumption: The team has a dedicated DevOps engineer to manage shard rebalancing, cluster memory heaps, and index lifecycle policies, and can afford $1,200/mo in AWS compute).*
+
+#### Surfaced Assumptions Output
+> **User**: *"List the critical operational assumptions behind this recommendation."*
+
+**AI Response**:
+> **Declared Assumptions**:
+> 1. **Budget**: Assumes an infrastructure spend of $\ge \$800/\text{month}$ for managed OpenSearch.
+> 2. **Operations**: Assumes your team has experience tuning JVM garbage collection and mapping analyzers.
+> 3. **Query Complexity**: Assumes you need complex fuzzy matching, vector semantic search, and multi-language stemmers.
+>
+> **Sensitivity Warning**:
+> *"If you do not have dedicated DevOps staff or your monthly budget is $< \$100$, Elasticsearch is an operational trap. In that scenario, use **Meilisearch** or **Typesense** on a single $20/mo VPS instead."*
+
+---
+
+## Summary Best Practices
+- **Never approve a plan without reading its assumptions**: It is where 90% of real-world budget blowouts hide.
+- **Invert assumptions early**: Testing *"What if we have 1/5th the time?"* immediately surfaces simpler, higher-ROI alternatives.

@@ -1,99 +1,121 @@
 ---
-title: "Ventoy AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Ventoy on Cross-Platform."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Ventoy, Troubleshooting with Claude, Claude AI skills, Claude integration, Ventoy, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Ventoy Multiboot USB Creator AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Ventoy multiboot USB drives, UEFI Secure Boot MOK enrollment, and ventoy.json plugin automation."
+category: "Multiboot USB Creator & ISO Bootloader"
+tags: ["ventoy", "multiboot-usb", "iso-bootloader", "uefi-secure-boot", "ventoy-json", "mok-enrollment", "claude"]
 ---
 
-# Ventoy AI Skill Guide for Claude
+# Ventoy Multiboot USB Creator AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Ventoy** on **Cross-Platform**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Ventoy is an open-source multiboot USB utility that eliminates the need to repeatedly format flash drives. Once Ventoy is installed, users simply copy ISO, WIM, IMG, VHD(x), and EFI files directly onto the data partition. During boot, Ventoy's **in-memory hooking engine** dynamically mounts the target ISO image in RAM and chains execution via GRUB2/Shim. Claude operates as an Operating System Deployment Specialist and Systems Engineer, specializing in **UEFI Secure Boot (MOK - Machine Owner Key) enrollment**, **`ventoy.json` plugin configuration**, **unattended OS automated installations (Windows / Linux kickstarts)**, and **persistent Live Linux storage**.
 
-- **Application Name**: Ventoy
-- **Category**: Multiboot USB Creator & ISO Bootloader
-- **Platform**: Cross-Platform
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Ventoy Disk Partition Structure & Boot Stack
 
-> **Core Purpose**: Revolutionary open-source tool turning USB drives into multiboot systems by copying ISO files directly onto the drive.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Ventoy, Claude must understand its underlying technical framework:
-
-Installs custom GRUB2 bootloader on EFI/MBR partition, hooking ISO file system in memory dynamically during boot.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Ventoy Drive Partition Layout               │
+│                                                             │
+│  Partition 1: Large Data Partition (exFAT / NTFS / ext4)    │
+│  ├── Raw Boot Images (*.iso, *.wim, *.vhd, *.img)           │
+│  └── `/ventoy/ventoy.json` (Configuration & Plugin Scripts) │
+│                                                             │
+│  Partition 2: Hidden Boot Partition (`VTOYEFI` - 32MB FAT)  │
+│  ├── UEFI Shim Loader & Enrolled MOK Certificate            │
+│  ├── GRUB2 Custom Dynamic Kernel & Hooking Drivers          │
+│  └── Legacy x86 MBR / BIOS Bootstrap Code                   │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Ventoy:
+## Operational Capabilities & Agent Directives
 
-- **Direct ISO file drag-and-drop multiboot support**
-- **x86 Legacy BIOS & UEFI (Secure Boot supported) compatibility**
-- **Data persistence plugin support for Linux Live distros**
+1. **UEFI Secure Boot Remediation**: Guide users through the Machine Owner Key (MOK) enrollment sequence (`Enroll MOK` $\rightarrow$ `Continue` $\rightarrow$ `Enroll Key` $\rightarrow$ `Password: ventoy`) to bypass Secure Boot restrictions without disabling system security.
+2. **Declarative `ventoy.json` Authoring**: Author structured plugin configurations to automate Windows 11 hardware bypasses (TPM 2.0 / RAM / CPU checks), auto-inject unattended answers, and configure theme layouts.
+3. **Data Persistence Management**: Configure persistent live storage images (`persistence.dat`) for Ubuntu, Kali Linux, and Fedora Live USB environments.
+4. **Automated CLI Installation**: Script automated disk preparation on Linux (`Ventoy2Disk.sh -i /dev/sdX`) and Windows (`Ventoy2Disk.exe /I V:`) with safety checks preventing accidental host OS drive overwrites.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Ventoy, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Ventoy, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Configuration Recipe: Master `ventoy.json` Configuration
+
+Save this file as `/ventoy/ventoy.json` on the main Ventoy USB data partition:
+
+```json
+{
+  "control": [
+    { "VTOY_DEFAULT_SEARCH_ROOT": "/ISOs" },
+    { "VTOY_MENU_TIMEOUT": "10" },
+    { "VTOY_DEFAULT_IMAGE": "/ISOs/Ubuntu-24.04-Desktop.iso" },
+    { "VTOY_WIN11_BYPASS_CHECK": "1" },
+    { "VTOY_WIN11_BYPASS_NRO": "1" }
+  ],
+  "theme": {
+    "file": "/ventoy/themes/flat/theme.txt",
+    "gfxmode": "1920x1080"
+  },
+  "menu_alias": [
+    {
+      "image": "/ISOs/Win11_23H2_English_x64.iso",
+      "alias": "Windows 11 Enterprise (Unattended Bypass)"
+    },
+    {
+      "image": "/ISOs/Ubuntu-24.04-Desktop.iso",
+      "alias": "Ubuntu 24.04 LTS Live (Persistent Storage)"
+    },
+    {
+      "image": "/ISOs/archlinux-x86_64.iso",
+      "alias": "Arch Linux Netinstall"
+    }
+  ],
+  "persistence": [
+    {
+      "image": "/ISOs/Ubuntu-24.04-Desktop.iso",
+      "backend": "/ventoy/persistence/ubuntu_persistence.dat"
+    }
+  ],
+  "auto_install": [
+    {
+      "image": "/ISOs/Win11_23H2_English_x64.iso",
+      "template": "/ventoy/script/autounattend.xml"
+    }
+  ]
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Ventoy encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] UEFI Secure Boot blocks bootloader
-- **Root Cause**: Unsigned GRUB2 binary rejected.
-- **Resolution Pathway**: Enroll Ventoy MOK key in UEFI firmware.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Verification Failed: (0x1A) Security Violation` on UEFI Boot** | Secure Boot rejected unsigned Ventoy EFI binary before MOK key was enrolled. | 1. Press `OK` $\rightarrow$ Select **Enroll MOK**.<br>2. Select **View Key** (verify `Ventoy Certificate`).<br>3. Select **Continue** $\rightarrow$ **Yes**.<br>4. Enter default password: `ventoy` $\rightarrow$ Reboot. |
+| **Windows 11 Installer Fails: `This PC can't run Windows 11`** | Target hardware lacks TPM 2.0 or Secure Boot; Ventoy bypass flag was not set. | In `/ventoy/ventoy.json`, set `"VTOY_WIN11_BYPASS_CHECK": "1"` and `"VTOY_WIN11_BYPASS_NRO": "1"` to bypass hardware and online Microsoft account requirements. |
+| **Linux Boot Freezes on `mount: /dev/loop0 failed`** | Target ISO image is severely fragmented across the USB exFAT partition. | 1. Defragment the USB drive or copy the ISO off and back onto the drive.<br>2. On Linux, run `e4defrag` or check with `filefrag -v /path/to/image.iso`. |
+| **Ventoy Drive Not Detected in BIOS/UEFI Boot Menu** | USB was formatted with GPT for a legacy MBR-only motherboard, or vice-versa. | 1. In Ventoy2Disk, select **Partition Style** $\rightarrow$ **MBR** (compatible with both Legacy BIOS and UEFI).<br>2. Re-install Ventoy using non-destructive update mode. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Ventoy:
+## Command Line Syntax & Disk Installation
 
 ```bash
-Ventoy2Disk.exe -i G:
+# 1. Non-Destructive Update of Existing Ventoy USB on Linux
+sudo ./Ventoy2Disk.sh -u /dev/sdb
+
+# 2. Fresh Installation on Linux with GPT Partition Table and Secure Boot
+sudo ./Ventoy2Disk.sh -i -g -s /dev/sdb
+
+# 3. Create 8GB Persistence File for Ubuntu on Linux
+sudo ./CreatePersistentImg.sh -s 8192 -t ext4 -l casper-rw -o ubuntu_persistence.dat
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `/ventoy/ventoy.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Ventoy issues on Cross-Platform?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Ventoy?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Ventoy Config File**: `<USB_DRIVE>:\ventoy\ventoy.json`
+- **Persistence Storage Images**: `<USB_DRIVE>:\ventoy\persistence\*.dat`
+- **Unattended Templates**: `<USB_DRIVE>:\ventoy\script\*.xml`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Never advise users to execute `Ventoy2Disk.sh -i` without explicitly verifying the target disk identifier (`lsblk`) to prevent accidental destruction of primary host storage partitions. Always provide MOK enrollment steps for Secure Boot errors.

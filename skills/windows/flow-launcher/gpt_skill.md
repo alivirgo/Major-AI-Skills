@@ -1,100 +1,147 @@
 ---
-title: "Flow Launcher AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Flow Launcher on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Flow Launcher, ChatGPT troubleshooting, GPT automation, Flow Launcher, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Flow Launcher Extensible Productivity AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Flow Launcher, C# Plugin API (IPlugin), Python JSON-RPC frameworks, and automated plugin deployments."
+category: "Productivity Application & File Launcher"
+tags: ["flow-launcher", "csharp-iplugin", "flow-plugin-dev", "jsonrpc-protocol", "gpt-codex", "windows-productivity-dev"]
 ---
 
-# Flow Launcher AI Skill Guide for GPT
+# Flow Launcher Extensible Productivity AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Flow Launcher** on **Windows**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Flow Launcher provides a powerful extensibility framework for developers through the **Native C# Plugin API (`Flow.Launcher.Plugin.IPlugin`)** and the **Out-of-Process JSON-RPC Engine (Python, Node.js, C++)**. GPT/Codex acts as a Principal Windows Software Engineer and Flow Launcher Plugin Developer, delivering **high-performance compiled C# plugins**, **modular Python JSON-RPC adapters**, **context menu action extensions (`IContextMenu`)**, and **automated plugin packaging pipelines**.
 
-- **Application Name**: Flow Launcher
-- **Category**: Productivity Application & File Launcher
-- **Platform**: Windows
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Plugin API Stack
 
-> **Core Purpose**: Extensible open-source application launcher with deep Everything and Python plugin integration.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Flow Launcher, GPT must understand its underlying technical framework:
-
-C# / WPF framework with isolated Python runtime environment for third-party plugins.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Flow Launcher Developer Platform            │
+│                                                             │
+│  Native C# .NET In-Process API (`Flow.Launcher.Plugin`)     │
+│  ├── `IPlugin` Interface (`Init(PluginInitContext)`, `Query`)│
+│  ├── `IContextMenu` Interface (`LoadContextMenus(Result)`)  │
+│  └── `Result` Model (`Title`, `SubTitle`, `Action`, `Icon`) │
+│                                                             │
+│  JSON-RPC Standard I/O Subsystem                            │
+│  ├── Python / Node.js Process Spawner (stdin/stdout Pipes)  │
+│  ├── JSON Request/Response Serialization Engine             │
+│  └── `JsonRPCAction` Dynamic Callback Dispatcher            │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Flow Launcher:
+## Operational Capabilities & Agent Directives
 
-- **Instant app launching and Everything file search integration**
-- **Rich C# and Python plugin ecosystem**
-- **Web search triggers, bookmark queries, and inline calculator**
+1. **Native C# Plugin Development**: Author compiled C# plugins implementing `IPlugin` and `IAsyncPlugin` targeting .NET 8, executing non-blocking asynchronous queries with zero memory allocations.
+2. **Python JSON-RPC Adapter Engineering**: Construct clean Python plugin wrappers handling the JSON-RPC lifecycle, parsing `query` parameters, and emitting `Result` JSON objects.
+3. **Context Menu Actions & Settings Integration**: Implement `IContextMenu` to provide secondary actions (*e.g. Copy to Clipboard, Open Containing Folder, Execute as Administrator*).
+4. **Automated Plugin Packaging**: Script automated build routines producing compliant `.zip` release packages containing `plugin.json`, compiled binaries/scripts, and assets.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Flow Launcher, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Flow Launcher, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production C# Code: High-Performance Flow Launcher Native C# Plugin (`IPlugin`)
+
+Save this file as `Main.cs` in a C# Class Library project referencing `Flow.Launcher.Plugin.dll`:
+
+```csharp
+// ==============================================================================
+// Flow Launcher Native C# Plugin: GitHub Repository Quick-Search
+// Implements IPlugin and IContextMenu for instant search result rendering.
+// ==============================================================================
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows;
+using Flow.Launcher.Plugin;
+
+namespace Flow.Launcher.Plugin.GitHubQuickSearch {
+    public class Main : IPlugin, IContextMenu {
+        private PluginInitContext _context;
+
+        public void Init(PluginInitContext context) {
+            _context = context;
+        }
+
+        public List<Result> Query(Query query) {
+            var results = new List<Result>();
+            string searchTerm = query.Search.Trim();
+
+            if (string.IsNullOrEmpty(searchTerm)) {
+                results.Add(new Result {
+                    Title = "Search GitHub Repositories",
+                    SubTitle = "Type your query (e.g. 'gh flow launcher')",
+                    IcoPath = "Images\\github.png",
+                    Action = _ => {
+                        Process.Start(new ProcessStartInfo("https://github.com") { UseShellExecute = true });
+                        return true;
+                    }
+                });
+                return results;
+            }
+
+            // Generate GitHub Search Action
+            string targetUrl = $"https://github.com/search?q={Uri.EscapeDataString(searchTerm)}";
+            results.Add(new Result {
+                Title = $"Search GitHub for '{searchTerm}'",
+                SubTitle = $"Open in default browser: {targetUrl}",
+                IcoPath = "Images\\github.png",
+                Action = _ => {
+                    Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true });
+                    return true;
+                }
+            });
+
+            return results;
+        }
+
+        public List<Result> LoadContextMenus(Result selectedResult) {
+            var contextMenus = new List<Result>();
+
+            contextMenus.Add(new Result {
+                Title = "Copy Search URL to Clipboard",
+                SubTitle = "Copies the full GitHub query URL to Windows clipboard",
+                IcoPath = "Images\\copy.png",
+                Action = _ => {
+                    Clipboard.SetText(selectedResult.SubTitle.Replace("Open in default browser: ", ""));
+                    _context.API.ShowMsg("Copied!", "GitHub Search URL copied to clipboard.");
+                    return true;
+                }
+            });
+
+            return contextMenus;
+        }
+    }
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Flow Launcher encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Python plugins fail to load
-- **Root Cause**: Flow Launcher cannot locate Python interpreter in PATH.
-- **Resolution Pathway**: Specify exact python.exe path in Flow Settings -> Plugin Store -> Python Settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`JsonReaderException` on Plugin Execution** | Python plugin emitted debug `print()` statements to stdout, corrupting the JSON-RPC stream. | Redirect debug logs to `sys.stderr` or a log file: `print("debug", file=sys.stderr)`. |
+| **C# Plugin Fails with `BadImageFormatException`** | Plugin compiled for wrong architecture (e.g. x86 instead of x64 / AnyCPU). | Configure build target to `x64` or `AnyCPU` targeting .NET 8.0 Windows Desktop. |
+| **`plugin.json` Validation Error: `Missing ID`** | Manifest missing a valid unique GUID in the `"ID"` field. | Generate a new GUID (`[guid]::NewGuid()`) and populate the `"ID"` property. |
+| **Action Keyword Not Triggering Plugin** | `"ActionKeyword"` in `plugin.json` conflicts with another plugin or was overridden in user settings. | In Flow Settings $\rightarrow$ Plugins, verify the Action Keyword matches the expected trigger. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Flow Launcher:
+## Command Line Syntax & Batch Processing
 
 ```bash
-Flow.Launcher.exe
-Flow.Launcher.exe --query "g github flow launcher"
+# Test Flow Launcher Plugin via Command Line Query
+"%LOCALAPPDATA%\FlowLauncher\Flow.Launcher.exe" --query "gh react"
+
+# Package Plugin Directory into .zip Release
+powershell -Command "Compress-Archive -Path '.\SystemDiagnostics\*' -DestinationPath '.\SystemDiagnostics.zip' -Force"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `%APPDATA%\FlowLauncher\Settings\Settings.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Flow Launcher issues on Windows?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Flow Launcher?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Plugin SDK NuGet**: `Flow.Launcher.Plugin`
+- **Installed Plugins**: `%APPDATA%\FlowLauncher\Plugins\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: In Flow Launcher Python plugins, never output raw debug text to `stdout`. All logging must be redirected to `sys.stderr` to prevent JSON-RPC serialization corruption.

@@ -1,99 +1,161 @@
 ---
-title: "Rectangle AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Rectangle on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Rectangle, Troubleshooting with Claude, Claude AI skills, Claude integration, Rectangle, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Rectangle macOS Window Manager AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Rectangle, macOS Accessibility API (AXUIElement), multi-display tiling, and URL scheme actions."
+category: "Keyboard & Drag Window Manager"
+tags: ["rectangle", "macos-window-manager", "axuielement", "accessibility-api", "window-tiling", "url-scheme", "claude"]
 ---
 
-# Rectangle AI Skill Guide for Claude
+# Rectangle macOS Window Manager AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Rectangle** on **macOS**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Rectangle is an open-source macOS window management utility engineered in Swift and AppKit. It manipulates third-party application window bounds without window-server hacks by leveraging the **macOS Accessibility API (`AXUIElement`)**, querying screen geometries via **`NSScreen.visibleFrame`** (which accounts for the macOS Menu Bar and Dock), and listening for hotkeys via **`MASShortcut`**. Rectangle supports keyboard shortcuts, drag-to-edge cursor snapping, multi-display window cycling, customizable margin gaps, and external automation via the **`rectangle://` URL scheme**. Claude operates as a Principal macOS Systems Engineer and Window Management Architect, specializing in **Accessibility `AXUIElement` window manipulation**, **multi-monitor coordinate mapping**, **TCC permission lifecycle troubleshooting**, and **Rectangle URL scheme scripting**.
 
-- **Application Name**: Rectangle
-- **Category**: Keyboard & Drag Window Manager
-- **Platform**: macOS
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Rectangle Window Server & Accessibility Architecture
 
-> **Core Purpose**: Open-source window management tool enabling fast keyboard-based window positioning.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Rectangle, Claude must understand its underlying technical framework:
-
-Swift utility utilizing Accessibility API (AXUIElement) for low-level window manipulation.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Rectangle Engine Architecture               │
+│                                                             │
+│  Input & Trigger Subsystem                                  │
+│  ├── Global Hotkey Listener (`MASShortcut` / Carbon Events) │
+│  ├── Drag-to-Edge Cursor Tracker (`NSEvent` Global Monitor) │
+│  └── URL Scheme Action Dispatcher (`rectangle://execute...`)│
+│                                                             │
+│  Geometry Calculation & Coordinate Engine                   │
+│  ├── `NSScreen.visibleFrame` (Menu Bar & Dock Offset Math)  │
+│  ├── Multi-Display Topology Resolver (Display ID Offsets)   │
+│  └── Window Padding / Margin Gap Subtractor                 │
+│                                                             │
+│  macOS Accessibility Manipulation Tier                      │
+│  ├── Target App Accessibility Node (`AXUIElement`)          │
+│  ├── Set Window Position (`kAXPositionAttribute`)           │
+│  └── Set Window Dimensions (`kAXSizeAttribute`)             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Rectangle:
+## Operational Capabilities & Agent Directives
 
-- **Keyboard shortcut window snapping**
-- **Drag-to-edge cursor snapping**
-- **Custom padding gaps & multi-display tracking**
+1. **Rectangle URL Scheme Automation**: Construct terminal and Python automation scripts dispatching commands via `open "rectangle://execute-action?name=<action>"` (*e.g. `left-half`, `right-half`, `maximize`, `first-third`*).
+2. **Native `AXUIElement` Window Manipulation**: Author standalone Swift scripts demonstrating direct manipulation of `kAXPositionAttribute` and `kAXSizeAttribute` on running application processes.
+3. **Multi-Display Coordinate Triage**: Troubleshoot window jumping and misalignment across mixed DPI Retina and external displays by calculating relative `NSScreen` frame bounds.
+4. **TCC Accessibility Permissions Recovery**: Remediate non-responsive shortcuts using `tccutil reset Accessibility com.knollsoft.Rectangle` and system permission verification.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Rectangle, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Rectangle, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Swift Automation: Standalone Native Window Snapper (`AXUIElement`)
+
+Save this file as `snap_window.swift` and execute via `swift snap_window.swift left`:
+
+```swift
+// ==============================================================================
+// Standalone Swift 5.x Script: Native macOS Window Snapper (AXUIElement)
+// Tiles the frontmost application window to Left or Right half without dependencies.
+// ==============================================================================
+import Cocoa
+
+guard CommandLine.arguments.count > 1 else {
+    print("Usage: swift snap_window.swift <left|right|maximize>")
+    exit(1)
+}
+
+let action = CommandLine.arguments[1].lowercased()
+
+// 1. Verify Accessibility Permissions
+guard AXIsProcessTrusted() else {
+    print("🚨 Error: Accessibility permissions not granted. Enable Terminal in System Settings -> Accessibility.")
+    exit(1)
+}
+
+// 2. Get Frontmost Application Process
+guard let frontApp = NSWorkspace.shared.frontmostApplication else {
+    print("Error: No frontmost application detected.")
+    exit(1)
+}
+
+let appElement = AXUIElementCreateApplication(frontApp.processIdentifier)
+var focusedWindow: AnyObject?
+let result = AXUIElementCopyAttributeValue(appElement, kAXFocusedWindowAttribute as CFString, &focusedWindow)
+
+guard result == .success, let window = focusedWindow else {
+    print("Error: Could not access focused window on \(frontApp.localizedName ?? "App").")
+    exit(1)
+}
+
+let windowElement = window as! AXUIElement
+
+// 3. Calculate Target Screen Bounds (Excluding Menu Bar & Dock)
+guard let screen = NSScreen.main else {
+    print("Error: Main display not detected.")
+    exit(1)
+}
+
+let visibleFrame = screen.visibleFrame
+let screenHeight = screen.frame.height
+
+var targetX: CGFloat = visibleFrame.origin.x
+var targetY: CGFloat = screenHeight - visibleFrame.origin.y - visibleFrame.height
+var targetW: CGFloat = visibleFrame.width
+var targetH: CGFloat = visibleFrame.height
+
+if action == "left" {
+    targetW = visibleFrame.width / 2.0
+} else if action == "right" {
+    targetX = visibleFrame.origin.x + (visibleFrame.width / 2.0)
+    targetW = visibleFrame.width / 2.0
+} else if action != "maximize" {
+    print("Invalid action. Use 'left', 'right', or 'maximize'.")
+    exit(1)
+}
+
+// 4. Apply Position and Size via Accessibility API
+var newPoint = CGPoint(x: targetX, y: targetY)
+var newSize = CGSize(width: targetW, height: targetH)
+
+let posValue = AXValueCreate(.cgPoint, &newPoint)!
+let sizeValue = AXValueCreate(.cgSize, &newSize)!
+
+AXUIElementSetAttributeValue(windowElement, kAXPositionAttribute as CFString, posValue)
+AXUIElementSetAttributeValue(windowElement, kAXSizeAttribute as CFString, sizeValue)
+
+print("✅ Snapped \(frontApp.localizedName ?? "Window") to '\(action)'.")
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Rectangle encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Shortcuts stop working
-- **Root Cause**: Accessibility API permission lost.
-- **Resolution Pathway**: Reset accessibility via 'tccutil reset Accessibility com.knollsoft.Rectangle'.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Shortcuts Stop Working / Window Refuses to Move** | macOS Accessibility permission revoked after an application update. | 1. In Terminal, run: `tccutil reset Accessibility com.knollsoft.Rectangle`.<br>2. Open *System Settings $\rightarrow$ Privacy & Security $\rightarrow$ Accessibility*.<br>3. Toggle **Rectangle** ON. |
+| **Window Snaps to Wrong Display in Multi-Monitor Setup** | "Displays have separate Spaces" setting disabled, confusing `NSScreen` frame origins. | In System Settings $\rightarrow$ *Desktop & Dock*, check **Displays have separate Spaces**, then log out and log back in. |
+| **Unwanted Gaps Around Snapped Windows** | Window Margin / Gap Size setting configured in Rectangle preferences. | In Rectangle Preferences $\rightarrow$ **Settings**, set **Gap size** to `0px`. |
+| **Certain Windows (Calculator, System Settings) Won't Resize** | Target application window has fixed minimum/maximum constraints in AppKit (`NSWindow.minSize == NSWindow.maxSize`). | This is expected macOS behavior; fixed-dimension utility panels cannot be resized. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Rectangle:
+## Command Line Syntax & URL Scheme Actions
 
 ```bash
-open -a Rectangle
+# 1. Tile Frontmost Window to Left Half via Rectangle URL Scheme
+open -g "rectangle://execute-action?name=left-half"
+
+# 2. Tile Frontmost Window to Right Half
+open -g "rectangle://execute-action?name=right-half"
+
+# 3. Maximize Frontmost Window
+open -g "rectangle://execute-action?name=maximize"
+
+# 4. Reset Rectangle Accessibility Permissions via CLI
+tccutil reset Accessibility com.knollsoft.Rectangle
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `~/Library/Preferences/com.knollsoft.Rectangle.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Rectangle issues on macOS?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Rectangle?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Preferences Plist**: `~/Library/Preferences/com.knollsoft.Rectangle.plist`
+- **Application Binary**: `/Applications/Rectangle.app`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When triggering Rectangle actions via shell scripts, always use the `-g` (background) flag with `open "rectangle://execute-action?name=..."` to avoid stealing focus from the active window being tiled.

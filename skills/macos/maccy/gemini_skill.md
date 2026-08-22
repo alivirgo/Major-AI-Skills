@@ -1,99 +1,126 @@
 ---
-title: "MacCy AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate MacCy on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacCy, Gemini troubleshooting, Google AI, MacCy, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Maccy macOS Clipboard History Manager AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Maccy popup menus, pinned clipboard items, rich text formatting previews, and Menu Bar states."
+category: "Clipboard History Manager"
+tags: ["maccy", "macos", "clipboard-ui", "gemini", "pinned-items", "menu-bar-diagnostics"]
 ---
 
-# MacCy AI Skill Guide for Gemini
+# Maccy macOS Clipboard History Manager AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **MacCy** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Maccy provides a keyboard-first, native macOS popup menu that renders searchable clipboard clips, rich text previews, image thumbnails, and persistent pinned headers. Gemini acts as an AI macOS Productivity Specialist and UI Systems Auditor, specializing in **multimodal Maccy popup menu inspection**, **pinned vs dynamic history validation**, **rich text/code snippet formatting verification**, and **Menu Bar status icon state analysis**.
 
-- **Application Name**: MacCy
-- **Category**: Clipboard History Manager
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & UI Hierarchy Stack
 
-> **Core Purpose**: Lightweight open-source clipboard history manager keeping searchable history of text, images, and files.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with MacCy, Gemini must understand its underlying technical framework:
-
-Monitors macOS NSPasteboard change events and stores historical data in SQLite storage.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Maccy Visual Operations Stack               │
+│                                                             │
+│  Popup Menu Presentation Hierarchy                          │
+│  ├── Search Header Input (Real-Time Fuzzy Filter)           │
+│  ├── Pinned Items Section (Numbered 1-9 Shortcuts, Red Pins)│
+│  ├── Dynamic History List (Numbered Shortcuts, Timestamps)  │
+│  │    ├── Text Clips (Formatted Syntax & Line Breaks)       │
+│  │    ├── Image Thumbnails (Aspect Ratio & Byte Size)       │
+│  │    └── File Path Links (POSIX URIs & Finder Icons)       │
+│  └── Preview Panel (Side-by-Side Expanded Text/Image HUD)   │
+│                                                             │
+│  Menu Bar & Preference Controls                             │
+│  ├── Menu Bar Icon (Paperclip Indicator / Active State)     │
+│  └── Popup Positioning (At Cursor vs Centered on Screen)    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of MacCy:
+## Operational Capabilities & Agent Directives
 
-- **Searchable clipboard history with fuzzy search**
-- **Secure Input detection ignoring password managers**
-- **Pinning clips to prevent cleanup**
+1. **Multimodal Popup Menu Inspection**: Analyze screenshots of Maccy's popup menu to verify that search queries correctly highlight fuzzy matches, pinned headers retain their sticky positions, and preview panels expand cleanly without truncation.
+2. **Formatting & Syntax Highlighting Review**: Ensure copied JSON, Python, and SQL snippets preserve line indentations and escape characters when rendered in Maccy's side preview panel.
+3. **Menu Bar Status & Appearance Tuning**: Guide users in configuring popup positioning (*At Cursor / Menu Icon / Window Center*) and menu bar visibility settings.
+4. **Fuzzy Search & Filtering Diagnostics**: Troubleshoot character matching sensitivity and regex search parameters in Maccy preferences.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding MacCy, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to MacCy, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Maccy Preference Auditor (`.plist`)
+
+Execute this script to audit and optimize Maccy's visual display preferences (history size, popup location, and preview panel toggles):
+
+```python
+"""
+Maccy macOS Settings & Display Preference Auditor
+Audits org.pavelm.Maccy.plist for optimal UI layout and history retention.
+"""
+
+import os
+import plistlib
+
+PREF_PATH = os.path.expanduser(
+    "~/Library/Containers/org.pavelm.Maccy/Data/Library/Preferences/org.pavelm.Maccy.plist"
+)
+
+def audit_maccy_settings():
+    if not os.path.exists(PREF_PATH):
+        # Fallback to standard Preferences directory if not sandboxed
+        alt_path = os.path.expanduser("~/Library/Preferences/org.pavelm.Maccy.plist")
+        if os.path.exists(alt_path):
+            pref_file = alt_path
+        else:
+            print(f"Error: Maccy preferences not found at '{PREF_PATH}'.")
+            return
+    else:
+        pref_file = PREF_PATH
+
+    print(f"--- [AUDITING MACCY UI SETTINGS: {pref_file}] ---")
+    try:
+        with open(pref_file, "rb") as f:
+            prefs = plistlib.load(f)
+
+        history_size   = prefs.get("historySize", 200)
+        paste_on_select = prefs.get("pasteOnSelect", True)
+        show_preview   = prefs.get("previewPosition", "right")
+        popup_pos      = prefs.get("popupPosition", "cursor")
+
+        print(f"• History Size Limit:     {history_size} items")
+        print(f"• Auto-Paste on Select:   {'✅ ENABLED' if paste_on_select else '⚠️ DISABLED (Manual Cmd+V required)'}")
+        print(f"• Preview Panel Position: {show_preview}")
+        print(f"• Popup Spawn Location:   {popup_pos}")
+
+    except Exception as e:
+        print(f"Error reading plist: {e}")
+
+if __name__ == "__main__":
+    audit_maccy_settings()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If MacCy encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Clips not saving
-- **Root Cause**: Secure Input lock active by password manager.
-- **Resolution Pathway**: Run 'ioreg -l -w 0 | grep SecureInput' to find locking app.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Maccy Menu Closes Immediately Upon Opening** | Focus lost due to another floating panel or menu bar daemon claiming active window state. | In Maccy Preferences $\rightarrow$ **Appearance**, set *Popup position* to **Screen center**. |
+| **Preview Panel Overlaps Screen Edge** | Multi-monitor display boundary causing the side preview panel to render offscreen. | In Maccy Preferences $\rightarrow$ **Appearance**, set Preview position to **Left** or **Bottom**. |
+| **Menu Bar Icon Missing** | User unchecked "Show in menu bar" in preferences. | 1. Trigger Maccy via global hotkey (`⌘ + Shift + C`).<br>2. Open Preferences (`⌘ + ,`).<br>3. Check **Show in menu bar**. |
+| **Pinned Items Lost After Restart** | CoreData SQLite write-ahead log (WAL) failed to flush before system shutdown. | Pin items and select *Quit* from Maccy menu once to force clean SQLite WAL checkpoint. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for MacCy:
+## Command Line Syntax & Server Control
 
 ```bash
-open -a MacCy
+# Launch Maccy via Terminal
+open -a Maccy
+
+# Reset Maccy Display Preferences to Defaults
+defaults delete org.pavelm.Maccy
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Preferences/org.pavelgroup.MacCy.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot MacCy issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for MacCy?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Sandboxed Preferences**: `~/Library/Containers/org.pavelm.Maccy/Data/Library/Preferences/org.pavelm.Maccy.plist`
+- **Application Support CoreData**: `~/Library/Containers/org.pavelm.Maccy/Data/Library/Application Support/Maccy/`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For large displays and multi-monitor setups, recommend setting Maccy's popup position to `At cursor` and preview panel to `Right` to optimize visual scanning ergonomics.

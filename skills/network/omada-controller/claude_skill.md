@@ -1,99 +1,153 @@
 ---
-title: "Omada Controller AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Omada Controller on Network Platform."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Omada Controller, Troubleshooting with Claude, Claude AI skills, Claude integration, Omada Controller, Network Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "TP-Link Omada SDN Controller AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize TP-Link Omada SDN Controller, REST OpenAPI, MongoDB backend, device adoption, and VLAN/VPN routing."
+category: "Enterprise SDN Network Controller"
+tags: ["omada-controller", "tp-link-sdn", "rest-openapi", "network-automation", "vlan-routing", "wifi-roaming", "claude"]
 ---
 
-# Omada Controller AI Skill Guide for Claude
+# TP-Link Omada SDN Controller AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Omada Controller** on **Network Platform**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+TP-Link Omada SDN Controller is a centralized software-defined networking platform managing Omada EAP wireless access points, JetStream managed switches, and SafeStream/Omada multi-WAN VPN gateways. Powered by a **Java OpenJDK daemon** and an embedded **MongoDB database**, Omada exposes an authenticated **HTTPS REST OpenAPI (`/api/v2`)** and maintains southbound device control via dedicated UDP/TCP ports (**UDP 29810 Discovery, TCP 29811 Management, TCP 29812 Adoption, TCP 29813 Heartbeat, TCP 29814 Upgrade**). Claude operates as a Principal Network Systems Architect and SDN Automation Engineer, specializing in **REST OpenAPI automation**, **Layer 3 remote adoption (`set-inform`)**, **802.1Q VLAN trunking**, and **MongoDB database recovery**.
 
-- **Application Name**: Omada Controller
-- **Category**: Enterprise SDN Network Controller
-- **Platform**: Network Platform
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Omada SDN Controller Architecture & Protocol Stack
 
-> **Core Purpose**: Centralized Software-Defined Networking platform for managing TP-Link Omada EAP Access Points, JetStream Switches, and Routers.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Omada Controller, Claude must understand its underlying technical framework:
-
-Java runtime and MongoDB backend exposing HTTPS REST OpenAPI (/api/v2) and managing devices over southbound UDP/TCP ports 29810-29814.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Omada SDN Controller Stack                  │
+│                                                             │
+│  Northbound Management & API Ingress                        │
+│  ├── HTTPS Web Management Console (Port 8043)               │
+│  ├── REST OpenAPI v2/v3 (`/api/v2/login`, Site Operations)  │
+│  └── Cloud Portal Gateway (Omada Cloud Management Bridge)   │
+│                                                             │
+│  SDN Controller Core & Persistence                          │
+│  ├── Java Application Daemon (`/opt/tplink/EAPController`)  │
+│  ├── MongoDB Database Backend (Device State, Client Logs)   │
+│  └── 802.11k/v/r Fast Roaming & AI WLAN Mesh Coordinator    │
+│                                                             │
+│  Southbound Device Communication Layer                      │
+│  ├── UDP 29810 (Device Discovery Broadcasts)                │
+│  ├── TCP 29811/29813 (Device Management & Heartbeat Keepalive│
+│  └── TCP 29812/29814 (Device Adoption, Firmware Upgrade)    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Omada Controller:
+## Operational Capabilities & Agent Directives
 
-- **Centralized EAP Wi-Fi 6/6E/7 Provisioning & Mesh Topology**
-- **JetStream Switch Port Profiles, 802.1Q VLANs, and LACP**
-- **Omada Gateway Multi-WAN Load Balancing & WireGuard/IPSec VPNs**
+1. **Omada REST OpenAPI Automation**: Author Python scripts to authenticate against Omada Controller, obtain session tokens (`omada_token`), and programmatically retrieve device inventories, client connection stats, and switch port configurations.
+2. **Layer 3 Remote Device Adoption**: Remediate cross-subnet adoption failures by guiding administrators to issue the SSH discovery inform command (`set-inform http://<controller_ip>:29812/inform`).
+3. **MongoDB Database Recovery & Maintenance**: Repair corrupted database journal locks (`mongod.lock`) and execute database compaction.
+4. **VLAN & Multi-WAN Policy Optimization**: Design robust network segmentations with isolated Guest VLANs, 802.1p QoS tagging, and multi-WAN failover rules.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Omada Controller, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Omada Controller, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Omada Controller REST API Inventory & Client Telemetry Client
+
+Save this script as `omada_api_client.py` (requires `pip install requests urllib3`):
+
+```python
+"""
+TP-Link Omada SDN Controller REST API Client
+Authenticates with controller, extracts active site ID, device states, and connected clients.
+"""
+
+import sys
+import requests
+import json
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+CONTROLLER_URL = "https://192.168.1.50:8043"
+USERNAME = "admin"
+PASSWORD = "SecurePassword123"
+
+class OmadaController:
+    def __init__(self, base_url: str = CONTROLLER_URL):
+        self.base_url = base_url.rstrip("/")
+        self.session = requests.Session()
+        self.session.verify = False
+        self.token = None
+        self.omada_id = None
+
+    def login(self, username: str = USERNAME, password: str = PASSWORD):
+        print(f"--- [AUTHENTICATING WITH OMADA CONTROLLER: {self.base_url}] ---")
+        
+        # 1. Obtain Controller ID / Info
+        info_res = self.session.get(f"{self.base_url}/api/v2/info")
+        if info_res.status_code == 200:
+            self.omada_id = info_res.json().get("result", {}).get("omadacId")
+        
+        login_url = f"{self.base_url}/api/v2/login"
+        payload = {"name": username, "password": password}
+        res = self.session.post(login_url, json=payload)
+        
+        if res.status_code == 200 and res.json().get("errorCode") == 0:
+            result = res.json().get("result", {})
+            self.token = result.get("token")
+            self.session.headers.update({"Csrf-Token": self.token})
+            print("✅ Authentication successful!")
+        else:
+            print(f"🚨 Login failed: {res.text}")
+            sys.exit(1)
+
+    def get_devices(self, site_id: str = "Default"):
+        url = f"{self.base_url}/api/v2/sites/{site_id}/devices"
+        res = self.session.get(url)
+        if res.status_code == 200:
+            devices = res.json().get("result", [])
+            print(f"\n--- [OMADA MANAGED DEVICES: ({len(devices)})] ---")
+            for d in devices:
+                name = d.get("name", "Unnamed")
+                model = d.get("model", "Unknown")
+                mac = d.get("mac", "")
+                ip = d.get("ip", "")
+                status = "CONNECTED" if d.get("status") == 1 else "OFFLINE"
+                print(f"• [{status:<9}] {name:<20} | Model: {model:<12} | IP: {ip:<15} | MAC: {mac}")
+        else:
+            print(f"Failed to fetch devices: {res.text}")
+
+if __name__ == "__main__":
+    controller = OmadaController()
+    controller.login()
+    controller.get_devices()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Omada Controller encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Device Stuck in Pending state
-- **Root Cause**: Credentials mismatch or firewall blocking ports 29810-29814.
-- **Resolution Pathway**: Run set-inform command over SSH.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Device Stuck in `Adopting` or `Pending` State** | Southbound TCP ports 29811–29814 blocked by host firewall or device is on a different L3 subnet without Inform URL. | 1. SSH into AP/Switch (default `admin`/`admin`).<br>2. Run: `set-inform http://<Controller_IP>:29812/inform`.<br>3. In host OS, open ports: `sudo ufw allow 29810:29814/tcp && sudo ufw allow 29810/udp`. |
+| **Controller Service Fails to Start: `MongoDB Error`** | Improper shutdown left lock file `mongod.lock` intact or database journal corrupted. | 1. Stop service: `sudo tesseract stop` or `systemctl stop omada`.<br>2. Remove lock: `sudo rm -f /opt/tplink/EAPController/data/db/mongod.lock`.<br>3. Repair: `mongod --dbpath /opt/tplink/EAPController/data/db --repair`.<br>4. Restart service. |
+| **Wi-Fi Clients Experience Roaming Drops** | Fast Roaming (802.11k/v/r) disabled or 2.4GHz/5GHz transmit power set too high, preventing handoff. | In Controller Settings $\rightarrow$ Wireless Networks $\rightarrow$ Advanced, enable **802.11r Fast Roaming** and reduce 2.4GHz Tx power to Medium/Low. |
+| **SSL / HTTPS Security Warning on Port 8043** | Controller using default self-signed SSL certificate. | In Controller Settings $\rightarrow$ Maintenance $\rightarrow$ **SSL Certificate**, import custom Let's Encrypt / Enterprise PKCS#12 certificate. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Omada Controller:
+## Command Line Syntax & Omada CLI Recipes
 
 ```bash
-curl -k -X POST "https://<CONTROLLER_IP>:8043/api/v2/login" -d '{\"username\":\"admin\",\"password\":\"secret\"}'
+# 1. Inspect Omada Controller Daemon Logs (Linux)
+tail -f /opt/tplink/EAPController/logs/server.log
+
+# 2. SSH into EAP / Switch and Set L3 Adoption Inform URL
+ssh admin@192.168.1.105 "set-inform http://192.168.1.50:29812/inform"
+
+# 3. Restart Omada Controller Service on Linux
+sudo systemctl restart tpeap.service
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `/opt/tplink/EAPController/logs/server.log`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Network Platform
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Omada Controller issues on Network Platform?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Omada Controller?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Controller Root Directory**: `/opt/tplink/EAPController/` (Linux) or `C:\Program Files (x86)\TP-LINK\Omada Controller\` (Windows)
+- **Application Server Logs**: `/opt/tplink/EAPController/logs/server.log`
+- **MongoDB Data Path**: `/opt/tplink/EAPController/data/db/`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For Layer 3 remote site deployments, verify that TCP ports 29811–29814 and UDP port 29810 are forwarded through the edge firewall before troubleshooting adoption timeouts.

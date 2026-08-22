@@ -1,99 +1,134 @@
 ---
-title: "Shottr AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Shottr on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Shottr, Troubleshooting with Claude, Claude AI skills, Claude integration, Shottr, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Shottr macOS Screen Capture & Annotation AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Shottr, Apple ScreenCaptureKit, Vision framework OCR, Metal graphics rendering, and scrolling captures."
+category: "Screen Capture & Image Annotation Utility"
+tags: ["shottr", "macos-screen-capture", "screencapturekit", "vision-framework-ocr", "metal-rendering", "scrolling-screenshot", "claude"]
 ---
 
-# Shottr AI Skill Guide for Claude
+# Shottr macOS Screen Capture & Annotation AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Shottr** on **macOS**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Shottr is an ultra-fast, lightweight macOS screenshot and annotation utility engineered in native Swift. It harnesses Apple's modern **`ScreenCaptureKit`** framework for zero-latency frame capture, uses **Metal hardware acceleration** for instant raster rendering and vector annotation overlays, and embeds the Apple **Vision Framework (`VNRecognizeTextRequest`)** for on-device Live Text optical character recognition (OCR) and object erasure. Shottr includes an automated **Scrolling Capture vertical image stitcher**, precise **on-screen pixel rulers**, and irreversible **lossy pixelation / blur filters**. Claude operates as a Principal macOS Graphics Engineer and Image Processing Specialist, specializing in **ScreenCaptureKit frame capture**, **Vision OCR extraction pipelines**, **TCC Screen Recording permissions**, and **automated screencapture scripting**.
 
-- **Application Name**: Shottr
-- **Category**: Screen Capture & Image Annotation Utility
-- **Platform**: macOS
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Shottr Core Architecture & Metal Pipeline Stack
 
-> **Core Purpose**: Fast screenshot, pixelation, ruler, and OCR utility optimized for Apple Silicon.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Shottr, Claude must understand its underlying technical framework:
-
-Swift application leveraging Apple ScreenCaptureKit and Metal graphics acceleration.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Shottr Engine Architecture                  │
+│                                                             │
+│  Capture & Frame Ingestion Tier                             │
+│  ├── Apple `ScreenCaptureKit` Hardware Frame Ingestion      │
+│  ├── Window ID / Display Stream Selector (`CGWindowList...`)│
+│  └── Scrolling Capture Image Stitcher (Feature Matching)    │
+│                                                             │
+│  Image Processing & Vision AI Core                          │
+│  ├── Apple Vision Framework OCR (`VNRecognizeTextRequest`)  │
+│  ├── Metal Compute Shader Pipeline (Pixelation & Fast Blur) │
+│  └── Pixel Ruler & Delta-E Color Inspector                  │
+│                                                             │
+│  Annotation & Export Subsystem                              │
+│  ├── Vector Annotation Engine (Arrows, Text, Number Pins)   │
+│  ├── Direct Clipboard Injection (`NSPasteboard.writeObjects`│
+│  └── Lossless OptiPNG / WebP / JPEG Image Encoder           │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Shottr:
+## Operational Capabilities & Agent Directives
 
-- **Scrolling screenshot capture**
-- **Instant blur/pixelation filters**
-- **On-screen pixel ruler & OCR**
+1. **ScreenCaptureKit & Frame Capture Scripting**: Construct Swift and Python scripts utilizing native macOS screenshot APIs to capture specific display rects and windows without UI artifacts.
+2. **Vision Framework Live Text Extraction**: Implement automated OCR routines converting screen bounding boxes into structured, searchable text.
+3. **Screen Recording TCC Permissions Diagnostics**: Resolve blank/wallpaper-only capture anomalies by auditing macOS Screen Recording permissions in `TCC.db`.
+4. **Scrolling Screenshot Stitching Optimization**: Advise users on optimal scrolling capture velocity to avoid duplicated sticky headers and visual seams.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Shottr, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Shottr, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Swift Automation: Headless Screen Capture & Vision OCR Pipeline
+
+Save this file as `screen_capture_ocr.swift` and execute via `swift screen_capture_ocr.swift`:
+
+```swift
+// ==============================================================================
+// Standalone Swift 5.x Script: Screen Capture & On-Device Vision OCR
+// Captures main display bounds and extracts printed text using Apple Vision.
+// ==============================================================================
+import Cocoa
+import Vision
+
+// 1. Capture Main Screen Image using CoreGraphics
+guard let mainDisplay = CGMainDisplayID() as CGDirectDisplayID? else {
+    print("Error: Could not obtain main display ID.")
+    exit(1)
+}
+
+guard let screenshot = CGDisplayCreateImage(mainDisplay) else {
+    print("🚨 Error: Screen capture failed. Ensure Terminal has Screen Recording permissions in System Settings.")
+    exit(1)
+}
+
+print("--- [CAPTURED SCREENSHOT: \(screenshot.width)x\(screenshot.height) px] ---")
+
+// 2. Perform On-Device Live Text OCR via Vision Framework
+let requestHandler = VNImageRequestHandler(cgImage: screenshot, options: [:])
+let request = VNRecognizeTextRequest { (req, error) in
+    guard let observations = req.results as? [VNRecognizedTextObservation] else {
+        print("No text detected on screen.")
+        return
+    }
+
+    print("\n--- [EXTRACTED ON-SCREEN TEXT VIA APPLE VISION OCR] ---")
+    for observation in observations {
+        guard let topCandidate = observation.topCandidates(1).first else { continue }
+        if topCandidate.confidence > 0.5 {
+            print("• \(topCandidate.string)")
+        }
+    }
+}
+
+request.recognitionLevel = .accurate
+request.usesLanguageCorrection = true
+
+do {
+    try requestHandler.perform([request])
+    print("\n✅ OCR processing complete.")
+} catch {
+    print("Failed to perform OCR: \(error)")
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Shottr encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Blank screenshots
-- **Root Cause**: Screen Recording permission missing.
-- **Resolution Pathway**: Grant access in System Settings -> Privacy & Security.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Captured Screenshot Shows Only Desktop Wallpaper** | macOS Screen Recording (TCC) permission not granted to Shottr. | 1. Open *System Settings $\rightarrow$ Privacy & Security $\rightarrow$ Screen Recording*.<br>2. Toggle **Shottr** ON.<br>3. Quit and relaunch Shottr. |
+| **Scrolling Capture Generates Jagged / Repeated Bands** | Webpage has fixed/sticky CSS navigation headers or trackpad scroll speed was too rapid. | 1. Scroll at a steady, moderate pace.<br>2. In Shottr Scrolling window, check **Ignore Fixed Headers**.<br>3. Or capture full-page screenshot directly in browser developer tools (`Cmd+Shift+P -> Capture full size screenshot`). |
+| **Pixel Ruler Measures Wrong Dimensions on External Display** | Mixed-DPI display setup (e.g. 2x Retina MacBook display paired with 1x 1080p monitor). | Shottr automatically adjusts point-to-pixel scales; ensure display scaling is set to default in System Settings. |
+| **Live Text OCR Returns Gibberish / Symbols** | Target text rendered in low-contrast decorative typeface or non-Latin script. | Zoom into target image before triggering OCR or set recognition level to Accurate in preferences. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Shottr:
+## Command Line Syntax & macOS Screen Capture Recipes
 
 ```bash
-open -a Shottr
+# 1. Capture Interactive Rectangle Selection via macOS Native CLI
+screencapture -i -c
+
+# 2. Capture Entire Display Silently to Clipboard
+screencapture -x -c
+
+# 3. Read Shottr User Preferences via defaults CLI
+defaults read cc.ffitch.shottr
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `~/Library/Application Support/Shottr`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Shottr issues on macOS?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Shottr?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Preferences Plist**: `~/Library/Preferences/cc.ffitch.shottr.plist`
+- **Application Support Cache**: `~/Library/Application Support/Shottr/`
+- **TCC Screen Capture Service ID**: `kTCCServiceScreenCapture`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When screenshots capture only empty desktop wallpaper without application windows, immediately guide the user to verify macOS Screen Recording permissions in System Settings $\rightarrow$ Privacy & Security.

@@ -1,44 +1,95 @@
 ---
-title: "Outline Documents Before Writing AI Skill"
-description: "Ask for a 5-point outline first to ensure the structure makes sense before generating paragraphs."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, outline-before-writing"
-category: "Common Sense Everyday AI"
+title: "Outline Documents Before Writing (The Structural Gate) AI Skill"
+description: "How to use the Structural Outline Gate to lock in logical progression, prevent rambling drafts, and eliminate 80% of document rewriting."
+category: "Daily Productivity & Workflow"
+tags: ["outlining", "writing-workflows", "document-structure", "planning", "productivity", "prompt-engineering"]
 ---
 
-# Outline Documents Before Writing (AI Skill)
+# Outline Documents Before Writing (The Structural Gate) (AI Skill)
 
 ## Overview
-Ask for a 5-point outline first to ensure the structure makes sense before generating paragraphs.
+When asked to write a 1,500-word article, technical guide, or report in a single prompt, AI models generate a flat, unstructured wall of text where subtopics overlap, key arguments are buried, and transitions feel disjointed.
+
+The **Structural Outline Gate Protocol** requires the AI to generate a strict, hierarchical **5-to-7 point outline** first. Once you review, reorder, or trim headings, each section is expanded with surgical precision.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Structural Gate Workflow
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 The Structural Outline Gate                 │
+│                                                             │
+│  User Topic ──► [ STEP 1: Generate 5-Point Hierarchical Outline ] │
+│                                   │                         │
+│  Human Reviews & Adjusts ◄────────┘                         │
+│  (Swap sections, delete filler, add unique case study)      │
+│           │                                                 │
+│           ▼                                                 │
+│  [ STEP 2: Lock Headings & Expand Section by Section ]       │
+│  ↳ Cohesive, High-Depth, Zero-Rambling Final Document       │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Outlining Prompt Templates
+
+### Pattern 1: The Hierarchical Outline Gate
+Use for long-form essays, whitepapers, guides, and proposals:
+
+```markdown
+I want to write a comprehensive guide on [TOPIC].
+Target Audience: [AUDIENCE: e.g. Staff Engineers / Marketing Directors].
+Primary Thesis / Message: [CORE THESIS].
+
+Do NOT start writing the full text yet.
+Provide a **Hierarchical Outline** with:
+1. Exactly 5 to 6 major numbered H2 sections.
+2. Under each H2, list 2-3 specific bullet points detailing the exact arguments, examples, or metrics to be covered.
+3. Suggest a 1-sentence opening hook for the introduction.
+
+Conclude by asking: "Do you want to adjust any section before we draft?"
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Section-by-Section Expansion Directive
+Use after you approve or modify the outline:
+
+```markdown
+The outline is approved.
+
+Now, draft **Section 1 and Section 2 ONLY**:
+- Maintain an authoritative, conversational tone.
+- Include concrete examples and code/data blocks where specified.
+- Stop at the end of Section 2 so I can review tone before you continue.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Writing an Architecture Guide on Event-Driven Microservices
+
+#### The 1-Shot Writing Failure
+> **Prompt**: *"Write a 2,000-word guide on event-driven architecture."*
+> ❌ *Result: A rambling, repetitive essay that mentions Kafka 40 times, repeats the definition of pub/sub in 3 different sections, and skips critical dead-letter queue (DLQ) failure handling.*
+
+#### The Outline Gate Success
+> **AI Outline Generated**:
+> 1. **The Distributed Monolith Trap**: Why REST API chains fail under load.
+> 2. **Core Pub/Sub Mechanics**: Producers, Brokers, Consumers, and Topic Partitioning.
+> 3. **The 3 Golden Rules of Event Design**: Immutability, Schema Evolution (Protobuf/Avro), and Idempotent Consumers.
+> 4. **Handling Partial Failures**: Dead Letter Queues (DLQ) and Exponential Backoff Retries.
+> 5. **Migration Blueprint**: From synchronous HTTP calls to asynchronous messaging in 4 steps.
+
+**Human Edit**: *"Add a section on Outbox Pattern between 3 and 4, then proceed with Section 1."*
+
+**Outcome**: The resulting guide was rigorous, structured logically, and required zero rewriting.
+
+---
+
+## Summary Rules
+- **Never skip the outline gate for content $> 500$ words**: It is 10x faster to delete an outline bullet than to rewrite a 400-word generated paragraph.
+- **Lock the headings first**: Once headings are locked, generation tokens are channeled with maximum depth into each subtopic.

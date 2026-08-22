@@ -1,99 +1,112 @@
 ---
-title: "Rectangle AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Rectangle on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Rectangle, ChatGPT troubleshooting, GPT automation, Rectangle, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Rectangle macOS Window Manager AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Rectangle, URL scheme command pipelines, defaults CLI configurations, and AppleScript window snapping."
+category: "Keyboard & Drag Window Manager"
+tags: ["rectangle", "url-scheme", "macos-scripting", "window-management-cli", "gpt-codex", "defaults-write"]
 ---
 
-# Rectangle AI Skill Guide for GPT
+# Rectangle macOS Window Manager AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Rectangle** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Rectangle provides a developer-accessible URL scheme (**`rectangle://`**) and standard macOS **`defaults` preference keys** allowing headless scripts, terminal aliases, and external macro launchers (Stream Deck, Raycast, Alfred) to programmatically arrange windows. GPT/Codex acts as a Principal macOS Automation Architect and Systems Developer, delivering **batch URL scheme command runners**, **automated window layout shell scripts**, **`defaults write` configuration installers**, and **multi-window workplace orchestrators**.
 
-- **Application Name**: Rectangle
-- **Category**: Keyboard & Drag Window Manager
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Automation Stack
 
-> **Core Purpose**: Open-source window management tool enabling fast keyboard-based window positioning.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Rectangle, GPT must understand its underlying technical framework:
-
-Swift utility utilizing Accessibility API (AXUIElement) for low-level window manipulation.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Rectangle Developer Platform                │
+│                                                             │
+│  CLI & URL Scheme Ingress Tier                              │
+│  ├── URL Scheme Dispatcher (`rectangle://execute-action?...`)│
+│  ├── Named Action Matrix (`left-half`, `right-half`, `max`) │
+│  └── macOS Terminal Shell Aliases & Functions               │
+│                                                             │
+│  System Configuration & Defaults Engine                     │
+│  ├── `defaults write com.knollsoft.Rectangle ...`           │
+│  ├── Keybinding Schema (JSON / Plist Keybinding Mappings)   │
+│  └── Multi-App Workspace Provisioning Scripts               │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Rectangle:
+## Operational Capabilities & Agent Directives
 
-- **Keyboard shortcut window snapping**
-- **Drag-to-edge cursor snapping**
-- **Custom padding gaps & multi-display tracking**
+1. **URL Scheme Action Pipelines**: Build shell and Python scripts invoking `open -g "rectangle://execute-action?name=<action>"` to position specific application windows dynamically.
+2. **Automated Defaults Configuration**: Script automated environment setup files (`.dotfiles`) configuring all Rectangle hotkeys, gap sizes, and snapping behaviors via `defaults write`.
+3. **Multi-App Workspace Layout Orchestration**: Author scripts that launch an IDE, browser, and terminal, sequentially focusing each application and tiling them into predefined screen quadrants.
+4. **Custom Keybinding JSON Exporter**: Construct import/export routines for Rectangle shortcut configurations.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Rectangle, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Rectangle, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Bash Automation: Multi-App Developer Workspace Tiling Orchestrator
+
+Save this script as `setup_dev_workspace.sh` and execute via `bash setup_dev_workspace.sh`:
+
+```bash
+#!/usr/bin/env bash
+# ==============================================================================
+# Rectangle Automated Workspace Orchestrator
+# Launches development apps and tiles them into split-screen layouts via URL scheme.
+# ==============================================================================
+set -euo pipefail
+
+echo "--- [ORCHESTRATING DEVELOPER WORKSPACE VIA RECTANGLE] ---"
+
+snap_app() {
+    local app_name="$1"
+    local action="$2"
+
+    echo "Focusing '$app_name' and applying action '$action'..."
+    open -a "$app_name"
+    sleep 0.4 # Allow AppKit focus transition
+    open -g "rectangle://execute-action?name=$action"
+    sleep 0.2
+}
+
+# 1. Tile Visual Studio Code to Left Half
+snap_app "Visual Studio Code" "left-half"
+
+# 2. Tile Terminal to Top-Right Quarter
+snap_app "Terminal" "top-right"
+
+# 3. Tile Google Chrome / Safari to Bottom-Right Quarter
+snap_app "Safari" "bottom-right"
+
+echo "✅ Developer workspace tiled successfully!"
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Rectangle encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Shortcuts stop working
-- **Root Cause**: Accessibility API permission lost.
-- **Resolution Pathway**: Reset accessibility via 'tccutil reset Accessibility com.knollsoft.Rectangle'.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`open -g rectangle://...` Does Not Move Window** | Target window does not hold active keyboard focus at the moment the URL scheme executes. | Insert a brief `sleep 0.3` after focusing the target application via `open -a AppName`. |
+| **`defaults write` Changes Do Not Take Effect** | Rectangle was running and overwrote `com.knollsoft.Rectangle.plist` from in-memory cache upon exit. | 1. Quit Rectangle first: `killall Rectangle`.<br>2. Run `defaults write ...`.<br>3. Relaunch Rectangle: `open -a Rectangle`. |
+| **URL Action Name Unrecognized** | Action name in query parameter contains typos or invalid syntax. | Use standard action names: `left-half`, `right-half`, `top-half`, `bottom-half`, `top-left`, `top-right`, `bottom-left`, `bottom-right`, `maximize`, `almost-maximize`, `center`, `first-third`, `center-third`, `last-third`, `next-display`, `previous-display`. |
+| **App Store Version vs Direct Download Version Conflict** | Preference domain or sandboxing container differences between MAS and GitHub release builds. | Direct download uses `~/Library/Preferences/com.knollsoft.Rectangle.plist`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Rectangle:
+## Command Line Syntax & Batch Processing
 
 ```bash
-open -a Rectangle
+# 1. Configure Zero Gap Size via defaults CLI
+defaults write com.knollsoft.Rectangle gapSize -float 0.0
+
+# 2. Set Spectacle Shortcut Preset
+defaults write com.knollsoft.Rectangle alternateDefaultShortcuts -int 1
+
+# 3. Execute Next Display Move
+open -g "rectangle://execute-action?name=next-display"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/Library/Preferences/com.knollsoft.Rectangle.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Rectangle issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Rectangle?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Preferences Plist**: `~/Library/Preferences/com.knollsoft.Rectangle.plist`
+- **Application Binary**: `/Applications/Rectangle.app`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Always terminate the Rectangle process (`killall Rectangle`) before modifying preference values via `defaults write` to prevent in-memory cache overrides upon application quit.

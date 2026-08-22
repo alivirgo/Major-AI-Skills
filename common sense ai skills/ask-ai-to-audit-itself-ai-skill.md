@@ -1,44 +1,139 @@
 ---
-title: "Ask AI to Audit Its Output AI Skill"
-description: "Before closing chat, ask 'read your answer above and fix any mistakes or typos'."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, ask-ai-to-audit-itself"
-category: "Common Sense Everyday AI"
+title: "Ask AI to Audit Its Own Output AI Skill"
+description: "Leverage the Reflexion and Critic-Actor prompting patterns to force LLMs to self-correct logic errors, overlooked edge cases, and factual slips before final delivery."
+category: "Fact-Checking & Safety Habits"
+tags: ["self-audit", "reflexion", "critic-actor", "verification", "code-review", "prompt-engineering"]
 ---
 
-# Ask AI to Audit Its Output (AI Skill)
+# Ask AI to Audit Its Own Output (AI Skill)
 
 ## Overview
-Before closing chat, ask 'read your answer above and fix any mistakes or typos'.
+When an AI generates a long response in a single generation pass, it cannot "look ahead" to revise earlier sentences based on later logical deductions. As a result, drafts often contain subtle internal contradictions, forgotten constraints, or code bugs that the model would easily catch if asked to review them as a third party.
+
+This skill implements the **Reflexion / Critic-Actor Prompting Protocol**—a technique that separates *generation* from *critique* to dramatically elevate accuracy and quality.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 3-Stage Reflexion Architecture
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 The Critic-Actor Pipeline                   │
+│                                                             │
+│  Step 1: ACTOR       ──► Draft initial solution             │
+│            │                                                │
+│  Step 2: CRITIC      ──► Adversarial audit against strict   │
+│            │             rubric (find 3 flaws/edge cases)   │
+│            │                                                │
+│  Step 3: SYNTHESIZER ──► Output final refined version with  │
+│                          all audited flaws resolved         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master Audit Prompts
+
+### Pattern 1: The "Adversarial Code & Logic Audit"
+Use this prompt immediately after an AI provides a code snippet or architectural plan:
+
+```markdown
+Now, switch personas. Act as a Principal Security and Performance Reviewer.
+
+Critically audit your code/solution above against these 4 criteria:
+1. **Edge Cases**: Where will this fail (null values, concurrency race conditions, unexpected formats)?
+2. **Performance & Scalability**: Is there any O(N^2) bottleneck, memory leak, or redundant compute?
+3. **Security Vulnerabilities**: Are there injection risks, unsafe inputs, or missing validations?
+4. **Constraint Adherence**: Did the draft violate any original prompt requirements?
+
+List any flaws found. If flaws exist, provide the corrected, production-ready version.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+### Pattern 2: The "Editorial & Consistency Audit"
+Use this for articles, contracts, reports, and documentation:
+
+```markdown
+Read through the text you just drafted. Audit it strictly for:
+1. Internal factual or mathematical contradictions between sections.
+2. Passive, repetitive, or vague statements.
+3. Unanswered questions or vague hand-waving (e.g., "implement appropriate logic here").
+
+Output a bulleted "Changelog of Fixes" followed by the finalized, corrected text.
+```
+
+---
+
+## Real-World Examples
+
+### Example 1: Auditing an Ingestion Script
+
+#### Initial Generation (Actor Pass)
+```python
+def process_user_records(records):
+    results = []
+    for r in records:
+        data = r['profile']
+        results.append(data['email'].lower())
+    return results
+```
+
+#### The Audit Prompt & Self-Correction
+> **User**: *"Audit the function above for runtime exceptions in production."*
+>
+> **AI Self-Audit**:
+> **Flaws Identified**:
+> 1. `KeyError`: Will crash if `r` lacks `'profile'` or `'profile'` lacks `'email'`.
+> 2. `AttributeError`: Will crash if `email` is `None`.
+> 3. `TypeError`: Will fail if `records` is `None` or not iterable.
+>
+> **Corrected Production Version**:
+```python
+from typing import List, Dict, Any
+
+def process_user_records(records: List[Dict[str, Any]] | None) -> List[str]:
+    if not records:
+        return []
+    
+    valid_emails = []
+    for r in records:
+        if not isinstance(r, dict):
+            continue
+        profile = r.get('profile')
+        if isinstance(profile, dict):
+            email = profile.get('email')
+            if isinstance(email, str) and email.strip():
+                valid_emails.append(email.strip().lower())
+                
+    return valid_emails
+```
+
+---
+
+### Example 2: One-Turn Multi-Pass Audit (Self-Correction Prompt)
+You don't always need two separate chat turns. You can instruct the model to perform the audit internally:
+
+```markdown
+Solve the following logic problem: [INSERT PROBLEM]
+
+Follow this multi-pass structure in your response:
+### Pass 1: Initial Solution & Reasoning
+[Work through the problem step-by-step]
+
+### Pass 2: Adversarial Self-Audit
+[Test the solution with extreme boundary inputs and double-check all arithmetic]
+
+### Pass 3: Final Verified Answer
+[State the confirmed solution]
+```
+
+---
+
+## Critical Rules & Anti-Patterns
+
+| Don't Do (Weak Habit) | Do Instead (Master Skill) | Why |
+| :--- | :--- | :--- |
+| Asking *"Is this correct?"* | Asking *"Find 3 hidden edge cases or bugs in your solution."* | Models tend to be sycophantic and will agree with themselves if asked passively. |
+| Auditing in a giant single block | Separating critique from the final output draft | Forcing the critique step into the context window ensures the final tokens incorporate the fixes. |
+| Skipping domain rubrics | Supplying explicit checklists (Security, Nulls, Math) | Directed rubrics activate targeted safety and verification paths in the LLM. |

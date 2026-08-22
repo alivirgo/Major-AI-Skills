@@ -1,101 +1,164 @@
 ---
-title: "Rclone AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Rclone on Cross-Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Rclone, ChatGPT troubleshooting, GPT automation, Rclone, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Rclone Cloud Storage Engine AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Rclone RC API, systemd daemon units, programmatic transfers, and JSON-RPC control."
+category: "Cloud Storage Sync & Mount Utility"
+tags: ["rclone", "rclone-rc", "json-rpc", "gpt-codex", "systemd-mount", "cloud-automation"]
 ---
 
-# Rclone AI Skill Guide for GPT
+# Rclone Cloud Storage Engine AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Rclone** on **Cross-Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Rclone exposes a comprehensive JSON-RPC / REST API via its **Remote Control (`rc`)** engine, allowing external Python, Go, and Node.js microservices to dynamically control mounts, start asynchronous transfer jobs, and query transfer metrics. GPT/Codex acts as a Principal Cloud Storage Automation Engineer, delivering **Rclone JSON-RPC automation scripts**, **production `systemd` / Windows Service mount definitions**, **dynamic `rclone.conf` generators**, and **disaster recovery pipelines**.
 
-- **Application Name**: Rclone
-- **Category**: Cloud Storage Sync & Mount Utility
-- **Platform**: Cross-Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Platform & RC API Architecture
 
-> **Core Purpose**: The 'rsync for cloud storage' command-line program to sync, transfer, encrypt, and mount files across 70+ cloud providers.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Rclone, GPT must understand its underlying technical framework:
-
-Go binary implementing cloud API abstraction layer with FUSE mounting capability (clone mount).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Rclone Remote Control Stack                 │
+│                                                             │
+│  Client Integration Layer                                   │
+│  ├── Python / Node.js HTTP REST & JSON-RPC Client           │
+│  ├── Core Methods (`sync/sync`, `operations/copyfile`)      │
+│  └── Job Management (`job/status`, `job/stop`)              │
+│                                                             │
+│  Engine & Daemon Lifecycle                                  │
+│  ├── Standalone Daemon Process (`rclone rcd`)               │
+│  ├── Systemd Unit & Windows NSSM Service Management         │
+│  └── Dynamic Remote Instantiation on the Fly               │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Rclone:
+## Operational Capabilities & Agent Directives
 
-- **Sync/transfer files across Google Drive, S3, Dropbox, SFTP, OneDrive**
-- **Client-side file encryption (clone crypt)**
-- **FUSE mounting of cloud remotes as local filesystem drives**
+1. **Rclone JSON-RPC API Automation**: Author Python scripts interacting with Rclone's HTTP endpoint (`http://localhost:5572/core/stats`, `sync/sync`, `mount/mount`) with authenticated JSON payloads.
+2. **Production Systemd Service Generation**: Build robust Linux `systemd` service units for persistent, auto-restarting FUSE cloud mounts with proper network-online dependency chaining.
+3. **Dynamic Remote Injection**: Configure remotes dynamically at runtime via the `config/create` API endpoint without editing static configuration files on disk.
+4. **Bandwidth Scheduling & Throttling**: Script automated bandwidth limit transitions (e.g. 10MB/s during work hours, unlimited at night) using `core/bwlimit`.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Rclone, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Rclone, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Rclone JSON-RPC Client & Job Monitor
+
+Save this script as `rclone_rpc_client.py` to trigger and monitor asynchronous sync jobs via Rclone's Remote Control daemon:
+
+```python
+"""
+Rclone Remote Control (RC) Python API Client
+Triggers asynchronous transfer jobs and tracks real-time progress via JSON-RPC.
+"""
+
+import sys
+import time
+import requests
+
+RCLONE_RC_URL = "http://127.0.0.1:5572"
+AUTH = ("admin", "secretpassword")
+
+def trigger_async_sync(src: str, dst: str) -> int:
+    payload = {
+        "srcFs": src,
+        "dstFs": dst,
+        "_async": True # Runs job asynchronously and returns job ID
+    }
+    
+    response = requests.post(f"{RCLONE_RC_URL}/sync/sync", json=payload, auth=AUTH)
+    response.raise_for_status()
+    job_id = response.json().get("jobid")
+    print(f"Dispatched Async Sync Job -> ID: {job_id}")
+    return job_id
+
+def monitor_job(job_id: int):
+    while True:
+        res = requests.post(f"{RCLONE_RC_URL}/job/status", json={"jobid": job_id}, auth=AUTH)
+        res.raise_for_status()
+        data = res.json()
+
+        finished = data.get("finished", False)
+        success = data.get("success", False)
+        error = data.get("error", "")
+
+        # Fetch current transfer stats
+        stats_res = requests.post(f"{RCLONE_RC_URL}/core/stats", auth=AUTH)
+        if stats_res.status_code == 200:
+            stats = stats_res.json()
+            bytes_transferred = stats.get("bytes", 0) / (1024 * 1024)
+            speed = stats.get("speed", 0) / (1024 * 1024)
+            print(f"[STATUS] Transferred: {bytes_transferred:.2f} MB | Speed: {speed:.2f} MB/s")
+
+        if finished:
+            if success:
+                print("Job finished successfully!")
+            else:
+                print(f"Job failed with error: {error}")
+            break
+
+        time.sleep(2)
+
+if __name__ == "__main__":
+    # Ensure Rclone is running: rclone rcd --rc-user admin --rc-pass secretpassword
+    job = trigger_async_sync("local_data:/var/backups", "s3_remote:enterprise-backups")
+    monitor_job(job)
+```
+
+---
+
+## Production Systemd Unit: Persistent Cloud Storage Mount
+
+Save this unit file as `/etc/systemd/system/rclone-mount.service`:
+
+```ini
+[Unit]
+Description=Rclone Persistent Cloud Storage FUSE Mount
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=root
+ExecStart=/usr/bin/rclone mount remote_s3:production-bucket /mnt/cloud_data \
+    --config=/root/.config/rclone/rclone.conf \
+    --vfs-cache-mode=full \
+    --vfs-cache-max-size=50G \
+    --vfs-cache-max-age=24h \
+    --vfs-read-chunk-size=32M \
+    --buffer-size=64M \
+    --allow-other \
+    --log-file=/var/log/rclone-mount.log \
+    --log-level=INFO
+ExecStop=/bin/fusermount -u -z /mnt/cloud_data
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Rclone encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Google Drive 403 Rate Limit Exceeded
-- **Root Cause**: Shared default client ID quota exhausted.
-- **Resolution Pathway**: Create custom Google Client ID in Google Cloud Console and configure in rclone.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`fusermount: entry for /mnt not found in /etc/mtab`** | Previous mount process crashed leaving an un-cleared broken FUSE inode. | 1. Force unmount: `fusermount -uz /mnt/cloud_data` or `umount -l /mnt/cloud_data`.<br>2. Kill lingering rclone PID: `pkill -9 rclone`.<br>3. Restart systemd mount service. |
+| **JSON-RPC Error: `401 Unauthorized` on RC API** | Missing or incorrect HTTP Basic Auth credentials in API request payload. | Pass valid credentials configured during daemon launch (`--rc-user` and `--rc-pass`). |
+| **`Failed to copy: s3 upload failed: RequestTimeTooSkewed`** | Host system clock drifted from AWS NTP servers by $>15$ minutes. | 1. Synchronize system clock: `chronyd -q 'server pool.ntp.org iburst'`.<br>2. Enable automated time sync via `timedatectl set-ntp true`. |
+| **Disk Space Exhaustion in `/tmp` during Large Sync** | Rclone buffering large files to OS `/tmp` partition instead of dedicated cache path. | Specify explicit cache directory: `--cache-dir /data/rclone_cache --vfs-cache-mode full`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Rclone:
+## Command Line Syntax & Batch Processing
 
 ```bash
-rclone config
-rclone copy /local/path remote:backup --progress
-rclone mount remote:path /mnt/cloud &
+# Launch Rclone Remote Control Daemon with Authentication
+rclone rcd --rc-addr 127.0.0.1:5572 --rc-user admin --rc-pass secretpassword
+
+# Change Bandwidth Limit on the Fly via RC CLI
+rclone rc core/bwlimit rate=10M
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/.config/rclone/rclone.conf`
-
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Rclone issues on Cross-Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Rclone?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When configuring background systemd mounts for production servers, include `fusermount -u -z <mount_point>` in `ExecStop` to ensure clean unmounting. Always specify `--vfs-cache-mode full` for multi-application compatibility.

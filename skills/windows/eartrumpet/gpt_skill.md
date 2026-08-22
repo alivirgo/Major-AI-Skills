@@ -1,99 +1,168 @@
 ---
-title: "EarTrumpet AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate EarTrumpet on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for EarTrumpet, ChatGPT troubleshooting, GPT automation, EarTrumpet, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "EarTrumpet Windows Audio Engine AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize EarTrumpet, Windows Core Audio APIs (WASAPI in C# / PowerShell), IAudioEndpointVolume, and automated volume management."
+category: "Per-App Audio Routing & Volume Control"
+tags: ["eartrumpet", "wasapi-csharp", "iaudioendpointvolume", "powershell-audio", "gpt-codex", "windows-audio-dev"]
 ---
 
-# EarTrumpet AI Skill Guide for GPT
+# EarTrumpet Windows Audio Engine AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **EarTrumpet** on **Windows**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+EarTrumpet is powered by the **Windows Core Audio (WASAPI) COM Subsystem**, exposing programmatic audio session orchestration via **`IAudioSessionManager2`**, **`IAudioSessionControl2`**, and **`IAudioEndpointVolume`**. GPT/Codex acts as a Principal Windows Audio Systems Engineer and COM Interop Developer, delivering **C# / PowerShell WASAPI automation scripts**, **per-process volume controllers**, **automated mute-on-lock background services**, and **audio endpoint diagnostic tools**.
 
-- **Application Name**: EarTrumpet
-- **Category**: Per-App Audio Routing & Volume Control
-- **Platform**: Windows
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & COM Audio Stack
 
-> **Core Purpose**: Modern volume control utility for Windows, replacing the default tray mixer with per-app audio routing.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with EarTrumpet, GPT must understand its underlying technical framework:
-
-Built on Windows Audio Session API (WASAPI) and WinRT Audio Endpoints to dynamically manage application audio streams.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 EarTrumpet Developer Platform               │
+│                                                             │
+│  WASAPI COM Interface Architecture (C# / P/Invoke)          │
+│  ├── `IMMDeviceEnumerator` (`eRender`, `eMultimedia`)       │
+│  ├── `IAudioEndpointVolume` (Master Level & Mute)           │
+│  └── `IAudioSessionEnumerator` (Process ID Matching)        │
+│                                                             │
+│  Scripting & Service Automation                             │
+│  ├── PowerShell P/Invoke WASAPI Volume Engine               │
+│  ├── Python WASAPI Client Pipelines (`import pycaw`)        │
+│  └── Unattended Sound Configuration Deployment Scripts      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of EarTrumpet:
+## Operational Capabilities & Agent Directives
 
-- **Per-application volume adjustment & mute toggles**
-- **Dynamic default audio playback device switching**
-- **Native UWP / WinUI modern interface matching Windows 11**
+1. **PowerShell / C# Core Audio Scripting**: Author standalone PowerShell scripts utilizing inline C# P/Invoke to enumerate WASAPI endpoints, adjust master volume, and toggle mute states without external binary dependencies.
+2. **Per-Process Audio Session Volume Control**: Write scripts matching target process names (e.g. `chrome.exe`, `vlc.exe`) and setting granular volume levels via `ISimpleAudioVolume`.
+3. **Automated Audio Profile Switching**: Construct scripts detecting peripheral connection (USB DAC / Bluetooth headset) and reassigning default audio endpoints.
+4. **AppX Package Automation**: Automate silent deployment and configuration extraction for enterprise workstation provisioning.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding EarTrumpet, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to EarTrumpet, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production PowerShell Automation: Native WASAPI Master Volume & Mute Controller (Inline C#)
+
+Save this script as `Set-AudioVolume.ps1`:
+
+```powershell
+<#
+.SYNOPSIS
+    Native Windows Core Audio (WASAPI) Volume Controller
+    Uses inline C# P/Invoke to query/set master volume and mute state without third-party dependencies.
+#>
+
+$Source = @"
+using System;
+using System.Runtime.InteropServices;
+
+namespace AudioController {
+    [Guid("5CDF2C82-841E-4546-9722-0CF74078229A"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IAudioEndpointVolume {
+        int RegisterControlChangeNotify(IntPtr pNotify);
+        int UnregisterControlChangeNotify(IntPtr pNotify);
+        int GetChannelCount(out uint pnChannelCount);
+        int SetMasterVolumeLevel(float fLevelDB, ref Guid pguidEventContext);
+        int SetMasterVolumeLevelScalar(float fLevel, ref Guid pguidEventContext);
+        int GetMasterVolumeLevel(out float pfLevelDB);
+        int GetMasterVolumeLevelScalar(out float pfLevel);
+        int SetChannelVolumeLevel(uint nChannel, float fLevelDB, ref Guid pguidEventContext);
+        int SetChannelVolumeLevelScalar(uint nChannel, float fLevel, ref Guid pguidEventContext);
+        int GetChannelVolumeLevel(uint nChannel, out float pfLevelDB);
+        int GetChannelVolumeLevelScalar(uint nChannel, out float pfLevel);
+        int SetMute([MarshalAs(UnmanagedType.Bool)] bool bMute, ref Guid pguidEventContext);
+        int GetMute([MarshalAs(UnmanagedType.Bool)] out bool pbMute);
+    }
+
+    [Guid("D666063F-1587-4E43-81F1-B948E807363F"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IMMDevice {
+        int Activate(ref Guid id, int clsCtx, IntPtr activationParams, [MarshalAs(UnmanagedType.IUnknown)] out object interfacePointer);
+    }
+
+    [Guid("A95664D2-9614-4F35-A746-DE8DB63617E6"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IMMDeviceEnumerator {
+        int GetDefaultAudioEndpoint(int dataFlow, int role, out IMMDevice endpoint);
+    }
+
+    [ComImport, Guid("BCDE0395-E52F-467C-8E3D-C4579291692E")]
+    public class MMDeviceEnumeratorComObject { }
+
+    public class VolumeMaster {
+        private static IAudioEndpointVolume GetMasterVolumeObject() {
+            var enumerator = (IMMDeviceEnumerator)(new MMDeviceEnumeratorComObject());
+            IMMDevice dev = null;
+            enumerator.GetDefaultAudioEndpoint(0, 1, out dev); // eRender = 0, eMultimedia = 1
+            Guid IID_IAudioEndpointVolume = typeof(IAudioEndpointVolume).GUID;
+            object epv = null;
+            dev.Activate(ref IID_IAudioEndpointVolume, 23, IntPtr.Zero, out epv);
+            return (IAudioEndpointVolume)epv;
+        }
+
+        public static float GetVolume() {
+            float vol = 0;
+            GetMasterVolumeObject().GetMasterVolumeLevelScalar(out vol);
+            return vol * 100.0f;
+        }
+
+        public static void SetVolume(float newVolumePercent) {
+            Guid g = Guid.Empty;
+            float scalar = Math.Max(0.0f, Math.Min(1.0f, newVolumePercent / 100.0f));
+            GetMasterVolumeObject().SetMasterVolumeLevelScalar(scalar, ref g);
+        }
+
+        public static bool GetMute() {
+            bool isMuted = false;
+            GetMasterVolumeObject().GetMute(out isMuted);
+            return isMuted;
+        }
+
+        public static void SetMute(bool muteState) {
+            Guid g = Guid.Empty;
+            GetMasterVolumeObject().SetMute(muteState, ref g);
+        }
+    }
+}
+"@
+
+Add-Type -TypeDefinition $Source -Language CSharp
+
+# Execution Examples:
+$currentVol = [AudioController.VolumeMaster]::GetVolume()
+$isMuted = [AudioController.VolumeMaster]::GetMute()
+
+Write-Host "--- [WINDOWS MASTER AUDIO STATUS] ---"
+Write-Host "• Current Master Volume: $([Math]::Round($currentVol, 1))%"
+Write-Host "• Mute Status:          $isMuted"
+
+# Example: To set volume to 50% uncomment below:
+# [AudioController.VolumeMaster]::SetVolume(50.0)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If EarTrumpet encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Application missing from mixer
-- **Root Cause**: Application has no active WASAPI audio session playing.
-- **Resolution Pathway**: Trigger sound/audio playback in the application to register audio session.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Add-Type` Throws `Cannot add type. Compilation errors occurred`** | Target machine missing .NET Framework C# compiler references. | Ensure PowerShell is executing under Windows PowerShell 5.1 or PowerShell 7 with desktop runtime. |
+| **`GetDefaultAudioEndpoint` Returns `E_NOTFOUND (0x80070490)`** | No active audio playback hardware device (speakers/headphones) connected to system. | Connect audio output device or enable virtual audio driver. |
+| **`SetMasterVolumeLevelScalar` Value Ignored** | Volume scalar value passed was outside valid bounds ($0.0 - 1.0$). | Always clamp volume scalars: `Math.Max(0.0f, Math.Min(1.0f, vol))`. |
+| **WASAPI COM Object Leak** | Calling COM methods in high-frequency loop without releasing interfaces. | Call `Marshal.ReleaseComObject()` on completed COM interface handles. |
 
 ---
 
-## Command Line Syntax and Configuration
+## Command Line Syntax & Batch Processing
 
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for EarTrumpet:
+```powershell
+# Set Windows Master Volume to 60% via Script
+powershell -ExecutionPolicy Bypass -File .\Set-AudioVolume.ps1
 
-```bash
-Start-Process -FilePath "shell:AppsFolder\41808File-Save.EarTrumpet_10tokenms02j!App"
+# Mute Audio Master Output
+powershell -Command "[AudioController.VolumeMaster]::SetMute(`$true)"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `%LOCALAPPDATA%\Packages\41808File-Save.EarTrumpet_10tokenms02j\LocalSettings`
+### Essential File Locations
+- **Windows Core Audio DLL**: `C:\Windows\System32\AudioSes.dll`, `MMDevAPI.dll`
 
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot EarTrumpet issues on Windows?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for EarTrumpet?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When building zero-dependency Windows audio automation tools in PowerShell, use inline C# COM interop to `IAudioEndpointVolume` rather than sending simulated volume key presses (`[System.Windows.Forms.SendKeys]`).

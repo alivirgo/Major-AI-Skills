@@ -1,44 +1,108 @@
 ---
-title: "Reuse Saved Prompt Templates AI Skill"
-description: "Keep a note with your favorite prompts to avoid re-typing long instructions every day."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, reuse-saved-prompt-templates"
-category: "Common Sense Everyday AI"
+title: "Reuse Saved Prompt Templates (Prompt Library Architecture) AI Skill"
+description: "How to build and maintain a parameterized Personal Prompt Library in Raycast, Obsidian, or TextExpander to save 30 minutes of typing every day."
+category: "Daily Productivity & Workflow"
+tags: ["prompt-library", "templates", "snippets", "textexpander", "productivity", "prompt-engineering"]
 ---
 
-# Reuse Saved Prompt Templates (AI Skill)
+# Reuse Saved Prompt Templates (Prompt Library Architecture) (AI Skill)
 
 ## Overview
-Keep a note with your favorite prompts to avoid re-typing long instructions every day.
+Re-typing complex prompt instructions from scratch every morning (*"Review this code, make sure you check for null values, do not write preambles..."*) is inefficient and leads to forgotten constraints and inconsistent outputs.
+
+The **Prompt Library Architecture** stores your highest-performing, battle-tested prompt recipes as parameterized templates in text expansion tools (Raycast, Alfred, TextExpander, or Obsidian), enabling you to trigger master-grade prompts with a 3-letter shortcut.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## Ad-Hoc Typing vs. Parameterized Snippet Library
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Prompt Library Workflow                     │
+│                                                             │
+│  Ad-Hoc Typing (Every Day):                                 │
+│  • 2 minutes spent typing instructions from memory          │
+│  • Forgets 2 constraints $\rightarrow$ mediocre response    │
+│                                                             │
+│  Parameterized Snippet (Type `;creview` or `;exec`):        │
+│  • 1-second keyboard shortcut                               │
+│  • Injects 100% complete battle-tested constraints          │
+│  • 10/10 Output on the First Try Every Single Time          │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## The 5 Essential Core Templates
+
+### 1. The Code Hardening Reviewer (Shortcut: `;creview`)
+```markdown
+Act as a Principal Staff Engineer. Review this code for production readiness:
+<code_block>
+{clipboard}
+</code_block>
+
+Audit for: 1) Memory/concurrency leaks, 2) Missing null guards, 3) Deprecated APIs, 4) Edge-case exceptions.
+Provide the hardened production version with full type hints.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### 2. The Meeting Action Parser (Shortcut: `;notes`)
+```markdown
+Parse these raw meeting scribbles into:
+1. **Key Decisions Made** (Max 3 bullets)
+2. **Action Items Table**: | Task | Owner | Deadline | Priority |
+3. **Open Blockers**
+
+Raw Notes:
+{clipboard}
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+### 3. The Executive BLUF Digest (Shortcut: `;bluf`)
+```markdown
+Read the attached text. Provide a 2-tier summary:
+1. **Executive BLUF (Max 2 sentences)**: The direct decision and financial/timeline impact.
+2. **3 Key Supporting Takeaways** (Bulleted with bold headers).
+Text:
+{clipboard}
+```
+
+---
+
+### 4. The Human Voice Copy Polish (Shortcut: `;polish`)
+```markdown
+Refactor this draft to sound warm, confident, and conversational:
+- Ban all AI clichés: "delve", "tapestry", "crucial", "testament", "beacon".
+- Vary sentence rhythm (mix short and compound sentences).
+- Start immediately with the hook; zero preamble fluff.
+Draft:
+{clipboard}
+```
+
+---
+
+### 5. The TSV Data Extractor (Shortcut: `;table`)
+```markdown
+Extract this unstructured text into a clean TSV code block ready for 1-click Excel paste.
+Columns: Date (YYYY-MM-DD), Entity/Person, Category, Amount (Number), Status.
+Data:
+{clipboard}
+```
+
+---
+
+## Implementation Setup Guide
+
+| Tool | Recommended Setup |
+| :--- | :--- |
+| **Raycast (Mac)** | Extensions $\rightarrow$ Snippets $\rightarrow$ Create Snippet with `{clipboard}` trigger. |
+| **TextExpander / Espanso (Cross-Platform)**| Define YAML snippets mapped to shortcut triggers like `;notes` or `;creview`. |
+| **Obsidian / Notion** | Create a `Prompts/` database categorized by Engineering, Writing, and Finance. |
+
+---
+
+## Summary Best Practice
+> **"Whenever an AI gives you a 10/10 response, don't just close the tab—extract the prompt, replace the variables with `{clipboard}`, and save it to your snippet library."**

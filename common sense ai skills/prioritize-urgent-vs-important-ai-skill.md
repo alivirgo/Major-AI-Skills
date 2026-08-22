@@ -1,44 +1,104 @@
 ---
-title: "Prioritize Tasks Using Eisenhower Matrix AI Skill"
-description: "Ask AI to categorize your tasks into Urgent, Important, Delegate, or Skip."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, prioritize-urgent-vs-important"
-category: "Common Sense Everyday AI"
+title: "Prioritize Tasks Using the Eisenhower Matrix AI Skill"
+description: "How to use AI to triage chaotic daily to-do lists into the 4 Eisenhower Quadrants (Do First, Schedule, Delegate, Eliminate) for maximum daily leverage."
+category: "Daily Productivity & Workflow"
+tags: ["eisenhower-matrix", "task-prioritization", "time-management", "productivity", "deep-work", "prompt-engineering"]
 ---
 
-# Prioritize Tasks Using Eisenhower Matrix (AI Skill)
+# Prioritize Tasks Using the Eisenhower Matrix (AI Skill)
 
 ## Overview
-Ask AI to categorize your tasks into Urgent, Important, Delegate, or Skip.
+Staring at a flat list of 20 unranked tasks triggers decision fatigue. People naturally gravitate toward easy, low-impact tasks (*"clean up desktop icons"*, *"reply to casual emails"*) while avoiding high-leverage, complex strategic work.
+
+The **Eisenhower Matrix Task Triage Protocol** commands the AI to sort your raw to-do list into the **4 Classic Productivity Quadrants**: urgent firefighting, high-ROI deep work, delegable tasks, and zero-value time traps.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 4 Eisenhower Quadrants
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 The Eisenhower Matrix Grid                  │
+│                                                             │
+│  Q1: DO FIRST (Urgent & Important)                          │
+│  • P0 Outages, client contract deadlines, safety risks      │
+│                                                             │
+│  Q2: SCHEDULE (Not Urgent, but HIGH ROI) ──► 80% LEVERAGE   │
+│  • System refactoring, strategic planning, skill mastery    │
+│                                                             │
+│  Q3: DELEGATE / AUTOMATE (Urgent, Not Important)            │
+│  • Scheduling calls, routine data entry, basic formatting   │
+│                                                             │
+│  Q4: ELIMINATE / KILL (Neither Urgent nor Important)        │
+│  • Unnecessary sync meetings, busywork, vanity metrics      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Task Prioritization Prompt Templates
+
+### Pattern 1: The Morning 9 AM Triage Engine
+Use when staring at an overwhelming to-do list at the start of the day:
+
+```markdown
+Here is my raw to-do list for today:
+[PASTE RAW TASKS & NOTES]
+
+My Primary Goal for today is: [CORE GOAL].
+
+Triage these tasks using the Eisenhower Matrix into 4 distinct Markdown tables:
+1. **Q1: DO FIRST (Top 2-3 Urgent & Critical Tasks)** – Must finish before lunch.
+2. **Q2: DEEP WORK BLOCK (High-Leverage / Strategic)** – Time-box for 90 minutes.
+3. **Q3: DELEGATE / FAST BATCH** – Batch into a 20-minute admin blitz or delegate.
+4. **Q4: ELIMINATE / DEFER** – Tasks that provide $<5\%$ value and should be cancelled.
+
+For Q1 and Q2, specify the recommended order of execution.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Project Scope Cutter (Feature Backlog Triage)
+
+```markdown
+Review our feature backlog: [PASTE FEATURE LIST].
+
+Categorize features into:
+- **Must-Have for v1 (Q1)**
+- **Strategic Differentiation for v2 (Q2)**
+- **Nice-to-Have / Defer (Q4)**
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Freelance Founder's Monday Morning Task Dump
+
+#### Raw Task Dump
+> *"1) Fix Stripe billing bug affecting 3 users, 2) Redesign company logo, 3) Write quarterly investor update, 4) Reply to 15 cold LinkedIn InMails, 5) Refactor customer onboarding database queries, 6) Order new office coffee, 7) Prep proposal for $25k enterprise lead due at 5 PM."*
+
+#### AI Eisenhower Triage Output
+
+```markdown
+### 🚨 Q1: DO FIRST (Immediate Revenue & Risk / Finish by 1:00 PM)
+1. **Fix Stripe Billing Bug**: Direct financial leak; 3 users blocked. (Estimate: 45 mins).
+2. **$25k Enterprise Proposal**: Hard deadline at 5 PM; high revenue impact. (Estimate: 90 mins).
+
+### 🎯 Q2: SCHEDULE (Deep Work Block / 2:00 PM - 4:00 PM)
+- **Investor Quarterly Update**: High strategic value for future funding runway.
+- **Onboarding Query Optimization**: Drives long-term user retention.
+
+### ⚡ Q3: FAST BATCH / DELEGATE (4:00 PM - 4:30 PM Admin Blitz)
+- **Order Office Supplies**: 2-minute task.
+- **Cold InMails**: Archive or use standard snippet reply.
+
+### 🗑️ Q4: ELIMINATE / KILL
+- **Logo Redesign**: Zero revenue impact; pure procrastination distraction. Kill for now.
+```
+
+---
+
+## Summary Best Practices
+- **Never start your day in Q3/Q4**: Protect your first 2 hours exclusively for Q1 and Q2 tasks.
+- **Kill at least 1 task every day**: If you aren't actively eliminating items into Q4, your filter isn't strict enough.

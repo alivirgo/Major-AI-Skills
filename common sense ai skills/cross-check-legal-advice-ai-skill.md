@@ -1,44 +1,93 @@
 ---
-title: "Cross-Check Legal Advice AI Skill"
-description: "Use AI for legal concept research only -- always consult a certified lawyer for real cases."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, cross-check-legal-advice"
-category: "Common Sense Everyday AI"
+title: "Cross-Check Legal & Compliance Information AI Skill"
+description: "How to safely use AI for legal issue-spotting, contract clause translation, and preparing targeted questions for licensed legal counsel."
+category: "Fact-Checking & Safety Habits"
+tags: ["legal-research", "compliance", "issue-spotting", "contracts", "safety", "prompt-engineering"]
 ---
 
-# Cross-Check Legal Advice (AI Skill)
+# Cross-Check Legal & Compliance Information (AI Skill)
 
 ## Overview
-Use AI for legal concept research only -- always consult a certified lawyer for real cases.
+Large Language Models are exceptional at translating dense legalese into plain English and spotting missing clauses in standard boilerplate. However, AI assistants are **not licensed attorneys**: they cannot assess local jurisdictional nuances, recent statutory changes, or courtroom enforceability, and they may hallucinate non-existent case precedents.
+
+This skill establishes the **Legal Issue-Spotting Protocol**: using AI to understand contractual mechanics and draft targeted questions, while ensuring all binding decisions are reviewed by certified legal counsel.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Legal Copilot Boundary
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 The Safe Legal Workflow                     │
+│                                                             │
+│  [ WHAT AI DOES SAFELY (Issue-Spotting & Prep) ]            │
+│  • Explains legalese terms in plain English                 │
+│  • Identifies missing boilerplate (e.g. indemnity, IP terms)│
+│  • Generates a list of targeted questions for your lawyer   │
+│                                                             │
+│  [ WHAT REQUIRES LICENSED COUNSEL (Binding Judgment) ]      │
+│  • Confirming state / local jurisdictional enforceability   │
+│  • Signing binding settlements, agreements, or NDA waivers  │
+│  • Final litigation strategy & liability risk sign-off      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Legal Prep Prompt Templates
+
+### Pattern 1: The Contract Issue-Spotter & Redline Helper
+Use when reviewing commercial contracts, MSAs, or NDAs:
+
+```markdown
+Analyze the attached contract clause: [PASTE CLAUSE].
+
+Context: I am the [BUYER / SELLER / SERVICE PROVIDER] based in [STATE / COUNTRY].
+
+Provide:
+1. **Plain-English Translation**: What does this clause actually mean in simple terms?
+2. **Who It Favors**: Does this favor the other party or my company?
+3. **Risk Exposure**: What is the worst-case liability or financial risk under this wording?
+4. **Proposed Redline**: A balanced, fair revision to protect my interests.
+5. **Questions for My Attorney**: 2 specific questions I should ask my legal counsel before signing.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+### Pattern 2: The Regulatory Checklist Generator
+Use when preparing for compliance audits (GDPR, CCPA, HIPAA, SOC2):
+
+```markdown
+We are building [PRODUCT FEATURE] that processes [DATA TYPES].
+
+Generate an informational compliance checklist for [REGULATION: e.g. GDPR].
+- List the key technical requirements (consent, right-to-erasure, encryption).
+- Highlight areas where regulatory interpretation is evolving.
+- Note: Format strictly as an exploratory preparation guide for our legal team.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Reviewing a Non-Compete / Non-Solicit Clause
+
+#### Unsafe Habit (Taking AI as Legal Fact)
+> **User**: *"Is this 2-year nationwide non-compete clause enforceable in California?"*
+>
+> ❌ *AI gives a brief "No, California bans non-competes", but misses nuances about business sale exceptions or non-solicitation of trade secrets.*
+
+#### Safe Issue-Spotting & Lawyer Prep Output
+> **AI Issue-Spotting Response**:
+> 1. **Statutory Landscape**: Under California Business and Professions Code § 16600 (and 2024 amendments SB 699 / AB 1076), non-compete agreements are void and unenforceable for employees regardless of where signed.
+> 2. **Key Exceptions**: Valid only in narrow scenarios (e.g., sale of a business goodwill interest).
+> 3. **Actionable Checklist for Counsel**:
+>    - Ask your lawyer to confirm whether the agreement includes an unlawful penalty clause.
+>    - Request an explicit severability clause so an invalid non-compete doesn't jeopardize the rest of the employment contract.
+
+---
+
+## The Golden Rules of AI Legal Safety
+1. **Never cite AI case law in court**: Avoid referencing specific case citations (*"Smith v. Jones"*) without pulling the actual brief from a verified legal database (Westlaw / LexisNexis).
+2. **Always state your jurisdiction**: Laws in California, Delaware, the EU, and Singapore differ drastically.
+3. **Use AI to lower attorney billable hours**: Use AI to draft the first summary and organize questions—saving your lawyer hours of preliminary issue-spotting time.

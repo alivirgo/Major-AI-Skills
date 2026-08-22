@@ -1,101 +1,119 @@
 ---
-title: "OrbStack AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate OrbStack on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for OrbStack, ChatGPT troubleshooting, GPT automation, OrbStack, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "OrbStack macOS Fast Docker & Linux VM Runtime AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize OrbStack, orb CLI scripting, Docker Buildx multi-arch compilation, and Linux VM automation."
+category: "Fast Docker & Linux VM Runtime"
+tags: ["orbstack", "docker-engine", "orb-cli", "docker-buildx", "gpt-codex", "vm-automation"]
 ---
 
-# OrbStack AI Skill Guide for GPT
+# OrbStack macOS Fast Docker & Linux VM Runtime AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **OrbStack** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+OrbStack provides scriptable container orchestration through its native Docker API engine, the **`orb` CLI toolkit**, and full support for **Docker Buildx (Multi-Arch Engine)**. GPT/Codex acts as a Principal DevOps Automation Engineer and Infrastructure Developer, delivering **automated `orb` provisioning scripts**, **cross-platform Docker Buildx pipelines**, **Linux VM environment bootstrap scripts**, and **local Kubernetes cluster setups**.
 
-- **Application Name**: OrbStack
-- **Category**: Fast Docker & Linux VM Runtime
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Container Pipeline Stack
 
-> **Core Purpose**: Ultra-fast, lightweight Docker Desktop and Linux VM replacement engineered natively for Apple Silicon.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with OrbStack, GPT must understand its underlying technical framework:
-
-Native Swift app utilizing Hypervisor.framework and custom lightweight Linux micro-kernel booting in under 2 seconds.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 OrbStack Developer Platform                 │
+│                                                             │
+│  CLI & Orchestration Tier                                   │
+│  ├── `orb` Command-Line Tool (Machine Lifecycles & Shells)  │
+│  ├── Docker CLI & `docker-compose` Engine                   │
+│  └── Lightweight Kubernetes (`k8s`) Multi-Node Cluster      │
+│                                                             │
+│  Build & Multi-Architecture Pipeline                        │
+│  ├── Docker Buildx (Native `linux/arm64` + Rosetta `x86_64`) │
+│  ├── Multi-Stage Container Image Caching & Layer Sharing    │
+│  └── Automated SSH Key Ingestion for Micro-VMs              │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of OrbStack:
+## Operational Capabilities & Agent Directives
 
-- **Drop-in replacement for Docker Desktop CLI (docker)**
-- **Native Linux Virtual Machines (orb create ubuntu)**
-- **Zero-config local domain routing (.orb.local)**
+1. **`orb` CLI Scripting & Automation**: Construct bash and Python automation scripts utilizing `orb create`, `orb run`, `orb push`, and `orb delete` to spin up ephemeral CI/CD runners.
+2. **Docker Buildx Multi-Arch Automation**: Configure Docker Buildx builders targeting `linux/amd64` and `linux/arm64` simultaneously with Rosetta 2 acceleration.
+3. **Automated Linux VM Bootstrapping**: Script cloud-init / bash bootstrap sequences installing toolchains (Rust, Node.js, Python, Clang) inside fresh OrbStack micro-VMs.
+4. **Local Kubernetes Automation**: Initialize and manage lightweight single-node Kubernetes clusters via OrbStack's embedded k8s engine.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding OrbStack, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to OrbStack, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Bash Automation: Automated Ephemeral Micro-VM Test Runner (`orb`)
+
+Save this script as `run_ephemeral_test.sh` to spin up a clean Ubuntu micro-VM, execute integration tests, and tear down the VM:
+
+```bash
+#!/usr/bin/env bash
+# ==============================================================================
+# OrbStack Ephemeral CI Test Runner
+# Creates a disposable Linux micro-VM, executes a test suite, and tears it down.
+# ==============================================================================
+set -euo pipefail
+
+TEST_VM="test-runner-$(date +%s)"
+DISTRO="ubuntu:24.04"
+
+echo "--- [SPINNING UP EPHEMERAL VM: $TEST_VM] ---"
+orb create "$DISTRO" "$TEST_VM"
+
+cleanup() {
+    echo -e "\n--- [TEARING DOWN EPHEMERAL VM: $TEST_VM] ---"
+    orb delete --force "$TEST_VM"
+    echo "✅ VM destroyed cleanly."
+}
+trap cleanup EXIT
+
+# 1. Update Package Repositories inside VM
+echo "Step 1: Updating packages inside VM..."
+orb -m "$TEST_VM" sudo apt-get update -qq
+orb -m "$TEST_VM" sudo apt-get install -y -qq build-essential git python3 python3-pip
+
+# 2. Run Test Script
+echo "Step 2: Executing Python test suite inside clean Linux environment..."
+orb -m "$TEST_VM" python3 -c "
+import platform, sys
+print('Architecture inside VM:', platform.machine())
+print('OS Release inside VM:  ', platform.version())
+print('Python Version:        ', sys.version)
+assert platform.system() == 'Linux', 'Test failed: Not running on Linux!'
+print('✅ Test passed successfully inside OrbStack micro-VM!')
+"
+
+echo "Execution completed."
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If OrbStack encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Docker CLI connection error
-- **Root Cause**: DOCKER_HOST variable pointing to legacy socket.
-- **Resolution Pathway**: Set 'export DOCKER_HOST=unix://$HOME/.orbstack/run/docker.sock'.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`orb create` Fails: `Distribution not found`** | Distro identifier misspelled or unsupported release tag. | List valid distribution tags: `orb list --available` (e.g. `ubuntu:24.04`, `archlinux`, `debian:12`, `alpine`). |
+| **Docker Buildx Hangs on Multi-Platform Builds** | Builder instance attempting QEMU emulation rather than native OrbStack Rosetta engine. | In OrbStack Settings $\rightarrow$ Ensure Rosetta is enabled $\rightarrow$ Run `docker buildx create --use --driver docker-container`. |
+| **`orb push` File Transfer Fails with Permission Denied** | Target directory in VM is owned by `root` while pushing as default user. | Target user home directory: `orb push file.txt $TEST_VM:~/file.txt`. |
+| **Kubernetes `kubectl` Cannot Connect to Cluster** | OrbStack Kubernetes engine disabled or kubeconfig context set to remote cluster. | 1. In OrbStack Settings $\rightarrow$ **Kubernetes**, toggle Enable.<br>2. In terminal, run: `kubectl config use-context orbstack`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for OrbStack:
+## Command Line Syntax & Batch Processing
 
 ```bash
-orb create ubuntu my-vm
-orb shell my-vm
-orb docker ps
+# 1. Build Multi-Architecture Container Images via Buildx
+docker buildx build --platform linux/amd64,linux/arm64 -t myapp:latest --push .
+
+# 2. Push File to OrbStack VM
+orb push config.env dev-box:/etc/app/config.env
+
+# 3. Enable OrbStack Kubernetes Engine Context
+kubectl config use-context orbstack
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/.orbstack/`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot OrbStack issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for OrbStack?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **OrbStack CLI Binary**: `/usr/local/bin/orb`
+- **Docker Context Config**: `~/.docker/config.json`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For automated testing workflows, ensure trap handlers (`trap cleanup EXIT`) are registered in bash scripts to guarantee ephemeral `orb` micro-VMs are destroyed upon script termination or unexpected errors.

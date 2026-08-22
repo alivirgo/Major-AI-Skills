@@ -1,100 +1,166 @@
 ---
-title: "Raycast AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Raycast on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Raycast, Troubleshooting with Claude, Claude AI skills, Claude integration, Raycast, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Raycast macOS Extensible Productivity Launcher AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Raycast, React/TypeScript Extension API (@raycast/api), Script Commands, and URL schemes."
+category: "Spotlight & Productivity Launcher Replacement"
+tags: ["raycast", "macos-launcher", "raycast-api", "react-typescript", "script-commands", "accessibility-window", "claude"]
 ---
 
-# Raycast AI Skill Guide for Claude
+# Raycast macOS Extensible Productivity Launcher AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Raycast** on **macOS**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Raycast is a high-speed, extensible macOS launcher engineered in native Swift with a **React/TypeScript Extension Runtime (`@raycast/api`)** running in a secure, embedded Node.js process. Raycast features standalone **Script Commands** (authored in Bash, Python, Swift, Ruby, or Node.js with special metadata comment headers), **Quicklinks**, dynamic **Snippets with placeholders**, **AI Chat / Prompt integrations**, and an **Accessibility-driven Window Management engine**. Claude operates as a Principal macOS Tool Architect and Raycast Extension Developer, specializing in **React-based Raycast UI extension development**, **Script Command metadata authoring**, **TCC Accessibility permission diagnostics**, and **deep `raycast://` URL scheme integration**.
 
-- **Application Name**: Raycast
-- **Category**: Spotlight & Productivity Launcher Replacement
-- **Platform**: macOS
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Raycast Multi-Tier Architecture & Extension Runtime Stack
 
-> **Core Purpose**: Extensible Swift-native launcher for macOS providing instant control over apps, scripts, and extensions.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Raycast, Claude must understand its underlying technical framework:
-
-Native Swift macOS app with React/TypeScript Extension runtime backed by Node.js and macOS Accessibility API.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Raycast Engine Architecture                 │
+│                                                             │
+│  Presentation & Native Swift Core                           │
+│  ├── Low-Latency Swift HUD Window (Floating Global Launcher)│
+│  ├── Spotlight Replacement & Global Hotkey Engine (⌘+Space) │
+│  └── Accessibility Window Management (`AXUIElement` Engine) │
+│                                                             │
+│  Extension & React Runtime (`@raycast/api`)                 │
+│  ├── Embedded Node.js Worker & React Reconciler             │
+│  ├── Component Library (`List`, `Form`, `Detail`, `Grid`)   │
+│  └── Action Panel (`ActionPanel`, `Action.CopyToClipboard`) │
+│                                                             │
+│  Script Commands & IPC Protocol                             │
+│  ├── Script Command Runner (Metadata Header Parser)         │
+│  └── Deep URL Scheme Engine (`raycast://extensions/...`)    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Raycast:
+## Operational Capabilities & Agent Directives
 
-- **Native Swift low-latency architecture**
-- **React/TypeScript Extension API**
-- **Built-in Clipboard History & Window Management**
+1. **React / TypeScript Extension Authoring**: Develop modular Raycast extensions using `@raycast/api` and `@raycast/utils` implementing `List`, `Detail`, `Form`, and `ActionPanel` views with clean state management.
+2. **Metadata Script Command Authoring**: Write standalone script commands in Bash, Python, or Swift with valid `@raycast.schemaVersion`, `@raycast.title`, `@raycast.mode`, and `@raycast.icon` headers.
+3. **Accessibility Window Snapping Triage**: Remediate window management failures by verifying Raycast's `AXUIElement` Accessibility permissions in macOS System Settings.
+4. **Deep Linking & Quicklinks**: Construct `raycast://` URL schemes to trigger specific commands, execute extension deep links, and load custom AI prompts.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Raycast, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Raycast, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production TypeScript Code: Custom Raycast Extension Command (`@raycast/api`)
+
+Save this file as `src/search-repositories.tsx` inside a Raycast Extension project (`npm install @raycast/api @raycast/utils`):
+
+```tsx
+// ==============================================================================
+// Raycast Extension Command (React / TypeScript): GitHub Repo Switcher
+// Fetches, filters, and opens local git repositories in VS Code or Terminal.
+// ==============================================================================
+import { Action, ActionPanel, Icon, List, showToast, Toast } from "@raycast/api";
+import { useExec } from "@raycast/utils";
+import { useState } from "react";
+
+interface RepoItem {
+  name: string;
+  path: string;
+}
+
+export default function Command() {
+  const [searchText, setSearchText] = useState("");
+
+  // Scan user Projects directory using fast find command
+  const { isLoading, data, error } = useExec(
+    "find",
+    ["/Users/" + process.env.USER + "/Projects", "-maxdepth", "2", "-name", ".git"],
+    {
+      onError: (err) => {
+        showToast({
+          style: Toast.Style.Failure,
+          title: "Failed to scan projects",
+          message: err.message,
+        });
+      },
+    }
+  );
+
+  const repos: RepoItem[] = (data || "")
+    .split("\n")
+    .filter((line) => line.length > 0)
+    .map((gitDir) => {
+      const repoPath = gitDir.replace(/\/\.git$/, "");
+      const repoName = repoPath.split("/").pop() || "Unnamed";
+      return { name: repoName, path: repoPath };
+    });
+
+  const filteredRepos = repos.filter((r) =>
+    r.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  return (
+    <List
+      isLoading={isLoading}
+      onSearchTextChange={setSearchText}
+      searchBarPlaceholder="Filter local git repositories..."
+    >
+      {filteredRepos.map((repo) => (
+        <List.Item
+          key={repo.path}
+          icon={Icon.Folder}
+          title={repo.name}
+          subtitle={repo.path}
+          actions={
+            <ActionPanel>
+              <Action.Open
+                title="Open in VS Code"
+                target={repo.path}
+                application="Visual Studio Code"
+              />
+              <Action.Open
+                title="Open in Terminal"
+                target={repo.path}
+                application="Terminal"
+              />
+              <Action.CopyToClipboard title="Copy Path" content={repo.path} />
+            </ActionPanel>
+          }
+        />
+      ))}
+    </List>
+  );
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Raycast encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Raycast window commands fail
-- **Root Cause**: Accessibility permissions revoked.
-- **Resolution Pathway**: Re-enable Raycast in macOS System Settings -> Accessibility.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Window Management Commands (Snap/Resize) Fail** | Raycast lacks macOS Accessibility permissions to manipulate window bounds via `AXUIElement`. | 1. Open *System Settings $\rightarrow$ Privacy & Security $\rightarrow$ Accessibility*.<br>2. Toggle **Raycast** OFF and ON.<br>3. Restart Raycast. |
+| **Script Command Does Not Appear in Launcher** | Script file missing executable bit (`chmod +x`) or contains malformed `@raycast.schemaVersion` header. | 1. In terminal, run: `chmod +x ~/.raycast-scripts/my_script.sh`.<br>2. Verify header format: `// @raycast.schemaVersion 1` and `// @raycast.title My Script`.<br>3. In Raycast Preferences $\rightarrow$ Extensions $\rightarrow$ Reload. |
+| **`npm run dev` Fails with Node.js Version Error** | Raycast API requires Node.js version 18.0.0 or higher. | Update Node.js via Homebrew: `brew install node` or `nvm use 20`. |
+| **`Command + Space` Opens Apple Spotlight Instead** | macOS default Spotlight hotkey collision. | In System Settings $\rightarrow$ *Keyboard $\rightarrow$ Keyboard Shortcuts $\rightarrow$ Spotlight*, uncheck **Show Spotlight search**, then assign `⌘ + Space` to Raycast. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Raycast:
+## Command Line Syntax & Raycast Script Command Header Template
 
 ```bash
-open raycast://
-open raycast://conf/
+#!/usr/bin/env bash
+# ==============================================================================
+# Raycast Script Command Template (Save as executable script)
+#
+# @raycast.schemaVersion 1
+# @raycast.title System Memory Free
+# @raycast.mode compact
+# @raycast.icon 🚀
+# @raycast.packageName Developer Utilities
+# ==============================================================================
+echo "Free Memory: $(vm_stat | grep 'Pages free' | awk '{print $3 * 4096 / 1024 / 1024}') MB"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `~/Library/Application Support/com.raycast.macos`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Raycast issues on macOS?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Raycast?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Raycast Application Support**: `~/Library/Application Support/com.raycast.macos`
+- **Custom Script Commands**: `~/Library/Application Support/com.raycast.macos/script-commands`
+- **Raycast Preferences**: `~/Library/Preferences/com.raycast.macos.plist`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When authoring Raycast Script Commands, always specify `@raycast.schemaVersion 1`, assign an appropriate `@raycast.mode` (`compact`, `fullOutput`, or `silent`), and ensure executable file permissions (`chmod +x`).

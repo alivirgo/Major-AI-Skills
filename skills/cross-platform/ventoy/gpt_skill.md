@@ -1,99 +1,116 @@
 ---
-title: "Ventoy AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Ventoy on Cross-Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Ventoy, ChatGPT troubleshooting, GPT automation, Ventoy, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Ventoy Multiboot USB Creator AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Ventoy multiboot drives, unattended XML scripts, persistence image generators, and CLI installations."
+category: "Multiboot USB Creator & ISO Bootloader"
+tags: ["ventoy", "unattended-install", "autounattend-xml", "gpt-codex", "persistence-generator", "multiboot-automation"]
 ---
 
-# Ventoy AI Skill Guide for GPT
+# Ventoy Multiboot USB Creator AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Ventoy** on **Cross-Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Ventoy's modular architecture allows complete programmatic customization through its JSON plugin schema, unattended installation injection engines, and command-line deployment binaries. GPT/Codex acts as a Principal Systems Automation Engineer and OS Deployment Architect, delivering **automated `autounattend.xml` answer files**, **persistence image generator scripts**, **custom GRUB2 menu themes**, and **CLI installation pipelines**.
 
-- **Application Name**: Ventoy
-- **Category**: Multiboot USB Creator & ISO Bootloader
-- **Platform**: Cross-Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Architecture & Unattended Injection Stack
 
-> **Core Purpose**: Revolutionary open-source tool turning USB drives into multiboot systems by copying ISO files directly onto the drive.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Ventoy, GPT must understand its underlying technical framework:
-
-Installs custom GRUB2 bootloader on EFI/MBR partition, hooking ISO file system in memory dynamically during boot.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Ventoy Automation Architecture              │
+│                                                             │
+│  Plugin & Injection Framework                               │
+│  ├── `ventoy.json` Declarative Rule Parser                  │
+│  ├── Unattended Answer File Injection (`autounattend.xml`)  │
+│  └── Persistence Loopback Image Mappings (`persistence.dat`)│
+│                                                             │
+│  Automated Deployment & Tooling                             │
+│  ├── `Ventoy2Disk.sh` & `Ventoy2Disk.exe` CLI Scripting     │
+│  ├── Programmatic Disk Formatting & Partition Reservation   │
+│  └── Dynamic Windows 11 TPM / Secure Boot Registry Bypass  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Ventoy:
+## Operational Capabilities & Agent Directives
 
-- **Direct ISO file drag-and-drop multiboot support**
-- **x86 Legacy BIOS & UEFI (Secure Boot supported) compatibility**
-- **Data persistence plugin support for Linux Live distros**
+1. **Unattended Windows Answer File Generation**: Programmatically author valid `autounattend.xml` answer files configured for automated disk partition formatting, local administrator account creation, and OOBE bypass.
+2. **Automated Persistence Image Creation**: Script the creation of ext4/btrfs raw disk images (`dd` / `fallocate` + `mkfs.ext4`) labeled for Linux live persistence (`casper-rw`).
+3. **Partition Space Reservation**: Configure Ventoy CLI installations with reserved non-partitioned trailing disk space for custom secondary operating system partitions (`-r <size_in_MB>`).
+4. **Automated Batch Media Provisioning**: Build bash scripts that flash a drive with Ventoy, configure `ventoy.json`, and download required ISO suites (Ubuntu, Arch, WinPE) automatically.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Ventoy, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Ventoy, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production XML Automation: Zero-Touch Windows 11 Unattended Answer File
+
+Save this file as `/ventoy/script/autounattend.xml` on the USB drive to fully automate Windows 11 installation without human intervention:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+        <ProductKey>
+          <Key>VK7JG-NPHTM-C97JM-9MPGT-3V66T</Key>
+          <WillShowUI>OnError</WillShowUI>
+        </ProductKey>
+      </UserData>
+    </component>
+  </settings>
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideLocalAccountScreen>true</HideLocalAccountScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <ProtectYourPC>3</ProtectYourPC>
+      </OOBE>
+      <UserAccounts>
+        <LocalAccounts>
+          <LocalAccount>
+            <Name>Administrator</Name>
+            <Group>Administrators</Group>
+            <Password>
+              <Value>Password123!</Value>
+              <PlainText>true</PlainText>
+            </Password>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+    </component>
+  </settings>
+</unattend>
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Ventoy encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] UEFI Secure Boot blocks bootloader
-- **Root Cause**: Unsigned GRUB2 binary rejected.
-- **Resolution Pathway**: Enroll Ventoy MOK key in UEFI firmware.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Ventoy2Disk.sh: Permission denied` on Linux** | Script executed without root privileges or execute permissions on binary. | 1. Add execute permissions: `chmod +x Ventoy2Disk.sh`.<br>2. Run with sudo: `sudo ./Ventoy2Disk.sh -i /dev/sdX`. |
+| **`autounattend.xml` Ignored during Windows Setup** | The image path in `ventoy.json` does not match the exact case-sensitive path to the ISO on disk. | 1. Ensure `image` path in `auto_install` matches ISO filename exactly.<br>2. Verify JSON syntax with `jq . /ventoy/ventoy.json`. |
+| **Persistence Fails to Save Files across Reboots** | Persistence `.dat` image filesystem label does not match distro requirements (`casper-rw` for Ubuntu/Mint; `persistence` for Debian/Kali). | 1. Inspect image filesystem label using `e2label persistence.dat`.<br>2. Set correct label: `e2label persistence.dat casper-rw`. |
+| **USB Write Speed Drops to 1 MB/s during ISO Copy** | Ventoy data partition formatted in exFAT with 128KB clusters on slow flash media. | Re-format Partition 1 as **NTFS** with 4KB or 64KB cluster allocation size for sustained write throughput. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Ventoy:
+## Command Line Syntax & Automated Installation
 
 ```bash
-Ventoy2Disk.exe -i G:
+# 1. Install Ventoy with 10GB Reserved Space at End of Disk (Linux)
+sudo ./Ventoy2Disk.sh -i -r 10240 /dev/sdb
+
+# 2. Non-Destructive Update to Latest Ventoy Version (Windows)
+Ventoy2Disk.exe /u G:
+
+# 3. Create 4GB Ext4 Persistence Image via DD and e2fsprogs
+dd if=/dev/zero of=casper-rw.dat bs=1M count=4096 status=progress
+mkfs.ext4 -F -L casper-rw casper-rw.dat
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `/ventoy/ventoy.json`
-
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Ventoy issues on Cross-Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Ventoy?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When formatting persistence images for Ubuntu live media, ensure the filesystem is formatted as `ext4` with label `casper-rw`. For Kali Linux, use label `persistence`. Validate JSON schemas in `ventoy.json`.

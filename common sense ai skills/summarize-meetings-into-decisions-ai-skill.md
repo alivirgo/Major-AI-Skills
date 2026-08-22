@@ -1,44 +1,91 @@
 ---
-title: "Summarize Meetings into Key Decisions AI Skill"
-description: "Ask AI 'what were the 3 main decisions made in this transcript?'."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, summarize-meetings-into-decisions"
-category: "Common Sense Everyday AI"
+title: "Summarize Meetings into Decisions (Decision Log Extraction) AI Skill"
+description: "How to extract high-signal Decision Records and rationale from messy meeting transcripts, filtering out 90% of chronological conversational chatter."
+category: "Daily Productivity & Workflow"
+tags: ["meeting-summaries", "decision-records", "executive-brief", "transcript-parsing", "productivity", "prompt-engineering"]
 ---
 
-# Summarize Meetings into Key Decisions (AI Skill)
+# Summarize Meetings into Decisions (Decision Log Extraction) (AI Skill)
 
 ## Overview
-Ask AI 'what were the 3 main decisions made in this transcript?'.
+When asked to summarize a 45-minute meeting transcript, standard AI outputs create a chronological play-by-play (*"First, Sarah presented the Q3 slide deck. Then Mark asked about pricing. Then Sarah replied that pricing was under review..."*). 
+
+This chronological narrative is nearly useless for executives and team members who weren't in the room. What matters are **the final decisions agreed upon, the rationale behind them, and who is accountable for execution**.
+
+The **Decision Log Extraction Protocol** filters out conversational chatter and formats the meeting into an **Architecture / Executive Decision Record (ADR)**.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## Chronological Narrative vs. Decision Record
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Transcript Processing Models                │
+│                                                             │
+│  Chronological Narrative (Low Value):                       │
+│  • 4 pages of "Bob said this, then Alice disagreed..."      │
+│  • High reading fatigue, impossible to find final agreements│
+│                                                             │
+│  Decision Record (High Value):                              │
+│  • [DECISION 1]: What was decided & why                     │
+│  • [OPTIONS REJECTED]: What was eliminated & why            │
+│  • [ACTION ASSIGNMENTS]: [Owner] + [Task] + [Deadline]      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## Master Decision Record Prompt Templates
+
+### Pattern 1: The Executive Decision Record (ADR)
+Use for product, strategy, and leadership meetings:
+
+```markdown
+Analyze the attached meeting transcript: [ATTACH TRANSCRIPT / PASTE TEXT].
+
+Do NOT write a chronological timeline of who spoke.
+Extract a structured **Executive Decision Record**:
+
+### 🎯 1. Key Decisions Made
+For each decision, format as:
+- **Decision**: [Clear 1-sentence statement of what was approved]
+- **Rationale**: [Why this option won over alternatives]
+- **Trade-off / Cost**: [What we are giving up or spending]
+
+### 🚫 2. Options Explicitly Rejected
+- [Option Name]: [Why the team decided NOT to proceed with this path]
+
+### ⚡ 3. Accountable Action Items
+| Task | Owner | Due Date | Definition of Done |
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Real-World Case Study
+
+### Scenario: Product Team Pricing Sync
+
+#### Chronological AI Output (Rambling)
+> *"The meeting began at 2 PM. Dave suggested increasing enterprise pricing by 20%. Lisa expressed concern that existing customers might churn. Mark mentioned that our churn rate is currently 1.8%. After some back-and-forth discussion regarding grandfathering policies, the team decided to increase new customer pricing..."*
+
+#### Decision Record Output (Instant Clarity)
+
+### 🎯 1. Key Decisions Made
+- **Decision**: Increase Enterprise Tier pricing by **20% (from $500/mo to $600/mo)** for all new signups starting September 1st.
+- **Rationale**: Competitor benchmarks show we are 35% underpriced; low churn rate (1.8%) demonstrates strong price tolerance.
+- **Grandfathering Policy**: All existing customers remain on legacy $500/mo pricing for 12 months.
+
+### 🚫 2. Options Explicitly Rejected
+- **Immediate Price Hike for Existing Customers**: Rejected due to risk of relationship damage with long-term champion accounts.
+
+### ⚡ 3. Accountable Action Items
+| Task | Owner | Due Date | Definition of Done |
+| :--- | :--- | :--- | :--- |
+| **Update Stripe Pricing Table** | Dave | Aug 25 | New $600/mo pricing tier live on staging. |
+| **Draft Grandfathering FAQ Email** | Lisa | Aug 20 | Customer update email reviewed and approved. |
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Summary Best Practices
+- **Ban "Who said what"**: Explicitly prompt *"Focus on team consensus and final decisions, not individual speech chronologies."*
+- **Always record rejected options**: Capturing *why* an alternative was killed prevents the team from debating the exact same idea again 3 months later.

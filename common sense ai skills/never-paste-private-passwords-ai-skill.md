@@ -1,44 +1,89 @@
 ---
-title: "Never Paste Passwords or Credit Cards AI Skill"
-description: "Keep personal IDs, banking details, and passwords completely out of AI chats."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, never-paste-private-passwords"
-category: "Common Sense Everyday AI"
+title: "Never Paste Passwords, Keys, or PII (Zero-Secrets Hygiene) AI Skill"
+description: "The essential security protocol for protecting API keys, passwords, credit card numbers, and PII from leaking into AI logs, training queues, and shared chats."
+category: "Fact-Checking & Safety Habits"
+tags: ["cybersecurity", "secrets-management", "privacy", "api-keys", "data-protection", "safety"]
 ---
 
-# Never Paste Passwords or Credit Cards (AI Skill)
+# Never Paste Passwords, Keys, or PII (Zero-Secrets Hygiene) (AI Skill)
 
 ## Overview
-Keep personal IDs, banking details, and passwords completely out of AI chats.
+Pasting real database passwords, production API keys (`sk-proj-...`, `AKIA...`), SSH private keys, credit cards, or customer Personally Identifiable Information (PII) into an AI chat creates immediate, catastrophic security exposure. 
+
+Chat logs can be accessed by human data annotators during model training, stored in unencrypted browser caches, exposed via shared workspace links, or compromised in third-party API breaches.
+
+The **Zero-Secrets Hygiene Protocol** establishes strict rules and automated dummy placeholder habits to keep your credentials 100% secure.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The Secret Leak Exposure Vector
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Where Pasted Secrets Travel                 │
+│                                                             │
+│  User Pastes Real AWS Key / API Secret into Chat Box        │
+│                           │                                 │
+│                           ▼                                 │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │ • Stored in SaaS provider server logs & vector indices │  │
+│  │ • Visible to human RLHF / model review annotators     │  │
+│  │ • Visible to teammates in shared organization chats   │  │
+│  │ • Risk of model weights ingestion in public training  │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                           │                                 │
+│                           ▼                                 │
+│  [ SECURITY COMPROMISE: Treat Any Pasted Key as Revoked ]   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+---
+
+## High-Risk Credentials Checklist
+
+Never paste any string matching these patterns into an AI prompt:
+
+| Credential Type | Real Example Pattern | Safe Dummy Placeholder to Use |
+| :--- | :--- | :--- |
+| **OpenAI / Anthropic Keys** | `sk-proj-49f8a...`, `sk-ant-...` | `os.getenv("OPENAI_API_KEY")` |
+| **AWS Access Keys** | `AKIAIOSFODNN7EXAMPLE` | `YOUR_AWS_ACCESS_KEY_ID` |
+| **GitHub Tokens** | `ghp_39d8fj29...` | `YOUR_GITHUB_TOKEN` |
+| **Database URLs** | `postgres://user:pass@db:5432` | `postgresql://USER:PASSWORD@HOST:5432/DB` |
+| **Private SSH / RSA Keys** | `-----BEGIN RSA PRIVATE KEY-----` | **NEVER PASTE. USE ENVIRONMENT VARIABLES** |
+| **Financial / Personal IDs** | Credit cards, CVVs, SSNs, Passports | Synthetic dummy numbers (`4111 1111...`) |
+
+---
+
+## Safe Code Scaffolding: The `.env` Standard
+
+When asking an AI to write integration code, always instruct it to use **Environment Variables** rather than hardcoded credentials:
+
+```markdown
+Write a Python script to send transactional emails using SendGrid.
+
+Security Rules:
+- Load the API key from environment variables: `os.environ["SENDGRID_API_KEY"]`.
+- Do NOT hardcode any strings or fake keys in the script.
+- Include a sample `.env.example` file showing the required key names.
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Emergency Protocol: What to Do If You Accidentally Paste a Key
+
+If you accidentally submit a real password or API key to an AI assistant:
+
+```
+┌───────────────────────────────────────────────────────────────────────────┐
+│ 1. REVOKE IMMEDIATELY: Go to the provider console and DELETE the key.     │
+│ 2. REGENERATE: Generate a new key and update your production `.env`.      │
+│ 3. AUDIT LOGS: Check CloudTrail / API access logs for unauthorized use.  │
+│ 4. DELETE CHAT: Delete the conversation thread from the AI platform.      │
+└───────────────────────────────────────────────────────────────────────────┘
+```
+*(Note: Deleting the chat alone is NOT enough. The moment a key hits an external server, you must treat it as permanently compromised and rotate it immediately).*
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Summary Rule of Thumb
+> **"If a string can authorize money, access private data, or log into a server, it belongs in an environment variable—NEVER in a chat box."**

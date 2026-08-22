@@ -1,99 +1,153 @@
 ---
-title: "MacWhisper AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate MacWhisper on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for MacWhisper, Gemini troubleshooting, Google AI, MacWhisper, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "MacWhisper On-Device Speech-to-Text AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot MacWhisper transcript viewers, audio waveforms, speaker tags, and subtitle exports."
+category: "Local AI Audio Transcription & Speech-to-Text"
+tags: ["macwhisper", "speech-to-text", "audio-waveform", "gemini", "speaker-diarization", "srt-subtitles"]
 ---
 
-# MacWhisper AI Skill Guide for Gemini
+# MacWhisper On-Device Speech-to-Text AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **MacWhisper** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+MacWhisper features a streamlined native macOS interface offering real-time transcript editing, interactive audio waveform scrubbers, speaker diarization labeling, and multi-format subtitle exporters. Gemini acts as an AI Audio & Speech Systems Reviewer, specializing in **multimodal MacWhisper transcript viewer inspection**, **audio waveform timeline synchronization**, **speaker diarization consistency audits**, and **subtitle layout validation**.
 
-- **Application Name**: MacWhisper
-- **Category**: Local AI Audio Transcription & Speech-to-Text
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Transcription Interface Stack
 
-> **Core Purpose**: On-device AI speech transcription app using OpenAI's Whisper model optimized for Apple Silicon with 100% offline privacy.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with MacWhisper, Gemini must understand its underlying technical framework:
-
-Swift application binding Whisper.cpp / CoreML C++ library utilizing Apple Neural Engine (ANE).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 MacWhisper Visual Operations                │
+│                                                             │
+│  Transcript & Waveform Inspection                           │
+│  ├── Interactive Audio Waveform Timeline (Scrub & Playback) │
+│  ├── Synchronized Text Paragraph Blocks (Timecode Chips)    │
+│  └── Speaker Diarization Badges (Speaker 1, Speaker 2...)   │
+│                                                             │
+│  Model & Export Configuration                               │
+│  ├── Model Manager HUD (Download Progress, VRAM Indicators) │
+│  ├── Export Format Selector (SRT, VTT, PDF, CSV, Word, JSON)│
+│  └── Subtitle Segment Splitter (Character / Line Limit)     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of MacWhisper:
+## Operational Capabilities & Agent Directives
 
-- **Drag-and-drop audio/video transcription**
-- **Real-time microphone dictation**
-- **SRT, VTT, CSV, PDF subtitle export**
+1. **Multimodal Transcript Inspection**: Analyze screenshots of MacWhisper transcript viewports to detect timestamp desynchronization, phonetic misspellings of specialized technical jargon, and missing sentence punctuation.
+2. **Audio Waveform & Segment Alignment**: Correlate visual speech energy bursts on the waveform timeline with active subtitle timecode ranges.
+3. **Speaker Diarization Review**: Validate that speaker tag switches match distinct conversational voice turns without erratic mid-sentence speaker flips.
+4. **Subtitle Formatting & Line Breaking**: Ensure generated SRT and VTT files respect cartographic broadcasting standards (maximum 37-42 characters per line, maximum 2 lines per subtitle card).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding MacWhisper, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to MacWhisper, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated SRT Subtitle Formatter & Line-Wrap Auditor
+
+Execute this script to validate and auto-wrap long subtitle lines in an exported SRT file to meet broadcast standards:
+
+```python
+"""
+SRT Subtitle Formatting & Character Limit Auditor
+Validates subtitle line lengths and wraps segments exceeding 42 characters per line.
+"""
+
+import sys
+import os
+import re
+
+MAX_CHARS_PER_LINE = 42
+MAX_LINES_PER_CARD = 2
+
+def audit_and_format_srt(srt_file: str, output_file: str):
+    if not os.path.exists(srt_file):
+        print(f"Error: Subtitle file '{srt_file}' not found.")
+        return
+
+    print(f"--- [AUDITING SUBTITLE BROADCAST COMPLIANCE: {srt_file}] ---")
+    
+    with open(srt_file, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    blocks = content.strip().split("\n\n")
+    formatted_blocks = []
+    issues_found = 0
+
+    for block in blocks:
+        lines = block.split("\n")
+        if len(lines) < 3:
+            formatted_blocks.append(block)
+            continue
+
+        idx = lines[0]
+        timecode = lines[1]
+        raw_text = " ".join(lines[2:])
+
+        # Wrap text to max characters per line
+        words = raw_text.split()
+        wrapped_lines = []
+        current_line = []
+        current_len = 0
+
+        for word in words:
+            if current_len + len(word) + (1 if current_line else 0) <= MAX_CHARS_PER_LINE:
+                current_line.append(word)
+                current_len += len(word) + (1 if len(current_line) > 1 else 0)
+            else:
+                wrapped_lines.append(" ".join(current_line))
+                current_line = [word]
+                current_len = len(word)
+        if current_line:
+            wrapped_lines.append(" ".join(current_line))
+
+        if len(wrapped_lines) > MAX_LINES_PER_CARD:
+            issues_found += 1
+
+        new_block = f"{idx}\n{timecode}\n" + "\n".join(wrapped_lines)
+        formatted_blocks.append(new_block)
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write("\n\n".join(formatted_blocks) + "\n")
+
+    print(f"Audit Complete! Re-formatted {len(blocks)} subtitle cards.")
+    if issues_found:
+        print(f"⚠️ Warning: {issues_found} cards exceeded {MAX_LINES_PER_CARD} lines (consider splitting timecodes).")
+    else:
+        print("✅ All subtitle cards meet 42-char broadcast readability standards.")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python3 audit_srt.py <subtitles.srt> [output_formatted.srt]")
+        sys.exit(1)
+    out = sys.argv[2] if len(sys.argv) > 2 else "formatted_" + os.path.basename(sys.argv[1])
+    audit_and_format_srt(sys.argv[1], out)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If MacWhisper encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Slow transcription
-- **Root Cause**: Running unoptimized Large model on low RAM.
-- **Resolution Pathway**: Switch to Medium or Small model.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Subtitle Text Overflows Screen Edges in Video Player** | Subtitle cards exported without character wrapping constraints (>80 characters on a single line). | 1. In MacWhisper Export $\rightarrow$ **SRT Options**, set *Max Characters per Line* to **42**.<br>2. Set *Max Lines* to **2**. |
+| **Speaker Tags Display as `Unknown Speaker`** | Audio quality too degraded or signal-to-noise ratio too low for acoustic clustering. | In MacWhisper, double-click the speaker label chip on the transcript to manually rename and merge speakers. |
+| **Model Download Progress Bar Stalls at 99%** | Network timeout during final Core ML / ANE model compilation step. | Allow 1-2 minutes for Apple Neural Engine compilation. If hung, delete incomplete file in `~/Library/Application Support/com.goodcode.MacWhisper/` and re-download. |
+| **Transcript Text Lacks Capitalization and Punctuation** | Model variant selected was an un-punctuated base model or language was set to generic code without casing. | Ensure target language is set to **English** (or specific source language) and select **Large-v3-Turbo**. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for MacWhisper:
+## Command Line Syntax & Server Control
 
 ```bash
+# Launch MacWhisper
 open -a MacWhisper
+
+# Verify Apple Silicon Neural Engine Availability
+sysctl hw.optional.arm64
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Application Support/com.goodcode.MacWhisper/`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot MacWhisper issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for MacWhisper?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Model Files**: `~/Library/Application Support/com.goodcode.MacWhisper/`
+- **Application Preferences**: `~/Library/Preferences/com.goodcode.MacWhisper.plist`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When exporting SRT/VTT subtitles from MacWhisper for video production, enforce a maximum constraint of 42 characters per line and 2 lines per card to guarantee professional viewer legibility.

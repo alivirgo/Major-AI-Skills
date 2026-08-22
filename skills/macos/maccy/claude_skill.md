@@ -1,99 +1,145 @@
 ---
-title: "MacCy AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate MacCy on macOS."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for MacCy, Troubleshooting with Claude, Claude AI skills, Claude integration, MacCy, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Maccy macOS Clipboard History Manager AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Maccy, NSPasteboard changeCount polling, Secure Input locks, CoreData storage, and simulated paste events."
+category: "Clipboard History Manager"
+tags: ["maccy", "macos", "nspasteboard", "clipboard-manager", "secure-input", "cgevent", "claude"]
 ---
 
-# MacCy AI Skill Guide for Claude
+# Maccy macOS Clipboard History Manager AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **MacCy** on **macOS**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Maccy is a lightweight, open-source macOS clipboard history manager built with Swift and AppKit. It continuously monitors the macOS global pasteboard (**`NSPasteboard.general`**) by tracking the **`changeCount`** property, securely discards confidential payloads (respecting **`org.nspasteboard.ConcealedType`** and **`TransientType`** flags), and maintains a persistent history in a local **CoreData / SQLite** database. When a user selects a clip, Maccy copies the data to the pasteboard and synthesizes a `Command + V` keystroke via **`CGEvent` Accessibility APIs**. Claude operates as a Principal macOS Systems Engineer and Swift Developer, specializing in **NSPasteboard lifecycle architecture**, **macOS Secure Input lock forensics (`ioreg`)**, **Accessibility synthetic event dispatch**, and **CoreData database optimization**.
 
-- **Application Name**: MacCy
-- **Category**: Clipboard History Manager
-- **Platform**: macOS
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Maccy Pasteboard & Storage Architecture
 
-> **Core Purpose**: Lightweight open-source clipboard history manager keeping searchable history of text, images, and files.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with MacCy, Claude must understand its underlying technical framework:
-
-Monitors macOS NSPasteboard change events and stores historical data in SQLite storage.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Maccy Engine Architecture                   │
+│                                                             │
+│  Pasteboard Observer & Filter Layer                         │
+│  ├── `NSPasteboard.general.changeCount` Polling Loop (0.25s)│
+│  ├── Password Manager Concealed Type Filter                 │
+│  │    ├── `org.nspasteboard.ConcealedType` (1Password)      │
+│  │    └── `org.nspasteboard.TransientType` (Bitwarden)      │
+│  └── Secure Input State Detector (`IsSecureEventInputEnabled`)│
+│                                                             │
+│  Storage & Search Pipeline                                  │
+│  ├── CoreData / SQLite Storage (`Storage.sqlite`)           │
+│  ├── Fuzzy Search Indexer (Title, Rich Text, Images)        │
+│  └── Pinned Items Cache (Persistent Header Entries)         │
+│                                                             │
+│  Paste Execution Layer                                      │
+│  ├── Direct Pasteboard Write (`NSPasteboard.clearContents`) │
+│  └── Synthetic Keystroke Dispatch (`CGEvent` ⌘+V Injection)  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of MacCy:
+## Operational Capabilities & Agent Directives
 
-- **Searchable clipboard history with fuzzy search**
-- **Secure Input detection ignoring password managers**
-- **Pinning clips to prevent cleanup**
+1. **Pasteboard Change Polling & Type Filtering**: Implement clean Swift pasteboard monitors that filter transient/concealed types and avoid capturing sensitive credentials.
+2. **Secure Input Lock Triage**: Diagnose stalled clipboard capturing by inspecting `ioreg -l -w 0 | grep SecureInput` to identify rogue processes locking macOS Secure Event Input.
+3. **Synthetic Event & Accessibility Triage**: Troubleshoot auto-paste failures by verifying Maccy's Accessibility permissions (`AXIsProcessTrustedWithOptions`).
+4. **CoreData Database Maintenance**: Query, vacuum, and repair corrupted Maccy SQLite databases (`~/Library/Containers/org.pavelm.Maccy/Data/Library/Application Support/Maccy/Storage.sqlite`).
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding MacCy, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to MacCy, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Swift Automation: Headless Pasteboard Monitor & Sensitive Data Filter
+
+Save this script as `pasteboard_monitor.swift` and execute via `swift pasteboard_monitor.swift`:
+
+```swift
+// ==============================================================================
+// Standalone Swift 5.x Script: Secure NSPasteboard Change Monitor
+// Polls NSPasteboard.general, filters password manager transient types, and logs.
+// ==============================================================================
+import Cocoa
+
+class SecurePasteboardMonitor {
+    private let pasteboard = NSPasteboard.general
+    private var lastChangeCount: Int
+    private var timer: Timer?
+
+    // Standard Concealed Pasteboard Types Used by Password Managers
+    private let concealedTypes: [NSPasteboard.PasteboardType] = [
+        NSPasteboard.PasteboardType("org.nspasteboard.ConcealedType"),
+        NSPasteboard.PasteboardType("org.nspasteboard.TransientType"),
+        NSPasteboard.PasteboardType("org.nspasteboard.AutoGeneratedType"),
+        NSPasteboard.PasteboardType("com.agilebits.onepassword")
+    ]
+
+    init() {
+        self.lastChangeCount = pasteboard.changeCount
+    }
+
+    func startMonitoring() {
+        print("--- [MACCY SECURE PASTEBOARD MONITOR ACTIVE] ---")
+        timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
+            self?.checkPasteboard()
+        }
+        RunLoop.current.run()
+    }
+
+    private func checkPasteboard() {
+        guard pasteboard.changeCount != lastChangeCount else { return }
+        lastChangeCount = pasteboard.changeCount
+
+        // 1. Check for Concealed / Password Manager Types
+        if let types = pasteboard.types {
+            for concealed in concealedTypes {
+                if types.contains(concealed) {
+                    print("⚠️ IGNORED: Sensitive/Concealed password manager clip detected.")
+                    return
+                }
+            }
+        }
+
+        // 2. Extract Plain Text or Rich Text
+        if let text = pasteboard.string(forType: .string) {
+            let preview = text.prefix(50).replacingOccurrences(of: "\n", with: " ")
+            print("📋 Captured Clip [Length: \(text.count)]: \"\(preview)...\"")
+        } else if let types = pasteboard.types, types.contains(.png) || types.contains(.tiff) {
+            print("🖼️ Captured Image Clip.")
+        }
+    }
+}
+
+let monitor = SecurePasteboardMonitor()
+monitor.startMonitoring()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If MacCy encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Clips not saving
-- **Root Cause**: Secure Input lock active by password manager.
-- **Resolution Pathway**: Run 'ioreg -l -w 0 | grep SecureInput' to find locking app.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Maccy Stops Recording New Clipboard Items** | Another application (Terminal, password manager, or game) locked macOS Secure Event Input. | 1. In Terminal, run: `ioreg -l -w 0 \| grep -i secureinput`.<br>2. Identify the locking process ID.<br>3. Close the offending application or disable Secure Keyboard Entry in Terminal settings. |
+| **Selecting an Item Copies but Fails to Auto-Paste** | Maccy lacks macOS Accessibility permissions to simulate the `Command + V` keystroke. | 1. Open *System Settings $\rightarrow$ Privacy & Security $\rightarrow$ Accessibility*.<br>2. Remove and re-add **Maccy**.<br>3. Verify in Maccy Preferences $\rightarrow$ **General** $\rightarrow$ *Paste automatically* is checked. |
+| **Maccy Crashes on Launch with CoreData Error** | Local SQLite database `Storage.sqlite` corrupted due to abrupt system shutdown. | 1. Navigate to `~/Library/Containers/org.pavelm.Maccy/Data/Library/Application Support/Maccy/`.<br>2. Backup and delete `Storage.sqlite` and `Storage.sqlite-wal`.<br>3. Relaunch Maccy to initialize a clean database. |
+| **Global Hotkey (⌘+Shift+C) Conflicts with Other App** | Hotkey collision with another developer utility or IDE shortcut. | In Maccy Preferences $\rightarrow$ **General**, click the shortcut recorder and assign an alternative combo (e.g. `⌥ + V`). |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for MacCy:
+## Command Line Syntax & macOS Diagnostics
 
 ```bash
-open -a MacCy
+# 1. Inspect macOS Secure Input Status to Identify Locking Process
+ioreg -l -w 0 | grep -i secureinput
+
+# 2. Inspect Maccy Preferences via defaults CLI
+defaults read org.pavelm.Maccy
+
+# 3. Clear Maccy History via SQLite Database Execution
+sqlite3 ~/Library/Containers/org.pavelm.Maccy/Data/Library/Application\ Support/Maccy/Storage.sqlite "DELETE FROM ZHISTORYITEM;"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `~/Library/Preferences/org.pavelgroup.MacCy.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot MacCy issues on macOS?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for MacCy?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Maccy Preferences**: `~/Library/Containers/org.pavelm.Maccy/Data/Library/Preferences/org.pavelm.Maccy.plist`
+- **CoreData Database**: `~/Library/Containers/org.pavelm.Maccy/Data/Library/Application Support/Maccy/Storage.sqlite`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When diagnosing clipboard recording issues in Maccy, always execute `ioreg -l -w 0 | grep -i secureinput` to rule out macOS Secure Event Input locks before altering database or preference files.

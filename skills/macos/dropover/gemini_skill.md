@@ -1,99 +1,115 @@
 ---
-title: "Dropover AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Dropover on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Dropover, Gemini troubleshooting, Google AI, Dropover, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Dropover macOS Drag Shelf Utility AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Dropover floating shelves, multi-item stacks, Quick Look previews, and cloud upload menus."
+category: "Temporary Floating Drag Shelf Utility"
+tags: ["dropover", "macos", "floating-shelf", "gemini", "quick-look", "drag-drop-ui"]
 ---
 
-# Dropover AI Skill Guide for Gemini
+# Dropover macOS Drag Shelf Utility AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Dropover** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Dropover introduces a floating shelf user interface designed for effortless drag-and-drop orchestration across macOS displays and applications. Gemini acts as an AI macOS Workflow Reviewer and UI Systems Auditor, specializing in **multimodal Dropover shelf inspection**, **multi-item stack visual validation**, **Quick Look inline preview diagnostics**, and **action menu workflow optimization**.
 
-- **Application Name**: Dropover
-- **Category**: Temporary Floating Drag Shelf Utility
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Shelf Interface Stack
 
-> **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Dropover, Gemini must understand its underlying technical framework:
-
-Custom floating NSPanel windows rendering across spaces boundaries.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Dropover Visual Operations                  │
+│                                                             │
+│  Floating Shelf HUD & Stack Visualization                   │
+│  ├── Floating Shelf Window (Translucent Frosted Glass HUD)  │
+│  ├── Multi-Item Card Stack (Fan Out / Collapsed Carousel)   │
+│  └── Quick Look Preview Overlay (Spacebar Instant View)     │
+│                                                             │
+│  Action Bar & Export Menus                                  │
+│  ├── Shelf Action Hub (Copy, Compress, Convert, Share Link) │
+│  ├── Cloud Upload Progress Indicator (Dropover Cloud)       │
+│  └── Multi-Shelf Organization Grid (Dock / Side Pinning)    │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Dropover:
+## Operational Capabilities & Agent Directives
 
-- **Floating shelf triggerable via cursor shake**
-- **Multi-file collection shelves across Spaces**
-- **Quick Look preview and instant web link sharing**
+1. **Multimodal Shelf UI Inspection**: Analyze screenshots of Dropover floating shelves to verify item count badges, thumbnail generation integrity, file size labels, and cloud upload status indicators.
+2. **Stack Fan-Out Diagnostics**: Review multi-item shelf expansions to ensure individual file cards can be dragged out independently without disturbing the remaining collection.
+3. **Drop Action Automation**: Advise users on quick contextual shelf actions (*e.g. Create Zip Archive, Convert to WebP/PNG, Extract Text via Live Text OCR*).
+4. **Docking & Pinning Validation**: Troubleshoot floating shelf positioning, auto-collapse timers, and screen edge docking behaviors.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Dropover, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Dropover, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Dropover Preference Auditor (`.plist`)
+
+Execute this script to verify that Dropover's floating shelf presentation and trigger settings are configured for maximum productivity:
+
+```python
+"""
+Dropover macOS Settings & Preference Auditor
+Inspects com.extendedmac.Dropover-mac.plist for recommended shelf parameters.
+"""
+
+import os
+import plistlib
+
+PREF_PATH = os.path.expanduser("~/Library/Preferences/com.extendedmac.Dropover-mac.plist")
+
+def audit_dropover_settings():
+    if not os.path.exists(PREF_PATH):
+        print(f"Error: Dropover preferences '{PREF_PATH}' not found.")
+        print("Note: Launch Dropover to generate configuration preferences.")
+        return
+
+    print("--- [AUDITING DROPOVER FLOATING SHELF SETTINGS] ---")
+    try:
+        with open(PREF_PATH, "rb") as f:
+            prefs = plistlib.load(f)
+
+        shake_trigger   = prefs.get("TriggerShakeEnabled", True)
+        all_spaces      = prefs.get("KeepOnScreenAcrossAllSpaces", True)
+        auto_collapse   = prefs.get("AutoCollapseShelves", False)
+        sound_effects   = prefs.get("PlaySoundEffects", True)
+
+        print(f"• Shake Cursor Trigger:       {'✅ ENABLED' if shake_trigger else '⚠️ DISABLED'}")
+        print(f"• Display Across All Spaces:  {'✅ ENABLED' if all_spaces else '🚨 DISABLED (Shelves will hide on space switch)'}")
+        print(f"• Auto-Collapse Shelves:      {'ENABLED' if auto_collapse else 'DISABLED'}")
+        print(f"• Sound Feedback Effects:     {'ENABLED' if sound_effects else 'DISABLED'}")
+
+    except Exception as e:
+        print(f"Error reading plist: {e}")
+
+if __name__ == "__main__":
+    audit_dropover_settings()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Dropover encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Shake gesture fails
-- **Root Cause**: Sensitivity set too high.
-- **Resolution Pathway**: Adjust sensitivity in Dropover Preferences.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Dropover Shelf Overlaps Other Fullscreen Windows** | Floating window level set to `screenSaver` or `.statusBar` rather than `.floating`. | In Dropover Preferences $\rightarrow$ **Appearance**, ensure Window Level is set to **Standard Floating**. |
+| **Thumbnails Show Generic Blank Icons** | macOS QuickLook thumbnail cache (`com.apple.quicklook.ThumbnailsAgent`) is corrupted. | In Terminal, run: `qlmanage -r cache && killall -9 quicklookd`. |
+| **Shelf Auto-Dismisses Before Dropping** | Auto-close timer expired while user was navigating files in Finder. | In Dropover Preferences $\rightarrow$ **Shelves**, increase the **Auto-Dismiss Idle Shelves** timeout or set to **Never**. |
+| **Cloud Upload Fails: `Upload Error` on Shelf** | File size exceeds Dropover Cloud upload tier limits or network proxy blocking connection. | In Shelf Actions $\rightarrow$ Select **Copy File Path** or save locally instead of cloud sharing. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Dropover:
+## Command Line Syntax & Server Control
 
 ```bash
+# Launch Dropover from Terminal
 open -a Dropover
+
+# Reset macOS QuickLook Thumbnail Cache
+qlmanage -r cache
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Dropover issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Dropover?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Preferences Plist**: `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
+- **Application Support Cache**: `~/Library/Application Support/com.extendedmac.Dropover-mac`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For multi-display setups, verify that "Keep shelves on screen across all Spaces" is enabled to prevent shelves from disappearing when switching Mission Control desktops.

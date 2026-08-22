@@ -1,44 +1,135 @@
 ---
-title: "Check Code for Obvious Flaws AI Skill"
-description: "Test AI-generated code snippets in a safe environment before running in production."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, check-code-for-obvious-flaws"
-category: "Common Sense Everyday AI"
+title: "Check Code for Obvious Flaws (Zero-Trust Code Audit) AI Skill"
+description: "How to run the 5-point Zero-Trust code audit to catch hallucinated package APIs, security leaks, unhandled exceptions, and edge-case crashes before running in production."
+category: "Fact-Checking & Safety Habits"
+tags: ["code-review", "zero-trust", "debugging", "security", "syntax-checking", "prompt-engineering"]
 ---
 
-# Check Code for Obvious Flaws (AI Skill)
+# Check Code for Obvious Flaws (Zero-Trust Code Audit) (AI Skill)
 
 ## Overview
-Test AI-generated code snippets in a safe environment before running in production.
+AI coding assistants are brilliant at scaffolding boilerplate and common algorithms, but they frequently generate code with **invisible runtime flaws**: deprecated library methods, unhandled null/undefined values, unbounded memory allocations, and hardcoded security assumptions.
+
+The **Zero-Trust Code Audit Protocol** provides a structured pre-execution gate to catch syntax errors, security vulnerabilities, and logic flaws before deploying to staging or production.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 5 Most Dangerous AI Code Traps
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 The Top 5 AI Code Pitfalls                  │
+│                                                             │
+│  1. Hallucinated APIs     ──► Invented package methods/flags│
+│  2. Unhandled Exceptions  ──► Crashes on 404, null, or empty│
+│  3. Hardcoded Secrets     ──► API keys or local paths leaked│
+│  4. Concurrency Bugs      ──► Race conditions in async/locks│
+│  5. Security Injections   ──► Raw string SQL/Bash injection │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## The Pre-Execution Sanity Checklist
+
+Before running any AI-generated script on your local machine or server:
+
+```
+[ ] 1. PACKAGE CHECK: Are all imported libraries real and installed via your package manager?
+[ ] 2. INJECTION CHECK: Are database queries parameterized (no f-string or string concat SQL)?
+[ ] 3. NULL SAFETY: Does the code guard against None, undefined, or missing dictionary keys?
+[ ] 4. DESTRUCTIVE ACTIONS: Does the script contain `rm -rf`, `DROP TABLE`, or unconfirmed delete API calls?
+[ ] 5. MOCK TEST: Can you run it on sample data or in a Docker sandbox before production?
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Master Code Audit Prompt Templates
+
+### Pattern 1: The Automated Flaw & Edge-Case Scanner
+Use this immediately after an AI writes code:
+
+```markdown
+Act as a Principal Staff Security Engineer and SRE.
+Critically review the code above for production readiness.
+
+Audit specifically for:
+1. **API Validity**: Are any function signatures or methods deprecated or invented?
+2. **Failure Modes**: What happens when network timeouts, 500 errors, or corrupt JSON payloads occur?
+3. **Security Vulnerabilities**: Check for injection risks, unsanitized inputs, or plain-text credentials.
+4. **Boundary Conditions**: Test mentally with empty inputs (`[]`, `""`, `None`, `0`).
+
+Provide the revised, hardened version with comprehensive `try/catch` error handling and type hints.
+```
+
+---
+
+### Pattern 2: The Unit Test Generator (Proof of Correctness)
+Forces the AI to prove its code works under edge cases:
+
+```markdown
+Write a comprehensive test suite (using `pytest` or `vitest`) for the function above.
+Include test cases for:
+- Happy path (standard valid input)
+- Empty/Null input
+- Boundary/Overflow input
+- Simulated network failure / timeout
+```
+
+---
+
+## Real-World Case Study
+
+### Scenario: Processing User File Uploads
+
+#### Fragile AI-Generated Snippet (Full of Flaws)
+```python
+# ❌ VULNERABLE AI CODE
+import os
+
+def save_uploaded_file(file, filename):
+    filepath = "/var/www/uploads/" + filename
+    file.save(filepath)
+    return {"status": "success", "path": filepath}
+```
+*Flaws: 1) Path traversal attack (`filename = "../../etc/passwd"`), 2) Overwrites existing files, 3) Crashes if directory doesn't exist, 4) No file size or MIME type validation.*
+
+#### Hardened Zero-Trust Audited Version
+```python
+# ✅ PRODUCTION-HARDENED CODE
+import os
+import uuid
+from pathlib import Path
+from werkzeug.utils import secure_filename
+
+UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "/var/www/uploads")).resolve()
+ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".pdf"}
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+
+def save_uploaded_file(file_stream, raw_filename: str, content_length: int) -> dict:
+    if content_length > MAX_FILE_SIZE:
+        raise ValueError("File exceeds maximum allowed size (10MB)")
+        
+    sanitized = secure_filename(raw_filename)
+    extension = Path(sanitized).suffix.lower()
+    if extension not in ALLOWED_EXTENSIONS:
+        raise ValueError(f"Unsupported file extension: {extension}")
+        
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    unique_filename = f"{uuid.uuid4().hex}_{sanitized}"
+    target_path = (UPLOAD_DIR / unique_filename).resolve()
+    
+    # Ensure no path traversal escaped the upload root
+    if not str(target_path).startswith(str(UPLOAD_DIR)):
+        raise PermissionError("Path traversal attempt detected")
+        
+    with open(target_path, "wb") as f:
+        f.write(file_stream.read())
+        
+    return {"status": "success", "filename": unique_filename}
+```
+
+---
+
+## Golden Rule of AI Code
+> **"Never run AI code you don't understand, and never deploy AI code without testing its failure states."**

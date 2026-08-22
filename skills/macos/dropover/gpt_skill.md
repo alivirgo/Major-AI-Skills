@@ -1,99 +1,112 @@
 ---
-title: "Dropover AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Dropover on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Dropover, ChatGPT troubleshooting, GPT automation, Dropover, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Dropover macOS Drag Shelf Utility AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Dropover, AppleScript automation, custom URL schemes, and macOS Shortcuts actions."
+category: "Temporary Floating Drag Shelf Utility"
+tags: ["dropover", "applescript", "url-scheme", "macos-shortcuts", "gpt-codex", "drag-drop-automation"]
 ---
 
-# Dropover AI Skill Guide for GPT
+# Dropover macOS Drag Shelf Utility AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Dropover** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Dropover provides automation capabilities through **macOS Shortcuts actions**, **AppleScript dispatch routines**, and a structured **Custom URL Scheme (`dropover://`)**. GPT/Codex acts as a Principal macOS Automation Architect and Swift Tool Developer, delivering **AppleScript file pipeline scripts**, **Shortcuts automation recipes**, **custom floating panel prototype code**, and **batch download ingestion tools**.
 
-- **Application Name**: Dropover
-- **Category**: Temporary Floating Drag Shelf Utility
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Automation Stack
 
-> **Core Purpose**: Temporary floating shelf that makes dragging and dropping files, images, and links seamless.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Dropover, GPT must understand its underlying technical framework:
-
-Custom floating NSPanel windows rendering across spaces boundaries.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Dropover Developer Platform                 │
+│                                                             │
+│  Automation & Ingress Layer                                 │
+│  ├── Custom URL Scheme API (`dropover://create-shelf?...`)  │
+│  ├── macOS Shortcuts Actions (Add to Shelf, Get Shelf Items)│
+│  └── AppleScript / JXA Integration Pipeline                 │
+│                                                             │
+│  AppKit Subsystem Implementation                            │
+│  ├── `NSDraggingDestination` Protocol Handler               │
+│  ├── `NSPasteboard.general` Ingress Parsing                 │
+│  └── `NSWorkspace.shared.open(url)` IPC Bridge              │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Dropover:
+## Operational Capabilities & Agent Directives
 
-- **Floating shelf triggerable via cursor shake**
-- **Multi-file collection shelves across Spaces**
-- **Quick Look preview and instant web link sharing**
+1. **Dropover URL Scheme Generation**: Author robust Python and Bash scripts generating syntactically valid `dropover://create-shelf?paths=...` requests with strict percent-encoding.
+2. **AppleScript Automated Staging**: Write AppleScript (`osascript`) handlers to programmatically stage selected Finder items or Safari downloaded files into active shelves.
+3. **AppKit Dragging Destination Prototypes**: Construct Swift AppKit prototypes demonstrating `NSView` / `NSWindow` implementation of `NSDraggingDestination` and `NSItemProvider`.
+4. **macOS Shortcuts Workflow Integration**: Design automated Shortcuts recipes extracting URLs, screenshots, and text clippings and pushing them directly to Dropover.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Dropover, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Dropover, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production AppleScript Automation: Automated Finder Selection to Dropover Shelf
+
+Save this script as `send_selection_to_dropover.scpt` and execute via `osascript send_selection_to_dropover.scpt`:
+
+```applescript
+-- =============================================================================
+-- AppleScript: Send Selected Finder Items to Dropover Floating Shelf
+-- Retrieves currently selected files in Finder and invokes Dropover URL Scheme.
+-- =============================================================================
+tell application "Finder"
+    set selectedItems to selection
+    if (count of selectedItems) is 0 then
+        display alert "No files selected in Finder."
+        return
+    end if
+
+    set pathList to {}
+    repeat with itemRef in selectedItems
+        set posixPath to POSIX path of (itemRef as alias)
+        set end of pathList to posixPath
+    end repeat
+end tell
+
+-- Construct URL Scheme Parameters
+set urlQuery to ""
+repeat with p in pathList
+    set encodedPath to do shell script "python3 -c \"import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))\" " & quoted form of p
+    if urlQuery is "" then
+        set urlQuery to "paths=" & encodedPath
+    else
+        set urlQuery to urlQuery & "&paths=" & encodedPath
+    end if
+end repeat
+
+set targetURL to "dropover://create-shelf?" & urlQuery
+
+-- Trigger Dropover URL Scheme
+do shell script "open " & quoted form of targetURL
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Dropover encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Shake gesture fails
-- **Root Cause**: Sensitivity set too high.
-- **Resolution Pathway**: Adjust sensitivity in Dropover Preferences.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`open dropover://...` Throws Syntax Error in Terminal** | File path arguments contained unencoded spaces, ampersands, or Unicode characters. | Always percent-encode POSIX paths (`urllib.parse.quote(path)`) before building URL scheme. |
+| **AppleScript Fails: `Finder got an error: User canceled`** | User had no active window open or no files highlighted when script executed. | Wrap Finder selection query in a defensive `try ... on error` block with user alert fallback. |
+| **Shortcuts Action Returns `Permission Denied`** | Shortcuts app lacks permission to send events to Dropover in macOS Privacy settings. | In System Settings $\rightarrow$ *Privacy & Security $\rightarrow$ Automation*, ensure **Shortcuts** is allowed to control **Dropover**. |
+| **Custom Swift Drag Destination Ignores File Drops** | Target `NSView` failed to register accepted drag types via `registerForDraggedTypes([.fileURL])`. | In Swift `viewDidLoad()`, call `registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Dropover:
+## Command Line Syntax & Batch Processing
 
 ```bash
-open -a Dropover
+# Execute AppleScript File Dispatcher
+osascript C:\Scripts\send_selection_to_dropover.scpt
+
+# Create Dropover Shelf with Specific Screenshots
+python3 -c "import subprocess, urllib.parse, glob; paths = glob.glob('/Users/$USER/Desktop/*.png'); q = '&'.join(['paths=' + urllib.parse.quote(p) for p in paths]); subprocess.run(['open', 'dropover://create-shelf?' + q])"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/Library/Preferences/com.extendedmac.Dropover-mac.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Dropover issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Dropover?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Dropover URL Scheme Handler**: `dropover://`
+- **Application Bundle**: `/Applications/Dropover.app`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When constructing `dropover://` URL queries in Python or Bash, percent-encode every individual file path (`urllib.parse.quote`) to prevent malformed URI errors during batch dispatch.

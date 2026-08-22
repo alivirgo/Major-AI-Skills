@@ -1,100 +1,135 @@
 ---
-title: "Microsoft PowerToys AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Microsoft PowerToys on Windows."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Microsoft PowerToys, Troubleshooting with Claude, Claude AI skills, Claude integration, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Microsoft PowerToys System Utilities AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Microsoft PowerToys, FancyZones, PowerToys Run, Keyboard Manager, Awake, and settings.json automation."
+category: "Power-User Operating System Utilities"
+tags: ["microsoft-powertoys", "fancyzones", "powertoys-run", "keyboard-manager", "awake-utility", "windows-11", "claude"]
 ---
 
-# Microsoft PowerToys AI Skill Guide for Claude
+# Microsoft PowerToys System Utilities AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Microsoft PowerToys** on **Windows**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Microsoft PowerToys is a suite of system utilities developed by Microsoft in C++ and C# / WinUI 3 to tune and streamline the Windows desktop experience. The architecture comprises a central **Runner Daemon (`PowerToys.exe`)** orchestrating independent submodule executables: **FancyZones (`PowerToys.FancyZones.exe`)** for multi-zone window grid snapping, **PowerToys Run (`PowerToys.PowerLauncher.exe`)** for modular desktop search, **Keyboard Manager (`PowerToys.KeyboardManagerEngine.exe`)** for low-level key remapping, **Awake (`PowerToys.Awake.exe`)** for execution state power overrides, and **Text Extractor (`PowerToys.TextExtractor.exe`)** for Windows Media OCR. Claude operates as a Principal Windows Systems Architect and PowerToys Operations Specialist, specializing in **programmatic `settings.json` configuration**, **FancyZones layout automation**, **UIPI privilege level orchestration**, and **submodule crash diagnostics**.
 
-- **Application Name**: Microsoft PowerToys
-- **Category**: Power-User Operating System Utilities
-- **Platform**: Windows
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### PowerToys Modular System Architecture & Process Stack
 
-> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, and Text Extractor.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Microsoft PowerToys, Claude must understand its underlying technical framework:
-
-C++ / WinUI 3 modular runtime hooking into Windows Win32 API shell hooks (SetWindowsHookEx).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Microsoft PowerToys Stack                   │
+│                                                             │
+│  Central Runner & WinUI 3 Dashboard                         │
+│  ├── `PowerToys.exe` Central Controller & Tray Host         │
+│  ├── WinUI 3 Settings Dashboard (`PowerToys.Settings.exe`)  │
+│  └── Central Config Store (`%LOCALAPPDATA%\Microsoft\PT\`) │
+│                                                             │
+│  Submodule Process Ecosystem                                │
+│  ├── FancyZones (`PowerToys.FancyZones.exe` Win32 Hooks)    │
+│  ├── PowerLauncher (`PowerToys.PowerLauncher.exe` WPF / C#) │
+│  ├── KeyboardManager (`PowerToys.KeyboardManagerEngine.exe`)│
+│  ├── Awake (`PowerToys.Awake.exe` `SetThreadExecutionState`)│
+│  └── TextExtractor (`Windows.Media.Ocr` Screen Scraper)     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Microsoft PowerToys:
+## Operational Capabilities & Agent Directives
 
-- **FancyZones window grid layout management**
-- **PowerToys Run quick launcher (Alt+Space)**
-- **Text Extractor OCR utility (Win+Shift+T)**
+1. **Programmatic `settings.json` Manipulation**: Author PowerShell and Python scripts to automate enabling/disabling PowerToys modules, updating hotkey bindings, and deploying standardized enterprise configurations.
+2. **FancyZones Multi-Monitor Grid Scripting**: Programmatically generate custom `zones-settings.json` templates defining column widths, row splits, and canvas padding.
+3. **UIPI & Administrator Elevation Management**: Resolve window snapping failures on Task Manager, Registry Editor, and elevated terminals by configuring PowerToys to run with highest elevation.
+4. **Awake Headless Execution Scripting**: Execute `PowerToys.Awake.exe` via CLI parameters (`--mode=indefinite --display-on=true`) during long-running builds.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Microsoft PowerToys, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Microsoft PowerToys, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production PowerShell Automation: PowerToys Module Configurator & Daemon Manager
+
+Save this script as `Configure-PowerToys.ps1`:
+
+```powershell
+<#
+.SYNOPSIS
+    Microsoft PowerToys Programmatic Configuration & Daemon Manager
+    Enables/disables specific modules and applies custom hotkeys via JSON settings manipulation.
+#>
+
+$PowerToysSettingsDir = "$env:LOCALAPPDATA\Microsoft\PowerToys"
+$GlobalSettingsFile = "$PowerToysSettingsDir\settings.json"
+
+function Set-PowerToysModuleState {
+    param (
+        [string]$ModuleName,
+        [bool]$Enabled
+    )
+
+    if (-not (Test-Path $GlobalSettingsFile)) {
+        Write-Error "PowerToys settings file not found at: $GlobalSettingsFile"
+        return
+    }
+
+    Write-Host "--- [CONFIGURING POWERTOYS MODULE: $ModuleName] ---"
+
+    # 1. Read and Parse Global settings.json
+    $jsonContent = Get-Content -Path $GlobalSettingsFile -Raw | ConvertFrom-Json
+
+    # 2. Update Module State in 'enabled' Dictionary
+    if ($jsonContent.enabled.PSObject.Properties[$ModuleName]) {
+        $jsonContent.enabled.$ModuleName = $Enabled
+        Write-Host "• Updated '$ModuleName' Enabled State -> $Enabled"
+    } else {
+        Write-Warning "Module '$ModuleName' not found in settings.json. Adding property..."
+        $jsonContent.enabled | Add-Member -NotePropertyName $ModuleName -NotePropertyValue $Enabled -Force
+    }
+
+    # 3. Save Back to Disk
+    $jsonContent | ConvertTo-Json -Depth 10 | Set-Content -Path $GlobalSettingsFile -Encoding UTF8
+    Write-Host "✅ Settings saved successfully to $GlobalSettingsFile"
+
+    # 4. Gracefully Restart PowerToys Runner to Apply Changes
+    Write-Host "Restarting PowerToys background runner..."
+    Stop-Process -Name "PowerToys" -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 1
+    Start-Process -FilePath "$env:LOCALAPPDATA\PowerToys\PowerToys.exe" -ErrorAction SilentlyContinue
+    Write-Host "✅ PowerToys restarted."
+}
+
+# Example Executions:
+# Set-PowerToysModuleState -ModuleName "FancyZones" -Enabled $true
+# Set-PowerToysModuleState -ModuleName "Awake" -Enabled $true
+# Set-PowerToysModuleState -ModuleName "ColorPicker" -Enabled $false
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Microsoft PowerToys encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] FancyZones fails to snap elevated windows
-- **Root Cause**: PowerToys process running as standard user.
-- **Resolution Pathway**: Enable 'Always run as administrator' in PowerToys General settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **FancyZones Fails to Snap Elevated Windows** | PowerToys running with standard user privileges blocked by UIPI (User Interface Privilege Isolation). | In PowerToys Settings $\rightarrow$ General, toggle **Always run as administrator** to On. |
+| **PowerToys Run (Alt + Space) Hangs or Crashes** | A corrupted Wox/Community plugin or unindexed path causing an unhandled deadlock in WPF. | In Settings $\rightarrow$ PowerToys Run $\rightarrow$ Plugins, disable suspect third-party plugins or clear `%LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\`. |
+| **Keyboard Manager Remappings Stop Working** | `PowerToys.KeyboardManagerEngine.exe` low-level hook dropped following Windows sleep/wake cycle. | In Task Manager, terminate `PowerToys.KeyboardManagerEngine.exe`; the runner will automatically respawn it. |
+| **Text Extractor Displays "OCR Failed"** | Required Windows OCR Language Pack not installed for current locale. | In Windows Settings $\rightarrow$ Time & language $\rightarrow$ Language $\rightarrow$ Install **OCR Component** for active language. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Microsoft PowerToys:
+## Command Line Syntax & Awake Execution
 
 ```bash
-PowerToys.exe
-PowerToys.PowerLauncher.exe
+# 1. Keep System Awake Indefinitely with Screen ON via CLI
+"%LOCALAPPDATA%\PowerToys\PowerToys.Awake.exe" --mode=indefinite --display-on=true
+
+# 2. Keep System Awake for 2 Hours (7200 seconds)
+"%LOCALAPPDATA%\PowerToys\PowerToys.Awake.exe" --mode=timed --time-limit=7200
+
+# 3. Launch PowerToys Settings Window
+"%LOCALAPPDATA%\PowerToys\PowerToys.Settings.exe"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Microsoft PowerToys issues on Windows?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Microsoft PowerToys?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Settings Store**: `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
+- **FancyZones Config**: `%LOCALAPPDATA%\Microsoft\PowerToys\FancyZones\zones-settings.json`
+- **Binary Directory**: `C:\Program Files\PowerToys\` or `%LOCALAPPDATA%\PowerToys\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When configuring PowerToys to manage windows across administrative tools (e.g. Task Manager, CMD, Services), always enable "Always run as administrator" in General settings to prevent UIPI hook rejection.

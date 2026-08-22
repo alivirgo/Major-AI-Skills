@@ -1,108 +1,129 @@
 ---
-title: "WizTree AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate WizTree on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for WizTree, Gemini troubleshooting, Google AI, WizTree, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "WizTree Disk Space Analyzer & MFT Engine AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot WizTree Treemap visualizers, File Extension percentage charts, Tree View hierarchies, and drive capacity heatmaps."
+category: "Disk Space Visualizer & Storage Diagnostics"
+tags: ["wiztree", "treemap-visualizer-ui", "file-extension-chart", "gemini", "tree-view-hierarchy", "disk-capacity-heatmap"]
 ---
 
-# WizTree AI Skill Guide for Gemini
+# WizTree Disk Space Analyzer & MFT Engine AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **WizTree** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+WizTree provides an intuitive storage visualization dashboard featuring the **Color-Coded Interactive Treemap Visualizer (Cushion Treemap representation)**, **Hierarchical Tree View with Size Percentage Progress Bars**, **File Extension Breakdown Chart (Extension, Space, % Total, File Count)**, and the **Top 1000 Largest Files Viewport**. Gemini acts as an AI Storage Systems Reviewer and Disk Cleanup Specialist, specializing in **multimodal Treemap visual pattern analysis**, **space consumption outlier detection**, **file extension categorization audits**, and **system drive partition hygiene**.
 
-- **Application Name**: WizTree
-- **Category**: Disk Space Visualizer & Storage Diagnostics
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Storage Visualization Stack
 
-> **Core Purpose**: Lightning-fast disk space visualizer reading the Master File Table (MFT) directly to scan hard drives in seconds.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with WizTree, Gemini must understand its underlying technical framework:
-
-Bypasses standard Windows File System APIs by directly parsing raw NTFS MFT bytes ($MFT file), analyzing millions of files in under 2 seconds. Falls back to Win32 directory traversal for non-NTFS drives.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 WizTree Visual Operations                   │
+│                                                             │
+│  Treemap Viewport & Geometric Partitioning                  │
+│  ├── Dynamic Cushion Treemap (Area Proportional to File Size│
+│  ├── Interactive File Hover Cues (Path, Size, Allocated MB) │
+│  └── Extension Color Mapping (Blue=Videos, Green=Archives)  │
+│                                                             │
+│  Directory Hierarchy & Extension Analytics                  │
+│  ├── Tree View Grid (Size Percentage Horizontal Bars)       │
+│  ├── File Extension Breakdown Table (Sorting by Total Space)│
+│  └── Top 1000 Files Table (Fast Largest File Enumeration)   │
+│                                                             │
+│  Operations & Context Menu Actions                          │
+│  ├── Explorer Context Menu (Open Path, Command Prompt, Del.)│
+│  └── Space Reclamation Shortcuts (Wipe to Recycle / Perm.)  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of WizTree:
+## Operational Capabilities & Agent Directives
 
-- **MFT Direct Scanning (100x faster than WinDirStat)**
-- **Visual Treemap representation of storage allocation**
-- **CSV/Text export for automated disk usage auditing**
-- **Command line automation with silent background flags**
-- **Duplication detection & file extension breakdown**
+1. **Multimodal Treemap Inspection**: Analyze screenshots of the WizTree Treemap to instantly identify oversized monolithic block clusters (*e.g. multi-gigabyte VMDK virtual disks, forgot ISO images, or ballooning AppData caches*).
+2. **File Extension Breakdown Auditing**: Review the File Types tab to discover unexpected space hogs (*e.g. `.log` files consuming 30% of drive capacity due to runaway application debug logging*).
+3. **Directory Tree Percentage Analysis**: Evaluate the Tree View to identify which subfolders contain the highest relative percentage of disk usage (e.g. `WinSxS`, `AppData\Local\Docker`).
+4. **Safe Deletion & System Integrity Verification**: Guide users away from deleting protected Windows operating system files (`pagefile.sys`, `hiberfil.sys`, `System Volume Information`) and recommend safe OS cleanup methods (*e.g. running `cleanmgr.exe` or `DISM /Cleanup-Image`*).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding WizTree, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to WizTree, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated WizTree File Extension Summary Generator
+
+Run this script to parse a WizTree exported CSV file and generate a visual ASCII bar chart of the top storage-consuming file extensions:
+
+```python
+"""
+WizTree File Extension Storage Visualizer
+Parses WizTree CSV export and generates an ASCII bar chart of space allocation by extension.
+"""
+
+import sys
+import os
+import pandas as pd
+
+def generate_extension_chart(csv_path: str):
+    if not os.path.exists(csv_path):
+        print(f"Error: CSV report '{csv_path}' not found.")
+        return
+
+    print(f"--- [WIZTREE STORAGE DISTRIBUTION CHART: {csv_path}] ---")
+    try:
+        df = pd.read_csv(csv_path, encoding="utf-8", on_bad_lines="skip")
+        df["Size_GB"] = df["Size"] / (1024**3)
+        df["Ext"] = df["File Name"].apply(lambda x: os.path.splitext(str(x))[1].lower())
+
+        # Group and calculate percentages
+        ext_summary = df.groupby("Ext")["Size_GB"].sum().sort_values(ascending=False).head(10)
+        total_gb = df["Size_GB"].sum()
+
+        print(f"\nTotal Drive Storage Analyzed: {total_gb:.2f} GB\n")
+        print(f"{'Extension':<12} | {'Size (GB)':>10} | {'% Total':>8} | Visual Allocation")
+        print("-" * 75)
+
+        for ext, size_gb in ext_summary.items():
+            if not ext:
+                ext = "[No Ext]"
+            pct = (size_gb / max(total_gb, 0.001)) * 100
+            bar_len = int(pct / 2) # 50 chars max for 100%
+            bar_str = "█" * bar_len
+
+            print(f"{ext:<12} | {size_gb:>10.2f} | {pct:>7.1f}% | {bar_str}")
+
+        print("\n✅ Visual storage distribution generated successfully.")
+
+    except Exception as e:
+        print(f"Failed to generate chart: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python3 generate_ext_chart.py <WizTree_Export.csv>")
+        sys.exit(1)
+    generate_extension_chart(sys.argv[1])
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If WizTree encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Inaccurate scan results or missing system files
-- **Root Cause**: WizTree executed without Administrator privileges, blocking MFT access.
-- **Resolution Pathway**: Launch WizTree using 'Run as Administrator' or pass /admin=1 in CLI.
-
-#### [Issue] Network drives (SMB/NFS) scan very slowly
-- **Root Cause**: MFT direct reading is unsupported over remote network shares.
-- **Resolution Pathway**: Allow WizTree to automatically fall back to standard Win32 directory walking API.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Treemap Shows Huge Single Block: `hiberfil.sys`** | Windows Hibernation file reserving RAM equivalent on the primary system drive. | If hibernation is not required, disable it in elevated CMD: `powercfg -h off`. |
+| **Treemap Shows Huge Block: `pagefile.sys`** | Windows Virtual Memory Paging file dynamically expanded. | Manage pagefile size in *System Properties $\rightarrow$ Performance Settings $\rightarrow$ Virtual Memory*. |
+| **Tree View Highlights Huge `C:\Windows\WinSxS`** | Accumulated Windows Update component store backups. | Safely purge WinSxS in elevated terminal:<br>`Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase`. |
+| **Treemap Shows Massive `C:\ProgramData\Docker`** | Unused Docker container images, build caches, and volumes. | Run Docker cleanup: `docker system prune -a --volumes`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for WizTree:
+## Command Line Syntax & Server Control
 
 ```bash
-wiztree64.exe C: /export="C:\reports\disk_report.csv" /admin=1
-wiztree64.exe D:\Data /filetypes=1 /dumpmft
-wiztree64.exe /admin=1 /select="C:\Windows\Temp"
+# Launch WizTree GUI
+"C:\Program Files\WizTree\wiztree64.exe"
+
+# Open WizTree Focused on Specific Subdirectory
+"C:\Program Files\WizTree\wiztree64.exe" "C:\Users\%USERNAME%\AppData"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `%APPDATA%\WizTree\WizTree.ini`
-- `HKCU\Software\WizTree`
+### Key Configuration Locations
+- **Settings Store**: `%APPDATA%\WizTree\WizTree.ini`
 
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot WizTree issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for WizTree?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: Never instruct users to manually delete `hiberfil.sys`, `pagefile.sys`, or files inside `C:\Windows\WinSxS` via file explorer; always use official OS commands (`powercfg -h off`, `DISM /StartComponentCleanup`).

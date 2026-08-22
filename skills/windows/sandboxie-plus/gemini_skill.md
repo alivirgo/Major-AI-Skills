@@ -1,100 +1,124 @@
 ---
-title: "Sandboxie Plus AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Sandboxie Plus on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Sandboxie Plus, Gemini troubleshooting, Google AI, Sandboxie Plus, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Sandboxie-Plus Application Isolation AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Sandboxie-Plus SandMan UI, Sandbox trees, Box Options security tabs, and Yellow [#] window indicators."
+category: "Application Sandboxing & Isolation Engine"
+tags: ["sandboxie-plus", "sandman-ui", "box-options-dialog", "gemini", "sandbox-tree", "yellow-brackets-hud"]
 ---
 
-# Sandboxie Plus AI Skill Guide for Gemini
+# Sandboxie-Plus Application Isolation AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Sandboxie Plus** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Sandboxie-Plus provides an intuitive security and virtualization management console featuring the **SandMan Qt6 UI Dashboard**, **Live Sandbox Process Hierarchy Tree**, the **Box Options Security & Resource Configuration Dialog**, and visual container cues like the **Yellow `[#]` Title Bar Border Indicators**. Gemini acts as an AI Sandbox Security Reviewer and Application Isolation Specialist, specializing in **multimodal SandMan UI inspection**, **process isolation state verification**, **Resource Access policy auditing**, and **sandboxed window indicator diagnostics**.
 
-- **Application Name**: Sandboxie Plus
-- **Category**: Application Sandboxing & Isolation Engine
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Isolation Console Stack
 
-> **Core Purpose**: Open-source sandbox isolation software preventing applications from making permanent changes to your system.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Sandboxie Plus, Gemini must understand its underlying technical framework:
-
-Kernel-level filesystem and registry virtualization driver redirecting disk and registry writes to isolated sandbox folders.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Sandboxie-Plus Visual Operations            │
+│                                                             │
+│  SandMan Management Console                                 │
+│  ├── Sandbox Group & Box Tree (Running PIDs, Memory, CPU)   │
+│  ├── Live Message Log (Driver Events, Security Denials)     │
+│  └── Quick Action Toolbar (Terminate All, Empty Sandbox)    │
+│                                                             │
+│  Box Options Configuration Viewports                        │
+│  ├── File & Registry Options (Direct / Write-Only Paths)    │
+│  ├── Network Restrictions (Block Inbound/Outbound Traffic)  │
+│  └── Security Hardening (AppContainer, Drop Admin Rights)   │
+│                                                             │
+│  Visual Sandboxing Indicators                               │
+│  ├── Yellow Title Bar Brackets `[#] Application Name [#]`   │
+│  └── Custom Color Window Border Highlighting (Red/Green/Blue│
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Sandboxie Plus:
+## Operational Capabilities & Agent Directives
 
-- **Isolated application execution & malware containment**
-- **Virtual filesystem and registry redirection**
-- **Snapshot management and memory isolation**
+1. **Multimodal SandMan UI Inspection**: Analyze screenshots of the SandMan management console to identify active sandboxed processes, detect unhandled `SBIE` error popups, and evaluate memory utilization per sandbox container.
+2. **Yellow Indicator Verification**: Confirm that sandboxed applications display the signature `[#]` brackets in the window title bar and colored border frame to guarantee isolation status.
+3. **Resource Access Rule Auditing**: Review Box Options dialog tabs (*File Paths, Registry Paths, IPC Objects*) to ensure sensitive personal directories (`%USERPROFILE%\Documents`, `%APPDATA%`) are protected with Read-Only or Write-Restricted policies.
+4. **Driver & Service Status Diagnostics**: Inspect the SandMan status bar to verify the `SbieDrv` kernel driver and `SbieSrv` service are running in active green status.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Sandboxie Plus, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Sandboxie Plus, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated `Sandboxie.ini` Policy Configurator
+
+Run this script to inspect and add a new security-hardened isolation box to `Sandboxie.ini`:
+
+```python
+"""
+Sandboxie.ini Declarative Box Generator
+Parses Sandboxie.ini and configures a secure sandbox profile with network and disk restrictions.
+"""
+
+import sys
+import os
+import configparser
+
+def configure_secure_box(ini_path: str, box_name: str = "HardenedBox"):
+    print(f"--- [CONFIGURING SECURE SANDBOX PROFILE: {box_name}] ---")
+
+    if not os.path.exists(ini_path):
+        print(f"Error: Sandboxie.ini not found at '{ini_path}'.")
+        return
+
+    # Use RawConfigParser to preserve casing and non-standard INI options
+    config = configparser.RawConfigParser(strict=False)
+    config.read(ini_path)
+
+    if not config.has_section(box_name):
+        config.add_section(box_name)
+        print(f"• Created new sandbox section: [{box_name}]")
+
+    # Configure Isolation Policies
+    config.set(box_name, "Enabled", "y")
+    config.set(box_name, "BoxType", "Enhanced")
+    config.set(box_name, "BlockInternetAccess", "y")
+    config.set(box_name, "DropAdminRights", "y")
+    config.set(box_name, "AutoDelete", "y")
+    config.set(box_name, "BorderColor", "#FF0000,on,6") # Red border 6px
+
+    with open(ini_path, "w", encoding="utf-8") as f:
+        config.write(f)
+
+    print(f"✅ Sandbox profile [{box_name}] configured successfully.")
+    print("Policies applied: BlockInternetAccess=y, DropAdminRights=y, AutoDelete=y, Red Border.")
+
+if __name__ == "__main__":
+    ini_file = sys.argv[1] if len(sys.argv) > 1 else r"C:\Program Files\Sandboxie-Plus\Sandboxie.ini"
+    configure_secure_box(ini_file)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Sandboxie Plus encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Sandboxed app fails to start
-- **Root Cause**: Driver communication blocked or sandbox path locked.
-- **Resolution Pathway**: Empty sandbox or restart SbieSrv service.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Window Does Not Show Yellow `[#]` Brackets** | Application is running on the host system outside of Sandboxie containment. | Terminate process and relaunch explicitly via right-click $\rightarrow$ **Run Sandboxed**. |
+| **SandMan Log Shows `SBIE1307 Program cannot access the Internet`** | Normal security block triggered by `BlockInternetAccess=y` policy. | If internet is required, open Box Options $\rightarrow$ **Network Options** $\rightarrow$ Check **Allow Internet Access**. |
+| **Sandboxed App Windows Show Invisible / Transparent Text** | Hardware GPU acceleration conflict with Sandboxie window hooking. | In Box Options $\rightarrow$ Compatibility, enable **Open WinClass** or disable hardware acceleration inside the app. |
+| **SandMan GUI Shows Driver Icon with Red Cross** | `SbieDrv` driver stopped or failed to load during Windows boot. | In SandMan, select *Maintenance $\rightarrow$ Driver $\rightarrow$ Start Driver*. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Sandboxie Plus:
+## Command Line Syntax & Server Control
 
 ```bash
-Start-Process "C:\Program Files\Sandboxie-Plus\SandMan.exe"
-SbieIni.exe /reload
+# Launch SandMan GUI
+"C:\Program Files\Sandboxie-Plus\SandMan.exe"
+
+# Query SbieDrv Kernel Driver Service Status via PowerShell
+Get-Service -Name "SbieDrv"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `C:\Windows\Sandboxie.ini`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Sandboxie Plus issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Sandboxie Plus?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Configuration File**: `C:\Program Files\Sandboxie-Plus\Sandboxie.ini`
+- **Sandbox Root Storage**: `C:\Sandbox\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Always look for the Yellow `[#]` title bar brackets and colored perimeter border to visually verify that an untrusted executable is executing under active Sandboxie isolation.

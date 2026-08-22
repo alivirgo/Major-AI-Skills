@@ -1,100 +1,145 @@
 ---
-title: "FFmpeg AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate FFmpeg on Cross-Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for FFmpeg, ChatGPT troubleshooting, GPT automation, FFmpeg, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "FFmpeg Media Engineering AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize FFmpeg transcoding pipelines, asynchronous worker queues, and CLI flags."
+category: "Multimedia Transcoding & Stream Processing Engine"
+tags: ["ffmpeg", "python-transcoding", "async-worker", "gpt-codex", "video-pipeline", "stream-processing"]
 ---
 
-# FFmpeg AI Skill Guide for GPT
+# FFmpeg Media Engineering AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **FFmpeg** on **Cross-Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+FFmpeg is the computational backbone for global media pipelines. GPT/Codex acts as a Principal Media Systems Architect and Backend Developer, delivering **Python transcoding automation scripts**, **asynchronous task queue integrations (Celery/RabbitMQ/Redis)**, **hardware-accelerated container packaging**, and **robust `ffprobe` stream metadata parsers**.
 
-- **Application Name**: FFmpeg
-- **Category**: Multimedia Transcoding & Stream Processing Engine
-- **Platform**: Cross-Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Pipeline Architecture & Developer Layer
 
-> **Core Purpose**: Universal CLI framework for transcoding, encoding, streaming, filtering, and manipulating video and audio.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with FFmpeg, GPT must understand its underlying technical framework:
-
-C libraries (libavcodec, libavformat, libavfilter, libswscale) supporting hardware acceleration (NVENC, QSV, VideoToolbox).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 FFmpeg Microservice Platform                │
+│                                                             │
+│  Job Ingestion & Analysis Layer                             │
+│  ├── `ffprobe` JSON Stream Inspector (Streams, Format, Tags)│
+│  ├── Codec & Bitrate Parameter Matrix Calculator            │
+│  └── Hardware Capabilities Query (`ffmpeg -hwaccels`)       │
+│                                                             │
+│  Execution & Task Worker Layer                              │
+│  ├── Python Subprocess / Asynchronous Worker Daemon         │
+│  ├── Real-Time Progress Parser (`-progress pipe:1`)         │
+│  └── Distributed Cloud Storage Pipe (S3 / GCS Direct Stream)│
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of FFmpeg:
+## Operational Capabilities & Agent Directives
 
-- **Universal video/audio format conversion & container remuxing**
-- **Hardware-accelerated encoding (H.264, HEVC, AV1)**
-- **Complex audio/video filtering graphs and stream splitting**
+1. **Real-Time Progress Tracking & Parsing**: Construct asynchronous Python execution wrappers that consume FFmpeg's `-progress pipe:1` stream to calculate encoding FPS, current timestamp, bitrate, and percentage completion.
+2. **Dynamic Codec Parameter Allocation**: Build algorithms that compute target bitrates, GOP sizes, and buffer sizes based on resolution, frame rate, and storage constraints.
+3. **Lossless Video Slicing & Concatenation**: Author scripts for fast, keyframe-accurate video cutting (`-ss ... -to ... -c copy`) and demuxer concatenation (`concat -safe 0`).
+4. **Hardware Acceleration Fallback Pipelines**: Implement fallback logic that attempts hardware encoding (NVENC/QSV) and automatically retries with software encoding (`libx264`/`libx265`) on driver failure.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding FFmpeg, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to FFmpeg, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Asynchronous FFmpeg Worker with Real-Time Progress
+
+Run this script to transcode videos asynchronously with live progress tracking and ETA calculations:
+
+```python
+"""
+FFmpeg Asynchronous Transcode Worker with Real-Time Progress
+Parses -progress pipe:1 to output live percentage and speed.
+"""
+
+import sys
+import os
+import asyncio
+import subprocess
+import json
+import re
+
+def get_duration(file_path: str) -> float:
+    cmd = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", file_path]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    return float(res.stdout.strip()) if res.stdout else 0.0
+
+async def transcode_with_progress(input_file: str, output_file: str):
+    if not os.path.exists(input_file):
+        print(f"Error: {input_file} not found.")
+        return
+
+    duration = get_duration(input_file)
+    print(f"Input duration: {duration:.2f} seconds")
+
+    cmd = [
+        "ffmpeg", "-y", "-i", input_file,
+        "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+        "-c:a", "aac", "-b:a", "128k",
+        "-progress", "pipe:1",
+        output_file
+    ]
+
+    process = await asyncio.create_subprocess_exec(
+        *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL
+    )
+
+    out_time_ms_regex = re.compile(r"out_time_us=(\d+)")
+    speed_regex = re.compile(r"speed=([\d\.]+x)")
+
+    while True:
+        line = await process.stdout.readline()
+        if not line:
+            break
+        text = line.decode().strip()
+        
+        match_time = out_time_ms_regex.match(text)
+        if match_time and duration > 0:
+            current_sec = int(match_time.group(1)) / 1_000_000.0
+            percent = min((current_sec / duration) * 100.0, 100.0)
+            sys.stdout.write(f"\r[TRANSCODING] Progress: {percent:.1f}% ({current_sec:.1f}s / {duration:.1f}s)")
+            sys.stdout.flush()
+
+    await process.wait()
+    sys.stdout.write("\n")
+    if process.returncode == 0:
+        print(f"Transcoding completed successfully: {output_file}")
+    else:
+        print(f"Transcoding failed with exit code: {process.returncode}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Usage: python async_transcode.py <input.mov> <output.mp4>")
+        sys.exit(1)
+    asyncio.run(transcode_with_progress(sys.argv[1], sys.argv[2]))
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If FFmpeg encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Unknown encoder error
-- **Root Cause**: Selected encoder (e.g. h264_nvenc) not supported by hardware/GPU driver.
-- **Resolution Pathway**: Fallback to software encoder 'libx264' or update GPU drivers.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Option -crf not found` with NVENC** | NVENC does not support `-crf`; it uses Constant Quality (`-cq`) or Constant Quantization Parameter (`-cqp`). | For NVENC, use: `-c:v h264_nvenc -rc vbr -cq 20 -b:v 0`. |
+| **Video Freeze on Keyframe Cut (`-ss` and `-c copy`)** | Cutting stream without re-encoding when the start timestamp `-ss` is placed on a non-keyframe (P-frame/B-frame). | 1. Place `-ss` before the input flag `-i` for fast seek to nearest I-frame.<br>2. If frame-accurate cutting is strictly required, remove `-c copy` and re-encode. |
+| **`Too many packets buffered for output stream`** | Audio and video streams are interleaved with uneven buffer packet sizes. | Add `-max_muxing_queue_size 1024` or `-max_muxing_queue_size 4096` to output options. |
+| **Concatenation Audio Disappears or Distorts** | Input clips have differing audio sample rates (44.1kHz vs 48kHz) or channel layouts. | 1. Resample all audio streams to 48kHz stereo before concat.<br>2. Use `-filter_complex "[0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1"` rather than file demuxer. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for FFmpeg:
+## Command Line Syntax & Batch Processing
 
 ```bash
-ffmpeg -i input.mp4 -c:v libx264 -crf 23 -c:a copy output.mp4
-ffmpeg -i input.mp4 -vn -ab 320k output.mp3
+# 1. Lossless Video Slicing (Fast Keyframe Cut)
+ffmpeg -ss 00:01:30 -to 00:03:00 -i input.mp4 -c copy -avoid_negative_ts 1 output_clip.mp4
+
+# 2. Extract High-Quality Thumbnail at Specific Second
+ffmpeg -ss 00:00:15 -i input.mp4 -vframes 1 -q:v 2 thumb.jpg
+
+# 3. Concatenate Multiple MP4 Files without Re-encoding
+# contents of files.txt: file 'clip1.mp4'\nfile 'clip2.mp4'
+ffmpeg -f concat -safe 0 -i files.txt -c copy merged.mp4
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/.ffmpeg/`
-
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot FFmpeg issues on Cross-Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for FFmpeg?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: For real-time progress parsing in backend workers, pipe progress metrics via `-progress pipe:1`. For NVENC rate control, use `-rc vbr -cq <N>` rather than `-crf`.

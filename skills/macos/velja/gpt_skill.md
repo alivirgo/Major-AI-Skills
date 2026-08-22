@@ -1,99 +1,156 @@
 ---
-title: "Velja AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Velja on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Velja, ChatGPT troubleshooting, GPT automation, Velja, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Velja macOS Smart Browser Picker & URL Router AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Velja, duti LaunchServices scripts, plist rule deployment, and macOS URL handling."
+category: "Smart Browser Picker & URL Router"
+tags: ["velja", "duti-cli", "plist-scripting", "macos-automation", "gpt-codex", "url-dispatch"]
 ---
 
-# Velja AI Skill Guide for GPT
+# Velja macOS Smart Browser Picker & URL Router AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Velja** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Velja provides automated browser dispatch configurable via **`duti` LaunchServices binding**, **`defaults` / `plistlib` rule deployment**, and the **`velja://` URL scheme**. GPT/Codex acts as a Principal macOS Automation Architect and Systems Engineer, delivering **automated dotfile browser routing installers**, **`duti` handler automation scripts**, **programmatic plist rule generators**, and **URL query stripping engines**.
 
-- **Application Name**: Velja
-- **Category**: Smart Browser Picker & URL Router
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & System Configuration Stack
 
-> **Core Purpose**: Intelligent browser picker routing specific links to specific browsers or web apps automatically.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Velja, GPT must understand its underlying technical framework:
-
-Registers as macOS http/https Launch Services default handler (LSSetDefaultHandlerForURLScheme).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Velja Developer Platform                    │
+│                                                             │
+│  LaunchServices Registration Tier                           │
+│  ├── `duti` CLI Handler Tool (`duti -s ... http`)           │
+│  ├── CoreServices Framework Ingress Binding                 │
+│  └── Custom URL Scheme Engine (`velja://`)                  │
+│                                                             │
+│  Declarative Configuration Subsystem                        │
+│  ├── `com.sindresorhus.Velja.plist` Configuration Map       │
+│  ├── Rule Serialization Format (Regex Patterns & App BIDs)  │
+│  └── Automated Dotfiles Bootstrap Pipelines                 │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Velja:
+## Operational Capabilities & Agent Directives
 
-- **Domain and URL pattern matching routing rules**
-- **App-specific routing (e.g., Figma links to Figma App)**
-- **Automatic tracking parameter removal (UTM, gclid stripping)**
+1. **Automated `duti` Protocol Registration**: Construct idempotent shell scripts registering Velja for `http`, `https`, and `mailto` protocols across new macOS machine setups.
+2. **Programmatic Plist Rule Generation**: Write Python scripts using `plistlib` to generate and deploy structured routing rules directly into `com.sindresorhus.Velja.plist`.
+3. **URL Scheme Automation**: Formulate `velja://` and `open -a Velja` commands to test link dispatch programmatically.
+4. **Browser Profile Argument Handling**: Configure launch arguments for Chromium and Gecko browsers (`--profile-directory`, `-P`) to route links to discrete browser user contexts.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Velja, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Velja, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Velja Rule Generator & Plist Deployer
+
+Save this script as `deploy_velja_rules.py` to programmatically inject custom routing rules into Velja's preference file:
+
+```python
+"""
+Velja Declarative Routing Rules Deployer (Python 3)
+Generates and writes structured domain routing rules into com.sindresorhus.Velja.plist.
+"""
+
+import sys
+import os
+import plistlib
+import subprocess
+
+PREF_PATH = os.path.expanduser("~/Library/Preferences/com.sindresorhus.Velja.plist")
+
+def deploy_custom_rules():
+    print("--- [DEPLOYING DECLARATIVE VELJA ROUTING RULES] ---")
+
+    # 1. Terminate Velja to prevent in-memory overwrite
+    subprocess.run(["killall", "Velja"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    prefs = {}
+    if os.path.exists(PREF_PATH):
+        try:
+            with open(PREF_PATH, "rb") as f:
+                prefs = plistlib.load(f)
+        except Exception as e:
+            print(f"Warning: Could not read existing plist: {e}")
+
+    # 2. Define Custom Routing Rules
+    custom_rules = [
+        {
+            "id": "rule-work-github",
+            "url": "https://github.com/enterprise-org/*",
+            "browser": {
+                "bundleIdentifier": "com.google.Chrome",
+                "name": "Google Chrome"
+            },
+            "enabled": True
+        },
+        {
+            "id": "rule-figma-app",
+            "url": "https://www.figma.com/file/*",
+            "browser": {
+                "bundleIdentifier": "com.figma.Desktop",
+                "name": "Figma"
+            },
+            "enabled": True
+        },
+        {
+            "id": "rule-personal-default",
+            "url": "*",
+            "browser": {
+                "bundleIdentifier": "com.apple.Safari",
+                "name": "Safari"
+            },
+            "enabled": True
+        }
+    ]
+
+    prefs["rules"] = custom_rules
+    prefs["removeTrackingParameters"] = True
+    prefs["hideMenubarIcon"] = False
+
+    # 3. Write Updated Preferences
+    with open(PREF_PATH, "wb") as f:
+        plistlib.dump(prefs, f)
+
+    print(f"✅ Successfully wrote {len(custom_rules)} rules to: {PREF_PATH}")
+
+    # 4. Relaunch Velja
+    subprocess.run(["open", "-a", "Velja"])
+    print("🚀 Velja relaunched with updated rules!")
+
+if __name__ == "__main__":
+    deploy_custom_rules()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Velja encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Links open in wrong browser
-- **Root Cause**: Not set as default browser.
-- **Resolution Pathway**: Set Velja as Default Browser in System Settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`duti` Command Not Found in Terminal** | `duti` utility not installed on macOS host. | Install via Homebrew: `brew install duti`. |
+| **Plist Edits Overwritten on System Reboot** | macOS `cfprefsd` preference daemon cached old values in memory. | Flush preference daemon cache: `killall cfprefsd` before restarting Velja. |
+| **Target App Fails to Open URL: `Application not found`** | Target `bundleIdentifier` in rule does not match the installed application's actual bundle ID. | Check bundle ID: `defaults read /Applications/AppName.app/Contents/Info.plist CFBundleIdentifier`. |
+| **Wildcard Matching Fails on Subdomains** | Pattern syntax missing leading `*://*.` wildcard prefix. | Use standard wildcard syntax: `https://*.domain.com/*`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Velja:
+## Command Line Syntax & Batch Processing
 
 ```bash
-open -a Velja
+# 1. Set Velja for HTTP and HTTPS via duti
+duti -s com.sindresorhus.Velja http
+duti -s com.sindresorhus.Velja https
+
+# 2. Flush macOS Preference Daemon Cache
+killall cfprefsd
+
+# 3. Test URL Routing via macOS open CLI
+open "https://github.com/enterprise-org/repo"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/Library/Preferences/com.sindresorhus.Velja.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Velja issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Velja?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Preferences Plist**: `~/Library/Preferences/com.sindresorhus.Velja.plist`
+- **Application Bundle**: `/Applications/Velja.app`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When writing automated configuration scripts for Velja, always terminate `Velja` and flush `cfprefsd` (`killall cfprefsd`) to ensure plist changes are loaded into memory upon restart.

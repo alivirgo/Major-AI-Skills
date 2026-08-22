@@ -1,44 +1,84 @@
 ---
-title: "Save Favorite Prompts in a Cheat Sheet AI Skill"
-description: "Maintain a simple digital document of prompts that produced great results."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, save-favorite-prompts-cheat-sheet"
-category: "Common Sense Everyday AI"
+title: "Save Favorite Prompts in a Cheat Sheet (The 1-Page Desk Reference) AI Skill"
+description: "How to organize and maintain a 1-page high-leverage prompt cheat sheet for instant copy-pasting across daily work tasks."
+category: "Mastering Everyday AI Habits"
+tags: ["cheat-sheet", "prompt-library", "quick-reference", "productivity", "workflows", "prompt-engineering"]
 ---
 
-# Save Favorite Prompts in a Cheat Sheet (AI Skill)
+# Save Favorite Prompts in a Cheat Sheet (The 1-Page Desk Reference) (AI Skill)
 
 ## Overview
-Maintain a simple digital document of prompts that produced great results.
+Searching through dozens of past chat threads to find *"that one prompt that generated the perfect table last month"* wastes cognitive energy.
+
+The **1-Page Prompt Cheat Sheet Protocol** consolidates your top 8 most versatile, battle-tested prompt modifiers into a clean, printable or pin-able Markdown document for instant reference at your desk.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 4-Category Cheat Sheet Architecture
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 1-Page Master Cheat Sheet                   │
+│                                                             │
+│  [ 1. CODING & DEBUGGING ]    ──► Strict types, null-checks │
+│  [ 2. EDITING & POLISH ]      ──► Human voice, no buzzwords │
+│  [ 3. DATA & SYNTHESIS ]      ──► TSV tables, BLUF digests  │
+│  [ 4. DECISION & STRATEGY ]   ──► Pre-mortem, 3 options     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## The Master 1-Page Prompt Cheat Sheet
+
+Copy and pin this block into a pinned note in Notion, Apple Notes, or Obsidian:
+
+### 🛠️ 1. Coding & Engineering
+```markdown
+# Strict Bug Fixer
+"Audit this code for thread-safety, memory leaks, and unhandled nulls. 
+Provide ONLY the corrected, production-ready code with type hints."
+
+# Unit Test Generator
+"Write pytest/vitest unit tests for this function covering happy path, 
+empty/null input, and network timeout edge cases."
+```
+
+### ✍️ 2. Writing & Communication
+```markdown
+# Human Voice Polish
+"Refactor this draft to sound conversational, confident, and warm. 
+Ban 'delve', 'tapestry', 'crucial', 'testament'. Keep under 100 words."
+
+# Negative Preamble Suppressor
+"Draft the reply. Output final text ONLY—no introductory or closing chat fluff."
+```
+
+### 📊 3. Data & Executive Synthesis
+```markdown
+# 1-Click Excel TSV Table
+"Extract the key data above into a TSV code block with headers: 
+Date (YYYY-MM-DD), Item, Category, Amount (Number). No currency symbols."
+
+# Executive 2-Tier BLUF
+"Provide: 1) A 2-sentence Executive BLUF at the top in bold, 
+2) 3 supporting bullet points with specific numbers."
+```
+
+### 🎯 4. Decision & Strategy
+```markdown
+# 3-Option Spectrum
+"Give me exactly 3 options: Option A (Quick fix/Low risk), 
+Option B (Balanced best practice), Option C (Bold strategic fix)."
+
+# Pre-Mortem Red Team
+"Fast-forward 12 months: this initiative failed completely. 
+List the top 3 fatal assumptions that caused the collapse."
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## 3 Rules for Keeping Your Cheat Sheet Useful
+1. **Cap it at 1 page**: If your cheat sheet exceeds 8–10 prompts, you will stop using it. Keep only the highest-frequency gems.
+2. **Use bracketed placeholders**: Ensure every snippet has `{clipboard}` or `[INSERT_TEXT]` ready for instant pasting.
+3. **Prune quarterly**: Delete prompts you haven't used in 90 days.

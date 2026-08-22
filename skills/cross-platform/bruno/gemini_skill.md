@@ -1,100 +1,128 @@
 ---
-title: "Bruno AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Bruno on Cross-Platform."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Bruno, Gemini troubleshooting, Google AI, Bruno, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Bruno API Client AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Bruno API Client, GraphQL queries, Bru DSL markup, and HTTP diagnostics."
+category: "Offline-First Open-Source API Client"
+tags: ["bruno", "api-diagnostics", "graphql", "gemini", "http-debugging", "bru-markup"]
 ---
 
-# Bruno AI Skill Guide for Gemini
+# Bruno API Client AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Bruno** on **Cross-Platform**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Bruno is an offline-first, open-source alternative to cloud-dependent API testing tools, organizing HTTP, GraphQL, and gRPC endpoints into Git-versioned folders using human-readable **Bru markup files (`.bru`)**. Gemini acts as an AI API Integration Engineer and Protocol Analyst, specializing in **multimodal response payload inspection**, **GraphQL query/variable authoring**, **HTTP latency and header debugging**, and **declarative Bru collection design**.
 
-- **Application Name**: Bruno
-- **Category**: Offline-First Open-Source API Client
-- **Platform**: Cross-Platform
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### System Architecture & Request Lifecycle
 
-> **Core Purpose**: Fast, lightweight, Git-friendly open-source API client for testing REST, GraphQL, and gRPC APIs.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Bruno, Gemini must understand its underlying technical framework:
-
-Electron / React desktop client storing API collections directly as plain text .bru files in your git repository.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Bruno Request Lifecycle Engine              │
+│                                                             │
+│  Collection & File Layout                                   │
+│  ├── Plain Text Bru DSL Files (.bru format)                 │
+│  ├── Environment Scopes (Global, Folder, Request Variables) │
+│  └── Git Version Control Repository (Zero Cloud Lock-in)   │
+│                                                             │
+│  Execution & Verification Subsystem                         │
+│  ├── HTTP / GraphQL / gRPC Transport Stack                  │
+│  ├── Declarative Assertion Matrix (res.status, res.body)    │
+│  └── Pre/Post Request JavaScript Sandbox Hooks              │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Bruno:
+## Operational Capabilities & Agent Directives
 
-- **Git-native API collections stored in plain markup (.bru format)**
-- **Offline-first privacy without mandatory cloud sync**
-- **Scripting support via JavaScript and automated testing**
+1. **Multimodal API Response Triage**: Analyze screenshots of Bruno response windows, HTTP status codes, latency waterfalls, and payload diffs to identify server-side errors (4xx/5xx), payload truncation, and slow TTFB (Time to First Byte).
+2. **GraphQL Query & Mutation Authoring**: Construct `.bru` GraphQL files with parameterized operation names, variables, and schema introspection headers.
+3. **Environment & Path Variable Mapping**: Structure variable replacement tokens (`{{apiUrl}}`, `{{token}}`, `{{tenantId}}`) to ensure seamless switching between Local, Staging, and Production tiers.
+4. **Automated Assertion Design**: Formulate robust declarative assertions (`res.body.items: length 10`, `res.headers["content-type"]: contains "json"`).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Bruno, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Bruno, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Bru File Recipe: GraphQL Query with Variables
+
+Save this file as `graphql/get-user-query.bru`:
+
+```bru
+meta {
+  name: Fetch User GraphQL Profile
+  type: graphql
+  seq: 4
+}
+
+post {
+  url: {{graphqlEndpoint}}
+  body: graphql
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:graphql {
+  query GetUserProfile($userId: ID!, $includeHistory: Boolean!) {
+    user(id: $userId) {
+      id
+      username
+      email
+      accountStatus
+      orderHistory @include(if: $includeHistory) {
+        orderId
+        totalAmount
+        createdAt
+      }
+    }
+  }
+}
+
+body:graphql:vars {
+  {
+    "userId": "usr_9812401",
+    "includeHistory": true
+  }
+}
+
+assert {
+  res.status: eq 200
+  res.body.data.user.id: eq "usr_9812401"
+  res.body.data.user.accountStatus: eq "ACTIVE"
+  res.body.errors: isUndefined
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Bruno encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Environment variables not resolving in request
-- **Root Cause**: Active environment not selected.
-- **Resolution Pathway**: Select environment dropdown in top right of Bruno UI.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Response Window Shows `403 Forbidden` / Cloudflare Block** | Missing standard browser User-Agent headers or security origin headers. | 1. In Headers tab, add `User-Agent: Mozilla/5.0 ...` or explicit client header.<br>2. Add `Origin: {{originUrl}}`.<br>3. Check if IP requires VPN/Tailscale access. |
+| **GraphQL Returns Status 200 but Payload Contains `errors`** | GraphQL standard returns HTTP 200 even when resolver exceptions occur. | 1. Add strict assertion: `res.body.errors: isUndefined`.<br>2. In Response view, inspect `errors[0].message` and `locations`.<br>3. Verify input variables match GraphQL schema types. |
+| **Response Body Shows Garbled Binary Characters** | Server returned compressed Gzip/Brotli or binary file without automatic decompression. | 1. Verify `Accept-Encoding: gzip, deflate, br` header is handled.<br>2. Toggle view mode from Raw to Preview / JSON in Bruno footer.<br>3. Verify endpoint route (e.g. download endpoint vs JSON metadata endpoint). |
+| **Variable Token Appears as Literal `{{token}}` in URL** | Typo in variable name or variable was defined in an inactive environment file. | 1. Check spelling in `environments/<env>.bru`.<br>2. Hover over variable in Bruno UI to check resolved tooltip value.<br>3. Check if variable was overwritten in Folder settings. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Bruno:
+## Command Line Syntax & Batch Testing
 
 ```bash
-bru run --env Local
-bru run collection/ --output report.json
+# Run Bruno Collection with JSON Reporter
+npx @usebruno/cli run --env Production --output test-run.json --format json
+
+# Execute Specific Folder with Custom Concurrency
+npx @usebruno/cli run collections/auth/ --env Staging
+
+# Run with Strict Fail-Fast Mode
+npx @usebruno/cli run --bail
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/.config/bruno/`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Bruno issues on Cross-Platform?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Bruno?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Collection Config**: `bruno.json`
+- **Environment Files**: `environments/*.bru`
+- **Bruno App Preferences**: `~/.config/bruno`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For GraphQL endpoints, always assert `res.body.errors: isUndefined` alongside `res.status: eq 200`. Use Git-friendly `.bru` files to enable distributed team collaboration.

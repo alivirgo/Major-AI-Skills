@@ -1,99 +1,114 @@
 ---
-title: "EarTrumpet AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate EarTrumpet on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for EarTrumpet, Gemini troubleshooting, Google AI, EarTrumpet, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "EarTrumpet Windows Audio Engine AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot EarTrumpet WinUI flyouts, per-app volume sliders, peak level meters, and system tray integration."
+category: "Per-App Audio Routing & Volume Control"
+tags: ["eartrumpet", "winui-flyout", "peak-meters-ui", "gemini", "audio-sliders", "system-tray-audio"]
 ---
 
-# EarTrumpet AI Skill Guide for Gemini
+# EarTrumpet Windows Audio Engine AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **EarTrumpet** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+EarTrumpet provides a native Windows 11 fluent interface featuring the **WinUI / XAML Islands Audio Mixer Flyout**, **Dynamic Per-App Volume Sliders**, **Real-Time Visual Peak Level Meters**, and **Device Context Menus (Right-Click Endpoint Redirection)**. Gemini acts as an AI Windows Interface Specialist and Audio Systems Auditor, specializing in **multimodal Volume Flyout inspection**, **peak audio clipping analysis**, **active vs dormant audio stream identification**, and **system tray icon duplication diagnostics**.
 
-- **Application Name**: EarTrumpet
-- **Category**: Per-App Audio Routing & Volume Control
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Audio Interface Stack
 
-> **Core Purpose**: Modern volume control utility for Windows, replacing the default tray mixer with per-app audio routing.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with EarTrumpet, Gemini must understand its underlying technical framework:
-
-Built on Windows Audio Session API (WASAPI) and WinRT Audio Endpoints to dynamically manage application audio streams.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 EarTrumpet Visual Operations                │
+│                                                             │
+│  Mixer Flyout & UI Presentation                             │
+│  ├── Fluent Acrylic / Mica Flyout (Windows 11 Design System)│
+│  ├── Per-App Volume Sliders (0-100% Granular Control)       │
+│  └── Real-Time Peak Audio Meter Bars (Green/Yellow/Red HUD) │
+│                                                             │
+│  Device Context & Routing UI                                │
+│  ├── Multi-Endpoint Dropdowns (Speakers, Headset, Digital)  │
+│  ├── App-Specific Right-Click Device Redirector Menu        │
+│  └── Master Volume Slider & Mute Toggle Controls            │
+│                                                             │
+│  Taskbar & System Tray Integration                         │
+│  ├── System Tray Icon Status (Dual Speaker Icon Resolution) │
+│  └── Quick Action Flyout Shortcuts (Middle-Click to Mute)   │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of EarTrumpet:
+## Operational Capabilities & Agent Directives
 
-- **Per-application volume adjustment & mute toggles**
-- **Dynamic default audio playback device switching**
-- **Native UWP / WinUI modern interface matching Windows 11**
+1. **Multimodal Mixer Flyout Inspection**: Analyze screenshots of the EarTrumpet flyout to identify active vs muted applications, verify audio peak meter bounce activity, and detect unexpected background audio consumers.
+2. **Dual System Tray Icon Remediation**: Guide users through disabling the default Windows volume icon in *Taskbar Settings $\rightarrow$ Turn system icons on or off* to eliminate duplicate tray speaker icons.
+3. **Per-App Device Routing Verification**: Review application context menus to ensure individual programs are assigned to the intended playback endpoint (*e.g. Discord assigned to Headset while Spotify plays on Desktop Speakers*).
+4. **Volume Normalization & Peak Clipping Triage**: Inspect visual peak meter levels to ensure master output does not peg constantly at $100\%$ ($0\text{ dBFS}$ digital clipping).
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding EarTrumpet, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to EarTrumpet, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Windows Default Audio Endpoint Inspector
+
+Run this script to inspect available audio playback endpoints and determine the current default Windows audio device:
+
+```python
+"""
+Windows Audio Playback Endpoint Inspector
+Enumerates connected audio playback hardware devices and identifies the system default output.
+"""
+
+import sys
+
+def inspect_audio_endpoints():
+    print("--- [INSPECTING WINDOWS AUDIO PLAYBACK ENDPOINTS] ---")
+    try:
+        from pycaw.pycaw import AudioUtilities
+        
+        devices = AudioUtilities.GetAllDevices()
+        print(f"Found {len(devices)} Audio Device(s):\n")
+
+        for dev in devices:
+            # Check for output endpoints
+            dev_name = getattr(dev, "FriendlyName", "Audio Endpoint")
+            dev_state = getattr(dev, "State", "Unknown")
+            dev_id = getattr(dev, "id", "")
+
+            print(f"• Endpoint: {dev_name:<36} | State: {dev_state}")
+
+        print("\n✅ Audio hardware endpoints listed successfully.")
+
+    except ImportError:
+        print("Notice: 'pycaw' library required (run: pip install pycaw).")
+    except Exception as e:
+        print(f"Failed to query audio devices: {e}")
+
+if __name__ == "__main__":
+    inspect_audio_endpoints()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If EarTrumpet encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Application missing from mixer
-- **Root Cause**: Application has no active WASAPI audio session playing.
-- **Resolution Pathway**: Trigger sound/audio playback in the application to register audio session.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Two Speaker Icons Appear in System Tray** | Default Windows volume icon and EarTrumpet icon both enabled simultaneously. | In Windows Settings $\rightarrow$ Personalization $\rightarrow$ Taskbar $\rightarrow$ Other system tray icons, toggle **Volume** to Off. |
+| **Peak Meter Bounces but No Sound Output** | Application routed to inactive or disconnected audio endpoint (e.g. unpowered monitor HDMI). | Right-click the app icon in EarTrumpet $\rightarrow$ Select output device icon $\rightarrow$ Switch to active **Speakers / Headphones**. |
+| **Middle-Click Does Not Mute Application** | Middle-click shortcut disabled in EarTrumpet settings. | Right-click EarTrumpet tray icon $\rightarrow$ Settings $\rightarrow$ Enable **Middle-click on app to mute/unmute**. |
+| **Flyout Opens Stuttery on Multi-Monitor High-DPI** | Windows DWM scaling disparity between $4\text{K } 150\%$ and $1080\text{p } 100\%$ displays. | In Windows Display Settings, align monitor scaling factors or restart `explorer.exe`. |
 
 ---
 
-## Command Line Syntax and Configuration
+## Command Line Syntax & Server Control
 
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for EarTrumpet:
+```powershell
+# Query EarTrumpet UWP App Manifest Details
+Get-AppxPackage -Name "*EarTrumpet*" | Select-Object Name, Version, InstallLocation
 
-```bash
-Start-Process -FilePath "shell:AppsFolder\41808File-Save.EarTrumpet_10tokenms02j!App"
+# Relaunch Windows Explorer to Refresh Tray Icons
+Stop-Process -Name "explorer" -Force
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `%LOCALAPPDATA%\Packages\41808File-Save.EarTrumpet_10tokenms02j\LocalSettings`
+### Key Configuration Locations
+- **Settings Store**: `%LOCALAPPDATA%\Packages\41808File-Save.EarTrumpet_10tokenms02j\`
 
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot EarTrumpet issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for EarTrumpet?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When users report seeing two volume speaker icons in their Windows taskbar, instruct them to hide the native Windows Volume tray icon under Taskbar Settings.

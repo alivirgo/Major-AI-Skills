@@ -1,100 +1,188 @@
 ---
-title: "Flow Launcher AI Skill Guide for Claude"
-description: "Comprehensive SEO-optimized skill specification for Claude to diagnose, manage, troubleshoot, and automate Flow Launcher on Windows."
-keywords: "Claude AI, Anthropic Claude, Claude Code CLI, Claude prompt for Flow Launcher, Troubleshooting with Claude, Claude AI skills, Claude integration, Flow Launcher, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Flow Launcher Extensible Productivity AI Skill Guide (Claude)"
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Flow Launcher, C# / Python JSON-RPC plugins, plugin.json manifests, and Everything search integration."
+category: "Productivity Application & File Launcher"
+tags: ["flow-launcher", "python-jsonrpc-plugin", "csharp-plugins", "everything-search", "hotkey-launcher", "windows-11", "claude"]
 ---
 
-# Flow Launcher AI Skill Guide for Claude
+# Flow Launcher Extensible Productivity AI Skill Guide (Claude)
 
-## Overview
-This document serves as the official operational skill guide for **Flow Launcher** on **Windows**, specifically engineered for **Claude**.
+## Overview & Engine Architecture
+Flow Launcher is an open-source, extensible productivity launcher and desktop search application for Windows built on **C# / .NET 8 and WPF**. Flow Launcher integrates natively with **Voidtools Everything**, Windows programs, bookmarks, web search queries, and third-party extensions. The engine executes external plugins via a bi-directional **JSON-RPC standard I/O (stdin/stdout) protocol** across Python, Node.js, and executable binaries, or natively in-process via **C# .NET assemblies (`Flow.Launcher.Plugin.dll`)**. Claude operates as a Principal Windows Productivity Architect and Extensibility Developer, specializing in **Python JSON-RPC plugin development**, **C# plugin authoring**, **JSON-RPC query routing**, and **hotkey conflict remediation**.
 
-- **Application Name**: Flow Launcher
-- **Category**: Productivity Application & File Launcher
-- **Platform**: Windows
-- **Target AI Agent**: Claude
-- **AI Operating Persona**: Anthropic's Claude, specializing in safe, analytical, step-by-step diagnostic reasoning, system safety, and clear structured troubleshooting logs.
+### Flow Launcher System Architecture & JSON-RPC Stack
 
-> **Core Purpose**: Extensible open-source application launcher with deep Everything and Python plugin integration.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Flow Launcher, Claude must understand its underlying technical framework:
-
-C# / WPF framework with isolated Python runtime environment for third-party plugins.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Flow Launcher Architecture                  │
+│                                                             │
+│  UI Presentation & Search Bar Layer                         │
+│  ├── WPF Search Canvas (Themes, Acrylic Blur, Animations)   │
+│  ├── Global Hotkey Engine (Default: `Alt + Space`)          │
+│  └── Result List View (Icons, Subtitles, Action Menus)      │
+│                                                             │
+│  Plugin Host & Query Dispatcher Core                        │
+│  ├── Action Keyword Router (e.g. `g` Google, `w` Wikipedia) │
+│  ├── Native C# In-Process Host (`IPlugin`, `IContextMenu`)  │
+│  └── Out-of-Process JSON-RPC Engine (Python / Node / Exec)  │
+│                                                             │
+│  Data & Indexing Integration Subsystem                      │
+│  ├── Everything Search IPC Bridge (`Everything64.dll`)      │
+│  ├── Windows Shell Programs & Control Panel Indexer         │
+│  └── Settings Store (`%APPDATA%\FlowLauncher\Settings\`)   │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Claude model can assist users in configuring and executing the following capabilities of Flow Launcher:
+## Operational Capabilities & Agent Directives
 
-- **Instant app launching and Everything file search integration**
-- **Rich C# and Python plugin ecosystem**
-- **Web search triggers, bookmark queries, and inline calculator**
+1. **Python JSON-RPC Plugin Development**: Author production-grade Flow Launcher Python plugins communicating over standard I/O, parsing the incoming JSON payload (`query` method), and emitting formatted result arrays.
+2. **C# .NET Plugin Development**: Build compiled `.dll` plugins implementing `IPlugin`, `IContextMenu`, and `ISettingProvider` for maximum execution speed.
+3. **Plugin Manifest (`plugin.json`) Engineering**: Configure action keywords, execution file paths, dependencies, and metadata descriptors.
+4. **Hotkey Conflict & Everything Integration Triage**: Resolve hotkey collisions (*PowerToys Run vs Flow Launcher on `Alt + Space`*) and repair IPC connectivity to the Everything search daemon.
 
-### Claude Processing and Execution Guidelines
-When a user issues commands or requests help regarding Flow Launcher, Claude must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Flow Launcher, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Structure your analysis logically. Use diagnostic steps with clear root-cause verification before suggesting actions. Enforce safe execution parameters when advising system configuration or registry edits.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Code: Complete Flow Launcher Python Plugin (`main.py` + `plugin.json`)
+
+### 1. `plugin.json` (Plugin Metadata Manifest)
+Save in `%APPDATA%\FlowLauncher\Plugins\SystemDiagnostics\plugin.json`:
+
+```json
+{
+  "ID": "6A9E4D2B-8C1F-4B5A-9E3D-7F2A1C4E8B90",
+  "ActionKeyword": "sys",
+  "Name": "System Diagnostics",
+  "Description": "Displays live CPU, RAM, and Disk telemetry directly in Flow Launcher.",
+  "Author": "AI Systems Engineering Team",
+  "Version": "1.0.0",
+  "Language": "python",
+  "Website": "https://github.com/Flow-Launcher/Flow.Launcher",
+  "ExecuteFileName": "main.py",
+  "IcoPath": "icon.png"
+}
+```
+
+### 2. `main.py` (JSON-RPC Protocol Implementation)
+Save in `%APPDATA%\FlowLauncher\Plugins\SystemDiagnostics\main.py` (requires `pip install psutil`):
+
+```python
+"""
+Flow Launcher Python Plugin: System Diagnostics
+Implements standard Flow Launcher JSON-RPC stdin/stdout protocol to stream system metrics.
+"""
+
+import sys
+import json
+import psutil
+
+class SystemDiagnosticsPlugin:
+    def __init__(self):
+        # Read incoming JSON-RPC request from Flow Launcher via stdin
+        raw_input = sys.stdin.read()
+        if not raw_input.strip():
+            return
+
+        try:
+            request = json.loads(raw_input)
+            method = request.get("method")
+            parameters = request.get("parameters", [])
+
+            if method == "query":
+                query_text = parameters[0] if parameters else ""
+                self.query(query_text)
+            elif method == "open_task_manager":
+                self.open_task_manager()
+
+        except Exception as e:
+            self.send_error(str(e))
+
+    def query(self, query_text: str):
+        # Query Live System Metrics via psutil
+        cpu_percent = psutil.cpu_percent(interval=None)
+        mem = psutil.virtual_memory()
+        disk = psutil.disk_usage("C:\\")
+
+        results = [
+            {
+                "Title": f"CPU Utilization: {cpu_percent}%",
+                "SubTitle": f"{psutil.cpu_count(logical=True)} Logical Cores | Click to open Task Manager",
+                "IcoPath": "icon.png",
+                "JsonRPCAction": {
+                    "method": "open_task_manager",
+                    "parameters": [],
+                    "dontHideAfterAction": False
+                }
+            },
+            {
+                "Title": f"RAM Load: {mem.percent}% ({mem.used / (1024**3):.1f} GB / {mem.total / (1024**3):.1f} GB)",
+                "SubTitle": f"Available Memory: {mem.available / (1024**3):.1f} GB",
+                "IcoPath": "icon.png"
+            },
+            {
+                "Title": f"C: Drive Space: {disk.percent}% Used ({disk.free / (1024**3):.1f} GB Free)",
+                "SubTitle": f"Total Capacity: {disk.total / (1024**3):.1f} GB",
+                "IcoPath": "icon.png"
+            }
+        ]
+
+        # Send JSON-RPC response back to Flow Launcher via stdout
+        output = {"result": results}
+        print(json.dumps(output))
+
+    def open_task_manager(self):
+        import subprocess
+        subprocess.Popen("taskmgr.exe")
+
+    def send_error(self, err_msg: str):
+        output = {
+            "result": [
+                {
+                    "Title": "Plugin Error Occurred",
+                    "SubTitle": err_msg,
+                    "IcoPath": "icon.png"
+                }
+            ]
+        }
+        print(json.dumps(output))
+
+if __name__ == "__main__":
+    SystemDiagnosticsPlugin()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Flow Launcher encounters operational failures, Claude must analyze issues using the resolution pathways below:
-
-#### [Issue] Python plugins fail to load
-- **Root Cause**: Flow Launcher cannot locate Python interpreter in PATH.
-- **Resolution Pathway**: Specify exact python.exe path in Flow Settings -> Plugin Store -> Python Settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Python Plugins Fail to Execute Silently** | Flow Launcher cannot resolve Python path or `python.exe` is not in system environment. | In Flow Launcher Settings $\rightarrow$ **Plugin Store** $\rightarrow$ **Python Settings**, specify absolute path to `python.exe`. |
+| **Hotkey `Alt + Space` Does Not Trigger Launcher** | Conflict with Windows PowerToys Run, Discord overlay, or GeForce Experience. | In Flow Launcher Settings $\rightarrow$ **General**, assign a new hotkey combination (e.g. `Ctrl + Space` or `Alt + D`). |
+| **Everything Search Returns "Everything is not running"** | `Everything.exe` background process or service is stopped. | Start Everything service: `Everything.exe -svc-start` and verify Everything plugin is enabled in Flow Settings. |
+| **Flow Launcher Crashes on Startup** | Corrupted `Settings.json` file following an ungraceful shutdown. | Restore backup settings or delete corrupted `%APPDATA%\FlowLauncher\Settings\Settings.json`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Claude model can generate or execute the following terminal and shell commands for Flow Launcher:
+## Command Line Syntax & Flow Launcher Ingress
 
 ```bash
-Flow.Launcher.exe
-Flow.Launcher.exe --query "g github flow launcher"
+# 1. Launch Flow Launcher GUI
+"%LOCALAPPDATA%\FlowLauncher\Flow.Launcher.exe"
+
+# 2. Trigger Search Query via Command Line
+"%LOCALAPPDATA%\FlowLauncher\Flow.Launcher.exe" --query "sys"
+
+# 3. Query Flow Launcher Process via PowerShell
+Get-Process -Name "Flow.Launcher"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Claude should point users to the following file locations:
-
-- `%APPDATA%\FlowLauncher\Settings\Settings.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Claude-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Claude troubleshoot Flow Launcher issues on Windows?**
-A: Claude inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Claude generate automated CLI commands for Flow Launcher?**
-A: Yes, Claude utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Installed Plugins**: `%APPDATA%\FlowLauncher\Plugins\`
+- **Application Settings**: `%APPDATA%\FlowLauncher\Settings\Settings.json`
+- **Plugin Data Store**: `%APPDATA%\FlowLauncher\Settings\Plugins\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When developing Flow Launcher Python plugins, always emit responses as valid JSON strings to stdout (`json.dumps({"result": [...]})`) without any extraneous debug print statements that would corrupt the JSON-RPC pipe.

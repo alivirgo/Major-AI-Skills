@@ -1,99 +1,155 @@
 ---
-title: "Omada Controller AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Omada Controller on Network Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Omada Controller, ChatGPT troubleshooting, GPT automation, Omada Controller, Network Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "TP-Link Omada SDN Controller AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize TP-Link Omada Controller, REST OpenAPI, Terraform/Ansible pipelines, and Dockerized SDN deployments."
+category: "Enterprise SDN Network Controller"
+tags: ["omada-controller", "omada-openapi", "ansible-omada", "docker-omada", "gpt-codex", "network-automation"]
 ---
 
-# Omada Controller AI Skill Guide for GPT
+# TP-Link Omada SDN Controller AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Omada Controller** on **Network Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+TP-Link Omada SDN Controller provides scriptable REST OpenAPI endpoints allowing complete programmatic lifecycle management of sites, SSIDs, 802.1Q VLANs, firewall rules, and device firmware. GPT/Codex acts as a Principal Network DevOps Engineer and Infrastructure as Code (IaC) Developer, delivering **automated Omada REST OpenAPI scripts**, **Ansible network provisioning playbooks**, **Dockerized controller deployment recipes (`docker-compose.yml`)**, and **bulk configuration deployers**.
 
-- **Application Name**: Omada Controller
-- **Category**: Enterprise SDN Network Controller
-- **Platform**: Network Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & SDN Orchestration Stack
 
-> **Core Purpose**: Centralized Software-Defined Networking platform for managing TP-Link Omada EAP Access Points, JetStream Switches, and Routers.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Omada Controller, GPT must understand its underlying technical framework:
-
-Java runtime and MongoDB backend exposing HTTPS REST OpenAPI (/api/v2) and managing devices over southbound UDP/TCP ports 29810-29814.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Omada Developer Platform                    │
+│                                                             │
+│  API Ingress & Automation Subsystem                         │
+│  ├── Authenticated REST OpenAPI (`/api/v2/login`, Tokens)   │
+│  ├── Site Operations (`/api/v2/sites/{siteId}/...`)         │
+│  └── Automated Configuration Injectors (SSIDs, VLANs, ACLs) │
+│                                                             │
+│  Infrastructure as Code & Container Engine                  │
+│  ├── Docker Container Architecture (`mbentley/omada-controller`)│
+│  ├── Ansible Playbooks (Automated Site Bootstrap)           │
+│  └── Automated Firmware Upgrade & Backup Orchestrators      │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Omada Controller:
+## Operational Capabilities & Agent Directives
 
-- **Centralized EAP Wi-Fi 6/6E/7 Provisioning & Mesh Topology**
-- **JetStream Switch Port Profiles, 802.1Q VLANs, and LACP**
-- **Omada Gateway Multi-WAN Load Balancing & WireGuard/IPSec VPNs**
+1. **REST OpenAPI Automation**: Build comprehensive Python and TypeScript scripts authenticating with Omada Controller, maintaining CSRF token state, and managing network entities.
+2. **Automated SSID & Wireless Network Provisioning**: Script programmatic creation of WPA3 Enterprise / WPA2 Personal SSIDs with rate-limiting, VLAN tagging, and scheduler rules.
+3. **Dockerized Controller Deployment**: Author hardened `docker-compose.yml` configurations with persistent volume mounts, host networking, and automated backup cron jobs.
+4. **Automated Site Backup & Migration**: Script routines to export daily encrypted `.tar.gz` controller backup archives to cloud object storage.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Omada Controller, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Omada Controller, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Omada Wireless Network (SSID) Deployer
+
+Save this script as `deploy_omada_ssid.py` to programmatically provision a new wireless network across all EAPs in a site:
+
+```python
+"""
+Omada SDN Controller: Automated Wireless Network (SSID) Deployer
+Authenticates with the OpenAPI and provisions a secured WPA2/WPA3 SSID with VLAN tagging.
+"""
+
+import sys
+import requests
+import json
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+CONTROLLER_URL = "https://192.168.1.50:8043"
+USERNAME = "admin"
+PASSWORD = "SecretPassword123"
+
+def provision_wireless_network(ssid_name: str, psk_passphrase: str, vlan_id: int = 10, site_id: str = "Default"):
+    print(f"--- [PROVISIONING WIRELESS NETWORK ON OMADA CONTROLLER] ---")
+    session = requests.Session()
+    session.verify = False
+
+    # 1. Authenticate
+    login_url = f"{CONTROLLER_URL}/api/v2/login"
+    login_res = session.post(login_url, json={"name": USERNAME, "password": PASSWORD})
+    
+    if login_res.status_code != 200 or login_res.json().get("errorCode") != 0:
+        print(f"Authentication failed: {login_res.text}")
+        return
+
+    token = login_res.json().get("result", {}).get("token")
+    session.headers.update({"Csrf-Token": token})
+    print("✅ Successfully authenticated.")
+
+    # 2. Build SSID Creation Payload
+    ssid_payload = {
+        "name": ssid_name,
+        "wlanBand": 3, # 1 = 2.4G, 2 = 5G, 3 = Both
+        "security": 3, # WPA/WPA2/WPA3 Personal
+        "securityKey": psk_passphrase,
+        "vlanEnable": True if vlan_id > 1 else False,
+        "vlanId": vlan_id,
+        "broadcast": True,
+        "guestNetEnable": False
+    }
+
+    # 3. Dispatch POST Request
+    create_url = f"{CONTROLLER_URL}/api/v2/sites/{site_id}/setting/wlans"
+    res = session.post(create_url, json=ssid_payload)
+
+    if res.status_code == 200 and res.json().get("errorCode") == 0:
+        print(f"✅ Successfully provisioned SSID '{ssid_name}' (VLAN: {vlan_id}) across site '{site_id}'!")
+    else:
+        print(f"🚨 Failed to create SSID: {res.text}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print("Usage: python3 deploy_omada_ssid.py <SSID_Name> <Password> [VLAN_ID]")
+        sys.exit(1)
+
+    vlan = int(sys.argv[3]) if len(sys.argv) > 3 else 10
+    provision_wireless_network(sys.argv[1], sys.argv[2], vlan)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Omada Controller encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Device Stuck in Pending state
-- **Root Cause**: Credentials mismatch or firewall blocking ports 29810-29814.
-- **Resolution Pathway**: Run set-inform command over SSH.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **API Returns `ErrorCode: -1005 (Token Expired)`** | The session `Csrf-Token` expired after idle timeout. | Re-invoke `/api/v2/login` to obtain a fresh token and re-populate the `Csrf-Token` header. |
+| **Dockerized Controller Cannot Adopt Devices** | Container is running with bridge networking rather than host networking mode. | In `docker-compose.yml`, set `network_mode: "host"` so southbound UDP 29810 broadcasts reach the container. |
+| **SSID Created via API Does Not Transmit on EAPs** | WLAN group not attached or EAP radios disabled in site settings. | In Controller Settings $\rightarrow$ Wireless Settings $\rightarrow$ WLAN Groups, ensure EAPs are assigned to default group. |
+| **Backup Export API Fails with ErrorCode -39000** | Disk storage volume mounting `/opt/tplink/EAPController/data` is full ($100\%$ capacity). | Purge historical client logs or expand Docker persistent volume storage. |
 
 ---
 
-## Command Line Syntax and Configuration
+## Command Line Syntax & Docker Deployment
 
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Omada Controller:
-
-```bash
-curl -k -X POST "https://<CONTROLLER_IP>:8043/api/v2/login" -d '{\"username\":\"admin\",\"password\":\"secret\"}'
+```yaml
+# docker-compose.yml: Production Omada SDN Controller Deployment
+version: "3.8"
+services:
+  omada-controller:
+    image: mbentley/omada-controller:5.14
+    container_name: omada-controller
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=UTC
+      - MANAGE_HTTP_PORT=8088
+      - MANAGE_HTTPS_PORT=8043
+      - PORTAL_HTTP_PORT=8088
+      - PORTAL_HTTPS_PORT=8843
+      - SHOW_SERVER_LOGS=true
+      - SHOW_MONGODB_LOGS=false
+    volumes:
+      - ./omada-data:/opt/tplink/EAPController/data
+      - ./omada-work:/opt/tplink/EAPController/work
+      - ./omada-logs:/opt/tplink/EAPController/logs
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `/opt/tplink/EAPController/logs/server.log`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Network Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Omada Controller issues on Network Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Omada Controller?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Docker Compose File**: `docker-compose.yml`
+- **Persistent Data Volume**: `./omada-data/`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When deploying Omada SDN Controller inside Docker containers, always use `network_mode: host` to allow southbound Layer 2 UDP 29810 device discovery broadcasts to function correctly.

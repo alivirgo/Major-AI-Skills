@@ -1,103 +1,130 @@
 ---
-title: "Everything AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Everything on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Everything, ChatGPT troubleshooting, GPT automation, Everything, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Voidtools Everything Real-Time Search AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Voidtools Everything, Everything SDK (C/C++ & ctypes), WM_COPYDATA IPC, and automated EFU file list generation."
+category: "Real-Time File Search & Indexing Engine"
+tags: ["everything", "everything-sdk", "wm-copydata-ipc", "efu-file-lists", "ctypes-everything", "gpt-codex", "windows-file-indexing"]
 ---
 
-# Everything AI Skill Guide for GPT
+# Voidtools Everything Real-Time Search AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Everything** on **Windows**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Voidtools Everything exposes high-performance programmatic integration interfaces via the **Everything C-SDK (`Everything64.dll`)**, the **Win32 `WM_COPYDATA` IPC Message Protocol**, and the **EFU (Everything File Utility) File List Schema**. GPT/Codex acts as a Principal Windows Systems Software Engineer and File System Automation Developer, delivering **native C++ / Python SDK bindings**, **high-throughput IPC search daemons**, **automated EFU catalog synthesizers**, and **unattended backup indexing pipelines**.
 
-- **Application Name**: Everything
-- **Category**: Real-Time File Search & Indexing Engine
-- **Platform**: Windows
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & IPC Interface Stack
 
-> **Core Purpose**: Instant real-time search utility indexing file names across all NTFS and ReFS drives instantly.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Everything, GPT must understand its underlying technical framework:
-
-Monitors NTFS USN Change Journal, maintaining an in-memory index of file metadata with near-zero CPU/RAM overhead.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Everything Developer Platform               │
+│                                                             │
+│  SDK & Inter-Process Communication (IPC)                    │
+│  ├── `Everything64.dll` C-API Function Exports              │
+│  ├── `WM_COPYDATA` Win32 Message Protocol (HWND Routing)    │
+│  └── JSON / CSV / TXT Result Serialization Formats          │
+│                                                             │
+│  Search Query Engine & Data Types                           │
+│  ├── Advanced Query Flags (`EVERYTHING_REQUEST_FULL_PATH`)  │
+│  ├── Sort Fast Enumerators (`EVERYTHING_SORT_SIZE_DESCENDING│
+│  └── EFU (Everything File Utility) CSV Manifest Generator   │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Everything:
+## Operational Capabilities & Agent Directives
 
-- **Instant NTFS USN Change Journal Indexing**
-- **Complex Boolean operators, wildcards, and Regex support**
-- **Built-in HTTP, ETP, and FTP servers for network file retrieval**
-- **C++ SDK and IPC interface (WM_COPYDATA) for external app integration**
+1. **Everything SDK C-API Development**: Author robust C++ and Python wrapper classes interfacing with `Everything64.dll` to perform thread-safe indexed queries with custom request flags.
+2. **Win32 `WM_COPYDATA` IPC Messaging**: Construct zero-dependency Win32 IPC scripts discovering the `EVERYTHING_TASKBAR_NOTIFICATION` window class and dispatching `COPYDATASTRUCT` payloads.
+3. **Automated EFU File List Generation**: Write Python scripts generating indexed `.efu` files (filename, size, date modified, date created, attributes) for offline archive disks.
+4. **Automated High-Speed Disk Duplicate Finders**: Build scripts querying hash and size duplicates using Everything search modifiers (`dupe:size;name`).
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Everything, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Everything, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated EFU File List & Catalog Generator
+
+Save this script as `generate_efu_manifest.py` to create an offline searchable `.efu` file catalog for external media drives:
+
+```python
+"""
+Everything File Utility (EFU) Manifest Generator
+Scans a target directory and generates a compliant .efu CSV file for instant Everything import.
+"""
+
+import sys
+import os
+import csv
+import datetime
+
+def generate_efu_file(scan_directory: str, output_efu_path: str):
+    print(f"--- [GENERATING EVERYTHING EFU MANIFEST: '{scan_directory}'] ---")
+    
+    if not os.path.exists(scan_directory):
+        print(f"Error: Directory '{scan_directory}' does not exist.")
+        return
+
+    # Windows FILETIME epoch offset (1601 to 1970 in 100ns units)
+    WINDOWS_EPOCH_DIFF = 116444736000000000
+
+    def to_windows_filetime(posix_timestamp):
+        return int(posix_timestamp * 10000000) + WINDOWS_EPOCH_DIFF
+
+    entry_count = 0
+    with open(output_efu_path, "w", newline="", encoding="utf-8") as efu_file:
+        writer = csv.writer(efu_file)
+        # EFU Standard Header
+        writer.writerow(["Filename", "Size", "Date Modified", "Date Created", "Attributes"])
+
+        for root, dirs, files in os.walk(scan_directory):
+            for file_name in files:
+                full_path = os.path.join(root, file_name)
+                try:
+                    stat = os.stat(full_path)
+                    file_size = stat.st_size
+                    date_mod_ft = to_windows_filetime(stat.st_mtime)
+                    date_cre_ft = to_windows_filetime(stat.st_ctime)
+                    attr = 32 # FILE_ATTRIBUTE_ARCHIVE = 32
+
+                    writer.writerow([full_path, file_size, date_mod_ft, date_cre_ft, attr])
+                    entry_count += 1
+                except Exception:
+                    continue
+
+    print(f"✅ Generated EFU catalog with {entry_count} files: {output_efu_path}")
+    print("To search: In Everything, select File -> Open File List... -> select this EFU file.")
+
+if __name__ == "__main__":
+    src = sys.argv[1] if len(sys.argv) > 1 else "C:\\"
+    dst = sys.argv[2] if len(sys.argv) > 2 else "DriveCatalog.efu"
+    generate_efu_file(src, dst)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Everything encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Everything service not responding
-- **Root Cause**: Background service stopped or USN journal index corrupted.
-- **Resolution Pathway**: Run 'Everything.exe -svc-start' or navigate to Options -> Indexes -> Force Rebuild.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`Everything_QueryW()` Returns `False`** | Everything application is not running in background or IPC handle failed. | Verify `Everything.exe` process is active in Task Manager before calling query functions. |
+| **EFU File Shows Incorrect Dates in Everything** | Timestamps exported as POSIX seconds instead of 64-bit Windows FILETIME intervals. | Convert Unix timestamps to Windows FILETIME (`100-nanosecond intervals since Jan 1, 1601`). |
+| **SDK Throws `EVERYTHING_ERROR_REGISTERCLASSEX`** | Duplicate window class registration in multi-threaded application. | Maintain a single static SDK controller instance per process. |
+| **Search Ignores Request Flags** | Called `Everything_QueryW()` before setting `Everything_SetRequestFlags()`. | Set all search properties, flags, and limits before calling the query execution function. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Everything:
+## Command Line Syntax & Batch Processing
 
 ```bash
-Everything.exe -search "ext:zip;rar size:>1gb"
-Everything.exe -svc-start -admin
-Everything.exe -reindex -export-csv "C:\index_dump.csv"
+# Query Search Results with es.exe and Output JSON
+es.exe "ext:py size:>100kb" -json
+
+# Create EFU File List via Native Everything Binary
+"C:\Program Files\Everything\Everything.exe" -create-file-list "D_Drive.efu" "D:\"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `%APPDATA%\Everything\Everything.ini`
-- `%APPDATA%\Everything\Everything.db`
+### Essential File Locations
+- **SDK Header & DLL**: `EverythingSDK.zip` (`Everything64.dll`, `Everything.h`)
+- **CLI Utility**: `es.exe`
 
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Everything issues on Windows?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Everything?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When authoring EFU file manifests programmatically, always encode file timestamps as 64-bit Windows FILETIME integers to ensure native date filtering within Everything.

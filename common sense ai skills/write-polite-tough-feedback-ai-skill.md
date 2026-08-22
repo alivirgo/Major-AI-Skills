@@ -1,44 +1,75 @@
 ---
-title: "Write Polite Tough Feedback AI Skill"
-description: "Ask AI to help reword constructive criticism so it encourages without offending."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, write-polite-tough-feedback"
-category: "Common Sense Everyday AI"
+title: "Deliver Constructive Critical Feedback (The SBI Radical Candor Framework) AI Skill"
+description: "How to deliver tough, critical performance feedback without triggering defensiveness or resorting to confusing 'feedback sandwiches', using the Situation-Behavior-Impact (SBI) model."
+category: "Everyday AI Communication & Voice"
+tags: ["constructive-feedback", "radical-candor", "sbi-framework", "people-management", "communication", "prompt-engineering"]
 ---
 
-# Write Polite Tough Feedback (AI Skill)
+# Deliver Constructive Critical Feedback (The SBI Radical Candor Framework) (AI Skill)
 
 ## Overview
-Ask AI to help reword constructive criticism so it encourages without offending.
+Delivering tough feedback is one of the hardest parts of management. People usually fail in one of two ways:
+1. **Ruinous Empathy**: Using a confusing "feedback sandwich" (*"Great job on the slides! Your code was broken and late. But love your energy!"*) that obscures the actual problem.
+2. **Obnoxious Aggression**: Attacking the person's character (*"You are careless and unreliable"*), triggering immediate defensiveness and hostility.
+
+The **Situation-Behavior-Impact (SBI) Radical Candor Protocol** separates the **person** from the **observable behavior**, providing clear, compassionate, and actionable feedback.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The SBI Radical Candor Architecture
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 The SBI Feedback Framework                  │
+│                                                             │
+│  1. SITUATION  ──► The exact time & place (Objective)       │
+│  2. BEHAVIOR   ──► The specific observable action (No labels)│
+│  3. IMPACT     ──► The measurable outcome on team/client    │
+│  4. NEXT STEP  ──► Collaborative action plan forward        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master Feedback Prompt Templates
+
+### Pattern 1: The SBI Constructive Feedback Generator
+Use for 1-on-1s, performance reviews, or peer feedback:
+
+```markdown
+I need to give tough feedback to a team member:
+- **Context / Situation**: [e.g. During yesterday's sprint demo with the client]
+- **What happened (Raw observation)**: [e.g. They hadn't tested the checkout flow beforehand and it crashed live]
+- **Impact**: [e.g. Client lost confidence, delayed contract signing by 1 week]
+- **My Relationship Goal**: [e.g. Keep them motivated, but make it 100% clear this cannot happen again]
+
+Generate a spoken script for our 1-on-1 following the **Situation-Behavior-Impact (SBI)** model:
+- Tone: Radical Candor (Direct, supportive, non-accusatory).
+- Focus strictly on the process flaw (pre-demo testing protocol) rather than personal capability.
+- Under 120 words.
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Addressing Chronic Missed Deadlines
+
+#### Raw Manager Frustration (Attacking Character)
+> *"You've been missing deadlines on the last 3 sprints. It feels like you don't care about this project and the rest of the team is tired of picking up your slack."*
+> ❌ *(Triggers defensive fight-or-flight; employee feels attacked).*
+
+#### SBI Radically Candid Script (Constructive & Clear)
+> *"Alex, I want to talk about sprint delivery because I care about your growth here.*
+> 
+> *Over the last three sprints, pull requests were submitted on Friday afternoon past our Wednesday code freeze deadline. When PRs come in late, the QA team has to work over the weekend and our release gets pushed back.*
+> 
+> *I want to understand what's getting in the way—whether it's underestimating ticket scope or unexpected blockers. Let's look at your current backlog together and set up daily 10-minute check-ins so we hit next week's deadline with zero stress."*
+> 
+> ✅ *(Objective, focuses on process & impact, offers collaborative support).*
+
+---
+
+## Summary Best Practices
+- **Ban Character Labels**: Never say *"You are lazy/careless/unprofessional"*; say *"In Tuesday's meeting, speaking over colleagues caused X"*.
+- **Focus on the Future**: Spend 20% of the conversation on what happened and 80% on the actionable fix.

@@ -1,44 +1,81 @@
 ---
-title: "Iterate Step-by-Step AI Skill"
-description: "Build complex projects through multi-turn conversation rather than a giant mega-prompt."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, iterate-step-by-step"
-category: "Common Sense Everyday AI"
+title: "Iterate Step-by-Step (Conversational Scaffolding) AI Skill"
+description: "How to use the 4-Turn Conversational Scaffolding framework to build complex code, strategy, and content incrementally without token exhaustion or quality degradation."
+category: "Daily Productivity & Workflow"
+tags: ["iteration", "scaffolding", "workflow", "multi-turn", "agile", "prompt-engineering"]
 ---
 
-# Iterate Step-by-Step (AI Skill)
+# Iterate Step-by-Step (Conversational Scaffolding) (AI Skill)
 
 ## Overview
-Build complex projects through multi-turn conversation rather than a giant mega-prompt.
+Expecting an AI to produce a finished, 10/10 masterpiece in a single massive prompt (*"Write a complete multi-chapter marketing strategy and all ad copy"*) is a recipe for disappointment. The model spreads its attention across too many variables, producing shallow text and skipped details.
+
+The **Conversational Scaffolding Protocol** breaks production into a **4-Turn Agile Loop**: scaffold the outline $\rightarrow$ build the core engine $\rightarrow$ harden edge cases $\rightarrow$ polish the final output.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The 4-Turn Scaffolding Pipeline
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 4-Turn Scaffolding Pipeline                 │
+│                                                             │
+│  [ TURN 1: Wireframe / Skeleton ] ──► Agree on structure    │
+│                 │                                           │
+│  [ TURN 2: Core Drafting / Build ] ──► Generate meat        │
+│                 │                                           │
+│  [ TURN 3: Stress-Test & Edges ]   ──► Catch flaws & bugs   │
+│                 │                                           │
+│  [ TURN 4: Surgical Polish ]       ──► Voice, SEO, & CTA    │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master Iteration Prompt Templates
+
+### Pattern 1: The 4-Turn Execution Script
+Use when building a complex deliverable (e.g. business plan, landing page, software module):
+
+```markdown
+<!-- TURN 1: The Skeleton -->
+"We are going to build [PROJECT]. Do NOT write the content yet.
+Give me a 5-point structural outline. I will review and adjust."
+
+<!-- TURN 2: The Core Build (After adjusting Turn 1) -->
+"The outline is locked. Now write Section 1 and Section 2 ONLY. 
+Follow our agreed constraints and focus on high depth."
+
+<!-- TURN 3: Edge-Case Hardening -->
+"Now review what we have so far. Where are the weak points or missing scenarios? 
+Suggest 3 specific additions."
+
+<!-- TURN 4: The Final Polish -->
+"Apply the additions from Turn 3 and output the polished, production-ready version."
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+## Real-World Case Study
+
+### Scenario: Building a High-Converting SaaS Landing Page
+
+#### The 1-Shot Megaprompt Failure
+> **User**: *"Write a complete landing page for my new AI bookkeeping software including headlines, features, pricing, testimonials, and FAQs."*
+> 
+> ❌ *Result: A generic 600-word block of clichéd marketing text ("Revolutionize your finances today! Save time and money!") with zero competitive edge.*
+
+#### The 4-Turn Scaffolding Success
+> - **Turn 1 (Scaffold)**: User asks for a 5-section narrative wireframe $\rightarrow$ AI suggests: Hero $\rightarrow$ Relatable Pain $\rightarrow$ Interactive Demo $\rightarrow$ Social Proof $\rightarrow$ FAQ. User approves.
+> - **Turn 2 (Hero & Hook)**: User prompts: *"Write 3 bold variations for the Hero Section. Focus on eliminating tax season dread."* User selects the best hook.
+> - **Turn 3 (Feature Breakdown)**: User prompts: *"Now write the 3 feature blocks highlighting our automated receipt OCR and zero-reconciliation features."*
+> - **Turn 4 (FAQ & Polish)**: User prompts: *"Generate 4 objection-crushing FAQs addressing data security and accountant collaboration."*
+
+**Outcome**: A cohesive, deeply tailored, high-converting landing page built in under 4 minutes with zero token waste.
+
+---
+
+## Why Iteration Beats Megaprompting
+- 🎯 **Total Creative Steering**: You catch structural flaws in Turn 1 before writing 2,000 words in the wrong direction.
+- 💡 **Deeper Attention**: The AI devotes 100% of its context window and compute to one section at a time.
+- ⚡ **Zero Overwhelm**: You review bite-sized chunks rather than a 10-page wall of text.

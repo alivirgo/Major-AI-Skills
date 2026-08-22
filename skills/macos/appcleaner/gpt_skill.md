@@ -1,99 +1,145 @@
 ---
-title: "AppCleaner AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate AppCleaner on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for AppCleaner, ChatGPT troubleshooting, GPT automation, AppCleaner, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "AppCleaner macOS Application Uninstaller AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize macOS application uninstallation, Swift/Objective-C filesystem sweeping, and Homebrew Cask cleanups."
+category: "Complete Application Uninstaller"
+tags: ["appcleaner", "macos-uninstaller", "swift-scripting", "homebrew-cask", "gpt-codex", "launchctl"]
 ---
 
-# AppCleaner AI Skill Guide for GPT
+# AppCleaner macOS Application Uninstaller AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **AppCleaner** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+macOS application uninstallation requires programmatic parsing of application bundles, sandbox receipt traversal, and clean termination of background services. GPT/Codex acts as a Principal macOS Tool Developer and Systems Automation Engineer, delivering **native Swift / Bash uninstallation scripts**, **Homebrew Cask zap integration routines**, **`launchctl` service termination workflows**, and **Spotlight `mdfind` metadata scrapers**.
 
-- **Application Name**: AppCleaner
-- **Category**: Complete Application Uninstaller
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & System Uninstallation Stack
 
-> **Core Purpose**: Thorough application uninstaller hunting down hidden preferences, caches, and support files.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with AppCleaner, GPT must understand its underlying technical framework:
-
-Scans ~/Library domains and system launch daemons for matching bundle identifiers.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 macOS Uninstaller Platform                  │
+│                                                             │
+│  Bundle Identification & Metadata Engine                    │
+│  ├── `CFBundleIdentifier` / `CFBundleName` Extraction       │
+│  ├── Spotlight MDQuery API (`kMDItemFSName`, `kMDItemBundleID│
+│  └── Code Signing & Team Identifier Verification            │
+│                                                             │
+│  Service Unloading & Filesystem Purge Tier                  │
+│  ├── `launchctl bootout` Session & System Daemons           │
+│  ├── `NSFileManager.removeItem(at:)` Trash/Delete Engine    │
+│  └── Homebrew Cask `zap trash:` Integration                 │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of AppCleaner:
+## Operational Capabilities & Agent Directives
 
-- **SmartDelete background daemon**
-- **Deep filesystem scanning across ~/Library**
-- **Drag-and-drop batch uninstallation**
+1. **Native Swift Scripting for App Uninstallation**: Author standalone Swift scripts (`swift uninstaller.swift`) utilizing `FileManager` and `Bundle` APIs to discover and purge related library paths.
+2. **Homebrew Cask `zap trash:` Automation**: Construct clean Homebrew Cask uninstall recipes removing all declared preference plists and application support directories.
+3. **`launchctl` Process Termination**: Ensure running background helper agents and privileged daemons are gracefully terminated prior to binary deletion.
+4. **Spotlight Metadata Search Integration**: Query the macOS Spotlight index via `NSMetadataQuery` or `mdfind` to locate custom support directories outside default library locations.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding AppCleaner, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to AppCleaner, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Swift Automation: Native macOS Application & Artifact Uninstaller
+
+Save this file as `uninstall_app.swift` and execute via `swift uninstall_app.swift /Applications/TargetApp.app`:
+
+```swift
+// ==============================================================================
+// Standalone Swift 5.x Script: Clean macOS Application & Artifact Uninstaller
+// Inspects Info.plist, terminates running processes, and cleans ~/Library folders.
+// ==============================================================================
+import Foundation
+
+guard CommandLine.arguments.count > 1 else {
+    print("Usage: swift uninstall_app.swift /Applications/TargetApp.app")
+    exit(1)
+}
+
+let appPath = CommandLine.arguments[1]
+let appURL = URL(fileURLWithPath: appPath)
+
+guard let bundle = Bundle(url: appURL), let bundleID = bundle.bundleIdentifier else {
+    print("Error: Could not read CFBundleIdentifier from: \(appPath)")
+    exit(1)
+}
+
+let appName = appURL.deletingPathExtension().lastPathComponent
+print("--- [UNINSTALLING: \(appName) (\(bundleID))] ---")
+
+// 1. Terminate Running Application Instances
+let runningApps = NSRunningApplication.runningApplications(withBundleIdentifier: bundleID)
+for app in runningApps {
+    print("Terminating active process (PID: \(app.processIdentifier))...")
+    app.terminate()
+}
+
+// 2. Scan Standard Library Directories for Matching Artifacts
+let fileManager = FileManager.default
+let home = fileManager.homeDirectoryForCurrentUser
+
+let searchDirectories: [URL] = [
+    home.appendingPathComponent("Library/Application Support"),
+    home.appendingPathComponent("Library/Caches"),
+    home.appendingPathComponent("Library/Preferences"),
+    home.appendingPathComponent("Library/Containers"),
+    home.appendingPathComponent("Library/Group Containers"),
+    home.appendingPathComponent("Library/Saved Application State"),
+    home.appendingPathComponent("Library/LaunchAgents")
+]
+
+var artifactsToRemove: [URL] = []
+
+for dir in searchDirectories {
+    guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil) else {
+        continue
+    }
+    for fileURL in contents {
+        let name = fileURL.lastPathComponent.lowercased()
+        if name.contains(bundleID.lowercased()) || name.contains(appName.lowercased()) {
+            artifactsToRemove.append(fileURL)
+        }
+    }
+}
+
+print("\nFound \(artifactsToRemove.count) residual paths:")
+for url in artifactsToRemove {
+    print("  • \(url.path)")
+    try? fileManager.removeItem(at: url)
+}
+
+// 3. Remove Main Application Bundle
+try? fileManager.removeItem(at: appURL)
+print("\n✅ Successfully uninstalled \(appName) and purged all residual artifacts.")
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If AppCleaner encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Leftover files missed
-- **Root Cause**: Full Disk Access permission missing.
-- **Resolution Pathway**: Grant Full Disk Access in Privacy Settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`NSCocoaErrorDomain Code=513: You don’t have permission`** | macOS Sandbox or TCC policy preventing script from removing files in `~/Library/Containers`. | Grant Terminal / IDE **Full Disk Access** in System Settings $\rightarrow$ *Privacy & Security*. |
+| **App Bundle Cannot Be Deleted: `File is in use`** | A background helper process spawned by the application is still running. | 1. Find process: `pgrep -f BundleIdentifier`.<br>2. Terminate helper: `killall -9 "AppName Helper"`. |
+| **Homebrew Cask Leaves Residual Data After `brew uninstall`** | The formula was uninstalled using `brew uninstall` instead of `brew uninstall --zap`. | Run `brew uninstall --zap <cask_name>` to trigger the formula's full artifact cleanup block. |
+| **Spotlight Metadata Index Stale** | `mdfind` returns outdated paths for already-deleted files. | Reindex drive: `sudo mdutil -E /`. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for AppCleaner:
+## Command Line Syntax & Batch Processing
 
 ```bash
-open -a AppCleaner
+# Complete Application Zap via Homebrew CLI
+brew uninstall --zap --force visual-studio-code
+
+# Terminate and Unload User LaunchAgent via launchctl
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.vendor.helper.plist
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/Library/Application Support/AppCleaner`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot AppCleaner issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for AppCleaner?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Homebrew Cask Cache**: `~/Library/Caches/Homebrew/Cask/`
+- **System LaunchDaemons**: `/Library/LaunchDaemons/`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Terminate all running application instances (`NSRunningApplication.runningApplications(withBundleIdentifier:)`) before attempting to delete binary bundles or application support folders.

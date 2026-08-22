@@ -1,101 +1,126 @@
 ---
-title: "ShareX AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate ShareX on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for ShareX, Gemini troubleshooting, Google AI, ShareX, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "ShareX Advanced Screen Capture & Automation AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot ShareX Image Annotator, Task Settings dialogs, Hotkey matrices, and Destination Uploader lists."
+category: "Screen Capture, OCR, Video Recording & Sharing"
+tags: ["sharex", "image-annotator-ui", "task-settings-dialog", "gemini", "hotkey-matrix", "destination-uploaders"]
 ---
 
-# ShareX AI Skill Guide for Gemini
+# ShareX Advanced Screen Capture & Automation AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **ShareX** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+ShareX provides an expansive desktop capture and media routing interface featuring the **Main Dashboard (Capture History, Image Previewer)**, the **Image Annotator Canvas (Step numbers, Blur, Pixelate, Speech Bubbles, Highlights)**, **Task Settings (After Capture / After Upload automation trees)**, and the **Custom Destination Settings Manager**. Gemini acts as an AI Media Workflow Specialist and Image Annotation Auditor, specializing in **multimodal annotation quality review**, **Task Settings workflow sequence verification**, **destination upload security audits**, and **hotkey trigger management**.
 
-- **Application Name**: ShareX
-- **Category**: Screen Capture, OCR, Video Recording & Sharing
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Screen Capture Stack
 
-> **Core Purpose**: Comprehensive open-source screen capture, file sharing, and productivity tool.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with ShareX, Gemini must understand its underlying technical framework:
-
-Integrates FFmpeg binaries for video encoding and Windows OCR / Tesseract engines for text extraction.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 ShareX Visual Operations                    │
+│                                                             │
+│  Capture & Annotation Viewports                             │
+│  ├── Region Selection HUD (Pixel Coordinates, Magnifier Loup│
+│  ├── Image Annotator (Stickers, Blur/Pixelate, Vector Shapes│
+│  └── Pin to Screen Floating Viewport (Multi-Image Overlays) │
+│                                                             │
+│  Workflow Configuration & Task Trees                        │
+│  ├── After Capture Tasks (Copy to Clipboard, Save to File)  │
+│  ├── After Upload Tasks (Shorten URL, Copy Link to Clipbrd) │
+│  └── Hotkey Settings Grid (Custom Workflows & Keybinds)     │
+│                                                             │
+│  Destination & Service Management                           │
+│  ├── Image / Text / File Destinations (Imgur, S3, FTP, S3)  │
+│  └── Custom Uploader Builder Dialog (`.sxcu` Inspector)     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of ShareX:
+## Operational Capabilities & Agent Directives
 
-- **Screen capture (region, window, full screen, scrolling capture)**
-- **Integrated FFmpeg screen and audio recording (GIF/MP4/WebM)**
-- **Optical Character Recognition (OCR) via Windows/Tesseract APIs**
+1. **Multimodal Image Annotator Inspection**: Analyze screenshots within the ShareX Image Annotator to verify redaction coverage (*e.g. confirming passwords, API tokens, or PII are thoroughly obscured with Blur/Pixelate tools*).
+2. **Task Settings Workflow Sequence Auditing**: Review the "After Capture Tasks" and "After Upload Tasks" checkmark matrices to prevent accidental public uploads of private captures.
+3. **Hotkey Settings Verification**: Audit configured hotkeys to ensure dedicated combinations exist for Fullscreen (`Ctrl + PrintScreen`), Window (`Alt + PrintScreen`), and OCR extraction (`Win + Shift + T`).
+4. **Scrolling Capture Edge Detection Calibration**: Guide users in adjusting vertical and horizontal scroll overlap parameters to eliminate duplicated text lines during website captures.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding ShareX, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to ShareX, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated ShareX Capture History & Metadata Auditor
+
+Run this script to inspect recent screenshot captures and file paths recorded in ShareX's `History.json`:
+
+```python
+"""
+ShareX Capture History & File Manifest Auditor
+Parses ShareX History.json to extract recent captures, timestamps, and upload destination URLs.
+"""
+
+import sys
+import os
+import json
+
+HISTORY_PATH = os.path.expandvars(r"%USERPROFILE%\Documents\ShareX\History.json")
+
+def audit_sharex_history(history_file: str = HISTORY_PATH):
+    if not os.path.exists(history_file):
+        print(f"Error: ShareX history file not found at '{history_file}'.")
+        return
+
+    print(f"--- [AUDITING SHAREX CAPTURE HISTORY: {history_file}] ---")
+    try:
+        with open(history_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        entries = data if isinstance(data, list) else data.get("History", [])
+        print(f"Total Recorded Captures: {len(entries)}\n")
+
+        print("Recent 5 Capture Events:")
+        for item in entries[-5:]:
+            filename = item.get("FileName", "Unknown")
+            timestamp = item.get("DateTime", "Unknown Time")
+            filepath = item.get("FilePath", "")
+            url = item.get("URL", "No Upload URL")
+
+            print(f"• [{timestamp}] {filename}")
+            print(f"    Path: {filepath}")
+            if url != "No Upload URL":
+                print(f"    URL:  {url}")
+
+        print("\n✅ ShareX capture history parsed successfully.")
+
+    except Exception as e:
+        print(f"Failed to parse history: {e}")
+
+if __name__ == "__main__":
+    audit_sharex_history()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If ShareX encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] FFmpeg audio recording fails
-- **Root Cause**: Virtual audio capture device missing.
-- **Resolution Pathway**: Install 'virtual-audio-capturer' via ShareX Task Settings -> Screen Recording Options.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **ShareX Automatically Uploads Private Screenshots** | "Upload image to host" is checked in "After capture tasks". | In Main Window $\rightarrow$ Click **After capture tasks** $\rightarrow$ Uncheck **Upload image to host** to keep captures strictly local. |
+| **Annotator Blur Tool Leaves Text Readable** | Blur radius is too low for high-resolution 4K text. | In Annotator toolbar, increase **Blur Radius** to $\ge 20\text{px}$ or use the **Pixelate** tool with large block sizes. |
+| **Magnifier Loupe Stutters During Region Selection** | Hardware acceleration conflict with multi-monitor mixed refresh rates ($144\text{Hz}$ + $60\text{Hz}$). | In *Application settings $\rightarrow$ General*, uncheck **Use hardware acceleration for region capture**. |
+| **Scrolling Capture Stitches Distorted / Overlapping Images** | Web page has a sticky fixed header or dynamic floating navigation bar. | In Scrolling Capture window, adjust **Top margin crop** to exclude the fixed sticky navbar from the stitching engine. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for ShareX:
+## Command Line Syntax & Server Control
 
 ```bash
-ShareX.exe -ScreenCaptureRegion
-ShareX.exe -ScreenRecorder
-ShareX.exe -OCR
+# Launch ShareX GUI
+"C:\Program Files\ShareX\ShareX.exe"
+
+# Open ShareX Image Annotator with Specific Image File
+"C:\Program Files\ShareX\ShareX.exe" -ImageEditor "C:\Images\screenshot.png"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `%DOCUMENTS%\ShareX\ApplicationConfig.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot ShareX issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for ShareX?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Application Config**: `%USERPROFILE%\Documents\ShareX\ApplicationConfig.json`
+- **Capture Output**: `%USERPROFILE%\Documents\ShareX\Screenshots\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: For security compliance, always verify that "Upload image to host" is disabled in After Capture Tasks unless the user explicitly requests automated remote sharing.

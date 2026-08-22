@@ -1,100 +1,144 @@
 ---
-title: "Bruno AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Bruno on Cross-Platform."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Bruno, ChatGPT troubleshooting, GPT automation, Bruno, Cross-Platform utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Bruno API Client AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Bruno collections, Bru DSL generation, Postman-to-Bruno migration, and CLI runners."
+category: "Offline-First Open-Source API Client"
+tags: ["bruno", "bru-markup", "postman-migration", "openapi-import", "gpt-codex", "cli-automation"]
 ---
 
-# Bruno AI Skill Guide for GPT
+# Bruno API Client AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Bruno** on **Cross-Platform**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Bruno is a developer-focused, Git-integrated API testing suite utilizing human-readable `.bru` markup files. GPT/Codex acts as a Principal API Automation Developer and Pipeline Architect, delivering **programmatic `.bru` file generators**, **automated Postman/OpenAPI-to-Bruno migration scripts**, **JavaScript test hook authoring**, and **headless `@usebruno/cli` runner wrappers**.
 
-- **Application Name**: Bruno
-- **Category**: Offline-First Open-Source API Client
-- **Platform**: Cross-Platform
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Architecture & Programmatic Developer Layer
 
-> **Core Purpose**: Fast, lightweight, Git-friendly open-source API client for testing REST, GraphQL, and gRPC APIs.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Bruno, GPT must understand its underlying technical framework:
-
-Electron / React desktop client storing API collections directly as plain text .bru files in your git repository.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Bruno Developer Ecosystem                   │
+│                                                             │
+│  Declarative DSL Layer                                      │
+│  ├── `.bru` Recursive Grammar Parser & Tokenizer            │
+│  ├── `bruno.json` Collection Root Metadata Schema           │
+│  └── Dotenv & Custom Variable Interpolation Engine          │
+│                                                             │
+│  Automation & Pipeline Interfaces                           │
+│  ├── `@usebruno/cli` (Node.js Headless Command Runner)      │
+│  ├── Bruno JavaScript Sandbox (`bru`, `req`, `res`)         │
+│  └── Programmatic Node/Python Converters (Postman/OpenAPI)  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Bruno:
+## Operational Capabilities & Agent Directives
 
-- **Git-native API collections stored in plain markup (.bru format)**
-- **Offline-first privacy without mandatory cloud sync**
-- **Scripting support via JavaScript and automated testing**
+1. **Declarative Bru DSL Generation**: Programmatically generate `.bru` request files from OpenAPI specs, cURL commands, or Python dictionary models with correct block indentation.
+2. **Postman to Bruno Migration Automation**: Script the extraction of Postman Collection JSON format v2.1 into clean, modular `.bru` files organized by folder trees.
+3. **Advanced Test Scripting**: Author JavaScript pre-request and post-response logic for computing HMAC-SHA256 signatures, managing session nonces, and verifying schema validation.
+4. **CI/CD Automation & Reporting**: Build NPM scripts and GitHub Actions workflows that run collections via `npx @usebruno/cli` and post test metrics to pull requests.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Bruno, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Bruno, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: cURL to `.bru` Converter Script
+
+Run this standalone Python script to convert standard `curl` commands directly into clean, Git-ready `.bru` request files:
+
+```python
+"""
+Standalone Tool: cURL Command to Bruno (.bru) File Converter
+Converts cURL syntax into clean declarative Bru markup.
+"""
+
+import sys
+import re
+import os
+
+def curl_to_bru(curl_command: str, name: str, output_path: str):
+    # 1. Parse HTTP Method
+    method_match = re.search(r'-X\s+([A-Z]+)', curl_command)
+    method = method_match.group(1).lower() if method_match else "get"
+    if "--data" in curl_command or "-d" in curl_command and method == "get":
+        method = "post"
+
+    # 2. Parse URL
+    url_match = re.search(r'[\'"](https?://[^\'"]+)[\'"]', curl_command)
+    url = url_match.group(1) if url_match else "http://localhost:3000/api"
+
+    # 3. Parse Headers
+    headers = re.findall(r'-H\s+[\'"]([^:]+):\s*([^\'"]+)[\'"]', curl_command)
+
+    # 4. Parse Body Data
+    body_match = re.search(r'--data(?:-raw)?\s+[\'"]({.*?})[\'"]', curl_command, re.DOTALL)
+    body_data = body_match.group(1) if body_match else None
+
+    # 5. Build .bru Markup
+    bru_content = f"""meta {{
+  name: {name}
+  type: http
+  seq: 1
+}}
+
+{method} {{
+  url: {url}
+  body: {'json' if body_data else 'none'}
+  auth: none
+}}
+"""
+    if headers:
+        bru_content += "\nheaders {\n"
+        for k, v in headers:
+            bru_content += f"  {k.strip()}: {v.strip()}\n"
+        bru_content += "}\n"
+
+    if body_data:
+        bru_content += f"\nbody:json {{\n  {body_data.strip()}\n}}\n"
+
+    bru_content += """
+assert {
+  res.status: eq 200
+}
+"""
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(bru_content.strip() + "\n")
+
+    print(f"Successfully generated Bru file: {output_path}")
+
+if __name__ == "__main__":
+    example_curl = """curl -X POST 'https://api.example.com/v1/auth/login' -H 'Content-Type: application/json' -d '{"user":"admin","pass":"secret"}'"""
+    curl_to_bru(example_curl, "User Login", "C:/Export/login.bru")
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Bruno encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Environment variables not resolving in request
-- **Root Cause**: Active environment not selected.
-- **Resolution Pathway**: Select environment dropdown in top right of Bruno UI.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`SyntaxError: Unexpected token in .bru file`** | Broken indentation, missing closing bracket `}`, or unescaped quotes in request body block. | 1. Ensure block names (`meta`, `headers`, `body:json`) are followed by `{` on the same line.<br>2. Run `npx @usebruno/cli lint` to identify the failing line number.<br>3. Format JSON payloads cleanly inside `body:json { ... }`. |
+| **Pre-Request Script Fails: `bru.setVar is not a function`** | Script invoked outdated API syntax from legacy client versions. | 1. Use `bru.setVar(key, val)` for collection-level variables.<br>2. Use `bru.setEnvVar(key, val)` for environment-scoped variables.<br>3. Check Bruno runtime version ($\ge 1.15.0$). |
+| **GitHub Actions CI Fails on Missing Bru CLI** | Package `@usebruno/cli` was not installed in CI runner before executing test steps. | Add `npm install -g @usebruno/cli` or execute directly via `npx -y @usebruno/cli run --env CI`. |
+| **Request Hangs Indefinitely on Large File Upload** | `body:multipart-form` file path was specified with local relative path not resolvable by CLI runner. | Use paths relative to collection root or pass absolute file paths in `multipart-form` parameters. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Bruno:
+## Command Line Syntax & Batch Execution
 
 ```bash
-bru run --env Local
-bru run collection/ --output report.json
+# Windows CLI / NPM: Run Full Bruno Test Suite in CI
+npx @usebruno/cli run --env Production --output test-results.json --format json
+
+# Run Collection with Custom Environment Variable Injections
+npx @usebruno/cli run tests/e2e/ --env Local --env-var token=xyz123 --bail
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/.config/bruno/`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Cross-Platform
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Bruno issues on Cross-Platform?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Bruno?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Collection Descriptor**: `<root>/bruno.json`
+- **Environment Definitions**: `<root>/environments/<name>.bru`
+- **CLI Global Package**: `npm install -g @usebruno/cli`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When converting APIs from cURL or Postman into Bruno, ensure headers, auth blocks, and bodies are formatted into declarative Bru syntax blocks. Use `@usebruno/cli` for automated testing in CI/CD environments.

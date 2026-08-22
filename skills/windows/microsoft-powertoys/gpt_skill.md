@@ -1,100 +1,143 @@
 ---
-title: "Microsoft PowerToys AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Microsoft PowerToys on Windows."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Microsoft PowerToys, ChatGPT troubleshooting, GPT automation, Microsoft PowerToys, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Microsoft PowerToys System Utilities AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Microsoft PowerToys, PowerToys Run C# plugins, FancyZones JSON configurations, and automated Winget DSC deployments."
+category: "Power-User Operating System Utilities"
+tags: ["microsoft-powertoys", "powertoys-run-plugin", "csharp-powertoys", "fancyzones-json", "winget-dsc", "gpt-codex", "windows-utilities-dev"]
 ---
 
-# Microsoft PowerToys AI Skill Guide for GPT
+# Microsoft PowerToys System Utilities AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Microsoft PowerToys** on **Windows**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Microsoft PowerToys provides extensible systems integration via the **PowerToys Run C# Plugin Architecture (`Wox.Plugin`)**, the **FancyZones JSON Schema Specification (`zones-settings.json`)**, and **Windows Package Manager (Winget) Desired State Configuration (DSC)**. GPT/Codex acts as a Principal Windows Systems Developer and PowerToys Extensibility Engineer, delivering **compiled C# PowerToys Run plugins**, **programmatic FancyZones layout synthesizers**, **automated enterprise DSC configuration scripts**, and **submodule IPC integrations**.
 
-- **Application Name**: Microsoft PowerToys
-- **Category**: Power-User Operating System Utilities
-- **Platform**: Windows
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Plugin Platform Stack
 
-> **Core Purpose**: Official Microsoft suite of system enhancements including FancyZones, PowerToys Run, and Text Extractor.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Microsoft PowerToys, GPT must understand its underlying technical framework:
-
-C++ / WinUI 3 modular runtime hooking into Windows Win32 API shell hooks (SetWindowsHookEx).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 PowerToys Developer Platform                │
+│                                                             │
+│  PowerToys Run C# Plugin Architecture                       │
+│  ├── `Wox.Plugin.IPlugin` Interface (`Init`, `Query`)       │
+│  ├── `Wox.Plugin.IContextMenu` (Secondary Context Actions)  │
+│  └── `Result` Model (`Title`, `SubTitle`, `Action`, `Glyph`)│
+│                                                             │
+│  Declarative JSON Schema Engines                            │
+│  ├── FancyZones Multi-Monitor Matrix (`zones-settings.json`)│
+│  ├── Keyboard Manager Scan Code Mapping (`default.json`)    │
+│  └── PowerToys Global Config (`settings.json`)              │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Microsoft PowerToys:
+## Operational Capabilities & Agent Directives
 
-- **FancyZones window grid layout management**
-- **PowerToys Run quick launcher (Alt+Space)**
-- **Text Extractor OCR utility (Win+Shift+T)**
+1. **PowerToys Run C# Plugin Development**: Author compiled C# plugins targeting .NET 8 referencing `Wox.Plugin.dll` to build custom launcher tools (*e.g. Docker container controller, AWS profile switcher*).
+2. **Automated FancyZones Configuration**: Construct Python and PowerShell scripts to inject custom multi-monitor canvas schemas and zone margins into `zones-settings.json`.
+3. **Enterprise Desired State Configuration (DSC)**: Author WinGet DSC `.yaml` manifests deploying standardized PowerToys utility states across corporate fleets.
+4. **Keyboard Manager Remapping Automation**: Script automated key and shortcut remappings (*e.g. mapping CapsLock to Ctrl or Hyper Key*) via `default.json` manipulation.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Microsoft PowerToys, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Microsoft PowerToys, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production C# Code: PowerToys Run C# Plugin (`IPlugin`)
+
+Save this file as `Main.cs` in a C# Class Library referencing `Wox.Plugin.dll` and `PowerToys.PowerLauncher.Plugin.dll`:
+
+```csharp
+// ==============================================================================
+// Microsoft PowerToys Run Plugin: Windows Service Quick-Controller
+// Lists Windows services matching query and allows starting/stopping them.
+// ==============================================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceProcess;
+using System.Windows;
+using Wox.Plugin;
+
+namespace Community.PowerToys.Run.Plugin.ServiceController {
+    public class Main : IPlugin, IContextMenu {
+        private PluginInitContext _context;
+        public string Name => "Windows Service Controller";
+        public string Description => "Search, start, stop, and restart local Windows services.";
+
+        public void Init(PluginInitContext context) {
+            _context = context;
+        }
+
+        public List<Result> Query(Query query) {
+            var results = new List<Result>();
+            string search = query.Search.Trim().ToLower();
+
+            ServiceController[] services = ServiceController.GetServices();
+
+            foreach (var svc in services) {
+                if (string.IsNullOrEmpty(search) || svc.ServiceName.ToLower().Contains(search) || svc.DisplayName.ToLower().Contains(search)) {
+                    string statusIcon = svc.Status == ServiceControllerStatus.Running ? "[RUNNING]" : "[STOPPED]";
+                    
+                    results.Add(new Result {
+                        Title = $"{svc.DisplayName} ({svc.ServiceName})",
+                        SubTitle = $"Status: {statusIcon} | Press Enter to Toggle",
+                        IcoPath = "Images\\service.png",
+                        Action = _ => {
+                            try {
+                                if (svc.Status == ServiceControllerStatus.Running) {
+                                    svc.Stop();
+                                    _context.API.ShowMsg("Service Stopped", $"Successfully stopped {svc.ServiceName}");
+                                } else {
+                                    svc.Start();
+                                    _context.API.ShowMsg("Service Started", $"Successfully started {svc.ServiceName}");
+                                }
+                            } catch (Exception ex) {
+                                _context.API.ShowMsg("Error", ex.Message);
+                            }
+                            return true;
+                        }
+                    });
+                }
+            }
+
+            return results.Take(10).ToList();
+        }
+
+        public List<ContextMenuResult> LoadContextMenus(Result selectedResult) {
+            return new List<ContextMenuResult>();
+        }
+    }
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Microsoft PowerToys encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] FancyZones fails to snap elevated windows
-- **Root Cause**: PowerToys process running as standard user.
-- **Resolution Pathway**: Enable 'Always run as administrator' in PowerToys General settings.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Plugin Not Detected in PowerToys Run** | Plugin `.dll` not located in `%LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\Plugins\<PluginFolder>\`. | Ensure all binaries, `plugin.json`, and dependencies are copied to the dedicated subfolder. |
+| **`zones-settings.json` Resets to Default** | JSON syntax error or missing closing brace in custom layout definition. | Validate JSON schema syntax using `jq` or `python -m json.tool` before launching PowerToys. |
+| **Winget DSC Configuration Fails** | Winget source or package version locked during system update. | Run `winget source update` before executing the DSC configuration manifest. |
+| **Keyboard Manager Fails to Remap `Win + L`** | `Win + L` (Lock Workstation) is intercepted at kernel level by Winlogon and cannot be hooked in user space. | Inform users that Winlogon security combinations (`Win + L`, `Ctrl + Alt + Del`) cannot be remapped in user space. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Microsoft PowerToys:
+## Command Line Syntax & DSC Recipes
 
 ```bash
-PowerToys.exe
-PowerToys.PowerLauncher.exe
+# 1. Install PowerToys via Winget CLI
+winget install --id Microsoft.PowerToys -e --source winget
+
+# 2. Run PowerToys Run Search directly
+"%LOCALAPPDATA%\PowerToys\PowerToys.PowerLauncher.exe"
+
+# 3. Kill All PowerToys Submodules via PowerShell
+Get-Process | Where-Object { $_.ProcessName -like "PowerToys*" } | Stop-Process -Force
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `%LOCALAPPDATA%\Microsoft\PowerToys\settings.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Microsoft PowerToys issues on Windows?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Microsoft PowerToys?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **PowerToys Run Plugins**: `%LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\Plugins\`
+- **Keyboard Manager Config**: `%LOCALAPPDATA%\Microsoft\PowerToys\Keyboard Manager\default.json`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When authoring PowerToys Run C# plugins, limit results to a maximum of 10 items (`.Take(10)`) to maintain 60 FPS scrolling and low memory consumption on large query searches.

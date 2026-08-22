@@ -1,44 +1,88 @@
 ---
-title: "Request a One-Sentence Summary AI Skill"
-description: "Force the AI to condense any complex topic into a single clear sentence."
-keywords: "common sense AI, easy AI tips, non-technical AI skills, AI efficiency, cost effective AI, one-sentence-elevator-pitch"
-category: "Common Sense Everyday AI"
+title: "Request a One-Sentence Value Proposition (The XY Pitch Formula) AI Skill"
+description: "How to force AI to condense complex apps, startups, and initiatives into a crystal-clear, 1-sentence elevator pitch using the XY Positioning Formula."
+category: "Communication & Asking Clarity"
+tags: ["elevator-pitch", "value-proposition", "positioning", "copywriting", "distillation", "prompt-engineering"]
 ---
 
-# Request a One-Sentence Summary (AI Skill)
+# Request a One-Sentence Value Proposition (The XY Pitch Formula) (AI Skill)
 
 ## Overview
-Force the AI to condense any complex topic into a single clear sentence.
+When asked to describe a new product, startup, or internal initiative, founders and team leads often write 3 paragraphs of technical jargon that obscures what the product actually does.
+
+The **One-Sentence XY Pitch Protocol** forces the AI into radical distillation, generating crisp, memorable elevator pitches using proven venture capital and positioning formulas.
 
 ---
 
-## Practical Everyday Rule
-This common-sense skill is designed to make using AI super intelligent, intuitive, and cost-effective for **everyone**--no technical degree required.
+## The XY Positioning Formula
 
-1. **Why It Works**: Cuts out confusion, saves money/tokens, and gets you the exact answer you need on the first try.
-2. **How to Use It**: Apply this simple rule whenever chatting with Claude, ChatGPT, Gemini, or any AI assistant.
-3. **Who It Helps**: Students, business owners, writers, managers, and everyday users.
-
----
-
-## Example Usage
-
-### Less Effective Habit
-```text
-Can you help me write something about my project?
 ```
-
-### Smart Common Sense Habit
-```text
-I need a 3-bullet summary of my project for my manager. Keep it under 50 words and focus on the deadline.
+┌─────────────────────────────────────────────────────────────┐
+│                 The Classic XY Pitch Formula                │
+│                                                             │
+│  "We help [TARGET AUDIENCE] achieve [TRANSFORMATIVE BENEFIT]│
+│   without [THE PRIMARY PAIN POINT / OBSTACLE]."             │
+│                                                             │
+│  • Example: "We help remote engineering teams ship 2x faster│
+│              without running daily status standups."        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Benefit Summary
-- **Saves Time**: Gets you the right answer immediately without 5 back-and-forth messages.
-- **Saves Money**: Uses fewer AI credits and tokens.
-- **Easy to Remember**: Pure common sense for daily productivity.
+## Master One-Sentence Pitch Prompt Templates
+
+### Pattern 1: The 4-Archetype Pitch Generator
+Use when launching a product or clarifying your company positioning:
+
+```markdown
+Here is a raw description of my product / project: [PASTE PRODUCT NOTES].
+
+Condense this into 4 distinct **1-Sentence Elevator Pitches** following these formulas:
+1. **The Classic XY Formula**: "We help [X] do [Y] without [Z]."
+2. **The High-Concept Analogy**: "The [Famous Product A] for [Niche B]."
+3. **The Quantified ROI Pitch**: "Save [Metric/Time/Money] by [Core Mechanism]."
+4. **The Pain-Killer Pitch**: "Stop [Painful Problem] with [Simple Solution]."
+
+Rules:
+- Strictly ONE sentence per option.
+- Under 25 words per pitch.
+- Zero vague buzzwords ("revolutionize", "seamless", "synergy").
+```
 
 ---
-*Part of the Common Sense AI Skills Suite. Simple, powerful, and built for everyone.*
+
+### Pattern 2: The Internal Project Executive Pitch
+Use when pitching a budget or initiative to senior management:
+
+```markdown
+I need a 1-sentence summary for our executive leadership team about [PROJECT: e.g. Kubernetes Migration].
+- Focus on cost savings and uptime impact.
+- Make it so clear that a non-technical CEO understands it immediately.
+```
+
+---
+
+## Real-World Case Study
+
+### Scenario: API Observability & Debugging Tool
+
+#### Bloated Traditional Description (Confusing & Jargon-Heavy)
+> *"Our state-of-the-art distributed telemetry platform leverages advanced eBPF kernel instrumentation and AI-driven anomaly heuristics to empower enterprise microservice architectures with real-time holistic visibility across multi-cloud Kubernetes clusters..."*
+> 
+> ❌ *(Takes 45 seconds to read; nobody understands what it actually does).*
+
+#### One-Sentence Pitch Archetypes (Instant Comprehension)
+
+| Archetype | One-Sentence Pitch | Why It Works |
+| :--- | :--- | :--- |
+| **1. Classic XY** | *"We help backend engineers pinpoint API errors in production in 30 seconds without adding logging code to their codebase."* | Highlights exact target user, core benefit, and eliminated pain. |
+| **2. High-Concept Analogy** | *"The Google Analytics for backend API performance."* | Leverages instant mental models from familiar products. |
+| **3. Quantified ROI** | *"Cut production downtime diagnosis from 45 minutes to 60 seconds."* | Focuses purely on quantifiable business time savings. |
+| **4. Pain-Killer** | *"Never wake up at 2 AM to read through messy cloud server logs again."* | Taps into deep emotional frustration and immediate relief. |
+
+---
+
+## Summary Best Practices
+- **Enforce the word ceiling**: Adding *"Keep each option under 20 words"* forces the AI to eliminate filler and choose the strongest verbs.
+- **Ban analogy abuse**: If using the *"X for Y"* formula, make sure the comparison is immediately obvious (e.g. *"Uber for groceries"* vs *"Salesforce for dog walkers"*).

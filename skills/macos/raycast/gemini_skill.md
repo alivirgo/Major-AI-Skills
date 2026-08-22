@@ -1,100 +1,115 @@
 ---
-title: "Raycast AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Raycast on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Raycast, Gemini troubleshooting, Google AI, Raycast, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Raycast macOS Extensible Productivity Launcher AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Raycast Launcher HUDs, Extension Store views, Quicklink grids, and Raycast AI chat interfaces."
+category: "Spotlight & Productivity Launcher Replacement"
+tags: ["raycast", "macos-launcher", "launcher-hud", "gemini", "raycast-ai", "extension-store"]
 ---
 
-# Raycast AI Skill Guide for Gemini
+# Raycast macOS Extensible Productivity Launcher AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Raycast** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Raycast provides a keyboard-centric launcher interface featuring instant search results, dynamic detail panels, extension preference inspectors, and integrated Raycast AI conversational sidebars. Gemini acts as an AI macOS Productivity Architect and UI Workflow Specialist, specializing in **multimodal Raycast HUD inspection**, **Action Panel shortcut validation (`⌘ + K`)**, **Raycast Store extension diagnostics**, and **Raycast AI prompt tuning**.
 
-- **Application Name**: Raycast
-- **Category**: Spotlight & Productivity Launcher Replacement
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Launcher UI Stack
 
-> **Core Purpose**: Extensible Swift-native launcher for macOS providing instant control over apps, scripts, and extensions.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Raycast, Gemini must understand its underlying technical framework:
-
-Native Swift macOS app with React/TypeScript Extension runtime backed by Node.js and macOS Accessibility API.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Raycast Visual Operations Stack             │
+│                                                             │
+│  Launcher HUD Presentation Tier                             │
+│  ├── Main Search Bar (Filter / Query Input Field)           │
+│  ├── Multi-Column List View (`List.Item` Badges, Accessories│
+│  ├── Detail Markdown Viewport (`Detail` Metadata HUD)       │
+│  └── Action Panel Popover (`⌘ + K` Keyboard Shortcut Grid)  │
+│                                                             │
+│  Extension Store & AI Assistant                             │
+│  ├── Store Browser (Extension Cards, Author, Install Count) │
+│  └── Raycast AI Chat Sidebar (Inline Model Switcher, Prompts│
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Raycast:
+## Operational Capabilities & Agent Directives
 
-- **Native Swift low-latency architecture**
-- **React/TypeScript Extension API**
-- **Built-in Clipboard History & Window Management**
+1. **Multimodal HUD & UI Review**: Analyze screenshots of Raycast search results, list views, and detail panels to verify accessory label alignments, markdown image rendering, and icon contrast.
+2. **Action Panel (`⌘ + K`) Optimization**: Ensure critical secondary actions (copying URLs, toggling flags, opening files) are mapped with intuitive keyboard shortcuts.
+3. **Raycast AI Prompt Design**: Author and test system prompts for Raycast AI Commands (*e.g. Code Refactoring, Git Commit Message Generation, Text Proofreading*).
+4. **Extension Store Discovery & Troubleshooting**: Troubleshoot extension installation errors, missing OAuth tokens, and outdated API dependencies.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Raycast, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Raycast, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Raycast Quicklink & Snippet Generator
+
+Execute this script to generate imported JSON snippet files for Raycast with dynamic placeholders:
+
+```python
+"""
+Raycast Snippet & Quicklink Generator
+Generates importable Raycast Snippets JSON with dynamic date/clipboard placeholders.
+"""
+
+import sys
+import json
+
+def generate_developer_snippets(output_file: str):
+    snippets = [
+        {
+            "name": "Git Fixup Commit",
+            "text": "git commit --fixup {clipboard}",
+            "keyword": "!gfix"
+        },
+        {
+            "name": "ISO 8601 Timestamp",
+            "text": "{date format=\"yyyy-MM-dd'T'HH:mm:ssXXX\"}",
+            "keyword": "!isotime"
+        },
+        {
+            "name": "TypeScript Interface Template",
+            "text": "export interface {clipboard} {\n  id: string;\n  createdAt: Date;\n  updatedAt: Date;\n}",
+            "keyword": "!tsif"
+        }
+    ]
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(snippets, f, indent=2)
+
+    print(f"✅ Generated {len(snippets)} Raycast snippets to: {output_file}")
+    print("To import: In Raycast, search 'Import Snippets' and select this JSON file.")
+
+if __name__ == "__main__":
+    out = sys.argv[1] if len(sys.argv) > 1 else "raycast_dev_snippets.json"
+    generate_developer_snippets(out)
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Raycast encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Raycast window commands fail
-- **Root Cause**: Accessibility permissions revoked.
-- **Resolution Pathway**: Re-enable Raycast in macOS System Settings -> Accessibility.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Search Bar Shows Blank Screen on Keystroke** | Corrupted Raycast local cache or SQLite search index. | 1. In Raycast, search **Reload Extensions**.<br>2. If unresolved, quit Raycast and delete `~/Library/Application Support/com.raycast.macos/data`. |
+| **Extension Store Throws `Network Error`** | macOS proxy or corporate firewall blocking WebSocket / HTTPS connection to `api.raycast.com`. | In Raycast Settings $\rightarrow$ **Advanced**, configure HTTP Proxy settings or whitelist `*.raycast.com`. |
+| **Markdown Images in Detail View Show Broken Icon** | Image URI is using unencoded HTTP or insecure external links blocked by Content Security Policy. | Use local assets bundled in extension (`assets/image.png`) or secure HTTPS URLs. |
+| **Raycast AI Returns `Rate Limit Exceeded`** | Raycast AI usage ceiling reached for the active subscription tier. | In Raycast Settings $\rightarrow$ **AI**, switch to alternative model (e.g. Claude 3.5 Sonnet / GPT-4o). |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Raycast:
+## Command Line Syntax & Server Control
 
 ```bash
-open raycast://
-open raycast://conf/
+# Launch Raycast Preferences Directly via URL Scheme
+open "raycast://conf"
+
+# Launch Specific Raycast Extension Command via URL Scheme
+open "raycast://extensions/raycast/system/lock-screen"
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Application Support/com.raycast.macos`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Raycast issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Raycast?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Application Support Directory**: `~/Library/Application Support/com.raycast.macos/`
+- **Preferences Plist**: `~/Library/Preferences/com.raycast.macos.plist`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When building Raycast Extension UI components, always prioritize standard Action Panel shortcut ergonomics (`⌘ + Enter` for Primary, `⌘ + Shift + C` for Copy) to preserve native macOS keyboard fluency.

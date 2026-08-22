@@ -1,102 +1,142 @@
 ---
-title: "Scoop AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Scoop on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Scoop, Gemini troubleshooting, Google AI, Scoop, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Scoop Windows Package Manager AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Scoop CLI output tables, package health diagnostics (scoop checkup), bucket trees, and shim directory structures."
+category: "Command-Line Package Manager"
+tags: ["scoop", "scoop-checkup", "terminal-tables-ui", "gemini", "shim-inspection", "bucket-management"]
 ---
 
-# Scoop AI Skill Guide for Gemini
+# Scoop Windows Package Manager AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Scoop** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Scoop provides a clean, user-friendly terminal interface featuring **Formatted CLI Output Tables (`scoop list`, `scoop status`)**, the **`scoop checkup` System Health Diagnostic Engine**, structured **User-Space File Trees (`~/scoop/apps/`)**, and the **Shim Link Directory (`~/scoop/shims/`)**. Gemini acts as an AI Windows Systems Reviewer and Package Manager Auditor, specializing in **multimodal terminal output inspection**, **package upgrade health audits**, **broken shim link diagnostics**, and **storage footprint optimization**.
 
-- **Application Name**: Scoop
-- **Category**: Command-Line Package Manager
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Package Management Stack
 
-> **Core Purpose**: Command-line installer for Windows focused on developer tools and portable applications without elevation prompts.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Scoop, Gemini must understand its underlying technical framework:
-
-PowerShell-based package manager installing apps isolated under $env:USERPROFILE\scoop without system directory pollution.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Scoop Visual Operations                     │
+│                                                             │
+│  CLI Presentation & Terminal Tables                         │
+│  ├── `scoop list` Table (Name, Version, Source, Updated)    │
+│  ├── `scoop status` Table (Current vs Available Versions)   │
+│  └── `scoop search` (Multi-Bucket Matched Query Results)    │
+│                                                             │
+│  System Health & Diagnostic Engine                          │
+│  ├── `scoop checkup` HUD (ExecutionPolicy, PATH, 7-Zip)     │
+│  ├── Git Bucket Branch Status & Upstream Commit Stream      │
+│  └── Download Cache & Outdated Artifact Cleaners            │
+│                                                             │
+│  Filesystem Hierarchy & Shims                               │
+│  ├── `~/scoop/apps/<app>/current/` (Symlinked Active Version│
+│  └── `~/scoop/shims/` (Batch Wrappers & GUI Shim Binaries)  │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Scoop:
+## Operational Capabilities & Agent Directives
 
-- **Permission-less app installation (no UAC required)**
-- **Bucket ecosystem (main, extras, versions, php, java)**
-- **Shims creation for instant PATH binary integration**
+1. **Multimodal Terminal Table Inspection**: Analyze screenshots of `scoop status` and `scoop list` outputs to identify held packages (`scoop hold`), version drift, and unlinked applications.
+2. **`scoop checkup` Diagnostic Triage**: Review `scoop checkup` warnings (*e.g. missing Windows Defender exclusion for Scoop root, missing Windows long path support, or absent 7-Zip helper*).
+3. **Storage Footprint & Cache Optimization**: Guide users in running `scoop cleanup *` and `scoop cache rm *` to reclaim tens of gigabytes of deprecated package versions and downloaded archives.
+4. **Shim Integrity Verification**: Review the `~/scoop/shims` directory to ensure that both command-line (`.shim`) and GUI (`.exe`) shims correctly point to active `current` symlinks.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Scoop, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Scoop, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Scoop Package Storage & Health Auditor
+
+Run this script to inspect disk space consumed by installed Scoop applications, old versions, and cached installers:
+
+```python
+"""
+Scoop Disk Space & Package Health Auditor
+Calculates storage consumed by active apps vs outdated versions vs download cache.
+"""
+
+import sys
+import os
+
+SCOOP_ROOT = os.path.expandvars(r"%USERPROFILE%\scoop")
+
+def audit_scoop_storage(scoop_dir: str = SCOOP_ROOT):
+    if not os.path.exists(scoop_dir):
+        print(f"Error: Scoop directory not found at '{scoop_dir}'.")
+        return
+
+    print(f"--- [AUDITING SCOOP STORAGE FOOTPRINT: {scoop_dir}] ---")
+
+    def get_dir_size(path):
+        total = 0
+        if not os.path.exists(path):
+            return 0
+        for root, dirs, files in os.walk(path):
+            for f in files:
+                try:
+                    total += os.path.getsize(os.path.join(root, f))
+                except Exception:
+                    continue
+        return total
+
+    apps_dir = os.path.join(scoop_dir, "apps")
+    cache_dir = os.path.join(scoop_dir, "cache")
+    buckets_dir = os.path.join(scoop_dir, "buckets")
+    persist_dir = os.path.join(scoop_dir, "persist")
+
+    apps_size = get_dir_size(apps_dir)
+    cache_size = get_dir_size(cache_dir)
+    buckets_size = get_dir_size(buckets_dir)
+    persist_size = get_dir_size(persist_dir)
+    total_size = apps_size + cache_size + buckets_size + persist_size
+
+    def to_mb(b):
+        return b / (1024 * 1024)
+
+    print(f"• Total Scoop Storage:  {to_mb(total_size):>8.2f} MB")
+    print(f"• Installed Apps:       {to_mb(apps_size):>8.2f} MB")
+    print(f"• Download Cache:       {to_mb(cache_size):>8.2f} MB")
+    print(f"• Git Buckets Metadata: {to_mb(buckets_size):>8.2f} MB")
+    print(f"• Persisted User Data:  {to_mb(persist_size):>8.2f} MB\n")
+
+    if cache_size > (500 * 1024 * 1024):
+        print("💡 Recommendation: Run 'scoop cache rm *' to reclaim cached installer space.")
+    if os.path.exists(apps_dir):
+        app_names = [d for d in os.listdir(apps_dir) if os.path.isdir(os.path.join(apps_dir, d))]
+        print(f"Currently managing {len(app_names)} installed package(s).")
+
+    print("\n✅ Scoop storage audit completed successfully.")
+
+if __name__ == "__main__":
+    audit_scoop_storage()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Scoop encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Scoop install fails with ExecutionPolicy error
-- **Root Cause**: PowerShell script execution restricted.
-- **Resolution Pathway**: Run 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser'.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`scoop checkup` Warns: "Windows Defender might slow down Scoop"** | Windows Defender Real-Time Protection scanning extracted binary folders during install. | Add Scoop folder exclusion in elevated PowerShell:<br>`Add-MpPreference -ExclusionPath "$env:USERPROFILE\scoop"`. |
+| **`scoop list` Shows Red Asterisk Next to Version** | Package is outdated and a newer version is available in the bucket. | Run `scoop update <app_name>` or `scoop update *`. |
+| **Installed Command Returns "Target not found"** | `current` symlink inside `~/scoop/apps/<app>/` broken after incomplete update. | Re-generate symlink and shims: `scoop reset <app_name>`. |
+| **`scoop search` Shows No Results from Community** | Required bucket (e.g. `extras`, `nerd-fonts`) not added to local Scoop installation. | Add bucket: `scoop bucket add extras` $\rightarrow$ `scoop update`. |
 
 ---
 
-## Command Line Syntax and Configuration
+## Command Line Syntax & Server Control
 
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Scoop:
+```powershell
+# Run Scoop Diagnostics Health Check
+scoop checkup
 
-```bash
-scoop install git python neovim
-scoop bucket add extras
-scoop update *
+# List All Installed Packages with Versions
+scoop list
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/.config/scoop/config.json`
-- `~/scoop/buckets/`
+### Key Configuration Locations
+- **Apps Root**: `%USERPROFILE%\scoop\apps\`
+- **Download Cache**: `%USERPROFILE%\scoop\cache\`
 
 ---
 
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Scoop issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Scoop?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
-
----
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+## Agent Operational Directive
+> **MANDATORY**: When `scoop checkup` flags Windows Defender performance warnings, recommend adding `$env:USERPROFILE\scoop` to Windows Defender exclusions to prevent installation lockups.

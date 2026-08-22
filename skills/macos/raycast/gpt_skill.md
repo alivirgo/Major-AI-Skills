@@ -1,100 +1,170 @@
 ---
-title: "Raycast AI Skill Guide for GPT"
-description: "Comprehensive SEO-optimized skill specification for GPT to diagnose, manage, troubleshoot, and automate Raycast on macOS."
-keywords: "ChatGPT, GPT-4, OpenAI Codex, GPT prompt for Raycast, ChatGPT troubleshooting, GPT automation, Raycast, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Raycast macOS Extensible Productivity Launcher AI Skill Guide (GPT & Codex)"
+description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Raycast React/TypeScript extensions, OAuth PKCE flows, LocalStorage APIs, and CLI publishing."
+category: "Spotlight & Productivity Launcher Replacement"
+tags: ["raycast", "raycast-api", "oauth-pkce", "localstorage", "gpt-codex", "react-extension"]
 ---
 
-# Raycast AI Skill Guide for GPT
+# Raycast macOS Extensible Productivity Launcher AI Skill Guide (GPT & Codex)
 
-## Overview
-This document serves as the official operational skill guide for **Raycast** on **macOS**, specifically engineered for **GPT**.
+## Overview & Engine Architecture
+Raycast provides a Node.js-backed Extension runtime with first-class React components, persistent **`LocalStorage` & `Cache` APIs**, and secure **OAuth 2.0 PKCE authentication clients**. GPT/Codex acts as a Principal Full-Stack macOS Tool Developer and Raycast Extension Engineer, delivering **OAuth integration flows**, **`@raycast/api` custom command packages**, **high-performance local caching layers**, and **automated Raycast Store publishing workflows (`npx @raycast/api-cli publish`)**.
 
-- **Application Name**: Raycast
-- **Category**: Spotlight & Productivity Launcher Replacement
-- **Platform**: macOS
-- **Target AI Agent**: GPT
-- **AI Operating Persona**: OpenAI's ChatGPT (GPT-4 / Codex), specializing in fast, code-first automation scripts, terminal commands, concise JSON configurations, and immediate action plans.
+### Developer Architecture & Extension Ecosystem Stack
 
-> **Core Purpose**: Extensible Swift-native launcher for macOS providing instant control over apps, scripts, and extensions.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Raycast, GPT must understand its underlying technical framework:
-
-Native Swift macOS app with React/TypeScript Extension runtime backed by Node.js and macOS Accessibility API.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Raycast Developer Platform                  │
+│                                                             │
+│  React & Component Architecture (`@raycast/api`)            │
+│  ├── `List` & `Grid` Viewport Components (Async Data Hooks) │
+│  ├── `Form` Component (Validation, DatePicker, FilePicker)  │
+│  └── `Detail` Component (Markdown Syntax Renderer, Metadata)│
+│                                                             │
+│  Storage & Authentication Subsystems                        │
+│  ├── `LocalStorage` Key-Value JSON Database                 │
+│  ├── `Cache` (In-Memory / On-Disk Fast LRU Buffer)          │
+│  └── `OAuth` Client (`OAuth.PKCEClient` with Webhooks)      │
+│                                                             │
+│  Tooling & CI/CD Pipeline                                   │
+│  ├── Raycast CLI (`npx ray develop`, `npx ray lint`)        │
+│  └── Manifest Configuration (`package.json` Commands Array) │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The GPT model can assist users in configuring and executing the following capabilities of Raycast:
+## Operational Capabilities & Agent Directives
 
-- **Native Swift low-latency architecture**
-- **React/TypeScript Extension API**
-- **Built-in Clipboard History & Window Management**
+1. **OAuth 2.0 PKCE Flow Implementation**: Author secure third-party authentication integrations (GitHub, Slack, Jira, Linear) using Raycast's native `OAuth.PKCEClient`.
+2. **`LocalStorage` & `Cache` Optimization**: Implement persistent caching of API payloads using `@raycast/api` `LocalStorage` and `Cache` to guarantee instantaneous command startup.
+3. **Raycast Manifest (`package.json`) Authoring**: Construct valid command schemas with appropriate `mode` (`view`, `no-view`, `menu-bar`), `preferences`, and `arguments`.
+4. **Automated Raycast CLI Workflows**: Author scripts for automated linting, building, and publishing extension packages via `npx @raycast/api-cli`.
 
-### GPT Processing and Execution Guidelines
-When a user issues commands or requests help regarding Raycast, GPT must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Raycast, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Provide ultra-concise, copy-pasteable terminal commands, script snippets, and direct operational fixes. Minimize conversational fluff and prioritize action scripts.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production TypeScript Code: OAuth PKCE Service & LocalStorage Cache Manager
+
+Save this file as `src/oauth-service.ts` in your Raycast Extension project:
+
+```typescript
+// ==============================================================================
+// Raycast Extension: OAuth 2.0 PKCE Client & LocalStorage Cache Manager
+// Manages authentication tokens and cached API user profiles securely.
+// ==============================================================================
+import { OAuth, LocalStorage } from "@raycast/api";
+
+const CLIENT_ID = "raycast-custom-client-id";
+const TOKEN_URL = "https://oauth2.provider.com/token";
+const AUTH_URL = "https://oauth2.provider.com/authorize";
+
+const client = new OAuth.PKCEClient({
+  redirectMethod: OAuth.RedirectMethod.Web,
+  providerName: "CustomProvider",
+  providerIcon: "icon.png",
+  description: "Connect your CustomProvider account to Raycast",
+});
+
+export async function authorize(): Promise<string> {
+  const tokenSet = await client.getTokens();
+  if (tokenSet?.accessToken) {
+    if (tokenSet.isExpired()) {
+      if (tokenSet.refreshToken) {
+        console.log("Access token expired. Refreshing token...");
+        const newTokens = await refreshTokens(tokenSet.refreshToken);
+        await client.setTokens(newTokens);
+        return newTokens.accessToken;
+      }
+    } else {
+      return tokenSet.accessToken;
+    }
+  }
+
+  // Initiate PKCE Authorization Request
+  const authRequest = await client.authorizationRequest({
+    endpoint: AUTH_URL,
+    clientId: CLIENT_ID,
+    scope: "read write user",
+  });
+
+  const { authorizationCode } = await client.authorize(authRequest);
+  const tokens = await fetchTokens(authRequest, authorizationCode);
+  await client.setTokens(tokens);
+  return tokens.accessToken;
+}
+
+async function fetchTokens(
+  authRequest: OAuth.AuthorizationRequest,
+  authCode: string
+): Promise<OAuth.TokenResponse> {
+  const response = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: CLIENT_ID,
+      code: authCode,
+      code_verifier: authRequest.codeVerifier,
+      grant_type: "authorization_code",
+      redirect_uri: authRequest.redirectURI,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch tokens: ${response.statusText}`);
+  }
+  return (await response.json()) as OAuth.TokenResponse;
+}
+
+async function refreshTokens(refreshToken: string): Promise<OAuth.TokenResponse> {
+  const response = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: CLIENT_ID,
+      refresh_token: refreshToken,
+      grant_type: "refresh_token",
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to refresh token: ${response.statusText}`);
+  }
+  return (await response.json()) as OAuth.TokenResponse;
+}
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Raycast encounters operational failures, GPT must analyze issues using the resolution pathways below:
-
-#### [Issue] Raycast window commands fail
-- **Root Cause**: Accessibility permissions revoked.
-- **Resolution Pathway**: Re-enable Raycast in macOS System Settings -> Accessibility.
-
+| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **`OAuthError: Invalid redirect URI`** | Redirect URI generated by Raycast does not match whitelist in third-party OAuth app console. | In third-party developer portal, register redirect URI: `https://raycast.com/redirect?packageName=<author>/<extension>`. |
+| **`LocalStorage.getItem()` Returns `undefined`** | Key was never initialized or values were stored as unparsed objects rather than strings. | Store complex objects via `JSON.stringify()` or use `LocalStorage.setItem(key, value)`. |
+| **Raycast Lint Fails: `Command icon is missing`** | `package.json` declares an icon file that does not exist in the `assets/` directory. | Ensure all icons declared in `package.json` are placed in `./assets/` (PNG format, $512\times 512\text{px}$). |
+| **`npx ray develop` Reloads Infinitely** | File watcher triggered by files being written into `src/` during runtime execution. | Write cache and temporary files to `environment.supportPath` rather than project source folders. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The GPT model can generate or execute the following terminal and shell commands for Raycast:
+## Command Line Syntax & Batch Processing
 
 ```bash
-open raycast://
-open raycast://conf/
+# 1. Start Local Raycast Extension Development Server
+npx ray develop
+
+# 2. Run Strict Linter and Code Quality Checks
+npx ray lint
+
+# 3. Build Production Bundle for Raycast Store
+npx ray build -e dist
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, GPT should point users to the following file locations:
-
-- `~/Library/Application Support/com.raycast.macos`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: GPT-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does GPT troubleshoot Raycast issues on macOS?**
-A: GPT inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can GPT generate automated CLI commands for Raycast?**
-A: Yes, GPT utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Essential File Locations
+- **Extension Manifest**: `package.json`
+- **TypeScript Configuration**: `tsconfig.json`
+- **Assets Directory**: `./assets/`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: Never store sensitive API secrets or tokens in plaintext files inside the extension directory; always use `OAuth.PKCEClient` or Raycast's encrypted `LocalStorage` APIs.

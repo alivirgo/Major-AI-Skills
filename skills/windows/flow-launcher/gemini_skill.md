@@ -1,100 +1,139 @@
 ---
-title: "Flow Launcher AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Flow Launcher on Windows."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Flow Launcher, Gemini troubleshooting, Google AI, Flow Launcher, Windows utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Flow Launcher Extensible Productivity AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Flow Launcher search canvas, result styling, Theme Manager, Plugin Store, and Action Keyword routing."
+category: "Productivity Application & File Launcher"
+tags: ["flow-launcher", "search-canvas-ui", "theme-manager-ui", "gemini", "action-keywords", "plugin-store-ui"]
 ---
 
-# Flow Launcher AI Skill Guide for Gemini
+# Flow Launcher Extensible Productivity AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Flow Launcher** on **Windows**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Flow Launcher provides a modern, customizable desktop search user interface featuring the **Floating Search Canvas (Fluent Acrylic / Mica styling)**, **Result List Viewport (Icons, Glyphs, Titles, Subtitles, Badges)**, the **Plugin Store & Settings Window**, and **Action Keyword Management**. Gemini acts as an AI Desktop Productivity Specialist and UX/Plugin Auditor, specializing in **multimodal search canvas inspection**, **visual plugin layout review**, **theme customization**, and **Action Keyword conflict diagnostics**.
 
-- **Application Name**: Flow Launcher
-- **Category**: Productivity Application & File Launcher
-- **Platform**: Windows
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Desktop Interface Stack
 
-> **Core Purpose**: Extensible open-source application launcher with deep Everything and Python plugin integration.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Flow Launcher, Gemini must understand its underlying technical framework:
-
-C# / WPF framework with isolated Python runtime environment for third-party plugins.
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Flow Launcher Visual Operations             │
+│                                                             │
+│  Search Canvas & Result Presentation                        │
+│  ├── Floating Search Bar (Custom Width, Auto-Hide on Blur)  │
+│  ├── Result Rows (High-DPI Icons, Subtitle Metadata, Glyph) │
+│  └── Context Menu Actions (`Shift + Enter` / Right Click)   │
+│                                                             │
+│  Settings Window & Plugin Configuration                     │
+│  ├── Plugin List (Enable/Disable Toggles, Action Keyword Box│
+│  ├── Plugin Store (Community Gallery & One-Click Install)   │
+│  └── General & Hotkey Config (Global Activation Hotkey)     │
+│                                                             │
+│  Theme Manager & Visual Customization                       │
+│  ├── Theme Selector (Dark, Light, Fluent, Nord, Catppuccin) │
+│  └── Font & Blur Radius Adjuster (Opacity, Drop Shadow)     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Flow Launcher:
+## Operational Capabilities & Agent Directives
 
-- **Instant app launching and Everything file search integration**
-- **Rich C# and Python plugin ecosystem**
-- **Web search triggers, bookmark queries, and inline calculator**
+1. **Multimodal Search Canvas Inspection**: Analyze screenshots of the Flow Launcher search bar to verify query formatting, result ranking order, missing icon placeholders, and subtitle alignment.
+2. **Action Keyword Conflict Auditing**: Review the Settings $\rightarrow$ Plugins panel to detect duplicate Action Keywords (*e.g. two plugins sharing keyword `g` causing ambiguous routing*).
+3. **Theme & Styling Customization**: Guide users in customizing XAML/CSS theme color palettes, background acrylic blur intensity, and typography (e.g. Segoe UI Variable).
+4. **Plugin Store Installation Verification**: Verify successful installation of community plugins and ensure required external dependencies (Python, Node.js, Everything) are recognized in the GUI.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Flow Launcher, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Flow Launcher, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Flow Launcher Settings (`Settings.json`) Inspector
+
+Run this script to inspect installed plugins, configured hotkeys, and Action Keywords in Flow Launcher's `Settings.json`:
+
+```python
+"""
+Flow Launcher Settings & Plugin Auditor
+Parses Settings.json to verify plugin states, action keywords, and hotkey bindings.
+"""
+
+import sys
+import os
+import json
+
+SETTINGS_PATH = os.path.expandvars(r"%APPDATA%\FlowLauncher\Settings\Settings.json")
+
+def audit_flow_settings(settings_file: str = SETTINGS_PATH):
+    if not os.path.exists(settings_file):
+        print(f"Error: Flow Launcher settings not found at '{settings_file}'.")
+        return
+
+    print(f"--- [AUDITING FLOW LAUNCHER SETTINGS: {settings_file}] ---")
+    try:
+        with open(settings_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        hotkey = data.get("Hotkey", "Alt + Space")
+        theme = data.get("Theme", "Default")
+        print(f"• Global Hotkey: {hotkey}")
+        print(f"• Active Theme:  {theme}\n")
+
+        # Inspect Plugins
+        plugins_data = data.get("PluginSettings", {}).get("Plugins", {})
+        print(f"Configured Plugins: {len(plugins_data)} entry/entries:\n")
+
+        keywords = {}
+        for pid, pinfo in plugins_data.items():
+            name = pinfo.get("Name", "Unknown Plugin")
+            disabled = pinfo.get("Disabled", False)
+            keyword = pinfo.get("ActionKeyword", "*")
+            status = "❌ Disabled" if disabled else "✅ Enabled"
+
+            print(f"• [{status}] {name:<26} | Keyword: '{keyword}'")
+
+            if not disabled and keyword != "*":
+                keywords.setdefault(keyword, []).append(name)
+
+        # Detect Keyword Collisions
+        collisions = {k: v for k, v in keywords.items() if len(v) > 1}
+        if collisions:
+            print("\n🚨 WARNING: Detected Action Keyword Collisions:")
+            for k, names in collisions.items():
+                print(f"  • Keyword '{k}' shared by: {', '.join(names)}")
+        else:
+            print("\n✅ No Action Keyword collisions detected.")
+
+    except Exception as e:
+        print(f"Failed to parse settings: {e}")
+
+if __name__ == "__main__":
+    audit_flow_settings()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Flow Launcher encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Python plugins fail to load
-- **Root Cause**: Flow Launcher cannot locate Python interpreter in PATH.
-- **Resolution Pathway**: Specify exact python.exe path in Flow Settings -> Plugin Store -> Python Settings.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Search Canvas Appears Off-Screen on Multi-Monitor** | Stored window position references a disconnected external monitor. | Press `Alt + Space` $\rightarrow$ Press `Win + Shift + Left/Right Arrow` to move launcher back to primary display. |
+| **Plugin Returns Results with Missing / Broken Icons** | `IcoPath` in plugin result references a relative path that does not exist on disk. | In plugin folder, verify icon image exists (e.g. `icon.png`) and path is relative to plugin root directory. |
+| **Theme Acrylic Blur Renders as Solid Gray / Black** | Windows Transparency effects disabled in OS settings. | In Windows Settings $\rightarrow$ Accessibility $\rightarrow$ Visual effects, toggle **Transparency effects** to On. |
+| **Search Results Show Duplicate Entries** | Multiple plugins (e.g. Program Plugin + Explorer Plugin) indexing the same directory. | In Settings $\rightarrow$ Plugins, disable redundant indexing paths in Program or Explorer settings. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Flow Launcher:
+## Command Line Syntax & Server Control
 
 ```bash
-Flow.Launcher.exe
-Flow.Launcher.exe --query "g github flow launcher"
+# Launch Flow Launcher with Specific Theme
+"%LOCALAPPDATA%\FlowLauncher\Flow.Launcher.exe"
+
+# Re-open Flow Launcher Settings Window
+# (Trigger via GUI or Hotkey Alt+Space -> Type "Settings")
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `%APPDATA%\FlowLauncher\Settings\Settings.json`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: Windows
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Flow Launcher issues on Windows?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Flow Launcher?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Settings File**: `%APPDATA%\FlowLauncher\Settings\Settings.json`
+- **Plugin Directory**: `%APPDATA%\FlowLauncher\Plugins\`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When configuring Action Keywords in Flow Launcher, ensure that global action triggers do not collide with existing default search keywords to maintain deterministic query dispatching.

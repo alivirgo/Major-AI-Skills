@@ -1,99 +1,127 @@
 ---
-title: "Velja AI Skill Guide for Gemini"
-description: "Comprehensive SEO-optimized skill specification for Gemini to diagnose, manage, troubleshoot, and automate Velja on macOS."
-keywords: "Google Gemini, Gemini Advanced, Gemini AI skills, Gemini prompt for Velja, Gemini troubleshooting, Google AI, Velja, macOS utilities, AI troubleshooting, productivity tools, Claude Code, Codex, LM Studio, OpenClaw, Antigravity, VS Code"
-author: "AI Systems Engineering Team"
+title: "Velja macOS Smart Browser Picker & URL Router AI Skill Guide (Gemini)"
+description: "Comprehensive operational skill specification for Google Gemini to visually diagnose, automate, script, and troubleshoot Velja prompt modals, browser selector lists, routing rule tables, and tracking filters."
+category: "Smart Browser Picker & URL Router"
+tags: ["velja", "macos-browser-picker", "browser-modal", "gemini", "routing-rules-ui", "tracking-stripper-ui"]
 ---
 
-# Velja AI Skill Guide for Gemini
+# Velja macOS Smart Browser Picker & URL Router AI Skill Guide (Gemini)
 
-## Overview
-This document serves as the official operational skill guide for **Velja** on **macOS**, specifically engineered for **Gemini**.
+## Overview & Engine Architecture
+Velja presents a minimalist native macOS prompt modal when opening ambiguous links, offering instant keyboard navigation across installed browsers, browser profiles, and native app hand-offs. Gemini acts as an AI macOS UX & Privacy Reviewer, specializing in **multimodal Velja prompt dialog inspection**, **routing rules table validation**, **tracking parameter filter audits**, and **browser icon presentation checks**.
 
-- **Application Name**: Velja
-- **Category**: Smart Browser Picker & URL Router
-- **Platform**: macOS
-- **Target AI Agent**: Gemini
-- **AI Operating Persona**: Google's Gemini, specializing in multimodal image/screenshot analysis, fast context integration, cross-platform workflows, and rich structured summaries.
+### Visual Analytics & Browser Selector Stack
 
-> **Core Purpose**: Intelligent browser picker routing specific links to specific browsers or web apps automatically.
-
----
-
-## IDE & Agentic Execution Ecosystem Optimization
-This skill file is pre-configured and structured for seamless execution across top AI coding agents and IDE environments:
-
-- **Claude Code CLI**: Parses shell commands, diagnostic steps, and file paths directly for automated terminal execution.
-- **OpenAI Codex & ChatGPT**: Provides concise, copy-pasteable script blocks and API payload definitions.
-- **LM Studio**: Optimized for local GGUF model RAG vector context indexing (compatible with 4k-32k context windows).
-- **OpenClaw & Antigravity**: Directly maps file system paths, tool calls (`view_file`, `run_command`, `write_to_file`), and background task execution.
-- **VS Code / Copilot**: Seamlessly integrates into workspace system prompts, extension tasks, and local terminal workflows.
-
----
-
-## Architectural Deep Dive
-When interacting with Velja, Gemini must understand its underlying technical framework:
-
-Registers as macOS http/https Launch Services default handler (LSSetDefaultHandlerForURLScheme).
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Velja Visual Operations Stack               │
+│                                                             │
+│  Modal Prompt & Browser Picker Hierarchy                    │
+│  ├── Floating Link Interception Modal (URL Preview & Domain)│
+│  ├── Installed Browser Grid (Numbered 1-9 Shortcuts, Icons) │
+│  │    ├── Safari (Personal Profile)                         │
+│  │    ├── Google Chrome (Work Profile)                      │
+│  │    └── Native Hand-Off Button (Open in App: Figma/Zoom)  │
+│  └── Alternative Browser Trigger (Hold ⌥/⇧ Key Overlays)    │
+│                                                             │
+│  Settings & Privacy Rule Panels                             │
+│  ├── Routing Rules Table (Domain Pattern $\rightarrow$ Target Browser)│
+│  └── Tracking Parameter Stripper Checklist (UTM, Facebook...)│
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Key Features and Operational Capabilities
-The Gemini model can assist users in configuring and executing the following capabilities of Velja:
+## Operational Capabilities & Agent Directives
 
-- **Domain and URL pattern matching routing rules**
-- **App-specific routing (e.g., Figma links to Figma App)**
-- **Automatic tracking parameter removal (UTM, gclid stripping)**
+1. **Multimodal Modal Dialog Review**: Analyze screenshots of Velja's link selection modal to verify domain string legibility, sanitized URL previews, and browser profile badge clarity.
+2. **Routing Rules Table Validation**: Inspect routing rule tables to ensure higher-priority subdomains (*e.g. `work.github.com`*) appear above catch-all root domain rules (*`*.github.com`*).
+3. **Privacy & Tracking Parameter Checklist Auditing**: Verify that tracking parameter stripping is active for general browsing while whitelisting sensitive developer/auth domains.
+4. **Keyboard Navigation Optimization**: Ensure each installed browser is assigned a distinct single-key shortcut (`1`, `2`, `3`) for rapid link dispatch.
 
-### Gemini Processing and Execution Guidelines
-When a user issues commands or requests help regarding Velja, Gemini must execute the following protocol:
-1. **Context Identification**: Instantly recognize references to Velja, its processes, and associated configuration files.
-2. **Model-Specific Protocol**: Focus on visual error diagnosis from screenshots, cross-platform app ecosystems, contextual awareness, and clear structured tabular breakdowns.
-3. **Proactive Diagnostics**: Check permissions, pathing, background service health, and OS compatibility before providing solutions.
+---
+
+## Production Python Automation: Automated Velja Settings & Rule Table Auditor
+
+Execute this script to audit Velja's preference plist and list all active domain routing rules:
+
+```python
+"""
+Velja macOS Routing Rules & Preference Auditor
+Reads com.sindresorhus.Velja.plist and prints configured domain-to-browser rules.
+"""
+
+import os
+import plistlib
+import json
+
+PREF_PATH = os.path.expanduser("~/Library/Preferences/com.sindresorhus.Velja.plist")
+
+def audit_velja_configuration():
+    if not os.path.exists(PREF_PATH):
+        print(f"Error: Velja preferences '{PREF_PATH}' not found.")
+        print("Note: Launch Velja to generate initial configuration preferences.")
+        return
+
+    print("--- [AUDITING VELJA BROWSER ROUTING & PRIVACY SETTINGS] ---")
+    try:
+        with open(PREF_PATH, "rb") as f:
+            prefs = plistlib.load(f)
+
+        remove_tracking = prefs.get("removeTrackingParameters", True)
+        hide_menu_bar   = prefs.get("hideMenubarIcon", False)
+        default_browser = prefs.get("defaultBrowser", "System Default")
+
+        print(f"• Default Primary Browser:    {default_browser}")
+        print(f"• Strip Tracking Parameters:  {'✅ ENABLED' if remove_tracking else '⚠️ DISABLED'}")
+        print(f"• Menu Bar Icon Visibility:   {'HIDDEN' if hide_menu_bar else 'VISIBLE'}")
+
+        # Inspect Custom Rules
+        raw_rules = prefs.get("rules", [])
+        print(f"\n--- [CONFIGURED ROUTING RULES ({len(raw_rules)})] ---")
+        if raw_rules:
+            for r in raw_rules:
+                pattern = r.get("url", r.get("pattern", "Wildcard"))
+                browser = r.get("browser", {}).get("name", "Custom Browser")
+                print(f"• Pattern: {pattern:<30} -> Target: {browser}")
+        else:
+            print("*No custom domain rules configured (using default browser prompt).*")
+
+    except Exception as e:
+        print(f"Error reading plist: {e}")
+
+if __name__ == "__main__":
+    audit_velja_configuration()
+```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-If Velja encounters operational failures, Gemini must analyze issues using the resolution pathways below:
-
-#### [Issue] Links open in wrong browser
-- **Root Cause**: Not set as default browser.
-- **Resolution Pathway**: Set Velja as Default Browser in System Settings.
-
+| Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| :--- | :--- | :--- |
+| **Modal Prompt Shows Truncated / Illegible URL** | Display resolution or scaling setting compressing Velja's floating modal dialog. | Hover over the URL bar in the Velja prompt to view the expanded full path tooltip. |
+| **Duplicate Browser Icons in Picker List** | Multiple versions of the same browser installed in `/Applications/` and `~/Applications/`. | In Velja Settings $\rightarrow$ **Browsers**, remove duplicate entries and link to the primary `/Applications/` binary. |
+| **Holding Modifier Key Fails to Override Browser** | Modifier key shortcut in Velja conflicts with a global macOS shortcut. | In Velja Settings $\rightarrow$ **General**, change the alternative modifier key from `Option` (`⌥`) to `Shift` (`⇧`). |
+| **Prompt Appears on Wrong Display** | macOS Mission Control setting "Displays have separate Spaces" unconfigured. | Ensure mouse cursor is on the active display when clicking links. |
 
 ---
 
-## Command Line Syntax and Configuration
-
-### Executable and Terminal Commands
-The Gemini model can generate or execute the following terminal and shell commands for Velja:
+## Command Line Syntax & Server Control
 
 ```bash
-open -a Velja
+# Launch Velja Settings Directly
+open "velja://"
+
+# Query Active Default HTTP Handler via duti
+duti -d http
 ```
 
-### Configuration and Data Storage Paths
-To inspect or repair corrupted settings, Gemini should point users to the following file locations:
-
-- `~/Library/Preferences/com.sindresorhus.Velja.plist`
-
----
-
-## SEO and Schema Metadata Context
-This skill guide is structured for deep indexing, RAG vector retrieval, and machine readability.
-
-- **Schema Type**: TechnicalArticle / SoftwareApplication
-- **Target OS**: macOS
-- **Optimization Strategy**: Gemini-Native Vector Search
-
-### Knowledge Base FAQ
-
-**Q: How does Gemini troubleshoot Velja issues on macOS?**
-A: Gemini inspects execution permissions, process status, configuration paths, and known error patterns specified in this guide to provide direct resolution steps.
-
-**Q: Can Gemini generate automated CLI commands for Velja?**
-A: Yes, Gemini utilizes the precise terminal syntax provided in this document to automate workflow tasks.
+### Key Configuration Locations
+- **Preferences Plist**: `~/Library/Preferences/com.sindresorhus.Velja.plist`
+- **Application Binary**: `/Applications/Velja.app`
 
 ---
-*Created for automated agentic deployment across Claude Code, Codex, LM Studio, OpenClaw, Antigravity, and VS Code.*
+
+## Agent Operational Directive
+> **MANDATORY**: When configuring domain routing rules in Velja, order specific subdomain and internal VPN regex patterns before catch-all wildcards to prevent routing collisions.
