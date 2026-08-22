@@ -1,6 +1,6 @@
 # Specialized Application AI Skills Ecosystem (`skills/`)
 
-This directory contains production-grade, expert-level AI Skill specifications and automation architectures for 75 professional applications across 15 engineering and creative domain categories.
+This directory contains production-grade, expert-level AI Skill specifications and automation architectures for 76 professional applications across 18 engineering and creative domain categories.
 
 Each tool ecosystem includes three specialized AI engineering specifications:
 - **`claude_skill.md`**: Tailored for Anthropic Claude (deep system architecture, deterministic algorithms, kernel drivers, socket communication, and CI/CD pipelines).
@@ -72,6 +72,9 @@ Each tool ecosystem includes three specialized AI engineering specifications:
 │  • AutoHotkey v2, EarTrumpet, Everything, Flow Launcher,                    │
 │    Microsoft PowerToys, Sandboxie-Plus, Scoop, ShareX,                      │
 │    System Informer, WizTree                                                 │
+│                                                                             │
+│  [18] Linux Desktop Distribution (`skills/linux/`)                          │
+│  • Omarchy (Arch Linux + Hyprland + Quickshell by DHH)                      │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -98,6 +101,7 @@ Each tool ecosystem includes three specialized AI engineering specifications:
 | **[scientific/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/scientific)** | Scientific Computing & DAQ | COMSOL Multiphysics, NI LabVIEW, MATLAB, OriginPro |
 | **[video-editing/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/video-editing)** | NLE & Video Post-Production | DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro |
 | **[windows/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/windows)** | Windows Systems & Utilities | AutoHotkey v2, EarTrumpet, Everything, Flow Launcher, PowerToys, Sandboxie-Plus, Scoop, ShareX, System Informer, WizTree |
+| **[linux/](file:///c:/Users/ASUS/Documents/Newfolder/Antigravity/Major%20AI%20Skills/skills/linux)** | Linux Desktop Distribution | Omarchy (Arch Linux + Hyprland + Quickshell by DHH) |
 
 ---
 
