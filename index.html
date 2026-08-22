@@ -114,14 +114,14 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-github {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 12px;
+      padding: 4px 10px;
       font-size: 13px;
       font-weight: 500;
       color: var(--text-heading);
@@ -133,6 +133,17 @@
 
     .btn-github:hover {
       background: var(--bg-hover);
+    }
+
+    .star-count-pill {
+      font-family: var(--font-code);
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--bg-active);
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: 2px;
+      border: 1px solid var(--border-color);
     }
 
     .theme-toggle {
@@ -403,6 +414,35 @@
       background-color: rgba(0, 0, 0, 0.015);
     }
 
+    /* Star Graph Card */
+    .star-graph-wrapper {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 20px 0 28px;
+      text-align: center;
+    }
+
+    .star-graph-img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-app);
+    }
+
+    .star-graph-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-code);
+    }
+
     /* Right Sidebar Table of Contents */
     .toc-sidebar {
       width: var(--toc-width);
@@ -469,7 +509,14 @@
     <div class="header-right">
       <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">Theme: Dark</button>
       <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"></path>
+        </svg>
+        <span>Star</span>
+        <span class="star-count-pill" id="starCount">0</span>
+      </a>
+      <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
         </svg>
         GitHub
@@ -532,74 +579,7 @@
       </div>
 
       <div id="dynamicBody">
-        <h2 class="section-heading" id="sec-about">1. About This Repository</h2>
-        <p>This repository provides deterministic, production-grade technical blueprints for AI models (Claude, ChatGPT, Gemini, Codex, and local LLMs) to accurately automate, script, and troubleshoot professional software applications without boilerplate or hallucinations.</p>
-        
-        <div class="callout">
-          <div class="callout-title">Architecture Philosophy</div>
-          <p>Every file is handcrafted with complete code recipes (Python, C#, C++, PowerShell, AutoHotkey v2, IEC 61131-3 Structured Text, MATLAB), real-world troubleshooting matrices, and strict agent operational directives.</p>
-        </div>
-
-        <h2 class="section-heading" id="sec-structure">2. Repository Directory Structure</h2>
-        <pre><code>Major AI Skills/
-├── skills/                      # 225 Application Skill Guides (75 Apps x 3 Models across 17 Categories)
-│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
-│   ├── video-editing/           # DaVinci Resolve, Final Cut Pro, VEGAS Pro
-│   ├── 3d/                      # Houdini, Cinema 4D, ZBrush, Substance 3D
-│   ├── windows/                 # AutoHotkey v2, Everything, PowerToys, System Informer, etc.
-│   ├── macos/                   # Raycast, Shottr, OrbStack, MacWhisper, Rectangle, etc.
-│   ├── cross-platform/          # FFmpeg, Wireshark, Nginx, Tailscale, Rclone, Bruno
-│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, CODESYS
-│   ├── scientific/              # MATLAB, COMSOL, LabVIEW, OriginPro
-│   └── music/                   # Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools
-├── efficiency ai skills/        # 100 Token Optimization & Context Pruning Rules
-└── common sense ai skills/     # 100 Factual Grounding & Everyday AI Habits</code></pre>
-
-        <h2 class="section-heading" id="sec-quickstart">3. Command Line Integration</h2>
-        <p>You can clone and ingest the skill definitions directly into your local development environment:</p>
-        <pre><code># Clone the complete repository
-git clone https://github.com/alivirgo/Major-AI-Skills.git
-
-# Ingest specific application skill into Claude Code CLI or Cursor rules
-cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules</code></pre>
-
-        <h2 class="section-heading" id="sec-matrix">4. Application Coverage Matrix</h2>
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Domain Category</th>
-              <th>Primary Software Applications</th>
-              <th>Supported Interfaces</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>CAD & Mechanical</td>
-              <td>SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino</td>
-              <td>COM API, C# VSTA, Python, Open C/C++</td>
-            </tr>
-            <tr>
-              <td>Video & NLE Post</td>
-              <td>DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro</td>
-              <td>Python API, Fusion VFX, FCPXML, C# ScriptPortal</td>
-            </tr>
-            <tr>
-              <td>Systems & Kernel</td>
-              <td>Everything, System Informer, PowerToys, AHK v2</td>
-              <td>C-SDK ctypes, Win32 NTDLL, WASAPI, C# IPlugin</td>
-            </tr>
-            <tr>
-              <td>Industrial & PLC</td>
-              <td>Siemens TIA Portal, Rockwell Studio 5000, CODESYS</td>
-              <td>TIA Openness, CIP Pycomm3, IEC 61131-3 ST</td>
-            </tr>
-            <tr>
-              <td>Scientific Computing</td>
-              <td>MATLAB, COMSOL Multiphysics, LabVIEW, OriginPro</td>
-              <td>MEX C++, mph Python, DAQmx, PyOrigin</td>
-            </tr>
-          </tbody>
-        </table>
+        <!-- Injected via JS loadDoc() -->
       </div>
     </main>
 
@@ -611,6 +591,7 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
         <li><a href="#sec-structure" class="toc-link">2. Directory Structure</a></li>
         <li><a href="#sec-quickstart" class="toc-link">3. Quickstart & Usage</a></li>
         <li><a href="#sec-matrix" class="toc-link">4. Coverage Matrix</a></li>
+        <li><a href="#sec-community" class="toc-link">5. Community Stars Graph</a></li>
       </ul>
     </aside>
 
@@ -630,6 +611,49 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').innerText = `Theme: ${savedTheme === 'dark' ? 'Dark' : 'Light'}`;
 
+    // Community Stars Counter with 1-Hour Auto-Update Cache
+    function updateCommunityStars() {
+      const CACHE_KEY = 'major_ai_stars_count';
+      const TIMESTAMP_KEY = 'major_ai_stars_timestamp';
+      const ONE_HOUR_MS = 60 * 60 * 1000;
+      const now = Date.now();
+
+      const cachedStars = localStorage.getItem(CACHE_KEY);
+      const cachedTime = localStorage.getItem(TIMESTAMP_KEY);
+
+      if (cachedStars && cachedTime && (now - parseInt(cachedTime, 10)) < ONE_HOUR_MS) {
+        renderStars(cachedStars);
+      } else {
+        fetch('https://api.github.com/repos/alivirgo/Major-AI-Skills')
+          .then(res => res.json())
+          .then(data => {
+            if (data && typeof data.stargazers_count === 'number') {
+              const stars = data.stargazers_count;
+              localStorage.setItem(CACHE_KEY, stars);
+              localStorage.setItem(TIMESTAMP_KEY, now.toString());
+              renderStars(stars);
+            }
+          })
+          .catch(() => {
+            if (cachedStars) renderStars(cachedStars);
+          });
+      }
+
+      // Refresh Star History Chart cache-buster hourly
+      const chartImg = document.getElementById('starHistoryImg');
+      if (chartImg) {
+        const hourBucket = Math.floor(now / ONE_HOUR_MS);
+        chartImg.src = `https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date&v=${hourBucket}`;
+      }
+    }
+
+    function renderStars(count) {
+      const starEl = document.getElementById('starCount');
+      if (starEl) starEl.innerText = count;
+      const metaEl = document.getElementById('liveStarMeta');
+      if (metaEl) metaEl.innerText = `Current Stars: ${count} | Auto-synced hourly`;
+    }
+
     // Documentation Dynamic Database
     const docs = {
       overview: {
@@ -644,6 +668,7 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
             <div class="callout-title">Architecture Philosophy</div>
             <p>Every file is handcrafted with complete code recipes (Python, C#, C++, PowerShell, AutoHotkey v2, IEC 61131-3 Structured Text, MATLAB), real-world troubleshooting matrices, and strict agent operational directives.</p>
           </div>
+          
           <h2 class="section-heading" id="sec-structure">2. Repository Directory Structure</h2>
           <pre><code>Major AI Skills/
 ├── skills/                      # 225 Application Skill Guides (75 Apps x 3 Models across 17 Categories)
@@ -658,6 +683,64 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
 │   └── music/                   # Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools
 ├── efficiency ai skills/        # 100 Token Optimization & Context Pruning Rules
 └── common sense ai skills/     # 100 Factual Grounding & Everyday AI Habits</code></pre>
+
+          <h2 class="section-heading" id="sec-quickstart">3. Command Line Integration</h2>
+          <p>You can clone and ingest the skill definitions directly into your local development environment:</p>
+          <pre><code># Clone the complete repository
+git clone https://github.com/alivirgo/Major-AI-Skills.git
+
+# Ingest specific application skill into Claude Code CLI or Cursor rules
+cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules</code></pre>
+
+          <h2 class="section-heading" id="sec-matrix">4. Application Coverage Matrix</h2>
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Domain Category</th>
+                <th>Primary Software Applications</th>
+                <th>Supported Interfaces</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CAD & Mechanical</td>
+                <td>SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino</td>
+                <td>COM API, C# VSTA, Python, Open C/C++</td>
+              </tr>
+              <tr>
+                <td>Video & NLE Post</td>
+                <td>DaVinci Resolve Studio, Final Cut Pro, VEGAS Pro</td>
+                <td>Python API, Fusion VFX, FCPXML, C# ScriptPortal</td>
+              </tr>
+              <tr>
+                <td>Systems & Kernel</td>
+                <td>Everything, System Informer, PowerToys, AHK v2</td>
+                <td>C-SDK ctypes, Win32 NTDLL, WASAPI, C# IPlugin</td>
+              </tr>
+              <tr>
+                <td>Industrial & PLC</td>
+                <td>Siemens TIA Portal, Rockwell Studio 5000, CODESYS</td>
+                <td>TIA Openness, CIP Pycomm3, IEC 61131-3 ST</td>
+              </tr>
+              <tr>
+                <td>Scientific Computing</td>
+                <td>MATLAB, COMSOL Multiphysics, LabVIEW, OriginPro</td>
+                <td>MEX C++, mph Python, DAQmx, PyOrigin</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="section-heading" id="sec-community">5. Community Stars Graph</h2>
+          <p>Live repository star growth tracked over time, automatically refreshed every hour via GitHub API:</p>
+          <div class="star-graph-wrapper">
+            <a href="https://star-history.com/#alivirgo/Major-AI-Skills&Date" target="_blank" rel="noopener noreferrer">
+              <img id="starHistoryImg" class="star-graph-img" src="https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date" alt="Major AI Skills Star History Chart" />
+            </a>
+            <div class="star-graph-meta">
+              <span id="liveStarMeta">Auto-synced hourly with GitHub API</span>
+              <a href="https://github.com/alivirgo/Major-AI-Skills/stargazers" target="_blank" style="color: var(--text-link);">View Stargazers on GitHub &rarr;</a>
+            </div>
+          </div>
         `
       },
       windows: {
@@ -667,7 +750,6 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
         hasModels: true,
         body: `
           <h2 class="section-heading" id="sec-apps">Covered Applications</h2>
-          <p>This category includes in-depth guides for 10 premier Windows power-user utilities:</p>
           <ul>
             <li><strong>Everything (voidtools)</strong>: Real-time NTFS MFT / USN Change Journal IPC client and <code>Everything64.dll</code> C-SDK.</li>
             <li><strong>System Informer (Process Hacker)</strong>: NTDLL Process Basic Information, PEB command-line extraction, and <code>KSystemInformer.sys</code> kernel driver.</li>
@@ -680,20 +762,6 @@ cat "Major AI Skills/skills/windows/everything/claude_skill.md" >> .cursorrules<
             <li><strong>PowerToys</strong>: FancyZones multi-monitor canvas schemas, PowerToys Run C# plugins (<code>IPlugin</code>), and Awake power management.</li>
             <li><strong>Flow Launcher</strong>: Python JSON-RPC stdin/stdout plugins, C# <code>IPlugin</code> interfaces, and Everything search integration.</li>
           </ul>
-          <h2 class="section-heading" id="sec-code">Sample Win32 Implementation (Everything C-SDK Python)</h2>
-          <pre><code>import ctypes
-from ctypes import wintypes
-
-everything = ctypes.WinDLL("Everything64.dll")
-everything.Everything_SetSearchW.argtypes = [wintypes.LPCWSTR]
-everything.Everything_QueryW.argtypes = [wintypes.BOOL]
-everything.Everything_QueryW.restype = wintypes.BOOL
-
-def search_files(query: str):
-    everything.Everything_SetSearchW(query)
-    everything.Everything_QueryW(True)
-    count = everything.Everything_GetNumResults()
-    print(f"Found {count} matches for '{query}' across NTFS volumes.")</code></pre>
         `
       },
       cad: {
@@ -812,6 +880,7 @@ def search_files(query: str):
       const activeItem = event && event.target ? event.target.closest('.nav-item') : null;
       if (activeItem) activeItem.classList.add('active');
 
+      updateCommunityStars();
       window.scrollTo(0, 0);
     }
 
@@ -827,6 +896,10 @@ def search_files(query: str):
         item.parentElement.style.display = (query === '' || text.includes(query)) ? 'block' : 'none';
       });
     }
+
+    // Initialize document and start 1-hour star update interval
+    loadDoc('overview');
+    setInterval(updateCommunityStars, 60 * 60 * 1000);
   </script>
 </body>
 </html>

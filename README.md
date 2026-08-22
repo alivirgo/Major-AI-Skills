@@ -100,6 +100,12 @@ Ingest the `skills/` or `efficiency ai skills/` folders into your local vector d
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=alivirgo/Major-AI-Skills&type=Date)](https://star-history.com/#alivirgo/Major-AI-Skills&Date)
+
+---
+
 ## License
 
 MIT License. Feel free to use, modify, and distribute these skill specifications in your own projects, custom agents, and internal team workflows.
