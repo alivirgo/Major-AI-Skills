@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Major AI Skills | 425+ Production AI Skills, Prompts & Blueprints</title>
+  <meta name="description" content="A curated repository of 425+ production-grade AI skills, system prompt specs, and token optimization blueprints for Claude, ChatGPT, Gemini, and local LLMs across 75 software applications.">
+  <meta name="keywords" content="AI skills, prompt engineering, system prompts, token optimization, Claude, ChatGPT, Gemini, Codex, Antigravity, OpenClaw, CAD AI, Video Editing AI, LLM developer tools">
+  <meta name="author" content="Ali Virgo">
+  <link rel="canonical" href="https://alivirgo.github.io/Major-AI-Skills/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alivirgo.github.io/Major-AI-Skills/">
+  <meta property="og:title" content="Major AI Skills | 425+ Production AI Skills & System Prompt Specs">
+  <meta property="og:description" content="Curated collection of 425+ production-grade AI skills, prompt engineering specs, and token optimization blueprints across 75 software applications and 17 domain categories.">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://alivirgo.github.io/Major-AI-Skills/">
+  <meta property="twitter:title" content="Major AI Skills | 425+ Production AI Skills & System Prompt Specs">
+  <meta property="twitter:description" content="Curated collection of 425+ production-grade AI skills, prompt engineering specs, and token optimization blueprints across 75 software applications and 17 domain categories.">
+
+  <!-- Google Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Major AI Skills",
+    "description": "Curated collection of 425+ production-grade AI skills, system prompt specs, and token optimization blueprints for Claude, ChatGPT, Gemini, and local LLMs.",
+    "codeRepository": "https://github.com/alivirgo/Major-AI-Skills",
+    "author": {
+      "@type": "Person",
+      "name": "Ali Virgo",
+      "url": "https://github.com/alivirgo"
+    },
+    "programmingLanguage": ["Python", "C#", "C++", "PowerShell", "AutoHotkey", "Structured Text", "MATLAB"]
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #0a0d14;
+      --bg-secondary: #101522;
+      --bg-card: rgba(19, 26, 42, 0.7);
+      --bg-card-hover: rgba(27, 37, 59, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(99, 102, 241, 0.4);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-indigo: #6366f1;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --glow-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Glows */
+    .bg-glow-1 {
+      position: fixed;
+      top: -150px;
+      left: 20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -150px;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header & Navigation */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 13, 20, 0.85);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .logo-badge {
+      background: var(--glow-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 72px 0 48px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #818cf8;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: var(--glow-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    /* Search & Filter Bar */
+    .search-wrapper {
+      max-width: 680px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      border-radius: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Category Filter Tabs */
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-indigo);
+      border-color: var(--accent-indigo);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Cards Grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .category-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .apps-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .app-chip {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-models {
+      display: flex;
+      gap: 6px;
+    }
+
+    .model-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .model-claude { background: rgba(217, 119, 6, 0.2); color: #fbbf24; }
+    .model-gemini { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .model-gpt { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+    .card-link {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-indigo);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .card-link:hover {
+      color: #818cf8;
+      text-decoration: underline;
+    }
+
+    /* Hub Sections (Efficiency & Common Sense) */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+
+    .hub-card {
+      background: linear-gradient(145deg, rgba(16, 21, 34, 0.9), rgba(19, 26, 42, 0.6));
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hub-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--glow-gradient);
+    }
+
+    .hub-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hub-desc {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      margin-bottom: 24px;
+    }
+
+    .hub-feature-list {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .hub-feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .hub-feature-list li::before {
+      content: '✓';
+      color: var(--accent-emerald);
+      font-weight: 800;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+      .hub-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-row {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-content">
+      <a href="#" class="logo">
+        <span>⚡</span>
+        <span>Major <span class="logo-badge">AI Skills</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero-badge">🚀 Production-Ready AI Blueprints</div>
+      <h1>Specialized AI Skills for <span>425+ Professional Workflows</span></h1>
+      <p>Handcrafted, zero-fluff technical specifications and prompt engineering blueprints built for Claude Code, ChatGPT, Gemini, and local LLMs across 75 top software applications.</p>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num">425+</div>
+          <div class="stat-label">AI Skills Specs</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">75</div>
+          <div class="stat-label">Applications Covered</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">17</div>
+          <div class="stat-label">Domain Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Handcrafted Code</div>
+        </div>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="search-wrapper">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="skillSearch" class="search-input" placeholder="Search applications, CAD, video editing, scripts, tokens...">
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-filter="all">All Domains (17)</button>
+        <button class="tab-btn" data-filter="cad">CAD & 3D</button>
+        <button class="tab-btn" data-filter="media">Video & Audio</button>
+        <button class="tab-btn" data-filter="systems">Windows & Mac</button>
+        <button class="tab-btn" data-filter="enterprise">Enterprise & PLC</button>
+        <button class="tab-btn" data-filter="science">Scientific & GIS</button>
+      </div>
+    </section>
+
+    <!-- Core Hub Highlights -->
+    <section class="hub-grid">
+      <div class="hub-card">
+        <h2 class="hub-title">⚡ Efficiency AI Skills (100 Rules)</h2>
+        <p class="hub-desc">Proven token-reduction techniques and prompt compression rules to cut API costs by 40-70% and eliminate context window bloat.</p>
+        <ul class="hub-feature-list">
+          <li>AST Code Skeletonization & Selective Imports</li>
+          <li>Line-Bounded Range Edits & Diff Minimization</li>
+          <li>Prompt Caching Headers & Stop Sequence Truncation</li>
+          <li>Subagent Transcript Indexing & Tool Choice Forcing</li>
+        </ul>
+        <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="card-link">Explore Efficiency Skills &rarr;</a>
+      </div>
+
+      <div class="hub-card">
+        <h2 class="hub-title">💡 Common Sense AI Skills (100 Habits)</h2>
+        <p class="hub-desc">Practical, plain-English habits designed for non-technical users and everyday productivity with LLMs.</p>
+        <ul class="hub-feature-list">
+          <li>Eliminating Hallucinations & Factual Grounding</li>
+          <li>Instant Tone Calibration & Role Stacking</li>
+          <li>One-Shot Template Reusability & Batch Summaries</li>
+          <li>Automating Email, Meeting Notes & Contract Reviews</li>
+        </ul>
+        <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="card-link">Explore Common Sense Skills &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Application Categories Grid -->
+    <section class="categories-grid" id="categoriesGrid">
+      
+      <!-- CAD -->
+      <div class="category-card" data-tags="cad 3d mechanical solidworks catia nx fusion rhino">
+        <div class="card-header">
+          <div class="card-icon">📐</div>
+          <div class="card-title">CAD & Parametric Design</div>
+        </div>
+        <p class="card-desc">Parametric feature scripting, NURBS surface modeling, Python CAD API bridges, and PLM lifecycle pipelines.</p>
+        <div class="apps-chips">
+          <span class="app-chip">SolidWorks</span>
+          <span class="app-chip">CATIA</span>
+          <span class="app-chip">Siemens NX</span>
+          <span class="app-chip">Fusion 360</span>
+          <span class="app-chip">Rhino 3D</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cad" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Video Editing -->
+      <div class="category-card" data-tags="media video editing davinci resolve final cut vegas fcpxml timeline">
+        <div class="card-header">
+          <div class="card-icon">🎬</div>
+          <div class="card-title">Video Editing & NLE Post</div>
+        </div>
+        <p class="card-desc">DaVinci Resolve scripting API, Fusion VFX nodes, FCPXML v1.11 timelines, and VEGAS C# batch rendering.</p>
+        <div class="apps-chips">
+          <span class="app-chip">DaVinci Resolve</span>
+          <span class="app-chip">Final Cut Pro</span>
+          <span class="app-chip">VEGAS Pro</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/video-editing" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 3D Animation -->
+      <div class="category-card" data-tags="cad 3d animation vfx houdini cinema4d zbrush substance pbr">
+        <div class="card-header">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">3D Modeling & Visual Effects</div>
+        </div>
+        <p class="card-desc">Houdini VEX/Python nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance Painter PBR texturing.</p>
+        <div class="apps-chips">
+          <span class="app-chip">Houdini</span>
+          <span class="app-chip">Cinema 4D</span>
+          <span class="app-chip">ZBrush</span>
+          <span class="app-chip">Substance 3D</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/3d" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Windows Systems -->
+      <div class="category-card" data-tags="systems windows autohotkey powertoys everything eartrumpet systeminformer wiztree sandboxie scoop sharex">
+        <div class="card-header">
+          <div class="card-icon">🪟</div>
+          <div class="card-title">Windows Utilities & Kernel</div>
+        </div>
+        <p class="card-desc">NTDLL process diagnostics, MFT storage visualizers, WASAPI audio routing, AHK v2 automation, and isolation sandboxes.</p>
+        <div class="apps-chips">
+          <span class="app-chip">AutoHotkey v2</span>
+          <span class="app-chip">PowerToys</span>
+          <span class="app-chip">Everything</span>
+          <span class="app-chip">System Informer</span>
+          <span class="app-chip">WizTree</span>
+          <span class="app-chip">Sandboxie</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/windows" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- macOS Productivity -->
+      <div class="category-card" data-tags="systems macos raycast shottr rectangle orbstack macwhisper appcleaner velja maccy">
+        <div class="card-header">
+          <div class="card-icon">🍎</div>
+          <div class="card-title">macOS Native Productivity</div>
+        </div>
+        <p class="card-desc">Raycast React extensions, Accessibility API window snapping, Apple Silicon Docker/Linux VM runtime, and CoreML transcription.</p>
+        <div class="apps-chips">
+          <span class="app-chip">Raycast</span>
+          <span class="app-chip">OrbStack</span>
+          <span class="app-chip">MacWhisper</span>
+          <span class="app-chip">Rectangle</span>
+          <span class="app-chip">Shottr</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/macos" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Cross Platform Tools -->
+      <div class="category-card" data-tags="systems cross-platform ffmpeg wireshark nginx tailscale rclone bruno sniffnet">
+        <div class="card-header">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Cross-Platform Infrastructure</div>
+        </div>
+        <p class="card-desc">FFmpeg hardware pipelines, Wireshark tshark packet analysis, Nginx reverse proxying, Tailscale mesh VPN, and Rclone cloud sync.</p>
+        <div class="apps-chips">
+          <span class="app-chip">FFmpeg</span>
+          <span class="app-chip">Wireshark</span>
+          <span class="app-chip">Nginx</span>
+          <span class="app-chip">Tailscale</span>
+          <span class="app-chip">Rclone</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cross-platform" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- PLC & Industrial -->
+      <div class="category-card" data-tags="enterprise industrial plc siemens tia rockwell studio5000 codesys scada opcua">
+        <div class="card-header">
+          <div class="card-icon">🏭</div>
+          <div class="card-title">PLC & Industrial Automation</div>
+        </div>
+        <p class="card-desc">IEC 61131-3 Structured Text, Siemens TIA Openness, Rockwell CIP tag drivers, and CODESYS OPC UA controllers.</p>
+        <div class="apps-chips">
+          <span class="app-chip">Siemens TIA</span>
+          <span class="app-chip">Studio 5000</span>
+          <span class="app-chip">CODESYS</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/plc-industrial" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Scientific & Multiphysics -->
+      <div class="category-card" data-tags="science scientific matlab comsol labview originpro fea daq">
+        <div class="card-header">
+          <div class="card-icon">🔬</div>
+          <div class="card-title">Scientific Computing & Simulation</div>
+        </div>
+        <p class="card-desc">MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.</p>
+        <div class="apps-chips">
+          <span class="app-chip">MATLAB</span>
+          <span class="app-chip">COMSOL</span>
+          <span class="app-chip">LabVIEW</span>
+          <span class="app-chip">OriginPro</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/scientific" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Music & DAWs -->
+      <div class="category-card" data-tags="media music daw ableton cubase flstudio logicpro protools midi">
+        <div class="card-header">
+          <div class="card-icon">🎵</div>
+          <div class="card-title">Music Production & DAWs</div>
+        </div>
+        <p class="card-desc">Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.</p>
+        <div class="apps-chips">
+          <span class="app-chip">Ableton Live</span>
+          <span class="app-chip">Cubase</span>
+          <span class="app-chip">FL Studio</span>
+          <span class="app-chip">Logic Pro</span>
+          <span class="app-chip">Pro Tools</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/music" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Electronic Design (EDA) -->
+      <div class="category-card" data-tags="science eda altium kicad cadence ltspice pcb circuit">
+        <div class="card-header">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Electronic Design Automation</div>
+        </div>
+        <p class="card-desc">Altium DelphiScript automation, KiCad PCB Python API, Cadence Virtuoso SKILL scripting, and LTspice raw simulation parsing.</p>
+        <div class="apps-chips">
+          <span class="app-chip">Altium</span>
+          <span class="app-chip">KiCad</span>
+          <span class="app-chip">Cadence</span>
+          <span class="app-chip">LTspice</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/eda" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Enterprise ERP & PLM -->
+      <div class="category-card" data-tags="enterprise erp sap oracle dynamics maximo windchill servicenow">
+        <div class="card-header">
+          <div class="card-icon">🏢</div>
+          <div class="card-title">Enterprise ERP, PLM & EAM</div>
+        </div>
+        <p class="card-desc">SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.</p>
+        <div class="apps-chips">
+          <span class="app-chip">SAP GUI</span>
+          <span class="app-chip">Oracle EBS</span>
+          <span class="app-chip">Dynamics NAV</span>
+          <span class="app-chip">IBM Maximo</span>
+          <span class="app-chip">Windchill</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/erp" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+      <!-- GIS & Medical -->
+      <div class="category-card" data-tags="science gis medical dicom arcgis qgis slicer osirix horos">
+        <div class="card-header">
+          <div class="card-icon">🗺️</div>
+          <div class="card-title">GIS, Medical Imaging & DICOM</div>
+        </div>
+        <p class="card-desc">ArcGIS ArcPy geoprocessing, QGIS PyQGIS pipelines, 3D Slicer volume segmentation, and OsiriX DICOM radiology workstations.</p>
+        <div class="apps-chips">
+          <span class="app-chip">ArcGIS Pro</span>
+          <span class="app-chip">QGIS</span>
+          <span class="app-chip">3D Slicer</span>
+          <span class="app-chip">OsiriX</span>
+          <span class="app-chip">Horos</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-models">
+            <span class="model-badge model-claude">Claude</span>
+            <span class="model-badge model-gemini">Gemini</span>
+            <span class="model-badge model-gpt">GPT</span>
+          </div>
+          <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/gis" target="_blank" class="card-link">View Skills &rarr;</a>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Major AI Skills is an open-source project maintained by <a href="https://github.com/alivirgo" target="_blank">Ali Virgo</a> under the MIT License.</p>
+      <p style="margin-top: 8px; font-size: 0.8125rem;">Built for Claude Code, ChatGPT, Gemini, LM Studio, Antigravity, and VS Code.</p>
+    </div>
+  </footer>
+
+  <!-- Interactive Search & Filtering Script -->
+  <script>
+    const searchInput = document.getElementById('skillSearch');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.category-card');
+
+    let currentFilter = 'all';
+
+    function filterCards() {
+      const query = searchInput.value.toLowerCase().trim();
+
+      cards.forEach(card => {
+        const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        const matchesSearch = query === '' || tags.includes(query) || text.includes(query);
+        const matchesTab = currentFilter === 'all' || tags.includes(currentFilter);
+
+        if (matchesSearch && matchesTab) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterCards);
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        filterCards();
+      });
+    });
+  </script>
+</body>
+</html>
