@@ -26,7 +26,7 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![Skills](https://img.shields.io/badge/Skills-392-blueviolet)](CATALOG.md)
 [![npm](https://img.shields.io/npm/v/major-ai-skills?color=cb3837&label=npm)](https://www.npmjs.com/package/major-ai-skills)
 [![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@alivirgo%2Fmajor--ai--skills-24292f)](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills)
-[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/tag/V2.1.0)
+[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/tag/v2.1.0)
 [![skills.sh](https://img.shields.io/badge/skills.sh-npx%20skills%20add-000)](#installation)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
@@ -68,11 +68,11 @@ Prefer an exact reviewed set. Full Antigravity installs can exhaust context beca
 | --- | --- |
 | **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |
 | **GitHub Packages** | Scoped package [`@alivirgo/major-ai-skills`](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills) (fills the repo **Packages** sidebar) |
-| **GitHub Release** | Download `major-ai-skills-2.0.0.tgz` from [V2.1.0](https://github.com/alivirgo/Major-AI-Skills/releases/tag/V2.1.0) |
+| **GitHub Release** | Download `major-ai-skills-2.1.0.tgz` from [V2.1.0](https://github.com/alivirgo/Major-AI-Skills/releases/tag/v2.1.0) |
 | **skills.sh / Vercel skills CLI** | `npx skills add alivirgo/Major-AI-Skills` (discovery via install telemetry) |
 | **Claude Code marketplace** | Add this repo as a marketplace (`.claude-plugin/marketplace.json`), then install a specialized plugin |
 | **Gemini CLI gallery** | `gemini-extension.json` + topic `gemini-cli-extension` (auto-indexed) · `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
-| **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@2.0.0/) / [unpkg](https://unpkg.com/major-ai-skills@2.0.0/) mirror the npm package |
+| **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@2.1.0/) / [unpkg](https://unpkg.com/major-ai-skills@2.1.0/) mirror the npm package |
 | **GitHub Pages** | Browse catalog: [alivirgo.github.io/Major-AI-Skills](https://alivirgo.github.io/Major-AI-Skills/) |
 
 Full channel list + submit links: [docs/users/distribution.md](docs/users/distribution.md).

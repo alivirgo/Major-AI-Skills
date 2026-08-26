@@ -978,7 +978,7 @@
 
   <!-- Notification Bar -->
   <div class="notification-bar">
-    <span>392 installable agent skills for 90+ applications - </span>
+    <span>392 installable agent skills - v2.1.0 - </span>
     <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">Star on GitHub →</a>
   </div>
 
@@ -986,7 +986,7 @@
   <header class="site-header">
     <div class="header-brand" onclick="loadDoc('overview')">
       <span class="header-logo">Major AI Skills</span>
-      <span class="header-version">v1.0.0</span>
+      <span class="header-version">v2.1.0</span>
     </div>
     <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
     <nav class="header-nav">
@@ -1019,7 +1019,7 @@
         <li><a class="nav-item" onclick="loadDoc('usage', event)"><span>Installation & Integration</span></a></li>
       </ul>
 
-      <div class="nav-section-title">Application Domains (76 Tools)</div>
+      <div class="nav-section-title">Application Domains (28 Categories)</div>
       <ul class="nav-list" id="appsNavList">
         <li><a class="nav-item" onclick="loadDoc('linux', event)"><span>Linux Desktop Distribution</span> <span class="nav-badge">1</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cad', event)"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
@@ -1029,16 +1029,19 @@
         <li><a class="nav-item" onclick="loadDoc('macos', event)"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cross-platform', event)"><span>Cross-Platform Tools</span> <span class="nav-badge">9</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('plc-industrial', event)"><span>PLC & Industrial Automation</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('scientific', event)"><span>Scientific Computing</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('scientific', event)"><span>Scientific Computing</span> <span class="nav-badge">15</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('music', event)"><span>Music Production & DAWs</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('eda', event)"><span>Electronic Design (EDA)</span> <span class="nav-badge">4</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('erp', event)"><span>Enterprise ERP, PLM & EAM</span> <span class="nav-badge">6</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('erp', event)"><span>Enterprise ERP, PLM & EAM</span> <span class="nav-badge">3</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('digital-forensics', event)"><span>Digital Forensics & IR</span> <span class="nav-badge">3</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('gis', event)"><span>GIS & Medical Imaging</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('game-engines', event)"><span>Game Engines & Runtimes</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('network', event)"><span>Network SDN Controllers</span> <span class="nav-badge">1</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('network', event)"><span>Network & Edge</span> <span class="nav-badge">3</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('design', event)"><span>Design & Knowledge</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('devops', event)"><span>DevOps & Automation</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('development', event)"><span>Web, Mobile & APIs</span> <span class="nav-badge">37</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('productivity', event)"><span>Productivity & SaaS</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('enterprise', event)"><span>Enterprise Platforms</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('devops', event)"><span>DevOps & Cloud</span> <span class="nav-badge">45</span></a></li>
       </ul>
 
       <div class="nav-section-title">Reference Handbooks</div>
@@ -1120,24 +1123,27 @@
 
     // Category Cards for Homepage
     const categoryData = [
-      { key: 'linux', icon: '🐧', title: 'Linux Desktop', count: '1 App', apps: 'Omarchy (Arch + Hyprland + Quickshell)' },
-      { key: 'cad', icon: '⚙️', title: 'CAD & Design', count: '5 Apps', apps: 'SolidWorks, CATIA, NX, Fusion 360, Rhino' },
-      { key: 'video-editing', icon: '🎬', title: 'Video Editing', count: '6 Apps', apps: 'DaVinci, Premiere, After Effects, Remotion...' },
-      { key: '3d', icon: '🎨', title: '3D & VFX', count: '5 Apps', apps: 'Blender, Houdini, Cinema 4D, ZBrush, Substance' },
-      { key: 'windows', icon: '🪟', title: 'Windows Utilities', count: '10 Apps', apps: 'AHK v2, Everything, PowerToys, ShareX...' },
-      { key: 'macos', icon: '🍎', title: 'macOS Productivity', count: '9 Apps', apps: 'Raycast, OrbStack, Rectangle, Shottr...' },
-      { key: 'cross-platform', icon: '🌐', title: 'Cross-Platform', count: '9 Apps', apps: 'FFmpeg, Wireshark, Nginx, Tailscale...' },
-      { key: 'plc-industrial', icon: '🏭', title: 'PLC & Industrial', count: '3 Apps', apps: 'TIA Portal, Studio 5000, CODESYS' },
-      { key: 'scientific', icon: '🔬', title: 'Scientific', count: '4 Apps', apps: 'MATLAB, COMSOL, LabVIEW, OriginPro' },
-      { key: 'music', icon: '🎵', title: 'Music & DAWs', count: '5 Apps', apps: 'Ableton, Cubase, FL Studio, Logic Pro...' },
-      { key: 'eda', icon: '📟', title: 'Electronic Design', count: '4 Apps', apps: 'Altium, KiCad, Cadence, LTspice' },
-      { key: 'erp', icon: '🏢', title: 'Enterprise ERP', count: '6 Apps', apps: 'SAP GUI, Oracle EBS, Dynamics NAV...' },
-      { key: 'digital-forensics', icon: '🔍', title: 'Digital Forensics', count: '3 Apps', apps: 'Autopsy, EnCase, FTK' },
-      { key: 'gis', icon: '🗺️', title: 'GIS & Medical', count: '5 Apps', apps: 'ArcGIS, QGIS, 3D Slicer, OsiriX, Horos' },
-      { key: 'game-engines', icon: '🎮', title: 'Game Engines', count: '5 Apps', apps: 'Unity, Unreal, Godot, CryEngine, RPG Maker' },
-      { key: 'network', icon: '📡', title: 'Network SDN', count: '1 App', apps: 'TP-Link Omada SDN Controller' },
-      { key: 'design', icon: '✏️', title: 'Design & Knowledge', count: '5 Apps', apps: 'Figma, Photoshop, Obsidian, Notion, Linear' },
-      { key: 'devops', icon: '📦', title: 'DevOps & Automation', count: '5 Apps', apps: 'Docker, Supabase, n8n, Playwright, VS Code' },
+      { key: 'linux', icon: '🐧', title: 'Linux Desktop', count: '1 Skill', apps: 'Omarchy (Arch + Hyprland + Quickshell)' },
+      { key: 'cad', icon: '⚙️', title: 'CAD & Design', count: '5 Skills', apps: 'SolidWorks, CATIA, NX, Fusion 360, Rhino' },
+      { key: 'video-editing', icon: '🎬', title: 'Video Editing', count: '6 Skills', apps: 'DaVinci, Premiere, After Effects, Remotion...' },
+      { key: '3d', icon: '🎨', title: '3D & VFX', count: '5 Skills', apps: 'Blender, Houdini, Cinema 4D, ZBrush, Substance' },
+      { key: 'windows', icon: '🪟', title: 'Windows Utilities', count: '10 Skills', apps: 'AHK v2, Everything, PowerToys, ShareX...' },
+      { key: 'macos', icon: '🍎', title: 'macOS Productivity', count: '9 Skills', apps: 'Raycast, OrbStack, Rectangle, Shottr...' },
+      { key: 'cross-platform', icon: '🌐', title: 'Cross-Platform', count: '9 Skills', apps: 'FFmpeg, Wireshark, Nginx, Tailscale...' },
+      { key: 'plc-industrial', icon: '🏭', title: 'PLC & Industrial', count: '3 Skills', apps: 'TIA Portal, Studio 5000, CODESYS' },
+      { key: 'scientific', icon: '🔬', title: 'Scientific & Data', count: '15 Skills', apps: 'MATLAB, Pandas, Spark, PyTorch, Hugging Face...' },
+      { key: 'music', icon: '🎵', title: 'Music & DAWs', count: '5 Skills', apps: 'Ableton, Cubase, FL Studio, Logic Pro...' },
+      { key: 'eda', icon: '📟', title: 'Electronic Design', count: '4 Skills', apps: 'Altium, KiCad, Cadence, LTspice' },
+      { key: 'erp', icon: '🏢', title: 'Enterprise ERP', count: '3 Skills', apps: 'SAP GUI, Oracle EBS, Dynamics NAV...' },
+      { key: 'digital-forensics', icon: '🔍', title: 'Digital Forensics', count: '3 Skills', apps: 'Autopsy, EnCase, FTK' },
+      { key: 'gis', icon: '🗺️', title: 'GIS & Medical', count: '5 Skills', apps: 'ArcGIS, QGIS, 3D Slicer, OsiriX, Horos' },
+      { key: 'game-engines', icon: '🎮', title: 'Game Engines', count: '5 Skills', apps: 'Unity, Unreal, Godot, CryEngine, RPG Maker' },
+      { key: 'network', icon: '📡', title: 'Network & Edge', count: '3 Skills', apps: 'Omada SDN, Wireshark, Tailscale...' },
+      { key: 'design', icon: '✏️', title: 'Design & Knowledge', count: '5 Skills', apps: 'Figma, Photoshop, Obsidian, Notion, Linear' },
+      { key: 'development', icon: '💻', title: 'Web, Mobile & APIs', count: '37 Skills', apps: 'Next.js, React, FastAPI, Flutter, Stripe...' },
+      { key: 'productivity', icon: '✅', title: 'Productivity & SaaS', count: '5 Skills', apps: 'Jira, Asana, Trello...' },
+      { key: 'enterprise', icon: '🤝', title: 'Enterprise Platforms', count: '5 Skills', apps: 'Salesforce, HubSpot, Maximo, Windchill...' },
+      { key: 'devops', icon: '📦', title: 'DevOps & Cloud', count: '45 Skills', apps: 'Kubernetes, Terraform, Helm, AWS CLI, Docker...' },
     ];
 
     function renderCategoryGrid() {
@@ -1179,11 +1185,11 @@
  ██║ ╚═╝ ██║██║  ██║╚█████╔╝╚██████╔╝██║  ██║    ██║  ██║██║    ███████║██║  ██╗██║███████╗███████╗███████║
  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝</div>
             <h2 class="hero-tagline">Production-Grade AI <span class="highlight">Automation Blueprints</span></h2>
-            <p class="hero-subtitle">Deterministic, expert-level skill specifications for Claude, Gemini, GPT & Codex across 76 professional applications. Zero boilerplate. Zero hallucinations.</p>
+            <p class="hero-subtitle">Deterministic, expert-level skill specifications for Claude, Gemini, GPT & Codex across 392 installable skills and 190+ product/dev workflows. Zero boilerplate. Zero hallucinations.</p>
             <div class="hero-stats">
               <div class="hero-stat"><div class="hero-stat-value">392</div><div class="hero-stat-label">Skill Specs</div></div>
-              <div class="hero-stat"><div class="hero-stat-value">90+</div><div class="hero-stat-label">Applications</div></div>
-              <div class="hero-stat"><div class="hero-stat-value">24+</div><div class="hero-stat-label">Domains</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">190+</div><div class="hero-stat-label">Product Skills</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">28</div><div class="hero-stat-label">Domains</div></div>
               <div class="hero-stat"><div class="hero-stat-value" id="heroStars">0</div><div class="hero-stat-label">GitHub Stars</div></div>
             </div>
             <div class="hero-buttons">
@@ -1199,7 +1205,7 @@
           </div>
 
           <h2 class="section-heading" id="sec-categories">Application Domains</h2>
-          <p>18 curated engineering categories spanning CAD, VFX, audio, security, industrial automation, and OS-level system utilities:</p>
+          <p>28 curated engineering categories spanning CAD, VFX, audio, security, industrial automation, and OS-level system utilities:</p>
           ${renderCategoryGrid()}
 
           <h2 class="section-heading" id="sec-how">How It Works</h2>
@@ -1207,7 +1213,7 @@
             <div class="how-card">
               <div class="how-card-num">01</div>
               <div class="how-card-title">Pick a Skill</div>
-              <div class="how-card-desc">Browse 76 applications across 18 domains. Each skill is a self-contained expert blueprint.</div>
+              <div class="how-card-desc">Browse 392 skills across 28 domains. Each skill is a self-contained expert blueprint.</div>
             </div>
             <div class="how-card">
               <div class="how-card-num">02</div>
@@ -1250,7 +1256,11 @@
               <tr><td>macOS Productivity</td><td>Raycast, OrbStack, MacWhisper, Rectangle...</td><td>React/TS, AXUIElement, CoreML, Swift</td></tr>
               <tr><td>Cross-Platform</td><td>FFmpeg, Wireshark, Nginx, Tailscale, Rclone...</td><td>CLI, pcapng, config, WireGuard</td></tr>
               <tr><td>Industrial & PLC</td><td>TIA Portal, Studio 5000, CODESYS</td><td>TIA Openness, CIP Pycomm3, IEC 61131-3</td></tr>
-              <tr><td>Scientific</td><td>MATLAB, COMSOL, LabVIEW, OriginPro</td><td>MEX C++, mph Python, DAQmx, PyOrigin</td></tr>
+              <tr><td>Scientific</td><td>MATLAB, COMSOL, LabVIEW, OriginPro + Pandas/Spark/PyTorch</td><td>MEX C++, mph Python, Python data stack</td></tr>
+              <tr><td>Cloud & DevOps</td><td>Kubernetes, Terraform, Helm, GitHub Actions, AWS/GCP/Azure CLIs...</td><td>kubectl, HCL, YAML, OIDC</td></tr>
+              <tr><td>Data & ML</td><td>PostgreSQL, Redis, Spark, Pandas, PyTorch, Hugging Face...</td><td>SQL, Python, PromQL</td></tr>
+              <tr><td>Web & Mobile</td><td>Next.js, React, FastAPI, Flutter, Android Studio, Xcode...</td><td>TS/JS, Dart, Kotlin, Swift</td></tr>
+              <tr><td>SaaS & Security</td><td>Stripe, Jira, Salesforce, Semgrep, CodeQL, Trivy...</td><td>REST, webhooks, SAST</td></tr>
               <tr><td>Music & DAWs</td><td>Ableton Live, Cubase, FL Studio, Logic Pro, Pro Tools</td><td>MIDI Remote Scripts, OSC, JavaScript MIDI FX</td></tr>
               <tr><td>EDA & PCB</td><td>Altium Designer, KiCad, Cadence Virtuoso, LTspice</td><td>DelphiScript, pcbnew Python, SKILL, SPICE</td></tr>
               <tr><td>Enterprise</td><td>SAP GUI, Oracle EBS, Dynamics NAV, Maximo, Windchill</td><td>VBScript, OA Framework, AL, REST/SOAP</td></tr>
@@ -1406,9 +1416,9 @@ npx major-ai-skills --cursor --skills solidworks</code></pre>
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Industrial automation controllers, Programmable Logic Controller (PLC) programming in IEC 61131-3 Structured Text, and SCADA connectivity.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('plc-industrial', [{ name: 'Siemens TIA Portal', slug: 'siemens-tia-portal', desc: 'TIA Openness C# API, SCL Structured Control Language, and S7-1500 hardware configuration.' }, { name: 'Rockwell Studio 5000', slug: 'rockwell-studio-5000', desc: 'ControlLogix / CompactLogix Structured Text, L5X XML generation, and Pycomm3 CIP drivers.' }, { name: 'CODESYS V3.5', slug: 'codesys', desc: 'Hardware-independent IEC 61131-3 PLC programming, SoftPLC runtime, and OPC UA server configuration.' }])}`
       },
       scientific: {
-        breadcrumb: 'Docs / Applications / Scientific Computing', heading: 'Scientific Computing & Simulation (4 Applications)', description: 'MATLAB MEX C++ acceleration, COMSOL Multiphysics solvers, LabVIEW DAQmx streaming, and OriginPro non-linear peak fitting.', hasModels: true,
-        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
-        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Numerical computing, finite element multiphysics analysis, instrument control, and scientific publication-ready data analysis.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('scientific', [{ name: 'MathWorks MATLAB', slug: 'matlab', desc: 'Numerical matrix math, Simulink models, MEX C++ compiled bridges, and GPU ArrayFire acceleration.' }, { name: 'COMSOL Multiphysics', slug: 'comsol', desc: 'Finite Element Analysis (FEA), multi-physics field coupling, and MPH-Java API automation.' }, { name: 'National Instruments LabVIEW', slug: 'labview', desc: 'Virtual Instrument (VI) dataflow programming, NI-DAQmx hardware data streaming, and VISA serial.' }, { name: 'OriginLab OriginPro', slug: 'originpro', desc: 'Publication-quality scientific graphing, non-linear curve fitting, and PyOrigin Python automation.' }])}`
+        breadcrumb: 'Docs / Applications / Scientific Computing', heading: 'Scientific Computing & Data (15 Skills)', description: 'MATLAB, COMSOL, LabVIEW, OriginPro plus Pandas, Spark, PyTorch, Hugging Face, Jupyter, and related data/ML skills.', hasModels: true,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Numerical computing, multiphysics simulation, instrument control, and the modern Python data/ML stack.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('scientific', [{ name: 'MathWorks MATLAB', slug: 'matlab', desc: 'Numerical matrix math, Simulink, MEX bridges.', variants: false }, { name: 'COMSOL Multiphysics', slug: 'comsol', desc: 'FEA, multiphysics coupling, MPH automation.', variants: false }, { name: 'Pandas', slug: 'pandas', desc: 'DataFrames, joins, groupby, and tidy transforms.', variants: false }, { name: 'Apache Spark', slug: 'spark', desc: 'Spark SQL, jobs, and cluster debugging notes.', variants: false }, { name: 'PyTorch', slug: 'pytorch', desc: 'Tensors, training loops, and checkpoint hygiene.', variants: false }, { name: 'Hugging Face', slug: 'huggingface', desc: 'Transformers, datasets, and Hub workflows.', variants: false }, { name: 'Jupyter', slug: 'jupyter', desc: 'Notebooks, kernels, and reproducible runs.', variants: false }, { name: 'LabVIEW', slug: 'labview', desc: 'VI dataflow, DAQmx streaming, VISA.', variants: false }])}<p><a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse full CATALOG.md →</a></p>`
       },
       music: {
         breadcrumb: 'Docs / Applications / Music Production & DAWs', heading: 'Music Production & Digital Audio Workstations (5 Applications)', description: 'Ableton Live OSC control, Cubase MIDI Logical Editor, FL Studio Python controllers, Logic Pro Scripter, and Pro Tools PTSL API.', hasModels: true,
@@ -1421,9 +1431,9 @@ npx major-ai-skills --cursor --skills solidworks</code></pre>
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Schematic capture, PCB layout routing, SPICE analog circuit simulation, and IC layout automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('eda', [{ name: 'Altium Designer', slug: 'altium-designer', desc: 'DelphiScript / JavaScript PCB automation, design rule checking (DRC), and automated Gerber output.' }, { name: 'KiCad EDA', slug: 'kicad', desc: 'Open-source PCB design, pcbnew Python API scripting, footprint placement, and BOM generation.' }, { name: 'Cadence Virtuoso', slug: 'cadence-virtuoso', desc: 'Analog/mixed-signal IC layout, SKILL language automation, and Spectre SPICE netlist simulation.' }, { name: 'Analog Devices LTspice', slug: 'ltspice', desc: 'SPICE transient/AC circuit simulation, headless batch execution, and raw binary waveform parsing.' }])}`
       },
       erp: {
-        breadcrumb: 'Docs / Applications / Enterprise ERP, PLM & EAM', heading: 'Enterprise ERP, PLM & EAM Systems (6 Applications)', description: 'SAP GUI Scripting, Oracle EBS automation, Business Central AL, IBM Maximo REST APIs, and Windchill PLM SOAP/REST endpoints.', hasModels: true,
+        breadcrumb: 'Docs / Applications / Enterprise ERP, PLM & EAM', heading: 'Enterprise ERP (3 Skills)', description: 'SAP GUI Scripting, Oracle EBS automation, and Dynamics NAV / Business Central AL.', hasModels: true,
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
-        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Enterprise Resource Planning, Product Lifecycle Management (PLM), Enterprise Asset Management (EAM), and IT Service Management.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('erp', [{ name: 'SAP GUI', slug: 'sap-gui', desc: 'SAP GUI Scripting API (VBScript/Python), transaction execution (T-Codes), and batch data entry.' }, { name: 'Oracle E-Business Suite', slug: 'oracle-ebs', desc: 'Oracle Forms Automation, OA Framework scripting, and Concurrent Program management.' }, { name: 'Microsoft Dynamics NAV', slug: 'dynamics-nav', desc: 'Dynamics 365 Business Central / NAV C/AL and AL code, page extensions, and OData web services.' }])}<h3 class="sub-heading">Enterprise PLM, EAM & ITSM</h3>${renderAppCards('enterprise', [{ name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Enterprise Asset Management NextGen REST/JSON APIs, work order lifecycle, and automation scripts.' }, { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'Product Lifecycle Management Info*Engine SOAP/REST APIs, CAD document checkout, and change management.' }, { name: 'ServiceNow Desktop', slug: 'servicenow-desktop', desc: 'ServiceNow Table REST APIs, incident automation, catalog request processing, and GlideRecord scripts.' }])}`
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Enterprise Resource Planning transaction automation and ERP extensibility.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('erp', [{ name: 'SAP GUI', slug: 'sap-gui', desc: 'SAP GUI Scripting API (VBScript/Python), T-Codes, batch entry.' }, { name: 'Oracle E-Business Suite', slug: 'oracle-ebs', desc: 'Oracle Forms automation and Concurrent Programs.' }, { name: 'Microsoft Dynamics NAV', slug: 'dynamics-nav', desc: 'Business Central / NAV AL, page extensions, OData.' }])}<p>Related PLM/EAM/ITSM skills live under <a href="#" onclick="loadDoc('enterprise');return false">Enterprise CRM</a> (Maximo, Windchill, ServiceNow).</p>`
       },
       'digital-forensics': {
         breadcrumb: 'Docs / Applications / Digital Forensics & IR', heading: 'Digital Forensics & Incident Response (3 Applications)', description: 'Autopsy Python ingest modules, EnCase EnScript evidence processing, and FTK case database extraction pipelines.', hasModels: true,
@@ -1451,9 +1461,24 @@ npx major-ai-skills --cursor --skills solidworks</code></pre>
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Product design systems, raster editing, personal knowledge bases, and issue tracking automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('design', [{ name: 'Figma', slug: 'figma', desc: 'Plugin API, REST exports, variables, and design-token pipelines.', variants: false }, { name: 'Adobe Photoshop', slug: 'adobe-photoshop', desc: 'UXP / ExtendScript batch actions, smart objects, and export presets.', variants: false }, { name: 'Obsidian', slug: 'obsidian', desc: 'Markdown vaults, Dataview, URI schemes, and plugin scaffolding.', variants: false }, { name: 'Notion', slug: 'notion', desc: 'Notion API databases, blocks, and page templates.', variants: false }, { name: 'Linear', slug: 'linear', desc: 'GraphQL issues, projects, cycles, and triage automations.', variants: false }])}`
       },
       devops: {
-        breadcrumb: 'Docs / Applications / DevOps & Automation', heading: 'DevOps, Automation & Agent Tooling (5 Applications)', description: 'Docker Compose, Supabase, n8n workflows, Playwright tests, and VS Code extension/workspace skills.', hasModels: false,
-        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
-        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Containers, backend platforms, workflow automation, browser testing, and editor-centric agent workflows.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('devops', [{ name: 'Docker', slug: 'docker', desc: 'Dockerfile/Compose hardening, multi-stage builds, and CLI diagnostics.', variants: false }, { name: 'Supabase', slug: 'supabase', desc: 'Postgres, Auth, Storage, Edge Functions, and CLI workflows.', variants: false }, { name: 'n8n', slug: 'n8n', desc: 'Workflow JSON, REST API, credentials, and self-hosted ops.', variants: false }, { name: 'Playwright', slug: 'playwright', desc: 'E2E tests, tracing, codegen, and CI browser matrices.', variants: false }, { name: 'Visual Studio Code', slug: 'vscode', desc: 'tasks.json, launch.json, extensions API, and workspace tips.', variants: false }])}<h3 class="sub-heading">Also in catalog</h3>${renderAppCards('office', [{ name: 'Microsoft Excel', slug: 'microsoft-excel', desc: 'Office Scripts, Power Query, and structured table automation.', variants: false }, { name: 'Slack', slug: 'slack', desc: 'Web API bots, Block Kit, and workflow triggers.', variants: false }])}`
+        breadcrumb: 'Docs / Applications / DevOps & Cloud', heading: 'DevOps & Cloud (45 Skills)', description: 'Kubernetes, Terraform, Helm, GitHub Actions, AWS/GCP/Azure CLIs, observability, and platform automation - plus Docker, Supabase, and CI tooling.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Cloud platforms, containers, IaC, CI/CD, service mesh, secrets, and observability. Prefer selective installs (<code>--skills</code>) rather than loading the full devops category.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('devops', [{ name: 'Kubernetes', slug: 'kubernetes', desc: 'kubectl, Deployments, Services, Ingress, and rollout debugging.', variants: false }, { name: 'Terraform', slug: 'terraform', desc: 'HCL modules, remote state, plan review, and safe applies.', variants: false }, { name: 'Helm', slug: 'helm', desc: 'Charts, values overrides, lint/template, and rollbacks.', variants: false }, { name: 'GitHub Actions', slug: 'github-actions', desc: 'Workflows, matrices, caches, OIDC, and least-privilege tokens.', variants: false }, { name: 'AWS CLI', slug: 'aws-cli', desc: 'SSO/profiles, S3, Lambda, CloudWatch, and IAM hygiene.', variants: false }, { name: 'Docker', slug: 'docker', desc: 'Dockerfile/Compose hardening and multi-stage builds.', variants: false }, { name: 'PostgreSQL', slug: 'postgresql', desc: 'Indexes, EXPLAIN, vacuum, and safe migrations.', variants: false }, { name: 'Prometheus', slug: 'prometheus', desc: 'PromQL, scrape configs, recording and alerting rules.', variants: false }])}<p><a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse full CATALOG.md →</a></p>`
+      },
+      development: {
+        breadcrumb: 'Docs / Applications / Web, Mobile & APIs', heading: 'Web, Mobile & APIs (37 Skills)', description: 'Next.js, React, TypeScript, FastAPI, Django, Flutter, React Native, Stripe, and related engineering skills.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Application frameworks, typed languages, mobile toolchains, and payment/API integrations.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('development', [{ name: 'Next.js', slug: 'nextjs', desc: 'App Router, server/client boundaries, and caching.', variants: false }, { name: 'React', slug: 'react', desc: 'Hooks discipline, state design, and accessibility.', variants: false }, { name: 'TypeScript', slug: 'typescript', desc: 'Strict typing, narrowing, and tsconfig hygiene.', variants: false }, { name: 'FastAPI', slug: 'fastapi', desc: 'Pydantic models, Depends, OpenAPI, and tests.', variants: false }, { name: 'Django', slug: 'django', desc: 'ORM, migrations, and production settings.', variants: false }, { name: 'Flutter', slug: 'flutter', desc: 'Widgets, state, and store build notes.', variants: false }, { name: 'Stripe', slug: 'stripe', desc: 'Checkout, webhooks, subscriptions, idempotency.', variants: false }, { name: 'Prisma', slug: 'prisma', desc: 'schema.prisma, migrations, and typed queries.', variants: false }])}<p><a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse full CATALOG.md →</a></p>`
+      },
+      productivity: {
+        breadcrumb: 'Docs / Applications / Productivity & SaaS', heading: 'Productivity & SaaS (5 Skills)', description: 'Jira, Asana, Trello, and related work-tracking skills.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Issue tracking and lightweight project tools for agent-assisted planning.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('productivity', [{ name: 'Jira', slug: 'jira', desc: 'JQL, workflows, automation hygiene, REST updates.', variants: false }, { name: 'Asana', slug: 'asana', desc: 'Tasks, projects, and API automation patterns.', variants: false }, { name: 'Trello', slug: 'trello', desc: 'Boards, cards, and webhook-friendly flows.', variants: false }, { name: 'Linear', slug: 'linear', desc: 'GraphQL issues, projects, and triage.', variants: false }])}`
+      },
+      enterprise: {
+        breadcrumb: 'Docs / Applications / Enterprise CRM', heading: 'Enterprise CRM & Platforms (5 Skills)', description: 'Salesforce, HubSpot, Maximo, Windchill, and ServiceNow automation skills.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>CRM, EAM, PLM, and ITSM platforms for go-to-market and operations automation.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('enterprise', [{ name: 'Salesforce', slug: 'salesforce', desc: 'SOQL, Flows, Apex bulkification, SFDX deploy.', variants: false }, { name: 'HubSpot', slug: 'hubspot', desc: 'CRM properties, workflows, private apps.', variants: false }, { name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Work orders, NextGen REST, automation scripts.', variants: false }, { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'CAD docs, change management, Info*Engine.', variants: false }, { name: 'ServiceNow', slug: 'servicenow-desktop', desc: 'Table REST, incidents, catalog requests.', variants: false }])}`
       },
       efficiency: {
         breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency', heading: 'Token & Context Efficiency Handbook (100 Rules)', description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.', hasModels: false,

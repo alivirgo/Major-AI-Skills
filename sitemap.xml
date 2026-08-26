@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/llms.txt</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/llms-full.txt</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/skills_index.json</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/app-skills/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/efficiency/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/common-sense/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://alivirgo.github.io/Major-AI-Skills/assets/og-card.png</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/README.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.npmjs.com/package/major-ai-skills</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/llms.txt</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/llms-full.txt</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/skills_index.json</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/app-skills/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/efficiency/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/common-sense/</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://alivirgo.github.io/Major-AI-Skills/assets/og-card.png</loc><lastmod>2026-08-26</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/README.md</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.npmjs.com/package/major-ai-skills</loc><lastmod>2026-08-26</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
 </urlset>
