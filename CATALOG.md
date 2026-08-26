@@ -1,39 +1,39 @@
 # Major AI Skills Catalog
 
-> Generated registry of **292** installable skills.
+> Generated registry of **392** installable skills.
 
 Use `skills_index.json` for machine-readable discovery. Each skill lives at `skills/<id>/SKILL.md`.
 
 ## Categories
 
-- [3d](#3d) — 5 skills
-- [automation](#automation) — 1 skills
-- [cad](#cad) — 5 skills
-- [common-sense](#common-sense) — 99 skills
-- [cross-platform](#cross-platform) — 9 skills
-- [design](#design) — 2 skills
-- [development](#development) — 1 skills
-- [devops](#devops) — 2 skills
-- [digital-forensics](#digital-forensics) — 3 skills
-- [eda](#eda) — 4 skills
-- [efficiency](#efficiency) — 100 skills
-- [enterprise](#enterprise) — 3 skills
-- [erp](#erp) — 3 skills
-- [game-engines](#game-engines) — 5 skills
-- [gis](#gis) — 2 skills
-- [knowledge](#knowledge) — 2 skills
-- [linux](#linux) — 1 skills
-- [macos](#macos) — 9 skills
-- [medical](#medical) — 3 skills
-- [music](#music) — 5 skills
-- [network](#network) — 1 skills
-- [office](#office) — 1 skills
-- [plc-industrial](#plc-industrial) — 3 skills
-- [productivity](#productivity) — 2 skills
-- [scientific](#scientific) — 4 skills
-- [testing](#testing) — 1 skills
-- [video-editing](#video-editing) — 6 skills
-- [windows](#windows) — 10 skills
+- [3d](#3d) - 5 skills
+- [automation](#automation) - 2 skills
+- [cad](#cad) - 5 skills
+- [common-sense](#common-sense) - 99 skills
+- [cross-platform](#cross-platform) - 9 skills
+- [design](#design) - 2 skills
+- [development](#development) - 37 skills
+- [devops](#devops) - 45 skills
+- [digital-forensics](#digital-forensics) - 3 skills
+- [eda](#eda) - 4 skills
+- [efficiency](#efficiency) - 100 skills
+- [enterprise](#enterprise) - 5 skills
+- [erp](#erp) - 3 skills
+- [game-engines](#game-engines) - 5 skills
+- [gis](#gis) - 2 skills
+- [knowledge](#knowledge) - 3 skills
+- [linux](#linux) - 1 skills
+- [macos](#macos) - 9 skills
+- [medical](#medical) - 3 skills
+- [music](#music) - 5 skills
+- [network](#network) - 3 skills
+- [office](#office) - 1 skills
+- [plc-industrial](#plc-industrial) - 3 skills
+- [productivity](#productivity) - 5 skills
+- [scientific](#scientific) - 15 skills
+- [testing](#testing) - 2 skills
+- [video-editing](#video-editing) - 6 skills
+- [windows](#windows) - 10 skills
 
 ## 3d
 
@@ -50,6 +50,7 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 | Skill | Description |
 | --- | --- |
 | [`n8n`](skills/n8n/SKILL.md) | Operational skill for Claude to automate n8n workflows via REST API, nodes, credentials, webhooks, and expression-safe data mapping. |
+| [`zapier`](skills/zapier/SKILL.md) | Operational skill for Zapier: Zaps, triggers, actions, Filters/Paths, storage, and error-handling without brittle automations. |
 
 ## cad
 
@@ -149,7 +150,7 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 | [`tell-ai-what-not-to-do`](skills/tell-ai-what-not-to-do/SKILL.md) | How to use explicit Negative Constraints ('Do NOT use third-party libraries', 'Do NOT use passive voice') to prune hallucination paths and lock in exact specifications. |
 | [`tell-ai-when-in-a-rush`](skills/tell-ai-when-in-a-rush/SKILL.md) | How to trigger Emergency High-Velocity Mode for instant 3-second answers during live client meetings, outages, and negotiation standoffs. |
 | [`tell-ai-your-time-budget`](skills/tell-ai-your-time-budget/SKILL.md) | How to anchor prompts with explicit execution time limits ('I have 10 minutes before a demo' vs 'I have 2 days') to get calibrated solutions. |
-| [`think-of-ai-as-a-junior-assistant`](skills/think-of-ai-as-a-junior-assistant/SKILL.md) | Why treating AI as a brilliant but inexperienced junior intern—fast and knowledgeable, but requiring explicit guardrails and final QA—maximizes leverage. |
+| [`think-of-ai-as-a-junior-assistant`](skills/think-of-ai-as-a-junior-assistant/SKILL.md) | Why treating AI as a brilliant but inexperienced junior intern - fast and knowledgeable, but requiring explicit guardrails and final QA - maximizes leverage. |
 | [`translate-jargon-to-plain-english`](skills/translate-jargon-to-plain-english/SKILL.md) | How to translate dense legal, medical, financial, and technical jargon into actionable plain English with the 'So What?' operational impact framework. |
 | [`treat-ai-answers-as-first-drafts`](skills/treat-ai-answers-as-first-drafts/SKILL.md) | How to use AI to conquer the blank page (0 to 80% in 30 seconds) while applying the 4-step Human Finishing Pass to reach 100% polish and authenticity. |
 | [`try-different-angles-if-first-fails`](skills/try-different-angles-if-first-fails/SKILL.md) | How to escape conversational deadlocks and unhelpful AI loops using 4 proven Prompt Pivot strategies (Persona, Inversion, Decomposition, Exemplar). |
@@ -190,14 +191,93 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
+| [`android-studio`](skills/android-studio/SKILL.md) | Operational skill for Android Studio: Gradle projects, emulators, Logcat, build variants, signing configs, and AGP troubleshooting. |
+| [`anthropic-api`](skills/anthropic-api/SKILL.md) | Operational skill for the Anthropic API: Messages, system prompts, tool use, streaming, and production Claude client hygiene. |
+| [`chromadb`](skills/chromadb/SKILL.md) | Operational skill for ChromaDB: collections, embeddings, metadata filters, persistence, and local RAG vector storage. |
+| [`codeql`](skills/codeql/SKILL.md) | Operational skill for CodeQL: enabling GitHub analysis, writing/using queries, interpreting SARIF, and fixing true positives in PRs. |
+| [`django`](skills/django/SKILL.md) | Operational skill for Django: models, ORM query hygiene, migrations, views/URLs, settings security, and admin customization. |
+| [`express`](skills/express/SKILL.md) | Operational skill for Express.js: routers, middleware order, error handlers, async wrappers, validation, and production app structure. |
+| [`fastapi`](skills/fastapi/SKILL.md) | Operational skill for FastAPI: Pydantic models, dependency injection, async routes, OpenAPI, authentication hooks, and TestClient-based testing. |
+| [`firebase`](skills/firebase/SKILL.md) | Operational skill for Firebase: Auth, Firestore/RTDB rules, Cloud Functions, FCM, Emulator Suite, and client SDK security boundaries. |
+| [`flask`](skills/flask/SKILL.md) | Operational skill for Flask: app factories, blueprints, request context, Jinja/JSON APIs, extensions, and pytest testing patterns. |
+| [`flutter`](skills/flutter/SKILL.md) | Operational skill for Flutter: widgets, state management choices, async UI, platform channels awareness, and release build hygiene. |
+| [`go-services`](skills/go-services/SKILL.md) | Operational skill for Go HTTP services: modules, idiomatic handlers, context cancellation, middleware, testing, and lean deployable binaries. |
+| [`graphql-apis`](skills/graphql-apis/SKILL.md) | Operational skill for GraphQL APIs: schema-first design, resolvers, N+1 prevention, authz in the graph, and client query discipline. |
+| [`graphql-client`](skills/graphql-client/SKILL.md) | Operational skill for GraphQL clients: Apollo Client and urql patterns for queries, mutations, cache, error policies, and auth headers. |
+| [`kotlin`](skills/kotlin/SKILL.md) | Operational skill for Kotlin: idiomatic null-safety, coroutines, flows, data classes, and interop with Java/Android APIs. |
+| [`langchain`](skills/langchain/SKILL.md) | Operational skill for LangChain: chains/LCEL, tools, memory boundaries, retrieval, and production LLM app structure. |
+| [`llamaindex`](skills/llamaindex/SKILL.md) | Operational skill for LlamaIndex: indexes, retrievers, query engines, ingestion pipelines, and RAG evaluation basics. |
+| [`nextjs`](skills/nextjs/SKILL.md) | Operational skill for Next.js App Router: server vs client components, routing, data fetching/caching, Server Actions awareness, and production build hygiene. |
+| [`nodejs`](skills/nodejs/SKILL.md) | Operational skill for Node.js: ESM/CJS modules, async I/O, streams, process lifecycle, package scripts, and production runtime hygiene. |
+| [`openai-api`](skills/openai-api/SKILL.md) | Operational skill for the OpenAI API: chat completions/responses, tools, embeddings, retries, and production client hygiene. |
+| [`owasp-asvs`](skills/owasp-asvs/SKILL.md) | Operational skill for OWASP ASVS: selecting levels, mapping requirements to controls, evidence for reviews, and gap triage. |
+| [`postman`](skills/postman/SKILL.md) | Operational skill for Postman: collections, environments, pre-request scripts, Newman CI runs, and API contract smoke tests (complementary to Bruno). |
+| [`prisma`](skills/prisma/SKILL.md) | Operational skill for Prisma ORM: schema modeling, migrations, client queries, transactions, and avoiding N+1 with relation loads. |
+| [`python-packaging`](skills/python-packaging/SKILL.md) | Operational skill for Python packaging: pyproject.toml, src layout, virtualenvs, pytest/ruff/mypy tooling, and publishing wheels to indexes. |
+| [`rails`](skills/rails/SKILL.md) | Operational skill for Ruby on Rails: MVC/API mode, Active Record, migrations, strong params, credentials, and conventional generators. |
+| [`react`](skills/react/SKILL.md) | Operational skill for React: function components, hooks discipline, state design, effects, lists/keys, and accessible interactive UI patterns. |
+| [`react-native`](skills/react-native/SKILL.md) | Operational skill for React Native: core components, navigation, native modules awareness, New Architecture notes, and release builds. |
+| [`rust-cli`](skills/rust-cli/SKILL.md) | Operational skill for Rust CLIs: clap argument parsing, error handling with anyhow/thiserror, Cargo workspace layout, and distributable binaries. |
+| [`semgrep`](skills/semgrep/SKILL.md) | Operational skill for Semgrep: writing rules, running CI scans, tuning noise, and triaging findings without drowning in false positives. |
+| [`shopify-app`](skills/shopify-app/SKILL.md) | Operational skill for Shopify app development: app extensions, OAuth/session tokens, GraphQL Admin API, webhooks, and billing. |
+| [`spring-boot`](skills/spring-boot/SKILL.md) | Operational skill for Spring Boot: starters, dependency injection, REST controllers, validation, profiles, Actuator, and test slices. |
+| [`stripe`](skills/stripe/SKILL.md) | Operational skill for Stripe payments: Checkout, PaymentIntents, webhooks with signature verification, subscriptions, idempotency keys, and test-mode hygiene. |
+| [`swift`](skills/swift/SKILL.md) | Operational skill for Swift: value types, optionals, async/await, actors, SwiftUI state basics, and protocol-oriented design. |
+| [`typescript`](skills/typescript/SKILL.md) | Operational skill for TypeScript: strict typing, narrowing, generics, tsconfig, migrating JavaScript safely, and eliminating any-typed boundaries. |
+| [`vercel`](skills/vercel/SKILL.md) | Operational skill for Vercel deployments: Next.js/frontend project linking, env vars, preview vs production, build settings, and rollout hygiene. |
 | [`vscode`](skills/vscode/SKILL.md) | Operational skill for Claude to automate VS Code via tasks, launch configs, extensions API, settings, and CLI (`code`) workflows. |
+| [`wordpress`](skills/wordpress/SKILL.md) | Operational skill for WordPress development: themes, plugins, hooks, WP-CLI, REST API, and hardening against common WP pitfalls. |
+| [`xcode-ios`](skills/xcode-ios/SKILL.md) | Operational skill for Xcode iOS development: targets/schemes, simulators, signing & capabilities, SwiftUI/UIKit projects, and archive/export. |
 
 ## devops
 
 | Skill | Description |
 | --- | --- |
+| [`airflow`](skills/airflow/SKILL.md) | Operational skill for Apache Airflow: DAGs, operators, sensors, scheduling, retries, and production task hygiene. |
+| [`ansible`](skills/ansible/SKILL.md) | Operational skill for Ansible playbooks, inventories, roles, idempotent modules, check mode, and ansible-vault secret handling. |
+| [`argocd`](skills/argocd/SKILL.md) | Operational skill for agents to implement GitOps with Argo CD - Applications, sync policies, AppProjects, health checks, and safe rollback. |
+| [`aws-cli`](skills/aws-cli/SKILL.md) | Operational skill for AWS CLI v2: profiles and SSO, IAM least privilege, S3, EC2, Lambda, CloudWatch Logs, and safe account/region confirmation before mutations. |
+| [`azure-cli`](skills/azure-cli/SKILL.md) | Operational skill for agents to manage Microsoft Azure via az CLI - subscriptions, resource groups, AKS, App Service, Key Vault, and RBAC hygiene. |
+| [`clickhouse`](skills/clickhouse/SKILL.md) | Operational skill for ClickHouse: MergeTree tables, partitions, projections, ingest, and analytical SQL performance. |
+| [`consul`](skills/consul/SKILL.md) | Operational skill for agents to run HashiCorp Consul for service discovery, health checks, KV config, intentions, and service mesh basics. |
+| [`dbt`](skills/dbt/SKILL.md) | Operational skill for dbt: models, refs, tests, docs, and analytics engineering workflows on warehouses. |
+| [`dependabot-config`](skills/dependabot-config/SKILL.md) | Operational skill for Dependabot: dependabot.yml ecosystems, schedules, grouping, ignore rules, and safe auto-merge policies. |
 | [`docker`](skills/docker/SKILL.md) | Operational skill for Claude to automate Docker via CLI, Dockerfiles, Compose, BuildKit, multi-stage builds, and container networking hygiene. |
+| [`elasticsearch`](skills/elasticsearch/SKILL.md) | Operational skill for agents to operate Elasticsearch - index mappings, ILM, queries, clusters health, ingest pipelines, and safe reindex patterns. |
+| [`fluxcd`](skills/fluxcd/SKILL.md) | Operational skill for agents to run GitOps with Flux CD - GitRepository, Kustomization, HelmRelease, image automation, and reconciliation debugging. |
+| [`gcloud-cli`](skills/gcloud-cli/SKILL.md) | Operational skill for agents to manage Google Cloud via gcloud - projects, IAM, GKE, Cloud Run, GCS, and safe deploy hygiene. |
+| [`github-actions`](skills/github-actions/SKILL.md) | Operational skill for GitHub Actions CI/CD: workflows, jobs, matrices, caching, OIDC cloud auth, secrets, and reusable workflows. |
+| [`github-packages-npm`](skills/github-packages-npm/SKILL.md) | Operational skill for GitHub Packages npm: publishing scoped packages, auth via GITHUB_TOKEN/PAT, .npmrc setup, and consuming private packages. |
+| [`gpg-signing`](skills/gpg-signing/SKILL.md) | Operational skill for GPG signing: key generation hygiene, git commit/tag signing, verification, and revocation basics. |
+| [`grafana`](skills/grafana/SKILL.md) | Operational skill for Grafana: data sources, dashboards, variables, panels, unified alerting, and dashboard-as-code provisioning. |
+| [`helm`](skills/helm/SKILL.md) | Operational skill for packaging and deploying Kubernetes applications with Helm charts, values overrides, hooks, dependencies, and release rollbacks. |
+| [`incident-runbooks`](skills/incident-runbooks/SKILL.md) | Operational skill for writing actionable oncall runbooks: symptoms, severity, diagnostics, mitigation steps, escalation, and post-incident links. |
+| [`kafka`](skills/kafka/SKILL.md) | Operational skill for Apache Kafka: topics, partitions, producers/consumers, consumer groups, offsets, and lag monitoring caveats. |
+| [`kubernetes`](skills/kubernetes/SKILL.md) | Operational skill for agents to design, debug, and operate Kubernetes workloads with kubectl, Deployments, Services, Ingress, ConfigMaps, Secrets, and rollout hygiene. |
+| [`lets-encrypt`](skills/lets-encrypt/SKILL.md) | Operational skill for agents to issue and renew TLS certificates with Let's Encrypt - certbot/acme.sh, HTTP-01/DNS-01, renewal timers, and failure recovery. |
+| [`makefile-automation`](skills/makefile-automation/SKILL.md) | Operational skill for agents to design reliable Makefiles - phony targets, dependencies, variables, self-docs, and safe automation entrypoints for repos. |
+| [`mongodb`](skills/mongodb/SKILL.md) | Operational skill for MongoDB: document modeling, indexes, aggregation pipelines, transactions, explain plans, and Atlas-friendly patterns. |
+| [`mysql`](skills/mysql/SKILL.md) | Operational skill for agents to administer MySQL/MariaDB - schema design, indexes, dumps, users/grants, replication basics, and safe migrations. |
+| [`nginx-hardening`](skills/nginx-hardening/SKILL.md) | Operational skill for agents to harden NGINX as a reverse proxy/ingress - TLS, headers, rate limits, request size, and upstream safety (distinct from general NGINX app serving). |
+| [`nomad`](skills/nomad/SKILL.md) | Operational skill for agents to schedule workloads with HashiCorp Nomad - jobspecs, task groups, networking, variables, and rollout strategies. |
+| [`opentelemetry`](skills/opentelemetry/SKILL.md) | Operational skill for agents to instrument services with OpenTelemetry - traces, metrics, logs, SDKs, collectors, and context propagation. |
+| [`packer`](skills/packer/SKILL.md) | Operational skill for agents to build golden machine images with HashiCorp Packer - templates, builders, provisioners, and immutable image pipelines. |
+| [`postgresql`](skills/postgresql/SKILL.md) | Operational skill for PostgreSQL: schema design, indexing, EXPLAIN ANALYZE, vacuum, safe migrations, and production query hygiene. |
+| [`prefect`](skills/prefect/SKILL.md) | Operational skill for Prefect: flows, tasks, deployments, work pools, retries, and observability for Python pipelines. |
+| [`prometheus`](skills/prometheus/SKILL.md) | Operational skill for Prometheus: scrape configs, PromQL, recording rules, alerting rules, cardinality control, and exporter hygiene. |
+| [`pulumi`](skills/pulumi/SKILL.md) | Operational skill for agents to manage infrastructure as code with Pulumi - stacks, previews, secrets, providers, and safe up/destroy workflows. |
+| [`rabbitmq`](skills/rabbitmq/SKILL.md) | Operational skill for agents to run RabbitMQ messaging - exchanges, queues, bindings, ACK/NACK, DLQ, quorum queues, and consumer hygiene. |
+| [`redis`](skills/redis/SKILL.md) | Operational skill for Redis: caching patterns, TTLs, data structures, keys design, pub/sub, and memory/eviction pitfalls. |
+| [`redis-streams`](skills/redis-streams/SKILL.md) | Operational skill for Redis Streams: XADD/XREADGROUP, consumer groups, acknowledgements, pending entries, and trim policies (complementary to Redis caching). |
+| [`snowflake`](skills/snowflake/SKILL.md) | Operational skill for Snowflake: warehouses, roles, stages, COPY, Time Travel, and cost-aware SQL analytics. |
+| [`snyk`](skills/snyk/SKILL.md) | Operational skill for Snyk: Open Source SCA, container/IaC scans, fixing via PRs, ignore policies, and CI gate tuning. |
+| [`sqlite`](skills/sqlite/SKILL.md) | Operational skill for agents to use SQLite effectively - schema, WAL mode, migrations, backups, pragmas, and concurrency limits. |
 | [`supabase`](skills/supabase/SKILL.md) | Operational skill for Claude to automate Supabase via JS client, SQL migrations, RLS policies, Edge Functions, Auth, and CLI workflows. |
+| [`supabase-rls`](skills/supabase-rls/SKILL.md) | Advanced operational skill for Supabase Row Level Security: policy design, security definer RPCs, storage policies, Edge Function authz, and RLS performance. |
+| [`terraform`](skills/terraform/SKILL.md) | Operational skill for writing and reviewing Terraform HCL: providers, modules, remote state, plans, applies, and destructive-change safety. |
+| [`terraform-aws`](skills/terraform-aws/SKILL.md) | Operational skill for AWS-focused Terraform: module layout, providers, IAM least privilege, state backends, and safe applies (complementary to general Terraform). |
+| [`trivy`](skills/trivy/SKILL.md) | Operational skill for agents to scan images, filesystems, IaC, and repos with Aqua Trivy - CVE triage, severity gates, and CI fail policies. |
+| [`vault`](skills/vault/SKILL.md) | Operational skill for agents to use HashiCorp Vault for secrets - KV engines, policies, AppRole/K8s auth, dynamic credentials, and safe lease handling. |
 
 ## digital-forensics
 
@@ -325,8 +405,10 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
+| [`hubspot`](skills/hubspot/SKILL.md) | Operational skill for HubSpot: CRM objects, properties, workflows, private apps, and HubSpot API rate-limit hygiene. |
 | [`ibm-maximo`](skills/ibm-maximo/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize IBM Maximo, Maximo Application Suite (MAS), MBO Jython scripting, OSLC REST APIs, and MIF integrations. |
 | [`ptc-windchill`](skills/ptc-windchill/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize PTC Windchill, PDMLink, Workgroup Manager (WWGM), OData REST APIs, and MethodServer administration. |
+| [`salesforce`](skills/salesforce/SKILL.md) | Operational skill for Salesforce: objects, SOQL/SOSL, Apex triggers, Flows, Lightning Web Components, and API integration hygiene. |
 | [`servicenow-desktop`](skills/servicenow-desktop/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize ServiceNow Desktop agents, MID Server, Agent Client Collector (ACC), and Table REST APIs. |
 
 ## erp
@@ -358,6 +440,7 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
+| [`confluence`](skills/confluence/SKILL.md) | Operational skill for Confluence: spaces, page trees, macros, labels, permissions, and REST content updates. |
 | [`notion`](skills/notion/SKILL.md) | Operational skill for Claude to automate Notion via official API, databases, pages, blocks, and property schemas for knowledge ops. |
 | [`obsidian`](skills/obsidian/SKILL.md) | Operational skill for Claude to automate Obsidian vaults via URI schemes, Templater/Dataview patterns, Markdown structure, and local plugin workflows. |
 
@@ -365,7 +448,7 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
-| [`omarchy`](skills/omarchy/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy — the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim. |
+| [`omarchy`](skills/omarchy/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim. |
 
 ## macos
 
@@ -403,7 +486,9 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
+| [`cloudflare-dns`](skills/cloudflare-dns/SKILL.md) | Operational skill for agents to manage Cloudflare DNS - records, proxied vs DNS-only, TTL, API tokens, and safe cutover patterns. |
 | [`omada-controller`](skills/omada-controller/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize TP-Link Omada SDN Controller, REST OpenAPI, MongoDB backend, device adoption, and VLAN/VPN routing. |
+| [`wireguard`](skills/wireguard/SKILL.md) | Operational skill for agents to deploy WireGuard VPNs - keys, interfaces, AllowedIPs, NAT traversal notes, and least-privilege peer routing. |
 
 ## office
 
@@ -423,23 +508,38 @@ Use `skills_index.json` for machine-readable discovery. Each skill lives at `ski
 
 | Skill | Description |
 | --- | --- |
+| [`asana`](skills/asana/SKILL.md) | Operational skill for Asana: projects, tasks, sections, custom fields, rules, and API automation without notification spam. |
+| [`jira`](skills/jira/SKILL.md) | Operational skill for Jira: issue fields, JQL, workflows, automation hygiene, sprint practices, and REST API bulk updates. |
 | [`linear`](skills/linear/SKILL.md) | Operational skill for Claude to automate Linear via GraphQL API, issues, projects, cycles, labels, and webhook-driven product ops. |
 | [`slack`](skills/slack/SKILL.md) | Operational skill for Claude to automate Slack via Web API, Block Kit, Bolt apps, events, slash commands, and chat.postMessage patterns. |
+| [`trello`](skills/trello/SKILL.md) | Operational skill for Trello: boards, lists, cards, Power-Ups, Butler automation, and REST API card hygiene. |
 
 ## scientific
 
 | Skill | Description |
 | --- | --- |
 | [`comsol`](skills/comsol/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize COMSOL Multiphysics 6.2, MPh Python API, LiveLink for MATLAB, Java API (mphserver), and solver convergence. |
+| [`duckdb`](skills/duckdb/SKILL.md) | Operational skill for DuckDB: local analytical SQL, Parquet/CSV scans, views, and zero-copy handoff to pandas/Polars. |
+| [`great-expectations`](skills/great-expectations/SKILL.md) | Operational skill for Great Expectations: Expectation Suites, Checkpoints, Datasources, and data quality gates in pipelines. |
+| [`huggingface-transformers`](skills/huggingface-transformers/SKILL.md) | Operational skill for Hugging Face Transformers: pipelines, tokenizers, fine-tuning, and inference with AutoModel APIs. |
+| [`jupyter`](skills/jupyter/SKILL.md) | Operational skill for Jupyter: notebooks, kernels, reproducible cells, papermill params, and hygiene for sharing analytical work. |
 | [`labview`](skills/labview/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize NI LabVIEW, G-Language dataflow, NI-DAQmx hardware drivers, VISA SCPI, and g-cli build pipelines. |
 | [`matlab`](skills/matlab/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize MathWorks MATLAB R2024b/R2025a, MATLAB Engine API for Python, Simulink, parfor parallel computing, and MEX compilation. |
+| [`mlflow`](skills/mlflow/SKILL.md) | Operational skill for MLflow: experiment tracking, runs, artifacts, model registry, and reproducible ML logging. |
+| [`opencv`](skills/opencv/SKILL.md) | Operational skill for OpenCV: image IO, transforms, contours, video capture, and classical computer-vision pipelines. |
 | [`originpro`](skills/originpro/SKILL.md) | Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize OriginLab OriginPro, originpro Python API, Nonlinear Curve Fitting (NLFit), Peak Analysis, and LabTalk. |
+| [`pandas`](skills/pandas/SKILL.md) | Operational skill for pandas: DataFrames, IO, groupby/merge, dtype hygiene, and memory-aware ETL on tabular data. |
+| [`polars`](skills/polars/SKILL.md) | Operational skill for Polars: LazyFrames, expressions, streaming scans, and fast single-node analytics on Parquet/CSV. |
+| [`pytorch`](skills/pytorch/SKILL.md) | Operational skill for PyTorch: tensors, nn.Module models, training/eval loops, device placement, checkpointing, and inference hygiene. |
+| [`scikit-learn`](skills/scikit-learn/SKILL.md) | Operational skill for scikit-learn: pipelines, CV, preprocessing, model selection, and leakage-safe tabular ML. |
+| [`spark`](skills/spark/SKILL.md) | Operational skill for Apache Spark: DataFrames, partitions, shuffle hygiene, Spark SQL, and job debugging on clusters or local mode. |
 
 ## testing
 
 | Skill | Description |
 | --- | --- |
 | [`playwright`](skills/playwright/SKILL.md) | Operational skill for Claude to automate Playwright Test with locators, fixtures, tracing, CI browsers, and resilient end-to-end specs. |
+| [`playwright-ci`](skills/playwright-ci/SKILL.md) | CI-focused Playwright skill: flake control, retries/traces, sharding, blob reports, artifact upload, and deterministic auth/data in pipelines. |
 
 ## video-editing
 

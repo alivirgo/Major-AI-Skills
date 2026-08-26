@@ -1,8 +1,8 @@
 # Major AI Skills
 
-> **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more — focused on professional apps, token efficiency, and practical prompting habits.**
+> **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more - focused on professional apps, token efficiency, and practical prompting habits.**
 
-**Current release: V2.0.0.** Flat `skills/<id>/SKILL.md` layout, multi-host `npx` installer, catalog index, specialized plugins, and bundles — with deep product skill content (CAD, video, 3D, design, desktop utilities) plus efficiency and common-sense skills.
+**Current release: V2.1.0.** Flat `skills/<id>/SKILL.md` layout, multi-host `npx` installer, catalog index, specialized plugins, and bundles - with deep product skill content (CAD, video, 3D, design, desktop utilities) plus efficiency and common-sense skills.
 
 Coding agents can install exact skill IDs into the directory their host watches. You keep control: preview with `--dry-run`, filter by `--skills` / `--category`, or install a specialized pack.
 
@@ -23,8 +23,11 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![Codex CLI](https://img.shields.io/badge/Codex%20CLI-OpenAI-green)](https://github.com/openai/codex)
 [![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-Google-blue)](https://github.com/google-gemini/gemini-cli)
 [![Antigravity](https://img.shields.io/badge/Antigravity-AI%20IDE-red)](https://github.com/alivirgo/Major-AI-Skills)
-[![Skills](https://img.shields.io/badge/Skills-292-blueviolet)](CATALOG.md)
+[![Skills](https://img.shields.io/badge/Skills-392-blueviolet)](CATALOG.md)
 [![npm](https://img.shields.io/npm/v/major-ai-skills?color=cb3837&label=npm)](https://www.npmjs.com/package/major-ai-skills)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@alivirgo%2Fmajor--ai--skills-24292f)](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills)
+[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/tag/V2.1.0)
+[![skills.sh](https://img.shields.io/badge/skills.sh-npx%20skills%20add-000)](#installation)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
 [![llms.txt](https://img.shields.io/badge/llms.txt-GEO%20ready-0ea5e9)](https://alivirgo.github.io/Major-AI-Skills/llms.txt)
@@ -32,7 +35,7 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 ## Why This Repo
 
 - **Agentic skills that are installable, not just inspirational**: `npx major-ai-skills --claude|--cursor|--codex|--gemini|--antigravity` places `SKILL.md` where your AI coding assistant already looks.
-- **Product-depth skill library**: CAD, video, 3D, GIS, medical, music, ERP, forensics, PLC, desktop utilities — not only generic coding tips.
+- **Product-depth skill library**: CAD, video, 3D, GIS, medical, music, ERP, forensics, PLC, desktop utilities - not only generic coding tips.
 - **Efficiency + common sense**: token-saving techniques and plain-English prompting habits in the same catalog.
 - **Built for major agent workflows**: Claude Code skills, Cursor skills, Codex CLI skills, Gemini CLI skills, Antigravity skills, Kiro, OpenCode, and custom paths.
 - **Focused delivery**: specialized plugins and bundles so you do not overload Antigravity / Cursor context windows.
@@ -40,7 +43,7 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 
 ### Why not only browse folders?
 
-A flat `SKILL.md` skill library with stable IDs, an index, and a host-aware installer turns prose into reproducible local agent capability — the distribution pattern popular search traffic expects from modern agent-skill repos, applied to **our** genuine skills.
+A flat `SKILL.md` skill library with stable IDs, an index, and a host-aware installer turns prose into reproducible local agent capability - the distribution pattern popular search traffic expects from modern agent-skill repos, applied to **our** genuine skills.
 
 ## Table of Contents
 
@@ -59,7 +62,22 @@ A flat `SKILL.md` skill library with stable IDs, an index, and a host-aware inst
 
 Prefer an exact reviewed set. Full Antigravity installs can exhaust context because the host watches `~/.agents/skills`.
 
-### Direct skill install
+### Where to get Major AI Skills
+
+| Platform | Install / consume |
+| --- | --- |
+| **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |
+| **GitHub Packages** | Scoped package [`@alivirgo/major-ai-skills`](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills) (fills the repo **Packages** sidebar) |
+| **GitHub Release** | Download `major-ai-skills-2.0.0.tgz` from [V2.1.0](https://github.com/alivirgo/Major-AI-Skills/releases/tag/V2.1.0) |
+| **skills.sh / Vercel skills CLI** | `npx skills add alivirgo/Major-AI-Skills` (discovery via install telemetry) |
+| **Claude Code marketplace** | Add this repo as a marketplace (`.claude-plugin/marketplace.json`), then install a specialized plugin |
+| **Gemini CLI gallery** | `gemini-extension.json` + topic `gemini-cli-extension` (auto-indexed) · `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
+| **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@2.0.0/) / [unpkg](https://unpkg.com/major-ai-skills@2.0.0/) mirror the npm package |
+| **GitHub Pages** | Browse catalog: [alivirgo.github.io/Major-AI-Skills](https://alivirgo.github.io/Major-AI-Skills/) |
+
+Full channel list + submit links: [docs/users/distribution.md](docs/users/distribution.md).
+
+#### npm (recommended)
 
 ```bash
 # Preview an exact set for Antigravity
@@ -73,6 +91,29 @@ npx major-ai-skills --claude --category cad,efficiency
 
 # Codex
 npx major-ai-skills --codex --skills playwright,docker,supabase
+```
+
+#### skills.sh (multi-agent)
+
+```bash
+npx skills add alivirgo/Major-AI-Skills --list
+npx skills add alivirgo/Major-AI-Skills --skill blender --skill figma -g -y
+```
+
+#### GitHub Packages
+
+```bash
+# One-time: authenticate to GitHub's npm registry
+# echo "//npm.pkg.github.com/:_authToken=YOUR_GH_TOKEN" >> ~/.npmrc
+npm install -g @alivirgo/major-ai-skills --registry=https://npm.pkg.github.com
+major-ai-skills --cursor --skills blender,figma
+```
+
+#### Claude Code plugin marketplace
+
+```text
+/plugin marketplace add alivirgo/Major-AI-Skills
+/plugin install mas-cad-studio@major-ai-skills
 ```
 
 ### Verify
@@ -139,7 +180,7 @@ Guides:
 
 ### What is Major AI Skills?
 
-A curated, installable GitHub library of **292+ agent skills** for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and related AI coding assistants — covering CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits.
+A curated, installable GitHub library of **392+ agent skills** for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and related AI coding assistants - covering CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits.
 
 ### How do I install Claude Code skills or Cursor skills from this repo?
 
@@ -152,7 +193,7 @@ See [claude-code-skills.md](docs/users/claude-code-skills.md) and [cursor-skills
 
 ### Should I install everything?
 
-No. Prefer `--skills` or `--category`, or a specialized plugin. Antigravity watches `~/.agents/skills` — a full dump can exhaust context. Use `--all` only when you intentionally accept that risk.
+No. Prefer `--skills` or `--category`, or a specialized plugin. Antigravity watches `~/.agents/skills` - a full dump can exhaust context. Use `--all` only when you intentionally accept that risk.
 
 ### Where did the old folders go?
 
@@ -192,13 +233,13 @@ Categories include: CAD, video, 3D, games, design, knowledge, desktop (macOS/Win
 
 High-intent guides for people comparing skill libraries on Google / GitHub / AI answer engines:
 
-- **[Best Claude Code skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/)** — HTML landing (also [md](docs/users/best-claude-code-skills-github.md))
-- **[Best Cursor skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/)** — HTML landing (also [md](docs/users/best-cursor-skills-github.md))
+- **[Best Claude Code skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/)** - HTML landing (also [md](docs/users/best-claude-code-skills-github.md))
+- **[Best Cursor skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/)** - HTML landing (also [md](docs/users/best-cursor-skills-github.md))
 - **[Best Antigravity skills](https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/)**
 - **[What are AI agent skills?](https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/)**
 - **[Major AI Skills vs agentic-awesome-skills](https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/)**
-- **[Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/)** — SolidWorks, Blender, Figma, …
-- **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** — ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces
+- **[Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/)** - SolidWorks, Blender, Figma, …
+- **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** - ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces
 - Large coding catalogs such as [agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) remain excellent for generic agent workflows; Major AI Skills specializes in **product-depth** and **efficiency** skills you can install beside them
 
 Machine-readable discovery for answer engines and agents:
@@ -223,4 +264,4 @@ Machine-readable discovery for answer engines and agents:
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

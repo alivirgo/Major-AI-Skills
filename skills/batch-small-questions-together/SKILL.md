@@ -94,7 +94,7 @@ Review the function below and answer these 3 diagnostic points:
 
 **AI Response**:
 > 1. **Payment Terms**: Net-30 from invoice date; 1.5% monthly late fee applies after 30 days (Section 3.2).
-> 2. **IP Ownership**: IP transfers **only upon full payment received** (Section 5.1—favorable to freelancer).
+> 2. **IP Ownership**: IP transfers **only upon full payment received** (Section 5.1 - favorable to freelancer).
 > 3. **Termination**: 14 days written notice required by either party without cause (Section 8.3).
 > 4. **Non-Compete**: None. Only a standard 1-year client non-solicitation clause (Section 9.2).
 
@@ -105,4 +105,4 @@ Review the function below and answer these 3 diagnostic points:
 ## Best Practices for Batching
 - **Keep questions related**: Batch questions that draw from the same source document or context.
 - **Number each item**: Numbering ($1, 2, 3$) ensures the model doesn't accidentally skip an item.
-- **Set a ceiling of 3–5 items**: Asking 15 questions in one turn can lead to shallow answers or truncation.
+- **Set a ceiling of 3-5 items**: Asking 15 questions in one turn can lead to shallow answers or truncation.

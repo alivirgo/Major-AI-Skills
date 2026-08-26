@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 When generating an API integration client or debugging a REST webhook, agents often ingest the entire `openapi.json` or `swagger.yaml` specification file.
 
-In enterprise platforms (Stripe, GitHub, AWS, Kubernetes), complete OpenAPI specifications span **15,000 to 60,000 lines of JSON** (consuming **80,000 to 250,000 tokens**). Ingesting the full spec crashes context windows and costs dollars per query—even if the developer only wants to integrate a single endpoint (*`POST /v1/refunds`*).
+In enterprise platforms (Stripe, GitHub, AWS, Kubernetes), complete OpenAPI specifications span **15,000 to 60,000 lines of JSON** (consuming **80,000 to 250,000 tokens**). Ingesting the full spec crashes context windows and costs dollars per query - even if the developer only wants to integrate a single endpoint (*`POST /v1/refunds`*).
 
 The **OpenAPI Endpoint Filtering Protocol** parses the specification locally and extracts **strictly the target path, its HTTP method parameters, and its transitively resolved `$ref` schema components**.
 

@@ -87,25 +87,25 @@ Then, conclude with your verdict based strictly on the evidence above.
 
 **AI Response**:
 1. **Evaluation Criteria**:
-   - **Write Throughput**: Sustained 50,000 writes/sec with predictable sub-10ms latency.
-   - **Query Patterns**: Time-series rollups, range queries, and device alerts.
-   - **Cost at Scale**: Storage and I/O pricing under heavy ingestion.
+  - **Write Throughput**: Sustained 50,000 writes/sec with predictable sub-10ms latency.
+  - **Query Patterns**: Time-series rollups, range queries, and device alerts.
+  - **Cost at Scale**: Storage and I/O pricing under heavy ingestion.
 
 2. **Analysis & Trade-Offs**:
-   - **DynamoDB**:
-     - *Pros*: Effortlessly scales to 50k writes/sec with on-demand or provisioned WCU. Zero server maintenance.
-     - *Cons*: Cost scales linearly with write volume ($$$); analytical range queries and time-series aggregation require exporting to S3/Athena.
-   - **PostgreSQL (with TimescaleDB extension)**:
-     - *Pros*: Native time-bucket aggregation, compression ratios up to 90%, cost-effective on large EBS volumes.
-     - *Cons*: Requires cluster tuning (connection pooling with PgBouncer, auto-partitioning/hypertables, replica management).
+  - **DynamoDB**:
+    - *Pros*: Effortlessly scales to 50k writes/sec with on-demand or provisioned WCU. Zero server maintenance.
+    - *Cons*: Cost scales linearly with write volume ($$$); analytical range queries and time-series aggregation require exporting to S3/Athena.
+  - **PostgreSQL (with TimescaleDB extension)**:
+    - *Pros*: Native time-bucket aggregation, compression ratios up to 90%, cost-effective on large EBS volumes.
+    - *Cons*: Requires cluster tuning (connection pooling with PgBouncer, auto-partitioning/hypertables, replica management).
 
 3. **Elimination Logic**:
-   - Standard vanilla PostgreSQL is **eliminated** due to table bloat and write lock contention at 50k writes/sec.
-   - Pure DynamoDB is **eliminated** if complex time-series queries (e.g., 7-day moving averages across sensor fleets) are required in-database without secondary tooling.
+  - Standard vanilla PostgreSQL is **eliminated** due to table bloat and write lock contention at 50k writes/sec.
+  - Pure DynamoDB is **eliminated** if complex time-series queries (e.g., 7-day moving averages across sensor fleets) are required in-database without secondary tooling.
 
 4. **Recommendation**:
-   - **Choose TimescaleDB (PostgreSQL)** if you need rich SQL analytics and fixed infrastructure costs.
-   - **Choose DynamoDB** if zero-operational overhead and pure key-value ingestion speed outweigh cost and analytical flexibility.
+  - **Choose TimescaleDB (PostgreSQL)** if you need rich SQL analytics and fixed infrastructure costs.
+  - **Choose DynamoDB** if zero-operational overhead and pure key-value ingestion speed outweigh cost and analytical flexibility.
 
 ---
 

@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 Spawning an autonomous browser subagent with a vague prompt (*"Go to the documentation website and find information on rate limits"*) is one of the most expensive failure modes in agentic systems. 
 
-Unbounded browser subagents click exploratory links, get trapped in cookie banners and CAPTCHAs, ingest raw 50,000-token HTML DOM trees, and take 30+ visual screenshots—burning **200,000+ tokens** and stalling the parent agent for 5 minutes.
+Unbounded browser subagents click exploratory links, get trapped in cookie banners and CAPTCHAs, ingest raw 50,000-token HTML DOM trees, and take 30+ visual screenshots - burning **200,000+ tokens** and stalling the parent agent for 5 minutes.
 
 The **Bounded Browser Subagent Protocol** enforces strict **Step Ceilings, Deterministic Stop Conditions, and Selector-Targeted DOM Extractions**.
 

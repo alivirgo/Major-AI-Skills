@@ -38,8 +38,8 @@ The **System Prompt Minifier Engine** is a deterministic compiler script that pr
 │                                                             │
 │  Minified Production Prompt (68 Tokens - 82.1% Cut!):       │
 │  <rules>                                                    │
-│  - CLEAN_CODE: Write modular, strictly typed code.          │
-│  - NO_LOGS: Strip all console.log statements before commit. │
+│ - CLEAN_CODE: Write modular, strictly typed code.          │
+│ - NO_LOGS: Strip all console.log statements before commit. │
 │  </rules>                                                   │
 │  ↳ 68 clean tokens, identical instruction adherence         │
 └─────────────────────────────────────────────────────────────┘

@@ -20,7 +20,7 @@ Re-printing existing import statements causes:
 2. **Accidental Duplicate Import Regressions**: When copy-pasting or applying naive patchers, re-printed imports get appended to the bottom of the file as duplicate imports.
 3. **Cluttered Code Reviews**: Reviewers must scroll past 30 lines of familiar imports to find the 2-line logic patch.
 
-The **Zero-Boilerplate Import Snippet Protocol** omits existing top-of-file imports in localized snippets—displaying **strictly the modified code block**, and showing imports only if a brand new dependency is being introduced.
+The **Zero-Boilerplate Import Snippet Protocol** omits existing top-of-file imports in localized snippets - displaying **strictly the modified code block**, and showing imports only if a brand new dependency is being introduced.
 
 ---
 

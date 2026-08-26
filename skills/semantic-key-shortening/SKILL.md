@@ -17,7 +17,7 @@ In automated extraction, log processing, and multi-agent communications, models 
 
 In high-volume batch runs ($>500$ records), repeating 30-character descriptive keys on every JSON object consumes **thousands of redundant tokens** without adding any technical clarity.
 
-The **Semantic Key Shortening Protocol** replaces verbose key names with **standardized developer abbreviations (`src`, `dst`, `err`, `req`, `res`, `fn`, `qty`)**—using client-side Pydantic and TypeScript aliases to expand them into full domain entities automatically.
+The **Semantic Key Shortening Protocol** replaces verbose key names with **standardized developer abbreviations (`src`, `dst`, `err`, `req`, `res`, `fn`, `qty`)** - using client-side Pydantic and TypeScript aliases to expand them into full domain entities automatically.
 
 ---
 

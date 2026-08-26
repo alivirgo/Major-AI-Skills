@@ -44,7 +44,7 @@ n8n is an extensible workflow automation platform (self-hosted or cloud) where *
 
 1. **Item Semantics**: Design nodes knowing each input item may fan out; use SplitInBatches for rate limits.
 2. **Idempotency**: Deduplicate webhook deliveries with external IDs before creating records.
-3. **Secrets**: Store tokens in Credentials / env vars — never hardcode in Function nodes committed to git.
+3. **Secrets**: Store tokens in Credentials / env vars - never hardcode in Function nodes committed to git.
 4. **Error Paths**: Attach Error Trigger workflows or node error outputs for alerting.
 5. **API Management**: Export/import workflow JSON for version control; activate via API carefully.
 
@@ -83,7 +83,7 @@ const items = $input.all().map((item) => {
 return items;
 ```
 
-Management API — activate workflow:
+Management API - activate workflow:
 
 ```bash
 curl -X POST "https://n8n.example.com/api/v1/workflows/42/activate" \

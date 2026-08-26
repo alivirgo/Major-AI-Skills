@@ -31,10 +31,10 @@ The **Top-$K$ Vector Retrieval Pruning Protocol** combines **strict cosine simil
 │                 RAG Retrieval Density Impact                │
 │                                                             │
 │  High-$K$ Unfiltered Retrieval (10 Chunks / 8,400 Tokens):  │
-│  • Chunks 1–2: High similarity (0.88, 0.82) ──► Relevant   │
-│  • Chunks 3–5: Moderate similarity (0.71, 0.68) ──► Fluff   │
-│  • Chunks 6–10: Low similarity (<0.62) ──► Distracting Noise│
-│  ↳ 8,400 tokens billed, model hallucinates on Chunks 6–10!  │
+│  • Chunks 1-2: High similarity (0.88, 0.82) ──► Relevant   │
+│  • Chunks 3-5: Moderate similarity (0.71, 0.68) ──► Fluff   │
+│  • Chunks 6-10: Low similarity (<0.62) ──► Distracting Noise│
+│  ↳ 8,400 tokens billed, model hallucinates on Chunks 6-10!  │
 │                                                             │
 │  Pruned High-Confidence Retrieval (2 Chunks / 1,400 Tokens):│
 │  • Filter 1: Drop all chunks with similarity < 0.78         │

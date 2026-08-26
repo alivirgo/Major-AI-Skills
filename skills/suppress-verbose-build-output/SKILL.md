@@ -20,7 +20,7 @@ Unsuppressed build logs:
 2. **Burn Budget on Successful Operations**: When a build succeeds with Exit Code 0, not a single line of progress stdout is needed.
 3. **Trigger False Alarms**: Informational deprecation warnings (*"npm WARN deprecated..."*) mislead models into hallucinating phantom bugs.
 
-The **Silent Build & Stdout Suppression Protocol** enforces **native quiet flags (`--silent`, `-q`) and stdout stream suppression**—keeping terminal returns completely clean unless an actual build failure occurs.
+The **Silent Build & Stdout Suppression Protocol** enforces **native quiet flags (`--silent`, `-q`) and stdout stream suppression** - keeping terminal returns completely clean unless an actual build failure occurs.
 
 ---
 

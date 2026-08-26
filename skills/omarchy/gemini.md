@@ -1,6 +1,6 @@
 ---
 title: "Omarchy Linux Distribution AI Skill Guide (Gemini)"
-description: "Comprehensive operational skill specification for Google Gemini to visually inspect, configure, troubleshoot, and optimize Omarchy — the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and modern CLI tools."
+description: "Comprehensive operational skill specification for Google Gemini to visually inspect, configure, troubleshoot, and optimize Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and modern CLI tools."
 category: "Linux Desktop Distribution & Tiling Window Manager"
 tags: ["omarchy", "arch-linux", "hyprland", "quickshell", "neovim", "tiling-wm", "linux-distribution", "dhh", "wayland", "gemini"]
 ---
@@ -41,7 +41,7 @@ Omarchy is a **beautiful, modern, and opinionated** omakase Linux distribution c
 ## Operational Capabilities & Agent Directives
 
 1. **Visual Tiling Layout Analysis**: Inspect screenshots of Hyprland desktop to verify window arrangement, gap sizes, border colors, and workspace distribution across monitors.
-2. **Quickshell Panel Diagnostics**: Visually audit top bar panel rendering — clock accuracy, workspace indicators, system tray icons, notification badges, and media controls.
+2. **Quickshell Panel Diagnostics**: Visually audit top bar panel rendering - clock accuracy, workspace indicators, system tray icons, notification badges, and media controls.
 3. **Theme Color Validation**: Compare applied theme colors against `theme.toml` definitions, verifying wallpaper integration, accent consistency across bar, borders, and application windows.
 4. **Monitor Configuration Verification**: Analyze `hyprctl monitors` output to validate resolution, scaling factors, refresh rates, and multi-monitor positioning.
 5. **Performance Telemetry Interpretation**: Read btop/htop outputs, systemd journal logs, and PipeWire status to diagnose resource bottlenecks and audio routing issues.

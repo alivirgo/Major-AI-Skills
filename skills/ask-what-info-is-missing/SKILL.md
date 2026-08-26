@@ -91,4 +91,4 @@ Review the advice you just gave.
 | :--- | :--- | :--- |
 | **Relevance** | 40% generic filler | 100% targeted to your exact constraints |
 | **Assumptions** | Hidden & unstated | Explicitly surfaced and answered |
-| **Token Waste** | 3–4 back-and-forth correction turns | One diagnostic round $\rightarrow$ Perfect deliverable |
+| **Token Waste** | 3-4 back-and-forth correction turns | One diagnostic round $\rightarrow$ Perfect deliverable |

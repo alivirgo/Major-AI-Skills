@@ -31,10 +31,10 @@ The **Visual Anchor Protocol** structures complex multi-constraint prompts using
 │  ↳ 40% probability of missing the word limit or QA rule     │
 │                                                             │
 │  Bold Key-Value Anchors:                                    │
-│  - **Goal**: Announce 2-day sprint delay to engineering     │
-│  - **Tone**: Positive and accountable                       │
-│  - **Negative Rule**: ❌ Do NOT blame QA or testing         │
-│  - **Hard Limit**: Strictly under 60 words                  │
+│ - **Goal**: Announce 2-day sprint delay to engineering     │
+│ - **Tone**: Positive and accountable                       │
+│ - **Negative Rule**: ❌ Do NOT blame QA or testing         │
+│ - **Hard Limit**: Strictly under 60 words                  │
 │  ↳ 100% Deterministic Constraint Compliance                 │
 └─────────────────────────────────────────────────────────────┘
 ```

@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 Human working memory struggles with abstract, multi-variable systems (such as *distributed database sharding, asynchronous message queues, or derivative options trading*). Attempting to learn these concepts through raw technical definitions creates cognitive overload.
 
-The **Structural Analogy Protocol** maps unfamiliar, abstract technical architectures to familiar, tangible physical systems—instantly transferring your pre-existing real-world intuition into the new domain.
+The **Structural Analogy Protocol** maps unfamiliar, abstract technical architectures to familiar, tangible physical systems - instantly transferring your pre-existing real-world intuition into the new domain.
 
 ---
 
@@ -45,8 +45,8 @@ Explain [ABSTRACT CONCEPT: e.g. Redis In-Memory Cache vs. PostgreSQL Disk Databa
 Instructions:
 1. Ground the entire explanation in a **Single Physical Analogy** (e.g. A Chef's Kitchen / A Carpenter's Workshop).
 2. Explicitly map every technical component to a physical object:
-   - Component A $\rightarrow$ Physical Object A
-   - Component B $\rightarrow$ Physical Object B
+  - Component A $\rightarrow$ Physical Object A
+  - Component B $\rightarrow$ Physical Object B
 3. Explain what happens during a bottleneck or crash in terms of that analogy.
 4. Keep under 150 words.
 ```

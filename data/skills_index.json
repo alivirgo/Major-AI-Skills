@@ -260,6 +260,34 @@
     }
   },
   {
+    "id": "airflow",
+    "path": "skills/airflow",
+    "category": "devops",
+    "name": "airflow",
+    "description": "Operational skill for Apache Airflow: DAGs, operators, sensors, scheduling, retries, and production task hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "airflow",
+      "orchestration",
+      "dags",
+      "etl",
+      "scheduling",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "altium-designer",
     "path": "skills/altium-designer",
     "category": "eda",
@@ -318,6 +346,34 @@
     }
   },
   {
+    "id": "android-studio",
+    "path": "skills/android-studio",
+    "category": "development",
+    "name": "android-studio",
+    "description": "Operational skill for Android Studio: Gradle projects, emulators, Logcat, build variants, signing configs, and AGP troubleshooting.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "android-studio",
+      "android",
+      "gradle",
+      "emulator",
+      "kotlin",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "ansi-strip-logger",
     "path": "skills/ansi-strip-logger",
     "category": "efficiency",
@@ -341,6 +397,62 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "ansible",
+    "path": "skills/ansible",
+    "category": "devops",
+    "name": "ansible",
+    "description": "Operational skill for Ansible playbooks, inventories, roles, idempotent modules, check mode, and ansible-vault secret handling.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "ansible",
+      "playbooks",
+      "roles",
+      "automation",
+      "vault",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "anthropic-api",
+    "path": "skills/anthropic-api",
+    "category": "development",
+    "name": "anthropic-api",
+    "description": "Operational skill for the Anthropic API: Messages, system prompts, tool use, streaming, and production Claude client hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "anthropic",
+      "claude",
+      "api",
+      "llm",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -406,6 +518,34 @@
     }
   },
   {
+    "id": "argocd",
+    "path": "skills/argocd",
+    "category": "devops",
+    "name": "argocd",
+    "description": "Operational skill for agents to implement GitOps with Argo CD - Applications, sync policies, AppProjects, health checks, and safe rollback.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "argocd",
+      "gitops",
+      "kubernetes",
+      "cd",
+      "sync",
+      "helm"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "artifact-reuse-pattern",
     "path": "skills/artifact-reuse-pattern",
     "category": "efficiency",
@@ -428,6 +568,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "asana",
+    "path": "skills/asana",
+    "category": "productivity",
+    "name": "asana",
+    "description": "Operational skill for Asana: projects, tasks, sections, custom fields, rules, and API automation without notification spam.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "asana",
+      "tasks",
+      "projects",
+      "workflows",
+      "productivity",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -1010,6 +1178,64 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "aws-cli",
+    "path": "skills/aws-cli",
+    "category": "devops",
+    "name": "aws-cli",
+    "description": "Operational skill for AWS CLI v2: profiles and SSO, IAM least privilege, S3, EC2, Lambda, CloudWatch Logs, and safe account/region confirmation before mutations.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "aws",
+      "aws-cli",
+      "iam",
+      "s3",
+      "cloudwatch",
+      "lambda",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "azure-cli",
+    "path": "skills/azure-cli",
+    "category": "devops",
+    "name": "azure-cli",
+    "description": "Operational skill for agents to manage Microsoft Azure via az CLI - subscriptions, resource groups, AKS, App Service, Key Vault, and RBAC hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "azure",
+      "az",
+      "azure-cli",
+      "aks",
+      "rbac",
+      "arm",
+      "cli"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -1626,6 +1852,34 @@
     }
   },
   {
+    "id": "chromadb",
+    "path": "skills/chromadb",
+    "category": "development",
+    "name": "chromadb",
+    "description": "Operational skill for ChromaDB: collections, embeddings, metadata filters, persistence, and local RAG vector storage.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "chromadb",
+      "vector-database",
+      "embeddings",
+      "rag",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "cinema-4d",
     "path": "skills/cinema-4d",
     "category": "3d",
@@ -1706,6 +1960,90 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "clickhouse",
+    "path": "skills/clickhouse",
+    "category": "devops",
+    "name": "clickhouse",
+    "description": "Operational skill for ClickHouse: MergeTree tables, partitions, projections, ingest, and analytical SQL performance.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "clickhouse",
+      "olap",
+      "mergetree",
+      "analytics",
+      "sql",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "cloudflare-dns",
+    "path": "skills/cloudflare-dns",
+    "category": "network",
+    "name": "cloudflare-dns",
+    "description": "Operational skill for agents to manage Cloudflare DNS - records, proxied vs DNS-only, TTL, API tokens, and safe cutover patterns.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "cloudflare",
+      "dns",
+      "cdn",
+      "records",
+      "ttl",
+      "network"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "codeql",
+    "path": "skills/codeql",
+    "category": "development",
+    "name": "codeql",
+    "description": "Operational skill for CodeQL: enabling GitHub analysis, writing/using queries, interpreting SARIF, and fixing true positives in PRs.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "codeql",
+      "sast",
+      "github",
+      "security",
+      "sarif",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -2149,6 +2487,62 @@
     }
   },
   {
+    "id": "confluence",
+    "path": "skills/confluence",
+    "category": "knowledge",
+    "name": "confluence",
+    "description": "Operational skill for Confluence: spaces, page trees, macros, labels, permissions, and REST content updates.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "confluence",
+      "wiki",
+      "documentation",
+      "spaces",
+      "atlassian",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "consul",
+    "path": "skills/consul",
+    "category": "devops",
+    "name": "consul",
+    "description": "Operational skill for agents to run HashiCorp Consul for service discovery, health checks, KV config, intentions, and service mesh basics.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "consul",
+      "hashicorp",
+      "service-discovery",
+      "service-mesh",
+      "kv",
+      "health-checks"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "context-pruning-directive",
     "path": "skills/context-pruning-directive",
     "category": "efficiency",
@@ -2381,6 +2775,34 @@
     }
   },
   {
+    "id": "dbt",
+    "path": "skills/dbt",
+    "category": "devops",
+    "name": "dbt",
+    "description": "Operational skill for dbt: models, refs, tests, docs, and analytics engineering workflows on warehouses.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "dbt",
+      "analytics-engineering",
+      "sql",
+      "warehouse",
+      "testing",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "dead-code-elimination",
     "path": "skills/dead-code-elimination",
     "category": "efficiency",
@@ -2469,6 +2891,34 @@
     }
   },
   {
+    "id": "dependabot-config",
+    "path": "skills/dependabot-config",
+    "category": "devops",
+    "name": "dependabot-config",
+    "description": "Operational skill for Dependabot: dependabot.yml ecosystems, schedules, grouping, ignore rules, and safe auto-merge policies.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "dependabot",
+      "dependencies",
+      "security",
+      "github",
+      "devops",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "direct-tool-selection",
     "path": "skills/direct-tool-selection",
     "category": "efficiency",
@@ -2491,6 +2941,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "django",
+    "path": "skills/django",
+    "category": "development",
+    "name": "django",
+    "description": "Operational skill for Django: models, ORM query hygiene, migrations, views/URLs, settings security, and admin customization.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "django",
+      "orm",
+      "python",
+      "migrations",
+      "admin",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -2759,6 +3237,34 @@
     }
   },
   {
+    "id": "duckdb",
+    "path": "skills/duckdb",
+    "category": "scientific",
+    "name": "duckdb",
+    "description": "Operational skill for DuckDB: local analytical SQL, Parquet/CSV scans, views, and zero-copy handoff to pandas/Polars.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "duckdb",
+      "sql",
+      "parquet",
+      "analytics",
+      "olap",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "dynamics-nav",
     "path": "skills/dynamics-nav",
     "category": "erp",
@@ -2846,6 +3352,34 @@
     }
   },
   {
+    "id": "elasticsearch",
+    "path": "skills/elasticsearch",
+    "category": "devops",
+    "name": "elasticsearch",
+    "description": "Operational skill for agents to operate Elasticsearch - index mappings, ILM, queries, clusters health, ingest pipelines, and safe reindex patterns.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "elasticsearch",
+      "elastic",
+      "search",
+      "ilm",
+      "opensearch",
+      "indexing"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "encase",
     "path": "skills/encase",
     "category": "digital-forensics",
@@ -2926,6 +3460,62 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "express",
+    "path": "skills/express",
+    "category": "development",
+    "name": "express",
+    "description": "Operational skill for Express.js: routers, middleware order, error handlers, async wrappers, validation, and production app structure.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "express",
+      "nodejs",
+      "middleware",
+      "http",
+      "api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "fastapi",
+    "path": "skills/fastapi",
+    "category": "development",
+    "name": "fastapi",
+    "description": "Operational skill for FastAPI: Pydantic models, dependency injection, async routes, OpenAPI, authentication hooks, and TestClient-based testing.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "fastapi",
+      "python",
+      "pydantic",
+      "openapi",
+      "api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -3049,6 +3639,34 @@
     }
   },
   {
+    "id": "firebase",
+    "path": "skills/firebase",
+    "category": "development",
+    "name": "firebase",
+    "description": "Operational skill for Firebase: Auth, Firestore/RTDB rules, Cloud Functions, FCM, Emulator Suite, and client SDK security boundaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "firebase",
+      "firestore",
+      "auth",
+      "cloud-functions",
+      "fcm",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "fl-studio",
     "path": "skills/fl-studio",
     "category": "music",
@@ -3136,6 +3754,34 @@
     }
   },
   {
+    "id": "flask",
+    "path": "skills/flask",
+    "category": "development",
+    "name": "flask",
+    "description": "Operational skill for Flask: app factories, blueprints, request context, Jinja/JSON APIs, extensions, and pytest testing patterns.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "flask",
+      "python",
+      "blueprints",
+      "wsgi",
+      "api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "flow-launcher",
     "path": "skills/flow-launcher",
     "category": "windows",
@@ -3162,6 +3808,62 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "flutter",
+    "path": "skills/flutter",
+    "category": "development",
+    "name": "flutter",
+    "description": "Operational skill for Flutter: widgets, state management choices, async UI, platform channels awareness, and release build hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "flutter",
+      "dart",
+      "widgets",
+      "mobile",
+      "cross-platform",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "fluxcd",
+    "path": "skills/fluxcd",
+    "category": "devops",
+    "name": "fluxcd",
+    "description": "Operational skill for agents to run GitOps with Flux CD - GitRepository, Kustomization, HelmRelease, image automation, and reconciliation debugging.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "flux",
+      "fluxcd",
+      "gitops",
+      "kubernetes",
+      "helmrelease",
+      "kustomization"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -3252,6 +3954,35 @@
     }
   },
   {
+    "id": "gcloud-cli",
+    "path": "skills/gcloud-cli",
+    "category": "devops",
+    "name": "gcloud-cli",
+    "description": "Operational skill for agents to manage Google Cloud via gcloud - projects, IAM, GKE, Cloud Run, GCS, and safe deploy hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "gcloud",
+      "gcp",
+      "google-cloud",
+      "iam",
+      "gke",
+      "cloud-run",
+      "cli"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "generate-social-media-captions",
     "path": "skills/generate-social-media-captions",
     "category": "common-sense",
@@ -3275,6 +4006,63 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "github-actions",
+    "path": "skills/github-actions",
+    "category": "devops",
+    "name": "github-actions",
+    "description": "Operational skill for GitHub Actions CI/CD: workflows, jobs, matrices, caching, OIDC cloud auth, secrets, and reusable workflows.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "github-actions",
+      "ci",
+      "cd",
+      "oidc",
+      "workflows",
+      "yaml",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "github-packages-npm",
+    "path": "skills/github-packages-npm",
+    "category": "devops",
+    "name": "github-packages-npm",
+    "description": "Operational skill for GitHub Packages npm: publishing scoped packages, auth via GITHUB_TOKEN/PAT, .npmrc setup, and consuming private packages.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "github-packages",
+      "npm",
+      "registry",
+      "publishing",
+      "devops",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -3398,6 +4186,34 @@
     }
   },
   {
+    "id": "go-services",
+    "path": "skills/go-services",
+    "category": "development",
+    "name": "go-services",
+    "description": "Operational skill for Go HTTP services: modules, idiomatic handlers, context cancellation, middleware, testing, and lean deployable binaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "go",
+      "golang",
+      "http",
+      "modules",
+      "services",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "godot",
     "path": "skills/godot",
     "category": "game-engines",
@@ -3427,6 +4243,117 @@
     }
   },
   {
+    "id": "gpg-signing",
+    "path": "skills/gpg-signing",
+    "category": "devops",
+    "name": "gpg-signing",
+    "description": "Operational skill for GPG signing: key generation hygiene, git commit/tag signing, verification, and revocation basics.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "gpg",
+      "signing",
+      "git",
+      "keys",
+      "verification",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "grafana",
+    "path": "skills/grafana",
+    "category": "devops",
+    "name": "grafana",
+    "description": "Operational skill for Grafana: data sources, dashboards, variables, panels, unified alerting, and dashboard-as-code provisioning.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "grafana",
+      "dashboards",
+      "alerting",
+      "observability",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "graphql-apis",
+    "path": "skills/graphql-apis",
+    "category": "development",
+    "name": "graphql-apis",
+    "description": "Operational skill for GraphQL APIs: schema-first design, resolvers, N+1 prevention, authz in the graph, and client query discipline.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "graphql",
+      "api",
+      "schema",
+      "resolvers",
+      "dataloader",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "graphql-client",
+    "path": "skills/graphql-client",
+    "category": "development",
+    "name": "graphql-client",
+    "description": "Operational skill for GraphQL clients: Apollo Client and urql patterns for queries, mutations, cache, error policies, and auth headers.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "graphql",
+      "apollo",
+      "urql",
+      "client",
+      "cache",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "graphql-introspection-trimmer",
     "path": "skills/graphql-introspection-trimmer",
     "category": "efficiency",
@@ -3449,6 +4376,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "great-expectations",
+    "path": "skills/great-expectations",
+    "category": "scientific",
+    "name": "great-expectations",
+    "description": "Operational skill for Great Expectations: Expectation Suites, Checkpoints, Datasources, and data quality gates in pipelines.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "great-expectations",
+      "data-quality",
+      "validation",
+      "etl",
+      "testing",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -3543,6 +4498,34 @@
     }
   },
   {
+    "id": "helm",
+    "path": "skills/helm",
+    "category": "devops",
+    "name": "helm",
+    "description": "Operational skill for packaging and deploying Kubernetes applications with Helm charts, values overrides, hooks, dependencies, and release rollbacks.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "helm",
+      "charts",
+      "kubernetes",
+      "values",
+      "templating",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "highlight-action-items",
     "path": "skills/highlight-action-items",
     "category": "common-sense",
@@ -3630,6 +4613,62 @@
     }
   },
   {
+    "id": "hubspot",
+    "path": "skills/hubspot",
+    "category": "enterprise",
+    "name": "hubspot",
+    "description": "Operational skill for HubSpot: CRM objects, properties, workflows, private apps, and HubSpot API rate-limit hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "hubspot",
+      "crm",
+      "workflows",
+      "marketing",
+      "api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "huggingface-transformers",
+    "path": "skills/huggingface-transformers",
+    "category": "scientific",
+    "name": "huggingface-transformers",
+    "description": "Operational skill for Hugging Face Transformers: pipelines, tokenizers, fine-tuning, and inference with AutoModel APIs.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "huggingface",
+      "transformers",
+      "nlp",
+      "fine-tuning",
+      "pytorch",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "ibm-maximo",
     "path": "skills/ibm-maximo",
     "category": "enterprise",
@@ -3681,6 +4720,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "incident-runbooks",
+    "path": "skills/incident-runbooks",
+    "category": "devops",
+    "name": "incident-runbooks",
+    "description": "Operational skill for writing actionable oncall runbooks: symptoms, severity, diagnostics, mitigation steps, escalation, and post-incident links.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "runbooks",
+      "oncall",
+      "incidents",
+      "sre",
+      "operations",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -3804,6 +4871,34 @@
     }
   },
   {
+    "id": "jira",
+    "path": "skills/jira",
+    "category": "productivity",
+    "name": "jira",
+    "description": "Operational skill for Jira: issue fields, JQL, workflows, automation hygiene, sprint practices, and REST API bulk updates.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "jira",
+      "jql",
+      "agile",
+      "workflows",
+      "rest-api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "json-minified-payloads",
     "path": "skills/json-minified-payloads",
     "category": "efficiency",
@@ -3826,6 +4921,61 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "jupyter",
+    "path": "skills/jupyter",
+    "category": "scientific",
+    "name": "jupyter",
+    "description": "Operational skill for Jupyter: notebooks, kernels, reproducible cells, papermill params, and hygiene for sharing analytical work.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "jupyter",
+      "notebooks",
+      "python",
+      "reproducibility",
+      "papermill",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "kafka",
+    "path": "skills/kafka",
+    "category": "devops",
+    "name": "kafka",
+    "description": "Operational skill for Apache Kafka: topics, partitions, producers/consumers, consumer groups, offsets, and lag monitoring caveats.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "kafka",
+      "streaming",
+      "events",
+      "consumer-groups",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -3949,6 +5099,63 @@
     }
   },
   {
+    "id": "kotlin",
+    "path": "skills/kotlin",
+    "category": "development",
+    "name": "kotlin",
+    "description": "Operational skill for Kotlin: idiomatic null-safety, coroutines, flows, data classes, and interop with Java/Android APIs.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "kotlin",
+      "coroutines",
+      "android",
+      "jvm",
+      "null-safety",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "kubernetes",
+    "path": "skills/kubernetes",
+    "category": "devops",
+    "name": "kubernetes",
+    "description": "Operational skill for agents to design, debug, and operate Kubernetes workloads with kubectl, Deployments, Services, Ingress, ConfigMaps, Secrets, and rollout hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "kubernetes",
+      "kubectl",
+      "k8s",
+      "deployments",
+      "ingress",
+      "yaml",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "labview",
     "path": "skills/labview",
     "category": "scientific",
@@ -3976,6 +5183,34 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "langchain",
+    "path": "skills/langchain",
+    "category": "development",
+    "name": "langchain",
+    "description": "Operational skill for LangChain: chains/LCEL, tools, memory boundaries, retrieval, and production LLM app structure.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "langchain",
+      "llm",
+      "agents",
+      "rag",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -4030,6 +5265,34 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "lets-encrypt",
+    "path": "skills/lets-encrypt",
+    "category": "devops",
+    "name": "lets-encrypt",
+    "description": "Operational skill for agents to issue and renew TLS certificates with Let's Encrypt - certbot/acme.sh, HTTP-01/DNS-01, renewal timers, and failure recovery.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "lets-encrypt",
+      "acme",
+      "tls",
+      "certbot",
+      "certificates",
+      "https"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -4147,6 +5410,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "llamaindex",
+    "path": "skills/llamaindex",
+    "category": "development",
+    "name": "llamaindex",
+    "description": "Operational skill for LlamaIndex: indexes, retrievers, query engines, ingestion pipelines, and RAG evaluation basics.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "llamaindex",
+      "rag",
+      "retrieval",
+      "llm",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -4357,6 +5648,34 @@
     }
   },
   {
+    "id": "makefile-automation",
+    "path": "skills/makefile-automation",
+    "category": "devops",
+    "name": "makefile-automation",
+    "description": "Operational skill for agents to design reliable Makefiles - phony targets, dependencies, variables, self-docs, and safe automation entrypoints for repos.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "makefile",
+      "make",
+      "automation",
+      "phony",
+      "devops",
+      "dx"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "matlab",
     "path": "skills/matlab",
     "category": "scientific",
@@ -4530,6 +5849,34 @@
     }
   },
   {
+    "id": "mlflow",
+    "path": "skills/mlflow",
+    "category": "scientific",
+    "name": "mlflow",
+    "description": "Operational skill for MLflow: experiment tracking, runs, artifacts, model registry, and reproducible ML logging.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "mlflow",
+      "experiment-tracking",
+      "model-registry",
+      "mlops",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "model-tier-routing",
     "path": "skills/model-tier-routing",
     "category": "efficiency",
@@ -4560,6 +5907,34 @@
     }
   },
   {
+    "id": "mongodb",
+    "path": "skills/mongodb",
+    "category": "devops",
+    "name": "mongodb",
+    "description": "Operational skill for MongoDB: document modeling, indexes, aggregation pipelines, transactions, explain plans, and Atlas-friendly patterns.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "mongodb",
+      "aggregation",
+      "indexes",
+      "nosql",
+      "atlas",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "multi-tool-batch-invocation",
     "path": "skills/multi-tool-batch-invocation",
     "category": "efficiency",
@@ -4582,6 +5957,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "mysql",
+    "path": "skills/mysql",
+    "category": "devops",
+    "name": "mysql",
+    "description": "Operational skill for agents to administer MySQL/MariaDB - schema design, indexes, dumps, users/grants, replication basics, and safe migrations.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "mysql",
+      "mariadb",
+      "sql",
+      "database",
+      "replication",
+      "migrations"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -4646,6 +6049,34 @@
     }
   },
   {
+    "id": "nextjs",
+    "path": "skills/nextjs",
+    "category": "development",
+    "name": "nextjs",
+    "description": "Operational skill for Next.js App Router: server vs client components, routing, data fetching/caching, Server Actions awareness, and production build hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "nextjs",
+      "react",
+      "app-router",
+      "server-components",
+      "frontend",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "nginx",
     "path": "skills/nginx",
     "category": "cross-platform",
@@ -4672,6 +6103,34 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "nginx-hardening",
+    "path": "skills/nginx-hardening",
+    "category": "devops",
+    "name": "nginx-hardening",
+    "description": "Operational skill for agents to harden NGINX as a reverse proxy/ingress - TLS, headers, rate limits, request size, and upstream safety (distinct from general NGINX app serving).",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "nginx",
+      "hardening",
+      "tls",
+      "rate-limit",
+      "reverse-proxy",
+      "security-headers"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -4820,6 +6279,62 @@
     }
   },
   {
+    "id": "nodejs",
+    "path": "skills/nodejs",
+    "category": "development",
+    "name": "nodejs",
+    "description": "Operational skill for Node.js: ESM/CJS modules, async I/O, streams, process lifecycle, package scripts, and production runtime hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "nodejs",
+      "javascript",
+      "esm",
+      "streams",
+      "runtime",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "nomad",
+    "path": "skills/nomad",
+    "category": "devops",
+    "name": "nomad",
+    "description": "Operational skill for agents to schedule workloads with HashiCorp Nomad - jobspecs, task groups, networking, variables, and rollout strategies.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "nomad",
+      "hashicorp",
+      "scheduler",
+      "jobs",
+      "hcl",
+      "orchestration"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "notion",
     "path": "skills/notion",
     "category": "knowledge",
@@ -4910,7 +6425,7 @@
     "path": "skills/omarchy",
     "category": "linux",
     "name": "omarchy",
-    "description": "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy — the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim.",
+    "description": "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4996,6 +6511,34 @@
     }
   },
   {
+    "id": "openai-api",
+    "path": "skills/openai-api",
+    "category": "development",
+    "name": "openai-api",
+    "description": "Operational skill for the OpenAI API: chat completions/responses, tools, embeddings, retries, and production client hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "openai",
+      "api",
+      "llm",
+      "embeddings",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "openapi-endpoint-filtering",
     "path": "skills/openapi-endpoint-filtering",
     "category": "efficiency",
@@ -5018,6 +6561,62 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "opencv",
+    "path": "skills/opencv",
+    "category": "scientific",
+    "name": "opencv",
+    "description": "Operational skill for OpenCV: image IO, transforms, contours, video capture, and classical computer-vision pipelines.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "opencv",
+      "computer-vision",
+      "image-processing",
+      "python",
+      "video",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "opentelemetry",
+    "path": "skills/opentelemetry",
+    "category": "devops",
+    "name": "opentelemetry",
+    "description": "Operational skill for agents to instrument services with OpenTelemetry - traces, metrics, logs, SDKs, collectors, and context propagation.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "opentelemetry",
+      "otel",
+      "tracing",
+      "metrics",
+      "observability",
+      "collector"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -5200,6 +6799,90 @@
     }
   },
   {
+    "id": "owasp-asvs",
+    "path": "skills/owasp-asvs",
+    "category": "development",
+    "name": "owasp-asvs",
+    "description": "Operational skill for OWASP ASVS: selecting levels, mapping requirements to controls, evidence for reviews, and gap triage.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "owasp",
+      "asvs",
+      "security",
+      "requirements",
+      "verification",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "packer",
+    "path": "skills/packer",
+    "category": "devops",
+    "name": "packer",
+    "description": "Operational skill for agents to build golden machine images with HashiCorp Packer - templates, builders, provisioners, and immutable image pipelines.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "packer",
+      "hashicorp",
+      "ami",
+      "images",
+      "golden-image",
+      "hcl"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "pandas",
+    "path": "skills/pandas",
+    "category": "scientific",
+    "name": "pandas",
+    "description": "Operational skill for pandas: DataFrames, IO, groupby/merge, dtype hygiene, and memory-aware ETL on tabular data.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "pandas",
+      "dataframe",
+      "etl",
+      "python",
+      "analytics",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "play-devils-advocate",
     "path": "skills/play-devils-advocate",
     "category": "common-sense",
@@ -5258,6 +6941,146 @@
     }
   },
   {
+    "id": "playwright-ci",
+    "path": "skills/playwright-ci",
+    "category": "testing",
+    "name": "playwright-ci",
+    "description": "CI-focused Playwright skill: flake control, retries/traces, sharding, blob reports, artifact upload, and deterministic auth/data in pipelines.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "playwright",
+      "ci",
+      "sharding",
+      "traces",
+      "flakes",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "polars",
+    "path": "skills/polars",
+    "category": "scientific",
+    "name": "polars",
+    "description": "Operational skill for Polars: LazyFrames, expressions, streaming scans, and fast single-node analytics on Parquet/CSV.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "polars",
+      "dataframe",
+      "lazy",
+      "parquet",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "postgresql",
+    "path": "skills/postgresql",
+    "category": "devops",
+    "name": "postgresql",
+    "description": "Operational skill for PostgreSQL: schema design, indexing, EXPLAIN ANALYZE, vacuum, safe migrations, and production query hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "postgresql",
+      "sql",
+      "indexes",
+      "explain",
+      "migrations",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "postman",
+    "path": "skills/postman",
+    "category": "development",
+    "name": "postman",
+    "description": "Operational skill for Postman: collections, environments, pre-request scripts, Newman CI runs, and API contract smoke tests (complementary to Bruno).",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "postman",
+      "api",
+      "collections",
+      "newman",
+      "testing",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "prefect",
+    "path": "skills/prefect",
+    "category": "devops",
+    "name": "prefect",
+    "description": "Operational skill for Prefect: flows, tasks, deployments, work pools, retries, and observability for Python pipelines.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "prefect",
+      "orchestration",
+      "flows",
+      "etl",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "prioritize-urgent-vs-important",
     "path": "skills/prioritize-urgent-vs-important",
     "category": "common-sense",
@@ -5280,6 +7103,34 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "prisma",
+    "path": "skills/prisma",
+    "category": "development",
+    "name": "prisma",
+    "description": "Operational skill for Prisma ORM: schema modeling, migrations, client queries, transactions, and avoiding N+1 with relation loads.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "prisma",
+      "orm",
+      "typescript",
+      "migrations",
+      "postgres",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -5314,6 +7165,34 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "prometheus",
+    "path": "skills/prometheus",
+    "category": "devops",
+    "name": "prometheus",
+    "description": "Operational skill for Prometheus: scrape configs, PromQL, recording rules, alerting rules, cardinality control, and exporter hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "prometheus",
+      "promql",
+      "alerting",
+      "metrics",
+      "observability",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -5433,6 +7312,91 @@
     }
   },
   {
+    "id": "pulumi",
+    "path": "skills/pulumi",
+    "category": "devops",
+    "name": "pulumi",
+    "description": "Operational skill for agents to manage infrastructure as code with Pulumi - stacks, previews, secrets, providers, and safe up/destroy workflows.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "pulumi",
+      "iac",
+      "stacks",
+      "typescript",
+      "python",
+      "cloud",
+      "devops"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "python-packaging",
+    "path": "skills/python-packaging",
+    "category": "development",
+    "name": "python-packaging",
+    "description": "Operational skill for Python packaging: pyproject.toml, src layout, virtualenvs, pytest/ruff/mypy tooling, and publishing wheels to indexes.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "python",
+      "packaging",
+      "pyproject",
+      "pytest",
+      "wheels",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "pytorch",
+    "path": "skills/pytorch",
+    "category": "scientific",
+    "name": "pytorch",
+    "description": "Operational skill for PyTorch: tensors, nn.Module models, training/eval loops, device placement, checkpointing, and inference hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "pytorch",
+      "deep-learning",
+      "tensors",
+      "training",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "qgis",
     "path": "skills/qgis",
     "category": "gis",
@@ -5459,6 +7423,62 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "rabbitmq",
+    "path": "skills/rabbitmq",
+    "category": "devops",
+    "name": "rabbitmq",
+    "description": "Operational skill for agents to run RabbitMQ messaging - exchanges, queues, bindings, ACK/NACK, DLQ, quorum queues, and consumer hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "rabbitmq",
+      "amqp",
+      "messaging",
+      "queues",
+      "dlq",
+      "quorum-queues"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "rails",
+    "path": "skills/rails",
+    "category": "development",
+    "name": "rails",
+    "description": "Operational skill for Ruby on Rails: MVC/API mode, Active Record, migrations, strong params, credentials, and conventional generators.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "rails",
+      "ruby",
+      "activerecord",
+      "mvc",
+      "api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -5520,6 +7540,62 @@
     }
   },
   {
+    "id": "react",
+    "path": "skills/react",
+    "category": "development",
+    "name": "react",
+    "description": "Operational skill for React: function components, hooks discipline, state design, effects, lists/keys, and accessible interactive UI patterns.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "react",
+      "hooks",
+      "components",
+      "frontend",
+      "a11y",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "react-native",
+    "path": "skills/react-native",
+    "category": "development",
+    "name": "react-native",
+    "description": "Operational skill for React Native: core components, navigation, native modules awareness, New Architecture notes, and release builds.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "react-native",
+      "mobile",
+      "expo",
+      "navigation",
+      "javascript",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "reactive-wakeup-signaling",
     "path": "skills/reactive-wakeup-signaling",
     "category": "efficiency",
@@ -5575,6 +7651,62 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "redis",
+    "path": "skills/redis",
+    "category": "devops",
+    "name": "redis",
+    "description": "Operational skill for Redis: caching patterns, TTLs, data structures, keys design, pub/sub, and memory/eviction pitfalls.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "redis",
+      "cache",
+      "ttl",
+      "datastructures",
+      "sessions",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "redis-streams",
+    "path": "skills/redis-streams",
+    "category": "devops",
+    "name": "redis-streams",
+    "description": "Operational skill for Redis Streams: XADD/XREADGROUP, consumer groups, acknowledgements, pending entries, and trim policies (complementary to Redis caching).",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "redis",
+      "streams",
+      "consumer-groups",
+      "messaging",
+      "devops",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -5839,6 +7971,62 @@
     }
   },
   {
+    "id": "rust-cli",
+    "path": "skills/rust-cli",
+    "category": "development",
+    "name": "rust-cli",
+    "description": "Operational skill for Rust CLIs: clap argument parsing, error handling with anyhow/thiserror, Cargo workspace layout, and distributable binaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "rust",
+      "cli",
+      "clap",
+      "cargo",
+      "binaries",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "salesforce",
+    "path": "skills/salesforce",
+    "category": "enterprise",
+    "name": "salesforce",
+    "description": "Operational skill for Salesforce: objects, SOQL/SOSL, Apex triggers, Flows, Lightning Web Components, and API integration hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "salesforce",
+      "soql",
+      "apex",
+      "flows",
+      "crm",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "sandboxie-plus",
     "path": "skills/sandboxie-plus",
     "category": "windows",
@@ -5948,6 +8136,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "scikit-learn",
+    "path": "skills/scikit-learn",
+    "category": "scientific",
+    "name": "scikit-learn",
+    "description": "Operational skill for scikit-learn: pipelines, CV, preprocessing, model selection, and leakage-safe tabular ML.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "scikit-learn",
+      "machine-learning",
+      "pipelines",
+      "cross-validation",
+      "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -6100,6 +8316,34 @@
     }
   },
   {
+    "id": "semgrep",
+    "path": "skills/semgrep",
+    "category": "development",
+    "name": "semgrep",
+    "description": "Operational skill for Semgrep: writing rules, running CI scans, tuning noise, and triaging findings without drowning in false positives.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "semgrep",
+      "sast",
+      "static-analysis",
+      "security",
+      "ci",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "servicenow-desktop",
     "path": "skills/servicenow-desktop",
     "category": "enterprise",
@@ -6184,6 +8428,34 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "shopify-app",
+    "path": "skills/shopify-app",
+    "category": "development",
+    "name": "shopify-app",
+    "description": "Operational skill for Shopify app development: app extensions, OAuth/session tokens, GraphQL Admin API, webhooks, and billing.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "shopify",
+      "app",
+      "graphql",
+      "webhooks",
+      "oauth",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -6594,6 +8866,62 @@
     }
   },
   {
+    "id": "snowflake",
+    "path": "skills/snowflake",
+    "category": "devops",
+    "name": "snowflake",
+    "description": "Operational skill for Snowflake: warehouses, roles, stages, COPY, Time Travel, and cost-aware SQL analytics.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "snowflake",
+      "warehouse",
+      "sql",
+      "copy",
+      "rbac",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "snyk",
+    "path": "skills/snyk",
+    "category": "devops",
+    "name": "snyk",
+    "description": "Operational skill for Snyk: Open Source SCA, container/IaC scans, fixing via PRs, ignore policies, and CI gate tuning.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "snyk",
+      "sca",
+      "vulnerabilities",
+      "containers",
+      "security",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "solidworks",
     "path": "skills/solidworks",
     "category": "cad",
@@ -6620,6 +8948,34 @@
     "variants": {
       "gpt": true,
       "gemini": true
+    }
+  },
+  {
+    "id": "spark",
+    "path": "skills/spark",
+    "category": "scientific",
+    "name": "spark",
+    "description": "Operational skill for Apache Spark: DataFrames, partitions, shuffle hygiene, Spark SQL, and job debugging on clusters or local mode.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "spark",
+      "pyspark",
+      "dataframe",
+      "big-data",
+      "sql",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
     }
   },
   {
@@ -6732,6 +9088,62 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "spring-boot",
+    "path": "skills/spring-boot",
+    "category": "development",
+    "name": "spring-boot",
+    "description": "Operational skill for Spring Boot: starters, dependency injection, REST controllers, validation, profiles, Actuator, and test slices.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "spring-boot",
+      "java",
+      "rest",
+      "dependency-injection",
+      "actuator",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "sqlite",
+    "path": "skills/sqlite",
+    "category": "devops",
+    "name": "sqlite",
+    "description": "Operational skill for agents to use SQLite effectively - schema, WAL mode, migrations, backups, pragmas, and concurrency limits.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "sqlite",
+      "sql",
+      "embedded-db",
+      "wal",
+      "migrations",
+      "local-dev"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -6877,6 +9289,34 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "stripe",
+    "path": "skills/stripe",
+    "category": "development",
+    "name": "stripe",
+    "description": "Operational skill for Stripe payments: Checkout, PaymentIntents, webhooks with signature verification, subscriptions, idempotency keys, and test-mode hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "stripe",
+      "payments",
+      "webhooks",
+      "subscriptions",
+      "checkout",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -7087,6 +9527,34 @@
     }
   },
   {
+    "id": "supabase-rls",
+    "path": "skills/supabase-rls",
+    "category": "devops",
+    "name": "supabase-rls",
+    "description": "Advanced operational skill for Supabase Row Level Security: policy design, security definer RPCs, storage policies, Edge Function authz, and RLS performance.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "supabase",
+      "rls",
+      "postgres",
+      "policies",
+      "edge-functions",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "suppress-verbose-build-output",
     "path": "skills/suppress-verbose-build-output",
     "category": "efficiency",
@@ -7109,6 +9577,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "swift",
+    "path": "skills/swift",
+    "category": "development",
+    "name": "swift",
+    "description": "Operational skill for Swift: value types, optionals, async/await, actors, SwiftUI state basics, and protocol-oriented design.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "swift",
+      "async-await",
+      "swiftui",
+      "ios",
+      "actors",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -7435,11 +9931,68 @@
     }
   },
   {
+    "id": "terraform",
+    "path": "skills/terraform",
+    "category": "devops",
+    "name": "terraform",
+    "description": "Operational skill for writing and reviewing Terraform HCL: providers, modules, remote state, plans, applies, and destructive-change safety.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "terraform",
+      "iac",
+      "hcl",
+      "modules",
+      "state",
+      "cloud",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "terraform-aws",
+    "path": "skills/terraform-aws",
+    "category": "devops",
+    "name": "terraform-aws",
+    "description": "Operational skill for AWS-focused Terraform: module layout, providers, IAM least privilege, state backends, and safe applies (complementary to general Terraform).",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "terraform",
+      "aws",
+      "modules",
+      "iam",
+      "infrastructure",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "think-of-ai-as-a-junior-assistant",
     "path": "skills/think-of-ai-as-a-junior-assistant",
     "category": "common-sense",
     "name": "think-of-ai-as-a-junior-assistant",
-    "description": "Why treating AI as a brilliant but inexperienced junior intern—fast and knowledgeable, but requiring explicit guardrails and final QA—maximizes leverage.",
+    "description": "Why treating AI as a brilliant but inexperienced junior intern - fast and knowledgeable, but requiring explicit guardrails and final QA - maximizes leverage.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7754,6 +10307,62 @@
     }
   },
   {
+    "id": "trello",
+    "path": "skills/trello",
+    "category": "productivity",
+    "name": "trello",
+    "description": "Operational skill for Trello: boards, lists, cards, Power-Ups, Butler automation, and REST API card hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "trello",
+      "kanban",
+      "boards",
+      "butler",
+      "productivity",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "trivy",
+    "path": "skills/trivy",
+    "category": "devops",
+    "name": "trivy",
+    "description": "Operational skill for agents to scan images, filesystems, IaC, and repos with Aqua Trivy - CVE triage, severity gates, and CI fail policies.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "trivy",
+      "security",
+      "cve",
+      "container-scan",
+      "iac",
+      "sbom"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "try-different-angles-if-first-fails",
     "path": "skills/try-different-angles-if-first-fails",
     "category": "common-sense",
@@ -7834,6 +10443,34 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "typescript",
+    "path": "skills/typescript",
+    "category": "development",
+    "name": "typescript",
+    "description": "Operational skill for TypeScript: strict typing, narrowing, generics, tsconfig, migrating JavaScript safely, and eliminating any-typed boundaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "typescript",
+      "types",
+      "generics",
+      "tsconfig",
+      "javascript",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -8102,6 +10739,34 @@
     }
   },
   {
+    "id": "vault",
+    "path": "skills/vault",
+    "category": "devops",
+    "name": "vault",
+    "description": "Operational skill for agents to use HashiCorp Vault for secrets - KV engines, policies, AppRole/K8s auth, dynamic credentials, and safe lease handling.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "vault",
+      "hashicorp",
+      "secrets",
+      "approle",
+      "kv",
+      "encryption"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "vegas-pro",
     "path": "skills/vegas-pro",
     "category": "video-editing",
@@ -8189,6 +10854,34 @@
     }
   },
   {
+    "id": "vercel",
+    "path": "skills/vercel",
+    "category": "development",
+    "name": "vercel",
+    "description": "Operational skill for Vercel deployments: Next.js/frontend project linking, env vars, preview vs production, build settings, and rollout hygiene.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "vercel",
+      "nextjs",
+      "deploy",
+      "edge",
+      "preview",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "verify-names-and-locations",
     "path": "skills/verify-names-and-locations",
     "category": "common-sense",
@@ -8234,6 +10927,34 @@
       "settings",
       "cli",
       "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "wireguard",
+    "path": "skills/wireguard",
+    "category": "network",
+    "name": "wireguard",
+    "description": "Operational skill for agents to deploy WireGuard VPNs - keys, interfaces, AllowedIPs, NAT traversal notes, and least-privilege peer routing.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "wireguard",
+      "vpn",
+      "networking",
+      "wg",
+      "tunnel",
+      "security"
     ],
     "tools": [
       "claude",
@@ -8305,6 +11026,34 @@
     }
   },
   {
+    "id": "wordpress",
+    "path": "skills/wordpress",
+    "category": "development",
+    "name": "wordpress",
+    "description": "Operational skill for WordPress development: themes, plugins, hooks, WP-CLI, REST API, and hardening against common WP pitfalls.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "wordpress",
+      "php",
+      "plugins",
+      "themes",
+      "wp-cli",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "write-polite-tough-feedback",
     "path": "skills/write-polite-tough-feedback",
     "category": "common-sense",
@@ -8356,6 +11105,62 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "xcode-ios",
+    "path": "skills/xcode-ios",
+    "category": "development",
+    "name": "xcode-ios",
+    "description": "Operational skill for Xcode iOS development: targets/schemes, simulators, signing & capabilities, SwiftUI/UIKit projects, and archive/export.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "xcode",
+      "ios",
+      "signing",
+      "simulator",
+      "swift",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "zapier",
+    "path": "skills/zapier",
+    "category": "automation",
+    "name": "zapier",
+    "description": "Operational skill for Zapier: Zaps, triggers, actions, Filters/Paths, storage, and error-handling without brittle automations.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-08-26",
+    "tags": [
+      "zapier",
+      "automation",
+      "zaps",
+      "integration",
+      "no-code",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,

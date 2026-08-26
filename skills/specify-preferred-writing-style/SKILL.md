@@ -40,7 +40,7 @@ Select one of these presets to instantly lock in the desired voice:
 ### Preset 1: The Pragmatic Practitioner (Engineering & Tech)
 ```markdown
 Style Directive:
-- Tone: Candid, direct, pragmatic—like a senior engineer writing notes for a peer.
+- Tone: Candid, direct, pragmatic - like a senior engineer writing notes for a peer.
 - Density: High. Use exact CLI commands, code snippets, and error logs.
 - Cadence: Active verbs, short sentences. Ban all corporate fluff and marketing adjectives.
 ```

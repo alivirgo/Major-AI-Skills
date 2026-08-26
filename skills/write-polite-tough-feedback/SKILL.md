@@ -69,7 +69,7 @@ Generate a spoken script for our 1-on-1 following the **Situation-Behavior-Impac
 > 
 > *Over the last three sprints, pull requests were submitted on Friday afternoon past our Wednesday code freeze deadline. When PRs come in late, the QA team has to work over the weekend and our release gets pushed back.*
 > 
-> *I want to understand what's getting in the way—whether it's underestimating ticket scope or unexpected blockers. Let's look at your current backlog together and set up daily 10-minute check-ins so we hit next week's deadline with zero stress."*
+> *I want to understand what's getting in the way - whether it's underestimating ticket scope or unexpected blockers. Let's look at your current backlog together and set up daily 10-minute check-ins so we hit next week's deadline with zero stress."*
 > 
 > ✅ *(Objective, focuses on process & impact, offers collaborative support).*
 

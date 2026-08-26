@@ -17,7 +17,7 @@ Open-source libraries and enterprise codebases are laden with verbose license he
 
 When an agent ingests full files for debugging or refactoring, these non-executable text lines consume **30% to 50% of the input context window**, diluting the model's self-attention across legal boilerplate rather than algorithmic logic.
 
-The **Comment Stripping Preprocessor Protocol** automatically sanitizes source code before context ingestion—stripping license headers and decorative comments while strictly preserving semantic type hints, security invariants, and critical `FIXME`/`SAFETY` tags.
+The **Comment Stripping Preprocessor Protocol** automatically sanitizes source code before context ingestion - stripping license headers and decorative comments while strictly preserving semantic type hints, security invariants, and critical `FIXME`/`SAFETY` tags.
 
 ---
 
@@ -126,4 +126,4 @@ Ingesting 15 production microservice files across diverse repositories:
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Context ingestion pipelines must sanitize license headers and decorative comments prior to injecting files into the LLM context window. Never alter the files on disk—perform comment stripping *in-memory* for context injection only.
+> **MANDATORY**: Context ingestion pipelines must sanitize license headers and decorative comments prior to injecting files into the LLM context window. Never alter the files on disk - perform comment stripping *in-memory* for context injection only.

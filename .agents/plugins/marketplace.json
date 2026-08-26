@@ -1,0 +1,7 @@
+﻿{
+  "name": "major-ai-skills",
+  "description": "Major AI Skills library for Codex / OpenAI agents",
+  "version": "2.0.0",
+  "skillsRoot": "../../skills",
+  "install": "npx major-ai-skills --codex"
+}

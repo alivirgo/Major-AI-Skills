@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When users ask an AI to *"Explain quantum computing"* or *"Teach me Excel pivot tables,"* most models respond with a massive, passive wall of text. Passive reading leads to rapid forgetting and illusion of competence.
 
-This skill equips users and AI systems with the **Interactive Socratic Tutor Pattern**—a systematic prompting framework that forces the AI into an adaptive teacher persona that delivers bite-sized explanations, verifies understanding through active recall questions, and adapts difficulty in real time.
+This skill equips users and AI systems with the **Interactive Socratic Tutor Pattern** - a systematic prompting framework that forces the AI into an adaptive teacher persona that delivers bite-sized explanations, verifies understanding through active recall questions, and adapts difficulty in real time.
 
 ---
 
@@ -35,7 +35,7 @@ This skill equips users and AI systems with the **Interactive Socratic Tutor Pat
 └─────────────────────────────────────────────────────────────┘
 ```
 
-1. **One Concept at a Time**: Prohibit the AI from dumping an entire syllabus or chapter at once. Enforce micro-lessons (maximum 150–200 words per stage).
+1. **One Concept at a Time**: Prohibit the AI from dumping an entire syllabus or chapter at once. Enforce micro-lessons (maximum 150-200 words per stage).
 2. **Immediate Active Recall**: Every instructional turn MUST conclude with a single question, practical exercise, or multiple-choice test.
 3. **Adaptive Feedback Loop**: If the learner struggles, the AI provides an alternative analogy or breaks the sub-concept down further before moving forward.
 4. **No Spoon-Feeding**: When the learner gets an answer wrong, the tutor provides hints rather than blurting out the solution.
@@ -134,5 +134,5 @@ To begin, ask me about my background with [TOPIC] and what specific goal I want 
 ## Expected Output Standard
 When implemented correctly:
 - Learner retention increases by over **3x** due to forced retrieval practice.
-- Token consumption per round-trip is reduced by **60–80%** due to bounded length constraints.
+- Token consumption per round-trip is reduced by **60-80%** due to bounded length constraints.
 - Real comprehension gaps are diagnosed immediately rather than discovered later in production or exams.

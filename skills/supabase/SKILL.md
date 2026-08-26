@@ -148,4 +148,4 @@ supabase start
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Enable RLS on user-owned tables and pair with explicit policies. Keep `service_role` server-side only. Manage schema via SQL migrations and the Supabase CLI — not one-off production console edits.
+> **MANDATORY**: Enable RLS on user-owned tables and pair with explicit policies. Keep `service_role` server-side only. Manage schema via SQL migrations and the Supabase CLI - not one-off production console edits.

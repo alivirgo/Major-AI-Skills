@@ -17,7 +17,7 @@ When an autonomous coding assistant executes a standard `git status` command, Gi
 
 In multi-turn agent loops with frequent state checks, this verbose commentary consumes **500 to 1,500 wasted tokens per turn** without adding any actionable file-level information.
 
-The **Abbreviated Git Status Protocol** enforces the use of `git status -s` (short format) or `git status --porcelain=v1` / `v2`—streaming a compact, machine-parseable 2-character matrix that reduces token consumption by **85%** while retaining 100% of staging, modification, and branch tracking information.
+The **Abbreviated Git Status Protocol** enforces the use of `git status -s` (short format) or `git status --porcelain=v1` / `v2` - streaming a compact, machine-parseable 2-character matrix that reduces token consumption by **85%** while retaining 100% of staging, modification, and branch tracking information.
 
 ---
 

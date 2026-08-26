@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Ask for a Weighted Pros & Cons Matrix (AI Skill)
 
 ## Overview
-A basic two-column pros-and-cons list is often misleading because it treats every bullet point equally—treating a minor advantage (*"Clean user interface"*) with the same visual weight as a fatal flaw (*"Lacks regulatory compliance"*).
+A basic two-column pros-and-cons list is often misleading because it treats every bullet point equally - treating a minor advantage (*"Clean user interface"*) with the same visual weight as a fatal flaw (*"Lacks regulatory compliance"*).
 
 The **Weighted Multi-Attribute Matrix Protocol** upgrades simple pros/cons into a rigorous decision framework, evaluating trade-offs across **Impact, Implementation Effort, Financial Cost, and Reversibility**.
 

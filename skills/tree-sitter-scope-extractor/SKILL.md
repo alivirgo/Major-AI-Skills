@@ -31,15 +31,15 @@ The **Tree-Sitter AST Scope Extraction Protocol** parses the file into an Abstra
 │                 Code Context Ingestion Scope                │
 │                                                             │
 │  Full-File Ingestion (800 Lines / 6,500 Tokens):            │
-│  • Lines 1–40: Imports & Global DB Pools                    │
-│  • Lines 41–130: `createOrder`, `cancelOrder`, `listOrders` │
-│  • Lines 131–180: `processOrder` <-- THE ONLY TARGET!       │
-│  • Lines 181–800: 12 other unrelated accounting routines    │
+│  • Lines 1-40: Imports & Global DB Pools                    │
+│  • Lines 41-130: `createOrder`, `cancelOrder`, `listOrders` │
+│  • Lines 131-180: `processOrder` <-- THE ONLY TARGET!       │
+│  • Lines 181-800: 12 other unrelated accounting routines    │
 │  ↳ 6,500 tokens billed, attention diluted across 800 lines  │
 │                                                             │
 │  Tree-Sitter Enclosing Scope (60 Lines / 420 Tokens):       │
-│  • Lines 1–12: Top-level module imports (Module Contract)   │
-│  • Lines 131–180: Complete `processOrder` AST block         │
+│  • Lines 1-12: Top-level module imports (Module Contract)   │
+│  • Lines 131-180: Complete `processOrder` AST block         │
 │  ↳ 420 clean tokens (93.5% Cut!), 100% AST integrity!       │
 └─────────────────────────────────────────────────────────────┘
 ```

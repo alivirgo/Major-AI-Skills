@@ -16,8 +16,8 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 When running large test suites, Docker image builds, or package installations (`npm test`, `cargo test`, `docker build`), terminal commands frequently generate **500 to 5,000 lines of output**.
 
 In 99% of software failures, the critical diagnostic information is distributed in two places:
-1. **The Head (First 15–25 lines)**: Command invocation arguments, environment variables, compiler flags, and target module names.
-2. **The Tail (Last 30–50 lines)**: The fatal assertion failure, exact line number, exception stack trace, and final exit code summary.
+1. **The Head (First 15-25 lines)**: Command invocation arguments, environment variables, compiler flags, and target module names.
+2. **The Tail (Last 30-50 lines)**: The fatal assertion failure, exact line number, exception stack trace, and final exit code summary.
 
 The middle 90% of the log consists of redundant progress meters (*"Passing test 1..140"*, *"Downloading layer 4a3f..."*). Ingesting unclipped logs burns **10,000+ tokens per failure turn**.
 
@@ -32,9 +32,9 @@ The **Head/Tail Log Clipping Protocol** (also known as the **Sandwich Truncation
 │                 Log Stream Ingestion Impact                 │
 │                                                             │
 │  Unclipped Terminal Log (3,000 Lines / 18,500 Tokens):      │
-│  • Lines 1–20: `pytest tests/` (Environment info)           │
-│  • Lines 21–2950: 2,930 lines of passing green dots / tests │
-│  • Lines 2951–3000: AssertionError on line 42               │
+│  • Lines 1-20: `pytest tests/` (Environment info)           │
+│  • Lines 21-2950: 2,930 lines of passing green dots / tests │
+│  • Lines 2951-3000: AssertionError on line 42               │
 │  ↳ 18,500 tokens billed, agent loses attention in middle    │
 │                                                             │
 │  Sandwich Truncated Log (60 Lines / 420 Tokens - 97.7% Cut):│

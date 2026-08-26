@@ -38,11 +38,11 @@ System Informer provides a deep diagnostic interface featuring the **Hierarchica
 
 1. **Multimodal Process Tree Inspection**: Analyze screenshots of the System Informer process tree to evaluate parent-child relationships (*e.g. identifying anomalous spawns like `svchost.exe` without `services.exe` parent*).
 2. **Color-Coded State Disambiguation**: Review process highlight colors to quickly triage system states:
-   - *Yellow*: .NET Managed Runtime Process
-   - *Cyan*: Windows Store (AppX / UWP) Package
-   - *Blue / Light Blue*: Suspended Process or Debugged Process
-   - *Green*: Newly Spawned Process
-   - *Red*: Terminating / Exiting Process
+  - *Yellow*: .NET Managed Runtime Process
+  - *Cyan*: Windows Store (AppX / UWP) Package
+  - *Blue / Light Blue*: Suspended Process or Debugged Process
+  - *Green*: Newly Spawned Process
+  - *Red*: Terminating / Exiting Process
 3. **Suspicious Virtual Memory Analysis**: Review Process Properties $\rightarrow$ Memory tab to detect anomalous `PAGE_EXECUTE_READWRITE` (RWX) allocations characteristic of code injection.
 4. **Locked File & Handle Search Triage**: Guide users through the `Find Handles or DLLs` window (`Ctrl + F`) to identify which application is holding exclusive file locks on locked volumes.
 

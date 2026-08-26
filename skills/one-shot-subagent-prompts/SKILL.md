@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 When a primary orchestrator agent delegates work to a child subagent (*e.g., spawning an autonomous research subagent or browser subagent*), providing a vague, underspecified prompt (*"Look into why database connections are failing"*) triggers a high-cost **Clarification Ping-Pong Loop**.
 
-The child subagent spends 4 to 8 turns asking for workspace paths, exploring irrelevant folders, asking for permission, and returning conversational status updates—burning **20,000+ tokens** across both agent transcripts.
+The child subagent spends 4 to 8 turns asking for workspace paths, exploring irrelevant folders, asking for permission, and returning conversational status updates - burning **20,000+ tokens** across both agent transcripts.
 
 The **One-Shot Subagent Task Specification Protocol** packages **Context Scope, Deterministic Actions, Hard Boundaries, and a Return Contract** into the initial invocation prompt, enabling the subagent to complete the task autonomously in a single execution trajectory.
 
@@ -66,15 +66,15 @@ When calling `invoke_subagent` or configuring subagent dispatchers:
 
 ```markdown
 ### 🎯 Context & Target:
-- Target File: `src/services/auth.ts` (lines 40–80)
+- Target File: `src/services/auth.ts` (lines 40-80)
 - Related Types: `src/types/auth.d.ts`
 - Environment: Redis client available via `import { redis } from '@/lib/redis'`
 
 ### ⚡ Deterministic Task:
 1. In `verifySessionToken(token: string)`:
-   - Extract JWT `jti` claim.
-   - Query Redis: `await redis.get(`revoked:${jti}`)`.
-   - If key exists, return `null` (unauthorized).
+  - Extract JWT `jti` claim.
+  - Query Redis: `await redis.get(`revoked:${jti}`)`.
+  - If key exists, return `null` (unauthorized).
 2. Run test verification: `npm test tests/auth.test.ts`.
 
 ### 🛑 Hard Execution Boundaries:

@@ -110,4 +110,4 @@ Data:
 ---
 
 ## Summary Best Practice
-> **"Whenever an AI gives you a 10/10 response, don't just close the tab—extract the prompt, replace the variables with `{clipboard}`, and save it to your snippet library."**
+> **"Whenever an AI gives you a 10/10 response, don't just close the tab - extract the prompt, replace the variables with `{clipboard}`, and save it to your snippet library."**

@@ -35,9 +35,9 @@ This skill provides a systematic framework to strip out AI synthetic markers and
 └───────────────────────────────────────────────────────────────┘
 ```
 
-1. **Provide the "Messy Human Angle" First**: Never ask an AI to invent a personal story. Provide 2–3 rough bullet points of actual events, quotes, or feelings from your own day.
+1. **Provide the "Messy Human Angle" First**: Never ask an AI to invent a personal story. Provide 2-3 rough bullet points of actual events, quotes, or feelings from your own day.
 2. **Set a Negative Constraint List**: Explicitly ban AI tell-tale vocabulary and throat-clearing preambles.
-3. **Tone Mirroring via Sample Text**: Feed 200–300 words of your own past writing and instruct the model to analyze and mirror your sentence lengths, vocabulary density, and punctuation quirks.
+3. **Tone Mirroring via Sample Text**: Feed 200-300 words of your own past writing and instruct the model to analyze and mirror your sentence lengths, vocabulary density, and punctuation quirks.
 4. **Vary Sentence Rhythm (Burstiness)**: Human writing mixes ultra-short punchy sentences with longer, compound thoughts. AI writing defaults to uniform 18-word sentences.
 
 ---
@@ -55,11 +55,11 @@ Here is my raw perspective and the core points I want to convey:
 - [Point 3: Key takeaway or call to action]
 
 Style Guidelines:
-1. Tone: Conversational, candid, pragmatic, and direct—like an experienced colleague sharing notes over coffee.
+1. Tone: Conversational, candid, pragmatic, and direct - like an experienced colleague sharing notes over coffee.
 2. Ban all AI clichés: Do not use "delve", "tapestry", "embark", "testament", "beacon", "game-changer", "dive deep", "in today's fast-paced world", or "unleash".
 3. Sentence Rhythm: Mix short 2-5 word sentences with longer descriptive sentences. Avoid uniform sentence length.
 4. Voice: Use first-person ("I", "we") and active verbs. Avoid passive academic language.
-5. Cut the throat-clearing: Start immediately with the hook or insight—no greeting fluff or introductory summaries.
+5. Cut the throat-clearing: Start immediately with the hook or insight - no greeting fluff or introductory summaries.
 ```
 
 ---

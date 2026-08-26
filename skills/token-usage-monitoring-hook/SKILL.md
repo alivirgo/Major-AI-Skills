@@ -20,7 +20,7 @@ Silent token consumption causes:
 2. **Invisible Performance Degradation**: Sudden 15-second latency spikes caused by processing bloated input prompts.
 3. **No Root-Cause Tracing**: Developers cannot identify which specific tool call or turn introduced the token flood.
 
-The **Token Usage Telemetry Hook Protocol** intercepts every model response and tool execution—logging **exact input, output, and cache read metrics** and triggering an alert when any single turn exceeds safe thresholds ($> 5,000\text{ tokens}$).
+The **Token Usage Telemetry Hook Protocol** intercepts every model response and tool execution - logging **exact input, output, and cache read metrics** and triggering an alert when any single turn exceeds safe thresholds ($> 5,000\text{ tokens}$).
 
 ---
 

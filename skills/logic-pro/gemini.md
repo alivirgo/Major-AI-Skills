@@ -34,10 +34,10 @@ Logic Pro 11 provides a high-fidelity visual workspace featuring the **Tracks Ar
 
 1. **Multimodal Channel EQ Curve Inspection**: Analyze screenshots of Channel EQ to verify high-pass filter slope steepness ($12-24\text{dB/oct}$), low-mid boxiness cuts ($300-500\text{Hz}$), and high-frequency air boosts ($10-12\text{kHz}$).
 2. **Compressor Circuit Topology Selection**: Guide users in selecting optimal compressor emulations based on musical material:
-   - *Vintage Opto (Teletronix LA-2A)*: Smooth vocals and legato bass.
-   - *Vintage FET (Universal Audio 1176)*: Fast transient snares, aggressive rock vocals.
-   - *Classic VCA (dbx 160)*: Punchy kick drums.
-   - *Studio VCA (SSL G-Master Bus)*: Master stereo bus glue.
+  - *Vintage Opto (Teletronix LA-2A)*: Smooth vocals and legato bass.
+  - *Vintage FET (Universal Audio 1176)*: Fast transient snares, aggressive rock vocals.
+  - *Classic VCA (dbx 160)*: Punchy kick drums.
+  - *Studio VCA (SSL G-Master Bus)*: Master stereo bus glue.
 3. **Dolby Atmos 3D Object Panner Auditing**: Validate 3D spatial panner placement, azimuth angles, elevation coordinates, and object size diffusion across binaural headphone renders.
 4. **Smart Controls Mapping Review**: Ensure multi-parameter macro mappings maintain smooth, proportional control scaling.
 

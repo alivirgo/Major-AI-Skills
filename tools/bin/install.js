@@ -170,7 +170,7 @@ function main() {
 
   console.log(`Destination: ${destRoot}`);
   console.log(`Skills to install: ${selected.length}`);
-  if (args.dryRun) console.log("(dry-run — no files written)");
+  if (args.dryRun) console.log("(dry-run - no files written)");
 
   for (const s of selected) {
     const src = path.join(root, s.path);

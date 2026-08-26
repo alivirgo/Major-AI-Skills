@@ -38,7 +38,7 @@ The **Transport-Layer Compression Protocol** transparently compresses outgoing H
 │  Gzip Compressed HTTP Stream (`Content-Encoding: gzip`):    │
 │  • Compressed Payload Size: 110 KB (87.0% Reduction!)       │
 │  • Uplink Transfer Time: 44 ms (7.7x Faster Upload)         │
-│  • Zero LLM token changes — transparent transport layer     │
+│  • Zero LLM token changes - transparent transport layer     │
 └─────────────────────────────────────────────────────────────┘
 ```
 

@@ -53,10 +53,10 @@ Here is my raw to-do list for today:
 My Primary Goal for today is: [CORE GOAL].
 
 Triage these tasks using the Eisenhower Matrix into 4 distinct Markdown tables:
-1. **Q1: DO FIRST (Top 2-3 Urgent & Critical Tasks)** – Must finish before lunch.
-2. **Q2: DEEP WORK BLOCK (High-Leverage / Strategic)** – Time-box for 90 minutes.
-3. **Q3: DELEGATE / FAST BATCH** – Batch into a 20-minute admin blitz or delegate.
-4. **Q4: ELIMINATE / DEFER** – Tasks that provide $<5\%$ value and should be cancelled.
+1. **Q1: DO FIRST (Top 2-3 Urgent & Critical Tasks)** - Must finish before lunch.
+2. **Q2: DEEP WORK BLOCK (High-Leverage / Strategic)** - Time-box for 90 minutes.
+3. **Q3: DELEGATE / FAST BATCH** - Batch into a 20-minute admin blitz or delegate.
+4. **Q4: ELIMINATE / DEFER** - Tasks that provide $<5\%$ value and should be cancelled.
 
 For Q1 and Q2, specify the recommended order of execution.
 ```

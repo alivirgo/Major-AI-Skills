@@ -20,7 +20,7 @@ Defaulting to maximum ceilings creates severe operational hazards:
 2. **Slow Crash Latency**: A looping task hangs the agent for 40 to 60 seconds while streaming unnecessary tokens.
 3. **Financial Exposure**: Runaway background jobs can consume hundreds of dollars in hours without hard output limits.
 
-The **Max Tokens Ceiling Guard Protocol** enforces **task-calibrated output clamping**—restricting the output ceiling strictly to the expected payload size.
+The **Max Tokens Ceiling Guard Protocol** enforces **task-calibrated output clamping** - restricting the output ceiling strictly to the expected payload size.
 
 ---
 

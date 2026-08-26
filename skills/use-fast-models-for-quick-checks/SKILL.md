@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 Using a heavyweight reasoning model (like OpenAI o1 or Claude 3.5 Sonnet) to fix a spelling mistake, extract a date, or format a Markdown table is like hiring a senior structural engineer to screw in a lightbulb.
 
-Heavy models are **10x to 50x more expensive** and have significantly higher latency (5–15 seconds vs. 400ms).
+Heavy models are **10x to 50x more expensive** and have significantly higher latency (5-15 seconds vs. 400ms).
 
 The **Model Routing Economics Protocol** matches task cognitive difficulty to the optimal model tier, slashing AI API costs and accelerating daily workflow velocity.
 

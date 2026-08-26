@@ -85,32 +85,32 @@ For each ticket, format as:
 ### Week 1: Core Architecture & Authentication Engine
 - **Objective**: Establish stable multi-platform build and secure auth pipeline.
 - **Deliverables**:
-  - React Native / Expo base repository configured with TypeScript and ESLint.
-  - Supabase / Firebase Auth integration (Apple Sign-In & Google Auth).
+ - React Native / Expo base repository configured with TypeScript and ESLint.
+ - Supabase / Firebase Auth integration (Apple Sign-In & Google Auth).
 - **Critical Blocker**: Apple Developer Enterprise Account approval.
 - **Definition of Done**: A tester can sign in via Apple on a physical iOS device and view a blank authenticated dashboard.
 
 ### Week 2: Core Feature Loop & Local Persistence
 - **Objective**: Build the primary user workflow end-to-end.
 - **Deliverables**:
-  - Main user dashboard with CRUD functionality.
-  - Offline-first SQLite local caching for instant load times.
+ - Main user dashboard with CRUD functionality.
+ - Offline-first SQLite local caching for instant load times.
 - **Critical Blocker**: Finalized database schema from Week 1.
 - **Definition of Done**: User can create, edit, and delete an item offline, and sync seamlessly when Wi-Fi reconnects.
 
 ### Week 3: Stress Testing, Error Tracking & Beta Distribution
 - **Objective**: Hardening the build against crashes and boundary conditions.
 - **Deliverables**:
-  - Sentry error logging and PostHog analytics instrumentation.
-  - TestFlight beta build distributed to 20 external testers.
+ - Sentry error logging and PostHog analytics instrumentation.
+ - TestFlight beta build distributed to 20 external testers.
 - **Critical Blocker**: Zero P0/P1 crashes reported across 50 test sessions.
 - **Definition of Done**: 20 beta testers complete onboarding without a single fatal exception.
 
 ### Week 4: App Store Submission & Production Cutover
 - **Objective**: Store approval, privacy compliance, and public launch.
 - **Deliverables**:
-  - App Store screenshots, privacy nutrition labels, and marketing landing page.
-  - Production CDN DNS cutover.
+ - App Store screenshots, privacy nutrition labels, and marketing landing page.
+ - Production CDN DNS cutover.
 - **Definition of Done**: App is officially approved and live on the Apple App Store.
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: omarchy
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy — the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim."
+description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim."
 category: linux
 risk: safe
 source: self
@@ -103,7 +103,7 @@ fi
 if pgrep -x quickshell > /dev/null 2>&1; then
     log_ok "Quickshell desktop panels active"
 else
-    log_warn "Quickshell not running — top bar and widgets unavailable"
+    log_warn "Quickshell not running - top bar and widgets unavailable"
     log_info "Restart: quickshell &"
 fi
 
@@ -171,7 +171,7 @@ ROOT_USAGE=$(df / --output=pcent | tail -1 | tr -d ' %')
 if [ "$ROOT_USAGE" -lt 85 ]; then
     log_ok "Root filesystem usage: ${ROOT_USAGE}%"
 else
-    log_warn "Root filesystem usage: ${ROOT_USAGE}% — consider cleanup"
+    log_warn "Root filesystem usage: ${ROOT_USAGE}% - consider cleanup"
 fi
 
 # 10. Check Theme Configuration
@@ -196,7 +196,7 @@ echo -e "${CYAN}═════════════════════�
 ### Essential Keybindings (Omarchy Defaults)
 
 ```conf
-# ~/.config/hypr/hyprland.conf — Omarchy Default Keybindings (Super = Mod key)
+# ~/.config/hypr/hyprland.conf - Omarchy Default Keybindings (Super = Mod key)
 
 # Window Navigation
 bind = SUPER, H, movefocus, l          # Focus left

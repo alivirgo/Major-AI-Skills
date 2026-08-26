@@ -36,7 +36,7 @@ The **Zero-Fluff Prompting Protocol** cuts out all social packaging, focusing 10
 │  Direct Command Input:                                      │
 │  "Draft a 2-sentence meeting reschedule email."             │
 │  ↳ Model mirrors crisp, direct tone:                        │
-│    "Hi Mark—can we move our sync to Thursday at 2 PM?"      │
+│    "Hi Mark - can we move our sync to Thursday at 2 PM?"      │
 │  ↳ Zero fluff, instant execution                            │
 └─────────────────────────────────────────────────────────────┘
 ```

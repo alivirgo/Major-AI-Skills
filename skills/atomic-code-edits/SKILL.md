@@ -37,7 +37,7 @@ The **Atomic Code Edit Protocol** enforces targeted differential patching using 
 │  • High risk of comment/type erasure                        │
 │                                                             │
 │  Atomic Patch (`replace_file_content`):                     │
-│  • Agent targets lines 142–146 only                         │
+│  • Agent targets lines 142-146 only                         │
 │  • 35 Output Tokens streamed                                │
 │  • 0.4 Seconds Latency (45x Faster!)                        │
 │  • 100% Codebase Integrity Guaranteed                       │

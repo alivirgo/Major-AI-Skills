@@ -19,7 +19,7 @@ Re-printing full files creates two severe problems:
 1. **Severe Token Waste**: Emitting 300 lines of unchanged code burns **2,500+ expensive output tokens** for a 3-line bug fix.
 2. **Poor Developer Experience**: The human reviewer must scroll through hundreds of lines trying to spot what actually changed.
 
-The **Minimal Unified Diff Protocol** formats all code modifications using standard **Unified Diffs (` ```diff `)**—displaying strictly the modified lines with **2 to 3 lines of surrounding context (`-` deletions, `+` additions)**.
+The **Minimal Unified Diff Protocol** formats all code modifications using standard **Unified Diffs (` ```diff `)** - displaying strictly the modified lines with **2 to 3 lines of surrounding context (`-` deletions, `+` additions)**.
 
 ---
 
@@ -80,7 +80,7 @@ When emitting diffs in chat responses or walkthrough artifacts:
 
 ## The 3 Rules of Unified Diff Formatting
 
-### 1. Include 2–3 Lines of Anchor Context
+### 1. Include 2-3 Lines of Anchor Context
 Always provide 2 to 3 unchanged lines above and below the change (prefixed with a leading space) so the user and IDE can anchor the exact location.
 
 ### 2. Prefix Deletions with `-` and Additions with `+`

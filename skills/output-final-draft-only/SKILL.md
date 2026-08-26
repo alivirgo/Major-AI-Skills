@@ -100,7 +100,7 @@ Output Rules:
 > 
 > *I hope this works well for your standup meeting! Have a great day!"*
 > 
-> *(User has to carefully highlight only lines 3–5 on their mobile screen).*
+> *(User has to carefully highlight only lines 3-5 on their mobile screen).*
 
 #### With Zero-Preamble Protocol
 > **AI Output**:

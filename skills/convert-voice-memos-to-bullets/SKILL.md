@@ -54,9 +54,9 @@ Task:
 1. **Denoise**: Remove all verbal fillers ("um", "uh", "like", "sort of", "you know").
 2. **Resolve Self-Corrections**: If I changed my mind mid-sentence (e.g., "let's do Tuesday, actually no, Wednesday"), keep only the final corrected decision.
 3. **Structure Output**:
-   - **Core Thesis / Insight** (1-2 clear sentences)
-   - **Key Ideas & Takeaways** (Bulleted with bold headings)
-   - **Action Items** (`[ ] Task description`)
+  - **Core Thesis / Insight** (1-2 clear sentences)
+  - **Key Ideas & Takeaways** (Bulleted with bold headings)
+  - **Action Items** (`[ ] Task description`)
 ```
 
 ---
@@ -89,8 +89,8 @@ Convert this dictated strategy rant into a formal 3-paragraph executive memo.
 > - **Scope Trade-off**: Preserving **CSV Export** for v1, while deferring **PDF Export** to v2 to meet the accelerated timeline.
 >
 > **Action Items**:
-> - [ ] **Security Audit Delivery** (Owner: Dave / Deadline: This Friday) – Send completed SOC2 / security report to Acme Corp legal to unblock contract signing.
-> - [ ] **Roadmap Scope Update** – Adjust sprint backlog to remove PDF export from the mid-September release milestone.
+> - [ ] **Security Audit Delivery** (Owner: Dave / Deadline: This Friday) - Send completed SOC2 / security report to Acme Corp legal to unblock contract signing.
+> - [ ] **Roadmap Scope Update** - Adjust sprint backlog to remove PDF export from the mid-September release milestone.
 
 ---
 

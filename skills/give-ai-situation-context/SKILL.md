@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Give AI Situation & Constraint Context (AI Skill)
 
 ## Overview
-Asking an unanchored question like *"What database should I use for my app?"* forces the AI to guess who you are. The model will often recommend enterprise solutions like Amazon DynamoDB clusters with multi-region replication—which is disastrously complex for a solo founder building a weekend MVP.
+Asking an unanchored question like *"What database should I use for my app?"* forces the AI to guess who you are. The model will often recommend enterprise solutions like Amazon DynamoDB clusters with multi-region replication - which is disastrously complex for a solo founder building a weekend MVP.
 
 The **Situation Anchoring Framework** teaches you to spend 15 seconds defining your **Role, Scale, Budget, and Constraints** upfront, ensuring the AI's advice is 100% appropriate for your real-world circumstances.
 

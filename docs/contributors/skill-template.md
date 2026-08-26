@@ -14,7 +14,7 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Overview & Engine Architecture
 
-2–4 sentences explaining what this skill covers and how the product is structured.
+2-4 sentences explaining what this skill covers and how the product is structured.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -47,4 +47,4 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Related Skills
 
-- `@other-skill` — when to use instead
+- `@other-skill` - when to use instead

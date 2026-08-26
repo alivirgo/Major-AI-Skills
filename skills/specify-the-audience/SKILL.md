@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When you prompt an AI without naming a specific reader, the model writes for an imaginary "average internet user." The result is almost always misaligned: too technical for executive leadership, too simplistic for senior engineers, or too stiff for customers.
 
-The **Audience Calibration Protocol** anchors the AI to a concrete **Reader Profile**—instantly tailoring vocabulary, technical density, and emotional framing to match the exact priorities of that stakeholder.
+The **Audience Calibration Protocol** anchors the AI to a concrete **Reader Profile** - instantly tailoring vocabulary, technical density, and emotional framing to match the exact priorities of that stakeholder.
 
 ---
 

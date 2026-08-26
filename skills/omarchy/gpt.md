@@ -1,6 +1,6 @@
 ---
 title: "Omarchy Linux Distribution AI Skill Guide (GPT & Codex)"
-description: "Comprehensive operational skill specification for OpenAI GPT & Codex to script, automate, extend, and manage Omarchy — the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, Neovim, and modern development tools."
+description: "Comprehensive operational skill specification for OpenAI GPT & Codex to script, automate, extend, and manage Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, Neovim, and modern development tools."
 category: "Linux Desktop Distribution & Tiling Window Manager"
 tags: ["omarchy", "arch-linux", "hyprland", "quickshell", "neovim", "tiling-wm", "linux-distribution", "dhh", "wayland", "gpt", "codex"]
 ---
@@ -60,7 +60,7 @@ Omarchy is a **beautiful, modern, and opinionated** omakase Linux distribution c
 ```bash
 #!/usr/bin/env bash
 # ==============================================================================
-# Omarchy Hyprland Workspace Manager — IPC Socket Automation Script
+# Omarchy Hyprland Workspace Manager - IPC Socket Automation Script
 # Provides smart workspace creation, window movement, and layout presets.
 # Usage: omarchy-workspace.sh <command> [args]
 # ==============================================================================
@@ -119,7 +119,7 @@ apply_dev_layout() {
     echo "Development layout applied: Terminal(1) | Editor(2) | Browser(3)"
 }
 
-# Smart workspace finder — go to first empty workspace
+# Smart workspace finder - go to first empty workspace
 goto_empty_workspace() {
     local occupied
     occupied=$(hypr_json workspaces | jq '[.[].id] | sort | .[]')
@@ -153,7 +153,7 @@ show_overview() {
     echo "═══════════════════════════════════════"
     echo "  Omarchy Workspace Overview"
     echo "═══════════════════════════════════════"
-    hypr_json workspaces | jq -r 'sort_by(.id) | .[] | "  WS \(.id) [\(.monitor)] — \(.windows) window(s)"'
+    hypr_json workspaces | jq -r 'sort_by(.id) | .[] | "  WS \(.id) [\(.monitor)] - \(.windows) window(s)"'
     echo "───────────────────────────────────────"
     echo "  Active: WS $(get_active_workspace)"
     echo "  Focused: $(get_focused_class)"
@@ -224,7 +224,7 @@ return {
       local entries = {}
       for _, ws in ipairs(workspaces) do
         table.insert(entries, {
-          display = string.format("WS %d [%s] — %d windows", ws.id, ws.monitor, ws.windows),
+          display = string.format("WS %d [%s] - %d windows", ws.id, ws.monitor, ws.windows),
           value = ws.id,
         })
       end

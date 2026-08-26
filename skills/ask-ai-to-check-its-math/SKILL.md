@@ -105,23 +105,23 @@ print(f"Exact CAGR: {cagr_pct:.2f}%")
 
 **AI Response**:
 1. **Given Data**:
-   - Old Plan Monthly Rate: $40.00
-   - New Plan Monthly Rate: $100.00
-   - Cycle Length: 30 days
-   - Days remaining in cycle: $30 - 12 = 18$ days
+  - Old Plan Monthly Rate: $40.00
+  - New Plan Monthly Rate: $100.00
+  - Cycle Length: 30 days
+  - Days remaining in cycle: $30 - 12 = 18$ days
 
 2. **Daily Rates**:
-   - Old Daily Rate: $\frac{\$40}{30} = \$1.3333\dots$ / day
-   - New Daily Rate: $\frac{\$100}{30} = \$3.3333\dots$ / day
-   - Daily Differential: $\$3.3333 - \$1.3333 = \$2.0000$ / day
+  - Old Daily Rate: $\frac{\$40}{30} = \$1.3333\dots$ / day
+  - New Daily Rate: $\frac{\$100}{30} = \$3.3333\dots$ / day
+  - Daily Differential: $\$3.3333 - \$1.3333 = \$2.0000$ / day
 
 3. **Prorated Charge Calculation**:
-   - Charge = $18 \text{ days} \times \$2.00/\text{day} = \mathbf{\$36.00}$
+  - Charge = $18 \text{ days} \times \$2.00/\text{day} = \mathbf{\$36.00}$
 
 4. **Reverse Verification**:
-   - Unused credit on old plan: $18 \times \$1.3333 = \$24.00$
-   - Cost of new plan for remaining period: $18 \times \$3.3333 = \$60.00$
-   - Net invoice addition: $\$60.00 - \$24.00 = \mathbf{\$36.00}$. Confirmed.
+  - Unused credit on old plan: $18 \times \$1.3333 = \$24.00$
+  - Cost of new plan for remaining period: $18 \times \$3.3333 = \$60.00$
+  - Net invoice addition: $\$60.00 - \$24.00 = \mathbf{\$36.00}$. Confirmed.
 
 ---
 

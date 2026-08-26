@@ -84,12 +84,12 @@ Help me organize my thoughts before the visit:
 > **Prompt**: *"Explain the biological function of Ferritin and AST in plain English, and what questions I should ask my doctor."*
 
 **AI Response**:
-> - **Ferritin**: Acts like the body's iron storage warehouse. High levels can indicate increased iron stores, but ferritin is also an "acute-phase reactant"—meaning it temporarily rises in response to everyday inflammation, infection, or exercise.
+> - **Ferritin**: Acts like the body's iron storage warehouse. High levels can indicate increased iron stores, but ferritin is also an "acute-phase reactant" - meaning it temporarily rises in response to everyday inflammation, infection, or exercise.
 > - **AST (Aspartate Aminotransferase)**: An enzyme found primarily in liver and muscle cells. When cells are stressed, AST can leak into the bloodstream.
 >
 > **Questions to Ask Your Doctor**:
 > 1. *"Could my elevated ferritin and AST be related to recent workouts, supplements, or a recent virus?"*
-> 2. *"Would you recommend repeating this panel fasting in 4–6 weeks, or checking fasting iron saturation?"*
+> 2. *"Would you recommend repeating this panel fasting in 4-6 weeks, or checking fasting iron saturation?"*
 
 ---
 

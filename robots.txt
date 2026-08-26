@@ -5,7 +5,7 @@
 User-agent: *
 Allow: /
 
-# OpenAI — ChatGPT search + browsing
+# OpenAI - ChatGPT search + browsing
 User-agent: GPTBot
 Allow: /
 
@@ -15,7 +15,7 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Anthropic — Claude search / user fetches
+# Anthropic - Claude search / user fetches
 User-agent: ClaudeBot
 Allow: /
 

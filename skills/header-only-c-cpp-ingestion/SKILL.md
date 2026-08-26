@@ -52,7 +52,7 @@ The **Header-First Ingestion Protocol** directs the agent to inspect the lightwe
 │                                                                           │
 │ TIER 2: SLICE IMPLEMENTATION ONLY IF FIXING A BUG (`.cpp` / `.c`)        │
 │ • If modifying an internal method: use line-bounded `view_file`           │
-│   (e.g., lines 140–180 of `engine.cpp` rather than the entire 1,200 lines)│
+│   (e.g., lines 140-180 of `engine.cpp` rather than the entire 1,200 lines)│
 └───────────────────────────────────────────────────────────────────────────┘
 ```
 

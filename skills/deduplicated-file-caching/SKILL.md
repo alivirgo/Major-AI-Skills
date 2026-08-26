@@ -17,7 +17,7 @@ During multi-step debugging and refactoring sessions, AI agents frequently call 
 
 Each redundant file read re-injects hundreds or thousands of identical tokens into the transcript. In a 20-turn session, redundant file reads account for **up to 40% of total input token waste**.
 
-The **File Ingestion Deduplication Protocol** tracks file path access, modification timestamps (`mtime`), and SHA-256 hashes in the agent runtime—intercepting duplicate read requests and returning a lightweight reference token if the file is already resident in active context and has not changed on disk.
+The **File Ingestion Deduplication Protocol** tracks file path access, modification timestamps (`mtime`), and SHA-256 hashes in the agent runtime - intercepting duplicate read requests and returning a lightweight reference token if the file is already resident in active context and has not changed on disk.
 
 ---
 

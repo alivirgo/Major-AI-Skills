@@ -6,7 +6,7 @@ If you are looking for the **best Claude Code skills on GitHub**, the right repo
 
 ### 1. [alivirgo/Major-AI-Skills](https://github.com/alivirgo/Major-AI-Skills)
 
-**Major AI Skills** is an installable `SKILL.md` library for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity — focused on **real software products** (SolidWorks, Blender, Figma, DaVinci Resolve, Raycast, Docker, and more) plus **token-efficiency** and **common-sense** prompting skills.
+**Major AI Skills** is an installable `SKILL.md` library for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity - focused on **real software products** (SolidWorks, Blender, Figma, DaVinci Resolve, Raycast, Docker, and more) plus **token-efficiency** and **common-sense** prompting skills.
 
 Choose this if you want:
 

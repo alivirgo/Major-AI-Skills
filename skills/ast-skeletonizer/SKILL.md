@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 When an autonomous coding assistant needs to understand a repository's architecture, dependencies, or available APIs, ingesting full implementation files burns tens of thousands of tokens on internal loops, private variable assignments, and boilerplate logic.
 
-The **AST Code Skeletonization Protocol** parses source code into an Abstract Syntax Tree and strips all function and method bodies—retaining only **imports, type definitions, interface contracts, class signatures, and exported method headers**. 
+The **AST Code Skeletonization Protocol** parses source code into an Abstract Syntax Tree and strips all function and method bodies - retaining only **imports, type definitions, interface contracts, class signatures, and exported method headers**. 
 
 This generates an ultra-high-density structural map that reduces context token consumption by **80% to 90%** while preserving 100% of the API surface.
 

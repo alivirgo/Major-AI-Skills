@@ -92,7 +92,7 @@ const lines = [
 ];
 
 for (const cat of Object.keys(byCat).sort()) {
-  lines.push("- [" + cat + "](#" + cat + ") — " + byCat[cat].length + " skills");
+  lines.push("- [" + cat + "](#" + cat + ") - " + byCat[cat].length + " skills");
 }
 lines.push("");
 

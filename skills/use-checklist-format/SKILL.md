@@ -33,9 +33,9 @@ The **Interactive Checklist Protocol** enforces the aviation-standard **Pre-Flig
 │                                                             │
 │  Phase-Gated Markdown Checklist:                            │
 │  ### Phase 1: Pre-Flight Safety Checks                      │
-│  - [ ] 1. Trigger manual RDS snapshot: `db-snapshot-v2`     │
-│  - [ ] 2. Verify S3 bucket encryption is set to AES-256     │
-│  - [ ] 3. Confirm `DATABASE_URL` is set on staging          │
+│ - [ ] 1. Trigger manual RDS snapshot: `db-snapshot-v2`     │
+│ - [ ] 2. Verify S3 bucket encryption is set to AES-256     │
+│ - [ ] 3. Confirm `DATABASE_URL` is set on staging          │
 │  ↳ Zero-Ambiguity, Linear Execution, 1-Click Verification   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -51,9 +51,9 @@ Use for technical deployments, migrations, and event launches:
 I need to execute [PROCEDURAL TASK: e.g. Deploying Next.js 15 app with Stripe to production].
 
 Generate an executable **3-Phase Markdown Checklist** with interactive checkboxes (`- [ ]`):
-1. **Phase 1: Pre-Flight (Prerequisites & Backups)** – Mandatory verification before touching production.
-2. **Phase 2: Live Cutover (Execution Steps)** – Step-by-step sequential commands in exact order.
-3. **Phase 3: Post-Flight QA & Verification** – Health checks, smoke tests, and rollback trigger condition.
+1. **Phase 1: Pre-Flight (Prerequisites & Backups)** - Mandatory verification before touching production.
+2. **Phase 2: Live Cutover (Execution Steps)** - Step-by-step sequential commands in exact order.
+3. **Phase 3: Post-Flight QA & Verification** - Health checks, smoke tests, and rollback trigger condition.
 
 Rules:
 - Include exact terminal commands / URLs where applicable.

@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 Every time an AI answers a strategic, financial, or technical question, it silently fills undefined variables with default assumptions (*e.g., assuming you have infinite bandwidth, a $50k monthly budget, standard US legal jurisdiction, or a team of 10 senior engineers*).
 
-The **Assumption Surfacing Protocol** forces the AI to declare all latent premises underneath its analysis—allowing you to adjust flawed presuppositions before making expensive decisions.
+The **Assumption Surfacing Protocol** forces the AI to declare all latent premises underneath its analysis - allowing you to adjust flawed presuppositions before making expensive decisions.
 
 ---
 

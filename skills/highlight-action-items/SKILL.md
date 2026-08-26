@@ -53,7 +53,7 @@ Analyze the attached project notes / incident log: [INSERT TEXT].
 Response Structure Requirements:
 1. **SECTION 1: IMMEDIATE ACTION ITEMS (Top-Loaded)**:
    Place at the very beginning inside a Markdown callout or bold numbered list:
-   - Format: `[ ] [OWNER] - [EXACT TASK] (Deadline: [TIME / DATE])`
+  - Format: `[ ] [OWNER] - [EXACT TASK] (Deadline: [TIME / DATE])`
 2. **SECTION 2: EXECUTIVE SUMMARY (Max 3 bullets)**
 3. **SECTION 3: SUPPORTING ANALYSIS & CONTEXT**
 

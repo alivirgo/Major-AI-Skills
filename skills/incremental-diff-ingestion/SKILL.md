@@ -17,7 +17,7 @@ When tasked with reviewing a Pull Request, auditing recent changes, or generatin
 
 If a developer changed 15 lines across 8 large backend files, ingesting the full files burns **35,000+ tokens** on unchanged legacy code. The model’s attention becomes diluted across thousands of lines of irrelevant code rather than focusing sharply on the modified logic.
 
-The **Incremental Git Diff Ingestion Protocol** feeds strictly the **Unified Diff Delta (`git diff -U3`)**, exposing the exact additions (`+`) and deletions (`-`) with 3 lines of surrounding context—reducing context consumption by **90%**.
+The **Incremental Git Diff Ingestion Protocol** feeds strictly the **Unified Diff Delta (`git diff -U3`)**, exposing the exact additions (`+`) and deletions (`-`) with 3 lines of surrounding context - reducing context consumption by **90%**.
 
 ---
 

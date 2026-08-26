@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Don't Summarize Without a Goal (Goal-Directed Extraction) (AI Skill)
 
 ## Overview
-Typing *"Summarize this document"* is one of the most common—and least effective—prompts in generative AI. Because the model doesn't know *why* you are reading the document, it defaults to a balanced, generic overview that often omits the exact metrics, dates, or risks you actually care about.
+Typing *"Summarize this document"* is one of the most common - and least effective - prompts in generative AI. Because the model doesn't know *why* you are reading the document, it defaults to a balanced, generic overview that often omits the exact metrics, dates, or risks you actually care about.
 
 The **Goal-Directed Extraction Protocol** anchors the AI to a specific persona, decision objective, or lens before reading, ensuring 100% of the output is actionable.
 

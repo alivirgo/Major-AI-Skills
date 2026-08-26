@@ -33,7 +33,7 @@ Nginx powers the majority of high-traffic web architectures, serving static cont
 ## Operational Capabilities & Agent Directives
 
 1. **Multimodal Log & Error Triage**: Analyze screenshots of Grafana dashboards, Nginx access logs (`$status`, `$request_time`, `$upstream_response_time`), and network waterfall charts to pinpoint latency spikes and HTTP 502/504 surges.
-2. **Micro-Caching Architecture Design**: Author `proxy_cache` configurations that cache dynamic GET requests for 1–5 seconds (`proxy_cache_valid 200 5s;`), shielding backend databases from traffic storms.
+2. **Micro-Caching Architecture Design**: Author `proxy_cache` configurations that cache dynamic GET requests for 1-5 seconds (`proxy_cache_valid 200 5s;`), shielding backend databases from traffic storms.
 3. **HTTP/2 and HTTP/3 (QUIC) Implementation**: Configure modern multiplexed protocols to eliminate head-of-line blocking on mobile and high-latency networks.
 4. **Automated Static Asset Optimization**: Configure `expires max;` headers, Brotli compression modules, and `try_files $uri $uri/ /index.html;` for Single Page Applications (SPA).
 

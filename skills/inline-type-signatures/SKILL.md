@@ -17,7 +17,7 @@ A pervasive token inefficiency in AI-generated code is **Type Duplication**: the
 
 Duplicating type signatures across both syntax and comments burns **50 to 100 redundant tokens per function**. In a 500-line service file, type duplication accounts for **2,000+ wasted tokens** that clutter the IDE and drift out of sync over time.
 
-The **Inline Type Signature Protocol** establishes the compiler's type system as the single source of truth—using concise inline type hints and restricting docstrings strictly to non-obvious business rationale.
+The **Inline Type Signature Protocol** establishes the compiler's type system as the single source of truth - using concise inline type hints and restricting docstrings strictly to non-obvious business rationale.
 
 ---
 

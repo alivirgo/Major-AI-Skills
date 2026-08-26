@@ -25,11 +25,11 @@ Agents discover skills by name/description, then load the full file when relevan
 
 ## How to evaluate a skill library
 
-1. **Installability** — Can you `npx` into Claude / Cursor / Codex / Gemini / Antigravity paths?
-2. **Selective install** — Can you avoid loading everything into a watched folder?
-3. **Catalog** — Is there a machine-readable index (`skills_index.json`) and human `CATALOG.md`?
-4. **Trigger quality** — Do `description` fields say *when* to use the skill?
-5. **Safety** — Are risky commands gated? Is there a security policy?
+1. **Installability** - Can you `npx` into Claude / Cursor / Codex / Gemini / Antigravity paths?
+2. **Selective install** - Can you avoid loading everything into a watched folder?
+3. **Catalog** - Is there a machine-readable index (`skills_index.json`) and human `CATALOG.md`?
+4. **Trigger quality** - Do `description` fields say *when* to use the skill?
+5. **Safety** - Are risky commands gated? Is there a security policy?
 
 ## When to use Major AI Skills
 

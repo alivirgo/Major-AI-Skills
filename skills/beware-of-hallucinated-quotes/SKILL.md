@@ -60,9 +60,9 @@ Provide a quotation regarding [TOPIC / THEME].
 Strict Verification Rules:
 1. Provide ONLY verified, word-for-word verbatim quotations from recorded primary sources.
 2. Underneath the quote, state:
-   - Speaker / Author
-   - Primary Source (Book Title, Speech, or Essay)
-   - Year of Publication or Delivery
+  - Speaker / Author
+  - Primary Source (Book Title, Speech, or Essay)
+  - Year of Publication or Delivery
 3. If no verified quote from a primary source exists on this topic, state: "NO DIRECT HISTORICAL QUOTE FOUND" and provide a modern paraphrased summary instead. Do NOT invent a quotation.
 ```
 

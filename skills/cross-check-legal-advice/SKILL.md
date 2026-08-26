@@ -87,12 +87,12 @@ Generate an informational compliance checklist for [REGULATION: e.g. GDPR].
 > 1. **Statutory Landscape**: Under California Business and Professions Code § 16600 (and 2024 amendments SB 699 / AB 1076), non-compete agreements are void and unenforceable for employees regardless of where signed.
 > 2. **Key Exceptions**: Valid only in narrow scenarios (e.g., sale of a business goodwill interest).
 > 3. **Actionable Checklist for Counsel**:
->    - Ask your lawyer to confirm whether the agreement includes an unlawful penalty clause.
->    - Request an explicit severability clause so an invalid non-compete doesn't jeopardize the rest of the employment contract.
+>   - Ask your lawyer to confirm whether the agreement includes an unlawful penalty clause.
+>   - Request an explicit severability clause so an invalid non-compete doesn't jeopardize the rest of the employment contract.
 
 ---
 
 ## The Golden Rules of AI Legal Safety
 1. **Never cite AI case law in court**: Avoid referencing specific case citations (*"Smith v. Jones"*) without pulling the actual brief from a verified legal database (Westlaw / LexisNexis).
 2. **Always state your jurisdiction**: Laws in California, Delaware, the EU, and Singapore differ drastically.
-3. **Use AI to lower attorney billable hours**: Use AI to draft the first summary and organize questions—saving your lawyer hours of preliminary issue-spotting time.
+3. **Use AI to lower attorney billable hours**: Use AI to draft the first summary and organize questions - saving your lawyer hours of preliminary issue-spotting time.

@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 # Agentic Token Efficiency Master Constitution (Zero-Waste Agent Architecture)
 
 ## Overview
-In multi-turn autonomous coding environments (Antigravity, Claude Code, OpenAI Codex, OpenClaw), token consumption scales quadratically ($O(N^2)$) if context is not rigorously managed. Unoptimized agents dump 2,000-line files into context, execute verbose shell commands, and generate lengthy conversational commentary—exhausting context windows, degrading attention, and multiplying API costs 10x.
+In multi-turn autonomous coding environments (Antigravity, Claude Code, OpenAI Codex, OpenClaw), token consumption scales quadratically ($O(N^2)$) if context is not rigorously managed. Unoptimized agents dump 2,000-line files into context, execute verbose shell commands, and generate lengthy conversational commentary - exhausting context windows, degrading attention, and multiplying API costs 10x.
 
 The **Agentic Token Efficiency Master Constitution** defines the 5 non-negotiable operational axioms that every high-performance AI coding agent must enforce across tool execution, context ingestion, and code mutation.
 
@@ -39,7 +39,7 @@ The **Agentic Token Efficiency Master Constitution** defines the 5 non-negotiabl
 
 ### 1. Surgical Slicing over Full File Ingestion
 - ❌ **Anti-Pattern**: Using `cat src/server.ts` or reading 2,500 lines when debugging a single route.
-- ✅ **Axiom**: Use targeted AST search or `grep_search` to find line numbers, then call `view_file` with `StartLine` and `EndLine` slices (e.g. lines 120–165).
+- ✅ **Axiom**: Use targeted AST search or `grep_search` to find line numbers, then call `view_file` with `StartLine` and `EndLine` slices (e.g. lines 120-165).
 
 ---
 
@@ -52,9 +52,9 @@ The **Agentic Token Efficiency Master Constitution** defines the 5 non-negotiabl
 ### 3. Porcelain & Filtered Shell Commands
 - ❌ **Anti-Pattern**: Running raw `npm test`, `git status`, or `ls -la` that dumps thousands of lines of node_modules and verbose progress bars into context.
 - ✅ **Axiom**: Run targeted, silent, or porcelain flags:
-  - `git status -s -b`
-  - `npm test -- --reporter=dot --silent`
-  - `ripgrep --glob '!**/node_modules/**'`
+ - `git status -s -b`
+ - `npm test -- --reporter=dot --silent`
+ - `ripgrep --glob '!**/node_modules/**'`
 
 ---
 

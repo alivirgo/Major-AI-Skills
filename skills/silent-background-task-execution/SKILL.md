@@ -20,7 +20,7 @@ Synchronous execution of long tasks causes severe failures:
 2. **HTTP Gateway Timeouts (504s)**: Long synchronous commands exceed reverse proxy socket limits (60s to 120s), aborting the task midway.
 3. **Turn Inefficiency**: The agent cannot perform other parallel investigations while blocked on a synchronous command.
 
-The **Silent Background Task Protocol** configures asynchronous daemon execution using **`WaitMsBeforeAsync`** and **`IsDaemon`** parameters—allowing commands to run silently in the background while logging to disk.
+The **Silent Background Task Protocol** configures asynchronous daemon execution using **`WaitMsBeforeAsync`** and **`IsDaemon`** parameters - allowing commands to run silently in the background while logging to disk.
 
 ---
 

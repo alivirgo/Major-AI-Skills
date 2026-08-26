@@ -47,7 +47,7 @@ Before publishing or sending any AI-assisted deliverable:
 | **1. Grounding** | Verify every proper noun, statistic, and code import. | Did the AI invent a library or miscalculate a ratio? |
 | **2. Voice Injection** | Add 1 personal detail or specific company reference. | Replace generic examples with real client stories. |
 | **3. Cliché Cut** | Delete all fluff words. | Strike *"Moreover"*, *"Crucial"*, *"It is important to note"*. |
-| **4. Brevity Trim** | Cut total length by 20–30%. | Delete the intro summary and the closing pleasantry. |
+| **4. Brevity Trim** | Cut total length by 20-30%. | Delete the intro summary and the closing pleasantry. |
 
 ---
 

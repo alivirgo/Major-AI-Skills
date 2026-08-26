@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 *.log
 .npm-cache/
+*.tgz
+.npmrc.github
+package.json.bak-npm

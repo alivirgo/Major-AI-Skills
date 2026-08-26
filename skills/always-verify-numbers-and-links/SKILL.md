@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Always Verify Numbers and Web Links (AI Skill)
 
 ## Overview
-Large Language Models (LLMs) do not compute math or maintain an internal web directory in real time—they predict the most probable sequence of tokens. As a result, AI assistants can invent plausible-looking URLs, 404 links, outdated statistics, and subtly incorrect arithmetic with complete grammatical confidence.
+Large Language Models (LLMs) do not compute math or maintain an internal web directory in real time - they predict the most probable sequence of tokens. As a result, AI assistants can invent plausible-looking URLs, 404 links, outdated statistics, and subtly incorrect arithmetic with complete grammatical confidence.
 
 This skill outlines the **Grounding & Verification Protocol**: a strict set of operating rules to validate figures, test web endpoints, and force AI models to ground their claims in verifiable data.
 

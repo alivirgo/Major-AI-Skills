@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 Asking an AI to execute a massive monolithic request in a single prompt (*"Write a complete multi-tenant SaaS application with Stripe billing, PostgreSQL, and React"*) causes **context saturation**. The model quickly runs out of output tokens, truncates code, skips critical error handling, and hallucinates dependencies.
 
-The **Step-Wise Milestone Decomposition Framework** breaks overwhelming projects into sequential, verified atomic phases—ensuring maximum code quality, architectural coherence, and total human control.
+The **Step-Wise Milestone Decomposition Framework** breaks overwhelming projects into sequential, verified atomic phases - ensuring maximum code quality, architectural coherence, and total human control.
 
 ---
 

@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 Default Large Language Models have a persistent RLHF bias toward concluding every response with polite conversational sign-offs (*"I hope this helps! Please let me know if you have any further questions or if you would like me to make any other changes. Happy coding!"*).
 
-Polite closing signatures burn **30 to 60 expensive output tokens per turn**. In a 30-turn development session, polite pleasantries consume **1,500+ output tokens**—slowing down the stream and cluttering clean terminal interfaces with repetitive fluff.
+Polite closing signatures burn **30 to 60 expensive output tokens per turn**. In a 30-turn development session, polite pleasantries consume **1,500+ output tokens** - slowing down the stream and cluttering clean terminal interfaces with repetitive fluff.
 
 The **Zero-Chitchat Turn Termination Protocol** enforces abrupt, clean turn endings: terminating token generation the instant the final code block, command result, or answer is emitted.
 

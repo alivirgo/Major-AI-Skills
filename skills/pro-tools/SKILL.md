@@ -44,9 +44,9 @@ Avid Pro Tools Ultimate is the global industry standard for professional music p
 
 1. **Pro Tools Scripting SDK (PTSL) Automation**: Author Python scripts communicating with Pro Tools via gRPC on port 31416 using the official PTSL client library to create tracks, arm recording, and export stems.
 2. **AAE Error Diagnostics & Latency Triage**: Resolve critical AAE runtime exceptions:
-   - *AAE Error -9073*: Disk I/O bottleneck (increase Disk Cache allocation).
-   - *AAE Error -9173*: Real-time CPU core overload (disable Turbo Boost or adjust buffer).
-   - *AAE Error -6101*: CPU spike during monitoring.
+  - *AAE Error -9073*: Disk I/O bottleneck (increase Disk Cache allocation).
+  - *AAE Error -9173*: Real-time CPU core overload (disable Turbo Boost or adjust buffer).
+  - *AAE Error -6101*: CPU spike during monitoring.
 3. **AAX Plugin Cache & Database Recovery**: Remediate unvalidated or missing AAX plugins by purging corrupted `InstalledAAXPlugIns` preference cache files.
 4. **EUCON Network Protocol Diagnostics**: Troubleshoot EuControl surface disconnects by validating Bonjour network broadcast discovery on local subnetworks.
 
@@ -134,4 +134,4 @@ lsof -i :31416
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: For large mixing sessions exceeding 64 tracks, always configure the Playback Engine Disk Cache Size to a fixed RAM allocation (e.g. 4GB–16GB) to eliminate DAE/AAE Error -9073 disk bottlenecks.
+> **MANDATORY**: For large mixing sessions exceeding 64 tracks, always configure the Playback Engine Disk Cache Size to a fixed RAM allocation (e.g. 4GB-16GB) to eliminate DAE/AAE Error -9073 disk bottlenecks.

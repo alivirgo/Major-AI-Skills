@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Ask for Alternative Viewpoints & Steel-Manning (AI Skill)
 
 ## Overview
-AI assistants have an inherent **sycophancy bias**—if a user poses a leading question (e.g., *"Why is moving all infrastructure to serverless the best decision?"*), the model will eagerly construct arguments supporting that premise, concealing massive trade-offs, operational risks, and hidden costs.
+AI assistants have an inherent **sycophancy bias** - if a user poses a leading question (e.g., *"Why is moving all infrastructure to serverless the best decision?"*), the model will eagerly construct arguments supporting that premise, concealing massive trade-offs, operational risks, and hidden costs.
 
 This skill equips users with the **Perspective Triangulation & Steel-Manning Protocol**: a systematic methodology to break confirmation bias and force the AI to present the strongest possible arguments for opposing philosophies.
 
@@ -91,7 +91,7 @@ Format as a comparative Markdown table followed by a 3-bullet risk summary.
 | **User Acquisition** | Massive top-of-funnel viral distribution; low friction for individual developers. | Qualified, high-intent leads who are prepared to pay at day 14. |
 | **Infrastructure Cost** | High; 95% of users remain free forever while consuming database/compute resources. | Negligible; inactive trial accounts are suspended after 14 days. |
 | **Support Overhead** | High ticket volume from non-paying users straining customer success teams. | Support is reserved exclusively for paying and trial customers. |
-| **Conversion Velocity**| Long, slow conversion cycles (often 6–18 months to upgrade). | Urgency-driven decision within a 2-week purchasing window. |
+| **Conversion Velocity**| Long, slow conversion cycles (often 6-18 months to upgrade). | Urgency-driven decision within a 2-week purchasing window. |
 
 **The Triangulated Verdict**:
 - Choose **Freemium** only if your marginal cost to serve a free user is near zero ($< \$0.05/\text{month}$) and your product has built-in multiplayer virality (e.g., Figma, Slack).

@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 Simply telling an AI *"Act as an accountant"* or *"Act as a developer"* provides only shallow steering. The model adopts superficial jargon but still defaults to broad, textbook explanations.
 
-The **Deep Persona Anchoring Protocol** specifies the **exact seniority level, philosophical bias, operating constraints, and communication cadence** of the expert persona—activating specific, high-rigor latent neural pathways in the model.
+The **Deep Persona Anchoring Protocol** specifies the **exact seniority level, philosophical bias, operating constraints, and communication cadence** of the expert persona - activating specific, high-rigor latent neural pathways in the model.
 
 ---
 

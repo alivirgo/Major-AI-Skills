@@ -102,7 +102,7 @@ Give me the single most statistically probable root cause, the exact line to fix
 
 | Goal | Optimal Prompt Approach |
 | :--- | :--- |
-| **Broad Brainstorming & Exploration** | Ask for 5–7 divergent ideas across distinct angles. |
+| **Broad Brainstorming & Exploration** | Ask for 5-7 divergent ideas across distinct angles. |
 | **Direct Execution & Fast Action** | Ask for the single highest-leverage strategy. |
 | **Root-Cause Troubleshooting** | Ask for the #1 statistically probable fix. |
 | **Refining Copy / Taglines** | Ask for the 1 best headline with a 2-sentence rationale. |

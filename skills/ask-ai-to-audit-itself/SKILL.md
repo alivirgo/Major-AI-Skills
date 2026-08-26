@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When an AI generates a long response in a single generation pass, it cannot "look ahead" to revise earlier sentences based on later logical deductions. As a result, drafts often contain subtle internal contradictions, forgotten constraints, or code bugs that the model would easily catch if asked to review them as a third party.
 
-This skill implements the **Reflexion / Critic-Actor Prompting Protocol**—a technique that separates *generation* from *critique* to dramatically elevate accuracy and quality.
+This skill implements the **Reflexion / Critic-Actor Prompting Protocol** - a technique that separates *generation* from *critique* to dramatically elevate accuracy and quality.
 
 ---
 

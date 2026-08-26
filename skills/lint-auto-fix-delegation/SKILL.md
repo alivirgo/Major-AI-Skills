@@ -46,7 +46,7 @@ The **Linter Auto-Fix Delegation Protocol** delegates 100% of deterministic styl
 
 Execute these sub-50ms CLI commands via `run_command`:
 
-### 1. Python (`ruff` — 100x Faster than Flake8/Black)
+### 1. Python (`ruff` - 100x Faster than Flake8/Black)
 ```bash
 # Fix unused imports, sorting, quotes, and standard PEP8 rules
 ruff check --fix src/

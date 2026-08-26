@@ -49,10 +49,10 @@ Structure the guide strictly using this format:
 1. **Prerequisites & Required Permissions** (Bullet list of tools/accounts needed).
 2. **Sequential Numbered Steps**:
    For EACH step provide:
-   - **Action**: Exact UI button clicks or CLI command.
-   - **Configuration Values**: Table/list of exact parameters to enter.
-   - **Expected Verification**: What the user should see on screen to confirm success.
-   - **⚠️ Common Gotcha**: The #1 mistake users make on this specific step.
+  - **Action**: Exact UI button clicks or CLI command.
+  - **Configuration Values**: Table/list of exact parameters to enter.
+  - **Expected Verification**: What the user should see on screen to confirm success.
+  - **⚠️ Common Gotcha**: The #1 mistake users make on this specific step.
 3. **End-to-End Smoke Test** (1 command or test click to verify the entire system is working).
 ```
 
@@ -72,10 +72,10 @@ Structure the guide strictly using this format:
 ### 🛠️ Step 1: Add the Root CNAME Record
 - **Action**: Navigate to **Cloudflare Dashboard** $\rightarrow$ Click **DNS** $\rightarrow$ **Records** $\rightarrow$ Click **Add Record**.
 - **Fields to Enter**:
-  - **Type**: `CNAME`
-  - **Name**: `@` (or `subdomain`)
-  - **Target**: `cname.vercel-dns.com`
-  - **Proxy Status**: **DNS ONLY (Grey Cloud)** ⚠️ *CRITICAL*
+ - **Type**: `CNAME`
+ - **Name**: `@` (or `subdomain`)
+ - **Target**: `cname.vercel-dns.com`
+ - **Proxy Status**: **DNS ONLY (Grey Cloud)** ⚠️ *CRITICAL*
 - **Expected Verification**: Record appears in the table with status `DNS only`.
 - **⚠️ Common Gotcha**: If Proxy status is set to *Proxied (Orange Cloud)*, Cloudflare's SSL will conflict with Vercel's SSL, causing an `ERR_TOO_MANY_REDIRECTS` crash.
 

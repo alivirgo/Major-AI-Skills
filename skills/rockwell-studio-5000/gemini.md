@@ -36,9 +36,9 @@ Rockwell Studio 5000 Logix Designer provides a visual control engineering worksp
 1. **Multimodal Controller Organizer Inspection**: Analyze screenshots of the project organizer tree to verify task priorities, identify inhibited I/O modules, and detect yellow warning triangles across the EtherNet/IP tree.
 2. **Ladder Logic Power Flow Diagnostics**: Review active ladder rungs during online monitoring to ensure Examine If Closed (XIC `-[ ]-`) and Examine If Open (XIO `-[/]-`) instructions evaluate true (highlighted green) to energize output coils (Output Energize `-( )-`).
 3. **Online Edit Status Tracking**: Guide users through the three stages of Rockwell Online Editing:
-   - *Insert Rung (`i` zone)*: Draft new logic.
-   - *Test Edits (`I` and `R` active)*: Test logic in real-time execution.
-   - *Assemble Edits (`Finalized`)*: Permanently commit rungs into controller flash.
+  - *Insert Rung (`i` zone)*: Draft new logic.
+  - *Test Edits (`I` and `R` active)*: Test logic in real-time execution.
+  - *Assemble Edits (`Finalized`)*: Permanently commit rungs into controller flash.
 4. **Tag Monitor & Force Verification**: Review Tag Monitor tables to identify active I/O Forces (Amber `FORCE` LED on controller front plate) and ensure safe commissioning states.
 
 ---

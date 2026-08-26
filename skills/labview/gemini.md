@@ -75,7 +75,7 @@ def inspect_tdms_file(file_path: str):
             for ch in grp.channels():
                 data_len = len(ch)
                 unit = ch.properties.get("unit_string", "No Unit")
-                print(f"    - Channel: {ch.name:<22} | Samples: {data_len:>6} | Unit: {unit}")
+                print(f"   - Channel: {ch.name:<22} | Samples: {data_len:>6} | Unit: {unit}")
 
         print("\n✅ TDMS binary structure validated successfully.")
 

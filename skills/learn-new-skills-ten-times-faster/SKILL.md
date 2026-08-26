@@ -89,9 +89,9 @@ Generate 10 high-yield flashcards for [TOPIC] in Anki-ready TSV format:
 #### Pareto-Feynman AI Deconstruction (Mastered in 2 Hours)
 > **AI 80/20 Breakdown**:
 > 1. **The Vital 20%**:
->    - `Dockerfile`: `FROM`, `WORKDIR`, `COPY`, `RUN`, `CMD` (90% of image building).
->    - `docker build -t <name> .` & `docker run -p <host>:<container> <name>` (90% of local running).
->    - `docker-compose.yml`: Wiring an App container to a PostgreSQL container with volumes.
+>   - `Dockerfile`: `FROM`, `WORKDIR`, `COPY`, `RUN`, `CMD` (90% of image building).
+>   - `docker build -t <name> .` & `docker run -p <host>:<container> <name>` (90% of local running).
+>   - `docker-compose.yml`: Wiring an App container to a PostgreSQL container with volumes.
 > 2. **What to Ignore for Now**: Multi-stage build optimization, Swarm, custom bridge networks, daemon socket tuning.
 > 3. **The 15-Minute Toy Project**: Create a 5-line Node.js script, write a 4-line Dockerfile, run it locally, and access `localhost:3000`.
 

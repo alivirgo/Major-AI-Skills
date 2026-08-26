@@ -119,15 +119,15 @@ services:
     container_name: tailscale-sidecar
     hostname: production-app-node
     environment:
-      - TS_AUTHKEY=tskey-auth-xxxxxx-ephemeral
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false
+     - TS_AUTHKEY=tskey-auth-xxxxxx-ephemeral
+     - TS_STATE_DIR=/var/lib/tailscale
+     - TS_USERSPACE=false
     volumes:
-      - ./tailscale_state:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
+     - ./tailscale_state:/var/lib/tailscale
+     - /dev/net/tun:/dev/net/tun
     cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
+     - NET_ADMIN
+     - SYS_MODULE
     restart: unless-stopped
 
   # Internal Web Application (Shares network stack with Tailscale)
@@ -136,7 +136,7 @@ services:
     container_name: internal-app
     network_mode: "service:tailscale"
     depends_on:
-      - tailscale
+     - tailscale
     command: ["node", "-e", "require('http').createServer((r,s)=>s.end('Hello from secure Tailscale mesh!')).listen(8080)"]
 ```
 

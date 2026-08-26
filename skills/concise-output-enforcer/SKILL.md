@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "lmstudio"]
 ## Overview
 Default Large Language Models suffer from **"Post-Completion Echo Syndrome"**: after performing a code mutation or answering a question, the model generates 3 to 5 paragraphs of unsolicited discursive commentary (*"In this update, I have successfully refactored the function. First, I imported the module, then I updated the parameters, and finally I ensured that..."*).
 
-Post-completion monologues burn **200 to 500 output tokens per turn**. Because output tokens are **3x to 5x more expensive** than input tokens and generate sequentially at 50–100 tokens/second, this chatter drastically slows down agent response times.
+Post-completion monologues burn **200 to 500 output tokens per turn**. Because output tokens are **3x to 5x more expensive** than input tokens and generate sequentially at 50-100 tokens/second, this chatter drastically slows down agent response times.
 
 The **Concise Output Enforcer Protocol** injects strict negative constraints that suppress all conversational preambles and post-execution summaries, delivering 100% actionable artifacts.
 

@@ -56,7 +56,7 @@ empty/null input, and network timeout edge cases."
 Ban 'delve', 'tapestry', 'crucial', 'testament'. Keep under 100 words."
 
 # Negative Preamble Suppressor
-"Draft the reply. Output final text ONLY—no introductory or closing chat fluff."
+"Draft the reply. Output final text ONLY - no introductory or closing chat fluff."
 ```
 
 ### 📊 3. Data & Executive Synthesis
@@ -84,6 +84,6 @@ List the top 3 fatal assumptions that caused the collapse."
 ---
 
 ## 3 Rules for Keeping Your Cheat Sheet Useful
-1. **Cap it at 1 page**: If your cheat sheet exceeds 8–10 prompts, you will stop using it. Keep only the highest-frequency gems.
+1. **Cap it at 1 page**: If your cheat sheet exceeds 8-10 prompts, you will stop using it. Keep only the highest-frequency gems.
 2. **Use bracketed placeholders**: Ensure every snippet has `{clipboard}` or `[INSERT_TEXT]` ready for instant pasting.
 3. **Prune quarterly**: Delete prompts you haven't used in 90 days.

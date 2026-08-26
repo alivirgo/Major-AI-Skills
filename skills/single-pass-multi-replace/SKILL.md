@@ -37,9 +37,9 @@ The **Single-Pass Multi-Replace Protocol** bundles all non-contiguous edit chunk
 │                                                             │
 │  Single-Pass Multi-Replace (1 Turn / 420 Tokens):           │
 │  • Turn 1: `multi_replace_file_content`                     │
-│    ↳ Chunk 1: Lines 3–6 (Import updated)                    │
-│    ↳ Chunk 2: Lines 35–40 (Interface updated)               │
-│    ↳ Chunk 3: Lines 120–125 (Function call updated)         │
+│    ↳ Chunk 1: Lines 3-6 (Import updated)                    │
+│    ↳ Chunk 2: Lines 35-40 (Interface updated)               │
+│    ↳ Chunk 3: Lines 120-125 (Function call updated)         │
 │  ↳ 1 Turn, 420 tokens billed (96.3% Savings!), Zero Drift!  │
 └─────────────────────────────────────────────────────────────┘
 ```

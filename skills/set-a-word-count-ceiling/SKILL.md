@@ -89,7 +89,7 @@ Rules:
 > *"Dear Michael, Thank you for reaching out regarding our scheduled catch-up for tomorrow. I hope your week is going smoothly. I am writing to let you know that an unexpected conflict has arisen on my calendar during our scheduled time slot. I apologize for any inconvenience this may cause you. Would it be possible for us to reschedule our call for later in the week? I am very much looking forward to our discussion..."* *(78 words of repetitive apology).*
 
 #### Constrained Draft (Ceiling: Under 30 Words)
-> *"Hi Michael—an unexpected conflict came up for tomorrow. Can we move our sync to Thursday at 2:00 PM EST instead? Let me know if that works!"* *(26 words, clear and respectful).*
+> *"Hi Michael - an unexpected conflict came up for tomorrow. Can we move our sync to Thursday at 2:00 PM EST instead? Let me know if that works!"* *(26 words, clear and respectful).*
 
 ---
 

@@ -1,0 +1,6 @@
+{
+  "name": "major-ai-skills",
+  "version": "2.1.0",
+  "description": "392+ installable agent skills (SKILL.md) for professional apps, token efficiency, and common-sense prompting. Compatible with Gemini CLI skills discovery.",
+  "contextFileName": "GEMINI.md"
+}

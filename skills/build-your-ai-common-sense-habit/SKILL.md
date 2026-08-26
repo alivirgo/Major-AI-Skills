@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Build Your AI Common Sense Habit (The Master Operating System) (AI Skill)
 
 ## Overview
-Generative AI tools (ChatGPT, Claude, Gemini) are not search engines, and they are not infallible humans—they are high-powered, probabilistic text engines. Treating them like magical minds leads to frustration, while treating them with **structured common sense** turns them into the ultimate personal multiplier.
+Generative AI tools (ChatGPT, Claude, Gemini) are not search engines, and they are not infallible humans - they are high-powered, probabilistic text engines. Treating them like magical minds leads to frustration, while treating them with **structured common sense** turns them into the ultimate personal multiplier.
 
 This guide codifies the **5 Core Habits of High-Leverage AI Operators** into a daily mental checklist.
 

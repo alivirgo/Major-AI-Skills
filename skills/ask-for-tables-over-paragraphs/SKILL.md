@@ -104,6 +104,6 @@ Provide a Decision Matrix table with the following headers:
 ---
 
 ## Summary Best Practices
-1. **Name the columns upfront**: Never say just *"put it in a table"*; specify the 4–6 exact columns you care about.
+1. **Name the columns upfront**: Never say just *"put it in a table"*; specify the 4-6 exact columns you care about.
 2. **Limit cell length**: Add *"Keep each cell under 10-15 words"* to prevent tables from wrapping awkwardly on smaller screens.
 3. **Suppress intro/outro prose**: Add *"Output table only, no markdown chat filler"* for maximum token efficiency.

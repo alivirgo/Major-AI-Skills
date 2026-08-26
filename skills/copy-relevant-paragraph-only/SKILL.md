@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When users have a question about a contract, manual, or article, the common reflex is to paste the entire 20-page document. 
 
-However, LLMs suffer from the **"Lost in the Middle" effect**—attention is sharpest at the very beginning and very end of a prompt, but degrades significantly in the middle of giant context dumps. Pasting entire documents also wastes thousands of input tokens and slows down generation speed.
+However, LLMs suffer from the **"Lost in the Middle" effect** - attention is sharpest at the very beginning and very end of a prompt, but degrades significantly in the middle of giant context dumps. Pasting entire documents also wastes thousands of input tokens and slows down generation speed.
 
 **Context Sniping** is the practice of copying *only* the specific 1 to 3 relevant paragraphs along with a single line of background framing.
 

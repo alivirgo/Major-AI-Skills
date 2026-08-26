@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Remember AI Knowledge Cutoff Dates (Temporal Grounding) (AI Skill)
 
 ## Overview
-Every foundational AI model operates with a fixed **Knowledge Cutoff Date**—a point in time beyond which its neural weights have zero training data. When queried about events, software releases, or pricing changes that occurred after its cutoff, offline models will not say *"I don't know"*; they will extrapolate older, obsolete information with total grammatical confidence.
+Every foundational AI model operates with a fixed **Knowledge Cutoff Date** - a point in time beyond which its neural weights have zero training data. When queried about events, software releases, or pricing changes that occurred after its cutoff, offline models will not say *"I don't know"*; they will extrapolate older, obsolete information with total grammatical confidence.
 
 The **Temporal Grounding Protocol** ensures that time-sensitive queries are anchored to current release cycles, forcing models to state their cutoff or utilize live web search tools for real-time accuracy.
 

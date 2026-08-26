@@ -132,17 +132,17 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
-      - TZ=UTC
-      - MANAGE_HTTP_PORT=8088
-      - MANAGE_HTTPS_PORT=8043
-      - PORTAL_HTTP_PORT=8088
-      - PORTAL_HTTPS_PORT=8843
-      - SHOW_SERVER_LOGS=true
-      - SHOW_MONGODB_LOGS=false
+     - TZ=UTC
+     - MANAGE_HTTP_PORT=8088
+     - MANAGE_HTTPS_PORT=8043
+     - PORTAL_HTTP_PORT=8088
+     - PORTAL_HTTPS_PORT=8843
+     - SHOW_SERVER_LOGS=true
+     - SHOW_MONGODB_LOGS=false
     volumes:
-      - ./omada-data:/opt/tplink/EAPController/data
-      - ./omada-work:/opt/tplink/EAPController/work
-      - ./omada-logs:/opt/tplink/EAPController/logs
+     - ./omada-data:/opt/tplink/EAPController/data
+     - ./omada-work:/opt/tplink/EAPController/work
+     - ./omada-logs:/opt/tplink/EAPController/logs
 ```
 
 ### Essential File Locations

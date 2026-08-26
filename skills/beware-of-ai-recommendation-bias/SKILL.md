@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Beware of AI Recommendation & Brand Bias (AI Skill)
 
 ## Overview
-When you ask an AI *"What is the best CRM software?"* or *"What is the best project management tool?"*, the model does not run an objective laboratory test. Instead, it reflects the **statistical volume of internet training data**—which is overwhelmingly dominated by massive venture-backed marketing budgets, affiliate blog spam, and high-frequency brand mentions.
+When you ask an AI *"What is the best CRM software?"* or *"What is the best project management tool?"*, the model does not run an objective laboratory test. Instead, it reflects the **statistical volume of internet training data** - which is overwhelmingly dominated by massive venture-backed marketing budgets, affiliate blog spam, and high-frequency brand mentions.
 
 This skill teaches the **Neutral Vendor Evaluation Protocol**: prompting techniques that neutralize popularity bias, blind-test feature sets, and extract objective trade-offs.
 

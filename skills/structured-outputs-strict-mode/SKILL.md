@@ -17,7 +17,7 @@ When asking an LLM for structured JSON output, relying purely on prompt instruct
 
 When downstream parsers fail, agents are forced into **Error Retry Turns**, wasting thousands of tokens and stalling workflows.
 
-**Strict Structured Outputs (`strict: true`)** uses **Context-Free Grammar (CFG) Constrained Decoding**: the API converts the provided JSON Schema into a grammar mask at the transformer sampler layer. Any token that would violate the schema is mathematically masked out during generation—guaranteeing **100% schema adherence with zero markdown wrapper tags**.
+**Strict Structured Outputs (`strict: true`)** uses **Context-Free Grammar (CFG) Constrained Decoding**: the API converts the provided JSON Schema into a grammar mask at the transformer sampler layer. Any token that would violate the schema is mathematically masked out during generation - guaranteeing **100% schema adherence with zero markdown wrapper tags**.
 
 ---
 

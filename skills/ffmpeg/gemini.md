@@ -101,8 +101,8 @@ if __name__ == "__main__":
 | Issue & Visual Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
 | :--- | :--- | :--- |
 | **Horizontal Comb Lines During Fast Motion (Interlacing)** | Video source is interlaced (1080i/480i) and displayed on a progressive scan monitor without deinterlacing. | Apply motion-adaptive deinterlacing: `-vf bwdif=mode=1` or `-vf yadif=mode=1`. |
-| **Color Banding / Stepping in Dark Gradients / Skies** | 8-bit quantization steps are too coarse in flat gradients. | 1. Encode in 10-bit color: `-c:v libx264 -pix_fmt yuv420p10le`.<br>2. Add subtle temporal dithering before encoding: `-vf deband`.<br>3. Lower CRF value (e.g. 18–20). |
-| **Severe Pixelation / Macroblocking during High Motion** | Encoder bitrate budget is constrained, or VBR buffer size is too small (`-bufsize`). | 1. Increase video bitrate or decrease CRF.<br>2. Ensure `-bufsize` is set to 1.5x–2x the `-maxrate`.<br>3. Use `-preset slow` for advanced motion estimation. |
+| **Color Banding / Stepping in Dark Gradients / Skies** | 8-bit quantization steps are too coarse in flat gradients. | 1. Encode in 10-bit color: `-c:v libx264 -pix_fmt yuv420p10le`.<br>2. Add subtle temporal dithering before encoding: `-vf deband`.<br>3. Lower CRF value (e.g. 18-20). |
+| **Severe Pixelation / Macroblocking during High Motion** | Encoder bitrate budget is constrained, or VBR buffer size is too small (`-bufsize`). | 1. Increase video bitrate or decrease CRF.<br>2. Ensure `-bufsize` is set to 1.5x-2x the `-maxrate`.<br>3. Use `-preset slow` for advanced motion estimation. |
 | **Filtergraph Error: `Filter scale has an unconnected output`** | Complex filtergraph syntax error; an intermediate labeled pad was left unmapped. | 1. Ensure all `[tag]` outputs are consumed by subsequent filter inputs or mapped via `-map "[tag]"`.<br>2. Verify semicolons between parallel filter statements. |
 
 ---

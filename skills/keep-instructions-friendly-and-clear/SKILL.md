@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When a prompt is written as a continuous, unformatted block of stream-of-consciousness text, the AI's attention mechanism easily conflates **instructions** (*"Do not include pricing"*) with **data context** (*"Here is the pricing document"*).
 
-The **Markdown Delimiter Protocol** uses clear typography—Markdown headers, bullet lists, code blocks, and XML tags—to cleanly segregate system instructions from background data, eliminating ambiguity.
+The **Markdown Delimiter Protocol** uses clear typography - Markdown headers, bullet lists, code blocks, and XML tags - to cleanly segregate system instructions from background data, eliminating ambiguity.
 
 ---
 
@@ -39,8 +39,8 @@ The **Markdown Delimiter Protocol** uses clear typography—Markdown headers, bu
 │  <raw_notes> [PASTE NOTES] </raw_notes>                     │
 │                                                             │
 │  ### Constraints                                            │
-│  - Length: Under 200 words                                  │
-│  - Tone: Friendly, zero technical jargon                    │
+│ - Length: Under 200 words                                  │
+│ - Tone: Friendly, zero technical jargon                    │
 │  ↳ 100% Parsing Accuracy, Zero Constraint Bleed             │
 └─────────────────────────────────────────────────────────────┘
 ```

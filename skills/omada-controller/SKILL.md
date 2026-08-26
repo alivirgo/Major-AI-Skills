@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
 | Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
 | :--- | :--- | :--- |
-| **Device Stuck in `Adopting` or `Pending` State** | Southbound TCP ports 29811–29814 blocked by host firewall or device is on a different L3 subnet without Inform URL. | 1. SSH into AP/Switch (default `admin`/`admin`).<br>2. Run: `set-inform http://<Controller_IP>:29812/inform`.<br>3. In host OS, open ports: `sudo ufw allow 29810:29814/tcp && sudo ufw allow 29810/udp`. |
+| **Device Stuck in `Adopting` or `Pending` State** | Southbound TCP ports 29811-29814 blocked by host firewall or device is on a different L3 subnet without Inform URL. | 1. SSH into AP/Switch (default `admin`/`admin`).<br>2. Run: `set-inform http://<Controller_IP>:29812/inform`.<br>3. In host OS, open ports: `sudo ufw allow 29810:29814/tcp && sudo ufw allow 29810/udp`. |
 | **Controller Service Fails to Start: `MongoDB Error`** | Improper shutdown left lock file `mongod.lock` intact or database journal corrupted. | 1. Stop service: `sudo tesseract stop` or `systemctl stop omada`.<br>2. Remove lock: `sudo rm -f /opt/tplink/EAPController/data/db/mongod.lock`.<br>3. Repair: `mongod --dbpath /opt/tplink/EAPController/data/db --repair`.<br>4. Restart service. |
 | **Wi-Fi Clients Experience Roaming Drops** | Fast Roaming (802.11k/v/r) disabled or 2.4GHz/5GHz transmit power set too high, preventing handoff. | In Controller Settings $\rightarrow$ Wireless Networks $\rightarrow$ Advanced, enable **802.11r Fast Roaming** and reduce 2.4GHz Tx power to Medium/Low. |
 | **SSL / HTTPS Security Warning on Port 8043** | Controller using default self-signed SSL certificate. | In Controller Settings $\rightarrow$ Maintenance $\rightarrow$ **SSL Certificate**, import custom Let's Encrypt / Enterprise PKCS#12 certificate. |
@@ -155,4 +155,4 @@ sudo systemctl restart tpeap.service
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: For Layer 3 remote site deployments, verify that TCP ports 29811–29814 and UDP port 29810 are forwarded through the edge firewall before troubleshooting adoption timeouts.
+> **MANDATORY**: For Layer 3 remote site deployments, verify that TCP ports 29811-29814 and UDP port 29810 are forwarded through the edge firewall before troubleshooting adoption timeouts.

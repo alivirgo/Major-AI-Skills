@@ -91,4 +91,4 @@ If you accidentally submit a real password or API key to an AI assistant:
 ---
 
 ## Summary Rule of Thumb
-> **"If a string can authorize money, access private data, or log into a server, it belongs in an environment variable—NEVER in a chat box."**
+> **"If a string can authorize money, access private data, or log into a server, it belongs in an environment variable - NEVER in a chat box."**

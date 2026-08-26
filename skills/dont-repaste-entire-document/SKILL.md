@@ -89,9 +89,9 @@ Draft the 3 core subsections for Chapter 2 following our agreed tone.
 >   redis:
 >     image: redis:7-alpine
 >     ports:
->       - "6379:6379"
+>      - "6379:6379"
 >     volumes:
->       - redis_data:/data
+>      - redis_data:/data
 > ```
 
 ---

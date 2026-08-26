@@ -15,7 +15,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 ## Overview
 When you upload a multi-page PDF or image-heavy document into an AI assistant, modern multimodal models often convert the pages into high-resolution images, consuming **up to 1,600 visual tokens per page** while struggling with multi-column text wrap and table borders.
 
-The **Text-First Token Hygiene Protocol** advocates extracting raw plain text or clean Markdown before prompting—reducing token usage by up to **80%**, slashing latency from 20 seconds to 1 second, and eliminating visual OCR errors.
+The **Text-First Token Hygiene Protocol** advocates extracting raw plain text or clean Markdown before prompting - reducing token usage by up to **80%**, slashing latency from 20 seconds to 1 second, and eliminating visual OCR errors.
 
 ---
 

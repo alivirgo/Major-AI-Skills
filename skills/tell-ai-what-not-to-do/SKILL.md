@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Tell AI What NOT to Do (Negative Constraint Engineering) (AI Skill)
 
 ## Overview
-Defining only what you *want* (*"Write a login script"*) leaves 90% of the possibility space undefined—inviting the AI to import unnecessary third-party libraries, write 50 lines of boilerplate, or invent complex dependencies.
+Defining only what you *want* (*"Write a login script"*) leaves 90% of the possibility space undefined - inviting the AI to import unnecessary third-party libraries, write 50 lines of boilerplate, or invent complex dependencies.
 
 **Negative Constraint Engineering** prunes the model's search space by explicitly outlawing forbidden libraries, cliché words, unneeded complexity, and structural anti-patterns.
 
@@ -86,7 +86,7 @@ Prohibited Elements:
 
 #### Without Negative Constraints (Bloated Output)
 > **Prompt**: *"Write a Python script to parse a nested JSON config and validate required keys."*
-> ❌ *Model imports `pydantic` and `pandas`—requiring you to build and upload a 50MB Lambda layer for a simple 10-line task.*
+> ❌ *Model imports `pydantic` and `pandas` - requiring you to build and upload a 50MB Lambda layer for a simple 10-line task.*
 
 #### With Negative Constraints (Zero-Dependency Perfection)
 > **Prompt**: *"Write a Python script to validate required keys in a JSON config. **Do NOT import pydantic, pandas, or any third-party package; use native Python 3.12 standard library only.**"*

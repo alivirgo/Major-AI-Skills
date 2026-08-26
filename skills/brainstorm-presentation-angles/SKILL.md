@@ -85,7 +85,7 @@ Focus strictly on:
 #### AI-Generated 4-Angle Hooks & Visuals
 
 #### 1. The Metric Shock (Data-Driven Hook)
-> **Spoken Script**: *"Last quarter, our 40 engineers spent 1,440 hours waiting for Jenkins deployment pipelines to finish. That is not just lost velocity—that is $180,000 in engineering salaries paid to watch progress bars spin. Today, we fix that permanently."*
+> **Spoken Script**: *"Last quarter, our 40 engineers spent 1,440 hours waiting for Jenkins deployment pipelines to finish. That is not just lost velocity - that is $180,000 in engineering salaries paid to watch progress bars spin. Today, we fix that permanently."*
 >
 > **Slide Visual**: A clean, stark counter: *"1,440 Hours Wasted Last Quarter"*.
 

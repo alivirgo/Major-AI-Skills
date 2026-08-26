@@ -32,11 +32,11 @@ Bundles are curated recommendations, not separate installs. Install the matching
 
 ## Efficiency Lab
 
-Any 10–20 skills from `category: efficiency` — start with `csv-over-json-tables`, `token-aware-chunking`, `selective-grep-filtering`, `multi-tool-batch-invocation`.
+Any 10-20 skills from `category: efficiency` - start with `csv-over-json-tables`, `token-aware-chunking`, `selective-grep-filtering`, `multi-tool-batch-invocation`.
 
 ## Common Sense Desk
 
-Any 10–20 skills from `category: common-sense` — start with `ask-short-answer-first`, `clean-messy-notes-to-action-items`, `summarize-meetings-into-decisions`.
+Any 10-20 skills from `category: common-sense` - start with `ask-short-answer-first`, `clean-messy-notes-to-action-items`, `summarize-meetings-into-decisions`.
 
 ## Automation & Ops
 

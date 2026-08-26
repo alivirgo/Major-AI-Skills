@@ -84,9 +84,9 @@ Before providing your final answer, begin with a 2-line "Target Alignment" block
 > **Intent Alignment**:
 > 1. **Primary Goal**: Convert MongoDB document collections into normalized PostgreSQL 16 schemas.
 > 2. **Mapping Plan**:
->    - `user.addresses` $\rightarrow$ Separate `user_addresses` table with `user_id` foreign key.
->    - `user.payment_methods` $\rightarrow$ Separate `payment_methods` table linked via `user_id`.
->    - `user.metadata` $\rightarrow$ Native `JSONB` column inside the `users` table.
+>   - `user.addresses` $\rightarrow$ Separate `user_addresses` table with `user_id` foreign key.
+>   - `user.payment_methods` $\rightarrow$ Separate `payment_methods` table linked via `user_id`.
+>   - `user.metadata` $\rightarrow$ Native `JSONB` column inside the `users` table.
 > 3. **Assumptions**: Using UUIDv4 primary keys and `ON DELETE CASCADE` for child tables.
 >
 > *Shall I generate the migration script based on this architecture?*

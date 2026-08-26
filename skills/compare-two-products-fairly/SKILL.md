@@ -52,13 +52,13 @@ Output Rules:
 1. Generate a single Markdown comparison table with the following headers:
    | Evaluation Dimension | [PRODUCT A] | [PRODUCT B] | Advantage Winner |
 2. Cover these dimensions:
-   - Primary Architectural Superpower
-   - Worst Limitation / Pain Point
-   - Pricing Model & Hidden Add-on Costs
-   - Learning Curve / Time to Implement
+  - Primary Architectural Superpower
+  - Worst Limitation / Pain Point
+  - Pricing Model & Hidden Add-on Costs
+  - Learning Curve / Time to Implement
 3. Follow the table with a "Decision Fork":
-   - "Choose [PRODUCT A] if you prioritize..."
-   - "Choose [PRODUCT B] if you prioritize..."
+  - "Choose [PRODUCT A] if you prioritize..."
+  - "Choose [PRODUCT B] if you prioritize..."
 ```
 
 ---

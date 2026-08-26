@@ -20,7 +20,7 @@ Spawning terminal shell grep commands introduces three major inefficiencies:
 2. **Match Flood Overflows**: Shell grep has no built-in result cap. If a term matches 2,000 lines across build files, it dumps **50,000+ tokens** into context in one shot.
 3. **Subprocess Spawn Latency**: Initializing a shell subprocess takes 400ms+, whereas native IDE search tools execute in **5 milliseconds**.
 
-The **Structured Native Code Search Protocol** enforces the use of the native **`grep_search`** tool—returning clean, structured JSON with strict match ceilings and glob filtering.
+The **Structured Native Code Search Protocol** enforces the use of the native **`grep_search`** tool - returning clean, structured JSON with strict match ceilings and glob filtering.
 
 ---
 

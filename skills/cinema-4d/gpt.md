@@ -108,7 +108,7 @@ if __name__ == "__main__":
 | **`RuntimeError: Document is not active`** | Script invoked `c4d.EventAdd()` or modified objects on a background document thread. | 1. Ensure document is set active via `documents.SetActiveDocument(doc)`.<br>2. Restrict document mutations to the main thread.<br>3. Wrap all state modifications between `doc.StartUndo()` and `doc.EndUndo()`. |
 | **MoGraph Matrix Cache Inconsistency on Render Nodes** | Cloners with dynamic effectors were not cached to disk prior to command-line rendering. | 1. Attach a **MoGraph Cache Tag** to the Cloner/Matrix object.<br>2. Execute *Bake* across full frame range.<br>3. Save scene with baked cache before dispatching to `Commandline.exe`. |
 | **Redshift License Check Fails in Headless CLI** | Maxon App license token is not synchronized or environment variables for RLM/Maxon are missing. | 1. Verify Maxon App service is running (`Maxon App.exe`).<br>2. Set `MAXON_LICENSE_SERVER` environment variable if using floating RLM licenses.<br>3. Check `%LOCALAPPDATA%\Maxon\logs\license.log`. |
-| **Viewport Freezes / High Polygon Lag** | Generators (Subdivision Surface, Booleans) computing high-poly meshes in real-time. | 1. Lower **Subdivision Viewport** level to 0–1 while keeping Render level at 2–3.<br>2. Convert static procedural stacks to polygon objects (`c4d.utils.SendModelingCommand(c4d.MCOMMAND_CURRENTSTATETOOBJECT)`). |
+| **Viewport Freezes / High Polygon Lag** | Generators (Subdivision Surface, Booleans) computing high-poly meshes in real-time. | 1. Lower **Subdivision Viewport** level to 0-1 while keeping Render level at 2-3.<br>2. Convert static procedural stacks to polygon objects (`c4d.utils.SendModelingCommand(c4d.MCOMMAND_CURRENTSTATETOOBJECT)`). |
 
 ---
 

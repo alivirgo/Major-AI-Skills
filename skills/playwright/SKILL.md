@@ -43,7 +43,7 @@ Playwright is a modern browser automation framework with **first-class Test Runn
 ## Operational Capabilities & Agent Directives
 
 1. **Role/Label Locators First**: Prefer `getByRole`, `getByLabel`, `getByTestId` over CSS/XPath soup.
-2. **Web-First Assertions**: Use `expect(locator).toBeVisible()` — not manual sleeps.
+2. **Web-First Assertions**: Use `expect(locator).toBeVisible()` - not manual sleeps.
 3. **Isolate Auth**: Reuse `storageState` for logged-in projects; avoid UI login in every test.
 4. **Trace on Retry**: Capture traces for failed/retried tests in CI.
 5. **Deterministic Data**: Seed test users/data; do not depend on volatile production content.
@@ -132,7 +132,7 @@ npx playwright test --ui
 
 1. One assertion intent per test; share journeys via fixtures.
 2. Use `test.step` for readable traces.
-3. Keep selectors in page objects only if they reduce duplication — don't over-abstract early.
+3. Keep selectors in page objects only if they reduce duplication - don't over-abstract early.
 
 ### Essential Paths
 - `playwright.config.ts`

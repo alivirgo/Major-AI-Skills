@@ -1,0 +1,52 @@
+{
+  "name": "major-ai-skills",
+  "owner": {
+    "name": "alivirgo"
+  },
+  "metadata": {
+    "description": "Installable agentic skills for Claude Code - professional apps, token efficiency, and common-sense prompting.",
+    "version": "2.1.0"
+  },
+  "plugins": [
+    {
+      "name": "major-ai-skills",
+      "source": "./",
+      "description": "Full Major AI Skills library (prefer selective installs via npx for Antigravity/Cursor)."
+    },
+    {
+      "name": "mas-cad-studio",
+      "source": "./plugins/mas-cad-studio",
+      "description": "CAD-focused skills: SolidWorks, Fusion 360, CATIA, NX, Rhino, Blender."
+    },
+    {
+      "name": "mas-video-lab",
+      "source": "./plugins/mas-video-lab",
+      "description": "Video and motion skills: DaVinci, Premiere, After Effects, Remotion, FFmpeg."
+    },
+    {
+      "name": "mas-3d-games",
+      "source": "./plugins/mas-3d-games",
+      "description": "3D DCC and game engines: Cinema 4D, Houdini, ZBrush, Substance, Blender, Unity, Unreal, Godot."
+    },
+    {
+      "name": "mas-design-knowledge",
+      "source": "./plugins/mas-design-knowledge",
+      "description": "Design and knowledge apps: Figma, Photoshop, Obsidian, Notion, Linear."
+    },
+    {
+      "name": "mas-desktop-ops",
+      "source": "./plugins/mas-desktop-ops",
+      "description": "Desktop ops: Raycast, Everything, PowerToys, Docker, VS Code, Bruno, Tailscale."
+    },
+    {
+      "name": "mas-efficiency-pack",
+      "source": "./plugins/mas-efficiency-pack",
+      "description": "Token and context efficiency skills."
+    },
+    {
+      "name": "mas-common-sense-pack",
+      "source": "./plugins/mas-common-sense-pack",
+      "description": "Everyday prompting habits and practical AI hygiene."
+    }
+  ]
+}

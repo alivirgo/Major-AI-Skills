@@ -79,7 +79,7 @@ Output:
 I want you to write a customer update email. Match the exact conversational style, humor, and sentence rhythm of this past email I wrote:
 
 <EXAMPLE_OF_MY_WRITING>
-"Hey team—quick heads up on the billing glitch from yesterday. The good news: zero customer credit cards were charged twice. The annoying news: about 40 users received duplicate receipt emails. We've patched the webhook queue and sent an apology note to those 40 folks. Back to normal now!"
+"Hey team - quick heads up on the billing glitch from yesterday. The good news: zero customer credit cards were charged twice. The annoying news: about 40 users received duplicate receipt emails. We've patched the webhook queue and sent an apology note to those 40 folks. Back to normal now!"
 </EXAMPLE_OF_MY_WRITING>
 
 Now, write an update about [NEW INCIDENT / TOPIC: e.g. 15-minute dashboard outage today] matching that exact voice.

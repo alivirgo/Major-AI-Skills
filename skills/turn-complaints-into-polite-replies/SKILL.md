@@ -79,7 +79,7 @@ Hi Mark,
 You are completely right to be frustrated. Having ad traffic running without the landing page live is unacceptable, and I understand the urgency.
 
 Here is what we are doing immediately:
-1. **Going Live Now**: Our team has pushed the final assets live—your landing page is active and converting as of 9:45 AM.
+1. **Going Live Now**: Our team has pushed the final assets live - your landing page is active and converting as of 9:45 AM.
 2. **Ad Spend Credit**: We have applied a $500 credit to your account to offset the ad spend during this morning's 45-minute delay.
 3. **Prevention**: We have updated our launch deployment checklist to require DNS verification 24 hours prior to ad launch.
 

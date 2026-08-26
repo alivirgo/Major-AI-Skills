@@ -13,7 +13,7 @@ tools: ["claude", "cursor", "gemini", "codex", "chatgpt"]
 # Ask AI How to Improve Your Prompt (Meta-Prompting) (AI Skill)
 
 ## Overview
-Prompt engineering is not guessing magical keywords—it is providing the right balance of **context, task constraints, and format specifications**. 
+Prompt engineering is not guessing magical keywords - it is providing the right balance of **context, task constraints, and format specifications**. 
 
 Instead of struggling through trial-and-error when a response falls flat, you can use **Meta-Prompting**: asking the AI itself to diagnose why your prompt was underspecified and write a significantly upgraded version.
 
@@ -99,10 +99,10 @@ Key Information:
 Guidelines:
 1. Tone: Deeply empathetic, accountable, proactive, and warm.
 2. Structure: 
-   - Acknowledge and apologize sincerely in sentence 1 (no corporate excuses).
-   - State the 2-part resolution clearly in bullet points.
-   - Provide the new tracking number placeholder and expected arrival window.
-   - Offer the $20 gift code for their next order.
+  - Acknowledge and apologize sincerely in sentence 1 (no corporate excuses).
+  - State the 2-part resolution clearly in bullet points.
+  - Provide the new tracking number placeholder and expected arrival window.
+  - Offer the $20 gift code for their next order.
 3. Length: Under 150 words.
 ```
 
