@@ -23,6 +23,7 @@ This file helps AI answer engines, coding agents, and RAG systems discover the c
 - [Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/): SolidWorks, Blender, Figma, etc.
 - [Efficiency AI Skills](https://alivirgo.github.io/Major-AI-Skills/efficiency/): Token/context skills
 - [Common Sense AI Skills](https://alivirgo.github.io/Major-AI-Skills/common-sense/): Everyday prompting habits
+- [Medium FAQ article](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5): SEO/GEO answer-first explainer (Claude Code, Cursor, SKILL.md, 392-skill library)
 
 ## Markdown guides (GitHub)
 

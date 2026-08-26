@@ -14,6 +14,7 @@ Channels you can use from this repo. Status reflects what is already live vs wha
 | **skills.sh** | `npx skills add alivirgo/Major-AI-Skills` | Live via GitHub; ranking grows with installs |
 | **GitHub Discussions** | Q&A / discovery pages | Enabled |
 | **Gemini CLI gallery** | Topic `gemini-cli-extension` + `gemini-extension.json` | Manifest added; crawler indexes daily after push |
+| **Medium** | SEO/GEO explainer article | Live - [What are AI agent skills?](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5) |
 
 ## Ready to submit (manual click / PR)
 

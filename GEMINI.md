@@ -19,3 +19,5 @@ gemini extensions install https://github.com/alivirgo/Major-AI-Skills
 - Index: `skills_index.json`
 - Human catalog: `CATALOG.md`
 - Site: https://alivirgo.github.io/Major-AI-Skills/
+- Medium FAQ: https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5
+- Agents index: https://alivirgo.github.io/Major-AI-Skills/llms.txt

@@ -30,6 +30,7 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![skills.sh](https://img.shields.io/badge/skills.sh-npx%20skills%20add-000)](#installation)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
+[![Medium](https://img.shields.io/badge/Medium-Article-12100E)](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5)
 [![llms.txt](https://img.shields.io/badge/llms.txt-GEO%20ready-0ea5e9)](https://alivirgo.github.io/Major-AI-Skills/llms.txt)
 
 ## Why This Repo
@@ -74,6 +75,7 @@ Prefer an exact reviewed set. Full Antigravity installs can exhaust context beca
 | **Gemini CLI gallery** | `gemini-extension.json` + topic `gemini-cli-extension` (auto-indexed) · `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
 | **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@2.1.0/) / [unpkg](https://unpkg.com/major-ai-skills@2.1.0/) mirror the npm package |
 | **GitHub Pages** | Browse catalog: [alivirgo.github.io/Major-AI-Skills](https://alivirgo.github.io/Major-AI-Skills/) |
+| **Medium** | Explainer: [What are AI agent skills? Claude Code, Cursor & SKILL.md](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5) |
 
 Full channel list + submit links: [docs/users/distribution.md](docs/users/distribution.md).
 
@@ -237,6 +239,7 @@ High-intent guides for people comparing skill libraries on Google / GitHub / AI 
 - **[Best Cursor skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/)** - HTML landing (also [md](docs/users/best-cursor-skills-github.md))
 - **[Best Antigravity skills](https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/)**
 - **[What are AI agent skills?](https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/)**
+- **[Medium: What are AI agent skills? Claude Code, Cursor & SKILL.md explained](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5)** - FAQ/GEO-style article
 - **[Major AI Skills vs agentic-awesome-skills](https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/)**
 - **[Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/)** - SolidWorks, Blender, Figma, …
 - **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** - ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces
@@ -260,6 +263,7 @@ Machine-readable discovery for answer engines and agents:
 
 - [Discussions](https://github.com/alivirgo/Major-AI-Skills/discussions) for ideas
 - [Issues](https://github.com/alivirgo/Major-AI-Skills/issues) for bugs
+- [Medium article](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5) - agent skills FAQ for SEO / GEO / AI
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [SECURITY.md](SECURITY.md)
 
 ## License

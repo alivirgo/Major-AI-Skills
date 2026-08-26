@@ -76,6 +76,7 @@ A: https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md and skills
 - Site: https://alivirgo.github.io/Major-AI-Skills/
 - Repo: https://github.com/alivirgo/Major-AI-Skills
 - Index for agents: https://alivirgo.github.io/Major-AI-Skills/llms.txt
+- Medium FAQ article: https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5
 - Best Claude Code skills guide: https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-claude-code-skills-github.md
 - Best Cursor skills guide: https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-cursor-skills-github.md
 - AI agent skills guide: https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-agent-skills.md

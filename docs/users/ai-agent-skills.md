@@ -51,6 +51,7 @@ npx major-ai-skills --antigravity --skills blender --dry-run
 
 ## Next reads
 
+- [Medium: What are AI agent skills? Claude Code, Cursor & SKILL.md](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5)
 - [Best Claude Code skills on GitHub](best-claude-code-skills-github.md)
 - [Best Cursor skills on GitHub](best-cursor-skills-github.md)
 - [Claude Code skills](claude-code-skills.md)
