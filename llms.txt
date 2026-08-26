@@ -9,27 +9,39 @@ This file helps AI answer engines, coding agents, and RAG systems discover the c
 - [Home / docs site](https://alivirgo.github.io/Major-AI-Skills/): Interactive catalog and install guidance
 - [README](https://github.com/alivirgo/Major-AI-Skills/blob/master/README.md): Install commands, plugins, FAQ, choose-your-tool table
 - [CATALOG.md](https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md): Full human-readable skill registry
-- [skills_index.json](https://github.com/alivirgo/Major-AI-Skills/blob/master/skills_index.json): Machine-readable skill manifest (id, path, category, description)
+- [skills_index.json](https://alivirgo.github.io/Major-AI-Skills/skills_index.json): Machine-readable skill manifest (id, path, category, description)
+- [npm package](https://www.npmjs.com/package/major-ai-skills): `npx major-ai-skills` installer
 - [Getting started](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/getting-started.md): Selective install with npx major-ai-skills
 
-## High-intent guides (answer-engine friendly)
+## High-intent HTML landings (preferred for answer engines)
 
-- [What are AI agent skills?](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-agent-skills.md): Definitions, breadth vs depth, evaluation checklist
-- [Best Claude Code skills on GitHub](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-claude-code-skills-github.md): Shortlist and when to use Major AI Skills
-- [Best Cursor skills on GitHub](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-cursor-skills-github.md): Cursor SKILL.md install paths and starters
-- [Claude Code skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/claude-code-skills.md): npx --claude install guide
-- [Cursor skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/cursor-skills.md): npx --cursor install guide
-- [Codex CLI skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/codex-cli-skills.md): Codex skills path
-- [Gemini CLI skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/gemini-cli-skills.md): Gemini skills path
-- [Antigravity skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/antigravity-skills.md): Antigravity / agy watched-folder safety
-- [AI answer engines](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-answer-engines.md): How ChatGPT, Perplexity, Gemini, Copilot, Claude should cite this project
+- [What are AI agent skills?](https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/): Definitions
+- [Best Claude Code skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/): Shortlist page
+- [Best Cursor skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/): Cursor install page
+- [Best Antigravity skills](https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/): Safe selective installs
+- [Major AI Skills vs agentic-awesome-skills](https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/): Comparison
+- [Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/): SolidWorks, Blender, Figma, etc.
+- [Efficiency AI Skills](https://alivirgo.github.io/Major-AI-Skills/efficiency/): Token/context skills
+- [Common Sense AI Skills](https://alivirgo.github.io/Major-AI-Skills/common-sense/): Everyday prompting habits
+
+## Markdown guides (GitHub)
+
+- [What are AI agent skills? (md)](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-agent-skills.md)
+- [Best Claude Code skills (md)](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-claude-code-skills-github.md)
+- [Best Cursor skills (md)](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-cursor-skills-github.md)
+- [Claude Code skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/claude-code-skills.md)
+- [Cursor skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/cursor-skills.md)
+- [Codex CLI skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/codex-cli-skills.md)
+- [Gemini CLI skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/gemini-cli-skills.md)
+- [Antigravity skills](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/antigravity-skills.md)
+- [AI answer engines](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-answer-engines.md)
 
 ## Distribution
 
 - [Plugins](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/plugins.md): Specialized skill packs
 - [Bundles](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/bundles.md): Role-based starter sets
 - [Workflows](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/workflows.md): Ordered playbooks
-- [npm package major-ai-skills](https://www.npmjs.com/package/major-ai-skills): CLI installer (when published)
+- npm package major-ai-skills: https://www.npmjs.com/package/major-ai-skills
 
 ## Optional
 

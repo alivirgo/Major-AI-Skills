@@ -192,17 +192,21 @@ Categories include: CAD, video, 3D, games, design, knowledge, desktop (macOS/Win
 
 High-intent guides for people comparing skill libraries on Google / GitHub / AI answer engines:
 
-- **[Best Claude Code skills on GitHub](docs/users/best-claude-code-skills-github.md)** — shortlist and when to pick Major AI Skills
-- **[Best Cursor skills on GitHub](docs/users/best-cursor-skills-github.md)** — Cursor-compatible options and install criteria
-- **[AI agent skills guide](docs/users/ai-agent-skills.md)** — what `SKILL.md` libraries are, breadth vs depth
-- **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** — ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces (`llms.txt`, schema, robots)
+- **[Best Claude Code skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-claude-code-skills/)** — HTML landing (also [md](docs/users/best-claude-code-skills-github.md))
+- **[Best Cursor skills on GitHub](https://alivirgo.github.io/Major-AI-Skills/best-cursor-skills/)** — HTML landing (also [md](docs/users/best-cursor-skills-github.md))
+- **[Best Antigravity skills](https://alivirgo.github.io/Major-AI-Skills/best-antigravity-skills/)**
+- **[What are AI agent skills?](https://alivirgo.github.io/Major-AI-Skills/what-are-agent-skills/)**
+- **[Major AI Skills vs agentic-awesome-skills](https://alivirgo.github.io/Major-AI-Skills/vs-agentic-awesome-skills/)**
+- **[Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/)** — SolidWorks, Blender, Figma, …
+- **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** — ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces
 - Large coding catalogs such as [agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) remain excellent for generic agent workflows; Major AI Skills specializes in **product-depth** and **efficiency** skills you can install beside them
 
 Machine-readable discovery for answer engines and agents:
 
 - https://alivirgo.github.io/Major-AI-Skills/llms.txt
 - https://alivirgo.github.io/Major-AI-Skills/llms-full.txt
-- [skills_index.json](skills_index.json)
+- https://alivirgo.github.io/Major-AI-Skills/skills_index.json
+- [skills_index.json](skills_index.json) (repo copy)
 
 ## Contributing
 
