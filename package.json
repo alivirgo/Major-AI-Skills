@@ -1,30 +1,47 @@
 {
   "name": "major-ai-skills",
   "version": "2.0.0",
-  "description": "Installable GitHub library of agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity — professional apps, token efficiency, and practical prompting.",
+  "description": "Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI & Antigravity — 292+ professional app, token-efficiency, and common-sense skills. SEO/GEO ready.",
   "license": "MIT",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "bugs": {
+    "url": "https://github.com/alivirgo/Major-AI-Skills/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alivirgo/Major-AI-Skills.git"
+  },
   "bin": {
     "major-ai-skills": "tools/bin/install.js"
   },
+  "main": "skills_index.json",
   "scripts": {
     "index": "node tools/scripts/generate_index.js",
     "catalog": "node tools/scripts/generate_index.js",
     "validate": "node tools/scripts/validate_skills.js",
-    "build": "npm run index"
+    "build": "npm run index",
+    "prepublishOnly": "npm run validate && npm run index",
+    "pack:check": "npm pack --dry-run"
   },
   "files": [
     "skills",
     "skills_index.json",
     "data/skills_index.json",
+    "data/bundles.json",
     "tools/bin",
+    "plugins/manifest.json",
     "CATALOG.md",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md",
+    "llms.txt",
+    "llms-full.txt",
+    "docs/users"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alivirgo/Major-AI-Skills.git"
-  },
   "keywords": [
     "agent-skills",
     "agentic-skills",
@@ -35,6 +52,7 @@
     "ai-skills",
     "skill-library",
     "skill-md",
+    "SKILL.md",
     "claude-code",
     "claude-code-skills",
     "cursor",
@@ -50,11 +68,21 @@
     "developer-tools",
     "npx",
     "cad",
+    "solidworks",
     "blender",
     "figma",
-    "token-efficiency"
+    "davinci-resolve",
+    "token-efficiency",
+    "prompt-engineering",
+    "geo",
+    "llms-txt",
+    "answer-engine",
+    "installable-skills"
   ],
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

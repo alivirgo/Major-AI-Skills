@@ -24,8 +24,10 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-Google-blue)](https://github.com/google-gemini/gemini-cli)
 [![Antigravity](https://img.shields.io/badge/Antigravity-AI%20IDE-red)](https://github.com/alivirgo/Major-AI-Skills)
 [![Skills](https://img.shields.io/badge/Skills-292-blueviolet)](CATALOG.md)
+[![npm](https://img.shields.io/npm/v/major-ai-skills?color=cb3837&label=npm)](https://www.npmjs.com/package/major-ai-skills)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
+[![llms.txt](https://img.shields.io/badge/llms.txt-GEO%20ready-0ea5e9)](https://alivirgo.github.io/Major-AI-Skills/llms.txt)
 
 ## Why This Repo
 
