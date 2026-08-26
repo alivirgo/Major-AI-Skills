@@ -2,86 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alivirgo.github.io/Major-AI-Skills/</loc>
-    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills</loc>
-    <lastmod>2026-08-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://alivirgo.github.io/Major-AI-Skills/llms.txt</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://alivirgo.github.io/Major-AI-Skills/llms-full.txt</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/README.md</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cad</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-agent-skills.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-claude-code-skills-github.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/best-cursor-skills-github.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/claude-code-skills.md</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/video-editing</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/cursor-skills.md</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/3d</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/codex-cli-skills.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/scientific</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/gemini-cli-skills.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/music</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/antigravity-skills.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/windows</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/ai-answer-engines.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/macos</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/getting-started.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/cross-platform</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/bundles.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://github.com/alivirgo/Major-AI-Skills/tree/master/skills/plc-industrial</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/plugins.md</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/workflows.md</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

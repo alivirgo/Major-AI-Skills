@@ -1,0 +1,60 @@
+{
+  "name": "major-ai-skills",
+  "version": "2.0.0",
+  "description": "Installable GitHub library of agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity — professional apps, token efficiency, and practical prompting.",
+  "license": "MIT",
+  "bin": {
+    "major-ai-skills": "tools/bin/install.js"
+  },
+  "scripts": {
+    "index": "node tools/scripts/generate_index.js",
+    "catalog": "node tools/scripts/generate_index.js",
+    "validate": "node tools/scripts/validate_skills.js",
+    "build": "npm run index"
+  },
+  "files": [
+    "skills",
+    "skills_index.json",
+    "data/skills_index.json",
+    "tools/bin",
+    "CATALOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alivirgo/Major-AI-Skills.git"
+  },
+  "keywords": [
+    "agent-skills",
+    "agentic-skills",
+    "ai-agent-skills",
+    "ai-agents",
+    "ai-coding",
+    "ai-workflows",
+    "ai-skills",
+    "skill-library",
+    "skill-md",
+    "claude-code",
+    "claude-code-skills",
+    "cursor",
+    "cursor-skills",
+    "codex-cli",
+    "codex-skills",
+    "gemini-cli",
+    "gemini-skills",
+    "antigravity",
+    "antigravity-skills",
+    "kiro",
+    "opencode",
+    "developer-tools",
+    "npx",
+    "cad",
+    "blender",
+    "figma",
+    "token-efficiency"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

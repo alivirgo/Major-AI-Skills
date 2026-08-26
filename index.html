@@ -3,10 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Major AI Skills — 425+ Production-Grade AI Automation Blueprints</title>
-  <meta name="description" content="Technical documentation and engineering reference for 425+ software automation skills and prompt specifications across 76 applications and 18 domains.">
+  <title>Major AI Skills - Agentic Skills for Claude Code, Cursor &amp; Antigravity</title>
+
+  <meta name="description" content="Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity. 292+ professional app, token-efficiency, and common-sense skills. npx major-ai-skills.">
+  <meta name="keywords" content="agentic skills, AI agent skills, Claude Code skills, Cursor skills, SKILL.md, Antigravity skills, Codex CLI skills, Gemini CLI skills, skill library, agent skills, installable skills, CAD AI skills, Blender skills, Figma skills, token efficiency">
   <meta name="author" content="Ali Virgo">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="ai-content" content="llms.txt,llms-full.txt,skills_index.json">
   <link rel="canonical" href="https://alivirgo.github.io/Major-AI-Skills/">
+  <link rel="describedby" href="https://alivirgo.github.io/Major-AI-Skills/llms.txt" type="text/plain" title="llms.txt">
+  <link rel="alternate" type="text/plain" href="https://alivirgo.github.io/Major-AI-Skills/llms-full.txt" title="llms-full.txt">
+  <link rel="alternate" type="application/json" href="https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/skills_index.json" title="skills_index.json">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Major AI Skills">
+  <meta property="og:title" content="Major AI Skills — Agentic Skills for Claude Code, Cursor & Antigravity">
+  <meta property="og:description" content="Installable SKILL.md library: professional app skills + token efficiency. npx major-ai-skills --cursor|--claude|--antigravity">
+  <meta property="og:url" content="https://alivirgo.github.io/Major-AI-Skills/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Major AI Skills — Agentic / AI Agent Skills Library">
+  <meta name="twitter:description" content="292+ SKILL.md playbooks for Claude Code, Cursor, Codex, Gemini CLI, Antigravity. Product-depth + efficiency skills.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://alivirgo.github.io/Major-AI-Skills/#website",
+        "url": "https://alivirgo.github.io/Major-AI-Skills/",
+        "name": "Major AI Skills",
+        "description": "Installable agentic skills and AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity.",
+        "publisher": { "@id": "https://alivirgo.github.io/Major-AI-Skills/#org" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://alivirgo.github.io/Major-AI-Skills/#org",
+        "name": "Major AI Skills",
+        "url": "https://github.com/alivirgo/Major-AI-Skills"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://alivirgo.github.io/Major-AI-Skills/#app",
+        "name": "Major AI Skills",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",
+        "license": "https://github.com/alivirgo/Major-AI-Skills/blob/master/LICENSE",
+        "url": "https://github.com/alivirgo/Major-AI-Skills",
+        "downloadUrl": "https://github.com/alivirgo/Major-AI-Skills",
+        "description": "Installable GitHub library of SKILL.md agentic skills for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity, focused on professional apps and token efficiency.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "softwareVersion": "2.0.0"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://alivirgo.github.io/Major-AI-Skills/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Major AI Skills?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Major AI Skills is an installable open-source library of 292+ agentic skills (SKILL.md playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity, specializing in professional software applications, token-efficiency techniques, and common-sense prompting habits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are agentic skills or AI agent skills?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Agentic skills (also called AI agent skills, Claude Code skills, Cursor skills, or SKILL.md playbooks) are folders containing a SKILL.md file with YAML frontmatter and Markdown instructions that teach coding agents how to perform a workflow."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install Cursor skills from Major AI Skills?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run npx major-ai-skills --cursor --skills <ids> to copy skill folders into ~/.cursor/skills. Preview first with --dry-run."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install Claude Code skills from Major AI Skills?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run npx major-ai-skills --claude --skills <ids> to install into ~/.claude/skills."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do Antigravity skills installs work safely?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Antigravity watches ~/.agents/skills, so Major AI Skills requires --skills, --category, or explicit --all. Prefer exact skill IDs and --dry-run to avoid context overload."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Major AI Skills free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Major AI Skills is MIT licensed open source at https://github.com/alivirgo/Major-AI-Skills."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -864,7 +974,7 @@
 
   <!-- Notification Bar -->
   <div class="notification-bar">
-    <span>425+ production-grade AI skills for 76 applications —</span>
+    <span>292 installable agent skills for 90+ applications — </span>
     <a href="https://github.com/alivirgo/Major-AI-Skills" target="_blank">Star on GitHub →</a>
   </div>
 
@@ -909,8 +1019,8 @@
       <ul class="nav-list" id="appsNavList">
         <li><a class="nav-item" onclick="loadDoc('linux', event)"><span>Linux Desktop Distribution</span> <span class="nav-badge">1</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cad', event)"><span>CAD & Parametric Design</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('video-editing', event)"><span>Video Editing & NLE Post</span> <span class="nav-badge">3</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('3d', event)"><span>3D Animation & VFX</span> <span class="nav-badge">4</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('video-editing', event)"><span>Video Editing & NLE Post</span> <span class="nav-badge">6</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('3d', event)"><span>3D Animation & VFX</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('windows', event)"><span>Windows Utilities & Kernel</span> <span class="nav-badge">10</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('macos', event)"><span>macOS Productivity</span> <span class="nav-badge">9</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('cross-platform', event)"><span>Cross-Platform Tools</span> <span class="nav-badge">9</span></a></li>
@@ -921,8 +1031,10 @@
         <li><a class="nav-item" onclick="loadDoc('erp', event)"><span>Enterprise ERP, PLM & EAM</span> <span class="nav-badge">6</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('digital-forensics', event)"><span>Digital Forensics & IR</span> <span class="nav-badge">3</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('gis', event)"><span>GIS & Medical Imaging</span> <span class="nav-badge">5</span></a></li>
-        <li><a class="nav-item" onclick="loadDoc('game-engines', event)"><span>Game Engines & Runtimes</span> <span class="nav-badge">3</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('game-engines', event)"><span>Game Engines & Runtimes</span> <span class="nav-badge">5</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('network', event)"><span>Network SDN Controllers</span> <span class="nav-badge">1</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('design', event)"><span>Design & Knowledge</span> <span class="nav-badge">5</span></a></li>
+        <li><a class="nav-item" onclick="loadDoc('devops', event)"><span>DevOps & Automation</span> <span class="nav-badge">5</span></a></li>
       </ul>
 
       <div class="nav-section-title">Reference Handbooks</div>
@@ -982,25 +1094,32 @@
 
     // Helper: Card Generator
     function renderAppCards(catPath, apps) {
-      return `<div class="app-cards-grid">` + apps.map(app => `
+      return `<div class="app-cards-grid">` + apps.map(app => {
+        const hasVariants = app.variants !== false;
+        const links = [
+          `<a href="${GH_BASE}/skills/${app.slug}/SKILL.md" target="_blank" class="file-link-btn">SKILL.md</a>`
+        ];
+        if (hasVariants) {
+          links.push(
+            `<a href="${GH_BASE}/skills/${app.slug}/gemini.md" target="_blank" class="file-link-btn">gemini.md</a>`,
+            `<a href="${GH_BASE}/skills/${app.slug}/gpt.md" target="_blank" class="file-link-btn">gpt.md</a>`
+          );
+        }
+        return `
         <div class="app-file-card">
           <div class="app-file-title">${app.name}</div>
           <div class="app-file-desc">${app.desc}</div>
-          <div class="app-file-links">
-            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/claude_skill.md" target="_blank" class="file-link-btn">claude_skill.md</a>
-            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/gemini_skill.md" target="_blank" class="file-link-btn">gemini_skill.md</a>
-            <a href="${GH_BASE}/skills/${catPath}/${app.slug}/gpt_skill.md" target="_blank" class="file-link-btn">gpt_skill.md</a>
-          </div>
-        </div>
-      `).join('') + `</div>`;
+          <div class="app-file-links">${links.join('')}</div>
+        </div>`;
+      }).join('') + `</div>`;
     }
 
     // Category Cards for Homepage
     const categoryData = [
       { key: 'linux', icon: '🐧', title: 'Linux Desktop', count: '1 App', apps: 'Omarchy (Arch + Hyprland + Quickshell)' },
       { key: 'cad', icon: '⚙️', title: 'CAD & Design', count: '5 Apps', apps: 'SolidWorks, CATIA, NX, Fusion 360, Rhino' },
-      { key: 'video-editing', icon: '🎬', title: 'Video Editing', count: '3 Apps', apps: 'DaVinci Resolve, Final Cut Pro, VEGAS Pro' },
-      { key: '3d', icon: '🎨', title: '3D & VFX', count: '4 Apps', apps: 'Houdini, Cinema 4D, ZBrush, Substance 3D' },
+      { key: 'video-editing', icon: '🎬', title: 'Video Editing', count: '6 Apps', apps: 'DaVinci, Premiere, After Effects, Remotion...' },
+      { key: '3d', icon: '🎨', title: '3D & VFX', count: '5 Apps', apps: 'Blender, Houdini, Cinema 4D, ZBrush, Substance' },
       { key: 'windows', icon: '🪟', title: 'Windows Utilities', count: '10 Apps', apps: 'AHK v2, Everything, PowerToys, ShareX...' },
       { key: 'macos', icon: '🍎', title: 'macOS Productivity', count: '9 Apps', apps: 'Raycast, OrbStack, Rectangle, Shottr...' },
       { key: 'cross-platform', icon: '🌐', title: 'Cross-Platform', count: '9 Apps', apps: 'FFmpeg, Wireshark, Nginx, Tailscale...' },
@@ -1011,8 +1130,10 @@
       { key: 'erp', icon: '🏢', title: 'Enterprise ERP', count: '6 Apps', apps: 'SAP GUI, Oracle EBS, Dynamics NAV...' },
       { key: 'digital-forensics', icon: '🔍', title: 'Digital Forensics', count: '3 Apps', apps: 'Autopsy, EnCase, FTK' },
       { key: 'gis', icon: '🗺️', title: 'GIS & Medical', count: '5 Apps', apps: 'ArcGIS, QGIS, 3D Slicer, OsiriX, Horos' },
-      { key: 'game-engines', icon: '🎮', title: 'Game Engines', count: '3 Apps', apps: 'Godot, CryEngine, RPG Maker' },
+      { key: 'game-engines', icon: '🎮', title: 'Game Engines', count: '5 Apps', apps: 'Unity, Unreal, Godot, CryEngine, RPG Maker' },
       { key: 'network', icon: '📡', title: 'Network SDN', count: '1 App', apps: 'TP-Link Omada SDN Controller' },
+      { key: 'design', icon: '✏️', title: 'Design & Knowledge', count: '5 Apps', apps: 'Figma, Photoshop, Obsidian, Notion, Linear' },
+      { key: 'devops', icon: '📦', title: 'DevOps & Automation', count: '5 Apps', apps: 'Docker, Supabase, n8n, Playwright, VS Code' },
     ];
 
     function renderCategoryGrid() {
@@ -1056,9 +1177,9 @@
             <h2 class="hero-tagline">Production-Grade AI <span class="highlight">Automation Blueprints</span></h2>
             <p class="hero-subtitle">Deterministic, expert-level skill specifications for Claude, Gemini, GPT & Codex across 76 professional applications. Zero boilerplate. Zero hallucinations.</p>
             <div class="hero-stats">
-              <div class="hero-stat"><div class="hero-stat-value">425+</div><div class="hero-stat-label">Skill Specs</div></div>
-              <div class="hero-stat"><div class="hero-stat-value">76</div><div class="hero-stat-label">Applications</div></div>
-              <div class="hero-stat"><div class="hero-stat-value">18</div><div class="hero-stat-label">Domains</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">292</div><div class="hero-stat-label">Skill Specs</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">90+</div><div class="hero-stat-label">Applications</div></div>
+              <div class="hero-stat"><div class="hero-stat-value">24+</div><div class="hero-stat-label">Domains</div></div>
               <div class="hero-stat"><div class="hero-stat-value" id="heroStars">0</div><div class="hero-stat-label">GitHub Stars</div></div>
             </div>
             <div class="hero-buttons">
@@ -1102,13 +1223,13 @@
 <span class="install-cmd">git clone https://github.com/alivirgo/Major-AI-Skills.git</span>
 
 <span class="install-comment"># Ingest a skill into Cursor rules</span>
-<span class="install-cmd">cat "skills/windows/everything/claude_skill.md" >> .cursorrules</span>
+<span class="install-cmd">npx major-ai-skills --cursor --skills everything</span>
 
 <span class="install-comment"># Or use with Claude Code CLI</span>
-<span class="install-cmd">cp "skills/cross-platform/ffmpeg/claude_skill.md" ./CLAUDE.md</span>
+<span class="install-cmd">npx major-ai-skills --claude --skills ffmpeg</span>
 
 <span class="install-comment"># Or Omarchy Linux skill for Hyprland automation</span>
-<span class="install-cmd">cat "skills/linux/omarchy/claude_skill.md" >> .cursorrules</span></code></pre>
+<span class="install-cmd">npx major-ai-skills --cursor --skills omarchy</span></code></pre>
           </div>
 
           <h2 class="section-heading" id="sec-matrix">Application Coverage Matrix</h2>
@@ -1142,14 +1263,14 @@
               <div class="app-file-title">⚡ Token & Cost Efficiency</div>
               <div class="app-file-desc">100 rules for context window optimization, AST skeletonization, prompt cache splitting, and stop-sequence truncation. Cut inference costs by 40-70%.</div>
               <div class="app-file-links">
-                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="file-link-btn">Browse 100 Rules →</a>
+                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills" target="_blank" class="file-link-btn">Browse 100 Rules →</a>
               </div>
             </div>
             <div class="app-file-card" onclick="loadDoc('commonsense')" style="cursor:pointer">
               <div class="app-file-title">🧠 Prompt Engineering</div>
               <div class="app-file-desc">100 practical habits for factual grounding, hallucination elimination, output schema enforcement, and role-perspective stacking.</div>
               <div class="app-file-links">
-                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="file-link-btn">Browse 100 Habits →</a>
+                <a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills" target="_blank" class="file-link-btn">Browse 100 Habits →</a>
               </div>
             </div>
           </div>
@@ -1161,7 +1282,7 @@
               <div class="metric-card"><div class="metric-val" id="metricStars">0</div><div class="metric-label">Stargazers</div></div>
               <div class="metric-card"><div class="metric-val" id="metricForks">0</div><div class="metric-label">Forks</div></div>
               <div class="metric-card"><div class="metric-val" id="metricWatchers">0</div><div class="metric-label">Watchers</div></div>
-              <div class="metric-card"><div class="metric-val" id="metricSpecs">425+</div><div class="metric-label">Skill Specs</div></div>
+              <div class="metric-card"><div class="metric-val" id="metricSpecs">292</div><div class="metric-label">Skill Specs</div></div>
             </div>
             <div class="chart-container">
               <svg id="liveGrowthSvg" class="chart-svg" viewBox="0 0 760 140" preserveAspectRatio="none"></svg>
@@ -1188,11 +1309,11 @@
           <h2 class="section-heading" id="sec-cursor">1. Cursor & VS Code Integration</h2>
           <p>To provide instant context for a specific tool in Cursor or VS Code Copilot, append the target skill file to your workspace rules:</p>
           <pre><code># Append SolidWorks skill to Cursor rules
-cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
+npx major-ai-skills --cursor --skills solidworks</code></pre>
           
           <h2 class="section-heading" id="sec-claude">2. Claude Code CLI Integration</h2>
           <p>Claude Code reads markdown instructions natively in project directories. Copy the desired skill file as <code>CLAUDE.md</code> in your project root:</p>
-          <pre><code>cp "skills/cross-platform/ffmpeg/claude_skill.md" ./CLAUDE.md</code></pre>
+          <pre><code>npx major-ai-skills --claude --skills ffmpeg</code></pre>
 
           <h2 class="section-heading" id="sec-lmstudio">3. LM Studio & Local RAG Ingestion</h2>
           <p>All skill files feature standard YAML frontmatter tags (<code>category</code>, <code>tags</code>, <code>description</code>) optimized for local vector embeddings in ChromaDB, Qdrant, or LM Studio document indexing.</p>
@@ -1237,7 +1358,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       },
       'video-editing': {
         breadcrumb: 'Docs / Applications / Video Editing & NLE Post',
-        heading: 'Video Editing & NLE Post-Production (3 Applications)',
+        heading: 'Video Editing & NLE Post-Production (6 Applications)',
         description: 'DaVinci Resolve scripting API, Fusion VFX nodes, FCPXML v1.11 timelines, and VEGAS C# batch rendering scripts.',
         hasModels: true,
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
@@ -1247,6 +1368,9 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
           <h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>
           ${renderAppCards('video-editing', [
             { name: 'DaVinci Resolve Studio', slug: 'davinci-resolve', desc: 'Python/Lua DaVinciResolveScript API, Fusion VFX node pipelines, and render queue orchestration.' },
+            { name: 'Adobe Premiere Pro', slug: 'adobe-premiere-pro', desc: 'ExtendScript / UXP timeline automation, markers, and Media Encoder handoff.', variants: false },
+            { name: 'Adobe After Effects', slug: 'adobe-after-effects', desc: 'ExtendScript compositions, expressions, and render queue control.', variants: false },
+            { name: 'Remotion', slug: 'remotion', desc: 'React-based programmatic video, Remotion CLI, and Lambda rendering.', variants: false },
             { name: 'Apple Final Cut Pro', slug: 'final-cut-pro', desc: 'FCPXML v1.11 timeline synthesis, asset tracking, and AVFoundation export automation.' },
             { name: 'MAGIX VEGAS Pro', slug: 'vegas-pro', desc: 'ScriptPortal C# .NET API, multi-track timeline manipulation, and hardware-accelerated batch rendering.' }
           ])}
@@ -1255,7 +1379,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
       '3d': {
         breadcrumb: 'Docs / Applications / 3D Animation & VFX', heading: '3D Animation, Sculpting & Visual Effects (4 Applications)', description: 'Houdini VEX/Python geometry nodes, Cinema 4D MoGraph, ZBrush ZScript automation, and Substance PBR texture baking.', hasModels: true,
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
-        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Procedural visual effects generation, high-poly digital sculpting, PBR material baking, and animation rigging automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('3d', [{ name: 'SideFX Houdini', slug: 'houdini', desc: 'Houdini Object Model (HOM) Python, VEX attribute wrangles, and SOP/DOP simulation graphs.' }, { name: 'Maxon Cinema 4D', slug: 'cinema-4d', desc: 'C4D Python SDK, MoGraph cloner effectors, and Redshift shader network generation.' }, { name: 'Pixologic / Maxon ZBrush', slug: 'zbrush', desc: 'ZScript macro automation, DynaMesh decimation routines, and multi-map displacement export.' }, { name: 'Adobe Substance 3D Painter', slug: 'substance-painter', desc: 'Substance Painter Python API, smart material layering, and PBR texture map baking.' }])}`
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Procedural visual effects generation, high-poly digital sculpting, PBR material baking, and animation rigging automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('3d', [{ name: 'Blender', slug: 'blender', desc: 'bpy Python API, Geometry Nodes, EEVEE/Cycles batch CLI pipelines, and addon packaging.', variants: false }, { name: 'SideFX Houdini', slug: 'houdini', desc: 'Houdini Object Model (HOM) Python, VEX attribute wrangles, and SOP/DOP simulation graphs.' }, { name: 'Maxon Cinema 4D', slug: 'cinema-4d', desc: 'C4D Python SDK, MoGraph cloner effectors, and Redshift shader network generation.' }, { name: 'Pixologic / Maxon ZBrush', slug: 'zbrush', desc: 'ZScript macro automation, DynaMesh decimation routines, and multi-map displacement export.' }, { name: 'Adobe Substance 3D Painter', slug: 'substance-painter', desc: 'Substance Painter Python API, smart material layering, and PBR texture map baking.' }])}`
       },
       windows: {
         breadcrumb: 'Docs / Applications / Windows Utilities & Kernel', heading: 'Windows Utilities & Kernel Systems (10 Applications)', description: 'Low-level Win32 NTDLL diagnostics, NTFS MFT search engines, WASAPI per-application audio, AutoHotkey v2 window management, and application isolation sandboxes.', hasModels: true,
@@ -1308,14 +1432,24 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Geospatial analysis, raster/vector transformations, medical DICOM imaging, and 3D volumetric anatomical segmentation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('gis', [{ name: 'Esri ArcGIS Pro', slug: 'arcgis-pro', desc: 'ArcPy spatial analyst geoprocessing, geodatabase feature class manipulation, and map layout export.' }, { name: 'QGIS Desktop', slug: 'qgis', desc: 'PyQGIS processing algorithms, vector layer styling, spatial joins, and standalone GIS scripts.' }])}<h3 class="sub-heading">Medical DICOM & Volumetric Imaging</h3>${renderAppCards('medical', [{ name: '3D Slicer', slug: '3d-slicer', desc: 'Python Slicer MRML scene node tree manipulation, CT/MRI volume rendering, and segmentation.' }, { name: 'OsiriX MD', slug: 'osirix', desc: 'macOS DICOM medical imaging workstation, Cocoa Objective-C / Swift plugin architecture, and PACS routing.' }, { name: 'Horos Project', slug: 'horos', desc: 'Open-source 64-bit medical DICOM viewer, multi-planar reconstruction (MPR), and 3D volume rendering.' }])}`
       },
       'game-engines': {
-        breadcrumb: 'Docs / Applications / Game Engines & Runtimes', heading: 'Game Engines & Interactive Runtimes (3 Applications)', description: 'Godot GDScript 2.0 & C# bindings, CryEngine Schematyc node systems, and RPG Maker JavaScript event scripting.', hasModels: true,
+        breadcrumb: 'Docs / Applications / Game Engines & Runtimes', heading: 'Game Engines & Interactive Runtimes (5 Applications)', description: 'Unity C# Editor scripts, Unreal Python tooling, Godot GDScript, CryEngine Schematyc, and RPG Maker JavaScript plugins.', hasModels: true,
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
-        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Game engine architecture, scene tree lifecycle management, real-time shaders, and event scripting.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('game-engines', [{ name: 'Godot Engine 4', slug: 'godot', desc: 'GDScript 2.0 static typing, C# bindings, scene tree lifecycle, and custom GDExtension C++ nodes.' }, { name: 'Crytek CryEngine 5', slug: 'cryengine', desc: 'CryEngine C++ entity components, Schematyc visual logic, and real-time physical rendering.' }, { name: 'Gotcha Gotcha Games RPG Maker MZ', slug: 'rpg-maker', desc: 'JavaScript ES6 plugin architecture, battle engine state machine hooks, and event interpreter.' }])}`
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Game engine architecture, scene tree lifecycle management, real-time shaders, and event scripting.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('game-engines', [{ name: 'Unity', slug: 'unity', desc: 'C# Editor scripts, Addressables, URP/HDRP, and batchmode CI builds.', variants: false }, { name: 'Unreal Engine', slug: 'unreal-engine', desc: 'Blueprints, Python Editor scripting, and Unreal Build Tool pipelines.', variants: false }, { name: 'Godot Engine 4', slug: 'godot', desc: 'GDScript 2.0 static typing, C# bindings, scene tree lifecycle, and custom GDExtension C++ nodes.' }, { name: 'Crytek CryEngine 5', slug: 'cryengine', desc: 'CryEngine C++ entity components, Schematyc visual logic, and real-time physical rendering.' }, { name: 'Gotcha Gotcha Games RPG Maker MZ', slug: 'rpg-maker', desc: 'JavaScript ES6 plugin architecture, battle engine state machine hooks, and event interpreter.' }])}`
       },
       network: {
         breadcrumb: 'Docs / Applications / Network SDN Controllers', heading: 'Software-Defined Network Controllers (1 Platform)', description: 'TP-Link Omada Software-Defined Networking REST OpenAPI, multi-site provisioning, VLAN isolation, and device reboot telemetry.', hasModels: true,
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Centralized network controller automation, REST OpenAPI orchestration, VLAN subnet routing, and enterprise hardware management.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('network', [{ name: 'TP-Link Omada SDN Controller', slug: 'omada-controller', desc: 'Omada Controller OpenAPI REST client, token authentication, multi-site provisioning, and device reboot.' }])}`
+      },
+      design: {
+        breadcrumb: 'Docs / Applications / Design & Knowledge', heading: 'Design Systems & Knowledge Tools (5 Applications)', description: 'Figma plugins/REST, Photoshop scripting, Obsidian vault workflows, Notion API, and Linear GraphQL.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Product design systems, raster editing, personal knowledge bases, and issue tracking automation.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('design', [{ name: 'Figma', slug: 'figma', desc: 'Plugin API, REST exports, variables, and design-token pipelines.', variants: false }, { name: 'Adobe Photoshop', slug: 'adobe-photoshop', desc: 'UXP / ExtendScript batch actions, smart objects, and export presets.', variants: false }, { name: 'Obsidian', slug: 'obsidian', desc: 'Markdown vaults, Dataview, URI schemes, and plugin scaffolding.', variants: false }, { name: 'Notion', slug: 'notion', desc: 'Notion API databases, blocks, and page templates.', variants: false }, { name: 'Linear', slug: 'linear', desc: 'GraphQL issues, projects, cycles, and triage automations.', variants: false }])}`
+      },
+      devops: {
+        breadcrumb: 'Docs / Applications / DevOps & Automation', heading: 'DevOps, Automation & Agent Tooling (5 Applications)', description: 'Docker Compose, Supabase, n8n workflows, Playwright tests, and VS Code extension/workspace skills.', hasModels: false,
+        toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Application Skill Files' }],
+        body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>Containers, backend platforms, workflow automation, browser testing, and editor-centric agent workflows.</p><h2 class="section-heading" id="sec-apps">2. Application Skill Files</h2>${renderAppCards('devops', [{ name: 'Docker', slug: 'docker', desc: 'Dockerfile/Compose hardening, multi-stage builds, and CLI diagnostics.', variants: false }, { name: 'Supabase', slug: 'supabase', desc: 'Postgres, Auth, Storage, Edge Functions, and CLI workflows.', variants: false }, { name: 'n8n', slug: 'n8n', desc: 'Workflow JSON, REST API, credentials, and self-hosted ops.', variants: false }, { name: 'Playwright', slug: 'playwright', desc: 'E2E tests, tracing, codegen, and CI browser matrices.', variants: false }, { name: 'Visual Studio Code', slug: 'vscode', desc: 'tasks.json, launch.json, extensions API, and workspace tips.', variants: false }])}<h3 class="sub-heading">Also in catalog</h3>${renderAppCards('office', [{ name: 'Microsoft Excel', slug: 'microsoft-excel', desc: 'Office Scripts, Power Query, and structured table automation.', variants: false }, { name: 'Slack', slug: 'slack', desc: 'Web API bots, Block Kit, and workflow triggers.', variants: false }])}`
       },
       efficiency: {
         breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency', heading: 'Token & Context Efficiency Handbook (100 Rules)', description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.', hasModels: false,
@@ -1332,7 +1466,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
             <tr><td>Stop-Sequence Truncation</td><td>Halt generation upon deterministic token</td><td>-30% output</td></tr>
           </tbody></table>
           <h2 class="section-heading" id="sec-files">3. Browse All 100 Rules</h2>
-          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/efficiency%20ai%20skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Efficiency Rules on GitHub →</a></p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Efficiency Rules on GitHub →</a></p>
         `
       },
       commonsense: {
@@ -1349,7 +1483,7 @@ cat "skills/cad/solidworks/claude_skill.md" >> .cursorrules</code></pre>
             <tr><td>Role & Perspective Stacking</td><td>Layer subject matter expertise constraints</td><td>Authentic domain voice</td></tr>
           </tbody></table>
           <h2 class="section-heading" id="sec-files">3. Browse All 100 Habits</h2>
-          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/common%20sense%20ai%20skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Common Sense Habits on GitHub →</a></p>
+          <p><a href="https://github.com/alivirgo/Major-AI-Skills/tree/master/skills" target="_blank" class="hero-btn outline" style="display:inline-flex">Browse 100 Common Sense Habits on GitHub →</a></p>
         `
       }
     };

@@ -1,0 +1,39 @@
+{
+  "plugins": [
+    {
+      "id": "mas-cad-studio",
+      "name": "MAS CAD Studio",
+      "skills": ["solidworks", "fusion-360", "catia", "siemens-nx", "rhino", "blender"]
+    },
+    {
+      "id": "mas-video-lab",
+      "name": "MAS Video Lab",
+      "skills": ["davinci-resolve", "final-cut-pro", "adobe-premiere-pro", "adobe-after-effects", "remotion", "ffmpeg", "losslesscut"]
+    },
+    {
+      "id": "mas-3d-games",
+      "name": "MAS 3D & Games",
+      "skills": ["cinema-4d", "houdini", "zbrush", "substance-painter", "blender", "unity", "unreal-engine", "godot"]
+    },
+    {
+      "id": "mas-design-knowledge",
+      "name": "MAS Design & Knowledge",
+      "skills": ["figma", "adobe-photoshop", "obsidian", "notion", "linear"]
+    },
+    {
+      "id": "mas-desktop-ops",
+      "name": "MAS Desktop Ops",
+      "skills": ["raycast", "everything", "microsoft-powertoys", "docker", "vscode", "bruno", "tailscale"]
+    },
+    {
+      "id": "mas-efficiency-pack",
+      "name": "MAS Efficiency Pack",
+      "skills": ["csv-over-json-tables", "token-aware-chunking", "selective-grep-filtering", "multi-tool-batch-invocation", "cached-system-instructions"]
+    },
+    {
+      "id": "mas-common-sense-pack",
+      "name": "MAS Common Sense Pack",
+      "skills": ["ask-short-answer-first", "clean-messy-notes-to-action-items", "summarize-meetings-into-decisions", "ask-ai-confidence-rating", "double-check-ai-math-manually"]
+    }
+  ]
+}

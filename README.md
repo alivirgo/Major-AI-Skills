@@ -1,115 +1,220 @@
 # Major AI Skills
 
-[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?color=blue&label=version)](https://github.com/alivirgo/Major-AI-Skills/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Skills: 425+](https://img.shields.io/badge/Skills-425%2B%20Specs-blueviolet)](https://github.com/alivirgo/Major-AI-Skills)
-[![Website: Live](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
+> **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more — focused on professional apps, token efficiency, and practical prompting habits.**
 
-A curated repository of 425+ production-ready AI skills, system prompt specs, and token-optimization blueprints. Built for developers, power users, and domain specialists using tools like Claude Code, ChatGPT, LM Studio, OpenClaw, Antigravity, and VS Code.
+**Current release: V2.0.0.** Flat `skills/<id>/SKILL.md` layout, multi-host `npx` installer, catalog index, specialized plugins, and bundles — with deep product skill content (CAD, video, 3D, design, desktop utilities) plus efficiency and common-sense skills.
 
----
-
-## What is this project?
-
-Most AI instructions out there are either too generic or bloated with fluff. We built **Major AI Skills** to solve a simple problem: how do you give AI models (Claude, GPT-4, Gemini, and local LLMs) exact, actionable context so they actually fix issues, execute shell commands, and automate software without wasting tokens?
-
-This repo is split into three main hubs:
-1. **Application Skills (`skills/`)**: Deep technical guides for 75 top software applications across CAD, Video Editing, 3D, GIS, Scientific, Medical, Music, Game Engines, EDA, ERP, Enterprise, Digital Forensics, PLC/Industrial, Windows, macOS, Cross-Platform, and Network platforms.
-2. **Efficiency AI Skills (`efficiency ai skills/`)**: 100 token-saving techniques focused on prompt compression, context window pruning, line-bounded edits, and API caching.
-3. **Common Sense AI Skills (`common sense ai skills/`)**: 100 practical, plain-English habits designed for non-technical users to get better results from AI while spending less.
-
----
-
-## Directory Structure
+Coding agents can install exact skill IDs into the directory their host watches. You keep control: preview with `--dry-run`, filter by `--skills` / `--category`, or install a specialized pack.
 
 ```text
-Major AI Skills/
-├── skills/                      # 225 Application Skill Specifications (75 Apps x 3 Models across 17 Categories)
-│   ├── cad/                     # SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino
-│   ├── video-editing/           # DaVinci Resolve, VEGAS Pro, Final Cut Pro
-│   ├── 3d/                      # Cinema 4D, Houdini, ZBrush, Substance Painter
-│   ├── gis/                     # ArcGIS Pro, QGIS
-│   ├── scientific/              # MATLAB, COMSOL, OriginPro, LabVIEW
-│   ├── medical/                 # 3D Slicer, OsiriX, Horos
-│   ├── music/                   # Cubase, Ableton Live, FL Studio, Logic Pro, Pro Tools
-│   ├── game-engines/            # CryEngine, Godot, RPG Maker
-│   ├── eda/                     # Altium Designer, KiCad, Cadence Virtuoso, LTspice
-│   ├── erp/                     # SAP GUI, Oracle EBS, Microsoft Dynamics NAV
-│   ├── enterprise/              # IBM Maximo, ServiceNow Desktop, PTC Windchill
-│   ├── digital-forensics/       # Autopsy, EnCase, FTK
-│   ├── plc-industrial/          # Siemens TIA Portal, Rockwell Studio 5000, Codesys
-│   ├── windows/                 # WizTree, Everything, ShareX, PowerToys, System Informer, AHK v2, etc.
-│   ├── macos/                   # Raycast, Shottr, AppCleaner, Rectangle, MacCy, OrbStack, MacWhisper, etc.
-│   ├── cross-platform/          # LosslessCut, Ventoy, Wireshark, FFmpeg, rclone, Tailscale, Nginx, Bruno
-│   └── network/                 # TP-Link Omada SDN Controller (EAPs, JetStream Switches, Gateways)
-├── efficiency ai skills/        # 100 Technical Token-Reduction & Cost-Optimization Rules
-└── common sense ai skills/     # 100 Plain-English AI Habits for Everyday Productivity
+Project / task
+  -> you (or the agent) pick exact skill IDs from the catalog
+  -> npx major-ai-skills --<host> --skills <ids> --dry-run
+  -> review the plan
+  -> install without --dry-run
+  -> invoke with @skill-id
 ```
 
----
+This is an independent community project. Product names (SolidWorks, Raycast, Claude, Cursor, Antigravity, etc.) are referenced only to describe compatibility and skill scope.
 
-## Key Categories
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Anthropic-purple)](https://claude.ai)
+[![Cursor](https://img.shields.io/badge/Cursor-AI%20IDE-orange)](https://cursor.sh)
+[![Codex CLI](https://img.shields.io/badge/Codex%20CLI-OpenAI-green)](https://github.com/openai/codex)
+[![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-Google-blue)](https://github.com/google-gemini/gemini-cli)
+[![Antigravity](https://img.shields.io/badge/Antigravity-AI%20IDE-red)](https://github.com/alivirgo/Major-AI-Skills)
+[![Skills](https://img.shields.io/badge/Skills-292-blueviolet)](CATALOG.md)
+[![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
+[![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
 
-### 1. Application Skill Guides (`skills/`)
-Every application folder contains three distinct model specifications (`claude_skill.md`, `gpt_skill.md`, `gemini_skill.md`):
+## Why This Repo
 
-- **CAD & Engineering**: SolidWorks, CATIA, Siemens NX, Fusion 360, Rhino.
-- **Video & Audio Post-Production**: DaVinci Resolve, VEGAS Pro, Final Cut Pro, Cubase, Ableton Live, FL Studio, Logic Pro, Pro Tools.
-- **3D & Visual Effects**: Cinema 4D, Houdini, ZBrush, Substance Painter.
-- **GIS & Scientific Computing**: ArcGIS Pro, QGIS, MATLAB, COMSOL, OriginPro, LabVIEW.
-- **Medical Imaging & DICOM**: 3D Slicer, OsiriX, Horos.
-- **Game Engines & EDA**: CryEngine, Godot, RPG Maker, Altium Designer, KiCad, Cadence Virtuoso, LTspice.
-- **ERP & Enterprise Asset Management**: SAP GUI, Oracle EBS, Microsoft Dynamics NAV, IBM Maximo, ServiceNow Desktop, PTC Windchill.
-- **Digital Forensics & Industrial Automation**: Autopsy, EnCase, FTK, Siemens TIA Portal, Rockwell Studio 5000, Codesys.
-- **Desktop & Systems Utilities**: Windows Power Tools, macOS Productivity, Cross-Platform tools, and Omada SDN Network Controllers.
+- **Agentic skills that are installable, not just inspirational**: `npx major-ai-skills --claude|--cursor|--codex|--gemini|--antigravity` places `SKILL.md` where your AI coding assistant already looks.
+- **Product-depth skill library**: CAD, video, 3D, GIS, medical, music, ERP, forensics, PLC, desktop utilities — not only generic coding tips.
+- **Efficiency + common sense**: token-saving techniques and plain-English prompting habits in the same catalog.
+- **Built for major agent workflows**: Claude Code skills, Cursor skills, Codex CLI skills, Gemini CLI skills, Antigravity skills, Kiro, OpenCode, and custom paths.
+- **Focused delivery**: specialized plugins and bundles so you do not overload Antigravity / Cursor context windows.
+- **Inspect before installing**: `--dry-run`, [CATALOG.md](CATALOG.md), and [skills_index.json](skills_index.json).
 
-### 2. Efficiency AI Skills (`efficiency ai skills/`)
-A collection of 100 modular rules to keep your AI context lean and fast:
-- **Prompt Compression**: Minimizing diffs, stripping preambles, and using minified JSON payloads.
-- **Context Window Management**: Line-bounded file reads, AST code skeletonizing, and Ripgrep glob filtering.
-- **API & Inference Optimization**: Anthropic/OpenAI prompt caching headers, stop sequence truncation, and model tier routing.
-- **Agentic Workflows**: Multi-tool batching, reactive background task execution, and subagent transcript indexing.
+### Why not only browse folders?
 
-### 3. Common Sense AI Skills (`common sense ai skills/`)
-100 simple, practical habits designed for non-technical users:
-- How to structure prompts for clear answers on the first try.
-- Simple ways to stop AI from rambling or making up fake links/facts.
-- Everyday cost-saving tips like avoiding massive copy-pastes and reusing prompt templates.
-- Workflows for drafting emails, organizing messy meeting notes, and summarizing contracts.
+A flat `SKILL.md` skill library with stable IDs, an index, and a host-aware installer turns prose into reproducible local agent capability — the distribution pattern popular search traffic expects from modern agent-skill repos, applied to **our** genuine skills.
 
----
+## Table of Contents
 
-## Compatible AI Engines & IDEs
+- [Why This Repo](#why-this-repo)
+- [Installation](#installation)
+- [Recommended Specialized Plugins](#recommended-specialized-plugins)
+- [Choose Your Tool](#choose-your-tool)
+- [Quick FAQ](#quick-faq)
+- [Bundles & Workflows](#bundles--workflows)
+- [Browse the Catalog](#browse-the-catalog)
+- [Compare Alternatives](#compare-alternatives)
+- [Contributing](#contributing)
+- [License](#license)
 
-These skill specifications are pre-formatted for direct integration into:
-- **Claude Code CLI**: Standardized for automated terminal tools and command execution.
-- **OpenAI Codex & ChatGPT**: Optimized for Python automation scripts, cURL commands, and API payloads.
-- **LM Studio**: Clean GGUF RAG vector indexing compatible with 4k to 32k context windows.
-- **OpenClaw & Antigravity**: Direct mapping for tool calls (`view_file`, `run_command`, `write_to_file`) and background tasks.
-- **VS Code & Cursor**: Ready to drop into `.cursorrules`, `CLAUDE.md`, or extension system prompts.
+## Installation
 
----
+Prefer an exact reviewed set. Full Antigravity installs can exhaust context because the host watches `~/.agents/skills`.
 
-## How to Use These Skills
+### Direct skill install
 
-### Option 1: Direct Prompt Injection
-Copy the contents of any skill file into your custom instructions, system prompt, or project rules file (`.cursorrules`, `CLAUDE.md`, or `SYSTEM_PROMPT.md`).
+```bash
+# Preview an exact set for Antigravity
+npx major-ai-skills --antigravity --skills raycast,ffmpeg,blender --dry-run
 
-### Option 2: RAG Vector Knowledge Base
-Ingest the `skills/` or `efficiency ai skills/` folders into your local vector database (Chroma, Qdrant, LanceDB) or LM Studio local search to allow your AI agent to auto-retrieve context when working on relevant tasks.
+# Cursor
+npx major-ai-skills --cursor --skills solidworks,figma,vscode
 
----
+# Claude Code
+npx major-ai-skills --claude --category cad,efficiency
 
-## Community & Stargazers
+# Codex
+npx major-ai-skills --codex --skills playwright,docker,supabase
+```
 
-[![GitHub Stars](https://img.shields.io/github/stars/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/network/members)
-[![GitHub Watchers](https://img.shields.io/github/watchers/alivirgo/Major-AI-Skills?style=social)](https://github.com/alivirgo/Major-AI-Skills/watchers)
+### Verify
 
-Track live repository community growth and recent stargazers directly on [GitHub Stargazers](https://github.com/alivirgo/Major-AI-Skills/stargazers) or via the [Interactive Documentation Portal](https://alivirgo.github.io/Major-AI-Skills/).
+```bash
+# macOS / Linux
+test -d ~/.cursor/skills && ls ~/.cursor/skills
 
----
+# Windows PowerShell
+Test-Path "$HOME\.cursor\skills"
+```
+
+### Run your first skill
+
+```text
+Use @blender to batch-rename mesh objects and export a clean FBX.
+```
+
+## Recommended Specialized Plugins
+
+Start with the pack that matches the job:
+
+| Plugin | Best for |
+| --- | --- |
+| MAS CAD Studio | Mechanical and industrial design apps |
+| MAS Video Lab | Edit / motion / transcode workflows |
+| MAS 3D & Games | DCC tools and game engines |
+| MAS Design & Knowledge | Figma, Photoshop, Obsidian, Notion, Linear |
+| MAS Desktop Ops | OS utilities + Docker + VS Code |
+| MAS Efficiency Pack | Token and context savings |
+| MAS Common Sense Pack | Everyday prompting habits |
+
+Details: [docs/users/plugins.md](docs/users/plugins.md) · manifests in [`plugins/`](plugins/).
+
+## Choose Your Tool
+
+| Tool | Install | First use |
+| --- | --- | --- |
+| Cursor | `npx major-ai-skills --cursor --skills <ids>` | `@raycast help me build a Script Command` |
+| Claude Code | `npx major-ai-skills --claude --skills <ids>` | Ask Claude to use `@solidworks` |
+| Codex CLI | `npx major-ai-skills --codex --skills <ids>` | Use `@docker` to harden a Compose file |
+| Gemini CLI | `npx major-ai-skills --gemini --skills <ids>` | Use `@figma` to map components to code |
+| Antigravity IDE | `npx major-ai-skills --antigravity --skills <ids> --dry-run` | Install only after review |
+| Antigravity CLI (agy) | `npx major-ai-skills --agy --skills <ids>` | `/ffmpeg compress this clip` |
+| Kiro | `npx major-ai-skills --kiro --skills <ids>` | Use `@obsidian` to structure a vault |
+| OpenCode | `npx major-ai-skills --opencode --category efficiency` | `@csv-over-json-tables` |
+| Custom path | `npx major-ai-skills --path ./my-skills --skills <ids>` | Depends on your host |
+
+Guides:
+
+- [Getting Started](docs/users/getting-started.md)
+- [Claude Code skills](docs/users/claude-code-skills.md)
+- [Cursor skills](docs/users/cursor-skills.md)
+- [Codex CLI skills](docs/users/codex-cli-skills.md)
+- [Gemini CLI skills](docs/users/gemini-cli-skills.md)
+- [Antigravity skills](docs/users/antigravity-skills.md)
+- [AI agent skills guide](docs/users/ai-agent-skills.md)
+
+## Quick FAQ
+
+### What are agentic skills / AI agent skills?
+
+**Agentic skills** (also called **AI agent skills**, **Claude Code skills**, **Cursor skills**, or `SKILL.md` playbooks) are reusable instruction packages that teach coding agents how to run a workflow with clearer constraints. Major AI Skills is an installable skill library of those playbooks focused on professional apps and efficient prompting.
+
+### What is Major AI Skills?
+
+A curated, installable GitHub library of **292+ agent skills** for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and related AI coding assistants — covering CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits.
+
+### How do I install Claude Code skills or Cursor skills from this repo?
+
+```bash
+npx major-ai-skills --claude --skills <ids>
+npx major-ai-skills --cursor --skills <ids>
+```
+
+See [claude-code-skills.md](docs/users/claude-code-skills.md) and [cursor-skills.md](docs/users/cursor-skills.md).
+
+### Should I install everything?
+
+No. Prefer `--skills` or `--category`, or a specialized plugin. Antigravity watches `~/.agents/skills` — a full dump can exhaust context. Use `--all` only when you intentionally accept that risk.
+
+### Where did the old folders go?
+
+Application, efficiency, and common-sense skills now live under `skills/<id>/SKILL.md`. Optional model variants remain as `gpt.md` / `gemini.md` inside the same folder.
+
+### How do I browse?
+
+- [CATALOG.md](CATALOG.md)
+- [skills_index.json](skills_index.json)
+- [Hosted site](https://alivirgo.github.io/Major-AI-Skills/)
+
+## Bundles & Workflows
+
+| Surface | Answers | Use it for |
+| --- | --- | --- |
+| Specialized plugin | What should I install for this domain? | Focused packs |
+| Bundle | Which skills belong together? | Role-based discovery |
+| Workflow | What order should the agent run skills in? | Outcome playbooks |
+
+- Bundles: [docs/users/bundles.md](docs/users/bundles.md)
+- Workflows: [docs/users/workflows.md](docs/users/workflows.md)
+
+## Browse the Catalog
+
+What you get in this repository:
+
+- **Skills library** in [`skills/`](skills/)
+- **Installer CLI** via the npm package (`major-ai-skills`)
+- **Generated catalog** in [`CATALOG.md`](CATALOG.md) and [`skills_index.json`](skills_index.json)
+- **Plugins & bundles** in [`plugins/`](plugins/) and [`data/bundles.json`](data/bundles.json)
+- **Docs** under [`docs/`](docs/)
+- **GitHub Pages** site in [`index.html`](index.html)
+
+Categories include: CAD, video, 3D, games, design, knowledge, desktop (macOS/Windows/Linux), GIS, scientific, medical, music, ERP, enterprise, EDA, forensics, PLC, network, efficiency, common-sense, devops, automation, testing, office, and more.
+
+## Compare Alternatives
+
+High-intent guides for people comparing skill libraries on Google / GitHub / AI answer engines:
+
+- **[Best Claude Code skills on GitHub](docs/users/best-claude-code-skills-github.md)** — shortlist and when to pick Major AI Skills
+- **[Best Cursor skills on GitHub](docs/users/best-cursor-skills-github.md)** — Cursor-compatible options and install criteria
+- **[AI agent skills guide](docs/users/ai-agent-skills.md)** — what `SKILL.md` libraries are, breadth vs depth
+- **[AI answer engines / GEO](docs/users/ai-answer-engines.md)** — ChatGPT, Perplexity, Gemini, Copilot, Claude citation surfaces (`llms.txt`, schema, robots)
+- Large coding catalogs such as [agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) remain excellent for generic agent workflows; Major AI Skills specializes in **product-depth** and **efficiency** skills you can install beside them
+
+Machine-readable discovery for answer engines and agents:
+
+- https://alivirgo.github.io/Major-AI-Skills/llms.txt
+- https://alivirgo.github.io/Major-AI-Skills/llms-full.txt
+- [skills_index.json](skills_index.json)
+
+## Contributing
+
+- Add skills under `skills/<skill-name>/SKILL.md`
+- Start from [docs/contributors/skill-template.md](docs/contributors/skill-template.md)
+- Validate with `npm run validate` and refresh the index with `npm run index`
+- See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Community
+
+- [Discussions](https://github.com/alivirgo/Major-AI-Skills/discussions) for ideas
+- [Issues](https://github.com/alivirgo/Major-AI-Skills/issues) for bugs
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [SECURITY.md](SECURITY.md)
 
 ## License
 
-MIT License. Feel free to use, modify, and distribute these skill specifications in your own projects, custom agents, and internal team workflows.
+MIT — see [LICENSE](LICENSE).

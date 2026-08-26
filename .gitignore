@@ -1,0 +1,6 @@
+.skills-legacy-backup/
+.skills-staging/
+node_modules/
+.DS_Store
+*.log
+.npm-cache/

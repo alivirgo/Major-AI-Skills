@@ -1,0 +1,44 @@
+{
+  "bundles": [
+    {
+      "id": "essentials",
+      "name": "Essentials",
+      "skills": ["ask-short-answer-first", "csv-over-json-tables", "vscode", "docker"]
+    },
+    {
+      "id": "cad-engineering",
+      "name": "CAD & Engineering",
+      "skills": ["solidworks", "fusion-360", "catia", "siemens-nx", "rhino", "blender"]
+    },
+    {
+      "id": "video-motion",
+      "name": "Video & Motion",
+      "skills": ["davinci-resolve", "adobe-premiere-pro", "adobe-after-effects", "remotion", "ffmpeg"]
+    },
+    {
+      "id": "3d-games",
+      "name": "3D & Games",
+      "skills": ["blender", "unity", "unreal-engine", "godot", "houdini"]
+    },
+    {
+      "id": "design-knowledge",
+      "name": "Design & Knowledge",
+      "skills": ["figma", "obsidian", "notion", "linear", "adobe-photoshop"]
+    },
+    {
+      "id": "desktop-macos",
+      "name": "Desktop macOS",
+      "skills": ["raycast", "rectangle", "shottr", "orbstack", "maccy"]
+    },
+    {
+      "id": "desktop-windows",
+      "name": "Desktop Windows",
+      "skills": ["everything", "microsoft-powertoys", "sharex", "autohotkey-v2", "flow-launcher"]
+    },
+    {
+      "id": "automation-ops",
+      "name": "Automation & Ops",
+      "skills": ["n8n", "docker", "supabase", "playwright", "nginx", "tailscale"]
+    }
+  ]
+}
