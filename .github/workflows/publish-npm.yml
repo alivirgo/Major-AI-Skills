@@ -17,7 +17,9 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org
+          # Do not set registry-url: setup-node writes
+          # //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} and npm then
+          # skips OIDC trusted publishing (E404 + 2FA token notice).
           package-manager-cache: false
       - run: npm run validate
       - run: npm publish --access public
