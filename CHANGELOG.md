@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## 2.1.1 - 2026-09-01
+
+- Added a daily npm-download graph to the GitHub and npm package README.
+- Added an automated workflow that refreshes the graph every 12 hours.
+
 ## 2.1.0 - 2026-08-26
 
 ### Added

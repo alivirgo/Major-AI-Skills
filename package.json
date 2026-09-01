@@ -1,6 +1,6 @@
 {
   "name": "major-ai-skills",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI & Antigravity - 392+ professional app, token-efficiency, and common-sense skills. SEO/GEO ready.",
   "license": "MIT",
   "author": {
@@ -24,6 +24,7 @@
     "catalog": "node tools/scripts/generate_index.js",
     "validate": "node tools/scripts/validate_skills.js",
     "build": "npm run index",
+    "downloads:graph": "node tools/scripts/update_download_graph.js",
     "prepublishOnly": "npm run validate && npm run index",
     "pack:check": "npm pack --dry-run"
   },
