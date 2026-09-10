@@ -1,6 +1,6 @@
 ---
 name: speculative-decoding-prompting
-description: "How to structure prompts and utilize Predicted Outputs (OpenAI/vLLM) to maximize speculative draft token acceptance rates, speeding up code generation by 3x at zero cost."
+description: "Use supported predicted-output or speculative-decoding features for edits with a largely known output and measure their benefit."
 category: efficiency
 risk: safe
 source: self

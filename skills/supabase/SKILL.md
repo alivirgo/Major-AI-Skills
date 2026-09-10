@@ -1,6 +1,6 @@
 ---
 name: supabase
-description: "Operational skill for Claude to automate Supabase via JS client, SQL migrations, RLS policies, Edge Functions, Auth, and CLI workflows."
+description: "Build Supabase-backed applications with SQL migrations, Auth, row-level security, Edge Functions, the JavaScript client, and CLI development workflows."
 category: devops
 risk: safe
 source: self

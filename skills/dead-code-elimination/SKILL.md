@@ -1,6 +1,6 @@
 ---
 name: dead-code-elimination
-description: "How autonomous agents use local static analysis tools (knip, vulture, autoflake) to prune unused functions, orphan variables, and dead imports before LLM ingestion, slashing context bloat by 35%."
+description: "Use static analysis to identify unused functions, variables, and imports before proposing code removal."
 category: efficiency
 risk: safe
 source: self

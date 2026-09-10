@@ -1,6 +1,6 @@
 ---
 name: grafana
-description: "Operational skill for Grafana: data sources, dashboards, variables, panels, unified alerting, and dashboard-as-code provisioning."
+description: "Build Grafana dashboards and variables, configure data sources and alerting, and provision dashboards as code."
 category: devops
 risk: safe
 source: self

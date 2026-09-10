@@ -23,6 +23,8 @@
     "index": "node tools/scripts/generate_index.js",
     "catalog": "node tools/scripts/generate_index.js",
     "validate": "node tools/scripts/validate_skills.js",
+    "index:check": "node tools/scripts/generate_index.js --check",
+    "test": "node --test tools/tests/*.test.js",
     "build": "npm run index",
     "downloads:graph": "node tools/scripts/update_download_graph.js",
     "prepublishOnly": "npm run validate && npm run index",
@@ -30,9 +32,11 @@
   },
   "files": [
     "skills",
+    "skills.sh.json",
     "skills_index.json",
     "data/skills_index.json",
     "data/bundles.json",
+    "assets/spotlight-checkout.png",
     "tools/bin",
     "plugins/manifest.json",
     "CATALOG.md",
@@ -41,7 +45,13 @@
     "CHANGELOG.md",
     "llms.txt",
     "llms-full.txt",
-    "docs/users"
+    "docs/users",
+    "examples/spotlight/README.md",
+    "examples/spotlight/VERIFICATION.md",
+    "examples/spotlight/package.json",
+    "examples/spotlight/package-lock.json",
+    "examples/spotlight/run.cjs",
+    "examples/spotlight/fixtures"
   ],
   "keywords": [
     "agent-skills",
@@ -85,5 +95,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "lucide": "^1.44.0",
+    "yaml": "^2.9.0"
   }
 }

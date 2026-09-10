@@ -1,6 +1,6 @@
 ---
 name: header-only-c-cpp-ingestion
-description: "How autonomous agents inspect .h/.hpp header files first to understand class contracts and struct layouts before reading heavy .cpp implementation files, slashing C++ context token spend by 85%."
+description: "Inspect C and C++ headers for public contracts and data structures before reading implementation files."
 category: efficiency
 risk: safe
 source: self

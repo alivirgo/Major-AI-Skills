@@ -1,6 +1,6 @@
 ---
 name: bullet-point-summary-first
-description: "How to extract high-yield, action-oriented bullet summaries from long documents, meetings, and articles using the 3-Bullet Digest framework."
+description: "Extract a short action-focused bullet summary from a long document, article, or meeting record."
 category: common-sense
 risk: safe
 source: self

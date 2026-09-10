@@ -1,6 +1,6 @@
 ---
 name: ask-for-alternative-viewpoints
-description: "Techniques to eliminate echo-chamber bias and user sycophancy by forcing AI to steel-man opposing viewpoints, stress-test premises, and simulate adversarial stakeholders."
+description: "Compare opposing viewpoints and stress-test the assumptions behind an argument or recommendation."
 category: common-sense
 risk: safe
 source: self

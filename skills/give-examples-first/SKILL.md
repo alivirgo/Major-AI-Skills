@@ -1,6 +1,6 @@
 ---
 name: give-examples-first
-description: "Why providing 1 or 2 concrete examples (Few-Shot Prompting) is 10x more effective than describing rules with adjectives."
+description: "Provide concrete input and output examples when a task's format or style is difficult to describe abstractly."
 category: common-sense
 risk: safe
 source: self

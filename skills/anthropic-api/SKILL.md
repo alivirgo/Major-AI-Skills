@@ -1,6 +1,6 @@
 ---
 name: anthropic-api
-description: "Operational skill for the Anthropic API: Messages, system prompts, tool use, streaming, and production Claude client hygiene."
+description: "Integrate the Anthropic Messages API with system prompts, tool calls, streaming, and client error handling."
 category: development
 risk: safe
 source: self

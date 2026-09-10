@@ -1,6 +1,6 @@
 ---
 name: write-polite-tough-feedback
-description: "How to deliver tough, critical performance feedback without triggering defensiveness or resorting to confusing 'feedback sandwiches', using the Situation-Behavior-Impact (SBI) model."
+description: "Write specific constructive feedback using observed behavior, its impact, and a clear request for change."
 category: common-sense
 risk: safe
 source: self

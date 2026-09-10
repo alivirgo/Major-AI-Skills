@@ -1,6 +1,6 @@
 ---
 name: nomad
-description: "Operational skill for agents to schedule workloads with HashiCorp Nomad - jobspecs, task groups, networking, variables, and rollout strategies."
+description: "Write Nomad jobspecs and task groups, configure networking and variables, and manage workload rollouts."
 category: devops
 risk: safe
 source: self

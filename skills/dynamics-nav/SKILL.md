@@ -1,6 +1,6 @@
 ---
 name: dynamics-nav
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Microsoft Dynamics NAV, Business Central, AL/CAL codeunits, OData V4, and NAV Server administration."
+description: "Automate Dynamics NAV and Business Central workflows with AL/CAL codeunits, OData integrations, and server administration."
 category: erp
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: eartrumpet
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize EarTrumpet, Windows Core Audio APIs (WASAPI), pycaw audio session automation, and per-app endpoint routing."
+description: "Inspect and route per-application audio with EarTrumpet, WASAPI, and pycaw; troubleshoot audio sessions and output devices."
 category: windows
 risk: safe
 source: self

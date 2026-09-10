@@ -1,6 +1,6 @@
 ---
 name: skip-explaining-the-obvious
-description: "How to suppress introductory 101 definitions and force AI to assume senior domain competence, saving tokens and reading time."
+description: "Match explanations to the reader's existing expertise and omit background they already understand."
 category: common-sense
 risk: safe
 source: self

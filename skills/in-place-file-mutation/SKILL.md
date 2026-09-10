@@ -1,6 +1,6 @@
 ---
 name: in-place-file-mutation
-description: "Why autonomous coding agents must modify source files directly in-place using replace_file_content rather than creating temporary sidecar files (temp.py, new.ts), eliminating filesystem clutter and multi-turn cleanup overhead."
+description: "Edit the intended source file directly when a temporary replacement would create unnecessary copies or cleanup."
 category: efficiency
 risk: safe
 source: self

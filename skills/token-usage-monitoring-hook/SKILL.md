@@ -1,6 +1,6 @@
 ---
 name: token-usage-monitoring-hook
-description: "How to implement client-side middleware hooks to meter per-turn input/output tokens in real-time, alerting on consumption spikes and enforcing session budget caps."
+description: "Record request-level token usage, flag unexpected consumption, and enforce application-defined budget limits."
 category: efficiency
 risk: safe
 source: self

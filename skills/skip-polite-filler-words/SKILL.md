@@ -1,6 +1,6 @@
 ---
 name: skip-polite-filler-words
-description: "Why stripping polite filler words ('Please', 'Hello', 'Could you kindly') saves input tokens, eliminates conversational skew, and sharpens response quality."
+description: "Shorten repetitive prompt wording while preserving clear instructions and the intended tone."
 category: common-sense
 risk: safe
 source: self

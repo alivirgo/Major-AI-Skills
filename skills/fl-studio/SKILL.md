@@ -1,6 +1,6 @@
 ---
 name: fl-studio
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize FL Studio, Python MIDI Scripting API, Headless CLI Rendering, Patcher, and Mixer gain staging."
+description: "Script FL Studio MIDI controls, configure Patcher and mixer workflows, and troubleshoot automated rendering."
 category: music
 risk: safe
 source: self

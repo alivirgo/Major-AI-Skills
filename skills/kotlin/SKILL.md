@@ -1,6 +1,6 @@
 ---
 name: kotlin
-description: "Operational skill for Kotlin: idiomatic null-safety, coroutines, flows, data classes, and interop with Java/Android APIs."
+description: "Write Kotlin with null-safe types, coroutines, flows, and data classes; integrate with Java and Android APIs."
 category: development
 risk: safe
 source: self

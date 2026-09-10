@@ -1,6 +1,6 @@
 ---
 name: selective-grep-filtering
-description: "How to use precise filetype globs (Includes: ['src/**/*.ts', '!**/*.test.ts']) and literal string matching to eliminate 90% of search noise and false-positive matches."
+description: "Narrow code searches with file globs, literal matching, and relevant directories to reduce unrelated results."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: type-alias-compression
-description: "How to extract repetitive nested generic signatures into clean top-level type aliases (type APIRes<T> = Promise<Result<T, AppError>>), cutting TypeScript/Python type annotation tokens by 45%."
+description: "Extract repeated complex type expressions into named aliases that keep signatures readable."
 category: efficiency
 risk: safe
 source: self

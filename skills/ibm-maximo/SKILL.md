@@ -1,6 +1,6 @@
 ---
 name: ibm-maximo
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize IBM Maximo, Maximo Application Suite (MAS), MBO Jython scripting, OSLC REST APIs, and MIF integrations."
+description: "Automate IBM Maximo asset workflows with MBO Jython scripts, OSLC REST interfaces, and MIF integrations."
 category: enterprise
 risk: safe
 source: self

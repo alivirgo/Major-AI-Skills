@@ -1,6 +1,6 @@
 ---
 name: artifact-reuse-pattern
-description: "How autonomous agents maintain single living state documents (implementation plans, walkthroughs) through in-place mutations rather than generating duplicate ephemeral files."
+description: "Update an existing plan or state artifact in place when the same document needs to track progress across multiple agent turns."
 category: efficiency
 risk: safe
 source: self

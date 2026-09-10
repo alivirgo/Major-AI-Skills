@@ -1,6 +1,6 @@
 ---
 name: obsidian
-description: "Operational skill for Claude to automate Obsidian vaults via URI schemes, Templater/Dataview patterns, Markdown structure, and local plugin workflows."
+description: "Organize Obsidian vaults with Markdown, URI links, Templater, Dataview, and local plugin workflows."
 category: knowledge
 risk: safe
 source: self

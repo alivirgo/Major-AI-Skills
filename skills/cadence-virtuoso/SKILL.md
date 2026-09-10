@@ -1,6 +1,6 @@
 ---
 name: cadence-virtuoso
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Cadence Virtuoso, SKILL language, OCEAN simulation scripts, Spectre engine, and DRC/LVS verification."
+description: "Automate Cadence Virtuoso design and simulation with SKILL, OCEAN, and Spectre; inspect DRC and LVS verification results."
 category: eda
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: output-final-draft-only
-description: "How to use strict negative formatting constraints to suppress conversational chit-chat ('Sure, here is...', 'Hope this helps!') for 1-click copy-pasting and script automation."
+description: "Return only the finished draft when the user needs text ready for a downstream workflow."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: compressed-system-prompts
-description: "How to refactor wordy, repetitive system prompts into high-density imperative token structures, cutting baseline system prompt costs by 70% while improving instruction adherence."
+description: "Shorten repeated system-prompt wording while preserving task scope, requirements, and instruction priority."
 category: efficiency
 risk: safe
 source: self

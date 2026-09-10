@@ -1,6 +1,6 @@
 ---
 name: pytorch
-description: "Operational skill for PyTorch: tensors, nn.Module models, training/eval loops, device placement, checkpointing, and inference hygiene."
+description: "Build PyTorch models and training loops, manage devices and checkpoints, and verify evaluation or inference behavior."
 category: scientific
 risk: safe
 source: self

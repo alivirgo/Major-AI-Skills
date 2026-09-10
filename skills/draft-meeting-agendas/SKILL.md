@@ -1,6 +1,6 @@
 ---
 name: draft-meeting-agendas
-description: "How to generate high-efficiency, time-boxed meeting agendas with explicit decision criteria, pre-reads, and discussion ownership."
+description: "Create a time-boxed meeting agenda with discussion owners, pre-reads, and explicit decisions to reach."
 category: common-sense
 risk: safe
 source: self

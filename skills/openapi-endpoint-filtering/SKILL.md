@@ -1,6 +1,6 @@
 ---
 name: openapi-endpoint-filtering
-description: "How autonomous agents slice monolithic 10,000-line OpenAPI/Swagger specifications down to operation-targeted sub-schemas, eliminating 99% of API specification token bloat."
+description: "Extract the OpenAPI operations and referenced schemas needed for a specific endpoint integration."
 category: efficiency
 risk: safe
 source: self

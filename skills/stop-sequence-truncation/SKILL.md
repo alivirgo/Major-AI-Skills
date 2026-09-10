@@ -1,6 +1,6 @@
 ---
 name: stop-sequence-truncation
-description: "How to configure custom stop sequences (stop: ['\\\\n\\\\n', '```\\\\n', '---']) at the inference sampler layer to terminate generation instantly upon deliverable completion, cutting trailing tokens by 50%."
+description: "Configure supported stop sequences for bounded output formats and check that they do not truncate valid content."
 category: efficiency
 risk: safe
 source: self

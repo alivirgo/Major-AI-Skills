@@ -1,6 +1,6 @@
 ---
 name: stop-wrong-answers-early
-description: "Why hitting 'Stop Generating' within 3 seconds of a misdirected response saves tokens, eliminates context poisoning, and speeds up workflow."
+description: "Interrupt a clearly misdirected answer and provide a specific correction to scope or assumptions."
 category: common-sense
 risk: safe
 source: self

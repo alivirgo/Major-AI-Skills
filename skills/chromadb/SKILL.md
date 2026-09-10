@@ -1,6 +1,6 @@
 ---
 name: chromadb
-description: "Operational skill for ChromaDB: collections, embeddings, metadata filters, persistence, and local RAG vector storage."
+description: "Build local RAG storage with ChromaDB collections, embeddings, metadata filters, and persistent vector indexes."
 category: development
 risk: safe
 source: self

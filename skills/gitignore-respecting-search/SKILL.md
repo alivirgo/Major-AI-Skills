@@ -1,6 +1,6 @@
 ---
 name: gitignore-respecting-search
-description: "How autonomous agents use gitignore-aware search engines (ripgrep) to automatically exclude node_modules, build artifacts, and vendor directories, eliminating 95% of search noise."
+description: "Use gitignore-aware search to focus code investigation on maintained source files and exclude generated dependencies."
 category: efficiency
 risk: safe
 source: self

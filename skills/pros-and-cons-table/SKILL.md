@@ -1,6 +1,6 @@
 ---
 name: pros-and-cons-table
-description: "How to upgrade basic pros/cons lists into Weighted Multi-Attribute Decision Matrices with impact scoring and reversibility analysis."
+description: "Compare options using benefits, drawbacks, weighted criteria, and reversibility when making a decision."
 category: common-sense
 risk: safe
 source: self

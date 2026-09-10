@@ -1,6 +1,6 @@
 ---
 name: tell-ai-your-time-budget
-description: "How to anchor prompts with explicit execution time limits ('I have 10 minutes before a demo' vs 'I have 2 days') to get calibrated solutions."
+description: "State the available time so the proposed approach fits the deadline and level of effort."
 category: common-sense
 risk: safe
 source: self

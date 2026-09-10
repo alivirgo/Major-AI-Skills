@@ -1,6 +1,6 @@
 ---
 name: ripgrep-over-grep-command
-description: "Why autonomous agents must use structured native code search tools (grep_search) rather than terminal shell commands (grep -rn), eliminating ANSI formatting noise and capping match overflows."
+description: "Search code with bounded matches, file filters, and structured search tools when available."
 category: efficiency
 risk: safe
 source: self

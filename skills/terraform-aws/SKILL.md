@@ -1,6 +1,6 @@
 ---
 name: terraform-aws
-description: "Operational skill for AWS-focused Terraform: module layout, providers, IAM least privilege, state backends, and safe applies (complementary to general Terraform)."
+description: "Design AWS Terraform modules, IAM permissions, providers, and state backends; review AWS-specific infrastructure plans."
 category: devops
 risk: safe
 source: self

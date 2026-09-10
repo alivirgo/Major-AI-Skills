@@ -1,6 +1,6 @@
 ---
 name: 3d-slicer
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize 3D Slicer, MRML scene graphs, VTK/ITK pipelines, DICOM databases, and Segment Editor workflows."
+description: "Automate 3D Slicer research workflows with MRML, VTK/ITK, DICOM data, and Segment Editor. Use for software workflows, not clinical interpretation."
 category: medical
 risk: safe
 source: self

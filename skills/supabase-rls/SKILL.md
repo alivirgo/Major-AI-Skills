@@ -1,6 +1,6 @@
 ---
 name: supabase-rls
-description: "Advanced operational skill for Supabase Row Level Security: policy design, security definer RPCs, storage policies, Edge Function authz, and RLS performance."
+description: "Design and review Supabase row-level security policies, security-definer functions, storage access, and authorization boundaries. Use for focused RLS reviews."
 category: devops
 risk: safe
 source: self

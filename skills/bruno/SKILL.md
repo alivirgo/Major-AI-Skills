@@ -1,6 +1,6 @@
 ---
 name: bruno
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Bruno API Client, Bru markup language (.bru), CLI runner (@usebruno/cli), and CI/CD test pipelines."
+description: "Create version-controlled Bruno API collections, write Bru request files, and run API checks through the Bruno CLI in CI."
 category: cross-platform
 risk: safe
 source: self

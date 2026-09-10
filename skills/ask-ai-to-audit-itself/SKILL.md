@@ -1,6 +1,6 @@
 ---
 name: ask-ai-to-audit-itself
-description: "Leverage the Reflexion and Critic-Actor prompting patterns to force LLMs to self-correct logic errors, overlooked edge cases, and factual slips before final delivery."
+description: "Review a draft answer for logical errors, missing requirements, edge cases, and claims needing external verification."
 category: common-sense
 risk: safe
 source: self

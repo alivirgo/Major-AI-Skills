@@ -1,6 +1,6 @@
 ---
 name: cite-specific-section-numbers
-description: "How to enforce Section-Anchored Citations when analyzing manuals, legal contracts, and compliance policies to make every AI claim instantly verifiable."
+description: "Anchor document analysis to exact sections or pages so readers can verify the supporting passage."
 category: common-sense
 risk: safe
 source: self

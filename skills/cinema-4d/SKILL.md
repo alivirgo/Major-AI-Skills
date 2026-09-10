@@ -1,6 +1,6 @@
 ---
 name: cinema-4d
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, diagnose, troubleshoot, and script Maxon Cinema 4D workflows, MoGraph systems, and Redshift GPU rendering."
+description: "Script Cinema 4D scene workflows, configure MoGraph systems, and troubleshoot Redshift rendering."
 category: 3d
 risk: safe
 source: self

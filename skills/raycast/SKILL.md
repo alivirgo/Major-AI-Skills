@@ -1,6 +1,6 @@
 ---
 name: raycast
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Raycast, React/TypeScript Extension API (@raycast/api), Script Commands, and URL schemes."
+description: "Build Raycast extensions with React and TypeScript, create Script Commands, and troubleshoot URL schemes and extension execution on macOS."
 category: macos
 risk: safe
 source: self

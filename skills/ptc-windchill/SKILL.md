@@ -1,6 +1,6 @@
 ---
 name: ptc-windchill
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize PTC Windchill, PDMLink, Workgroup Manager (WWGM), OData REST APIs, and MethodServer administration."
+description: "Automate Windchill PLM workflows through OData APIs, inspect Workgroup Manager integration, and troubleshoot MethodServer operations."
 category: enterprise
 risk: safe
 source: self

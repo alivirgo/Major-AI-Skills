@@ -1,6 +1,6 @@
 ---
 name: give-ai-situation-context
-description: "How to anchor prompts with the 4-Pillar Situation Framework (Role, Scale, Budget, Constraints) to stop AI from over-engineering or giving irrelevant advice."
+description: "Include role, scale, budget, and constraints so an answer fits the actual working situation."
 category: common-sense
 risk: safe
 source: self

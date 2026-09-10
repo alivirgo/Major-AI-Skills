@@ -1,6 +1,6 @@
 ---
 name: subagent-transcript-indexing
-description: "How orchestrator agents query historical child subagent transcripts locally using ripgrep on structured JSONL logs, eliminating 98% of multi-agent context replay tokens."
+description: "Locate relevant decisions or results in structured subagent transcripts without replaying every historical message."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: azure-cli
-description: "Operational skill for agents to manage Microsoft Azure via az CLI - subscriptions, resource groups, AKS, App Service, Key Vault, and RBAC hygiene."
+description: "Use the Azure CLI to manage subscriptions, resource groups, AKS, App Service, Key Vault, and role assignments."
 category: devops
 risk: safe
 source: self

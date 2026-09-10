@@ -1,6 +1,6 @@
 ---
 name: ask-ai-to-show-its-reasoning
-description: "Prompt patterns to extract transparent, first-principles logic, trade-off comparisons, and elimination criteria behind any AI recommendation."
+description: "Request a concise explanation of assumptions, evidence, decision criteria, and trade-offs behind a recommendation."
 category: common-sense
 risk: safe
 source: self

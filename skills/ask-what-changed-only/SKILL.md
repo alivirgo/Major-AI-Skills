@@ -1,6 +1,6 @@
 ---
 name: ask-what-changed-only
-description: "How to use diff-focused prompting to receive only the modified lines and sentences, cutting output token costs by up to 90% and making reviews instant."
+description: "Request only changed lines or sentences and their relevant context when reviewing an update."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: no-polite-chitchat-closing
-description: "How to eliminate conversational closing signatures ('Hope this helps!', 'Let me know if you have questions!') to save output tokens and terminate turns immediately upon deliverable completion."
+description: "Finish a task response with the result and necessary limitations when an additional conversational closing adds no information."
 category: efficiency
 risk: safe
 source: self

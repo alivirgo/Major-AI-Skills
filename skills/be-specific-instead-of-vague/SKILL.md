@@ -1,6 +1,6 @@
 ---
 name: be-specific-instead-of-vague
-description: "How to replace vague prompts with the 5-Variable Precision Formula to eliminate generic fluff, hit exact requirements, and get one-shot perfection."
+description: "Replace vague requests with a concrete goal, relevant context, constraints, and desired output."
 category: common-sense
 risk: safe
 source: self

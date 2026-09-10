@@ -1,6 +1,6 @@
 ---
 name: tree-sitter-scope-extractor
-description: "How to use Tree-sitter concrete syntax trees to extract strictly the enclosing function or class scope (+ imports) for a target line, cutting file inspection tokens by 90%."
+description: "Use Tree-sitter to extract the enclosing function or class and relevant imports around a source location."
 category: efficiency
 risk: safe
 source: self

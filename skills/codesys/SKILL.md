@@ -1,6 +1,6 @@
 ---
 name: codesys
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize CODESYS V3.5, IEC 61131-3 Structured Text (ST), ScriptEngine Python automation, EtherCAT/PROFINET, and OPC UA."
+description: "Develop CODESYS Structured Text and Python ScriptEngine workflows; troubleshoot fieldbus and OPC UA integration in a test environment."
 category: plc-industrial
 risk: safe
 source: self

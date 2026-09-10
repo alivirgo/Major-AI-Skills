@@ -1,6 +1,6 @@
 ---
 name: salesforce
-description: "Operational skill for Salesforce: objects, SOQL/SOSL, Apex triggers, Flows, Lightning Web Components, and API integration hygiene."
+description: "Build Salesforce workflows using SOQL, Apex, Flows, Lightning Web Components, and scoped API integrations."
 category: enterprise
 risk: safe
 source: self

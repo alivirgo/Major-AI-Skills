@@ -1,6 +1,6 @@
 ---
 name: concise-output-enforcer
-description: "How to enforce strict negative output constraints to eliminate conversational preambles, post-implementation monologues, and discursive filler, slashing response tokens by 60%."
+description: "Set explicit output-format and length constraints for tasks that need concise answers or machine-consumable results."
 category: efficiency
 risk: safe
 source: self

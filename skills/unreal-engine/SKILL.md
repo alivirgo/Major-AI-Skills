@@ -1,6 +1,6 @@
 ---
 name: unreal-engine
-description: "Operational skill for Claude to automate Unreal Engine 5 with Blueprints, C++ modules, Python Editor scripting, BuildCookRun, and Unreal Automation Tool."
+description: "Build Unreal Engine workflows with Blueprints, C++, editor Python, and Unreal Automation Tool build or packaging jobs."
 category: game-engines
 risk: safe
 source: self

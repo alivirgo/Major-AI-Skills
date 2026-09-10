@@ -1,6 +1,6 @@
 ---
 name: great-expectations
-description: "Operational skill for Great Expectations: Expectation Suites, Checkpoints, Datasources, and data quality gates in pipelines."
+description: "Define Great Expectations suites and checkpoints to validate datasets and enforce pipeline data-quality checks."
 category: scientific
 risk: safe
 source: self

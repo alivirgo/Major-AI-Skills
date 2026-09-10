@@ -1,6 +1,6 @@
 ---
 name: houdini
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, troubleshoot, and script SideFX Houdini pipelines, VEX algorithms, Hou Python API, PDG/TOPs graphs, and Solaris/Karma rendering."
+description: "Automate Houdini procedural workflows with VEX, the hou Python API, PDG/TOPs, and Solaris/Karma rendering."
 category: 3d
 risk: safe
 source: self

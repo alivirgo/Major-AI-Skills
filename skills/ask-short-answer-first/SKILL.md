@@ -1,6 +1,6 @@
 ---
 name: ask-short-answer-first
-description: "Master the Bottom Line Up Front (BLUF) prompting pattern to get the direct 2-line answer immediately, eliminating preamble fluff and saving reading time."
+description: "Lead with a brief direct answer and place supporting detail afterward when the reader needs a quick decision."
 category: common-sense
 risk: safe
 source: self

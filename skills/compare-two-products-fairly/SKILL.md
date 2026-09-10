@@ -1,6 +1,6 @@
 ---
 name: compare-two-products-fairly
-description: "How to use Symmetrical Head-to-Head prompting to compare software, hardware, or tools objectively with transparent pricing and fatal flaw analysis."
+description: "Compare two products against the same requirements, pricing assumptions, limitations, and evidence."
 category: common-sense
 risk: safe
 source: self

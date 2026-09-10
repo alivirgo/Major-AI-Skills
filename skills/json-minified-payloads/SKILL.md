@@ -1,6 +1,6 @@
 ---
 name: json-minified-payloads
-description: "How agent runtimes and tool callers serialize JSON payloads with compact single-line formatting (separators=(',', ':')), eliminating 40% of indentation whitespace tokens."
+description: "Serialize JSON without optional formatting whitespace for compact transport or model input."
 category: efficiency
 risk: safe
 source: self

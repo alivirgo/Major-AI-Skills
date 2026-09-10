@@ -1,6 +1,6 @@
 ---
 name: wireshark
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Wireshark, TShark CLI, TLS session decryption, TCP stream reassembly, and Display Filters."
+description: "Inspect packet captures with Wireshark or TShark, write display filters, and troubleshoot TCP or authorized TLS analysis."
 category: cross-platform
 risk: safe
 source: self

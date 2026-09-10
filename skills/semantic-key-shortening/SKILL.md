@@ -1,6 +1,6 @@
 ---
 name: semantic-key-shortening
-description: "How to use standardized, universally understood abbreviations (src, dst, err, req, res, fn, qty) in JSON schemas and structured outputs to cut payload token consumption by 55%."
+description: "Use familiar short field names in compact payloads when their meaning stays clear to producers and consumers."
 category: efficiency
 risk: safe
 source: self

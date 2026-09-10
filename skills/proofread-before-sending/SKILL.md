@@ -1,6 +1,6 @@
 ---
 name: proofread-before-sending
-description: "How to use AI as an objective Emotional Tone & Subtext Auditor to catch unintended passive-aggression, defensiveness, or submissive phrasing before hitting send."
+description: "Review a message for clarity, mistakes, tone, and unintended implications before sending it."
 category: common-sense
 risk: safe
 source: self

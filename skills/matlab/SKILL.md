@@ -1,6 +1,6 @@
 ---
 name: matlab
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize MathWorks MATLAB R2024b/R2025a, MATLAB Engine API for Python, Simulink, parfor parallel computing, and MEX compilation."
+description: "Automate MATLAB and Simulink workflows with Python integration, parallel loops, and MEX compilation."
 category: scientific
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: kubernetes
-description: "Operational skill for agents to design, debug, and operate Kubernetes workloads with kubectl, Deployments, Services, Ingress, ConfigMaps, Secrets, and rollout hygiene."
+description: "Design and debug Kubernetes Deployments, Services, Ingress, configuration, and rollouts using kubectl."
 category: devops
 risk: safe
 source: self

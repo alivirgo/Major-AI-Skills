@@ -1,6 +1,6 @@
 ---
 name: think-of-ai-as-a-junior-assistant
-description: "Why treating AI as a brilliant but inexperienced junior intern - fast and knowledgeable, but requiring explicit guardrails and final QA - maximizes leverage."
+description: "Delegate a bounded task with context and acceptance criteria, then review the result before relying on it."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: use-fast-models-for-quick-checks
-description: "How to route tasks between Fast/Small models (Haiku, Flash, GPT-4o-mini) and Heavy/Frontier models (Sonnet, GPT-4o, o1) to cut costs 90% and slash latency."
+description: "Assign bounded routine checks to suitable smaller models and escalate tasks that require stronger reasoning or verification."
 category: common-sense
 risk: safe
 source: self

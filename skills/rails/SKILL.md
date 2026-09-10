@@ -1,6 +1,6 @@
 ---
 name: rails
-description: "Operational skill for Ruby on Rails: MVC/API mode, Active Record, migrations, strong params, credentials, and conventional generators."
+description: "Build Rails applications with Active Record, migrations, controllers, strong parameters, and framework conventions."
 category: development
 risk: safe
 source: self

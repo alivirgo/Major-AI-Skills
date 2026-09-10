@@ -1,6 +1,6 @@
 ---
 name: logic-pro
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Apple Logic Pro 11, Scripter MIDI FX JavaScript, Audio Units (AUv2/AUv3), Dolby Atmos, and CoreAudio."
+description: "Automate Logic Pro MIDI with Scripter JavaScript, configure Audio Units, and troubleshoot CoreAudio or spatial-audio workflows."
 category: music
 risk: safe
 source: self

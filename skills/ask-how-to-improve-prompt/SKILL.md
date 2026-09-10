@@ -1,6 +1,6 @@
 ---
 name: ask-how-to-improve-prompt
-description: "Turn the AI into an expert Prompt Engineer to critique your instructions, fill missing context gaps, and generate reusable high-performance prompt templates."
+description: "Review a prompt for missing context and ambiguous requirements, then produce a reusable revised version."
 category: common-sense
 risk: safe
 source: self

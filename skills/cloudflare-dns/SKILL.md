@@ -1,6 +1,6 @@
 ---
 name: cloudflare-dns
-description: "Operational skill for agents to manage Cloudflare DNS - records, proxied vs DNS-only, TTL, API tokens, and safe cutover patterns."
+description: "Manage Cloudflare DNS records, proxy status, TTLs, and API tokens while planning and verifying DNS changes."
 category: network
 risk: safe
 source: self

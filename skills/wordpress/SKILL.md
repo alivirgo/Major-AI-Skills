@@ -1,6 +1,6 @@
 ---
 name: wordpress
-description: "Operational skill for WordPress development: themes, plugins, hooks, WP-CLI, REST API, and hardening against common WP pitfalls."
+description: "Build WordPress themes and plugins, automate tasks with WP-CLI, and review hooks, REST integration, and common security issues."
 category: development
 risk: safe
 source: self

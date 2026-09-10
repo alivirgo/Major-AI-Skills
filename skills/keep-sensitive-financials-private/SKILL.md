@@ -1,6 +1,6 @@
 ---
 name: keep-sensitive-financials-private
-description: "How to use synthetic substitution and mathematical scaling to analyze financial models, P&L sheets, and cap tables without leaking confidential numbers."
+description: "Prepare redacted or synthetic financial inputs for AI-assisted analysis while keeping confidential source values private."
 category: common-sense
 risk: safe
 source: self

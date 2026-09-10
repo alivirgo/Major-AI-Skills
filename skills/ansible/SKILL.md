@@ -1,6 +1,6 @@
 ---
 name: ansible
-description: "Operational skill for Ansible playbooks, inventories, roles, idempotent modules, check mode, and ansible-vault secret handling."
+description: "Write idempotent Ansible playbooks, inventories, and roles; use check mode and ansible-vault for controlled infrastructure automation."
 category: devops
 risk: safe
 source: self

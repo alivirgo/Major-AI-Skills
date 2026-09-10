@@ -1,6 +1,6 @@
 ---
 name: compact-status-updates
-description: "How to use concise, structured tool metadata (toolAction, toolSummary) and 1-sentence milestone broadcasts instead of verbose conversational progress monologues, saving 90% of intermediary tokens."
+description: "Write brief progress updates that state the current result, relevant blocker, and next meaningful action."
 category: efficiency
 risk: safe
 source: self

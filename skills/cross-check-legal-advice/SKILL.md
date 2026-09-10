@@ -1,6 +1,6 @@
 ---
 name: cross-check-legal-advice
-description: "How to safely use AI for legal issue-spotting, contract clause translation, and preparing targeted questions for licensed legal counsel."
+description: "Use AI for legal issue-spotting, plain-language clause explanations, and questions to verify with licensed counsel."
 category: common-sense
 risk: safe
 source: self

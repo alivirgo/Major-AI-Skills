@@ -1,6 +1,6 @@
 ---
 name: use-plain-text-over-pdfs
-description: "Why extracting and pasting clean plain text or Markdown beats raw PDF uploads by eliminating OCR latency, visual token bloat (up to 80% savings), and table scrambling."
+description: "Provide extracted text when layout is irrelevant, retaining the original PDF for visual or page-specific verification."
 category: common-sense
 risk: safe
 source: self

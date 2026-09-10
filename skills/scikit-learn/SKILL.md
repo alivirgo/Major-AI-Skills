@@ -1,6 +1,6 @@
 ---
 name: scikit-learn
-description: "Operational skill for scikit-learn: pipelines, CV, preprocessing, model selection, and leakage-safe tabular ML."
+description: "Build scikit-learn preprocessing and model pipelines with cross-validation, model selection, and data-leakage checks."
 category: scientific
 risk: safe
 source: self

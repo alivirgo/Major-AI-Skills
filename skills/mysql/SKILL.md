@@ -1,6 +1,6 @@
 ---
 name: mysql
-description: "Operational skill for agents to administer MySQL/MariaDB - schema design, indexes, dumps, users/grants, replication basics, and safe migrations."
+description: "Design and administer MySQL or MariaDB schemas, indexes, grants, backups, and migrations; investigate replication basics."
 category: devops
 risk: safe
 source: self

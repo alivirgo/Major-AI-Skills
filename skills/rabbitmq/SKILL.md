@@ -1,6 +1,6 @@
 ---
 name: rabbitmq
-description: "Operational skill for agents to run RabbitMQ messaging - exchanges, queues, bindings, ACK/NACK, DLQ, quorum queues, and consumer hygiene."
+description: "Configure RabbitMQ exchanges, queues, bindings, acknowledgements, dead-letter routing, and consumer processing."
 category: devops
 risk: safe
 source: self

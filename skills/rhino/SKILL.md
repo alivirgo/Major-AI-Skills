@@ -1,6 +1,6 @@
 ---
 name: rhino
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize McNeel Rhinoceros (Rhino 8), RhinoCommon API, Grasshopper visual data trees, and Rhino.Compute."
+description: "Automate Rhino modeling through RhinoCommon, work with Grasshopper data trees, and configure Rhino.Compute workflows."
 category: cad
 risk: safe
 source: self

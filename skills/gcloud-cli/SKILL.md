@@ -1,6 +1,6 @@
 ---
 name: gcloud-cli
-description: "Operational skill for agents to manage Google Cloud via gcloud - projects, IAM, GKE, Cloud Run, GCS, and safe deploy hygiene."
+description: "Manage Google Cloud projects, IAM, GKE, Cloud Run, and storage with gcloud while checking the active project and deployment target."
 category: devops
 risk: safe
 source: self

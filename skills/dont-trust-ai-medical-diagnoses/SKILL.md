@@ -1,6 +1,6 @@
 ---
 name: dont-trust-ai-medical-diagnoses
-description: "How to safely use AI for medical literacy, lab test vocabulary translation, and doctor appointment preparation while strictly avoiding self-diagnosis traps."
+description: "Use AI for medical vocabulary and appointment preparation while directing diagnosis and treatment questions to qualified clinicians."
 category: common-sense
 risk: safe
 source: self

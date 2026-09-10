@@ -1,6 +1,6 @@
 ---
 name: microsoft-excel
-description: "Operational skill for Claude to automate Excel via Office Scripts, Power Query M, VBA patterns, dynamic arrays, and workbook data hygiene."
+description: "Automate Excel workbooks with Office Scripts, Power Query, VBA, and dynamic arrays while checking data consistency."
 category: office
 risk: safe
 source: self

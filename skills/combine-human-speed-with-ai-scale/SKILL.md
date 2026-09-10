@@ -1,6 +1,6 @@
 ---
 name: combine-human-speed-with-ai-scale
-description: "How to operate as an elite Centaur/Cyborg operator by delegating heavy synthesis and drafting to AI while retaining human taste, strategy, and judgment."
+description: "Plan work that uses AI for drafting and synthesis while retaining human judgment over priorities and final decisions."
 category: common-sense
 risk: safe
 source: self

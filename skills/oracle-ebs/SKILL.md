@@ -1,6 +1,6 @@
 ---
 name: oracle-ebs
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Oracle EBS R12.2, Oracle Forms, Concurrent Programs, PL/SQL APPS schema, and FNDLOAD migrations."
+description: "Automate Oracle EBS workflows with Concurrent Programs, PL/SQL, Oracle Forms, and FNDLOAD configuration migrations."
 category: erp
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: nextjs
-description: "Operational skill for Next.js App Router: server vs client components, routing, data fetching/caching, Server Actions awareness, and production build hygiene."
+description: "Build Next.js applications with the App Router, server and client components, route handlers, caching, and deployment configuration."
 category: development
 risk: safe
 source: self

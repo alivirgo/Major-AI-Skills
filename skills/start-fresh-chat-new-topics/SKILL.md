@@ -1,6 +1,6 @@
 ---
 name: start-fresh-chat-new-topics
-description: "Why long-running mega-threads cause context pollution, latency spikes, and hallucinations, and how to use the State Handoff Pattern to reset cleanly."
+description: "Prepare a concise state handoff when starting a separate conversation for a new topic."
 category: common-sense
 risk: safe
 source: self

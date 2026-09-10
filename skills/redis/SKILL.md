@@ -1,6 +1,6 @@
 ---
 name: redis
-description: "Operational skill for Redis: caching patterns, TTLs, data structures, keys design, pub/sub, and memory/eviction pitfalls."
+description: "Design Redis keys and caching with appropriate TTLs, data structures, and eviction behavior; inspect memory or pub/sub issues."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: snowflake
-description: "Operational skill for Snowflake: warehouses, roles, stages, COPY, Time Travel, and cost-aware SQL analytics."
+description: "Manage Snowflake warehouses, roles, stages, and COPY workflows; investigate analytical SQL and resource usage."
 category: devops
 risk: safe
 source: self

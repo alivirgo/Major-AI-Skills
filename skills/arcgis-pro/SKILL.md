@@ -1,6 +1,6 @@
 ---
 name: arcgis-pro
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Esri ArcGIS Pro, ArcPy Python 3 API, Enterprise Geodatabases (SDE), and Spatial Analyst workflows."
+description: "Automate ArcGIS Pro geoprocessing with ArcPy, enterprise geodatabases, and Spatial Analyst workflows."
 category: gis
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: mongodb
-description: "Operational skill for MongoDB: document modeling, indexes, aggregation pipelines, transactions, explain plans, and Atlas-friendly patterns."
+description: "Design MongoDB documents and indexes, build aggregation pipelines, and investigate query plans or transaction behavior."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: compact-guard-clauses
-description: "How to eliminate deeply nested if-else pyramids by using early return guard clauses (the Bouncer Pattern), cutting indentation token overhead by 40%."
+description: "Refactor deeply nested conditions into early-return guard clauses when doing so improves readability and preserves behavior."
 category: efficiency
 risk: safe
 source: self

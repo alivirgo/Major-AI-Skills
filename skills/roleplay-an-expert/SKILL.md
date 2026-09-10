@@ -1,6 +1,6 @@
 ---
 name: roleplay-an-expert
-description: "How to use Deep Contextual Persona Anchoring to shift model weights from generic textbook answers to elite, practitioner-grade domain advice."
+description: "Specify relevant domain context and evaluation criteria to obtain focused advice while verifying factual claims."
 category: common-sense
 risk: safe
 source: self

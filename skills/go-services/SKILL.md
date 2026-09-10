@@ -1,6 +1,6 @@
 ---
 name: go-services
-description: "Operational skill for Go HTTP services: modules, idiomatic handlers, context cancellation, middleware, testing, and lean deployable binaries."
+description: "Build Go HTTP services with contextual cancellation, middleware, tests, and compact deployable binaries."
 category: development
 risk: safe
 source: self

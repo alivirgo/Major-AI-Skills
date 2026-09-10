@@ -1,6 +1,6 @@
 ---
 name: flask
-description: "Operational skill for Flask: app factories, blueprints, request context, Jinja/JSON APIs, extensions, and pytest testing patterns."
+description: "Build Flask applications with app factories, blueprints, JSON or Jinja responses, extensions, and pytest checks."
 category: development
 risk: safe
 source: self

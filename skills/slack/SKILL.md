@@ -1,6 +1,6 @@
 ---
 name: slack
-description: "Operational skill for Claude to automate Slack via Web API, Block Kit, Bolt apps, events, slash commands, and chat.postMessage patterns."
+description: "Build Slack apps with Bolt, Block Kit, events, slash commands, and scoped Web API operations."
 category: productivity
 risk: safe
 source: self

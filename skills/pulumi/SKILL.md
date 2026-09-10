@@ -1,6 +1,6 @@
 ---
 name: pulumi
-description: "Operational skill for agents to manage infrastructure as code with Pulumi - stacks, previews, secrets, providers, and safe up/destroy workflows."
+description: "Manage Pulumi stacks, providers, secrets, and infrastructure previews before applying reviewed changes."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: break-big-questions-into-steps
-description: "How to apply Task Decomposition to eliminate context saturation, prevent hallucination cascades, and build complex projects incrementally."
+description: "Divide a complex question into manageable subtasks with clear dependencies and intermediate results."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: zbrush
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Maxon ZBrush digital sculpting pipelines, ZScript macros, ZRemesher retopology, and Decimation Master."
+description: "Automate ZBrush sculpting workflows with ZScript, prepare retopology with ZRemesher, and manage mesh decimation or exports."
 category: 3d
 risk: safe
 source: self

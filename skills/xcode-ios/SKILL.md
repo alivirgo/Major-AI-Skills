@@ -1,6 +1,6 @@
 ---
 name: xcode-ios
-description: "Operational skill for Xcode iOS development: targets/schemes, simulators, signing & capabilities, SwiftUI/UIKit projects, and archive/export."
+description: "Configure Xcode targets, simulators, signing, SwiftUI or UIKit projects, and archive or export workflows."
 category: development
 risk: safe
 source: self

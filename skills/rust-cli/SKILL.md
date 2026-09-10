@@ -1,6 +1,6 @@
 ---
 name: rust-cli
-description: "Operational skill for Rust CLIs: clap argument parsing, error handling with anyhow/thiserror, Cargo workspace layout, and distributable binaries."
+description: "Build Rust command-line tools with clap, structured errors, Cargo workspaces, and distributable binaries."
 category: development
 risk: safe
 source: self

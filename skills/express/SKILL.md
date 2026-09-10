@@ -1,6 +1,6 @@
 ---
 name: express
-description: "Operational skill for Express.js: routers, middleware order, error handlers, async wrappers, validation, and production app structure."
+description: "Build Express.js routers and middleware with request validation, async error handling, and clear application structure."
 category: development
 risk: safe
 source: self

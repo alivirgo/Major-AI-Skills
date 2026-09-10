@@ -1,6 +1,6 @@
 ---
 name: jira
-description: "Operational skill for Jira: issue fields, JQL, workflows, automation hygiene, sprint practices, and REST API bulk updates."
+description: "Query Jira with JQL, manage issue fields and workflows, and plan scoped REST updates for project operations."
 category: productivity
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: pandas
-description: "Operational skill for pandas: DataFrames, IO, groupby/merge, dtype hygiene, and memory-aware ETL on tabular data."
+description: "Load, clean, join, and aggregate tabular data with pandas while managing data types and memory use."
 category: scientific
 risk: safe
 source: self

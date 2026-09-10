@@ -1,6 +1,6 @@
 ---
 name: rpg-maker
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize RPG Maker MZ/MV, JavaScript plugins, Pixi.js rendering, JSON database schemas, and event scripting."
+description: "Build RPG Maker MZ or MV JavaScript plugins, edit game data, and troubleshoot events or Pixi.js rendering."
 category: game-engines
 risk: safe
 source: self

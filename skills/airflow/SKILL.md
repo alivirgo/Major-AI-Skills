@@ -1,6 +1,6 @@
 ---
 name: airflow
-description: "Operational skill for Apache Airflow: DAGs, operators, sensors, scheduling, retries, and production task hygiene."
+description: "Build and troubleshoot Apache Airflow DAGs, operators, sensors, schedules, and retry behavior for data pipelines."
 category: devops
 risk: safe
 source: self

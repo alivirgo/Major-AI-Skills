@@ -1,6 +1,6 @@
 ---
 name: check-code-for-obvious-flaws
-description: "How to run the 5-point Zero-Trust code audit to catch hallucinated package APIs, security leaks, unhandled exceptions, and edge-case crashes before running in production."
+description: "Review generated code for nonexistent APIs, exposed secrets, unhandled errors, and likely edge-case failures."
 category: common-sense
 risk: safe
 source: self

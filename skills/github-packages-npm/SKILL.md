@@ -1,6 +1,6 @@
 ---
 name: github-packages-npm
-description: "Operational skill for GitHub Packages npm: publishing scoped packages, auth via GITHUB_TOKEN/PAT, .npmrc setup, and consuming private packages."
+description: "Publish or consume scoped npm packages through GitHub Packages, configure registry authentication, and troubleshoot package access."
 category: devops
 risk: safe
 source: self

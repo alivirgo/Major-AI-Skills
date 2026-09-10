@@ -1,6 +1,6 @@
 ---
 name: early-exit-evaluation
-description: "How autonomous debugging agents terminate exploratory searches immediately upon locating the first conclusive root-cause bug, cutting troubleshooting tokens by 60%."
+description: "Stop an exploratory search after sufficient evidence establishes the cause, then verify the proposed fix."
 category: efficiency
 risk: safe
 source: self

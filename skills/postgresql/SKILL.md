@@ -1,6 +1,6 @@
 ---
 name: postgresql
-description: "Operational skill for PostgreSQL: schema design, indexing, EXPLAIN ANALYZE, vacuum, safe migrations, and production query hygiene."
+description: "Design PostgreSQL schemas and indexes, investigate slow queries with EXPLAIN ANALYZE, and plan migrations, vacuum maintenance, and operational checks."
 category: devops
 risk: safe
 source: self

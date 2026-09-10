@@ -1,6 +1,6 @@
 ---
 name: logit-bias-token-steering
-description: "How to apply logit_bias parameters at the transformer sampling layer to mathematically force 1-token boolean/enum decisions and ban conversational filler words, cutting output tokens by 99%."
+description: "Configure token-bias controls on supporting model APIs for constrained generation, then validate the returned values."
 category: efficiency
 risk: safe
 source: self

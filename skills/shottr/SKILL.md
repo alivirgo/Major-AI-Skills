@@ -1,6 +1,6 @@
 ---
 name: shottr
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Shottr, Apple ScreenCaptureKit, Vision framework OCR, Metal graphics rendering, and scrolling captures."
+description: "Configure Shottr capture and OCR workflows on macOS and investigate scrolling-capture or graphics issues."
 category: macos
 risk: safe
 source: self

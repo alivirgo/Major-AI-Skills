@@ -1,6 +1,6 @@
 ---
 name: prompt-cache-control
-description: "How to strategically place Anthropic cache_control breakpoints and OpenAI prefix boundaries across system prompts, tool schemas, and conversation histories to achieve a 90% input cost discount."
+description: "Configure supported prompt caching around stable instructions and tool schemas, checking current provider behavior and usage metrics."
 category: efficiency
 risk: safe
 source: self

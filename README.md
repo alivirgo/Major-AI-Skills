@@ -27,11 +27,30 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![npm](https://img.shields.io/npm/v/major-ai-skills?color=cb3837&label=npm)](https://www.npmjs.com/package/major-ai-skills)
 [![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@alivirgo%2Fmajor--ai--skills-24292f)](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills)
 [![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/tag/v2.1.1)
-[![skills.sh](https://img.shields.io/badge/skills.sh-npx%20skills%20add-000)](#installation)
+[![skills.sh](https://skills.sh/b/alivirgo/Major-AI-Skills)](https://skills.sh/alivirgo/Major-AI-Skills)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
 [![Medium](https://img.shields.io/badge/Medium-Article-12100E)](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5)
 [![llms.txt](https://img.shields.io/badge/llms.txt-GEO%20ready-0ea5e9)](https://alivirgo.github.io/Major-AI-Skills/llms.txt)
+
+## Featured Workflows
+
+<!-- spotlight:start -->
+
+Pick a concrete task, inspect its instructions, and install only that skill. Each walkthrough includes prerequisites, a ready-to-use prompt, expected outputs, and acceptance checks.
+
+| Workflow | Install | Example coverage |
+| --- | --- | --- |
+| [Make a browser-ready video](docs/users/spotlight.md#ffmpeg) | `npx skills add alivirgo/Major-AI-Skills --skill ffmpeg` | Runnable local reference |
+| [Turn CSV orders into a revenue report](docs/users/spotlight.md#duckdb) | `npx skills add alivirgo/Major-AI-Skills --skill duckdb` | Runnable local reference |
+| [Test a checkout journey without a live payment](docs/users/spotlight.md#playwright) | `npx skills add alivirgo/Major-AI-Skills --skill playwright` | Runnable local reference |
+| [Render a repeatable product scene](docs/users/spotlight.md#blender) | `npx skills add alivirgo/Major-AI-Skills --skill blender` | Application walkthrough |
+| [Export selected frames with a small plugin](docs/users/spotlight.md#figma) | `npx skills add alivirgo/Major-AI-Skills --skill figma` | Application walkthrough |
+| [Audit a part before batch export](docs/users/spotlight.md#solidworks) | `npx skills add alivirgo/Major-AI-Skills --skill solidworks` | Application walkthrough |
+
+[Run the reference examples](examples/spotlight/README.md) | [Verification record](examples/spotlight/VERIFICATION.md) | [All skills and install commands](CATALOG.md)
+
+<!-- spotlight:end -->
 
 ## Daily downloads
 
@@ -55,6 +74,7 @@ A flat `SKILL.md` skill library with stable IDs, an index, and a host-aware inst
 ## Table of Contents
 
 - [Why This Repo](#why-this-repo)
+- [Featured Workflows](#featured-workflows)
 - [Installation](#installation)
 - [Recommended Specialized Plugins](#recommended-specialized-plugins)
 - [Choose Your Tool](#choose-your-tool)
@@ -103,10 +123,14 @@ npx major-ai-skills --codex --skills playwright,docker,supabase
 
 #### skills.sh (multi-agent)
 
+Browse the [repository on skills.sh](https://skills.sh/alivirgo/Major-AI-Skills). Choose exact skill IDs from [CATALOG.md](CATALOG.md):
+
 ```bash
 npx skills add alivirgo/Major-AI-Skills --list
 npx skills add alivirgo/Major-AI-Skills --skill blender --skill figma -g -y
 ```
+
+Individual listings are discovered through telemetry-enabled installs with the Vercel CLI. `--list` only previews discovery. Our separate `major-ai-skills` installer does not register installs with skills.sh. The generated [skills.sh.json](skills.sh.json) groups the repository page by category; it does not submit skills. See the [maintainer indexing guide](docs/users/skills-sh-indexing.md) for verification and publishing steps.
 
 #### GitHub Packages
 
@@ -179,6 +203,8 @@ Guides:
 - [Gemini CLI skills](docs/users/gemini-cli-skills.md)
 - [Antigravity skills](docs/users/antigravity-skills.md)
 - [AI agent skills guide](docs/users/ai-agent-skills.md)
+- [Featured workflows and examples](docs/users/spotlight.md)
+- [skills.sh launch kit and measurement](docs/users/skills-sh-launch.md)
 
 ## Quick FAQ
 

@@ -1,6 +1,6 @@
 ---
 name: prisma
-description: "Operational skill for Prisma ORM: schema modeling, migrations, client queries, transactions, and avoiding N+1 with relation loads."
+description: "Model data with Prisma, manage migrations and transactions, and review relation queries for N+1 behavior."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: ask-for-three-options
-description: "How to use the Triad of Options framework (Conservative, Balanced, and Bold) to prevent local optima, avoid analysis paralysis, and make calibrated decisions."
+description: "Compare conservative, balanced, and ambitious approaches with their trade-offs when choosing a course of action."
 category: common-sense
 risk: safe
 source: self

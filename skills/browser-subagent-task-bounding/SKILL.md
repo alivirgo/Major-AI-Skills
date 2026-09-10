@@ -1,6 +1,6 @@
 ---
 name: browser-subagent-task-bounding
-description: "How to constrain browser subagents with deterministic stop conditions, step ceilings (max 5-8 steps), and selector-targeted DOM extraction to prevent runaway token costs and infinite navigation loops."
+description: "Define a browser subtask's target, step budget, completion criteria, and return format before delegating navigation."
 category: efficiency
 risk: safe
 source: self

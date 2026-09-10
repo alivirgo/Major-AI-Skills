@@ -1,0 +1,6 @@
+order_id,customer_id,amount,status
+1,A,10.00,paid
+2,A,20.00,paid
+3,B,12.50,paid
+4,B,99.00,cancelled
+5,C,,paid

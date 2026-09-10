@@ -1,6 +1,6 @@
 ---
 name: elasticsearch
-description: "Operational skill for agents to operate Elasticsearch - index mappings, ILM, queries, clusters health, ingest pipelines, and safe reindex patterns."
+description: "Configure Elasticsearch mappings and ingest pipelines, investigate cluster health and queries, and plan reindexing or lifecycle changes."
 category: devops
 risk: safe
 source: self

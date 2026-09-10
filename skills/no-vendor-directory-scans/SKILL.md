@@ -1,6 +1,6 @@
 ---
 name: no-vendor-directory-scans
-description: "How agent tools and recursive search crawlers enforce strict glob exclusion on vendor directories (node_modules, venv, target, dist, .git), preventing catastrophic 80,000-token context floods."
+description: "Exclude generated dependency and build directories from recursive searches unless the investigation specifically requires them."
 category: efficiency
 risk: safe
 source: self

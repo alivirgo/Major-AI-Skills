@@ -1,6 +1,6 @@
 ---
 name: deduplicated-file-caching
-description: "How agent runtimes intercept redundant file reads within the same conversation trajectory using mtime and SHA-256 hash checks, eliminating 40% of duplicate context ingestion tokens."
+description: "Cache file reads using modification times or content hashes and invalidate them when the underlying files change."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: scratch-file-isolation
-description: "Why all temporary debug scripts, one-off AST refactorers, and test payloads must be quarantined inside a dedicated scratch/ directory, eliminating git status noise and test runner collisions."
+description: "Keep temporary debugging scripts and test payloads in a dedicated scratch directory separate from maintained source."
 category: efficiency
 risk: safe
 source: self

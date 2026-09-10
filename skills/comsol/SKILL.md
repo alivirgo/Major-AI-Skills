@@ -1,6 +1,6 @@
 ---
 name: comsol
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize COMSOL Multiphysics 6.2, MPh Python API, LiveLink for MATLAB, Java API (mphserver), and solver convergence."
+description: "Automate COMSOL models through Python, Java, or MATLAB integrations and diagnose solver-convergence issues."
 category: scientific
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: fluxcd
-description: "Operational skill for agents to run GitOps with Flux CD - GitRepository, Kustomization, HelmRelease, image automation, and reconciliation debugging."
+description: "Configure Flux CD GitRepository, Kustomization, and HelmRelease resources; troubleshoot reconciliation and image-update automation."
 category: devops
 risk: safe
 source: self

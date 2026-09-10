@@ -1,6 +1,6 @@
 ---
 name: one-sentence-elevator-pitch
-description: "How to force AI to condense complex apps, startups, and initiatives into a crystal-clear, 1-sentence elevator pitch using the XY Positioning Formula."
+description: "Condense a product or initiative into one sentence identifying its audience, purpose, and distinguishing benefit."
 category: common-sense
 risk: safe
 source: self

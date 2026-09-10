@@ -1,6 +1,6 @@
 ---
 name: suppress-verbose-build-output
-description: "How to use native quiet flags (--silent, -q) and stream redirection (> /dev/null, | Out-Null) on package installations and builds, eliminating 99% of stdout progress bar token pollution."
+description: "Use quiet build flags when useful while preserving exit status and actionable failure diagnostics."
 category: efficiency
 risk: safe
 source: self

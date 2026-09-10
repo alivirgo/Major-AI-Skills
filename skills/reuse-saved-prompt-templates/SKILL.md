@@ -1,6 +1,6 @@
 ---
 name: reuse-saved-prompt-templates
-description: "How to build and maintain a parameterized Personal Prompt Library in Raycast, Obsidian, or TextExpander to save 30 minutes of typing every day."
+description: "Create parameterized prompt templates for recurring work and keep their assumptions and inputs explicit."
 category: common-sense
 risk: safe
 source: self

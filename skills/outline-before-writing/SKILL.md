@@ -1,6 +1,6 @@
 ---
 name: outline-before-writing
-description: "How to use the Structural Outline Gate to lock in logical progression, prevent rambling drafts, and eliminate 80% of document rewriting."
+description: "Agree on a document outline and logical progression before drafting a long piece."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: autohotkey-v2
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize AutoHotkey v2 (AHK v2), Win32 API DllCall, UIPI / UIAccess, Window management, and Ahk2Exe compilation."
+description: "Write AutoHotkey v2 desktop scripts for window management and Win32 integration; troubleshoot permissions and compile scripts with Ahk2Exe."
 category: windows
 risk: safe
 source: self

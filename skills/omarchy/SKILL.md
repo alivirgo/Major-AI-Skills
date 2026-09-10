@@ -1,6 +1,6 @@
 ---
 name: omarchy
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, theme, and extend Omarchy - the omakase Arch Linux distribution by DHH built on Hyprland, Quickshell, and Neovim."
+description: "Configure and extend the Omarchy Linux desktop, troubleshoot Hyprland and Quickshell, and customize Neovim or desktop themes."
 category: linux
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: no-ls-bash-listing
-description: "Why autonomous agents must use structured native filesystem tools (list_dir) rather than spawning bash subprocesses (ls -la, dir), eliminating shell latency and 75% of permission token bloat."
+description: "Use structured filesystem listings when the host provides them and bounded file metadata is sufficient."
 category: efficiency
 risk: safe
 source: self

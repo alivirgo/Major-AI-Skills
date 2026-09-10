@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: "Operational skill for GitHub Actions CI/CD: workflows, jobs, matrices, caching, OIDC cloud auth, secrets, and reusable workflows."
+description: "Build GitHub Actions workflows with job matrices, caching, reusable workflows, OIDC authentication, and protected secrets; diagnose CI failures."
 category: devops
 risk: safe
 source: self

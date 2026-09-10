@@ -1,6 +1,6 @@
 ---
 name: treat-ai-answers-as-first-drafts
-description: "How to use AI to conquer the blank page (0 to 80% in 30 seconds) while applying the 4-step Human Finishing Pass to reach 100% polish and authenticity."
+description: "Review AI-generated drafts for factual accuracy, voice, completeness, and fit before final use."
 category: common-sense
 risk: safe
 source: self

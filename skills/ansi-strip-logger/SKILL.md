@@ -1,6 +1,6 @@
 ---
 name: ansi-strip-logger
-description: "How to strip terminal ANSI escape codes, cursor controls, and color bytes before context injection, eliminating 65% of test runner token bloat."
+description: "Remove ANSI colors and terminal control sequences from logs before passing them into model context or structured reports."
 category: efficiency
 risk: safe
 source: self

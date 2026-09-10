@@ -1,6 +1,6 @@
 ---
 name: translate-jargon-to-plain-english
-description: "How to translate dense legal, medical, financial, and technical jargon into actionable plain English with the 'So What?' operational impact framework."
+description: "Translate specialized terminology into plain language and explain its practical implications."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: argocd
-description: "Operational skill for agents to implement GitOps with Argo CD - Applications, sync policies, AppProjects, health checks, and safe rollback."
+description: "Configure Argo CD Applications, AppProjects, and sync policies; inspect health checks and troubleshoot GitOps rollouts."
 category: devops
 risk: safe
 source: self

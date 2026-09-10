@@ -1,6 +1,6 @@
 ---
 name: react
-description: "Operational skill for React: function components, hooks discipline, state design, effects, lists/keys, and accessible interactive UI patterns."
+description: "Build accessible React interfaces with function components, hooks, and deliberate state ownership; troubleshoot effects, list keys, and interactive behavior."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: flag-speculative-statements
-description: "How to use Epistemic Tagging ([FACT], [HEURISTIC], [SPECULATION]) to force AI to visibly separate verified truths from estimates and predictions."
+description: "Label verified facts, estimates, heuristics, and predictions distinctly in an analytical response."
 category: common-sense
 risk: safe
 source: self

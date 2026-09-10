@@ -1,6 +1,6 @@
 ---
 name: add-your-own-human-voice
-description: "Techniques and prompt frameworks to eliminate robotic AI clichés, infuse authentic personal voice, and blend human perspective with AI synthesis."
+description: "Revise AI-assisted writing to preserve the author's voice, concrete experience, and intended tone."
 category: common-sense
 risk: safe
 source: self

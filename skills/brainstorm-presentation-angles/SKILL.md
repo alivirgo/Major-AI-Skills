@@ -1,6 +1,6 @@
 ---
 name: brainstorm-presentation-angles
-description: "How to use AI to generate 4 distinct narrative hooks and opening angles for keynotes, executive pitches, and all-hands presentations."
+description: "Develop distinct opening angles and narrative approaches for a presentation, pitch, or keynote."
 category: common-sense
 risk: safe
 source: self

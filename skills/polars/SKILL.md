@@ -1,6 +1,6 @@
 ---
 name: polars
-description: "Operational skill for Polars: LazyFrames, expressions, streaming scans, and fast single-node analytics on Parquet/CSV."
+description: "Build Polars expression and LazyFrame pipelines for CSV or Parquet analytics with selective and streaming scans."
 category: scientific
 risk: safe
 source: self

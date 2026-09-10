@@ -1,6 +1,6 @@
 ---
 name: ast-refactoring-scripts
-description: "How autonomous agents generate and execute local Abstract Syntax Tree (AST) scripts (libcst, ts-morph, jscodeshift) for batch codebase migrations, eliminating 99% of token costs."
+description: "Use AST-aware tools such as libcst, ts-morph, or jscodeshift for repeatable code migrations across many files."
 category: efficiency
 risk: safe
 source: self

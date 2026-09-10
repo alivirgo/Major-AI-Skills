@@ -1,6 +1,6 @@
 ---
 name: osirix
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize OsiriX MD, PACS DICOM networking (C-STORE/C-FIND/C-MOVE), SQLite database indexing, and Hanging Protocols."
+description: "Configure OsiriX DICOM networking, database indexing, and hanging protocols for software workflows, not clinical interpretation."
 category: medical
 risk: safe
 source: self

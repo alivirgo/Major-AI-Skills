@@ -21,5 +21,6 @@ jobs:
           # //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} and npm then
           # skips OIDC trusted publishing (E404 + 2FA token notice).
           package-manager-cache: false
+      - run: npm ci
       - run: npm run validate
       - run: npm publish --access public

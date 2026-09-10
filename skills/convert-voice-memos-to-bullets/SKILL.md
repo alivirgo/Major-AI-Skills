@@ -1,6 +1,6 @@
 ---
 name: convert-voice-memos-to-bullets
-description: "How to process spoken dictation and audio transcripts, eliminate disfluencies and rambling, and extract structured executive notes."
+description: "Convert a transcript or spoken notes into organized bullet points, decisions, and next actions."
 category: common-sense
 risk: safe
 source: self

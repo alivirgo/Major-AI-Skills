@@ -1,6 +1,6 @@
 ---
 name: velja
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Velja, macOS LaunchServices HTTP handlers, tracking parameter stripping, and browser routing rules."
+description: "Configure Velja browser-routing rules and URL handling on macOS, including tracking-parameter cleanup."
 category: macos
 risk: safe
 source: self

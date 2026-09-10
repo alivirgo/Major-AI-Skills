@@ -1,6 +1,6 @@
 ---
 name: scripted-formatting-delegation
-description: "How autonomous coding agents delegate codebase-wide indentation, line-wrapping, and styling to local deterministic formatters (prettier, ruff, gofmt) rather than burning LLM tokens on reformatting."
+description: "Run the repository's formatter for mechanical whitespace and style changes and inspect the resulting diff."
 category: efficiency
 risk: safe
 source: self

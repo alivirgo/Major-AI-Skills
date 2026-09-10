@@ -1,6 +1,6 @@
 ---
 name: dependabot-config
-description: "Operational skill for Dependabot: dependabot.yml ecosystems, schedules, grouping, ignore rules, and safe auto-merge policies."
+description: "Configure Dependabot update ecosystems, schedules, groups, and ignore rules in dependabot.yml."
 category: devops
 risk: safe
 source: self

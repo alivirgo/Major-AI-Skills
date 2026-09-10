@@ -1,6 +1,6 @@
 ---
 name: n8n
-description: "Operational skill for Claude to automate n8n workflows via REST API, nodes, credentials, webhooks, and expression-safe data mapping."
+description: "Build n8n workflows with nodes, webhooks, credentials, and expression-based data mapping through its editor or REST API."
 category: automation
 risk: safe
 source: self

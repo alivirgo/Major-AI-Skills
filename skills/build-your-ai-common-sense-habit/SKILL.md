@@ -1,6 +1,6 @@
 ---
 name: build-your-ai-common-sense-habit
-description: "The foundational 5-pillar operating system for using generative AI with maximum efficiency, zero hallucination risk, and 10x leverage."
+description: "Build a repeatable prompting habit around clear goals, relevant context, verification, and human review."
 category: common-sense
 risk: safe
 source: self

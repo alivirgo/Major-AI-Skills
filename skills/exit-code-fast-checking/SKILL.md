@@ -1,6 +1,6 @@
 ---
 name: exit-code-fast-checking
-description: "How to evaluate CLI command success directly via process exit codes ($? == 0), suppressing thousands of lines of successful build/compilation stdout logs."
+description: "Check command exit codes and retain relevant errors when summarizing build or test results."
 category: efficiency
 risk: safe
 source: self

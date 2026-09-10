@@ -1,6 +1,6 @@
 ---
 name: kicad
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize KiCad, Pcbnew Python API, kicad-cli toolchain, custom design rules, and automated fabrication pipelines."
+description: "Automate KiCad board workflows with pcbnew and kicad-cli, configure design rules, and generate fabrication outputs for review."
 category: eda
 risk: safe
 source: self

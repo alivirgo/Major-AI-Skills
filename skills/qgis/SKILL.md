@@ -1,6 +1,6 @@
 ---
 name: qgis
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize QGIS, PyQGIS Python API, qgis_process CLI, GDAL/OGR drivers, and PostGIS geodatabases."
+description: "Automate QGIS geospatial workflows with PyQGIS, qgis_process, GDAL/OGR, and PostGIS; inspect layers and troubleshoot processing jobs."
 category: gis
 risk: safe
 source: self

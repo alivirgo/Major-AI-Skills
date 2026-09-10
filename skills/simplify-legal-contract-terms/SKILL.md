@@ -1,6 +1,6 @@
 ---
 name: simplify-legal-contract-terms
-description: "How to extract and translate the 5 most dangerous commercial contract clauses (Auto-Renewal, Liability Caps, IP Assignment, Price Increases, Termination Fees) into plain English."
+description: "Explain renewal, liability, intellectual-property, pricing, and termination clauses in plain language with references to the contract."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: copy-relevant-paragraph-only
-description: "How to use Context Sniping to prevent 'Lost-in-the-Middle' attention degradation, save input tokens, and get laser-accurate answers from long documents."
+description: "Select a relevant document excerpt with enough surrounding context to answer a focused question."
 category: common-sense
 risk: safe
 source: self

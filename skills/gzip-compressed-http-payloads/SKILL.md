@@ -1,6 +1,6 @@
 ---
 name: gzip-compressed-http-payloads
-description: "How agent client SDKs and MCP runtime bridges compress large conversation JSON payloads using gzip and zstd, slashing network transfer latency and socket timeouts by 80%."
+description: "Configure gzip or zstd transport compression for large HTTP payloads when both endpoints support it."
 category: efficiency
 risk: safe
 source: self

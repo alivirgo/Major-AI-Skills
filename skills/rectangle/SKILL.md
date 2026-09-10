@@ -1,6 +1,6 @@
 ---
 name: rectangle
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Rectangle, macOS Accessibility API (AXUIElement), multi-display tiling, and URL scheme actions."
+description: "Configure Rectangle window shortcuts and multi-display layouts; troubleshoot macOS Accessibility permissions and URL actions."
 category: macos
 risk: safe
 source: self

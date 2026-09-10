@@ -1,6 +1,6 @@
 ---
 name: graphql-client
-description: "Operational skill for GraphQL clients: Apollo Client and urql patterns for queries, mutations, cache, error policies, and auth headers."
+description: "Build Apollo Client or urql queries and mutations, manage cache behavior, and handle authentication and errors."
 category: development
 risk: safe
 source: self

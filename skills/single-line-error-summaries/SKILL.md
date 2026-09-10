@@ -1,6 +1,6 @@
 ---
 name: single-line-error-summaries
-description: "How to condense 100-line stack traces into structured single-line root cause statements (🚨 [FAIL: file:line] ErrorType: Message), slashing error reporting tokens by 95%."
+description: "Summarize a failure with its source location, error type, and actionable cause while retaining full logs."
 category: efficiency
 risk: safe
 source: self

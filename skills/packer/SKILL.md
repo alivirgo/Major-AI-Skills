@@ -1,6 +1,6 @@
 ---
 name: packer
-description: "Operational skill for agents to build golden machine images with HashiCorp Packer - templates, builders, provisioners, and immutable image pipelines."
+description: "Build machine images with Packer templates, builders, and provisioners as part of an immutable deployment workflow."
 category: devops
 risk: safe
 source: self

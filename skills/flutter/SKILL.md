@@ -1,6 +1,6 @@
 ---
 name: flutter
-description: "Operational skill for Flutter: widgets, state management choices, async UI, platform channels awareness, and release build hygiene."
+description: "Build Flutter widget interfaces, organize state and async behavior, and prepare platform integrations and release builds."
 category: development
 risk: safe
 source: self

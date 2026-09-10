@@ -1,6 +1,6 @@
 ---
 name: compact-error-handling
-description: "How to eliminate verbose, repetitive try-catch blocks in generated code by using multi-exception tuples, contextlib.suppress, and functional Result types, cutting error boilerplate by 60%."
+description: "Reduce repeated exception-handling code with language-appropriate constructs while preserving error propagation and diagnostics."
 category: efficiency
 risk: safe
 source: self

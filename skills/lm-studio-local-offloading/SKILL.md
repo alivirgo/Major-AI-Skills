@@ -1,6 +1,6 @@
 ---
 name: lm-studio-local-offloading
-description: "How autonomous engineering systems route mechanical sub-tasks (git commits, log triage, unit test boilerplate) to local GGUF models via LM Studio/Ollama, cutting cloud API spend by 60%."
+description: "Route suitable mechanical tasks to locally hosted models through LM Studio or Ollama and verify their outputs."
 category: efficiency
 risk: safe
 source: self

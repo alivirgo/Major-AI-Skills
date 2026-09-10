@@ -1,6 +1,6 @@
 ---
 name: double-check-ai-math-manually
-description: "How to use the 3-Tier Math Verification Ladder to protect invoices, cap tables, tax calculations, and loan estimates from silent AI arithmetic errors."
+description: "Independently check AI-generated calculations using source inputs, formulas, and a calculator or spreadsheet."
 category: common-sense
 risk: safe
 source: self

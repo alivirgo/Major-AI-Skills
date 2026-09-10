@@ -1,6 +1,6 @@
 ---
 name: playwright
-description: "Operational skill for Claude to automate Playwright Test with locators, fixtures, tracing, CI browsers, and resilient end-to-end specs."
+description: "Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows."
 category: testing
 risk: safe
 source: self

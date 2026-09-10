@@ -1,6 +1,6 @@
 ---
 name: nginx
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Nginx web server, reverse proxying, SSL/TLS termination, rate limiting, and upstream load balancing."
+description: "Configure Nginx web serving, reverse proxies, TLS termination, rate limits, and upstream load balancing; diagnose request failures."
 category: cross-platform
 risk: safe
 source: self

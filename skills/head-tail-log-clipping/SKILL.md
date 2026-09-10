@@ -1,6 +1,6 @@
 ---
 name: head-tail-log-clipping
-description: "How autonomous agents truncate massive terminal and build logs by retaining the first 20 lines (head) and last 40 lines (tail) while eliding the middle, eliminating 90% of log token bloat."
+description: "Keep the opening context and final diagnostics of large logs, with omitted content clearly identified and available if needed."
 category: efficiency
 risk: safe
 source: self

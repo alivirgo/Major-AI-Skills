@@ -1,6 +1,6 @@
 ---
 name: flow-launcher
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Flow Launcher, C# / Python JSON-RPC plugins, plugin.json manifests, and Everything search integration."
+description: "Build Flow Launcher plugins with C# or Python JSON-RPC, configure plugin manifests, and integrate Everything search."
 category: windows
 risk: safe
 source: self

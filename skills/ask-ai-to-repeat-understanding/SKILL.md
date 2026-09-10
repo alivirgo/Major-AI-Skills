@@ -1,6 +1,6 @@
 ---
 name: ask-ai-to-repeat-understanding
-description: "How to use the Intent Echo & Alignment pattern to prevent wasted tokens, hallucinated scopes, and misaligned deliverables on complex tasks."
+description: "Restate the intended outcome, scope, and constraints when a complex task needs an alignment check."
 category: common-sense
 risk: safe
 source: self

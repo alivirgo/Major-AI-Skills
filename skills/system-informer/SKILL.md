@@ -1,6 +1,6 @@
 ---
 name: system-informer
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize System Informer (Process Hacker 3), KSystemInformer.sys kernel driver, ntdll Native API inspection, and memory diagnostics."
+description: "Inspect Windows processes and memory with System Informer and native APIs; troubleshoot driver and diagnostic access."
 category: windows
 risk: safe
 source: self

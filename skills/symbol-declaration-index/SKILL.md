@@ -1,6 +1,6 @@
 ---
 name: symbol-declaration-index
-description: "How to generate and query compact 1-line symbol indexes (tags / symbols.tsv) using Tree-sitter and Universal Ctags, enabling instant symbol localization without multi-file text scans."
+description: "Generate or query compact symbol indexes with Ctags or Tree-sitter to locate declarations in large repositories."
 category: efficiency
 risk: safe
 source: self

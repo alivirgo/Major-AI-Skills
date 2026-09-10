@@ -1,6 +1,6 @@
 ---
 name: final-cut-pro
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Apple Final Cut Pro, FCPXML v1.11/v1.12 schemas, Apple Silicon Media Engine, Motion Templates, and Compressor."
+description: "Automate Final Cut Pro interchange with FCPXML, prepare Motion or Compressor workflows, and troubleshoot media rendering."
 category: video-editing
 risk: safe
 source: self

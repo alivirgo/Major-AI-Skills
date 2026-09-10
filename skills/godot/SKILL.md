@@ -1,6 +1,6 @@
 ---
 name: godot
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Godot 4.x, GDScript 2.0, SceneTree node architectures, physics servers, and headless CI/CD export pipelines."
+description: "Build Godot 4 scenes and GDScript workflows, inspect physics behavior, and configure headless project exports."
 category: game-engines
 risk: safe
 source: self

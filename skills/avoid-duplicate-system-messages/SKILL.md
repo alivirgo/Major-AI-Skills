@@ -1,6 +1,6 @@
 ---
 name: avoid-duplicate-system-messages
-description: "How to consolidate fragmented system instructions into a single static cacheable header, maximizing Anthropic and OpenAI prompt cache hit rates and cutting input token costs by 90%."
+description: "Consolidate repeated system instructions into a stable prompt prefix when configuring an application's prompt caching."
 category: efficiency
 risk: safe
 source: self

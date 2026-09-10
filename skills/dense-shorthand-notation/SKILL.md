@@ -1,6 +1,6 @@
 ---
 name: dense-shorthand-notation
-description: "How to use high-density symbolic operators (->, =>, |, ::, !) to compress complex business logic, state machines, and system rules, reducing prompt tokens by 65%."
+description: "Use documented compact notation for business rules or state transitions when readers can interpret it unambiguously."
 category: efficiency
 risk: safe
 source: self

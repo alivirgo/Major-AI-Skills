@@ -1,6 +1,6 @@
 ---
 name: batch-small-questions-together
-description: "How grouping related micro-queries into a single prompt eliminates quadratic context buildup, reduces API costs by up to 75%, and cuts round-trip wait times."
+description: "Group related short questions into one structured request while keeping each answer identifiable."
 category: common-sense
 risk: safe
 source: self

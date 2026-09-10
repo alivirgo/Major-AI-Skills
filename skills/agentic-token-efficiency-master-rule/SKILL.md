@@ -1,6 +1,6 @@
 ---
 name: agentic-token-efficiency-master-rule
-description: "The definitive operational architecture governing zero-waste token utilization, surgical context management, and latency minimization for autonomous AI coding agents."
+description: "Plan context use, bounded file inspection, tool output, and response length for coding-agent tasks with an explicit token budget."
 category: efficiency
 risk: safe
 source: self

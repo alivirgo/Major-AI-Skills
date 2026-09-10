@@ -1,0 +1,566 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "3D & VFX",
+      "description": "Procedural scenes, modeling, texturing, and rendering.",
+      "skills": [
+        "blender",
+        "cinema-4d",
+        "houdini",
+        "substance-painter",
+        "zbrush"
+      ]
+    },
+    {
+      "title": "Workflow Automation",
+      "description": "Connect services with event-driven workflows and data mapping.",
+      "skills": [
+        "n8n",
+        "zapier"
+      ]
+    },
+    {
+      "title": "CAD & Modeling",
+      "description": "Parametric parts, assemblies, geometry, and engineering exports.",
+      "skills": [
+        "catia",
+        "fusion-360",
+        "rhino",
+        "siemens-nx",
+        "solidworks"
+      ]
+    },
+    {
+      "title": "Everyday AI Work",
+      "description": "Clear prompts, useful drafts, source checking, and practical decisions.",
+      "skills": [
+        "act-as-a-personal-tutor",
+        "add-your-own-human-voice",
+        "always-verify-numbers-and-links",
+        "ask-ai-confidence-rating",
+        "ask-ai-to-audit-itself",
+        "ask-ai-to-check-its-math",
+        "ask-ai-to-repeat-understanding",
+        "ask-ai-to-show-its-reasoning",
+        "ask-for-alternative-viewpoints",
+        "ask-for-tables-over-paragraphs",
+        "ask-for-three-options",
+        "ask-how-to-improve-prompt",
+        "ask-one-best-answer",
+        "ask-short-answer-first",
+        "ask-what-changed-only",
+        "ask-what-info-is-missing",
+        "avoid-rephrasing-good-text",
+        "batch-small-questions-together",
+        "be-specific-instead-of-vague",
+        "beware-of-ai-recommendation-bias",
+        "beware-of-hallucinated-quotes",
+        "brainstorm-presentation-angles",
+        "break-big-questions-into-steps",
+        "break-complex-projects-into-milestones",
+        "build-your-ai-common-sense-habit",
+        "bullet-point-summary-first",
+        "check-code-for-obvious-flaws",
+        "cite-specific-section-numbers",
+        "clean-messy-notes-to-action-items",
+        "combine-human-speed-with-ai-scale",
+        "compare-two-products-fairly",
+        "convert-voice-memos-to-bullets",
+        "copy-relevant-paragraph-only",
+        "cross-check-legal-advice",
+        "dont-repaste-entire-document",
+        "dont-summarize-without-a-goal",
+        "dont-trust-ai-medical-diagnoses",
+        "double-check-ai-math-manually",
+        "draft-emails-with-placeholders",
+        "draft-meeting-agendas",
+        "draft-multiple-variations",
+        "fill-in-missing-assumptions",
+        "flag-missing-facts-first",
+        "flag-speculative-statements",
+        "format-data-to-copy-paste-tables",
+        "generate-social-media-captions",
+        "give-ai-direct-feedback",
+        "give-ai-situation-context",
+        "give-examples-first",
+        "highlight-action-items",
+        "iterate-step-by-step",
+        "keep-instructions-direct",
+        "keep-instructions-friendly-and-clear",
+        "keep-sensitive-financials-private",
+        "learn-new-skills-ten-times-faster",
+        "never-paste-private-passwords",
+        "one-sentence-elevator-pitch",
+        "outline-before-writing",
+        "output-final-draft-only",
+        "play-devils-advocate",
+        "prioritize-urgent-vs-important",
+        "proofread-before-sending",
+        "pros-and-cons-table",
+        "remember-ai-cutoff-dates",
+        "reuse-saved-prompt-templates",
+        "roleplay-an-expert",
+        "save-favorite-prompts-cheat-sheet",
+        "set-a-word-count-ceiling",
+        "simple-understanding-quiz",
+        "simplify-legal-contract-terms",
+        "skip-explaining-the-obvious",
+        "skip-polite-filler-words",
+        "specify-high-precision-needs",
+        "specify-preferred-writing-style",
+        "specify-the-audience",
+        "start-fresh-chat-new-topics",
+        "state-your-goal-not-just-command",
+        "stop-wrong-answers-early",
+        "structure-weekly-to-do-list",
+        "summarize-meetings-into-decisions",
+        "talk-like-to-a-smart-ten-year-old",
+        "tell-ai-what-not-to-do",
+        "tell-ai-when-in-a-rush",
+        "tell-ai-your-time-budget",
+        "think-of-ai-as-a-junior-assistant",
+        "translate-jargon-to-plain-english",
+        "treat-ai-answers-as-first-drafts",
+        "try-different-angles-if-first-fails",
+        "turn-complaints-into-polite-replies",
+        "use-bolding-and-bullet-formatting",
+        "use-checklist-format",
+        "use-fast-models-for-quick-checks",
+        "use-good-answers-as-templates",
+        "use-plain-text-over-pdfs",
+        "use-simple-analogies",
+        "use-voice-typing-for-fast-prompts",
+        "verify-names-and-locations",
+        "write-polite-tough-feedback",
+        "write-step-by-step-how-to"
+      ]
+    },
+    {
+      "title": "Media & Utilities",
+      "description": "Media processing, API clients, transfers, and cross-platform tools.",
+      "skills": [
+        "bruno",
+        "ffmpeg",
+        "losslesscut",
+        "nginx",
+        "rclone",
+        "sniffnet",
+        "tailscale",
+        "ventoy",
+        "wireshark"
+      ]
+    },
+    {
+      "title": "Design Tools",
+      "description": "Design-system automation, image workflows, and asset exports.",
+      "skills": [
+        "adobe-photoshop",
+        "figma"
+      ]
+    },
+    {
+      "title": "Application Development",
+      "description": "Web, mobile, language, API, and application integration workflows.",
+      "skills": [
+        "android-studio",
+        "anthropic-api",
+        "chromadb",
+        "codeql",
+        "django",
+        "express",
+        "fastapi",
+        "firebase",
+        "flask",
+        "flutter",
+        "go-services",
+        "graphql-apis",
+        "graphql-client",
+        "kotlin",
+        "langchain",
+        "llamaindex",
+        "nextjs",
+        "nodejs",
+        "openai-api",
+        "owasp-asvs",
+        "postman",
+        "prisma",
+        "python-packaging",
+        "rails",
+        "react",
+        "react-native",
+        "rust-cli",
+        "semgrep",
+        "shopify-app",
+        "spring-boot",
+        "stripe",
+        "swift",
+        "typescript",
+        "vercel",
+        "vscode",
+        "wordpress",
+        "xcode-ios"
+      ]
+    },
+    {
+      "title": "Cloud & DevOps",
+      "description": "Infrastructure, databases, CI, deployment, and observability.",
+      "skills": [
+        "airflow",
+        "ansible",
+        "argocd",
+        "aws-cli",
+        "azure-cli",
+        "clickhouse",
+        "consul",
+        "dbt",
+        "dependabot-config",
+        "docker",
+        "elasticsearch",
+        "fluxcd",
+        "gcloud-cli",
+        "github-actions",
+        "github-packages-npm",
+        "gpg-signing",
+        "grafana",
+        "helm",
+        "incident-runbooks",
+        "kafka",
+        "kubernetes",
+        "lets-encrypt",
+        "makefile-automation",
+        "mongodb",
+        "mysql",
+        "nginx-hardening",
+        "nomad",
+        "opentelemetry",
+        "packer",
+        "postgresql",
+        "prefect",
+        "prometheus",
+        "pulumi",
+        "rabbitmq",
+        "redis",
+        "redis-streams",
+        "snowflake",
+        "snyk",
+        "sqlite",
+        "supabase",
+        "supabase-rls",
+        "terraform",
+        "terraform-aws",
+        "trivy",
+        "vault"
+      ]
+    },
+    {
+      "title": "Digital Forensics",
+      "description": "Authorized evidence processing and forensic software automation.",
+      "skills": [
+        "autopsy",
+        "encase",
+        "ftk"
+      ]
+    },
+    {
+      "title": "Electronic Design",
+      "description": "PCB automation, circuit simulation, and verification workflows.",
+      "skills": [
+        "altium-designer",
+        "cadence-virtuoso",
+        "kicad",
+        "ltspice"
+      ]
+    },
+    {
+      "title": "Context & Efficiency",
+      "description": "Bounded context, concise output, repeatable edits, and measured resource use.",
+      "skills": [
+        "abbreviated-git-status",
+        "agentic-token-efficiency-master-rule",
+        "ansi-strip-logger",
+        "artifact-reuse-pattern",
+        "ast-refactoring-scripts",
+        "ast-skeletonizer",
+        "atomic-code-edits",
+        "avoid-duplicate-system-messages",
+        "batch-api-job-processing",
+        "batch-file-creation",
+        "binary-file-suppression",
+        "boolean-flag-responses",
+        "browser-subagent-task-bounding",
+        "cached-system-instructions",
+        "cached-tool-permission-grants",
+        "comment-stripping-preprocessor",
+        "compact-dir-listing",
+        "compact-enum-mappings",
+        "compact-error-codes",
+        "compact-error-handling",
+        "compact-guard-clauses",
+        "compact-status-updates",
+        "compact-yaml-frontmatter",
+        "compressed-json-repair",
+        "compressed-system-prompts",
+        "concise-output-enforcer",
+        "context-pruning-directive",
+        "csv-over-json-tables",
+        "dead-code-elimination",
+        "deduplicated-file-caching",
+        "dense-shorthand-notation",
+        "direct-tool-selection",
+        "early-exit-evaluation",
+        "exit-code-fast-checking",
+        "gitignore-respecting-search",
+        "graphql-introspection-trimmer",
+        "gzip-compressed-http-payloads",
+        "head-tail-log-clipping",
+        "header-only-c-cpp-ingestion",
+        "in-place-file-mutation",
+        "incremental-diff-ingestion",
+        "inline-lambda-functions",
+        "inline-type-signatures",
+        "json-minified-payloads",
+        "lazy-dependency-loading",
+        "line-bounded-file-reading",
+        "lint-auto-fix-delegation",
+        "list-comprehension-compression",
+        "lm-studio-local-offloading",
+        "logit-bias-token-steering",
+        "max-tokens-ceiling-guard",
+        "minimal-artifact-metadata",
+        "minimal-diff-formatter",
+        "model-tier-routing",
+        "multi-tool-batch-invocation",
+        "no-ls-bash-listing",
+        "no-polite-chitchat-closing",
+        "no-preamble-code-blocks",
+        "no-redundant-type-casting",
+        "no-vendor-directory-scans",
+        "one-shot-subagent-prompts",
+        "openapi-endpoint-filtering",
+        "prompt-cache-control",
+        "reactive-wakeup-signaling",
+        "regex-one-liner-refactoring",
+        "ripgrep-over-grep-command",
+        "schema-pruned-function-calling",
+        "scratch-file-isolation",
+        "scripted-formatting-delegation",
+        "selective-grep-filtering",
+        "semantic-key-shortening",
+        "silent-background-task-execution",
+        "single-command-script-chaining",
+        "single-line-error-summaries",
+        "single-pass-multi-replace",
+        "sliding-window-chat-truncation",
+        "speculative-decoding-prompting",
+        "standard-library-preference",
+        "stop-sequence-truncation",
+        "structured-outputs-strict-mode",
+        "subagent-transcript-indexing",
+        "summarized-rag-memories",
+        "suppress-verbose-build-output",
+        "symbol-declaration-index",
+        "system-prompt-minifier",
+        "targeted-line-range-edits",
+        "temperature-zero-determinism",
+        "ternary-operator-utilization",
+        "token-aware-chunking",
+        "token-bounded-summaries",
+        "token-budget-allocator",
+        "token-efficient-markdown",
+        "token-usage-monitoring-hook",
+        "tool-choice-forcing",
+        "top-k-vector-pruning",
+        "tree-sitter-scope-extractor",
+        "type-alias-compression",
+        "zero-boilerplate-imports",
+        "zero-cat-bash-prevention",
+        "zero-explanation-refactoring"
+      ]
+    },
+    {
+      "title": "Enterprise Platforms",
+      "description": "CRM, asset management, service operations, and PLM integrations.",
+      "skills": [
+        "hubspot",
+        "ibm-maximo",
+        "ptc-windchill",
+        "salesforce",
+        "servicenow-desktop"
+      ]
+    },
+    {
+      "title": "ERP Systems",
+      "description": "Enterprise business-system scripting and integration workflows.",
+      "skills": [
+        "dynamics-nav",
+        "oracle-ebs",
+        "sap-gui"
+      ]
+    },
+    {
+      "title": "Game Engines",
+      "description": "Editor automation, gameplay code, scenes, and build pipelines.",
+      "skills": [
+        "cryengine",
+        "godot",
+        "rpg-maker",
+        "unity",
+        "unreal-engine"
+      ]
+    },
+    {
+      "title": "GIS",
+      "description": "Geospatial processing, map data, and spatial automation.",
+      "skills": [
+        "arcgis-pro",
+        "qgis"
+      ]
+    },
+    {
+      "title": "Knowledge Tools",
+      "description": "Notes, documents, pages, and knowledge-base organization.",
+      "skills": [
+        "confluence",
+        "notion",
+        "obsidian"
+      ]
+    },
+    {
+      "title": "Linux Desktop",
+      "description": "Omarchy desktop configuration and customization.",
+      "skills": [
+        "omarchy"
+      ]
+    },
+    {
+      "title": "macOS Tools",
+      "description": "Desktop productivity, local automation, and application integrations.",
+      "skills": [
+        "appcleaner",
+        "dropover",
+        "maccy",
+        "macwhisper",
+        "orbstack",
+        "raycast",
+        "rectangle",
+        "shottr",
+        "velja"
+      ]
+    },
+    {
+      "title": "Imaging Software",
+      "description": "DICOM, visualization, and research-software workflows.",
+      "skills": [
+        "3d-slicer",
+        "horos",
+        "osirix"
+      ]
+    },
+    {
+      "title": "Music Production",
+      "description": "DAW scripting, MIDI, audio configuration, and session workflows.",
+      "skills": [
+        "ableton-live",
+        "cubase",
+        "fl-studio",
+        "logic-pro",
+        "pro-tools"
+      ]
+    },
+    {
+      "title": "Networking",
+      "description": "Controller configuration, connectivity, routing, and traffic inspection.",
+      "skills": [
+        "cloudflare-dns",
+        "omada-controller",
+        "wireguard"
+      ]
+    },
+    {
+      "title": "Office Automation",
+      "description": "Workbook scripting, data transformation, and spreadsheet workflows.",
+      "skills": [
+        "microsoft-excel"
+      ]
+    },
+    {
+      "title": "Industrial Automation",
+      "description": "PLC development and industrial software in authorized test environments.",
+      "skills": [
+        "codesys",
+        "rockwell-studio-5000",
+        "siemens-tia-portal"
+      ]
+    },
+    {
+      "title": "Project Tools",
+      "description": "Tasks, issue tracking, project organization, and team workflows.",
+      "skills": [
+        "asana",
+        "jira",
+        "linear",
+        "slack",
+        "trello"
+      ]
+    },
+    {
+      "title": "Data & Science",
+      "description": "Analytical SQL, scientific computing, notebooks, and machine learning.",
+      "skills": [
+        "comsol",
+        "duckdb",
+        "great-expectations",
+        "huggingface-transformers",
+        "jupyter",
+        "labview",
+        "matlab",
+        "mlflow",
+        "opencv",
+        "originpro",
+        "pandas",
+        "polars",
+        "pytorch",
+        "scikit-learn",
+        "spark"
+      ]
+    },
+    {
+      "title": "Browser Testing",
+      "description": "Playwright user journeys, diagnostics, and CI execution.",
+      "skills": [
+        "playwright",
+        "playwright-ci"
+      ]
+    },
+    {
+      "title": "Video Production",
+      "description": "Timelines, compositions, interchange, and rendering workflows.",
+      "skills": [
+        "adobe-after-effects",
+        "adobe-premiere-pro",
+        "davinci-resolve",
+        "final-cut-pro",
+        "remotion",
+        "vegas-pro"
+      ]
+    },
+    {
+      "title": "Windows Tools",
+      "description": "Desktop scripting, diagnostics, capture, and utility configuration.",
+      "skills": [
+        "autohotkey-v2",
+        "eartrumpet",
+        "everything",
+        "flow-launcher",
+        "microsoft-powertoys",
+        "sandboxie-plus",
+        "scoop",
+        "sharex",
+        "system-informer",
+        "wiztree"
+      ]
+    }
+  ]
+}

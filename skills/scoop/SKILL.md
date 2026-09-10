@@ -1,6 +1,6 @@
 ---
 name: scoop
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Scoop Package Manager, PowerShell app manifests, Git buckets, shims generation, and aria2 acceleration."
+description: "Manage Windows tools with Scoop manifests, buckets, and shims; troubleshoot package installation and download behavior."
 category: windows
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: unity
-description: "Operational skill for Claude to automate Unity Editor/runtime with C# scripts, EditorWindow tools, Addressables, URP/HDRP, and CLI batch builds."
+description: "Automate Unity editor and runtime workflows with C#, Addressables, render pipelines, and batch builds."
 category: game-engines
 risk: safe
 source: self

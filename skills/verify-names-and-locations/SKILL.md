@@ -1,6 +1,6 @@
 ---
 name: verify-names-and-locations
-description: "Why proper nouns, addresses, and job titles are the #1 source of AI hallucinations, and how to use the 4-Point Entity Verification Ladder to prevent embarrassing mistakes."
+description: "Check names, titles, addresses, and locations against reliable sources before using them in a deliverable."
 category: common-sense
 risk: safe
 source: self

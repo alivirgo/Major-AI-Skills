@@ -1,6 +1,6 @@
 ---
 name: tell-ai-when-in-a-rush
-description: "How to trigger Emergency High-Velocity Mode for instant 3-second answers during live client meetings, outages, and negotiation standoffs."
+description: "Request a concise prioritized answer when time is short, preserving critical facts and uncertainty."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: confluence
-description: "Operational skill for Confluence: spaces, page trees, macros, labels, permissions, and REST content updates."
+description: "Organize Confluence page trees, macros, labels, and permissions; perform scoped content updates through the REST API."
 category: knowledge
 risk: safe
 source: self

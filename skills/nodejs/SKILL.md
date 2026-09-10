@@ -1,6 +1,6 @@
 ---
 name: nodejs
-description: "Operational skill for Node.js: ESM/CJS modules, async I/O, streams, process lifecycle, package scripts, and production runtime hygiene."
+description: "Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling."
 category: development
 risk: safe
 source: self

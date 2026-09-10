@@ -1,6 +1,6 @@
 ---
 name: snyk
-description: "Operational skill for Snyk: Open Source SCA, container/IaC scans, fixing via PRs, ignore policies, and CI gate tuning."
+description: "Run Snyk dependency, container, and infrastructure scans; review findings, ignore policies, and CI gates."
 category: devops
 risk: safe
 source: self

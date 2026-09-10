@@ -1,6 +1,6 @@
 ---
 name: silent-background-task-execution
-description: "How autonomous agents launch long-running compilation, server, and test processes asynchronously (WaitMsBeforeAsync, IsDaemon) without blocking chat turns or polling."
+description: "Start long-running builds or tests asynchronously when supported and report completion or errors without blocking unrelated work."
 category: efficiency
 risk: safe
 source: self

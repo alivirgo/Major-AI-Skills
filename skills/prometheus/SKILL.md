@@ -1,6 +1,6 @@
 ---
 name: prometheus
-description: "Operational skill for Prometheus: scrape configs, PromQL, recording rules, alerting rules, cardinality control, and exporter hygiene."
+description: "Configure Prometheus scraping and exporters, write PromQL and alert rules, and control metric cardinality."
 category: devops
 risk: safe
 source: self

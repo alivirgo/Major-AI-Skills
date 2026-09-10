@@ -1,6 +1,6 @@
 ---
 name: specify-preferred-writing-style
-description: "How to move beyond vague style adjectives by defining Tone, Information Density, and Sentence Cadence across 5 standard professional style presets."
+description: "Define writing tone, information density, and sentence style with concrete examples."
 category: common-sense
 risk: safe
 source: self

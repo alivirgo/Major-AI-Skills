@@ -1,6 +1,6 @@
 ---
 name: tell-ai-what-not-to-do
-description: "How to use explicit Negative Constraints ('Do NOT use third-party libraries', 'Do NOT use passive voice') to prune hallucination paths and lock in exact specifications."
+description: "State relevant exclusions and forbidden approaches when they materially constrain the deliverable."
 category: common-sense
 risk: safe
 source: self

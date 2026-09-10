@@ -1,6 +1,6 @@
 ---
 name: labview
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize NI LabVIEW, G-Language dataflow, NI-DAQmx hardware drivers, VISA SCPI, and g-cli build pipelines."
+description: "Automate LabVIEW dataflow and build workflows, integrate NI-DAQmx or VISA instruments, and diagnose hardware communication."
 category: scientific
 risk: safe
 source: self

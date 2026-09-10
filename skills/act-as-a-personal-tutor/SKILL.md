@@ -1,6 +1,6 @@
 ---
 name: act-as-a-personal-tutor
-description: "Transform any AI assistant into an interactive, step-by-step personal tutor that assesses prior knowledge, explains concepts in bite-sized chunks, and quizzes comprehension before advancing."
+description: "Explain a subject step by step, assess prior knowledge, and use short exercises to check understanding before advancing."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: turn-complaints-into-polite-replies
-description: "How to de-escalate furious customers and protect brand reputation using the 4-part HEAR framework (Hear, Empathize, Action, Reassure)."
+description: "Draft customer complaint replies that acknowledge the issue and provide concrete next steps without unsupported promises."
 category: common-sense
 risk: safe
 source: self

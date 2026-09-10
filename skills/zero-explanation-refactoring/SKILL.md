@@ -1,6 +1,6 @@
 ---
 name: zero-explanation-refactoring
-description: "How to deliver pure executable code blocks and unified diffs with zero conversational commentary during automated refactoring tasks, enabling direct IDE parsing and cutting output tokens by 65%."
+description: "Return a focused patch or executable code when a refactoring request explicitly calls for code-only output."
 category: efficiency
 risk: safe
 source: self

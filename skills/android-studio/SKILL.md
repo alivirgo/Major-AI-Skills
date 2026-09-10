@@ -1,6 +1,6 @@
 ---
 name: android-studio
-description: "Operational skill for Android Studio: Gradle projects, emulators, Logcat, build variants, signing configs, and AGP troubleshooting."
+description: "Configure Android Studio Gradle projects, emulators, build variants, and signing; diagnose build and runtime failures with AGP and Logcat."
 category: development
 risk: safe
 source: self

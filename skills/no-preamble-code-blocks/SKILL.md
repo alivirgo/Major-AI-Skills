@@ -1,6 +1,6 @@
 ---
 name: no-preamble-code-blocks
-description: "How to enforce zero introductory throat-clearing ('Here is the code:') so responses start strictly on Line 1 with the code block or raw script, enabling direct CLI piping and saving output tokens."
+description: "Return code without an introductory paragraph when the user or downstream parser requests code-only output."
 category: efficiency
 risk: safe
 source: self

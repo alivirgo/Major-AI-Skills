@@ -1,6 +1,6 @@
 ---
 name: fastapi
-description: "Operational skill for FastAPI: Pydantic models, dependency injection, async routes, OpenAPI, authentication hooks, and TestClient-based testing."
+description: "Build and test FastAPI services with Pydantic models, dependency injection, async routes, OpenAPI, and authentication hooks."
 category: development
 risk: safe
 source: self

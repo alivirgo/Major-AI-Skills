@@ -1,6 +1,6 @@
 ---
 name: swift
-description: "Operational skill for Swift: value types, optionals, async/await, actors, SwiftUI state basics, and protocol-oriented design."
+description: "Write Swift with optionals, value types, protocols, async/await, and actors; manage state in SwiftUI workflows."
 category: development
 risk: safe
 source: self

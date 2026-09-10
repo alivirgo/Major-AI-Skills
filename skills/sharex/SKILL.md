@@ -1,6 +1,6 @@
 ---
 name: sharex
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize ShareX, FFmpeg screen recording, Custom Uploader (.sxcu) APIs, OCR workflows, and CLI integration."
+description: "Configure ShareX capture, recording, OCR, and custom uploader workflows with CLI or API integrations."
 category: windows
 risk: safe
 source: self

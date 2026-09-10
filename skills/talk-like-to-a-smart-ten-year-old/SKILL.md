@@ -1,6 +1,6 @@
 ---
 name: talk-like-to-a-smart-ten-year-old
-description: "How to use the ELI10 mental model framework to demystify complex technical, financial, and scientific concepts without childish condescension or dense jargon."
+description: "Explain complex ideas in clear everyday language with concrete examples and without condescension."
 category: common-sense
 risk: safe
 source: self

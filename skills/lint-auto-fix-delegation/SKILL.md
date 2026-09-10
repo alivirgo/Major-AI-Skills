@@ -1,6 +1,6 @@
 ---
 name: lint-auto-fix-delegation
-description: "How autonomous coding agents delegate formatting, unused imports, and styling rules to local linters (ruff, biome, eslint --fix) rather than wasting LLM tokens on manual syntax fixes."
+description: "Delegate mechanical style and import corrections to the repository's linter and inspect the resulting diff."
 category: efficiency
 risk: safe
 source: self

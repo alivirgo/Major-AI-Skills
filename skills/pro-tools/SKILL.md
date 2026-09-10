@@ -1,6 +1,6 @@
 ---
 name: pro-tools
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Avid Pro Tools Ultimate, Pro Tools Scripting SDK (PTSL/gRPC), AAX DSP, HDX hardware, and EUCON."
+description: "Automate Pro Tools session workflows with its scripting SDK and troubleshoot AAX, HDX, or EUCON integration."
 category: music
 risk: safe
 source: self

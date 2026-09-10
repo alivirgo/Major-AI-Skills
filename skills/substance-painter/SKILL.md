@@ -1,6 +1,6 @@
 ---
 name: substance-painter
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, troubleshoot, and script Adobe Substance 3D Painter PBR texturing pipelines, mesh map baking, Python API automation, and SAT batch rendering."
+description: "Automate Substance 3D Painter texturing and mesh-map baking with Python and batch tools; inspect PBR export workflows."
 category: 3d
 risk: safe
 source: self

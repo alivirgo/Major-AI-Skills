@@ -1,6 +1,6 @@
 ---
 name: spring-boot
-description: "Operational skill for Spring Boot: starters, dependency injection, REST controllers, validation, profiles, Actuator, and test slices."
+description: "Build Spring Boot REST services with validation, profiles, dependency injection, Actuator, and focused test slices."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: single-command-script-chaining
-description: "How to chain setup, build, and verification commands into atomic single-turn compound executions (&&, ;, |), slashing API roundtrips and conversation context accumulation by 80%."
+description: "Group dependent command-line operations when the shell's failure and sequencing behavior is explicit."
 category: efficiency
 risk: safe
 source: self

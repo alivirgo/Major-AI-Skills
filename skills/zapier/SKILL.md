@@ -1,6 +1,6 @@
 ---
 name: zapier
-description: "Operational skill for Zapier: Zaps, triggers, actions, Filters/Paths, storage, and error-handling without brittle automations."
+description: "Build Zapier automations with triggers, actions, filters, paths, and storage; handle mapping and execution errors."
 category: automation
 risk: safe
 source: self

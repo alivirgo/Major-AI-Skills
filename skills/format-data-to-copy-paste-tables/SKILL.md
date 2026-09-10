@@ -1,6 +1,6 @@
 ---
 name: format-data-to-copy-paste-tables
-description: "How to use AI as an instant ETL engine to parse messy raw text, emails, and receipts into clean, spreadsheet-ready TSV/CSV tables."
+description: "Convert unstructured text, emails, or receipts into consistent CSV or TSV rows for a spreadsheet."
 category: common-sense
 risk: safe
 source: self

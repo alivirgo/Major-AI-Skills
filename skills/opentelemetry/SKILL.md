@@ -1,6 +1,6 @@
 ---
 name: opentelemetry
-description: "Operational skill for agents to instrument services with OpenTelemetry - traces, metrics, logs, SDKs, collectors, and context propagation."
+description: "Instrument services with OpenTelemetry traces, metrics, and logs; configure collectors and diagnose context propagation."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: regex-one-liner-refactoring
-description: "How to replace 20-line procedural character-by-character parsing loops with concise, compiled Regular Expressions, reducing string manipulation code size by 75%."
+description: "Use regular expressions for bounded text transformations when structured parsing is unnecessary and edge cases are covered."
 category: efficiency
 risk: safe
 source: self

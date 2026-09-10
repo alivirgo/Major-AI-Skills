@@ -1,6 +1,6 @@
 ---
 name: terraform
-description: "Operational skill for writing and reviewing Terraform HCL: providers, modules, remote state, plans, applies, and destructive-change safety."
+description: "Write and review Terraform HCL, configure providers and remote state, and assess plan changes before infrastructure applies."
 category: devops
 risk: safe
 source: self

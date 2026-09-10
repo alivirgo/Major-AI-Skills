@@ -1,6 +1,6 @@
 ---
 name: beware-of-ai-recommendation-bias
-description: "How to neutralize pre-training data bias, SEO affiliate spam influence, and brand popularity bias when evaluating software, hardware, and vendors."
+description: "Review product recommendations for popularity bias, affiliate influence, missing alternatives, and unsupported comparisons."
 category: common-sense
 risk: safe
 source: self

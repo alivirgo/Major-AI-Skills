@@ -1,6 +1,6 @@
 ---
 name: huggingface-transformers
-description: "Operational skill for Hugging Face Transformers: pipelines, tokenizers, fine-tuning, and inference with AutoModel APIs."
+description: "Use Hugging Face Transformers pipelines, tokenizers, and AutoModel interfaces for inference and fine-tuning workflows."
 category: scientific
 risk: safe
 source: self

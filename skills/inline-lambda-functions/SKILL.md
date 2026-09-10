@@ -1,6 +1,6 @@
 ---
 name: inline-lambda-functions
-description: "How to eliminate verbose multi-line helper boilerplate by using concise inline lambda expressions and arrow functions, cutting callback token generation by 55%."
+description: "Use concise lambdas or arrow functions for small callbacks when a separate named function adds no clarity."
 category: efficiency
 risk: safe
 source: self

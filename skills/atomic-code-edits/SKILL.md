@@ -1,6 +1,6 @@
 ---
 name: atomic-code-edits
-description: "How autonomous coding agents use atomic chunk replacement tools (replace_file_content) instead of full-file overwrites to eliminate token bloat, latency, and accidental code truncation."
+description: "Apply localized code replacements when only a small part of a file changes, preserving surrounding implementation and review context."
 category: efficiency
 risk: safe
 source: self

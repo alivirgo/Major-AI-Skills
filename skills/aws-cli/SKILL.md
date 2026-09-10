@@ -1,6 +1,6 @@
 ---
 name: aws-cli
-description: "Operational skill for AWS CLI v2: profiles and SSO, IAM least privilege, S3, EC2, Lambda, CloudWatch Logs, and safe account/region confirmation before mutations."
+description: "Use AWS CLI profiles and SSO to inspect and manage S3, EC2, Lambda, IAM, and CloudWatch resources with explicit account and region selection."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: losslesscut
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize LosslessCut workflows, keyframe GOP alignment, lossless stream copying, and smart-cut rendering."
+description: "Trim and join media with LosslessCut, inspect keyframe boundaries, and choose between stream copying and smart-cut rendering."
 category: cross-platform
 risk: safe
 source: self

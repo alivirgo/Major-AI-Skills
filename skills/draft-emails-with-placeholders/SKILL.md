@@ -1,6 +1,6 @@
 ---
 name: draft-emails-with-placeholders
-description: "How to use the Modular Bracketed Placeholder Pattern to create reusable, mistake-proof email templates for sales, client follow-ups, and executive updates."
+description: "Draft reusable email templates with clearly marked placeholders for names, dates, amounts, and other missing facts."
 category: common-sense
 risk: safe
 source: self

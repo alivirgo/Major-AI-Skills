@@ -1,6 +1,6 @@
 ---
 name: prioritize-urgent-vs-important
-description: "How to use AI to triage chaotic daily to-do lists into the 4 Eisenhower Quadrants (Do First, Schedule, Delegate, Eliminate) for maximum daily leverage."
+description: "Sort a task list by urgency and importance to identify work to do, schedule, delegate, or remove."
 category: common-sense
 risk: safe
 source: self

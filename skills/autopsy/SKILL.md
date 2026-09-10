@@ -1,6 +1,6 @@
 ---
 name: autopsy
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Autopsy Digital Forensics, The Sleuth Kit (TSK), Ingest Module pipelines, and Apache Solr search indexing."
+description: "Automate authorized forensic analysis in Autopsy with Sleuth Kit ingest modules, evidence-processing pipelines, and search indexing."
 category: digital-forensics
 risk: safe
 source: self

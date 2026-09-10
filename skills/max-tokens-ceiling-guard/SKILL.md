@@ -1,6 +1,6 @@
 ---
 name: max-tokens-ceiling-guard
-description: "How to clamp max_tokens parameter to task-specific budgets (1 to 300 tokens) rather than defaulting to 4,096, preventing runaway generation loops and capping financial exposure."
+description: "Set task-appropriate output token limits in model requests and handle truncated responses explicitly."
 category: efficiency
 risk: safe
 source: self

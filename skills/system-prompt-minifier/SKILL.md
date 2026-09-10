@@ -1,6 +1,6 @@
 ---
 name: system-prompt-minifier
-description: "How to build and run an automated system prompt minifier that strips markdown comments, compresses redundant whitespace, and rewrites polite fluff into dense imperative grammar, cutting prompt size by 50%."
+description: "Reduce redundant prompt whitespace and repeated wording while checking that requirements remain intact."
 category: efficiency
 risk: safe
 source: self

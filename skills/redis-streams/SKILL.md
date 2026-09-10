@@ -1,6 +1,6 @@
 ---
 name: redis-streams
-description: "Operational skill for Redis Streams: XADD/XREADGROUP, consumer groups, acknowledgements, pending entries, and trim policies (complementary to Redis caching)."
+description: "Build Redis Streams consumers with groups, acknowledgements, pending-entry recovery, and trimming policies."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: specify-the-audience
-description: "How to anchor prompts with precise Audience Profiles to calibrate vocabulary, technical depth, and emotional framing for specific readers."
+description: "Describe the audience's expertise and needs so vocabulary, detail, and framing fit the intended reader."
 category: common-sense
 risk: safe
 source: self

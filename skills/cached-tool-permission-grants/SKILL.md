@@ -1,6 +1,6 @@
 ---
 name: cached-tool-permission-grants
-description: "How to configure session-scoped tool permission caching and auto-approval policies to eliminate human-in-the-loop modal stalls and permission error loops."
+description: "Reuse session-scoped tool approvals where the host supports them, preserving the user's approved scope and existing permission boundaries."
 category: efficiency
 risk: safe
 source: self

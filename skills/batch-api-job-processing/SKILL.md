@@ -1,6 +1,6 @@
 ---
 name: batch-api-job-processing
-description: "How to route non-interactive workloads (evaluations, mass refactoring audits, dataset generation) through Anthropic and OpenAI Asynchronous Batch APIs to cut token bills 50%."
+description: "Organize asynchronous evaluation, audit, or dataset workloads for a provider's batch API when immediate responses are unnecessary."
 category: efficiency
 risk: safe
 source: self

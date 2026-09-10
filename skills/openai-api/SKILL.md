@@ -1,6 +1,6 @@
 ---
 name: openai-api
-description: "Operational skill for the OpenAI API: chat completions/responses, tools, embeddings, retries, and production client hygiene."
+description: "Integrate OpenAI Responses or Chat Completions, tools, and embeddings with retry handling and clear client boundaries."
 category: development
 risk: safe
 source: self

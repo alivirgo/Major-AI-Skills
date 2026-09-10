@@ -1,6 +1,6 @@
 ---
 name: kafka
-description: "Operational skill for Apache Kafka: topics, partitions, producers/consumers, consumer groups, offsets, and lag monitoring caveats."
+description: "Configure Kafka topics and consumers, inspect partitions and offsets, and diagnose consumer-group lag."
 category: devops
 risk: safe
 source: self

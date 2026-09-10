@@ -1,6 +1,6 @@
 ---
 name: boolean-flag-responses
-description: "How to constrain diagnostic checks, compliance audits, and triage gates to single-token boolean/enum responses (TRUE/FALSE), cutting output tokens by 99%."
+description: "Design boolean or enum outputs for narrow diagnostic and triage tasks whose full result fits a fixed set of values."
 category: efficiency
 risk: safe
 source: self

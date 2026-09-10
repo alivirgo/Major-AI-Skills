@@ -1,6 +1,6 @@
 ---
 name: context-pruning-directive
-description: "How agent runtimes dynamically prune stale tool outputs, dead build logs, and historical turns to eliminate quadratic token growth ($O(N^2)$) and prevent attention degradation."
+description: "Prune stale tool output and redundant conversation history while retaining current requirements, decisions, and unresolved work."
 category: efficiency
 risk: safe
 source: self

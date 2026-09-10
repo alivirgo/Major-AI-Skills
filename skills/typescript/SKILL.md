@@ -1,6 +1,6 @@
 ---
 name: typescript
-description: "Operational skill for TypeScript: strict typing, narrowing, generics, tsconfig, migrating JavaScript safely, and eliminating any-typed boundaries."
+description: "Model TypeScript data with strict types, narrowing, and generics; configure tsconfig and migrate JavaScript while checking untyped boundaries."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: ask-one-best-answer
-description: "How forcing AI to deliver the single highest-leverage recommendation prevents shallow list dilution and delivers high-conviction, actionable solutions."
+description: "Request one recommended option with its rationale when a long list would obscure the decision."
 category: common-sense
 risk: safe
 source: self

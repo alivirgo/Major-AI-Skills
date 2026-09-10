@@ -1,6 +1,6 @@
 ---
 name: generate-social-media-captions
-description: "How to prompt for high-engagement, platform-native social media copy across LinkedIn, X/Twitter, and Instagram without robotic AI clichés or emoji spam."
+description: "Draft platform-appropriate social captions using a specific audience, message, voice, and call to action."
 category: common-sense
 risk: safe
 source: self

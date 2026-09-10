@@ -1,6 +1,6 @@
 ---
 name: linear
-description: "Operational skill for Claude to automate Linear via GraphQL API, issues, projects, cycles, labels, and webhook-driven product ops."
+description: "Manage Linear issues, projects, cycles, and labels through GraphQL and webhook-driven workflows."
 category: productivity
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: graphql-introspection-trimmer
-description: "How autonomous agents prune full GraphQL Introspection schemas and SDL dumps down to operation-targeted subgraphs, eliminating 90% of API context token bloat."
+description: "Extract operation-relevant GraphQL types from an introspection schema before building or debugging a query."
 category: efficiency
 risk: safe
 source: self

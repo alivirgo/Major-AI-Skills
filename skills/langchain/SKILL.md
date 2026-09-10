@@ -1,6 +1,6 @@
 ---
 name: langchain
-description: "Operational skill for LangChain: chains/LCEL, tools, memory boundaries, retrieval, and production LLM app structure."
+description: "Build LangChain LCEL, tool, and retrieval workflows with explicit memory boundaries and application structure."
 category: development
 risk: safe
 source: self

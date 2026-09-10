@@ -1,6 +1,6 @@
 ---
 name: simple-understanding-quiz
-description: "How to use the Testing Effect and Active Retrieval practice to diagnose knowledge gaps, eliminate illusions of competence, and lock in concepts."
+description: "Create short retrieval questions to identify knowledge gaps and check understanding of a topic."
 category: common-sense
 risk: safe
 source: self

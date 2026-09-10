@@ -1,6 +1,6 @@
 ---
 name: clickhouse
-description: "Operational skill for ClickHouse: MergeTree tables, partitions, projections, ingest, and analytical SQL performance."
+description: "Design ClickHouse MergeTree tables, partitioning, and projections; inspect ingestion and analytical query performance."
 category: devops
 risk: safe
 source: self

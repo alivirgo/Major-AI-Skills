@@ -1,6 +1,6 @@
 ---
 name: semgrep
-description: "Operational skill for Semgrep: writing rules, running CI scans, tuning noise, and triaging findings without drowning in false positives."
+description: "Write and run Semgrep rules, triage findings, and tune CI scanning to reduce irrelevant alerts."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: state-your-goal-not-just-command
-description: "How to avoid the classic XY Problem by explaining the ultimate business or technical outcome you want, unlocking simpler and higher-leverage solutions."
+description: "Explain the underlying outcome and constraints so a requested implementation can be assessed against the real goal."
 category: common-sense
 risk: safe
 source: self

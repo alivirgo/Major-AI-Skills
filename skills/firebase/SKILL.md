@@ -1,6 +1,6 @@
 ---
 name: firebase
-description: "Operational skill for Firebase: Auth, Firestore/RTDB rules, Cloud Functions, FCM, Emulator Suite, and client SDK security boundaries."
+description: "Build Firebase authentication, database rules, Cloud Functions, and messaging workflows; test access boundaries with the Emulator Suite."
 category: development
 risk: safe
 source: self

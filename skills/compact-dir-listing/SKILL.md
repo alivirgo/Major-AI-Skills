@@ -1,6 +1,6 @@
 ---
 name: compact-dir-listing
-description: "How autonomous agents use compact flat relative path streams instead of nested Unicode ASCII trees (tree -a) to eliminate 75% of filesystem inspection token overhead."
+description: "List relative file paths compactly when exploring repository structure without a full decorative directory tree."
 category: efficiency
 risk: safe
 source: self

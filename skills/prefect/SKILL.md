@@ -1,6 +1,6 @@
 ---
 name: prefect
-description: "Operational skill for Prefect: flows, tasks, deployments, work pools, retries, and observability for Python pipelines."
+description: "Build Prefect flows and tasks, configure deployments and work pools, and troubleshoot retries or pipeline observability."
 category: devops
 risk: safe
 source: self

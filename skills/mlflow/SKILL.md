@@ -1,6 +1,6 @@
 ---
 name: mlflow
-description: "Operational skill for MLflow: experiment tracking, runs, artifacts, model registry, and reproducible ML logging."
+description: "Track machine-learning experiments, parameters, metrics, artifacts, and model-registry changes with MLflow."
 category: scientific
 risk: safe
 source: self

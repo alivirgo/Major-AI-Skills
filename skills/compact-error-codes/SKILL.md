@@ -1,6 +1,6 @@
 ---
 name: compact-error-codes
-description: "How agent runtimes compress 50-line stack traces into structured, standardized error codes ([ERR_AUTH_EXPIRED: auth.ts:42]) to eliminate error fixation and save 80% of debugging tokens."
+description: "Represent repeated runtime failures with stable error codes and source locations while keeping full diagnostics available for investigation."
 category: efficiency
 risk: safe
 source: self

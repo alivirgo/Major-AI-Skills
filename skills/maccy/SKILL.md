@@ -1,6 +1,6 @@
 ---
 name: maccy
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Maccy, NSPasteboard changeCount polling, Secure Input locks, CoreData storage, and simulated paste events."
+description: "Configure Maccy clipboard workflows and inspect pasteboard, Secure Input, storage, or simulated-paste issues on macOS."
 category: macos
 risk: safe
 source: self

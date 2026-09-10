@@ -1,6 +1,6 @@
 ---
 name: compact-yaml-frontmatter
-description: "How to design lean, high-density YAML frontmatter for documentation, skills, and RAG knowledge bases, eliminating 70% of header token bloat."
+description: "Write concise YAML metadata for skills and documents with clear names, descriptions, and supported routing fields."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: minimal-diff-formatter
-description: "How to format code changes using standard unified diffs (```diff with + and - lines) instead of full-file code blocks, cutting output token generation by 85% and improving developer review velocity."
+description: "Present code changes as unified diffs when reviewers need the modified lines and nearby context."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: list-comprehension-compression
-description: "How to replace verbose multi-line procedural accumulator loops with high-density Python list/dict comprehensions and functional pipelines, cutting loop token overhead by 60%."
+description: "Replace simple Python accumulation loops with comprehensions when the transformation remains easy to read."
 category: efficiency
 risk: safe
 source: self

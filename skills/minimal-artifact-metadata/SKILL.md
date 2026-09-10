@@ -1,6 +1,6 @@
 ---
 name: minimal-artifact-metadata
-description: "How to structure high-density ArtifactMetadata fields (Summary, UserFacing, RequestFeedback) during artifact creation and editing, cutting metadata overhead by 80%."
+description: "Write concise artifact metadata that identifies the deliverable, its purpose, and any requested review."
 category: efficiency
 risk: safe
 source: self

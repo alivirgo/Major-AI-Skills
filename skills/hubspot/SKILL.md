@@ -1,6 +1,6 @@
 ---
 name: hubspot
-description: "Operational skill for HubSpot: CRM objects, properties, workflows, private apps, and HubSpot API rate-limit hygiene."
+description: "Manage HubSpot CRM objects and properties, configure workflows and private apps, and handle API rate limits."
 category: enterprise
 risk: safe
 source: self

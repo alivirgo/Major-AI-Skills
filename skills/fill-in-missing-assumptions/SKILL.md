@@ -1,6 +1,6 @@
 ---
 name: fill-in-missing-assumptions
-description: "How to use Assumption Surfacing and Sensitivity Analysis to uncover silent presuppositions, prevent architectural failure, and stress-test recommendations."
+description: "Identify hidden assumptions and test how changing them affects a recommendation or design."
 category: common-sense
 risk: safe
 source: self

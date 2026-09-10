@@ -1,6 +1,6 @@
 ---
 name: top-k-vector-pruning
-description: "How to constrain vector search retrieval to Top-K=2 or 3 high-confidence chunks using cosine similarity thresholds (>0.78) and cross-encoder rerankers, eliminating 70% of RAG context noise."
+description: "Tune retrieval count, relevance thresholds, and reranking for a RAG task using measured answer quality."
 category: efficiency
 risk: safe
 source: self

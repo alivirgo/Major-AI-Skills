@@ -1,6 +1,6 @@
 ---
 name: python-packaging
-description: "Operational skill for Python packaging: pyproject.toml, src layout, virtualenvs, pytest/ruff/mypy tooling, and publishing wheels to indexes."
+description: "Package Python projects with pyproject.toml, build wheels, configure test and lint tools, and prepare index publishing."
 category: development
 risk: safe
 source: self

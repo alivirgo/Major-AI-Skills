@@ -1,6 +1,6 @@
 ---
 name: targeted-line-range-edits
-description: "How to apply precise line-bounded code edits using replace_file_content ([StartLine, EndLine] windowing) rather than rewriting complete 500-line files, cutting edit output tokens by 95%."
+description: "Apply localized edits to the relevant file region instead of regenerating an entire file."
 category: efficiency
 risk: safe
 source: self

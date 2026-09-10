@@ -1,6 +1,6 @@
 ---
 name: react-native
-description: "Operational skill for React Native: core components, navigation, native modules awareness, New Architecture notes, and release builds."
+description: "Build React Native interfaces and navigation, integrate native modules, and prepare platform release builds."
 category: development
 risk: safe
 source: self

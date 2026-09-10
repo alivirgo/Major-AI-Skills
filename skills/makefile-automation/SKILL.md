@@ -1,6 +1,6 @@
 ---
 name: makefile-automation
-description: "Operational skill for agents to design reliable Makefiles - phony targets, dependencies, variables, self-docs, and safe automation entrypoints for repos."
+description: "Design Makefile targets, dependencies, variables, and discoverable repository automation commands."
 category: devops
 risk: safe
 source: self

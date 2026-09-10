@@ -1,6 +1,6 @@
 ---
 name: helm
-description: "Operational skill for packaging and deploying Kubernetes applications with Helm charts, values overrides, hooks, dependencies, and release rollbacks."
+description: "Package Kubernetes applications as Helm charts, configure values and dependencies, and inspect release upgrades or rollbacks."
 category: devops
 risk: safe
 source: self

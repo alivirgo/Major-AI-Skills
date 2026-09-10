@@ -1,6 +1,6 @@
 ---
 name: vault
-description: "Operational skill for agents to use HashiCorp Vault for secrets - KV engines, policies, AppRole/K8s auth, dynamic credentials, and safe lease handling."
+description: "Configure Vault secret engines, policies, AppRole or Kubernetes authentication, and dynamic credential leases."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: originpro
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize OriginLab OriginPro, originpro Python API, Nonlinear Curve Fitting (NLFit), Peak Analysis, and LabTalk."
+description: "Automate OriginPro data analysis with Python or LabTalk, configure nonlinear fitting, and inspect peak-analysis workflows."
 category: scientific
 risk: safe
 source: self

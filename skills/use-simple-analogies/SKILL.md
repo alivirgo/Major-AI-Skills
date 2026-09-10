@@ -1,6 +1,6 @@
 ---
 name: use-simple-analogies
-description: "How to anchor abstract software, financial, and scientific concepts in familiar physical systems (kitchens, highways, warehouses) for instant comprehension."
+description: "Explain an unfamiliar concept through a familiar example and identify where the analogy stops applying."
 category: common-sense
 risk: safe
 source: self

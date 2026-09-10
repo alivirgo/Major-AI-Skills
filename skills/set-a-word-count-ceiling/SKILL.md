@@ -1,6 +1,6 @@
 ---
 name: set-a-word-count-ceiling
-description: "How to enforce hard word ceilings ('under 60 words', 'max 3 sentences') to eliminate fluff, boost readability, and slash token costs."
+description: "Specify and check a word or sentence limit when a deliverable must fit a constrained format."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: lazy-dependency-loading
-description: "How autonomous coding agents rely on parametric knowledge first and fetch external SDK documentation Just-In-Time (JIT) only upon compiler or import failures, cutting upfront context bloat by 85%."
+description: "Load dependency documentation relevant to the current API or error while checking version-sensitive assumptions."
 category: efficiency
 risk: safe
 source: self

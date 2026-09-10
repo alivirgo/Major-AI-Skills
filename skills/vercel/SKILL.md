@@ -1,6 +1,6 @@
 ---
 name: vercel
-description: "Operational skill for Vercel deployments: Next.js/frontend project linking, env vars, preview vs production, build settings, and rollout hygiene."
+description: "Configure Vercel projects, environment variables, build settings, and preview deployments before a production rollout."
 category: development
 risk: safe
 source: self

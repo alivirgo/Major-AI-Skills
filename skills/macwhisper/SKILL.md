@@ -1,6 +1,6 @@
 ---
 name: macwhisper
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize MacWhisper, Core ML / whisper.cpp engines, Apple Neural Engine (ANE) acceleration, and subtitle pipelines."
+description: "Build MacWhisper transcription and subtitle workflows and troubleshoot local speech-model execution on Apple hardware."
 category: macos
 risk: safe
 source: self

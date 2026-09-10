@@ -1,6 +1,6 @@
 ---
 name: davinci-resolve
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize DaVinci Resolve Studio 19, Python Scripting API, Fusion VFX nodes, ACES/DWG color management, and Deliver batch rendering."
+description: "Automate DaVinci Resolve media and timelines with its scripting API, build Fusion workflows, and configure render jobs."
 category: video-editing
 risk: safe
 source: self

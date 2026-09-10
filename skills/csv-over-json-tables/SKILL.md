@@ -1,6 +1,6 @@
 ---
 name: csv-over-json-tables
-description: "Why transmitting tabular datasets as CSV/TSV instead of verbose JSON object arrays eliminates repetitive key names, slashing payload token consumption by 70%."
+description: "Represent rectangular datasets as CSV or TSV when repeated JSON field names add unnecessary payload size."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: remember-ai-cutoff-dates
-description: "How to prevent obsolete code, deprecated APIs, and outdated tax advice by enforcing Temporal Grounding and live web search triggers."
+description: "Check current sources for version-sensitive facts, APIs, prices, and rules before relying on model knowledge."
 category: common-sense
 risk: safe
 source: self

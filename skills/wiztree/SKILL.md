@@ -1,6 +1,6 @@
 ---
 name: wiztree
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize WizTree, raw NTFS MFT parsing, CSV storage audit exports, and headless CLI disk space analysis."
+description: "Analyze disk usage with WizTree, export storage-audit CSVs, and troubleshoot NTFS scan behavior."
 category: windows
 risk: safe
 source: self

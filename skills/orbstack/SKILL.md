@@ -1,6 +1,6 @@
 ---
 name: orbstack
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize OrbStack, Apple Silicon Hypervisor.framework, VirtioFS, Rosetta 2 Linux emulation, and .orb.local networking."
+description: "Configure OrbStack containers and Linux environments on macOS; troubleshoot shared files, emulation, and local networking."
 category: macos
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: cubase
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Steinberg Cubase Pro 13/14, MIDI Remote JavaScript API, ASIO Guard, Expression Maps, and MixConsole."
+description: "Configure Cubase MIDI Remote scripts, Expression Maps, and MixConsole workflows; investigate ASIO Guard and performance issues."
 category: music
 risk: safe
 source: self

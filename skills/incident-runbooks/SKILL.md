@@ -1,6 +1,6 @@
 ---
 name: incident-runbooks
-description: "Operational skill for writing actionable oncall runbooks: symptoms, severity, diagnostics, mitigation steps, escalation, and post-incident links."
+description: "Write on-call runbooks with symptoms, severity, diagnostics, mitigation steps, escalation paths, and incident references."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: trello
-description: "Operational skill for Trello: boards, lists, cards, Power-Ups, Butler automation, and REST API card hygiene."
+description: "Organize Trello boards and cards, configure Butler automation or Power-Ups, and perform scoped REST updates."
 category: productivity
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: owasp-asvs
-description: "Operational skill for OWASP ASVS: selecting levels, mapping requirements to controls, evidence for reviews, and gap triage."
+description: "Map application-security review evidence to OWASP ASVS requirements, select an appropriate verification level, and triage gaps."
 category: development
 risk: safe
 source: self

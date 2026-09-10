@@ -1,6 +1,6 @@
 ---
 name: batch-file-creation
-description: "How autonomous coding agents scaffold multi-file features and directories in a single execution turn using local generator scripts, cutting round-trip latency by 90%."
+description: "Scaffold related files with a local generator when a repeatable multi-file layout is needed."
 category: efficiency
 risk: safe
 source: self

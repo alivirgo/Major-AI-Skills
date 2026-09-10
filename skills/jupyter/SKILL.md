@@ -1,6 +1,6 @@
 ---
 name: jupyter
-description: "Operational skill for Jupyter: notebooks, kernels, reproducible cells, papermill params, and hygiene for sharing analytical work."
+description: "Build reproducible Jupyter notebooks, manage kernels and execution order, and parameterize runs with papermill."
 category: scientific
 risk: safe
 source: self

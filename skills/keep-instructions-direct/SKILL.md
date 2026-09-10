@@ -1,6 +1,6 @@
 ---
 name: keep-instructions-direct
-description: "Why leading with precise imperative action verbs ('Refactor', 'Audit', 'Synthesize') maximizes model attention and eliminates preamble fluff."
+description: "Write clear action-oriented instructions with a specific task and expected result."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: inline-type-signatures
-description: "How to enforce native language type hints (TypeScript syntax, Python PEP 484) while stripping duplicate JSDoc/Sphinx @param docstrings, eliminating 40% of signature token bloat."
+description: "Use native type annotations and avoid repeating the same type information in documentation comments."
 category: efficiency
 risk: safe
 source: self

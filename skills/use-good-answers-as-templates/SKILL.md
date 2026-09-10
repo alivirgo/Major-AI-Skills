@@ -1,6 +1,6 @@
 ---
 name: use-good-answers-as-templates
-description: "How to use previous high-performing AI responses as 1-shot structural templates to enforce 100% formatting, tone, and depth consistency across new topics."
+description: "Use an approved response as a structural example for a new task while replacing its facts and context."
 category: common-sense
 risk: safe
 source: self

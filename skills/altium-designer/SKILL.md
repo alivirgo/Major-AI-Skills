@@ -1,6 +1,6 @@
 ---
 name: altium-designer
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Altium Designer, DXP scripting engine, DRC rules, OutJob CAM generation, and high-speed PCB routing."
+description: "Automate Altium Designer PCB workflows with DXP scripts, design-rule checks, OutJob fabrication outputs, and routing configuration."
 category: eda
 risk: safe
 source: self

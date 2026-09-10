@@ -1,6 +1,6 @@
 ---
 name: always-verify-numbers-and-links
-description: "Why LLMs hallucinate statistics, phone numbers, and URLs, and how to enforce grounding, external verification, and tool-assisted calculations."
+description: "Verify statistics, contact details, calculations, and URLs against appropriate sources before using them in a deliverable."
 category: common-sense
 risk: safe
 source: self

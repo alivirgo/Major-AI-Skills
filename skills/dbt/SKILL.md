@@ -1,6 +1,6 @@
 ---
 name: dbt
-description: "Operational skill for dbt: models, refs, tests, docs, and analytics engineering workflows on warehouses."
+description: "Build dbt models with refs, data tests, and generated documentation for version-controlled warehouse transformations."
 category: devops
 risk: safe
 source: self

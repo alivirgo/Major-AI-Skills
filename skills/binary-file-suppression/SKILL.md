@@ -1,6 +1,6 @@
 ---
 name: binary-file-suppression
-description: "How autonomous coding agents detect and suppress raw binary, compiled, and media files from text context ingestion, preventing catastrophic context corruption and token overflow."
+description: "Detect binary, compiled, and media files before text ingestion so agent context contains readable source and metadata."
 category: efficiency
 risk: safe
 source: self

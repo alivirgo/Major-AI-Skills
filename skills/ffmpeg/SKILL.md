@@ -1,6 +1,6 @@
 ---
 name: ffmpeg
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize FFmpeg transcoding pipelines, hardware acceleration (NVENC/QSV/VideoToolbox), and complex filtergraphs."
+description: "Transcode and compress video with FFmpeg, inspect streams with ffprobe, build filtergraphs and HLS outputs, and diagnose codec or hardware-encoder failures."
 category: cross-platform
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: rclone
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Rclone multi-cloud synchronization, FUSE virtual mounts, client-side encryption, and high-throughput transfers."
+description: "Plan and run Rclone cloud transfers, synchronization, encrypted remotes, and mounts while checking source and destination behavior."
 category: cross-platform
 risk: safe
 source: self

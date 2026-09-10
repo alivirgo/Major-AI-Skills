@@ -1,6 +1,6 @@
 ---
 name: asana
-description: "Operational skill for Asana: projects, tasks, sections, custom fields, rules, and API automation without notification spam."
+description: "Organize Asana projects and tasks, configure custom fields and rules, and automate scoped updates through its API."
 category: productivity
 risk: safe
 source: self

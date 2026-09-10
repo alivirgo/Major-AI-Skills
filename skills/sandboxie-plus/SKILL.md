@@ -1,6 +1,6 @@
 ---
 name: sandboxie-plus
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Sandboxie-Plus, SbieDrv.sys kernel driver, Sandboxie.ini configuration, Start.exe CLI, and ephemeral malware containment."
+description: "Configure Sandboxie-Plus isolation settings and disposable test environments, and troubleshoot sandbox execution boundaries."
 category: windows
 risk: safe
 source: self

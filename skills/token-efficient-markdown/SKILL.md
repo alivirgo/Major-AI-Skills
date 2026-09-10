@@ -1,6 +1,6 @@
 ---
 name: token-efficient-markdown
-description: "How to format markdown documentation, tables, and artifacts with high structural density, eliminating decorative ASCII dividers, padded table spaces, and multi-newline whitespace bloat."
+description: "Format concise Markdown with useful headings and tables while avoiding decorative or repetitive markup."
 category: efficiency
 risk: safe
 source: self

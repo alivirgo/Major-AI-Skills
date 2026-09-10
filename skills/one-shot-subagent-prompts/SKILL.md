@@ -1,6 +1,6 @@
 ---
 name: one-shot-subagent-prompts
-description: "How orchestrator agents formulate comprehensive, self-contained task prompts for child subagents (Task, Boundaries, Stop Conditions, Return Schema), eliminating 75% of multi-turn clarification ping-pongs."
+description: "Write self-contained delegated tasks with relevant context, boundaries, completion criteria, and a useful return format."
 category: efficiency
 risk: safe
 source: self

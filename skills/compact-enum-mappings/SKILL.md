@@ -1,6 +1,6 @@
 ---
 name: compact-enum-mappings
-description: "How to replace verbose multi-word string identifiers (STATUS_PAYMENT_PENDING) with compact integer or short-code enums (0, 1, 2) in structured JSON payloads to reduce token consumption by 70%."
+description: "Define compact enum representations for structured payloads when both producer and consumer share the same documented mapping."
 category: efficiency
 risk: safe
 source: self

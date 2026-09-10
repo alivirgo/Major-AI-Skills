@@ -1,6 +1,6 @@
 ---
 name: spark
-description: "Operational skill for Apache Spark: DataFrames, partitions, shuffle hygiene, Spark SQL, and job debugging on clusters or local mode."
+description: "Build Spark DataFrame and SQL jobs, tune partitions and shuffle behavior, and diagnose local or cluster execution failures."
 category: scientific
 risk: safe
 source: self

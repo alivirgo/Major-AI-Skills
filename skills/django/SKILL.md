@@ -1,6 +1,6 @@
 ---
 name: django
-description: "Operational skill for Django: models, ORM query hygiene, migrations, views/URLs, settings security, and admin customization."
+description: "Build Django models, views, routes, and admin features; review ORM queries, migrations, and deployment settings."
 category: development
 risk: safe
 source: self

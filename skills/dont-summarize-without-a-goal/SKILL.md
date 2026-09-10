@@ -1,6 +1,6 @@
 ---
 name: dont-summarize-without-a-goal
-description: "Why generic 'summarize this' prompts produce low-signal fluff, and how to use Goal-Directed Extraction to pull exact decision criteria."
+description: "Define the decision or information need before asking for a document summary."
 category: common-sense
 risk: safe
 source: self

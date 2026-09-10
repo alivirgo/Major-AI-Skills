@@ -1,6 +1,6 @@
 ---
 name: fusion-360
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Autodesk Fusion (Fusion 360), Python API (adsk.fusion), Parametric Timeline, and CAM toolpaths."
+description: "Automate Autodesk Fusion parametric models with the Python API, inspect timeline features, and prepare CAM workflows for review."
 category: cad
 risk: safe
 source: self

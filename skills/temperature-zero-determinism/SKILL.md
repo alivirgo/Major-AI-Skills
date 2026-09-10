@@ -1,6 +1,6 @@
 ---
 name: temperature-zero-determinism
-description: "Why code generation, tool calling, and structured JSON extractions must always execute at temperature: 0.0 (greedy decoding), eliminating stochastic hallucinations and compiler retry loops."
+description: "Configure low-temperature generation where supported for tasks needing lower output variability, with independent correctness checks."
 category: efficiency
 risk: safe
 source: self

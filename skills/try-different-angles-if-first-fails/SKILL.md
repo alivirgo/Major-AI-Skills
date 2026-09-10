@@ -1,6 +1,6 @@
 ---
 name: try-different-angles-if-first-fails
-description: "How to escape conversational deadlocks and unhelpful AI loops using 4 proven Prompt Pivot strategies (Persona, Inversion, Decomposition, Exemplar)."
+description: "Reframe an unproductive prompt using a new example, decomposition, or perspective while preserving the goal."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: direct-tool-selection
-description: "How high-performance AI agents select the most specific, specialized tool on Turn 1, eliminating multi-turn exploratory discovery loops and cutting task latency by 65%."
+description: "Choose a task-specific tool from available capabilities when its documented behavior matches the requested operation."
 category: efficiency
 risk: safe
 source: self

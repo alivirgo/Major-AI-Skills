@@ -1,6 +1,6 @@
 ---
 name: trivy
-description: "Operational skill for agents to scan images, filesystems, IaC, and repos with Aqua Trivy - CVE triage, severity gates, and CI fail policies."
+description: "Scan containers, filesystems, repositories, and infrastructure code with Trivy, then triage CVEs and configure CI thresholds."
 category: devops
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: lets-encrypt
-description: "Operational skill for agents to issue and renew TLS certificates with Let's Encrypt - certbot/acme.sh, HTTP-01/DNS-01, renewal timers, and failure recovery."
+description: "Issue and renew Let's Encrypt certificates with certbot or acme.sh, configure ACME challenges, and diagnose renewal failures."
 category: devops
 risk: safe
 source: self

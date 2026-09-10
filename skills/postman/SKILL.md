@@ -1,6 +1,6 @@
 ---
 name: postman
-description: "Operational skill for Postman: collections, environments, pre-request scripts, Newman CI runs, and API contract smoke tests (complementary to Bruno)."
+description: "Build Postman collections and environments, write request scripts, and run API smoke checks with Newman."
 category: development
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: cryengine
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize CryEngine 5.x, C++ Game Plugins, Schematyc Entity components, SVOGI global illumination, and Sandbox Editor."
+description: "Build CryEngine C++ plugins and Schematyc components; troubleshoot Sandbox Editor workflows and SVOGI lighting."
 category: game-engines
 risk: safe
 source: self

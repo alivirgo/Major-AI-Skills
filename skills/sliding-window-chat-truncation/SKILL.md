@@ -1,6 +1,6 @@
 ---
 name: sliding-window-chat-truncation
-description: "How agent runtimes enforce a 3-zone sliding window (Immutable Anchor, Compressed Milestone Summary, Active Sliding Buffer) to keep conversation context bounded under 12,000 tokens across 100+ turns."
+description: "Maintain bounded conversation context using stable instructions, a current summary, and recent task-relevant messages."
 category: efficiency
 risk: safe
 source: self

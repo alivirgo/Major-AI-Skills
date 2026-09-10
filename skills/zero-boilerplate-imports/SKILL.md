@@ -1,6 +1,6 @@
 ---
 name: zero-boilerplate-imports
-description: "How to eliminate redundant import blocks when displaying localized code patches and diffs, relying on existing file imports and automated CLI import sorters."
+description: "Show only relevant import changes in code diffs while keeping complete executable files valid."
 category: efficiency
 risk: safe
 source: self

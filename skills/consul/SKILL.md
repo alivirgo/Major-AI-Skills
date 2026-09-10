@@ -1,6 +1,6 @@
 ---
 name: consul
-description: "Operational skill for agents to run HashiCorp Consul for service discovery, health checks, KV config, intentions, and service mesh basics."
+description: "Configure Consul service discovery, health checks, key-value settings, and service-mesh intentions."
 category: devops
 risk: safe
 source: self

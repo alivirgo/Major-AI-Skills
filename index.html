@@ -126,6 +126,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="assets/discovery.css">
+  <script src="assets/skill-catalog.js"></script>
+  <script src="assets/skill-spotlight.js"></script>
+  <script src="assets/lucide.min.js"></script>
+  <script src="assets/discovery.js"></script>
   <style>
     /* ═══════════════════════════════════════════════════
        OMARCHY-INSPIRED DARK TERMINAL DESIGN SYSTEM
@@ -1018,6 +1023,7 @@
       <div class="nav-section-title">Getting Started</div>
       <ul class="nav-list">
         <li><a class="nav-item active" onclick="loadDoc('overview', event)"><span>Overview & Architecture</span></a></li>
+        <li><a class="nav-item" href="#catalog" onclick="loadDoc('catalog', event); return false;"><span>All Skills & Install Commands</span></a></li>
         <li><a class="nav-item" onclick="loadDoc('usage', event)"><span>Installation & Integration</span></a></li>
       </ul>
 
@@ -1104,7 +1110,8 @@
     // Helper: Card Generator
     function renderAppCards(catPath, apps) {
       return `<div class="app-cards-grid">` + apps.map(app => {
-        const hasVariants = app.variants !== false;
+        const skill = window.MAJOR_AI_SKILLS.find(skill => skill.id === app.slug);
+        const hasVariants = skill ? skill.variants.gpt || skill.variants.gemini : app.variants !== false;
         const links = [
           `<a href="${GH_BASE}/skills/${app.slug}/SKILL.md" target="_blank" class="file-link-btn">SKILL.md</a>`
         ];
@@ -1117,8 +1124,9 @@
         return `
         <div class="app-file-card">
           <div class="app-file-title">${app.name}</div>
-          <div class="app-file-desc">${app.desc}</div>
+          <div class="app-file-desc">${escapeSkillText(skill ? skill.description : app.desc)}</div>
           <div class="app-file-links">${links.join('')}</div>
+          ${renderSkillInstall(app.slug)}
         </div>`;
       }).join('') + `</div>`;
     }
@@ -1170,6 +1178,7 @@
         hasModels: false,
         toc: [
           { id: 'sec-hero', title: 'Overview' },
+          { id: 'sec-spotlight', title: 'Featured Workflows' },
           { id: 'sec-categories', title: 'Application Domains' },
           { id: 'sec-how', title: 'How It Works' },
           { id: 'sec-install', title: 'Quick Start' },
@@ -1186,8 +1195,10 @@
  ██║╚██╔╝██║██╔══██║██   ██║██║   ██║██╔══██╗    ██╔══██║██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
  ██║ ╚═╝ ██║██║  ██║╚█████╔╝╚██████╔╝██║  ██║    ██║  ██║██║    ███████║██║  ██╗██║███████╗███████╗███████║
  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝</div>
-            <h2 class="hero-tagline">Production-Grade AI <span class="highlight">Automation Blueprints</span></h2>
-            <p class="hero-subtitle">Deterministic, expert-level skill specifications for Claude, Gemini, GPT & Codex across 392 installable skills and 190+ product/dev workflows. Zero boilerplate. Zero hallucinations.</p>
+            <h2 class="hero-tagline">Skills for <span class="highlight">Practical Automation</span></h2>
+            <p class="hero-subtitle">392 installable playbooks for professional apps, development, and everyday work. Start with a focused workflow, inspect the instructions, and verify the result.</p>
+            <p><a href="https://skills.sh/alivirgo/Major-AI-Skills"><img src="https://skills.sh/b/alivirgo/Major-AI-Skills" alt="Major AI Skills installs on skills.sh" height="20"></a></p>
+            <p><a href="#catalog" onclick="loadDoc('catalog'); return false;">Browse all skills and install commands</a></p>
             <div class="hero-stats">
               <div class="hero-stat"><div class="hero-stat-value">392</div><div class="hero-stat-label">Skill Specs</div></div>
               <div class="hero-stat"><div class="hero-stat-value">190+</div><div class="hero-stat-label">Product Skills</div></div>
@@ -1206,6 +1217,9 @@
             </div>
           </div>
 
+          <h2 class="section-heading" id="sec-spotlight">Featured Workflows</h2>
+          ${renderSkillSpotlight()}
+
           <h2 class="section-heading" id="sec-categories">Application Domains</h2>
           <p>28 curated engineering categories spanning CAD, VFX, audio, security, industrial automation, and OS-level system utilities:</p>
           ${renderCategoryGrid()}
@@ -1220,18 +1234,21 @@
             <div class="how-card">
               <div class="how-card-num">02</div>
               <div class="how-card-title">Choose Your Model</div>
-              <div class="how-card-desc">3 specifications per app - Claude (deep architecture), Gemini (visual diagnostics), GPT (scripting).</div>
+              <div class="how-card-desc">Canonical SKILL.md instructions, with optional model variants where available.</div>
             </div>
             <div class="how-card">
               <div class="how-card-num">03</div>
               <div class="how-card-title">Ingest & Automate</div>
-              <div class="how-card-desc">Drop into Cursor rules, Claude Code, or local RAG. Get deterministic, hallucination-free results.</div>
+              <div class="how-card-desc">Install for your agent, run a focused task, and check the output against your requirements.</div>
             </div>
           </div>
 
           <h2 class="section-heading" id="sec-install">Quick Start</h2>
           <div class="install-block">
-            <pre><code><span class="install-comment"># Clone the complete repository</span>
+            <pre><code><span class="install-comment"># Install one skill with the Vercel CLI</span>
+<span class="install-cmd">npx skills add alivirgo/Major-AI-Skills --skill ffmpeg</span>
+
+<span class="install-comment"># Clone the complete repository</span>
 <span class="install-cmd">git clone https://github.com/alivirgo/Major-AI-Skills.git</span>
 
 <span class="install-comment"># Ingest a skill into Cursor rules</span>
@@ -1482,6 +1499,11 @@ npx major-ai-skills --cursor --skills solidworks</code></pre>
         toc: [{ id: 'sec-overview', title: '1. Domain Overview' }, { id: 'sec-apps', title: '2. Featured Skill Files' }],
         body: `<h2 class="section-heading" id="sec-overview">1. Domain Overview</h2><p>CRM, EAM, PLM, and ITSM platforms for go-to-market and operations automation.</p><h2 class="section-heading" id="sec-apps">2. Featured Skill Files</h2>${renderAppCards('enterprise', [{ name: 'Salesforce', slug: 'salesforce', desc: 'SOQL, Flows, Apex bulkification, SFDX deploy.', variants: false }, { name: 'HubSpot', slug: 'hubspot', desc: 'CRM properties, workflows, private apps.', variants: false }, { name: 'IBM Maximo EAM', slug: 'ibm-maximo', desc: 'Work orders, NextGen REST, automation scripts.', variants: false }, { name: 'PTC Windchill PLM', slug: 'ptc-windchill', desc: 'CAD docs, change management, Info*Engine.', variants: false }, { name: 'ServiceNow', slug: 'servicenow-desktop', desc: 'Table REST, incidents, catalog requests.', variants: false }])}`
       },
+      catalog: {
+        breadcrumb: 'Docs / Skill Catalog', heading: 'Skill Catalog',
+        description: 'Professional applications, development tools, and practical workflows.', hasModels: false,
+        toc: [], body: renderSkillCatalog()
+      },
       efficiency: {
         breadcrumb: 'Docs / Handbooks / Token & Cost Efficiency', heading: 'Token & Context Efficiency Handbook (100 Rules)', description: 'Strict token-reduction rules and prompt compression protocols designed to decrease API inference latency and cut cloud inference costs by 40-70%.', hasModels: false,
         toc: [{ id: 'sec-overview', title: '1. Token Reduction Principles' }, { id: 'sec-rules', title: '2. Core Optimization Rules' }, { id: 'sec-files', title: '3. Browse All 100 Rules' }],
@@ -1531,6 +1553,8 @@ npx major-ai-skills --cursor --skills solidworks</code></pre>
       document.getElementById('docDescription').innerText = data.description;
       document.getElementById('modelTabContainer').style.display = data.hasModels ? 'flex' : 'none';
       document.getElementById('dynamicBody').innerHTML = data.body;
+      updateSkillCatalog();
+      if (window.lucide) window.lucide.createIcons();
 
       document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
       if (ev && ev.target) {

@@ -1,6 +1,6 @@
 ---
 name: single-pass-multi-replace
-description: "How to edit multiple separated blocks across a single file in one atomic turn using multi_replace_file_content, eliminating line-drift offset errors and cutting edit roundtrips by 70%."
+description: "Apply related replacements in one edit operation when the tool can validate each target against the original file."
 category: efficiency
 risk: safe
 source: self

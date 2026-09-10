@@ -1,6 +1,6 @@
 ---
 name: comment-stripping-preprocessor
-description: "How to strip redundant license headers, dead commented-out code, and verbose docstrings from source files before LLM ingestion, reducing input tokens by 40%."
+description: "Prepare compact source excerpts for model input by removing redundant comments while retaining necessary context and keeping original files intact."
 category: efficiency
 risk: safe
 source: self

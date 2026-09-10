@@ -1,6 +1,6 @@
 ---
 name: use-voice-typing-for-fast-prompts
-description: "How to use voice dictation (150 WPM vs 40 WPM typing) to eliminate context starvation and provide rich, nuanced background in seconds."
+description: "Turn dictated context into a clear prompt with explicit goals, constraints, and corrected names or numbers."
 category: common-sense
 risk: safe
 source: self

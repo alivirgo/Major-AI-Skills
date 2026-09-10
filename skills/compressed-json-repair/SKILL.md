@@ -1,6 +1,6 @@
 ---
 name: compressed-json-repair
-description: "How agent runtimes fix malformed LLM JSON outputs locally using deterministic parsing heuristics (jsonrepair, regex) rather than wasting expensive re-prompting roundtrips."
+description: "Repair malformed model-generated JSON with a local parser or repair library, then validate it against the expected schema."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: incremental-diff-ingestion
-description: "How autonomous agents use compact unified git diffs (git diff -U3, git diff @{u}..HEAD) instead of full-file ingestion for PR reviews and commit audits, reducing review tokens by 90%."
+description: "Review compact Git diffs with enough surrounding context to assess a pull request or commit."
 category: efficiency
 risk: safe
 source: self

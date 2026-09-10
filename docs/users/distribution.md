@@ -52,6 +52,8 @@ npx major-ai-skills --cursor|--claude|--codex|--gemini|--antigravity --skills <i
 
 ## Repo checklist for discovery
 
+- [x] Generated `skills.sh.json` category groups for canonical skills (`npm run index`)
+- [ ] Publish the configuration on the default branch and verify live skill listings using the [skills.sh indexing guide](skills-sh-indexing.md)
 - [x] Public repo + MIT + Release + Pages
 - [x] Topics (20) including agent-skills / claude-code / cursor / gemini
 - [x] `AGENTS.md`, `.claude-plugin/*`, `gemini-extension.json`

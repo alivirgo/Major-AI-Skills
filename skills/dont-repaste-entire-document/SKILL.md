@@ -1,6 +1,6 @@
 ---
 name: dont-repaste-entire-document
-description: "How to maintain clean conversation context, leverage conversational memory, and avoid re-uploading large documents for micro-edits."
+description: "Reference existing document context and provide localized changes when repeating the full document is unnecessary."
 category: common-sense
 risk: safe
 source: self

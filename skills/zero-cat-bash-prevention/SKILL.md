@@ -1,6 +1,6 @@
 ---
 name: zero-cat-bash-prevention
-description: "Why autonomous agents must use structured native file viewing tools (view_file) rather than terminal shell commands (cat, type, Get-Content), enabling 1-indexed line numbering and slice bounding."
+description: "Use bounded native file readers when available to inspect source with line numbers and relevant context."
 category: efficiency
 risk: safe
 source: self

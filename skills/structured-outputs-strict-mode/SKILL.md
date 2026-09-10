@@ -1,6 +1,6 @@
 ---
 name: structured-outputs-strict-mode
-description: "How to use OpenAI and Gemini Strict Mode (strict: true) and CFG-guided decoding (Pydantic/Zod) to guarantee 100% schema adherence, eliminating markdown wrapping and JSON parse retries."
+description: "Use provider-supported structured output with a schema, handling refusals, truncation, and validation failures."
 category: efficiency
 risk: safe
 source: self

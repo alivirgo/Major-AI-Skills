@@ -1,6 +1,6 @@
 ---
 name: encase
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize OpenText EnCase Forensic, EnScript automation, E01/Ex01 evidence files, and EnCase Evidence Processor (EEP)."
+description: "Automate authorized EnCase forensic workflows with EnScript, E01/Ex01 evidence files, and Evidence Processor jobs."
 category: digital-forensics
 risk: safe
 source: self

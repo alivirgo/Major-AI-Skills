@@ -1,6 +1,6 @@
 ---
 name: dropover
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Dropover, floating NSPanel shelf windows, CGEventTap shake gestures, and URL scheme integrations."
+description: "Configure Dropover file-shelf workflows and URL integrations, and diagnose macOS gesture or window behavior."
 category: macos
 risk: safe
 source: self

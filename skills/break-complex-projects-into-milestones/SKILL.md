@@ -1,6 +1,6 @@
 ---
 name: break-complex-projects-into-milestones
-description: "How to use AI to generate structured Work Breakdown Structures (WBS), 4-week critical path roadmaps, and verifiable milestone deliverables."
+description: "Turn a project goal into milestones with deliverables, dependencies, and verifiable completion criteria."
 category: common-sense
 risk: safe
 source: self

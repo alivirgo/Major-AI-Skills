@@ -1,6 +1,6 @@
 ---
 name: omada-controller
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize TP-Link Omada SDN Controller, REST OpenAPI, MongoDB backend, device adoption, and VLAN/VPN routing."
+description: "Manage TP-Link Omada controller workflows with the REST OpenAPI, device adoption, and VLAN or VPN configuration."
 category: network
 risk: safe
 source: self

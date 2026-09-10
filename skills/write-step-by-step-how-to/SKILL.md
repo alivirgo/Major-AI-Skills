@@ -1,6 +1,6 @@
 ---
 name: write-step-by-step-how-to
-description: "How to generate bulletproof Standard Operating Procedures (SOPs) and technical tutorials with exact click paths, expected visual results, and failure troubleshooting."
+description: "Write a practical procedure with prerequisites, ordered steps, expected results, and troubleshooting."
 category: common-sense
 risk: safe
 source: self

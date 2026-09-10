@@ -1,6 +1,6 @@
 ---
 name: clean-messy-notes-to-action-items
-description: "How to parse chaotic brain dumps and meeting notes into structured [WHO] - [WHAT] - [BY WHEN] action items, decisions, and follow-ups."
+description: "Turn unstructured notes into action items with owners, deadlines, decisions, and unresolved follow-ups."
 category: common-sense
 risk: safe
 source: self

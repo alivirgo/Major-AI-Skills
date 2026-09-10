@@ -1,6 +1,6 @@
 ---
 name: horos
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Horos DICOM viewer, PACS networking (C-STORE/C-FIND/C-MOVE), DCMTK pipelines, and Objective-C plugins."
+description: "Configure Horos DICOM and PACS workflows, automate DCMTK transfers, and troubleshoot plugins without interpreting clinical findings."
 category: medical
 risk: safe
 source: self

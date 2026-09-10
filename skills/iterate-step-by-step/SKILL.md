@@ -1,6 +1,6 @@
 ---
 name: iterate-step-by-step
-description: "How to use the 4-Turn Conversational Scaffolding framework to build complex code, strategy, and content incrementally without token exhaustion or quality degradation."
+description: "Develop a complex deliverable in reviewable stages, carrying forward agreed requirements and decisions."
 category: common-sense
 risk: safe
 source: self

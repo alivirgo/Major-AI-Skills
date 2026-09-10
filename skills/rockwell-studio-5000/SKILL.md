@@ -1,6 +1,6 @@
 ---
 name: rockwell-studio-5000
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Rockwell Studio 5000 Logix Designer, ControlLogix/CompactLogix, EtherNet/IP CIP, pycomm3, and L5X schemas."
+description: "Work with Studio 5000 Logix projects, L5X files, and pycomm3 communications in an authorized industrial test environment."
 category: plc-industrial
 risk: safe
 source: self

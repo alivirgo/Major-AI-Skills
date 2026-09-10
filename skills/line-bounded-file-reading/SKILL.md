@@ -1,6 +1,6 @@
 ---
 name: line-bounded-file-reading
-description: "How autonomous coding agents use StartLine and EndLine parameters to read targeted 30-to-50 line slices rather than unbounded 2,000-line files, eliminating 90% of file ingestion tokens."
+description: "Read targeted file ranges around symbols or errors, expanding the range when more context is needed."
 category: efficiency
 risk: safe
 source: self

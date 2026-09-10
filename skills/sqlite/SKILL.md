@@ -1,6 +1,6 @@
 ---
 name: sqlite
-description: "Operational skill for agents to use SQLite effectively - schema, WAL mode, migrations, backups, pragmas, and concurrency limits."
+description: "Design SQLite schemas and migrations, configure WAL and pragmas, and plan backups within its concurrency limits."
 category: devops
 risk: safe
 source: self

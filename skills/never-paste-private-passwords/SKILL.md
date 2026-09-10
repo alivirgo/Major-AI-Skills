@@ -1,6 +1,6 @@
 ---
 name: never-paste-private-passwords
-description: "The essential security protocol for protecting API keys, passwords, credit card numbers, and PII from leaking into AI logs, training queues, and shared chats."
+description: "Replace passwords, API keys, payment details, and personal identifiers with placeholders before sharing prompts or examples."
 category: common-sense
 risk: safe
 source: self

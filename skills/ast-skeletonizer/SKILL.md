@@ -1,6 +1,6 @@
 ---
 name: ast-skeletonizer
-description: "How to extract high-density structural code skeletons (types, interfaces, class definitions, and function signatures) while stripping implementations to reduce context token consumption by 85%."
+description: "Extract types, classes, and function signatures into a compact code outline when investigating structure before implementation details."
 category: efficiency
 risk: safe
 source: self

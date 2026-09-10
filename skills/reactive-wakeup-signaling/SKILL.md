@@ -1,6 +1,6 @@
 ---
 name: reactive-wakeup-signaling
-description: "Why autonomous agents must rely on event-driven runtime wakeups instead of polling status loops (manage_task status) while waiting for background jobs, eliminating 95% of waiting token waste."
+description: "Use runtime completion events for background work when available, avoiding unnecessary status polling."
 category: efficiency
 risk: safe
 source: self

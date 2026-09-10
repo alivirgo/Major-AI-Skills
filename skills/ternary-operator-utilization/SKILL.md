@@ -1,6 +1,6 @@
 ---
 name: ternary-operator-utilization
-description: "How to condense 6-line mutable if/else blocks into single-line ternary expressions and nullish coalescing operators (condition ? a : b, a ?? b), cutting conditional statement tokens by 55%."
+description: "Use ternary expressions or nullish coalescing for simple value selection when they improve readability."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: standard-library-preference
-description: "How to leverage modern built-in standard library utilities (functools, structuredClone, crypto.randomUUID, itertools) instead of writing custom helper boilerplate or pulling in heavy third-party dependencies."
+description: "Use existing standard-library functions for common operations when they fit the required behavior."
 category: efficiency
 risk: safe
 source: self

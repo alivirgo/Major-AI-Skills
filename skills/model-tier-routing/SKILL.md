@@ -1,6 +1,6 @@
 ---
 name: model-tier-routing
-description: "How agent runtimes dynamically route prompts across Flash/Haiku, Sonnet/GPT-4o, and o1/Reasoning tiers based on task complexity, reducing aggregate API bills by 75%."
+description: "Route model requests by task complexity, latency needs, and measured quality within a defined cost budget."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: use-bolding-and-bullet-formatting
-description: "How to use bold key-value anchors (**Constraint**: Value) and bullet hierarchies to maximize transformer attention weights and prevent skipped instructions."
+description: "Use bold labels and concise bullets to make requirements, decisions, and action items easier to scan."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: abbreviated-git-status
-description: "How autonomous coding agents use short-format and porcelain git status flags to eliminate 85% of shell output token overhead while preserving exact branch and staging state."
+description: "Inspect Git branch, staging, and working-tree changes with short or porcelain status output when a compact repository check is needed."
 category: efficiency
 risk: safe
 source: self

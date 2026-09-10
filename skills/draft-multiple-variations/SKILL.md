@@ -1,6 +1,6 @@
 ---
 name: draft-multiple-variations
-description: "How to prompt for high-contrast variations using psychological angles (Curiosity, Direct Benefit, Urgency, Counter-Intuitive) rather than synonym swaps."
+description: "Generate meaningfully different copy variants based on audience needs and angles rather than synonym substitutions."
 category: common-sense
 risk: safe
 source: self

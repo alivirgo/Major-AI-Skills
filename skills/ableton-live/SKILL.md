@@ -1,6 +1,6 @@
 ---
 name: ableton-live
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Ableton Live 12, Python MIDI Remote Scripts, Max for Live (M4L), AbletonOSC, and Ableton Link."
+description: "Automate Ableton Live sessions with Python MIDI Remote Scripts, Max for Live, AbletonOSC, and Link synchronization."
 category: music
 risk: safe
 source: self

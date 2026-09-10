@@ -1,6 +1,6 @@
 ---
 name: ventoy
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Ventoy multiboot USB drives, UEFI Secure Boot MOK enrollment, and ventoy.json plugin automation."
+description: "Configure Ventoy multiboot USB media and plugin settings, and diagnose boot or Secure Boot enrollment issues."
 category: cross-platform
 risk: safe
 source: self

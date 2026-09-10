@@ -1,6 +1,6 @@
 ---
 name: no-redundant-type-casting
-description: "How to eliminate redundant type assertions (as unknown as T) and defensive coercion wrapping (str(str(x)), Boolean(y === true)), cutting code generation token bloat by 30%."
+description: "Identify redundant type assertions and repeated coercions while preserving runtime validation at data boundaries."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: cached-system-instructions
-description: "How to structure hierarchical, immutable system instructions to maximize KV-cache hits on Anthropic and OpenAI, slashing Time-to-First-Token (TTFT) by 80% and input costs by 90%."
+description: "Structure stable system instructions and variable input separately when configuring supported prompt-cache workflows."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: llamaindex
-description: "Operational skill for LlamaIndex: indexes, retrievers, query engines, ingestion pipelines, and RAG evaluation basics."
+description: "Build LlamaIndex ingestion, retrieval, and query pipelines and evaluate RAG behavior on task-relevant examples."
 category: development
 risk: safe
 source: self

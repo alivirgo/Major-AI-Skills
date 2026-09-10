@@ -1,6 +1,6 @@
 ---
 name: duckdb
-description: "Operational skill for DuckDB: local analytical SQL, Parquet/CSV scans, views, and zero-copy handoff to pandas/Polars."
+description: "Query local CSV and Parquet files with DuckDB SQL, aggregate and join datasets, export analytical results, and troubleshoot schema drift or memory limits."
 category: scientific
 risk: safe
 source: self

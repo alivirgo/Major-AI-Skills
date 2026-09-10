@@ -1,6 +1,6 @@
 ---
 name: shopify-app
-description: "Operational skill for Shopify app development: app extensions, OAuth/session tokens, GraphQL Admin API, webhooks, and billing."
+description: "Build Shopify apps with OAuth or session tokens, Admin GraphQL, extensions, webhooks, and billing integration."
 category: development
 risk: safe
 source: self

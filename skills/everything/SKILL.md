@@ -1,6 +1,6 @@
 ---
 name: everything
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Voidtools Everything 1.4/1.5a, NTFS USN Change Journal, Everything64.dll C-SDK, es.exe CLI, and IPC automation."
+description: "Search Windows files with Everything and es.exe, integrate the SDK or IPC interface, and troubleshoot NTFS index behavior."
 category: windows
 risk: safe
 source: self

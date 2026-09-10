@@ -1,6 +1,6 @@
 ---
 name: play-devils-advocate
-description: "How to use Adversarial Red-Teaming and Pre-Mortem analysis to stress-test business ideas, architecture choices, and investments before committing capital."
+description: "Stress-test an idea with opposing arguments, failure scenarios, and a premortem before committing resources."
 category: common-sense
 risk: safe
 source: self

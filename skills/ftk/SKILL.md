@@ -1,6 +1,6 @@
 ---
 name: ftk
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Exterro FTK (Forensic Toolkit), Distributed Processing Engine (DPE), FTK Imager CLI, and KFF hash filtering."
+description: "Automate authorized FTK evidence workflows with FTK Imager, distributed processing, and known-file hash filtering."
 category: digital-forensics
 risk: safe
 source: self

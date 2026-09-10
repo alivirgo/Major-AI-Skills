@@ -1,6 +1,6 @@
 ---
 name: appcleaner
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize AppCleaner, macOS bundle identifier scanning, ~/Library artifact purging, and SmartDelete daemons."
+description: "Inspect macOS application bundles and related files for AppCleaner workflows, review removal candidates, and troubleshoot SmartDelete behavior."
 category: macos
 risk: safe
 source: self

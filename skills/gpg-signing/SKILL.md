@@ -1,6 +1,6 @@
 ---
 name: gpg-signing
-description: "Operational skill for GPG signing: key generation hygiene, git commit/tag signing, verification, and revocation basics."
+description: "Configure GPG commit and tag signing, verify signatures, and plan key revocation or recovery."
 category: devops
 risk: safe
 source: self

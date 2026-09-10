@@ -1,6 +1,6 @@
 ---
 name: save-favorite-prompts-cheat-sheet
-description: "How to organize and maintain a 1-page high-leverage prompt cheat sheet for instant copy-pasting across daily work tasks."
+description: "Organize reusable prompts in a concise reference with clear task labels and editable placeholders."
 category: common-sense
 risk: safe
 source: self

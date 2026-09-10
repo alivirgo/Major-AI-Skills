@@ -1,6 +1,6 @@
 ---
 name: ltspice
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize LTspice, SPICE netlist syntax, convergence algorithms, switching converters, and .MEAS automation."
+description: "Build LTspice netlists, automate measurements, and investigate convergence or switching-converter simulation behavior."
 category: eda
 risk: safe
 source: self

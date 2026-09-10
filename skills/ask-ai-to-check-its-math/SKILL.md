@@ -1,6 +1,6 @@
 ---
 name: ask-ai-to-check-its-math
-description: "Techniques to eliminate arithmetic hallucinations by enforcing Chain-of-Thought scratchpads, explicit order-of-operations steps, and programmatic Python execution."
+description: "Check arithmetic with explicit formulas and a calculator or executable code before presenting numerical results."
 category: common-sense
 risk: safe
 source: self

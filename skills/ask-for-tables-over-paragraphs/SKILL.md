@@ -1,6 +1,6 @@
 ---
 name: ask-for-tables-over-paragraphs
-description: "How to enforce structured Markdown tables to cut token consumption by 50%, eliminate narrative fluff, and produce instantly scannable, copy-pasteable data."
+description: "Request a table when options, attributes, or numerical results are easier to compare in aligned columns."
 category: common-sense
 risk: safe
 source: self

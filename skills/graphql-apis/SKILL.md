@@ -1,6 +1,6 @@
 ---
 name: graphql-apis
-description: "Operational skill for GraphQL APIs: schema-first design, resolvers, N+1 prevention, authz in the graph, and client query discipline."
+description: "Design GraphQL schemas and resolvers with authorization checks and N+1 query prevention."
 category: development
 risk: safe
 source: self

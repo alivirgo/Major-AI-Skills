@@ -1,6 +1,6 @@
 ---
 name: give-ai-direct-feedback
-description: "How to use the 3-Part Direct Feedback Formula to steer AI outputs without vague trial-and-error or starting chats from scratch."
+description: "Give specific feedback about what is wrong, what should change, and which parts should remain."
 category: common-sense
 risk: safe
 source: self

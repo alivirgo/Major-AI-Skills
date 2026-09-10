@@ -1,6 +1,6 @@
 ---
 name: specify-high-precision-needs
-description: "How to trigger maximum model rigor, deterministic reasoning, and zero-extrapolation constraints for audits, compliance, and safety-critical tasks."
+description: "State verification requirements, acceptable uncertainty, and evidence needs for accuracy-sensitive tasks."
 category: common-sense
 risk: safe
 source: self

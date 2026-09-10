@@ -1,6 +1,6 @@
 ---
 name: nginx-hardening
-description: "Operational skill for agents to harden NGINX as a reverse proxy/ingress - TLS, headers, rate limits, request size, and upstream safety (distinct from general NGINX app serving)."
+description: "Review Nginx reverse-proxy security settings, TLS, headers, request limits, and upstream boundaries. Use for focused hardening work."
 category: devops
 risk: safe
 source: self

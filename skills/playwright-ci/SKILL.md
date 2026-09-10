@@ -1,6 +1,6 @@
 ---
 name: playwright-ci
-description: "CI-focused Playwright skill: flake control, retries/traces, sharding, blob reports, artifact upload, and deterministic auth/data in pipelines."
+description: "Configure Playwright in CI with sharding, merged reports, failure traces, seeded test data, and repeatable authentication. Use for pipeline-specific failures."
 category: testing
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: servicenow-desktop
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize ServiceNow Desktop agents, MID Server, Agent Client Collector (ACC), and Table REST APIs."
+description: "Automate ServiceNow agent and integration workflows using MID Server, Agent Client Collector, and Table REST APIs."
 category: enterprise
 risk: safe
 source: self

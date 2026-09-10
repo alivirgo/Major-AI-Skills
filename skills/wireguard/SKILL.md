@@ -1,6 +1,6 @@
 ---
 name: wireguard
-description: "Operational skill for agents to deploy WireGuard VPNs - keys, interfaces, AllowedIPs, NAT traversal notes, and least-privilege peer routing."
+description: "Configure WireGuard keys, peers, interfaces, and AllowedIPs; troubleshoot routing and NAT traversal."
 category: network
 risk: safe
 source: self

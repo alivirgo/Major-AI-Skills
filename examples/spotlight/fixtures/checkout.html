@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Local checkout fixture</title>
+<style>
+  body { margin: 0; background: #f7f8fa; color: #202428; font: 16px system-ui; }
+  main { max-width: 640px; margin: 48px auto; padding: 24px; }
+  h1 { font-size: 28px; }
+  label { display: block; margin: 16px 0; }
+  input { display: block; padding: 10px; max-width: 100%; box-sizing: border-box; }
+  button { padding: 12px 16px; border: 0; border-radius: 4px; background: #176346; color: white; cursor: pointer; }
+</style>
+<main>
+  <h1>Demo checkout</h1>
+  <p>Test item: $12.00</p>
+  <button id="add">Add to cart</button>
+  <p><a href="#cart">Cart</a> <span id="count" aria-live="polite">0 items</span></p>
+  <section id="cart" hidden>
+    <h2>Your cart</h2>
+    <form>
+      <label>Email <input name="email" type="email" required></label>
+      <button type="submit">Confirm demo order</button>
+    </form>
+  </section>
+  <section id="confirmation" hidden>
+    <h2>Order confirmed</h2>
+    <p id="receipt"></p>
+  </section>
+</main>
+<script>
+  document.querySelector('#add').addEventListener('click', () => {
+    document.querySelector('#count').textContent = '1 item';
+    document.querySelector('#cart').hidden = false;
+  });
+  document.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault();
+    document.querySelector('#receipt').textContent = 'Receipt for ' + new FormData(event.target).get('email');
+    document.querySelector('#confirmation').hidden = false;
+  });
+</script>
+</html>

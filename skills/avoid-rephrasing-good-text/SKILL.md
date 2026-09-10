@@ -1,6 +1,6 @@
 ---
 name: avoid-rephrasing-good-text
-description: "How to perform surgical edits on awkward sentences without destroying your authentic voice, personal humor, or working copy."
+description: "Edit awkward or incorrect passages while preserving wording, voice, and humor that already work."
 category: common-sense
 risk: safe
 source: self

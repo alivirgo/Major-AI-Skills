@@ -1,6 +1,6 @@
 ---
 name: keep-instructions-friendly-and-clear
-description: "How to use Markdown headers, bullet hierarchies, and XML delimiters to prevent instructions from bleeding into context data."
+description: "Separate instructions, context, and examples with clear structure and delimiters."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: flag-missing-facts-first
-description: "How to command AI to conduct a Pre-Flight Information Audit and request missing data before attempting to solve complex problems."
+description: "Identify facts that are required for a reliable answer and distinguish them from optional context."
 category: common-sense
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: opencv
-description: "Operational skill for OpenCV: image IO, transforms, contours, video capture, and classical computer-vision pipelines."
+description: "Build OpenCV image and video processing workflows with transforms, contours, capture, and classical vision operations."
 category: scientific
 risk: safe
 source: self

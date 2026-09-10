@@ -1,6 +1,6 @@
 ---
 name: token-bounded-summaries
-description: "How to constrain operational, PR, and milestone summaries to a strict 50-token ceiling ([ACTION] -> [CHANGE] -> [STATUS]), eliminating 400-word narrative essays and cutting output tokens by 88%."
+description: "Write compact task, milestone, or pull-request summaries within a requested token budget."
 category: efficiency
 risk: safe
 source: self

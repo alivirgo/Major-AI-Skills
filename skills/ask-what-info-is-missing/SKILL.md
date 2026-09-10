@@ -1,6 +1,6 @@
 ---
 name: ask-what-info-is-missing
-description: "How to use Context Gap Discovery and the Interview-Me pattern to stop AI from hallucinating missing variables and uncover blind spots."
+description: "Identify missing inputs and ask targeted questions before resolving an underspecified task."
 category: common-sense
 risk: safe
 source: self

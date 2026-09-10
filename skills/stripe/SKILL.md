@@ -1,6 +1,6 @@
 ---
 name: stripe
-description: "Operational skill for Stripe payments: Checkout, PaymentIntents, webhooks with signature verification, subscriptions, idempotency keys, and test-mode hygiene."
+description: "Integrate Stripe Checkout, PaymentIntents, subscriptions, and signed webhooks with idempotency and test-mode checks."
 category: development
 risk: safe
 source: self

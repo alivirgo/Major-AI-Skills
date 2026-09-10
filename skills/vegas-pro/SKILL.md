@@ -1,6 +1,6 @@
 ---
 name: vegas-pro
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize MAGIX VEGAS Pro 21/22, .NET C# Scripting API (ScriptPortal.Vegas), OpenFX (OFX), NVENC GPU acceleration, and batch rendering."
+description: "Automate VEGAS Pro timelines and rendering with its C# scripting API; troubleshoot OpenFX and hardware encoding."
 category: video-editing
 risk: safe
 source: self

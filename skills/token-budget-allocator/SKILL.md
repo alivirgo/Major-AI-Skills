@@ -1,6 +1,6 @@
 ---
 name: token-budget-allocator
-description: "How agent runtimes enforce mathematical token quotas across system instructions, tool schemas, RAG context, and conversation history, preventing single-source context exhaustion."
+description: "Allocate a context budget across instructions, tool schemas, retrieved material, and conversation history."
 category: efficiency
 risk: safe
 source: self

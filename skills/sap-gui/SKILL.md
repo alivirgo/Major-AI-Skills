@@ -1,6 +1,6 @@
 ---
 name: sap-gui
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize SAP GUI 8.0, SAP GUI Scripting API (VBScript/Python), ALV Grid controls, and SAPUILandscape.xml."
+description: "Automate SAP GUI workflows with VBScript or Python, inspect ALV controls, and troubleshoot scripting or landscape configuration."
 category: erp
 risk: safe
 source: self

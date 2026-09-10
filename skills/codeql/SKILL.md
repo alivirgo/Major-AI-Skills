@@ -1,6 +1,6 @@
 ---
 name: codeql
-description: "Operational skill for CodeQL: enabling GitHub analysis, writing/using queries, interpreting SARIF, and fixing true positives in PRs."
+description: "Configure GitHub CodeQL analysis, run or write queries, interpret SARIF findings, and verify fixes for reported vulnerabilities."
 category: development
 risk: safe
 source: self

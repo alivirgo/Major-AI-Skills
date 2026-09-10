@@ -1,6 +1,6 @@
 ---
 name: summarized-rag-memories
-description: "How to compress retrieved vector/RAG document chunks into 3-bullet atomic facts before injecting them into frontier LLM context, cutting RAG token bloat by 85%."
+description: "Summarize retrieved documents into task-relevant facts with source references before assembling model context."
 category: efficiency
 risk: safe
 source: self

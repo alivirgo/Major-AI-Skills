@@ -1,6 +1,6 @@
 ---
 name: schema-pruned-function-calling
-description: "How to strip redundant descriptions, uncalled optional parameters, and unused tool definitions from agent JSON schemas, cutting baseline tool-calling token overhead by 65%."
+description: "Expose only relevant tool schemas and parameters for a task while preserving the fields required for correct calls."
 category: efficiency
 risk: safe
 source: self

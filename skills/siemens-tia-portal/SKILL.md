@@ -1,6 +1,6 @@
 ---
 name: siemens-tia-portal
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Siemens TIA Portal V18/V19, SIMATIC S7-1200/1500, SCL, TIA Openness (.NET), and snap7 communication."
+description: "Develop TIA Portal SCL and Openness automation, and inspect SIMATIC communications in an authorized test environment."
 category: plc-industrial
 risk: safe
 source: self

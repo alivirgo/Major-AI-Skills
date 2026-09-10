@@ -1,6 +1,6 @@
 ---
 name: use-checklist-format
-description: "How to convert complex procedures, launch plans, and onboarding workflows into executable, phase-gated Markdown checklists (- [ ]) to prevent human error."
+description: "Convert a procedure into a checklist with observable completion criteria and clear dependencies."
 category: common-sense
 risk: safe
 source: self

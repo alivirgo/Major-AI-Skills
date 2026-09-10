@@ -1,6 +1,6 @@
 ---
 name: beware-of-hallucinated-quotes
-description: "How to prevent and detect apocryphal AI quotations, fabricated book titles, and hallucinated academic citations before publishing."
+description: "Verify quotations, book titles, and academic references against original sources before publishing them."
 category: common-sense
 risk: safe
 source: self

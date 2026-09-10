@@ -1,6 +1,6 @@
 ---
 name: highlight-action-items
-description: "How to command AI to top-load next steps and action items at the very beginning of responses to ensure zero dropped tasks and instant execution."
+description: "Place actionable next steps prominently and distinguish owners, deadlines, and unresolved dependencies."
 category: common-sense
 risk: safe
 source: self

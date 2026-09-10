@@ -1,6 +1,6 @@
 ---
 name: structure-weekly-to-do-list
-description: "How to parse a chaotic brain dump into a sustainable 5-day Thematic Sprint with morning deep-work blocks and energy-calibrated task distribution."
+description: "Organize weekly tasks into realistic work blocks based on priorities, deadlines, and available capacity."
 category: common-sense
 risk: safe
 source: self

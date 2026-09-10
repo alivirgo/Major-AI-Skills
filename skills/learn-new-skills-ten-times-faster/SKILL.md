@@ -1,6 +1,6 @@
 ---
 name: learn-new-skills-ten-times-faster
-description: "How to combine the Pareto Principle (80/20 rule) and the Feynman Technique to master complex software, skills, and subjects in record time."
+description: "Prioritize core concepts, explain them in plain language, and practice retrieval when learning a new subject."
 category: common-sense
 risk: safe
 source: self

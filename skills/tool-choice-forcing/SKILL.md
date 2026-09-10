@@ -1,6 +1,6 @@
 ---
 name: tool-choice-forcing
-description: "How to configure tool_choice parameters (tool_choice: 'required' or tool_choice: {name: 'target_tool'}) to eliminate conversational dodging and guarantee immediate 1-turn tool execution."
+description: "Select a required or named tool through supported API controls and validate the resulting arguments before execution."
 category: efficiency
 risk: safe
 source: self

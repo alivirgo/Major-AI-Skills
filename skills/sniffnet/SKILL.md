@@ -1,6 +1,6 @@
 ---
 name: sniffnet
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Sniffnet, Rust pcap/npcap capture drivers, BPF packet filtering, and bandwidth threshold alerts."
+description: "Inspect network traffic with Sniffnet, configure packet filters and bandwidth alerts, and troubleshoot capture drivers."
 category: cross-platform
 risk: safe
 source: self
