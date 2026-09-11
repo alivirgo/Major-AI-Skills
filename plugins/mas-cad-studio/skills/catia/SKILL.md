@@ -1,6 +1,6 @@
 ---
 name: catia
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Dassault Systèmes CATIA V5 & 3DEXPERIENCE, CAA/COM Automation, Generative Shape Design (GSD), and PLM assemblies."
+description: "Automate CATIA V5 and 3DEXPERIENCE modeling workflows through CAA or COM, including shape design and assembly operations."
 category: cad
 risk: safe
 source: self

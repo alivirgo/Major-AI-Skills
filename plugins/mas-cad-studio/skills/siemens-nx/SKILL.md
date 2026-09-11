@@ -1,6 +1,6 @@
 ---
 name: siemens-nx
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Siemens NX, NX Open Python API, Synchronous Technology, and Teamcenter PLM."
+description: "Automate Siemens NX modeling with NX Open Python and troubleshoot synchronous modeling or Teamcenter integration."
 category: cad
 risk: safe
 source: self

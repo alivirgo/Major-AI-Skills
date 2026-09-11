@@ -1,6 +1,6 @@
 ---
 name: docker
-description: "Operational skill for Claude to automate Docker via CLI, Dockerfiles, Compose, BuildKit, multi-stage builds, and container networking hygiene."
+description: "Build Docker images and Compose environments, optimize multi-stage Dockerfiles with BuildKit, and troubleshoot container networking and runtime failures."
 category: devops
 risk: safe
 source: self

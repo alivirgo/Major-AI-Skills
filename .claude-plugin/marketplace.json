@@ -5,9 +5,14 @@
   },
   "metadata": {
     "description": "Installable agentic skills for Claude Code - professional apps, token efficiency, and common-sense prompting.",
-    "version": "2.1.0"
+    "version": "2.2.0"
   },
   "plugins": [
+    {
+      "name": "mas-ai-workflows",
+      "source": "./plugins/mas-ai-workflows",
+      "description": "Focused AI evaluation, retrieval, privacy, tool testing, and human review workflows."
+    },
     {
       "name": "major-ai-skills",
       "source": "./",

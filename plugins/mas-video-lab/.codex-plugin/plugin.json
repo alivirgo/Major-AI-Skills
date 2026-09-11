@@ -1,0 +1,27 @@
+{
+  "name": "mas-video-lab",
+  "version": "2.2.0",
+  "description": "Video and motion skills: DaVinci, Premiere, After Effects, Remotion, FFmpeg.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "MAS Video Lab",
+    "shortDescription": "Video and motion skills: DaVinci, Premiere, After Effects, Remotion, FFmpeg.",
+    "longDescription": "Video and motion skills: DaVinci, Premiere, After Effects, Remotion, FFmpeg.",
+    "developerName": "Ali Virgo",
+    "category": "Productivity",
+    "websiteURL": "https://alivirgo.github.io/Major-AI-Skills/",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Help me plan a task using MAS Video Lab."
+    ]
+  }
+}

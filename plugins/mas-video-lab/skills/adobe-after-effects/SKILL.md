@@ -1,6 +1,6 @@
 ---
 name: adobe-after-effects
-description: "Operational skill for Claude to automate After Effects via ExtendScript, expressions, render queue, compositions, and essential graphics pipelines."
+description: "Create and update After Effects compositions, expressions, and render queues using ExtendScript and Essential Graphics workflows."
 category: video-editing
 risk: safe
 source: self

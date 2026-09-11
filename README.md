@@ -2,7 +2,7 @@
 
 > **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more - focused on professional apps, token efficiency, and practical prompting habits.**
 
-**Current release: V2.1.1.** Flat `skills/<id>/SKILL.md` layout, multi-host `npx` installer, catalog index, specialized plugins, and bundles - with deep product skill content (CAD, video, 3D, design, desktop utilities) plus efficiency and common-sense skills.
+**Current release: [V2.2.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest).** 402 canonical skills, including ten new AI evaluation, retrieval, privacy, and reliability workflows. Install the [latest npm package](https://www.npmjs.com/package/major-ai-skills) or select a focused Claude/Codex plugin.
 
 Coding agents can install exact skill IDs into the directory their host watches. You keep control: preview with `--dry-run`, filter by `--skills` / `--category`, or install a specialized pack.
 
@@ -23,10 +23,10 @@ This is an independent community project. Product names (SolidWorks, Raycast, Cl
 [![Codex CLI](https://img.shields.io/badge/Codex%20CLI-OpenAI-green)](https://github.com/openai/codex)
 [![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-Google-blue)](https://github.com/google-gemini/gemini-cli)
 [![Antigravity](https://img.shields.io/badge/Antigravity-AI%20IDE-red)](https://github.com/alivirgo/Major-AI-Skills)
-[![Skills](https://img.shields.io/badge/Skills-392-blueviolet)](CATALOG.md)
+[![Skills](https://img.shields.io/badge/Skills-402-blueviolet)](CATALOG.md)
 [![npm](https://img.shields.io/npm/v/major-ai-skills?color=cb3837&label=npm)](https://www.npmjs.com/package/major-ai-skills)
 [![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@alivirgo%2Fmajor--ai--skills-24292f)](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills)
-[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/tag/v2.1.1)
+[![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release)](https://github.com/alivirgo/Major-AI-Skills/releases/latest)
 [![skills.sh](https://skills.sh/b/alivirgo/Major-AI-Skills)](https://skills.sh/alivirgo/Major-AI-Skills)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success)](https://alivirgo.github.io/Major-AI-Skills/)
@@ -95,11 +95,12 @@ Prefer an exact reviewed set. Full Antigravity installs can exhaust context beca
 | --- | --- |
 | **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |
 | **GitHub Packages** | Scoped package [`@alivirgo/major-ai-skills`](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills) (fills the repo **Packages** sidebar) |
-| **GitHub Release** | Download `major-ai-skills-2.1.1.tgz` from [V2.1.1](https://github.com/alivirgo/Major-AI-Skills/releases/tag/v2.1.1) |
+| **GitHub Release** | Download `major-ai-skills-2.2.0.tgz` from [V2.2.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
 | **skills.sh / Vercel skills CLI** | `npx skills add alivirgo/Major-AI-Skills` (discovery via install telemetry) |
 | **Claude Code marketplace** | Add this repo as a marketplace (`.claude-plugin/marketplace.json`), then install a specialized plugin |
-| **Gemini CLI gallery** | `gemini-extension.json` + topic `gemini-cli-extension` (auto-indexed) · `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
-| **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@2.1.1/) / [unpkg](https://unpkg.com/major-ai-skills@2.1.1/) mirror the npm package |
+| **Gemini CLI extension** | [Gallery listing verified September 11, 2026](https://geminicli.com/extensions). `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
+| **Codex self-marketplace** | `codex plugin marketplace add alivirgo/Major-AI-Skills` then browse Major AI Skills in the plugin directory; not an official-directory endorsement |
+| **CDN** | [jsDelivr](https://cdn.jsdelivr.net/npm/major-ai-skills@latest/) / [unpkg](https://unpkg.com/major-ai-skills@latest/) mirror the npm package |
 | **GitHub Pages** | Browse catalog: [alivirgo.github.io/Major-AI-Skills](https://alivirgo.github.io/Major-AI-Skills/) |
 | **Medium** | Explainer: [What are AI agent skills? Claude Code, Cursor & SKILL.md](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5) |
 
@@ -124,6 +125,8 @@ npx major-ai-skills --codex --skills playwright,docker,supabase
 #### skills.sh (multi-agent)
 
 Browse the [repository on skills.sh](https://skills.sh/alivirgo/Major-AI-Skills). Choose exact skill IDs from [CATALOG.md](CATALOG.md):
+
+Browse the [web catalog](https://alivirgo.github.io/Major-AI-Skills/catalog.html), with a direct link for every skill, such as [FFmpeg](https://alivirgo.github.io/Major-AI-Skills/catalog.html#ffmpeg).
 
 ```bash
 npx skills add alivirgo/Major-AI-Skills --list
@@ -214,7 +217,7 @@ Guides:
 
 ### What is Major AI Skills?
 
-A curated, installable GitHub library of **392+ agent skills** for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and related AI coding assistants - covering CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits.
+A curated, installable GitHub library of **402+ agent skills** for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and related AI coding assistants - covering CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits.
 
 ### How do I install Claude Code skills or Cursor skills from this repo?
 

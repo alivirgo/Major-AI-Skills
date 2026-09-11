@@ -1,6 +1,6 @@
 ---
 name: microsoft-powertoys
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Microsoft PowerToys, FancyZones, PowerToys Run, Keyboard Manager, Awake, and settings.json automation."
+description: "Configure PowerToys FancyZones, Run, Keyboard Manager, and Awake; automate settings and troubleshoot Windows utility behavior."
 category: windows
 risk: safe
 source: self

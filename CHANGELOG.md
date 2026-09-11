@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## 2.2.0 - 2026-09-11
+
+- Added ten focused AI workflow skills: evaluation datasets, RAG retrieval audits, JSON contracts, citation verification, PII redaction, injection boundary testing, tool replay, prompt regression gates, cost/latency benchmarks, and human handoff contracts.
+- Expanded the canonical catalog from 392 to 402 skills and added the MAS AI Workflows plugin for Claude Code and Codex.
+- Synchronized plugin bundles with canonical content and added native Codex marketplace manifests, publisher metadata, and CI drift checks.
+- Added a crawlable web catalog with per-skill anchors and corrected current release/download links.
+- Included marketplace manifests, plugin bundles, and Gemini extension metadata in npm archives.
+
 ## 2.1.1 - 2026-09-01
 
 - Added a daily npm-download graph to the GitHub and npm package README.

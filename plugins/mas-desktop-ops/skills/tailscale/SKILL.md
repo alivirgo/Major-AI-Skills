@@ -1,6 +1,6 @@
 ---
 name: tailscale
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, configure, troubleshoot, and optimize Tailscale mesh VPN networks, WireGuard tunnels, DERP relays, subnet routers, and MagicDNS."
+description: "Configure Tailscale connectivity, subnet routing, and MagicDNS; troubleshoot WireGuard paths and DERP relay behavior."
 category: cross-platform
 risk: safe
 source: self

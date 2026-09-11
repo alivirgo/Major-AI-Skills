@@ -1,6 +1,6 @@
 ---
 name: token-aware-chunking
-description: "How to chunk technical documentation and source code along AST/markdown boundaries calibrated strictly to tokenizer limits (tiktoken cl100k/o200k), eliminating fragmented code syntax and embedding clipping."
+description: "Split source code and documentation at semantic boundaries while respecting the target tokenizer's size limits."
 category: efficiency
 risk: safe
 source: self

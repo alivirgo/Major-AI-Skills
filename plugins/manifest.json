@@ -1,6 +1,11 @@
 {
   "plugins": [
     {
+      "id": "mas-ai-workflows",
+      "name": "MAS AI Workflows",
+      "skills": ["ai-evaluation-dataset", "rag-retrieval-audit", "llm-json-contract-check", "ai-citation-verification", "ai-pii-redaction-review", "agent-injection-boundary-test", "agent-tool-replay-test", "prompt-regression-gate", "llm-cost-latency-benchmark", "ai-human-handoff-contract"]
+    },
+    {
       "id": "mas-cad-studio",
       "name": "MAS CAD Studio",
       "skills": ["solidworks", "fusion-360", "catia", "siemens-nx", "rhino", "blender"]

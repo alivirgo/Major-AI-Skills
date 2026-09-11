@@ -1,5 +1,12 @@
 {
   "name": "mas-cad-studio",
-  "version": "2.0.0",
-  "description": "MAS CAD Studio - Major AI Skills specialized plugin"
+  "version": "2.2.0",
+  "description": "CAD-focused skills: SolidWorks, Fusion 360, CATIA, NX, Rhino, Blender.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT"
 }

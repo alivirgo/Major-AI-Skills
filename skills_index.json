@@ -231,6 +231,56 @@
     }
   },
   {
+    "id": "agent-injection-boundary-test",
+    "path": "skills/agent-injection-boundary-test",
+    "category": "development",
+    "name": "agent-injection-boundary-test",
+    "description": "Test an authorized AI agent's handling of instructions embedded in retrieved documents or tool outputs using harmless canaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "agent-injection-boundary-test"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "agent-tool-replay-test",
+    "path": "skills/agent-tool-replay-test",
+    "category": "development",
+    "name": "agent-tool-replay-test",
+    "description": "Replay recorded AI tool calls against deterministic fixtures to test argument validation, error handling, and side-effect boundaries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "agent-tool-replay-test"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "agentic-token-efficiency-master-rule",
     "path": "skills/agentic-token-efficiency-master-rule",
     "category": "efficiency",
@@ -253,6 +303,106 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "ai-citation-verification",
+    "path": "skills/ai-citation-verification",
+    "category": "development",
+    "name": "ai-citation-verification",
+    "description": "Check whether an AI answer's citations actually support its factual claims, with source-location evidence and explicit uncertainty.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "ai-citation-verification"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "ai-evaluation-dataset",
+    "path": "skills/ai-evaluation-dataset",
+    "category": "development",
+    "name": "ai-evaluation-dataset",
+    "description": "Build a versioned JSONL evaluation dataset for an AI workflow, with acceptance criteria, held-out cases, and leakage checks.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "ai-evaluation-dataset"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "ai-human-handoff-contract",
+    "path": "skills/ai-human-handoff-contract",
+    "category": "development",
+    "name": "ai-human-handoff-contract",
+    "description": "Define and test when an AI workflow must hand a task to a human, preserving evidence and preventing unapproved continuation.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "ai-human-handoff-contract"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "ai-pii-redaction-review",
+    "path": "skills/ai-pii-redaction-review",
+    "category": "development",
+    "name": "ai-pii-redaction-review",
+    "description": "Prepare a privacy-reviewed AI input using field-aware redaction, stable placeholders, and leakage checks before external submission.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "ai-pii-redaction-review"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -5445,6 +5595,56 @@
     }
   },
   {
+    "id": "llm-cost-latency-benchmark",
+    "path": "skills/llm-cost-latency-benchmark",
+    "category": "development",
+    "name": "llm-cost-latency-benchmark",
+    "description": "Measure an AI workflow's observed token cost and end-to-end latency across representative cases with reproducible configuration.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "llm-cost-latency-benchmark"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "llm-json-contract-check",
+    "path": "skills/llm-json-contract-check",
+    "category": "development",
+    "name": "llm-json-contract-check",
+    "description": "Validate AI-generated JSON against an application's schema and business rules, distinguishing refusals and truncation from malformed output.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "llm-json-contract-check"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "lm-studio-local-offloading",
     "path": "skills/lm-studio-local-offloading",
     "category": "efficiency",
@@ -7225,6 +7425,31 @@
     }
   },
   {
+    "id": "prompt-regression-gate",
+    "path": "skills/prompt-regression-gate",
+    "category": "development",
+    "name": "prompt-regression-gate",
+    "description": "Compare prompt revisions on a frozen AI evaluation set with paired runs, slice-level regressions, and explicit release thresholds.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "prompt-regression-gate"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "proofread-before-sending",
     "path": "skills/proofread-before-sending",
     "category": "common-sense",
@@ -7441,6 +7666,31 @@
       "queues",
       "dlq",
       "quorum-queues"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "rag-retrieval-audit",
+    "path": "skills/rag-retrieval-audit",
+    "category": "development",
+    "name": "rag-retrieval-audit",
+    "description": "Diagnose missing evidence in a retrieval-augmented generation pipeline using labeled queries, chunk inspection, and retrieval metrics.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-11",
+    "tags": [
+      "ai-workflows",
+      "evaluation",
+      "rag-retrieval-audit"
     ],
     "tools": [
       "claude",

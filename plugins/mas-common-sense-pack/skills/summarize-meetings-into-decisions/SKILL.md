@@ -1,6 +1,6 @@
 ---
 name: summarize-meetings-into-decisions
-description: "How to extract high-signal Decision Records and rationale from messy meeting transcripts, filtering out 90% of chronological conversational chatter."
+description: "Extract decisions, rationale, owners, and unresolved questions from a meeting transcript."
 category: common-sense
 risk: safe
 source: self

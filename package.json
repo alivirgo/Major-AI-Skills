@@ -1,7 +1,7 @@
 {
   "name": "major-ai-skills",
-  "version": "2.1.1",
-  "description": "Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI & Antigravity - 392+ professional app, token-efficiency, and common-sense skills. SEO/GEO ready.",
+  "version": "2.2.0",
+  "description": "Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI & Antigravity - 402+ professional app, token-efficiency, and common-sense skills. SEO/GEO ready.",
   "license": "MIT",
   "author": {
     "name": "Ali Virgo",
@@ -24,10 +24,12 @@
     "catalog": "node tools/scripts/generate_index.js",
     "validate": "node tools/scripts/validate_skills.js",
     "index:check": "node tools/scripts/generate_index.js --check",
+    "marketplaces": "node tools/scripts/generate_marketplaces.js",
+    "marketplaces:check": "node tools/scripts/generate_marketplaces.js --check",
     "test": "node --test tools/tests/*.test.js",
     "build": "npm run index",
     "downloads:graph": "node tools/scripts/update_download_graph.js",
-    "prepublishOnly": "npm run validate && npm run index",
+    "prepublishOnly": "npm run validate && npm run index && npm run marketplaces",
     "pack:check": "npm pack --dry-run"
   },
   "files": [
@@ -38,7 +40,11 @@
     "data/bundles.json",
     "assets/spotlight-checkout.png",
     "tools/bin",
-    "plugins/manifest.json",
+    "plugins",
+    ".claude-plugin",
+    ".agents/plugins/marketplace.json",
+    "gemini-extension.json",
+    "GEMINI.md",
     "CATALOG.md",
     "README.md",
     "LICENSE",

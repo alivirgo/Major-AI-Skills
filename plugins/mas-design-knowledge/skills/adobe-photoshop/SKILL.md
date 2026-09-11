@@ -1,6 +1,6 @@
 ---
 name: adobe-photoshop
-description: "Operational skill for Claude to automate Photoshop via ExtendScript/UXP, Actions, batch processors, Smart Objects, and generative workflow hygiene."
+description: "Automate Photoshop image-processing tasks with UXP or ExtendScript, Actions, batch jobs, and Smart Objects."
 category: design
 risk: safe
 source: self

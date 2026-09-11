@@ -1,0 +1,27 @@
+{
+  "name": "mas-efficiency-pack",
+  "version": "2.2.0",
+  "description": "Token and context efficiency skills.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "MAS Efficiency Pack",
+    "shortDescription": "Token and context efficiency skills.",
+    "longDescription": "Token and context efficiency skills.",
+    "developerName": "Ali Virgo",
+    "category": "Productivity",
+    "websiteURL": "https://alivirgo.github.io/Major-AI-Skills/",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Help me plan a task using MAS Efficiency Pack."
+    ]
+  }
+}

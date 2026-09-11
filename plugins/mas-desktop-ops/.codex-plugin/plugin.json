@@ -1,0 +1,27 @@
+{
+  "name": "mas-desktop-ops",
+  "version": "2.2.0",
+  "description": "Desktop ops: Raycast, Everything, PowerToys, Docker, VS Code, Bruno, Tailscale.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "MAS Desktop Ops",
+    "shortDescription": "Desktop ops: Raycast, Everything, PowerToys, Docker, VS Code, Bruno, Tailscale.",
+    "longDescription": "Desktop ops: Raycast, Everything, PowerToys, Docker, VS Code, Bruno, Tailscale.",
+    "developerName": "Ali Virgo",
+    "category": "Productivity",
+    "websiteURL": "https://alivirgo.github.io/Major-AI-Skills/",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Help me plan a task using MAS Desktop Ops."
+    ]
+  }
+}

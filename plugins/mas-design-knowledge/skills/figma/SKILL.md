@@ -1,6 +1,6 @@
 ---
 name: figma
-description: "Operational skill for Claude to automate Figma via Plugin API, REST API, variables, components, and design-token export pipelines."
+description: "Build Figma plugins, export selected frames, audit components, and map variables to design tokens using the Plugin and REST APIs."
 category: design
 risk: safe
 source: self

@@ -1,0 +1,12 @@
+{
+  "name": "mas-ai-workflows",
+  "version": "2.2.0",
+  "description": "Focused AI evaluation, retrieval, privacy, tool testing, and human review workflows.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT"
+}

@@ -1,6 +1,6 @@
 ---
 name: vscode
-description: "Operational skill for Claude to automate VS Code via tasks, launch configs, extensions API, settings, and CLI (`code`) workflows."
+description: "Configure VS Code tasks, debugging, settings, and extensions, and automate editor workflows with the code CLI."
 category: development
 risk: safe
 source: self

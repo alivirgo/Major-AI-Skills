@@ -1,6 +1,6 @@
 ---
 name: ask-ai-confidence-rating
-description: "Prompt patterns to extract calibrated confidence scores, identify hidden assumptions, and flag low-certainty claims before making critical decisions."
+description: "Identify uncertainty, assumptions, and claims needing verification when reviewing an AI answer."
 category: common-sense
 risk: safe
 source: self

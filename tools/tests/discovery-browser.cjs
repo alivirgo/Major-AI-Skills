@@ -28,7 +28,7 @@ fs.mkdirSync(output, { recursive: true });
       await page.locator("#sec-spotlight").scrollIntoViewIfNeeded();
       await page.screenshot({ path: path.join(output, `spotlight-${width}.png`) });
       await page.evaluate(() => loadDoc("catalog"));
-      assert.equal(await page.locator("#skill-results .skill-result").count(), 392);
+      assert.equal(await page.locator("#skill-results .skill-result").count(), require("../../skills_index.json").length);
       await page.locator("#skill-query").fill("transcode compress");
       assert.equal(await page.locator("#skill-results .skill-result").count(), 1);
       const copy = page.getByRole("button", { name: "Copy install command for ffmpeg", exact: true });

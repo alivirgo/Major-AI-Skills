@@ -1,6 +1,6 @@
 ---
 name: blender
-description: "Operational skill for Claude to automate Blender 4.x via bpy Python API, geometry nodes, EEVEE/Cycles rendering, batch CLI pipelines, and addon development."
+description: "Automate Blender scenes with the bpy Python API, build Geometry Nodes workflows, configure Cycles or EEVEE renders, and troubleshoot headless batch jobs."
 category: 3d
 risk: safe
 source: self

@@ -2,13 +2,15 @@
 
 Channels you can use from this repo. Status reflects what is already live vs what needs one more step.
 
+For current Claude, Gemini, and Codex checks, see the [September 11 marketplace audit](marketplace-readiness.md). Gemini's gallery listing is confirmed; Claude/OpenAI official-directory approval is not. Local fixes must be pushed before GitHub installs receive them.
+
 ## Live now (done from this workspace)
 
 | Channel | How users get it | Status |
 | --- | --- | --- |
 | **npm** | `npx major-ai-skills` | Live - https://www.npmjs.com/package/major-ai-skills |
 | **GitHub Packages** | `@alivirgo/major-ai-skills` | Live + public - repo Packages sidebar |
-| **GitHub Release** | `major-ai-skills-2.1.0.tgz` on v2.1.0 | Live |
+| **GitHub Release** | Versioned package archive | [Latest release](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
 | **GitHub Pages** | Browse + SEO landings | Live - https://alivirgo.github.io/Major-AI-Skills/ |
 | **Claude self-marketplace** | `/plugin marketplace add alivirgo/Major-AI-Skills` | Ready (`.claude-plugin/marketplace.json`) |
 | **skills.sh** | `npx skills add alivirgo/Major-AI-Skills` | Live via GitHub; ranking grows with installs |
@@ -20,7 +22,7 @@ Channels you can use from this repo. Status reflects what is already live vs wha
 
 | Channel | Action | Link |
 | --- | --- | --- |
-| **Claude official plugin directory** | Submit marketplace for Discover tab | https://clau.de/plugin-directory-submission |
+| **Claude official plugin directory** | Maintainer account submission and review | https://claude.ai/settings/plugins/submit |
 | **top-agent-skills.com** | Curated listing | Submission packet: [top-agent-skills-submission.md](top-agent-skills-submission.md) · email curator `aviv@alon.email` (site repo is private) |
 | **VoltAgent awesome-agent-skills** | PR after usage matures (they reject brand-new) | https://github.com/VoltAgent/awesome-agent-skills |
 | **awesome-claude-skills** | PR under Individual Skills | https://github.com/travisvn/awesome-claude-skills |
@@ -47,8 +49,8 @@ npx major-ai-skills --cursor|--claude|--codex|--gemini|--antigravity --skills <i
 
 ## CDN mirrors of the npm package (automatic)
 
-- https://cdn.jsdelivr.net/npm/major-ai-skills@2.1.0/
-- https://unpkg.com/major-ai-skills@2.1.0/
+- https://cdn.jsdelivr.net/npm/major-ai-skills@latest/
+- https://unpkg.com/major-ai-skills@latest/
 
 ## Repo checklist for discovery
 

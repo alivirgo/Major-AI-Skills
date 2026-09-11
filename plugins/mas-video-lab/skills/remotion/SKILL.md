@@ -1,6 +1,6 @@
 ---
 name: remotion
-description: "Operational skill for Claude to automate Remotion React video compositions, render CLI, server-side renders, and programmatic timeline props."
+description: "Create React video compositions with Remotion, parameterize timelines with props, and configure CLI or server-side rendering."
 category: video-editing
 risk: safe
 source: self

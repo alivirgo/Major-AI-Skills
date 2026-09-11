@@ -1,5 +1,12 @@
 {
   "name": "mas-video-lab",
-  "version": "2.0.0",
-  "description": "MAS Video Lab - Major AI Skills specialized plugin"
+  "version": "2.2.0",
+  "description": "Video and motion skills: DaVinci, Premiere, After Effects, Remotion, FFmpeg.",
+  "author": {
+    "name": "Ali Virgo",
+    "url": "https://github.com/alivirgo"
+  },
+  "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
+  "repository": "https://github.com/alivirgo/Major-AI-Skills",
+  "license": "MIT"
 }

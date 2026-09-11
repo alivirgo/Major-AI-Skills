@@ -1,6 +1,6 @@
 ---
 name: adobe-premiere-pro
-description: "Operational skill for Claude to automate Premiere Pro via ExtendScript/UXP, sequence ops, markers, EDL/XML interchange, and Media Encoder queue patterns."
+description: "Automate Premiere Pro sequences and markers, exchange EDL/XML data, and prepare Media Encoder jobs with scripting workflows."
 category: video-editing
 risk: safe
 source: self

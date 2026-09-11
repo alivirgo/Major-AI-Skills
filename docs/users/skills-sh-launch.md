@@ -2,9 +2,9 @@
 
 ## Positioning
 
-Major AI Skills is a library of 392 installable agent playbooks spanning professional applications, development tools, and practical work habits. The useful entry point is a specific task: converting a clip, querying a dataset, testing a browser journey, exporting a design, or automating a CAD operation. The library is independent of the product vendors it documents.
+Major AI Skills is a library of 402 installable agent playbooks spanning professional applications, development tools, and practical work habits. The useful entry point is a specific task: converting a clip, querying a dataset, testing a browser journey, exporting a design, or automating a CAD operation. The library is independent of the product vendors it documents.
 
-Lead with the demonstrated task and its evidence. The six [featured workflows](spotlight.md) provide focused installation commands and acceptance checks. The [verification record](../../examples/spotlight/VERIFICATION.md) distinguishes three executed portable references from three application walkthroughs. It does not claim that all 392 skills have been behaviorally benchmarked.
+Lead with the demonstrated task and its evidence. The six [featured workflows](spotlight.md) provide focused installation commands and acceptance checks. The [verification record](../../examples/spotlight/VERIFICATION.md) distinguishes three executed portable references from three application walkthroughs. It does not claim that all 402 skills have been behaviorally benchmarked.
 
 ## What ranking evidence supports
 
@@ -63,7 +63,7 @@ Major AI Skills: exact installs and reproducible workflow examples
 
 ### Release body
 
-Major AI Skills now gives every catalog entry an exact `npx skills add` command. All 392 descriptions have been rewritten around tasks, and the website adds search, category filtering, and command copying.
+Major AI Skills now gives every catalog entry an exact `npx skills add` command. All 402 descriptions have been rewritten around tasks, and the website adds search, category filtering, and command copying.
 
 Start with a focused example:
 
@@ -81,7 +81,7 @@ npx skills add alivirgo/Major-AI-Skills --skill ffmpeg
 
 ### Short announcement
 
-Major AI Skills: 392 installable playbooks, now with exact install commands and focused workflow examples. Start with FFmpeg video conversion, DuckDB CSV analysis, or a local Playwright checkout test. Code and verification: https://github.com/alivirgo/Major-AI-Skills
+Major AI Skills: 402 installable playbooks, now with exact install commands and focused workflow examples. Start with FFmpeg video conversion, DuckDB CSV analysis, or a local Playwright checkout test. Code and verification: https://github.com/alivirgo/Major-AI-Skills
 
 ### Longer community introduction
 
@@ -122,7 +122,7 @@ Keep discovery, adoption, and correctness separate:
 
 | Metric | Baseline | Follow-up | Interpretation |
 | --- | --- | --- | --- |
-| Local CLI discovery | 392 skills in the recorded local check | Recheck after adding skills | Packaging/discovery coverage, not website indexing |
+| Local CLI discovery | 402 skills in the recorded local check | Recheck after adding skills | Packaging/discovery coverage, not website indexing |
 | Remote CLI discovery | Record after publication | Compare against local catalog | Published source availability |
 | Visible featured pages | Record each page's state | Inspect after normal installs and processing | Listing coverage; unavailable is unknown until checked |
 | skills.sh installs per featured skill | Record actual displayed count or unknown | Compare at a named time using the same source | Adoption signal; deduplication and processing apply |

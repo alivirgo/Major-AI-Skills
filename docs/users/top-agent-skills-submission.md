@@ -32,7 +32,7 @@ Prepared for [publish-a-skill-and-get-listed](https://top-agent-skills.com/guide
 
 **Tagline:** Product-depth agent skills (CAD, video, 3D, design) plus token-efficiency and common-sense prompting - installable with one `npx` command.
 
-**Description:** Installable library of 392+ `SKILL.md` skills for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity. Focused on professional apps (SolidWorks, Blender, Figma, DaVinci, Docker, etc.), token-efficiency protocols, and plain-English prompting habits - not a generic coding mega-pack.
+**Description:** Installable library of 402+ `SKILL.md` skills for Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity. Focused on professional apps (SolidWorks, Blender, Figma, DaVinci, Docker, etc.), token-efficiency protocols, and plain-English prompting habits - not a generic coding mega-pack.
 
 **bestFor:** Teams that need product-app and efficiency skills beside a coding catalog (e.g. beside agentic-awesome-skills / superpowers).
 
@@ -107,7 +107,7 @@ Licence file: https://github.com/alivirgo/Major-AI-Skills/blob/master/LICENSE (M
 Publisher: Ali Virgo / alivirgo (community)
 
 Primary entry (bundle): major-ai-skills
-- 392+ SKILL.md skills: professional apps + token efficiency + common-sense prompting
+- 402+ SKILL.md skills: professional apps + token efficiency + common-sense prompting
 - Install (Cursor): npx major-ai-skills --cursor --skills blender,figma
 - Install (skills.sh): npx skills add alivirgo/Major-AI-Skills --skill blender -g -y
 - npm: https://www.npmjs.com/package/major-ai-skills

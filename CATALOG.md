@@ -1,6 +1,6 @@
 # Major AI Skills Catalog
 
-> Generated registry of **392** installable skills.
+> Generated registry of **402** installable skills.
 
 Use `skills_index.json` for machine-readable discovery. Each skill lives at `skills/<id>/SKILL.md`.
 
@@ -16,7 +16,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 - [common-sense](#common-sense) - 99 skills
 - [cross-platform](#cross-platform) - 9 skills
 - [design](#design) - 2 skills
-- [development](#development) - 37 skills
+- [development](#development) - 47 skills
 - [devops](#devops) - 45 skills
 - [digital-forensics](#digital-forensics) - 3 skills
 - [eda](#eda) - 4 skills
@@ -195,6 +195,12 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 
 | Skill | Description | Install |
 | --- | --- | --- |
+| [`agent-injection-boundary-test`](skills/agent-injection-boundary-test/SKILL.md) | Test an authorized AI agent's handling of instructions embedded in retrieved documents or tool outputs using harmless canaries. | `npx skills add alivirgo/Major-AI-Skills --skill agent-injection-boundary-test` |
+| [`agent-tool-replay-test`](skills/agent-tool-replay-test/SKILL.md) | Replay recorded AI tool calls against deterministic fixtures to test argument validation, error handling, and side-effect boundaries. | `npx skills add alivirgo/Major-AI-Skills --skill agent-tool-replay-test` |
+| [`ai-citation-verification`](skills/ai-citation-verification/SKILL.md) | Check whether an AI answer's citations actually support its factual claims, with source-location evidence and explicit uncertainty. | `npx skills add alivirgo/Major-AI-Skills --skill ai-citation-verification` |
+| [`ai-evaluation-dataset`](skills/ai-evaluation-dataset/SKILL.md) | Build a versioned JSONL evaluation dataset for an AI workflow, with acceptance criteria, held-out cases, and leakage checks. | `npx skills add alivirgo/Major-AI-Skills --skill ai-evaluation-dataset` |
+| [`ai-human-handoff-contract`](skills/ai-human-handoff-contract/SKILL.md) | Define and test when an AI workflow must hand a task to a human, preserving evidence and preventing unapproved continuation. | `npx skills add alivirgo/Major-AI-Skills --skill ai-human-handoff-contract` |
+| [`ai-pii-redaction-review`](skills/ai-pii-redaction-review/SKILL.md) | Prepare a privacy-reviewed AI input using field-aware redaction, stable placeholders, and leakage checks before external submission. | `npx skills add alivirgo/Major-AI-Skills --skill ai-pii-redaction-review` |
 | [`android-studio`](skills/android-studio/SKILL.md) | Configure Android Studio Gradle projects, emulators, build variants, and signing; diagnose build and runtime failures with AGP and Logcat. | `npx skills add alivirgo/Major-AI-Skills --skill android-studio` |
 | [`anthropic-api`](skills/anthropic-api/SKILL.md) | Integrate the Anthropic Messages API with system prompts, tool calls, streaming, and client error handling. | `npx skills add alivirgo/Major-AI-Skills --skill anthropic-api` |
 | [`chromadb`](skills/chromadb/SKILL.md) | Build local RAG storage with ChromaDB collections, embeddings, metadata filters, and persistent vector indexes. | `npx skills add alivirgo/Major-AI-Skills --skill chromadb` |
@@ -211,13 +217,17 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`kotlin`](skills/kotlin/SKILL.md) | Write Kotlin with null-safe types, coroutines, flows, and data classes; integrate with Java and Android APIs. | `npx skills add alivirgo/Major-AI-Skills --skill kotlin` |
 | [`langchain`](skills/langchain/SKILL.md) | Build LangChain LCEL, tool, and retrieval workflows with explicit memory boundaries and application structure. | `npx skills add alivirgo/Major-AI-Skills --skill langchain` |
 | [`llamaindex`](skills/llamaindex/SKILL.md) | Build LlamaIndex ingestion, retrieval, and query pipelines and evaluate RAG behavior on task-relevant examples. | `npx skills add alivirgo/Major-AI-Skills --skill llamaindex` |
+| [`llm-cost-latency-benchmark`](skills/llm-cost-latency-benchmark/SKILL.md) | Measure an AI workflow's observed token cost and end-to-end latency across representative cases with reproducible configuration. | `npx skills add alivirgo/Major-AI-Skills --skill llm-cost-latency-benchmark` |
+| [`llm-json-contract-check`](skills/llm-json-contract-check/SKILL.md) | Validate AI-generated JSON against an application's schema and business rules, distinguishing refusals and truncation from malformed output. | `npx skills add alivirgo/Major-AI-Skills --skill llm-json-contract-check` |
 | [`nextjs`](skills/nextjs/SKILL.md) | Build Next.js applications with the App Router, server and client components, route handlers, caching, and deployment configuration. | `npx skills add alivirgo/Major-AI-Skills --skill nextjs` |
 | [`nodejs`](skills/nodejs/SKILL.md) | Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling. | `npx skills add alivirgo/Major-AI-Skills --skill nodejs` |
 | [`openai-api`](skills/openai-api/SKILL.md) | Integrate OpenAI Responses or Chat Completions, tools, and embeddings with retry handling and clear client boundaries. | `npx skills add alivirgo/Major-AI-Skills --skill openai-api` |
 | [`owasp-asvs`](skills/owasp-asvs/SKILL.md) | Map application-security review evidence to OWASP ASVS requirements, select an appropriate verification level, and triage gaps. | `npx skills add alivirgo/Major-AI-Skills --skill owasp-asvs` |
 | [`postman`](skills/postman/SKILL.md) | Build Postman collections and environments, write request scripts, and run API smoke checks with Newman. | `npx skills add alivirgo/Major-AI-Skills --skill postman` |
 | [`prisma`](skills/prisma/SKILL.md) | Model data with Prisma, manage migrations and transactions, and review relation queries for N+1 behavior. | `npx skills add alivirgo/Major-AI-Skills --skill prisma` |
+| [`prompt-regression-gate`](skills/prompt-regression-gate/SKILL.md) | Compare prompt revisions on a frozen AI evaluation set with paired runs, slice-level regressions, and explicit release thresholds. | `npx skills add alivirgo/Major-AI-Skills --skill prompt-regression-gate` |
 | [`python-packaging`](skills/python-packaging/SKILL.md) | Package Python projects with pyproject.toml, build wheels, configure test and lint tools, and prepare index publishing. | `npx skills add alivirgo/Major-AI-Skills --skill python-packaging` |
+| [`rag-retrieval-audit`](skills/rag-retrieval-audit/SKILL.md) | Diagnose missing evidence in a retrieval-augmented generation pipeline using labeled queries, chunk inspection, and retrieval metrics. | `npx skills add alivirgo/Major-AI-Skills --skill rag-retrieval-audit` |
 | [`rails`](skills/rails/SKILL.md) | Build Rails applications with Active Record, migrations, controllers, strong parameters, and framework conventions. | `npx skills add alivirgo/Major-AI-Skills --skill rails` |
 | [`react`](skills/react/SKILL.md) | Build accessible React interfaces with function components, hooks, and deliberate state ownership; troubleshoot effects, list keys, and interactive behavior. | `npx skills add alivirgo/Major-AI-Skills --skill react` |
 | [`react-native`](skills/react-native/SKILL.md) | Build React Native interfaces and navigation, integrate native modules, and prepare platform release builds. | `npx skills add alivirgo/Major-AI-Skills --skill react-native` |

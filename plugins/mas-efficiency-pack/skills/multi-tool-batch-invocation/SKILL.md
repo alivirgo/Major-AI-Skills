@@ -1,6 +1,6 @@
 ---
 name: multi-tool-batch-invocation
-description: "How autonomous agents emit multiple independent tool calls in a single turn (tool_calls array), enabling parallel execution via Promise.all and slashing turn roundtrips by 70%."
+description: "Batch independent tool operations where the runtime supports parallel execution, preserving dependencies between steps."
 category: efficiency
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: solidworks
-description: "Comprehensive operational skill specification for Anthropic Claude to automate, script, troubleshoot, and optimize Dassault Systèmes SOLIDWORKS, COM/VBA API, FeatureManager trees, and assembly mates."
+description: "Automate SOLIDWORKS parts and assemblies with COM, Python, and VBA; inspect FeatureManager rebuild errors, configure mates, and batch-export CAD files."
 category: cad
 risk: safe
 source: self

@@ -1,6 +1,6 @@
 ---
 name: notion
-description: "Operational skill for Claude to automate Notion via official API, databases, pages, blocks, and property schemas for knowledge ops."
+description: "Create and update Notion pages, blocks, database entries, and property schemas through its API."
 category: knowledge
 risk: safe
 source: self

@@ -20,4 +20,5 @@ jobs:
       - run: npm ci
       - run: npm run validate
       - run: npm run index:check
+      - run: npm run marketplaces:check
       - run: npm test
