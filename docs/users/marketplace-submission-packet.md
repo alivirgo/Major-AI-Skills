@@ -2,6 +2,15 @@
 
 Status: prepared, not submitted or approved.
 
+## Submission progress (2.3.0)
+
+- Prepared a focused `mas-ai-workflows-2.3.0.zip` archive from the plugin directory, not the entire repository.
+- Added [five positive and three negative review cases](submission-test-cases.md). Actual imported-skill execution results are still pending.
+- OpenAI supports direct Claude skills-only archives: `.claude-plugin/plugin.json` plus `skills/<id>/SKILL.md`. Start at https://platform.openai.com/plugins, choose Create plugin, then Skills only. [Official instructions](https://developers.openai.com/plugins/guides/submit-claude-plugin).
+- Required OpenAI account prerequisites: Apps Management write access and individual/business verification. Listing fields include logo, support, privacy policy, and terms URLs. These publisher-owned policy details must not be fabricated. [Submission requirements](https://developers.openai.com/plugins/deploy/submission).
+- Claude entry point: https://claude.ai/settings/plugins/submit (or https://platform.claude.com/plugins/submit).
+- Automated account-form access is blocked because no browser is connected to the UI tool. No draft ID or submission receipt has been obtained.
+
 ## Publisher and source
 
 - Publisher: Ali Virgo / alivirgo.

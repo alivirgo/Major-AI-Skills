@@ -5,5 +5,6 @@ node_modules/
 *.log
 .npm-cache/
 *.tgz
+mas-ai-workflows-*.zip
 .npmrc.github
 package.json.bak-npm
