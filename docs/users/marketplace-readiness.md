@@ -1,5 +1,7 @@
 # Marketplace readiness
 
+Update: current Claude documentation routes in-app submissions to the community marketplace, not the discretionary official catalog. See the [submission packet](marketplace-submission-packet.md) for the distinction and review evidence gaps.
+
 Audit: September 11, 2026. Repository compatibility and official-directory approval are separate.
 
 ## Claude Code

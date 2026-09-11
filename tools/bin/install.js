@@ -34,6 +34,9 @@ function parseArgs(argv) {
   };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
+    if (["--search", "--limit"].includes(a) && (!argv[i + 1] || argv[i + 1].startsWith("--"))) {
+      throw new Error(`${a} requires a value`);
+    }
     if (a === "--help" || a === "-h") args.help = true;
     else if (a === "--dry-run") args.dryRun = true;
     else if (a === "--all") args.all = true;
@@ -49,6 +52,9 @@ function parseArgs(argv) {
     else if (a === "--path") args.path = argv[++i];
     else if (a === "--skills") args.skills = argv[++i];
     else if (a === "--category") args.category = argv[++i];
+    else if (a === "--search") args.search = argv[++i];
+    else if (a === "--json") args.json = true;
+    else if (a === "--limit") args.limit = Number(argv[++i]);
   }
   return args;
 }
@@ -106,6 +112,9 @@ Filters:
   --all            install every skill (explicit consent)
   --dry-run        preview only
   --list           print catalog summary
+  --search "task"  find relevant skills without installing anything
+  --json           machine-readable search results
+  --limit 5        maximum search results (1-20)
 `);
 }
 
@@ -114,6 +123,17 @@ function main() {
   if (args.help) return printHelp();
 
   const index = loadIndex();
+  if (args.search !== undefined) {
+    if (!args.search.trim()) throw new Error("Search query must not be empty");
+    const limit = args.limit === undefined ? 5 : args.limit;
+    if (!Number.isInteger(limit) || limit < 1 || limit > 20) throw new Error("--limit must be an integer from 1 to 20");
+    if (args.all || args.skills) throw new Error("Search cannot be combined with --all or --skills");
+    const results = require("./search").searchSkills(index, args.search, limit, args.category);
+    if (args.json) console.log(JSON.stringify({ schemaVersion: 1, query: args.search, results }, null, 2));
+    else console.log(results.length ? results.map(s => `${s.id}: ${s.description}\n${s.install}`).join("\n\n") : "No matching skills.");
+    return;
+  }
+  if (args.json || args.limit !== undefined) throw new Error("--json and --limit require --search");
   if (args.list) {
     const byCat = {};
     for (const s of index) (byCat[s.category] ||= []).push(s.id);
@@ -187,4 +207,4 @@ function main() {
   console.log(`Try: @${selected[0]?.id || "skill-id"} help me with ...`);
 }
 
-main();
+try { main(); } catch (error) { console.error(error.message); process.exitCode = 1; }

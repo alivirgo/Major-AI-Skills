@@ -91,6 +91,8 @@ Prefer an exact reviewed set. Full Antigravity installs can exhaust context beca
 
 ### Where to get Major AI Skills
 
+Find a relevant skill with [task-based discovery](docs/users/agent-discovery.md). From a checkout: `node tools/bin/install.js --search "JSON schema business rules" --json --limit 3`. Search never installs anything. This command is newer than npm 2.2.0.
+
 | Platform | Install / consume |
 | --- | --- |
 | **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |

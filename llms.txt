@@ -6,6 +6,8 @@ This file helps AI answer engines, coding agents, and RAG systems discover the c
 
 ## Primary
 
+- [Task-based agent discovery](https://github.com/alivirgo/Major-AI-Skills/blob/master/docs/users/agent-discovery.md): Bounded read-only lookup, JSON results, selective installation, and verification limits
+
 - [Home / docs site](https://alivirgo.github.io/Major-AI-Skills/): Interactive catalog and install guidance
 - [README](https://github.com/alivirgo/Major-AI-Skills/blob/master/README.md): Install commands, plugins, FAQ, choose-your-tool table
 - [CATALOG.md](https://github.com/alivirgo/Major-AI-Skills/blob/master/CATALOG.md): Full human-readable skill registry

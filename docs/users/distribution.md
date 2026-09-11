@@ -22,7 +22,7 @@ For current Claude, Gemini, and Codex checks, see the [September 11 marketplace 
 
 | Channel | Action | Link |
 | --- | --- | --- |
-| **Claude official plugin directory** | Maintainer account submission and review | https://claude.ai/settings/plugins/submit |
+| **Claude community marketplace** | Maintainer submission and review; not official curation | https://claude.ai/settings/plugins/submit |
 | **top-agent-skills.com** | Curated listing | Submission packet: [top-agent-skills-submission.md](top-agent-skills-submission.md) · email curator `aviv@alon.email` (site repo is private) |
 | **VoltAgent awesome-agent-skills** | PR after usage matures (they reject brand-new) | https://github.com/VoltAgent/awesome-agent-skills |
 | **awesome-claude-skills** | PR under Individual Skills | https://github.com/travisvn/awesome-claude-skills |

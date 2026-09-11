@@ -29,6 +29,7 @@
     "test": "node --test tools/tests/*.test.js",
     "build": "npm run index",
     "downloads:graph": "node tools/scripts/update_download_graph.js",
+    "adoption:snapshot": "node tools/scripts/adoption_snapshot.js",
     "prepublishOnly": "npm run validate && npm run index && npm run marketplaces",
     "pack:check": "npm pack --dry-run"
   },
