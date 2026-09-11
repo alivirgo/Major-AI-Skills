@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 2.3.0 - 2026-09-11
+
+- Added read-only task search with bounded JSON results, category filtering, and exact install commands.
+- Added discovery regression tests and weekly public aggregate adoption snapshots.
+- Prepared marketplace submission materials with explicit review evidence and evaluation gaps.
+- Synchronized all marketplace and Gemini versions with the npm release.
+
 ## 2.2.0 - 2026-09-11
 
 - Added ten focused AI workflow skills: evaluation datasets, RAG retrieval audits, JSON contracts, citation verification, PII redaction, injection boundary testing, tool replay, prompt regression gates, cost/latency benchmarks, and human handoff contracts.

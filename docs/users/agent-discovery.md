@@ -8,7 +8,11 @@ From a checkout:
 node tools/bin/install.js --search "JSON schema business rules" --json --limit 3
 ```
 
-The search command is not in npm 2.2.0. Until a newer npm release is published, run it from the GitHub checkout. The existing npm installer remains available for exact IDs.
+Search is included starting with npm 2.3.0:
+
+```bash
+npx major-ai-skills@latest --search "JSON schema business rules" --json --limit 3
+```
 
 ## Agent integration
 

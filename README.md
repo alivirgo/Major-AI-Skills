@@ -2,7 +2,7 @@
 
 > **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more - focused on professional apps, token efficiency, and practical prompting habits.**
 
-**Current release: [V2.2.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest).** 402 canonical skills, including ten new AI evaluation, retrieval, privacy, and reliability workflows. Install the [latest npm package](https://www.npmjs.com/package/major-ai-skills) or select a focused Claude/Codex plugin.
+**Current release: [V2.3.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest).** 402 canonical skills, including ten new AI evaluation, retrieval, privacy, and reliability workflows. Install the [latest npm package](https://www.npmjs.com/package/major-ai-skills) or select a focused Claude/Codex plugin.
 
 Coding agents can install exact skill IDs into the directory their host watches. You keep control: preview with `--dry-run`, filter by `--skills` / `--category`, or install a specialized pack.
 
@@ -91,13 +91,13 @@ Prefer an exact reviewed set. Full Antigravity installs can exhaust context beca
 
 ### Where to get Major AI Skills
 
-Find a relevant skill with [task-based discovery](docs/users/agent-discovery.md). From a checkout: `node tools/bin/install.js --search "JSON schema business rules" --json --limit 3`. Search never installs anything. This command is newer than npm 2.2.0.
+Find a relevant skill with [task-based discovery](docs/users/agent-discovery.md): `npx major-ai-skills@latest --search "JSON schema business rules" --json --limit 3`. Search never installs anything. Available starting with 2.3.0.
 
 | Platform | Install / consume |
 | --- | --- |
 | **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |
 | **GitHub Packages** | Scoped package [`@alivirgo/major-ai-skills`](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills) (fills the repo **Packages** sidebar) |
-| **GitHub Release** | Download `major-ai-skills-2.2.0.tgz` from [V2.2.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
+| **GitHub Release** | Download `major-ai-skills-2.3.0.tgz` from [V2.3.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
 | **skills.sh / Vercel skills CLI** | `npx skills add alivirgo/Major-AI-Skills` (discovery via install telemetry) |
 | **Claude Code marketplace** | Add this repo as a marketplace (`.claude-plugin/marketplace.json`), then install a specialized plugin |
 | **Gemini CLI extension** | [Gallery listing verified September 11, 2026](https://geminicli.com/extensions). `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` |
