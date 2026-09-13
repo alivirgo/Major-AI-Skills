@@ -61,7 +61,7 @@
 
 <div align="center">
 
-[![Major AI Skills Animated Snake Terminal](https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/assets/snake-text.svg)](https://github.com/alivirgo/Major-AI-Skills)
+[![Major AI Skills Animated Snake Terminal](https://cdn.jsdelivr.net/gh/alivirgo/Major-AI-Skills@master/assets/snake-text.svg)](https://github.com/alivirgo/Major-AI-Skills)
 
 </div>
 
@@ -101,10 +101,10 @@ Track real-time adoption across both the official npm registry and the global js
 | [![Repo Visitors](https://hits.sh/github.com/alivirgo/Major-AI-Skills.svg?view=today-total&style=flat-square&label=Visitors%20(Today%20%2F%20Total)&color=58a6ff)](https://hits.sh/github.com/alivirgo/Major-AI-Skills/) | [![AI Agent Requests](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdata.jsdelivr.com%2Fv1%2Fstats%2Fpackages%2Fnpm%2Fmajor-ai-skills%3Fperiod%3Dyear&query=%24.hits.total&label=AI%20Agent%20Requests&color=00d8ff&style=flat-square&logo=openai&logoColor=white)](https://www.jsdelivr.com/package/npm/major-ai-skills) | [![Total Agent Installs](https://img.shields.io/npm/dt/major-ai-skills?label=Agent%20Installs&color=cb3837&style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/package/major-ai-skills) |
 
 ### 📦 npm Daily Downloads (Last 30 Days)
-[![Daily npm downloads graph](https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/assets/npm-downloads.svg)](https://www.npmjs.com/package/major-ai-skills)
+[![Daily npm downloads graph](https://cdn.jsdelivr.net/gh/alivirgo/Major-AI-Skills@master/assets/npm-downloads.svg)](https://www.npmjs.com/package/major-ai-skills)
 
 ### ⚡ jsDelivr Daily Requests & Hits (Last 30 Days)
-[![Daily jsDelivr downloads graph](https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/assets/jsdelivr-downloads.svg)](https://www.jsdelivr.com/package/npm/major-ai-skills)
+[![Daily jsDelivr downloads graph](https://cdn.jsdelivr.net/gh/alivirgo/Major-AI-Skills@master/assets/jsdelivr-downloads.svg)](https://www.jsdelivr.com/package/npm/major-ai-skills)
 
 </div>
 
