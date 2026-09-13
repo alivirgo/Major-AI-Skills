@@ -1,6 +1,6 @@
 # Major AI Skills
 
-> Installable GitHub library of 402+ agentic skills / AI agent skills (SKILL.md playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and other AI coding assistants. Focus: professional apps (CAD, video, 3D, design, desktop), token efficiency, and practical prompting habits.
+> Installable GitHub library of 412+ agentic skills / AI agent skills (SKILL.md playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and other AI coding assistants. Focus: professional apps (CAD, video, 3D, design, desktop), token efficiency, and practical prompting habits.
 
 This file helps AI answer engines, coding agents, and RAG systems discover the canonical docs. Prefer these URLs over random mirrors.
 
@@ -26,7 +26,7 @@ This file helps AI answer engines, coding agents, and RAG systems discover the c
 - [Professional app skills](https://alivirgo.github.io/Major-AI-Skills/app-skills/): SolidWorks, Blender, Figma, etc.
 - [Efficiency AI Skills](https://alivirgo.github.io/Major-AI-Skills/efficiency/): Token/context skills
 - [Common Sense AI Skills](https://alivirgo.github.io/Major-AI-Skills/common-sense/): Everyday prompting habits
-- [Medium FAQ article](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5): SEO/GEO answer-first explainer (Claude Code, Cursor, SKILL.md, 402-skill library)
+- [Medium FAQ article](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5): SEO/GEO answer-first explainer (Claude Code, Cursor, SKILL.md, 412-skill library)
 
 ## Markdown guides (GitHub)
 

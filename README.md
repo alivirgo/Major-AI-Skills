@@ -29,6 +29,9 @@
 [![jsDelivr CDN](https://img.shields.io/badge/jsDelivr-Global%20CDN-e84d3d?logo=jsdelivr&logoColor=white&style=flat-square)](https://cdn.jsdelivr.net/npm/major-ai-skills@latest/)
 [![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@alivirgo%2Fmajor--ai--skills-24292f?logo=github&logoColor=white&style=flat-square)](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills)
 [![Release](https://img.shields.io/github/v/release/alivirgo/Major-AI-Skills?label=GitHub%20Release&logo=github&style=flat-square)](https://github.com/alivirgo/Major-AI-Skills/releases/latest)
+[![Repo Visitors](https://hits.sh/github.com/alivirgo/Major-AI-Skills.svg?label=Repo%20Visitors&color=58a6ff&style=flat-square)](https://hits.sh/github.com/alivirgo/Major-AI-Skills/)
+[![AI Agent Requests](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdata.jsdelivr.com%2Fv1%2Fstats%2Fpackages%2Fnpm%2Fmajor-ai-skills%3Fperiod%3Dyear&query=%24.hits.total&label=AI%20Agent%20Requests&color=00d8ff&style=flat-square&logo=openai&logoColor=white)](https://www.jsdelivr.com/package/npm/major-ai-skills)
+[![Total Agent Installs](https://img.shields.io/npm/dt/major-ai-skills?label=Agent%20Installs&color=cb3837&style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/package/major-ai-skills)
 [![skills.sh](https://skills.sh/b/alivirgo/Major-AI-Skills)](https://skills.sh/alivirgo/Major-AI-Skills)
 [![Direct skill distribution](https://img.shields.io/badge/Direct%20skills-npx%20major--ai--skills-black?style=flat-square)](#installation)
 [![Website](https://img.shields.io/badge/Website-GitHub%20Pages-success?style=flat-square&logo=github)](https://alivirgo.github.io/Major-AI-Skills/)
@@ -90,6 +93,12 @@ Pick a concrete task, inspect its instructions, and install only that skill. Eac
 Track real-time adoption across both the official npm registry and the global jsDelivr edge CDN. Updated automatically from public APIs every 12 hours.
 
 <div align="center">
+
+### ⚡ Live Telemetry & Real-Time Traffic Pulse
+
+| 👥 **Human Repo Visitors** | 🤖 **AI Agent Requests & CDN Hits** | 📦 **Total Agent Package Installs** |
+| :---: | :---: | :---: |
+| [![Repo Visitors](https://hits.sh/github.com/alivirgo/Major-AI-Skills.svg?view=today-total&style=flat-square&label=Visitors%20(Today%20%2F%20Total)&color=58a6ff)](https://hits.sh/github.com/alivirgo/Major-AI-Skills/) | [![AI Agent Requests](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdata.jsdelivr.com%2Fv1%2Fstats%2Fpackages%2Fnpm%2Fmajor-ai-skills%3Fperiod%3Dyear&query=%24.hits.total&label=AI%20Agent%20Requests&color=00d8ff&style=flat-square&logo=openai&logoColor=white)](https://www.jsdelivr.com/package/npm/major-ai-skills) | [![Total Agent Installs](https://img.shields.io/npm/dt/major-ai-skills?label=Agent%20Installs&color=cb3837&style=flat-square&logo=npm&logoColor=white)](https://www.npmjs.com/package/major-ai-skills) |
 
 ### 📦 npm Daily Downloads (Last 30 Days)
 [![Daily npm downloads graph](https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/assets/npm-downloads.svg)](https://www.npmjs.com/package/major-ai-skills)
