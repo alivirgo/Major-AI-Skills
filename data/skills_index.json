@@ -5133,6 +5133,35 @@
     }
   },
   {
+    "id": "keda",
+    "path": "skills/keda",
+    "category": "devops",
+    "name": "keda",
+    "description": "Configure Kubernetes Event-driven Autoscaling (KEDA); deploy ScaledObjects, ScaledJobs, TriggerAuthentications, and queue/metric-driven autoscalers.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "keda",
+      "kubernetes",
+      "autoscaling",
+      "event-driven",
+      "prometheus",
+      "kafka",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "keep-instructions-direct",
     "path": "skills/keep-instructions-direct",
     "category": "common-sense",
@@ -5934,6 +5963,35 @@
     }
   },
   {
+    "id": "meilisearch",
+    "path": "skills/meilisearch",
+    "category": "development",
+    "name": "meilisearch",
+    "description": "Configure Meilisearch full-text search engine; tune typo tolerance, ranking rules, filterable and searchable attributes, and instant search latency.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "meilisearch",
+      "search-engine",
+      "full-text-search",
+      "typo-tolerance",
+      "faceting",
+      "instant-search",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "microsoft-excel",
     "path": "skills/microsoft-excel",
     "category": "office",
@@ -6206,6 +6264,35 @@
       "webhooks",
       "rest-api",
       "nodes",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "nats",
+    "path": "skills/nats",
+    "category": "devops",
+    "name": "nats",
+    "description": "Configure NATS messaging and JetStream persistence; manage pub/sub subjects, consumer groups, key-value buckets, and distributed clustering.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "nats",
+      "jetstream",
+      "messaging",
+      "pubsub",
+      "microservices",
+      "event-driven",
       "claude"
     ],
     "tools": [
@@ -7608,6 +7695,35 @@
       "tensors",
       "training",
       "python",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "qdrant",
+    "path": "skills/qdrant",
+    "category": "development",
+    "name": "qdrant",
+    "description": "Manage Qdrant vector databases; optimize HNSW indexing, payload filtering, hybrid dense-sparse search, and high-dimensional collection schemas.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "qdrant",
+      "vector-database",
+      "hnsw",
+      "embeddings",
+      "semantic-search",
+      "rag",
       "claude"
     ],
     "tools": [
@@ -9834,6 +9950,35 @@
     }
   },
   {
+    "id": "surrealdb",
+    "path": "skills/surrealdb",
+    "category": "development",
+    "name": "surrealdb",
+    "description": "Design multi-model schemas and query SurrealDB using SurrealQL; implement graph relations, live queries, record links, and granular access rules.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "surrealdb",
+      "surrealql",
+      "multimodel",
+      "graph-database",
+      "live-queries",
+      "nosql",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "swift",
     "path": "skills/swift",
     "category": "development",
@@ -10036,6 +10181,36 @@
     }
   },
   {
+    "id": "tauri",
+    "path": "skills/tauri",
+    "category": "cross-platform",
+    "name": "tauri",
+    "description": "Build secure cross-platform desktop applications with Tauri v2; configure Rust backend IPC commands, window management, and granular permission capabilities.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "tauri",
+      "desktop",
+      "rust",
+      "cross-platform",
+      "ipc",
+      "webview",
+      "frontend",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
     "id": "tell-ai-what-not-to-do",
     "path": "skills/tell-ai-what-not-to-do",
     "category": "common-sense",
@@ -10145,6 +10320,35 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "temporal",
+    "path": "skills/temporal",
+    "category": "development",
+    "name": "temporal",
+    "description": "Author and orchestrate Temporal workflows and activities; implement saga compensation, deterministic execution, retries, signals, and queries.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "temporal",
+      "orchestration",
+      "workflow",
+      "activities",
+      "sagas",
+      "microservices",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -10463,6 +10667,35 @@
       "gemini",
       "codex",
       "lmstudio"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "traefik",
+    "path": "skills/traefik",
+    "category": "devops",
+    "name": "traefik",
+    "description": "Deploy Traefik edge router and reverse proxy; configure dynamic Docker/Kubernetes discovery, middleware chains, rate limiting, and automatic ACME TLS.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "traefik",
+      "reverse-proxy",
+      "ingress",
+      "docker",
+      "kubernetes",
+      "letsencrypt",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,
@@ -11154,6 +11387,65 @@
       "gemini",
       "codex",
       "chatgpt"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "vitest",
+    "path": "skills/vitest",
+    "category": "testing",
+    "name": "vitest",
+    "description": "Write and optimize Vitest unit and component test suites; configure workspace projects, worker thread pools, mocks, coverage, and instant watch mode.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "vitest",
+      "testing",
+      "unit-test",
+      "vite",
+      "typescript",
+      "esm",
+      "coverage",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
+    ],
+    "variants": {
+      "gpt": false,
+      "gemini": false
+    }
+  },
+  {
+    "id": "vllm",
+    "path": "skills/vllm",
+    "category": "development",
+    "name": "vllm",
+    "description": "Deploy, tune, and query vLLM high-throughput inference engines; configure PagedAttention, continuous batching, chunked prefill, and multi-GPU tensor parallelism.",
+    "risk": "safe",
+    "source": "self",
+    "date_added": "2026-09-13",
+    "tags": [
+      "vllm",
+      "llm-inference",
+      "paged-attention",
+      "continuous-batching",
+      "tensor-parallel",
+      "openai-api",
+      "claude"
+    ],
+    "tools": [
+      "claude",
+      "cursor",
+      "gemini",
+      "codex"
     ],
     "variants": {
       "gpt": false,

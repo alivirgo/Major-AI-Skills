@@ -148,6 +148,7 @@
         "rclone",
         "sniffnet",
         "tailscale",
+        "tauri",
         "ventoy",
         "wireshark"
       ]
@@ -188,6 +189,7 @@
         "llamaindex",
         "llm-cost-latency-benchmark",
         "llm-json-contract-check",
+        "meilisearch",
         "nextjs",
         "nodejs",
         "openai-api",
@@ -196,6 +198,7 @@
         "prisma",
         "prompt-regression-gate",
         "python-packaging",
+        "qdrant",
         "rag-retrieval-audit",
         "rails",
         "react",
@@ -205,9 +208,12 @@
         "shopify-app",
         "spring-boot",
         "stripe",
+        "surrealdb",
         "swift",
+        "temporal",
         "typescript",
         "vercel",
+        "vllm",
         "vscode",
         "wordpress",
         "xcode-ios"
@@ -237,11 +243,13 @@
         "helm",
         "incident-runbooks",
         "kafka",
+        "keda",
         "kubernetes",
         "lets-encrypt",
         "makefile-automation",
         "mongodb",
         "mysql",
+        "nats",
         "nginx-hardening",
         "nomad",
         "opentelemetry",
@@ -260,6 +268,7 @@
         "supabase-rls",
         "terraform",
         "terraform-aws",
+        "traefik",
         "trivy",
         "vault"
       ]
@@ -541,7 +550,8 @@
       "description": "Playwright user journeys, diagnostics, and CI execution.",
       "skills": [
         "playwright",
-        "playwright-ci"
+        "playwright-ci",
+        "vitest"
       ]
     },
     {

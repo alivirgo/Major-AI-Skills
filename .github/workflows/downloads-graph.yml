@@ -1,4 +1,4 @@
-name: Update npm download graph
+name: Update download graphs
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: npm-download-graph
+  group: download-graphs
   cancel-in-progress: true
 
 jobs:
@@ -22,15 +22,15 @@ jobs:
           node-version: 24
           package-manager-cache: false
       - run: node tools/scripts/update_download_graph.js
-      - name: Commit updated graph
+      - name: Commit updated graphs
         shell: bash
         run: |
-          if git diff --quiet -- assets/npm-downloads.svg; then
-            echo "Download graph is already current."
+          if git diff --quiet -- assets/npm-downloads.svg assets/jsdelivr-downloads.svg; then
+            echo "Download graphs are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/npm-downloads.svg
-          git commit -m "chore: update npm download graph"
+          git add assets/npm-downloads.svg assets/jsdelivr-downloads.svg
+          git commit -m "chore: update npm and jsdelivr download graphs"
           git push

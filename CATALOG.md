@@ -1,6 +1,6 @@
 # Major AI Skills Catalog
 
-> Generated registry of **402** installable skills.
+> Generated registry of **412** installable skills.
 
 Use `skills_index.json` for machine-readable discovery. Each skill lives at `skills/<id>/SKILL.md`.
 
@@ -14,10 +14,10 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 - [automation](#automation) - 2 skills
 - [cad](#cad) - 5 skills
 - [common-sense](#common-sense) - 99 skills
-- [cross-platform](#cross-platform) - 9 skills
+- [cross-platform](#cross-platform) - 10 skills
 - [design](#design) - 2 skills
-- [development](#development) - 47 skills
-- [devops](#devops) - 45 skills
+- [development](#development) - 52 skills
+- [devops](#devops) - 48 skills
 - [digital-forensics](#digital-forensics) - 3 skills
 - [eda](#eda) - 4 skills
 - [efficiency](#efficiency) - 100 skills
@@ -35,7 +35,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 - [plc-industrial](#plc-industrial) - 3 skills
 - [productivity](#productivity) - 5 skills
 - [scientific](#scientific) - 15 skills
-- [testing](#testing) - 2 skills
+- [testing](#testing) - 3 skills
 - [video-editing](#video-editing) - 6 skills
 - [windows](#windows) - 10 skills
 
@@ -181,6 +181,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`rclone`](skills/rclone/SKILL.md) | Plan and run Rclone cloud transfers, synchronization, encrypted remotes, and mounts while checking source and destination behavior. | `npx skills add alivirgo/Major-AI-Skills --skill rclone` |
 | [`sniffnet`](skills/sniffnet/SKILL.md) | Inspect network traffic with Sniffnet, configure packet filters and bandwidth alerts, and troubleshoot capture drivers. | `npx skills add alivirgo/Major-AI-Skills --skill sniffnet` |
 | [`tailscale`](skills/tailscale/SKILL.md) | Configure Tailscale connectivity, subnet routing, and MagicDNS; troubleshoot WireGuard paths and DERP relay behavior. | `npx skills add alivirgo/Major-AI-Skills --skill tailscale` |
+| [`tauri`](skills/tauri/SKILL.md) | Build secure cross-platform desktop applications with Tauri v2; configure Rust backend IPC commands, window management, and granular permission capabilities. | `npx skills add alivirgo/Major-AI-Skills --skill tauri` |
 | [`ventoy`](skills/ventoy/SKILL.md) | Configure Ventoy multiboot USB media and plugin settings, and diagnose boot or Secure Boot enrollment issues. | `npx skills add alivirgo/Major-AI-Skills --skill ventoy` |
 | [`wireshark`](skills/wireshark/SKILL.md) | Inspect packet captures with Wireshark or TShark, write display filters, and troubleshoot TCP or authorized TLS analysis. | `npx skills add alivirgo/Major-AI-Skills --skill wireshark` |
 
@@ -219,6 +220,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`llamaindex`](skills/llamaindex/SKILL.md) | Build LlamaIndex ingestion, retrieval, and query pipelines and evaluate RAG behavior on task-relevant examples. | `npx skills add alivirgo/Major-AI-Skills --skill llamaindex` |
 | [`llm-cost-latency-benchmark`](skills/llm-cost-latency-benchmark/SKILL.md) | Measure an AI workflow's observed token cost and end-to-end latency across representative cases with reproducible configuration. | `npx skills add alivirgo/Major-AI-Skills --skill llm-cost-latency-benchmark` |
 | [`llm-json-contract-check`](skills/llm-json-contract-check/SKILL.md) | Validate AI-generated JSON against an application's schema and business rules, distinguishing refusals and truncation from malformed output. | `npx skills add alivirgo/Major-AI-Skills --skill llm-json-contract-check` |
+| [`meilisearch`](skills/meilisearch/SKILL.md) | Configure Meilisearch full-text search engine; tune typo tolerance, ranking rules, filterable and searchable attributes, and instant search latency. | `npx skills add alivirgo/Major-AI-Skills --skill meilisearch` |
 | [`nextjs`](skills/nextjs/SKILL.md) | Build Next.js applications with the App Router, server and client components, route handlers, caching, and deployment configuration. | `npx skills add alivirgo/Major-AI-Skills --skill nextjs` |
 | [`nodejs`](skills/nodejs/SKILL.md) | Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling. | `npx skills add alivirgo/Major-AI-Skills --skill nodejs` |
 | [`openai-api`](skills/openai-api/SKILL.md) | Integrate OpenAI Responses or Chat Completions, tools, and embeddings with retry handling and clear client boundaries. | `npx skills add alivirgo/Major-AI-Skills --skill openai-api` |
@@ -227,6 +229,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`prisma`](skills/prisma/SKILL.md) | Model data with Prisma, manage migrations and transactions, and review relation queries for N+1 behavior. | `npx skills add alivirgo/Major-AI-Skills --skill prisma` |
 | [`prompt-regression-gate`](skills/prompt-regression-gate/SKILL.md) | Compare prompt revisions on a frozen AI evaluation set with paired runs, slice-level regressions, and explicit release thresholds. | `npx skills add alivirgo/Major-AI-Skills --skill prompt-regression-gate` |
 | [`python-packaging`](skills/python-packaging/SKILL.md) | Package Python projects with pyproject.toml, build wheels, configure test and lint tools, and prepare index publishing. | `npx skills add alivirgo/Major-AI-Skills --skill python-packaging` |
+| [`qdrant`](skills/qdrant/SKILL.md) | Manage Qdrant vector databases; optimize HNSW indexing, payload filtering, hybrid dense-sparse search, and high-dimensional collection schemas. | `npx skills add alivirgo/Major-AI-Skills --skill qdrant` |
 | [`rag-retrieval-audit`](skills/rag-retrieval-audit/SKILL.md) | Diagnose missing evidence in a retrieval-augmented generation pipeline using labeled queries, chunk inspection, and retrieval metrics. | `npx skills add alivirgo/Major-AI-Skills --skill rag-retrieval-audit` |
 | [`rails`](skills/rails/SKILL.md) | Build Rails applications with Active Record, migrations, controllers, strong parameters, and framework conventions. | `npx skills add alivirgo/Major-AI-Skills --skill rails` |
 | [`react`](skills/react/SKILL.md) | Build accessible React interfaces with function components, hooks, and deliberate state ownership; troubleshoot effects, list keys, and interactive behavior. | `npx skills add alivirgo/Major-AI-Skills --skill react` |
@@ -236,9 +239,12 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`shopify-app`](skills/shopify-app/SKILL.md) | Build Shopify apps with OAuth or session tokens, Admin GraphQL, extensions, webhooks, and billing integration. | `npx skills add alivirgo/Major-AI-Skills --skill shopify-app` |
 | [`spring-boot`](skills/spring-boot/SKILL.md) | Build Spring Boot REST services with validation, profiles, dependency injection, Actuator, and focused test slices. | `npx skills add alivirgo/Major-AI-Skills --skill spring-boot` |
 | [`stripe`](skills/stripe/SKILL.md) | Integrate Stripe Checkout, PaymentIntents, subscriptions, and signed webhooks with idempotency and test-mode checks. | `npx skills add alivirgo/Major-AI-Skills --skill stripe` |
+| [`surrealdb`](skills/surrealdb/SKILL.md) | Design multi-model schemas and query SurrealDB using SurrealQL; implement graph relations, live queries, record links, and granular access rules. | `npx skills add alivirgo/Major-AI-Skills --skill surrealdb` |
 | [`swift`](skills/swift/SKILL.md) | Write Swift with optionals, value types, protocols, async/await, and actors; manage state in SwiftUI workflows. | `npx skills add alivirgo/Major-AI-Skills --skill swift` |
+| [`temporal`](skills/temporal/SKILL.md) | Author and orchestrate Temporal workflows and activities; implement saga compensation, deterministic execution, retries, signals, and queries. | `npx skills add alivirgo/Major-AI-Skills --skill temporal` |
 | [`typescript`](skills/typescript/SKILL.md) | Model TypeScript data with strict types, narrowing, and generics; configure tsconfig and migrate JavaScript while checking untyped boundaries. | `npx skills add alivirgo/Major-AI-Skills --skill typescript` |
 | [`vercel`](skills/vercel/SKILL.md) | Configure Vercel projects, environment variables, build settings, and preview deployments before a production rollout. | `npx skills add alivirgo/Major-AI-Skills --skill vercel` |
+| [`vllm`](skills/vllm/SKILL.md) | Deploy, tune, and query vLLM high-throughput inference engines; configure PagedAttention, continuous batching, chunked prefill, and multi-GPU tensor parallelism. | `npx skills add alivirgo/Major-AI-Skills --skill vllm` |
 | [`vscode`](skills/vscode/SKILL.md) | Configure VS Code tasks, debugging, settings, and extensions, and automate editor workflows with the code CLI. | `npx skills add alivirgo/Major-AI-Skills --skill vscode` |
 | [`wordpress`](skills/wordpress/SKILL.md) | Build WordPress themes and plugins, automate tasks with WP-CLI, and review hooks, REST integration, and common security issues. | `npx skills add alivirgo/Major-AI-Skills --skill wordpress` |
 | [`xcode-ios`](skills/xcode-ios/SKILL.md) | Configure Xcode targets, simulators, signing, SwiftUI or UIKit projects, and archive or export workflows. | `npx skills add alivirgo/Major-AI-Skills --skill xcode-ios` |
@@ -267,11 +273,13 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`helm`](skills/helm/SKILL.md) | Package Kubernetes applications as Helm charts, configure values and dependencies, and inspect release upgrades or rollbacks. | `npx skills add alivirgo/Major-AI-Skills --skill helm` |
 | [`incident-runbooks`](skills/incident-runbooks/SKILL.md) | Write on-call runbooks with symptoms, severity, diagnostics, mitigation steps, escalation paths, and incident references. | `npx skills add alivirgo/Major-AI-Skills --skill incident-runbooks` |
 | [`kafka`](skills/kafka/SKILL.md) | Configure Kafka topics and consumers, inspect partitions and offsets, and diagnose consumer-group lag. | `npx skills add alivirgo/Major-AI-Skills --skill kafka` |
+| [`keda`](skills/keda/SKILL.md) | Configure Kubernetes Event-driven Autoscaling (KEDA); deploy ScaledObjects, ScaledJobs, TriggerAuthentications, and queue/metric-driven autoscalers. | `npx skills add alivirgo/Major-AI-Skills --skill keda` |
 | [`kubernetes`](skills/kubernetes/SKILL.md) | Design and debug Kubernetes Deployments, Services, Ingress, configuration, and rollouts using kubectl. | `npx skills add alivirgo/Major-AI-Skills --skill kubernetes` |
 | [`lets-encrypt`](skills/lets-encrypt/SKILL.md) | Issue and renew Let's Encrypt certificates with certbot or acme.sh, configure ACME challenges, and diagnose renewal failures. | `npx skills add alivirgo/Major-AI-Skills --skill lets-encrypt` |
 | [`makefile-automation`](skills/makefile-automation/SKILL.md) | Design Makefile targets, dependencies, variables, and discoverable repository automation commands. | `npx skills add alivirgo/Major-AI-Skills --skill makefile-automation` |
 | [`mongodb`](skills/mongodb/SKILL.md) | Design MongoDB documents and indexes, build aggregation pipelines, and investigate query plans or transaction behavior. | `npx skills add alivirgo/Major-AI-Skills --skill mongodb` |
 | [`mysql`](skills/mysql/SKILL.md) | Design and administer MySQL or MariaDB schemas, indexes, grants, backups, and migrations; investigate replication basics. | `npx skills add alivirgo/Major-AI-Skills --skill mysql` |
+| [`nats`](skills/nats/SKILL.md) | Configure NATS messaging and JetStream persistence; manage pub/sub subjects, consumer groups, key-value buckets, and distributed clustering. | `npx skills add alivirgo/Major-AI-Skills --skill nats` |
 | [`nginx-hardening`](skills/nginx-hardening/SKILL.md) | Review Nginx reverse-proxy security settings, TLS, headers, request limits, and upstream boundaries. Use for focused hardening work. | `npx skills add alivirgo/Major-AI-Skills --skill nginx-hardening` |
 | [`nomad`](skills/nomad/SKILL.md) | Write Nomad jobspecs and task groups, configure networking and variables, and manage workload rollouts. | `npx skills add alivirgo/Major-AI-Skills --skill nomad` |
 | [`opentelemetry`](skills/opentelemetry/SKILL.md) | Instrument services with OpenTelemetry traces, metrics, and logs; configure collectors and diagnose context propagation. | `npx skills add alivirgo/Major-AI-Skills --skill opentelemetry` |
@@ -290,6 +298,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | [`supabase-rls`](skills/supabase-rls/SKILL.md) | Design and review Supabase row-level security policies, security-definer functions, storage access, and authorization boundaries. Use for focused RLS reviews. | `npx skills add alivirgo/Major-AI-Skills --skill supabase-rls` |
 | [`terraform`](skills/terraform/SKILL.md) | Write and review Terraform HCL, configure providers and remote state, and assess plan changes before infrastructure applies. | `npx skills add alivirgo/Major-AI-Skills --skill terraform` |
 | [`terraform-aws`](skills/terraform-aws/SKILL.md) | Design AWS Terraform modules, IAM permissions, providers, and state backends; review AWS-specific infrastructure plans. | `npx skills add alivirgo/Major-AI-Skills --skill terraform-aws` |
+| [`traefik`](skills/traefik/SKILL.md) | Deploy Traefik edge router and reverse proxy; configure dynamic Docker/Kubernetes discovery, middleware chains, rate limiting, and automatic ACME TLS. | `npx skills add alivirgo/Major-AI-Skills --skill traefik` |
 | [`trivy`](skills/trivy/SKILL.md) | Scan containers, filesystems, repositories, and infrastructure code with Trivy, then triage CVEs and configure CI thresholds. | `npx skills add alivirgo/Major-AI-Skills --skill trivy` |
 | [`vault`](skills/vault/SKILL.md) | Configure Vault secret engines, policies, AppRole or Kubernetes authentication, and dynamic credential leases. | `npx skills add alivirgo/Major-AI-Skills --skill vault` |
 
@@ -554,6 +563,7 @@ Install an exact skill with the command beside it. The Vercel CLI prompts for th
 | --- | --- | --- |
 | [`playwright`](skills/playwright/SKILL.md) | Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows. | `npx skills add alivirgo/Major-AI-Skills --skill playwright` |
 | [`playwright-ci`](skills/playwright-ci/SKILL.md) | Configure Playwright in CI with sharding, merged reports, failure traces, seeded test data, and repeatable authentication. Use for pipeline-specific failures. | `npx skills add alivirgo/Major-AI-Skills --skill playwright-ci` |
+| [`vitest`](skills/vitest/SKILL.md) | Write and optimize Vitest unit and component test suites; configure workspace projects, worker thread pools, mocks, coverage, and instant watch mode. | `npx skills add alivirgo/Major-AI-Skills --skill vitest` |
 
 ## video-editing
 
