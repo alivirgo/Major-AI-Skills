@@ -119,7 +119,7 @@ services:
     container_name: tailscale-sidecar
     hostname: production-app-node
     environment:
-     - TS_AUTHKEY=tskey-auth-xxxxxx-ephemeral
+     - TS_AUTHKEY=${TAILSCALE_AUTH_KEY:-}
      - TS_STATE_DIR=/var/lib/tailscale
      - TS_USERSPACE=false
     volumes:
@@ -147,7 +147,7 @@ services:
 | Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
 | :--- | :--- | :--- |
 | **`Permission Denied` Connecting to `/var/run/tailscale/tailscaled.sock`** | Current user is not in the `tailscale` group or lacks root permissions to access the daemon socket. | 1. Add user to operator group: `sudo tailscale set --operator-group=$USER`.<br>2. Or execute script as root / `sudo`. |
-| **Ephemeral Container Nodes Accumulating in Admin Console** | Docker container restarted with new machine key without deleting old node registration. | 1. Use pre-authenticated ephemeral keys (`tskey-auth-...` with Ephemeral checked).<br>2. Ephemeral nodes automatically deregister immediately when taken offline. |
+| **Ephemeral Container Nodes Accumulating in Admin Console** | Docker container restarted with new machine key without deleting old node registration. | 1. Use pre-authenticated ephemeral keys (generated in Tailscale Admin Console with Ephemeral enabled).<br>2. Ephemeral nodes automatically deregister immediately when taken offline. |
 | **`Error: /dev/net/tun not found` in Docker** | Docker host does not have the TUN kernel module loaded or container lacks `cap_add: [NET_ADMIN]`. | 1. On host, run `sudo modprobe tun`.<br>2. Ensure `volumes: ["/dev/net/tun:/dev/net/tun"]` is mounted. |
 | **Headscale Client Fails: `node not registered`** | Client attempted authentication against a non-existent user namespace on Headscale. | 1. On Headscale server: `headscale users create default`.<br>2. Generate auth key: `headscale preauthkeys create -u default --reusable`. |
 
