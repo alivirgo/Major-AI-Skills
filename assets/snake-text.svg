@@ -1,0 +1,357 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="260" viewBox="0 0 820 260" role="img" aria-label="Major AI Skills interactive snake text animation">
+  <defs>
+    <!-- Background & Glowing Gradients -->
+    <linearGradient id="term-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#090d13"/>
+      <stop offset="100%" stop-color="#111822"/>
+    </linearGradient>
+
+    <linearGradient id="header-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#161f2c"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+
+    <!-- Snake Body Gradient -->
+    <linearGradient id="snake-head-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#58ff9b"/>
+      <stop offset="100%" stop-color="#00d8ff"/>
+    </linearGradient>
+
+    <linearGradient id="snake-body-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="100%" stop-color="#00b0ff"/>
+    </linearGradient>
+
+    <!-- Filter for Snake Neon Glow -->
+    <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Snake Path: Weaves organically through lines of text -->
+    <path id="snake-path" d="M -60,118 C 60,118 100,85 180,85 C 260,85 285,148 375,148 C 455,148 490,95 570,95 C 650,95 685,152 765,152 C 835,152 870,118 920,118" fill="none" />
+  </defs>
+
+  <style>
+    /* Typography & Core Styling */
+    .mono-text {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      fill: #e6edf3;
+    }
+    .text-dim { fill: #8b949e; }
+    .text-cyan { fill: #58a6ff; font-weight: 600; }
+    .text-green { fill: #3fb950; font-weight: 600; }
+    .text-purple { fill: #bc8cff; font-weight: 600; }
+    .text-orange { fill: #f0883e; font-weight: 600; }
+    .text-red { fill: #f85149; font-weight: 600; }
+    .text-yellow { fill: #d29922; font-weight: 600; }
+
+    /* Keyframe Animations for Text Pushed by the Snake (8s Total Cycle) */
+
+    /* 1. At t ~ 15%-25% (X ~ 180, Y ~ 85), pushes Line 1 command word UP */
+    @keyframes push-line1-cmd {
+      0%, 12% { transform: translateY(0); }
+      18% { transform: translateY(-16px); }
+      22% { transform: translateY(-14px); }
+      28% { transform: translateY(2px); }
+      32%, 100% { transform: translateY(0); }
+    }
+    .anim-push-line1 {
+      animation: push-line1-cmd 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    /* 2. At t ~ 22%-32%, words in Line 2 PART APART horizontally to let snake through! */
+    @keyframes part-left-skill {
+      0%, 16% { transform: translate(0, 0); }
+      23% { transform: translate(-14px, 8px); }
+      29% { transform: translate(-8px, 2px); }
+      34%, 100% { transform: translate(0, 0); }
+    }
+    @keyframes part-right-skill {
+      0%, 16% { transform: translate(0, 0); }
+      23% { transform: translate(18px, -10px); }
+      29% { transform: translate(8px, -2px); }
+      34%, 100% { transform: translate(0, 0); }
+    }
+    .anim-part-left {
+      animation: part-left-skill 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+    .anim-part-right {
+      animation: part-right-skill 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    /* 3. At t ~ 35%-45% (X ~ 375, Y ~ 148), snake dips down between Line 2 and Line 3 */
+    @keyframes push-down-token {
+      0%, 28% { transform: translateY(0); }
+      37% { transform: translateY(18px); }
+      43% { transform: translateY(-3px); }
+      48%, 100% { transform: translateY(0); }
+    }
+    .anim-push-token {
+      animation: push-down-token 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    /* 4. At t ~ 50%-62% (X ~ 570, Y ~ 95), snake shoots up through Line 1 skills list */
+    @keyframes push-up-skills {
+      0%, 46% { transform: translateY(0) scale(1); }
+      54% { transform: translateY(-16px) scale(1.05); }
+      60% { transform: translateY(2px) scale(0.98); }
+      65%, 100% { transform: translateY(0) scale(1); }
+    }
+    .anim-push-skills {
+      animation: push-up-skills 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    /* 5. At t ~ 65%-78% (X ~ 765, Y ~ 152), snake sweeps across jsDelivr & Edge tag */
+    @keyframes push-jsdelivr {
+      0%, 62% { transform: translateY(0) rotate(0deg); }
+      70% { transform: translateY(-16px) rotate(-3deg); }
+      74% { transform: translateY(-12px) rotate(1deg); }
+      79% { transform: translateY(2px) rotate(0deg); }
+      83%, 100% { transform: translateY(0) rotate(0deg); }
+    }
+    .anim-push-jsdelivr {
+      animation: push-jsdelivr 8s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    /* Snake Flicking Tongue */
+    @keyframes tongue-flick {
+      0%, 15%, 35%, 55%, 75%, 95%, 100% { transform: scaleX(0.2); opacity: 0; }
+      5%, 25%, 45%, 65%, 85% { transform: scaleX(1.4); opacity: 1; }
+    }
+    .snake-tongue {
+      animation: tongue-flick 2s ease-in-out infinite;
+      transform-origin: left center;
+    }
+  </style>
+
+  <!-- Container Box with Rounded Edges & Subtle Border -->
+  <rect x="1" y="1" width="818" height="258" rx="14" fill="url(#term-bg)" stroke="#30363d" stroke-width="1.5"/>
+
+  <!-- Terminal Window Header Bar -->
+  <rect x="1" y="1" width="818" height="34" rx="14" fill="url(#header-grad)" stroke="#30363d" stroke-width="1"/>
+  <!-- Crisp bottom border on titlebar -->
+  <line x1="1" y1="35" x2="819" y2="35" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Window Dots (macOS Style) -->
+  <circle cx="22" cy="18" r="5.5" fill="#ff5f56" stroke="#e0443e" stroke-width="0.5"/>
+  <circle cx="38" cy="18" r="5.5" fill="#ffbd2e" stroke="#dea123" stroke-width="0.5"/>
+  <circle cx="54" cy="18" r="5.5" fill="#27c93f" stroke="#1aab29" stroke-width="0.5"/>
+
+  <!-- Title Text -->
+  <text x="76" y="22" fill="#8b949e" font-family="ui-monospace, monospace" font-size="12" font-weight="600">Major AI Skills · Autonomous Agent Playbook Mesh (~/.agents/skills)</text>
+  <text x="790" y="22" fill="#58a6ff" font-family="ui-monospace, monospace" font-size="11" font-weight="600" text-anchor="end">v2.3.0 · 412 SKILLS</text>
+
+  <!-- ==================== CODE & TEXT CONTENT ==================== -->
+
+  <!-- LINE 1: Prompt Execution (Y = 78) -->
+  <g transform="translate(28, 78)">
+    <text class="mono-text text-green font-bold">$</text>
+    <text x="18" class="mono-text text-cyan">npx</text>
+    <text x="46" class="mono-text">major-ai-skills</text>
+    <text x="162" class="mono-text text-dim">--agent</text>
+
+    <!-- Target Word that Pushes UP as Snake passes under -->
+    <g class="anim-push-line1" transform-origin="250 0">
+      <rect x="222" y="-14" width="98" height="20" rx="5" fill="#21262d" stroke="#58a6ff" stroke-width="1"/>
+      <text x="231" y="0" class="mono-text text-cyan">claude-code</text>
+    </g>
+
+    <text x="330" class="mono-text text-dim">--skills</text>
+
+    <!-- Skills List that Pushes UP as Snake reaches X ~ 570 -->
+    <g class="anim-push-skills" transform-origin="460 0">
+      <rect x="390" y="-14" width="370" height="20" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="400" y="0" class="mono-text text-purple">vllm</text>
+      <text x="432" y="0" class="mono-text text-dim">,</text>
+      <text x="442" y="0" class="mono-text text-purple">temporal</text>
+      <text x="506" y="0" class="mono-text text-dim">,</text>
+      <text x="516" y="0" class="mono-text text-purple">nats</text>
+      <text x="548" y="0" class="mono-text text-dim">,</text>
+      <text x="558" y="0" class="mono-text text-purple">qdrant</text>
+      <text x="606" y="0" class="mono-text text-dim">,</text>
+      <text x="616" y="0" class="mono-text text-purple">surrealdb</text>
+      <text x="688" y="0" class="mono-text text-dim">,</text>
+      <text x="698" y="0" class="mono-text text-purple">traefik</text>
+    </g>
+  </g>
+
+  <!-- LINE 2: Catalog Status & Token Efficiency (Y = 124) -->
+  <g transform="translate(28, 124)">
+    <text class="mono-text text-green">[✓]</text>
+
+    <!-- Part Left Word: "412 Canonical" moves left to create space -->
+    <g class="anim-part-left" transform-origin="120 0">
+      <rect x="22" y="-14" width="130" height="20" rx="5" fill="#1f242c" stroke="#3fb950" stroke-width="1"/>
+      <text x="30" y="0" class="mono-text text-green">412 Canonical</text>
+    </g>
+
+    <!-- Part Right Word: "Skills" moves right to create space for Snake -->
+    <g class="anim-part-right" transform-origin="190 0">
+      <rect x="160" y="-14" width="58" height="20" rx="5" fill="#1f242c" stroke="#3fb950" stroke-width="1"/>
+      <text x="168" y="0" class="mono-text text-green">Skills</text>
+    </g>
+
+    <text x="226" class="mono-text text-dim">·</text>
+
+    <!-- Word Pushed DOWN as Snake passes overhead (Y ~ 148) -->
+    <g class="anim-push-token" transform-origin="290 0">
+      <rect x="240" y="-14" width="130" height="20" rx="5" fill="#161b22" stroke="#d29922" stroke-width="1"/>
+      <text x="248" y="0" class="mono-text text-yellow">Token-Efficient</text>
+    </g>
+
+    <text x="378" class="mono-text text-dim">·</text>
+    <text x="392" class="mono-text">Zero-Latency Discovery</text>
+    <text x="568" class="mono-text text-dim">·</text>
+
+    <!-- jsDelivr Badge Pushed UP -->
+    <g class="anim-push-jsdelivr" transform-origin="660 0">
+      <rect x="582" y="-14" width="180" height="20" rx="5" fill="#251214" stroke="#e84d3d" stroke-width="1"/>
+      <text x="592" y="0" class="mono-text text-red">⚡ jsDelivr Global Edge</text>
+    </g>
+  </g>
+
+  <!-- LINE 3: Playbook Mount (Y = 170) -->
+  <g transform="translate(28, 170)">
+    <text class="mono-text text-green">[✓]</text>
+    <text x="22" class="mono-text text-dim">Mounting playbooks to</text>
+    
+    <!-- Path Tag that Pushes DOWN with Snake dip -->
+    <g class="anim-push-token" transform-origin="250 0">
+      <rect x="180" y="-14" width="144" height="20" rx="5" fill="#1c2128" stroke="#bc8cff" stroke-width="1"/>
+      <text x="188" y="0" class="mono-text text-purple">~/.agents/skills/</text>
+    </g>
+
+    <text x="332" class="mono-text text-dim">for autonomous, zero-prompt execution</text>
+  </g>
+
+  <!-- LINE 4: Agent Ready Callout (Y = 216) -->
+  <g transform="translate(28, 216)">
+    <text class="mono-text text-orange">&gt;</text>
+    <text x="18" class="mono-text font-bold text-orange">Agent Ready:</text>
+    <text x="124" class="mono-text text-dim">Type</text>
+    <rect x="160" y="-14" width="56" height="20" rx="4" fill="#21262d"/>
+    <text x="168" y="0" class="mono-text text-cyan">@vllm</text>
+    <text x="224" class="mono-text text-dim">or</text>
+    <rect x="246" y="-14" width="86" height="20" rx="4" fill="#21262d"/>
+    <text x="254" y="0" class="mono-text text-cyan">@temporal</text>
+    <text x="340" class="mono-text text-dim">to execute deterministic production workflows.</text>
+  </g>
+
+
+  <!-- ==================== THE SLITHERING SNAKE ==================== -->
+  <!-- The Snake follows #snake-path via <animateMotion> with 8s loop -->
+
+  <g filter="url(#neon-glow)">
+    <!-- Segment 14 (Tail tip - small & transparent) -->
+    <circle r="2.5" fill="url(#snake-body-grad)" opacity="0.15">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.84s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 13 -->
+    <circle r="3" fill="url(#snake-body-grad)" opacity="0.2">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.77s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 12 -->
+    <circle r="3.5" fill="url(#snake-body-grad)" opacity="0.25">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.70s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 11 -->
+    <circle r="4" fill="url(#snake-body-grad)" opacity="0.32">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.63s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 10 -->
+    <circle r="4.5" fill="url(#snake-body-grad)" opacity="0.4">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.56s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 9 -->
+    <circle r="5" fill="url(#snake-body-grad)" opacity="0.48">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.49s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 8 -->
+    <circle r="5.5" fill="url(#snake-body-grad)" opacity="0.56">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.42s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 7 -->
+    <circle r="6" fill="url(#snake-body-grad)" opacity="0.65">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.35s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 6 -->
+    <circle r="6.5" fill="url(#snake-body-grad)" opacity="0.74">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.28s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 5 -->
+    <circle r="7" fill="url(#snake-body-grad)" opacity="0.82">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.21s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 4 -->
+    <circle r="7.5" fill="url(#snake-body-grad)" opacity="0.9">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.14s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- Segment 3 -->
+    <circle r="8" fill="url(#snake-body-grad)" opacity="0.95">
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="-0.07s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+    </circle>
+
+    <!-- SNAKE HEAD & FACE -->
+    <g>
+      <animateMotion dur="8s" repeatCount="indefinite" rotate="auto" begin="0s">
+        <mpath href="#snake-path"/>
+      </animateMotion>
+
+      <!-- Head Capsule -->
+      <ellipse cx="0" cy="0" rx="10" ry="7.5" fill="url(#snake-head-grad)"/>
+
+      <!-- Friendly Glowing Snake Eyes -->
+      <circle cx="3" cy="-3.5" r="2.2" fill="#0d1117"/>
+      <circle cx="3.8" cy="-4" r="0.9" fill="#ffffff"/>
+
+      <circle cx="3" cy="3.5" r="2.2" fill="#0d1117"/>
+      <circle cx="3.8" cy="3" r="0.9" fill="#ffffff"/>
+
+      <!-- Flicking Forked Tongue in Front of Head -->
+      <g class="snake-tongue" transform="translate(10, 0)">
+        <path d="M 0,0 L 7,-2 M 0,0 L 7,2 M 0,0 L 4,0" stroke="#ff385c" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+
+</svg>

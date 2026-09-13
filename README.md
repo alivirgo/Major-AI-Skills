@@ -56,6 +56,12 @@
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
+<div align="center">
+
+[![Major AI Skills Animated Snake Terminal](https://raw.githubusercontent.com/alivirgo/Major-AI-Skills/master/assets/snake-text.svg)](https://github.com/alivirgo/Major-AI-Skills)
+
+</div>
+
 ---
 
 ## 🎯 Featured Workflows
