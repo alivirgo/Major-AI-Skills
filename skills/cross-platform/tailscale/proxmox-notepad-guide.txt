@@ -1,0 +1,190 @@
+============================================================
+TAILSCALE ON PROXMOX  —  WHOLE LAN AVAILABLE
+Notepad runbook. Run as root on the Proxmox host.
+Replace 192.168.1.0/24 with YOUR LAN CIDR.
+============================================================
+
+GOAL
+  One Tailscale install on the Proxmox host.
+  Remote phones/laptops reach Proxmox, VMs, LXCs, printers
+  by their normal LAN IPs. No Tailscale on each guest.
+
+
+--------------------------------------------------
+0) FIND YOUR LAN CIDR
+--------------------------------------------------
+  ip -4 addr show vmbr0
+  ip route
+
+  Examples:
+    192.168.1.0/24
+    10.0.0.0/24
+
+  Multiple bridges? Advertise each, comma-separated:
+    192.168.1.0/24,10.10.20.0/24
+
+  Do NOT advertise 100.64.0.0/10  (Tailscale's own range)
+
+
+--------------------------------------------------
+1) INSTALL TAILSCALE ON THE HOST
+--------------------------------------------------
+  curl -fsSL https://tailscale.com/install.sh | sh
+
+
+--------------------------------------------------
+2) ENABLE IP FORWARDING  (survives reboot)
+--------------------------------------------------
+  echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+  echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.d/99-tailscale.conf
+  sysctl -p /etc/sysctl.d/99-tailscale.conf
+
+  Check:
+    sysctl net.ipv4.ip_forward
+    # must print: net.ipv4.ip_forward = 1
+
+
+--------------------------------------------------
+3) JOIN TAILSCALE AND ADVERTISE THE LAN
+--------------------------------------------------
+  tailscale up --advertise-routes=192.168.1.0/24 --hostname=proxmox
+
+  Open the URL it prints. Log in. Approve the node.
+
+  Optional extras (add to the same command):
+    --advertise-exit-node     also route internet via home
+    --ssh                     Tailscale SSH onto the host
+    --accept-dns=false        keep Proxmox on local DNS
+
+  Change routes later without reconnecting:
+    tailscale set --advertise-routes=192.168.1.0/24,10.10.20.0/24
+
+
+--------------------------------------------------
+4) APPROVE THE ROUTE IN THE ADMIN CONSOLE
+--------------------------------------------------
+  https://login.tailscale.com/admin/machines
+
+  proxmox  ->  ...  ->  Edit route settings
+    [x] 192.168.1.0/24
+    [x] Use as exit node     (only if you advertised it)
+
+  Also: Disable key expiry on this machine
+        (otherwise the gateway dies silently after ~180 days)
+
+
+--------------------------------------------------
+5) ACCEPT ROUTES ON YOUR CLIENTS
+--------------------------------------------------
+  Windows / macOS / iOS / Android: usually automatic.
+
+  Linux clients MUST opt in:
+    sudo tailscale up --accept-routes
+
+  Then from a remote device with Tailscale ON:
+    https://192.168.1.10:8006     Proxmox UI (host LAN IP)
+    ssh user@192.168.1.50         a VM
+    ping 192.168.1.1              router
+
+  Host itself: also reachable at its Tailscale IP
+    tailscale ip -4               (run this ON Proxmox)
+
+  Guests are reached by LAN IP, not the host Tailscale IP.
+
+
+--------------------------------------------------
+6) PROXMOX FIREWALL  (if LAN IPs fail)
+--------------------------------------------------
+  If Datacenter or Node firewall is ON, FORWARD may be dropped.
+
+  Check:
+    pve-firewall status
+    iptables -L FORWARD -n -v
+
+  Allow both directions:
+    tailscale0  <->  vmbr0
+
+  Tailscale already SNATs tailnet -> LAN.
+  LAN devices see the Proxmox host as the source.
+  No extra MASQUERADE needed for inbound access.
+
+
+--------------------------------------------------
+VERIFY
+--------------------------------------------------
+  On Proxmox:
+    tailscale status
+    tailscale ip
+    sysctl net.ipv4.ip_forward
+
+  On a remote Tailscale client (routes accepted):
+    ping <proxmox-lan-ip>
+    curl -k https://<proxmox-lan-ip>:8006
+
+
+--------------------------------------------------
+WHAT THIS IS / IS NOT
+--------------------------------------------------
+  Reach whole LAN from phone/laptop
+    -> subnet router (this guide)
+
+  Browse internet as if at home
+    -> add --advertise-exit-node, approve it, pick that exit node
+
+  Two sites, both LANs talk
+    -> subnet router on EACH site
+       --snat-subnet-routes=false --accept-routes
+       subnets must NOT overlap
+       https://tailscale.com/docs/features/site-to-site
+
+  Best per-VM security / direct P2P
+    -> install Tailscale inside each VM instead
+
+
+--------------------------------------------------
+OPTIONAL: MOVE OFF THE HOST INTO AN LXC
+--------------------------------------------------
+  Cleaner isolation. Same result.
+
+  1. Unprivileged Debian CT on vmbr0, static LAN IP, onboot=1
+
+  2. On the HOST, append to /etc/pve/lxc/<ID>.conf :
+       lxc.cgroup2.devices.allow: c 10:200 rwm
+       lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+
+  3. Restart the CT. Inside it, run steps 1-4 of this guide.
+
+
+--------------------------------------------------
+QUICK FIXES
+--------------------------------------------------
+  Ping Tailscale IP works, LAN IPs fail
+    - route not approved in admin console
+    - Linux client missing --accept-routes
+    - ip_forward is 0
+    - Proxmox firewall dropping FORWARD
+
+  Worked for weeks, then whole LAN vanished
+    - node key expired  -> disable key expiry
+
+  Slow / high latency
+    - stuck on DERP relay
+    - enable UPnP or allow UDP 41641
+
+  Wrong subnet advertised
+    tailscale set --advertise-routes=YOUR.REAL.CIDR/24
+    then re-approve in admin console
+
+
+--------------------------------------------------
+CHEAT SHEET
+--------------------------------------------------
+  tailscale status
+  tailscale ip
+  tailscale ping <peer>
+  tailscale set --advertise-routes=192.168.1.0/24
+  systemctl status tailscaled
+  systemctl restart tailscaled
+
+  Official: https://tailscale.com/kb/1019/subnets
+============================================================
