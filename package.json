@@ -1,11 +1,15 @@
 {
   "name": "major-ai-skills",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Installable agentic skills / AI agent skills (SKILL.md) for Claude Code, Cursor, Codex CLI, Gemini CLI & Antigravity - 412+ professional app, token-efficiency, and common-sense skills. SEO/GEO ready.",
   "license": "MIT",
   "author": {
     "name": "Ali Virgo",
     "url": "https://github.com/alivirgo"
+  },
+  "funding": {
+    "type": "buymeacoffee",
+    "url": "https://bmc.link/alivirgo"
   },
   "homepage": "https://alivirgo.github.io/Major-AI-Skills/",
   "bugs": {

@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## 2.4.1 - 2026-10-06
+
+- Terminal tip after install/search/list: Buy Ali a coffee → https://bmc.link/alivirgo
+- npm `funding` field and README community link for the same short URL
+
 ## 2.4.0 - 2026-10-06
 
 - Deepened **50 high-impact skills** across Days 1–5 of the skill improvement backlog (AI workflow stubs, core DevOps, data platforms, app/automation stack, and creative/CAD/video tools).

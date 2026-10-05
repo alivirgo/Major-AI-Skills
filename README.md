@@ -8,7 +8,7 @@
 
 > **Installable GitHub library of agentic skills / AI agent skills (`SKILL.md` playbooks) for Claude Code, Cursor, Codex CLI, Gemini CLI, Antigravity, and more - focused on professional apps, token efficiency, and practical prompting habits.**
 
-**Current release: [V2.4.0](https://github.com/alivirgo/Major-AI-Skills/releases/latest) · 412 Canonical Skills · Zero-Config Agent Discovery**
+**Current release: [V2.4.1](https://github.com/alivirgo/Major-AI-Skills/releases/latest) · 412 Canonical Skills · Zero-Config Agent Discovery**
 
 ---
 
@@ -185,7 +185,7 @@ npx major-ai-skills@latest --search "JSON schema business rules" --json --limit 
 | **npm** (primary) | `npx major-ai-skills --<host> --skills <ids>` | Direct interactive/scripted CLI installer · [npmjs.com/package/major-ai-skills](https://www.npmjs.com/package/major-ai-skills) |
 | **jsDelivr CDN** | `https://cdn.jsdelivr.net/npm/major-ai-skills@latest/` | Instant global CDN mirror & raw skill access · [jsdelivr.com/package/npm/major-ai-skills](https://www.jsdelivr.com/package/npm/major-ai-skills) |
 | **GitHub Packages** | `@alivirgo/major-ai-skills` | Scoped package [`@alivirgo/major-ai-skills`](https://github.com/alivirgo/Major-AI-Skills/pkgs/npm/major-ai-skills) (fills repo sidebar) |
-| **GitHub Release** | Download `major-ai-skills-2.4.0.tgz` | Verified tarball from [V2.4.0 Release](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
+| **GitHub Release** | Download `major-ai-skills-2.4.1.tgz` | Verified tarball from [V2.4.1 Release](https://github.com/alivirgo/Major-AI-Skills/releases/latest) |
 | **skills.sh / Vercel** | `npx skills add alivirgo/Major-AI-Skills` | Discovery via install telemetry |
 | **Claude Code Marketplace** | `.claude-plugin/marketplace.json` | Add this repo as a marketplace, then install a specialized plugin |
 | **Gemini CLI Extension** | `gemini extensions install https://github.com/alivirgo/Major-AI-Skills` | [Gallery listing verified September 11, 2026](https://geminicli.com/extensions) |
@@ -435,6 +435,7 @@ Machine-readable discovery for answer engines and agents:
 
 ## 👥 Community
 
+- ☕ **Buy Ali a coffee** → [bmc.link/alivirgo](https://bmc.link/alivirgo) (short link; also shown after `npx major-ai-skills` installs)
 - 💬 [Discussions](https://github.com/alivirgo/Major-AI-Skills/discussions) for ideas
 - 🐛 [Issues](https://github.com/alivirgo/Major-AI-Skills/issues) for bugs
 - 📝 [Medium Article](https://medium.com/@alithetechguy/what-are-ai-agent-skills-claude-code-cursor-skill-md-explained-plus-392-skill-library-to-instal-a4218fa6f0b5) - Agent skills FAQ for SEO / GEO / AI

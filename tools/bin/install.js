@@ -10,6 +10,14 @@ const os = require("os");
 const root = path.resolve(__dirname, "..", "..");
 const skillsRoot = path.join(root, "skills");
 
+/** Short memorable support link (Buy Me a Coffee → https://bmc.link/<user>). */
+const SUPPORT_URL = "https://bmc.link/alivirgo";
+
+function printSupportTip() {
+  console.log("");
+  console.log("☕ Enjoying Major AI Skills? Buy Ali a coffee → " + SUPPORT_URL);
+}
+
 const TARGETS = {
   antigravity: path.join(os.homedir(), ".agents", "skills"),
   cursor: path.join(os.homedir(), ".cursor", "skills"),
@@ -115,6 +123,9 @@ Filters:
   --search "task"  find relevant skills without installing anything
   --json           machine-readable search results
   --limit 5        maximum search results (1-20)
+
+Support:
+  ☕ ${SUPPORT_URL}
 `);
 }
 
@@ -130,7 +141,10 @@ function main() {
     if (args.all || args.skills) throw new Error("Search cannot be combined with --all or --skills");
     const results = require("./search").searchSkills(index, args.search, limit, args.category);
     if (args.json) console.log(JSON.stringify({ schemaVersion: 1, query: args.search, results }, null, 2));
-    else console.log(results.length ? results.map(s => `${s.id}: ${s.description}\n${s.install}`).join("\n\n") : "No matching skills.");
+    else {
+      console.log(results.length ? results.map(s => `${s.id}: ${s.description}\n${s.install}`).join("\n\n") : "No matching skills.");
+      printSupportTip();
+    }
     return;
   }
   if (args.json || args.limit !== undefined) throw new Error("--json and --limit require --search");
@@ -142,6 +156,7 @@ function main() {
       console.log(byCat[cat].sort().join(", "));
     }
     console.log(`\nTotal: ${index.length}`);
+    printSupportTip();
     return;
   }
 
@@ -205,6 +220,7 @@ function main() {
 
   console.log(args.dryRun ? "Dry-run complete." : "Install complete.");
   console.log(`Try: @${selected[0]?.id || "skill-id"} help me with ...`);
+  if (!args.dryRun) printSupportTip();
 }
 
 try { main(); } catch (error) { console.error(error.message); process.exitCode = 1; }
