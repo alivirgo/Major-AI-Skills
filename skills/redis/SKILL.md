@@ -1,12 +1,12 @@
 ---
 name: redis
-description: "Design Redis keys and caching with appropriate TTLs, data structures, and eviction behavior; inspect memory or pub/sub issues."
+description: "Design Redis caching, TTLs, and eviction policies; configure ACL auth and persistence (RDB/AOF); avoid KEYS, unbounded memory, and backup-restore windows that lose cache-aside coherency."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["redis", "cache", "ttl", "datastructures", "sessions", "claude"]
+tags: ["redis", "cache", "ttl", "eviction", "aof", "rdb", "acl", "cluster", "streams", "backpressure"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
@@ -14,77 +14,128 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Overview & Engine Architecture
 
-Redis is an in-memory data structure server used for caches, session stores, rate limits, queues, and coordination. Commands operate on typed keys (string, hash, list, set, sorted set, stream). Agents always set TTLs on cache keys, avoid `KEYS *` in production, and treat Redis as volatile unless persistence is explicitly designed.
+Redis is a **single-threaded** (per shard) in-memory data structure server: strings, hashes, lists, sets, sorted sets, streams. It excels at cache, rate limits, coordination, and lightweight queues—but **eviction ≠ persistence** and **cache ≠ system of record** unless durability is explicitly engineered.
 
 ```
-App clients
-   -> Redis (single / Sentinel / Cluster)
-        |- strings / hashes / lists / sets / zsets / streams
-        |- TTL + eviction policy
-        |- optional AOF/RDB persistence
+App -> Redis (standalone / Sentinel / Cluster)
+         |- TTL + maxmemory-policy (eviction)
+         |- optional RDB snapshots + AOF log
+         |- ACL users / TLS (managed offerings)
+         |- replication buffer (not counted in maxmemory)
 ```
 
-## When to use this skill
+---
 
-- Cache-aside or read-through caching
-- Rate limiting and ephemeral locks (with caveats)
-- Leaderboards and time-ordered feeds (ZSET)
-- Session storage with sliding expiration
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Namespace keys: `app:env:entity:id` (example `shop:prod:session:abc`).
-2. Set TTL on every cache key; decide eviction policy deliberately (`allkeys-lru`, etc.).
-3. Prefer `SCAN` over `KEYS`.
-4. Use atomic constructs (`SET NX EX`, Lua, or Redlock carefully) for locks; document failure modes.
-5. Do not store the only copy of critical business data solely in Redis unless persistence + backups are confirmed.
+- Cache-aside or read-through for hot reads with explicit TTL
+- Rate limiting, session storage with sliding TTL, leaderboards (ZSET)
+- Lightweight work queues (LIST/STREAM) with documented at-least-once behavior
 
-## Cache-aside pattern
+**Do not use when**
+
+- Redis is the only copy of financial ledger data without AOF + backups + restore drills
+- You need multi-key ACID across many keys in Cluster without hash tags
+- Someone asks to run `KEYS *` or `FLUSHALL` in production—refuse without approval
+
+---
+
+## Operational Capabilities & Agent Directives
+
+1. **Connection safety**: Use TLS and ACL users with command restrictions; cap client output buffers; set `timeout` on idle clients.
+2. **TTL discipline**: Every cache key gets TTL; document stale-read tolerance; invalidate on write (`DEL`/`UNLINK` or versioned keys).
+3. **Eviction vs durability**: `allkeys-lru` evicts cache keys under pressure; **`noeviction`** rejects writes—pick per instance role. Leave headroom below `maxmemory` for replication buffers.
+4. **Persistence**: Hybrid **RDB + AOF** is common in production; `appendfsync everysec` ≈ 1s loss window; `always` is slower. Copy RDB/AOF during **BACKUP SEAL** or off-host backups—not mid-rewrite without guidance.
+5. **Backpressure**: Large values block the event loop; pipeline responsibly; use `CLIENT PAUSE` only in controlled maintenance.
+6. **Exactly-once myth**: Streams consumer groups are **at-least-once**; use idempotent handlers + `XACK` after side effects; pending entries list (PEL) needs monitoring.
+7. **Auth**: `requirepass` alone is legacy; prefer ACL; never commit passwords; rotate on compromise.
+
+---
+
+## Production examples
+
+### Cache-aside (namespaced keys)
 
 ```bash
-# Pseudocode CLI equivalents for illustration
-SET shop:prod:item:42 '{"id":42,"price":199}' EX 300
+SET shop:prod:item:42 '{"id":42,"price":199}' EX 300 NX
 GET shop:prod:item:42
-DEL shop:prod:item:42
+# On DB write success:
+UNLINK shop:prod:item:42
 ```
 
-Application flow: read cache -> on miss load DB -> SET with TTL -> return. On write: update DB then DELETE/UPDATE cache key.
-
-## Useful structures
-
-| Structure | Use | Example |
-| --- | --- | --- |
-| STRING | blobs, counters | `INCR rate:ip:1.2.3.4` + `EXPIRE` |
-| HASH | object fields | `HSET user:1 name Ada` |
-| ZSET | rankings / schedules | `ZADD lb 100 user:1` |
-| LIST | simple queues | `LPUSH` / `BRPOP` |
-| STREAM | consumer groups | `XADD` / `XREADGROUP` |
-
-## Rate limit sketch (fixed window)
+### Rate limit (prefer app token bucket; fixed window sketch)
 
 ```bash
-INCR ratelimit:user:9:2026-08-26T15:04
-EXPIRE ratelimit:user:9:2026-08-26T15:04 60
-# reject when count > threshold
+SET ratelimit:user:9:202610061200 0 EX 60 NX
+INCR ratelimit:user:9:202610061200
 ```
 
-Prefer token bucket / sliding window libraries in app code for fairness under burst.
+### Stream consumer group (ack after work)
+
+```bash
+XGROUP CREATE events order-workers $ MKSTREAM
+XREADGROUP GROUP order-workers consumer1 COUNT 10 BLOCK 2000 STREAMS events >
+# process ...
+XACK events order-workers <message-id>
+```
+
+### Safe iteration
+
+```bash
+SCAN 0 MATCH shop:prod:item:* COUNT 100
+```
+
+---
+
+## Technical troubleshooting matrix
+
+| Failure signature | Root cause | Diagnostic & fix |
+| :--- | :--- | :--- |
+| OOM / evictions spike | `maxmemory` too low or no TTL | Raise memory; TTL all cache keys; split instances |
+| `OOM command not allowed` | `noeviction` + full memory | Eviction policy or scale; stop non-cache use on same DB |
+| Data “lost” after restart | No AOF/RDB or wrong `dir` | Enable hybrid persistence; verify backup files |
+| Slow p99 | Big values / `KEYS` / Lua loops | Shrink payloads; SCAN; split hot keys |
+| Replica lag / partial sync fail | Buffer limits | Increase repl backlog; reduce write burst |
+| Cache stampede | Thundering herd on expiry | Jitter TTL; singleflight in app |
+| Restore mismatch | Restored RDB while app wrote DB | Treat cache as cold; flush namespaced keys post-restore |
+
+---
 
 ## Best practices
 
-- Cap payload sizes; huge values block the single-threaded event loop.
-- Monitor `used_memory`, evictions, and hit rate.
-- Separate DB indexes logically by purpose when sharing an instance (still prefer separate instances for noisy neighbors).
-- In Cluster mode, understand hash tags for multi-key operations.
+- Separate **cache** Redis from **queue/coordination** Redis when possible.
+- Cluster: use **hash tags** `{user:42}:...` for multi-key ops in one slot.
+- Monitor: `used_memory`, evicted_keys, instantaneous_ops_per_sec, connected_clients.
+- Distributed locks: prefer Redlock only with eyes open; use **fencing tokens** for external resources.
+
+---
 
 ## Limitations
 
-- Distributed locks are subtle; correctness needs fencing tokens for some workloads.
-- Persistence settings trade durability for latency.
-- Managed Redis (ElastiCache, Memorystore) changes networking and AUTH setup.
+- Locks without fencing can double-write to downstream systems.
+- Active-active geo replication has conflict semantics—not transparent multi-master SQL.
+- Managed Redis changes VPC, AUTH, and backup UX.
+
+---
 
 ## Related skills
 
-- `@postgresql` - system of record behind the cache
-- `@kubernetes` - deploying Redis/Sentinel/Cluster operators
-- `@opentelemetry` - tracing cache misses as latency sources
+- `@postgresql` — system of record behind cache
+- `@kafka` / `@nats` — durable event bus vs Redis streams
+- `@opentelemetry` — trace cache miss latency
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: Never recommend Redis as sole durable store without documented AOF/RDB/backup strategy and restore test. Set TTL on cache keys. Ban `KEYS *` in production paths. Ack stream messages only after successful side effects.
+
+---
+
+## Source anchors (research)
+
+- [Redis persistence (RDB, AOF, BACKUP)](https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/)
+- [Redis eviction policies](https://redis.io/docs/latest/develop/reference/eviction/)
+- [Redis Enterprise recovery / partial data loss](https://redis.io/docs/latest/operate/rs/databases/recover/)

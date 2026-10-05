@@ -1,50 +1,61 @@
 ---
 name: nodejs
-description: "Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling."
+description: "Build Node.js services with ESM/CJS clarity, non-blocking I/O, streams, webhook raw-body handling, graceful shutdown, and pinned engines. Use for HTTP servers, Stripe webhooks on Express/Fastify, and CLI tooling."
 category: development
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["nodejs", "javascript", "esm", "streams", "runtime", "claude"]
+tags: ["nodejs", "javascript", "esm", "streams", "webhooks", "runtime", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Node.js Runtime AI Skill Guide
+# Node.js Runtime AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Node.js is a single-threaded event-loop runtime with libuv for async I/O. Agents choose ESM vs CJS deliberately, keep CPU-heavy work off the event loop (or isolate it), handle uncaught errors, and pin engines in `package.json` so local and CI Node versions match production.
+Node.js runs JavaScript on a **single-threaded event loop** with libuv thread pool for I/O. **Worker threads** and **child processes** handle CPU-bound work. Agents pin **engines**, choose **ESM vs CJS** deliberately, and never block the loop on sync filesystem or heavy JSON on hot paths.
+
+Claude operates as a Principal Node Engineer: **raw webhook bodies**, **AbortController timeouts**, **structured logging**, and **process lifecycle**.
 
 ```
 HTTP / CLI entry
-      |
-  event loop
-   +--+---+---+
-   | timers     |
-   | I/O polls  |
-   | microtasks |
-   +------------+
-      |
-  worker_threads / child_process (when needed)
+      │
+  event loop (timers, I/O, microtasks)
+      │
+  worker_threads / child_process (CPU)
 ```
 
-## When to use this skill
+---
 
-- Scaffolding or hardening Node services and CLIs
-- Fixing ESM/CJS interop and `package.json` `type` issues
-- Streaming large payloads without buffering entire bodies
-- Diagnosing event-loop stalls and unhandled rejections
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Prefer native `fetch`, `node:fs/promises`, and `node:path` over legacy callback APIs.
-2. Set `"type": "module"` or use `.mjs` / `.cjs` extensions explicitly - do not mix blindly.
-3. Never swallow `unhandledRejection` / `uncaughtException` without logging and controlled exit.
-4. Use streams or async iterators for files and HTTP bodies larger than memory comfort.
-5. Pin `engines.node` and match CI to that range.
+- Lightweight HTTP APIs, webhooks, and integration glue.
+- Streaming uploads/downloads without loading full bodies into RAM.
+- Tooling and build scripts in the same repo as frontend.
 
-## Minimal HTTP server (ESM)
+**Do not use when**
+
+- CPU-heavy batch jobs should run in Python/Rust workers or a queue—not the API process.
+- Team has standardized on Bun/Deno—verify API compatibility per runtime.
+
+---
+
+## Operational Capabilities & Agent Directives
+
+1. Prefer `node:` built-ins (`node:fs/promises`, `node:http`, native `fetch`).
+2. Set `"type": "module"` or explicit `.mjs`/`.cjs`—don't mix default imports blindly.
+3. **Webhook routes**: Register **raw body parser before** `express.json()` for Stripe path only.
+4. Handle `unhandledRejection` / `uncaughtException` with logging + controlled shutdown in production.
+5. **Streams** for large payloads; backpressure awareness.
+6. Pin `"engines": { "node": ">=20" }` and match CI.
+7. **Idempotency** for payment webhooks at DB layer—see `@stripe`.
+
+---
+
+## Minimal ESM HTTP server
 
 ```js
 import http from "node:http";
@@ -61,44 +72,63 @@ const server = http.createServer(async (req, res) => {
   res.end();
 });
 
-server.listen(port, () => {
-  console.log(`listening on ${port}`);
-});
+server.listen(port, () => console.log(`listening on ${port}`));
 ```
 
-## Commands
+Express Stripe webhook ordering:
 
-```bash
-node --version
-node --watch src/index.js
-npm run start
-NODE_OPTIONS=--enable-source-maps node dist/index.js
+```js
+app.post("/webhooks/stripe", express.raw({ type: "application/json" }), handler);
+app.use(express.json()); // after webhook route
 ```
 
-## Common pitfalls
+---
+
+## Technical Troubleshooting Matrix
 
 | Pitfall | Why it hurts | Fix |
 | --- | --- | --- |
-| Sync `fs` in request path | Blocks event loop | Use promises/streams |
-| Missing `await` on promise | Silent failures | Enable lint rules; handle rejections |
-| Relativizing without `node:` | Ambiguous imports | Prefer `node:` built-ins |
-| No `engines` field | Version skew in prod | Pin and enforce in CI |
+| Sync `fs.readFileSync` in handler | Event loop stall | Async + streams |
+| JSON parser before Stripe verify | Signature failure | Raw route first |
+| Missing `await` | Silent failures | Lint; global rejection handler |
+| Memory spike | Buffer entire upload | Stream to disk/S3 |
+| Version skew | Native API differences | Pin engines in CI |
+
+---
 
 ## Best practices
 
-- Structure apps with clear entrypoints and env validation at boot.
-- Prefer structured logs (JSON) with request IDs.
-- Use AbortController for cancelable fetches and timeouts.
-- Keep secrets in env or a secret manager - never in source.
+- Validate env at boot (zod/envalid).
+- Structured JSON logs + request IDs.
+- `AbortController` for fetch timeouts.
+- Graceful shutdown: stop accepting, drain connections, exit.
+
+---
 
 ## Limitations
 
-- CPU-bound work needs workers or an external job runner.
-- Native addons (`node-gyp`) complicate cross-platform builds.
-- Bun/Deno compatibility is not assumed - verify APIs per runtime.
+- Single-threaded JS—not for heavy parallel CPU without workers.
+- Native addons complicate cross-platform CI.
+- Bun/Deno APIs differ—don't assume Node-only snippets run everywhere.
+
+---
 
 ## Related skills
 
-- `@express` - HTTP framework patterns on Node
-- `@typescript` - typed Node services
-- `@docker` - containerizing Node processes
+- `@express` — middleware ordering for webhooks
+- `@stripe` — constructEvent on Buffer
+- `@typescript` — typed Node services
+- `@docker` — container NODE_ENV and signals
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: For signed webhooks, preserve exact raw body bytes through verification. Register body parsers so they cannot mutate webhook routes. Pin Node version in `engines` and CI. Never commit secrets.
+
+---
+
+## Sources
+
+- [Node.js docs](https://nodejs.org/docs/latest/api/)
+- [Stripe signature verification (Node)](https://docs.stripe.com/webhooks/signature?lang=node)

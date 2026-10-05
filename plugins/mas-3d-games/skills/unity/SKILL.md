@@ -6,140 +6,114 @@ risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["unity", "csharp", "editor-scripting", "urp", "addressables", "batchmode", "claude"]
+tags: ["unity", "csharp", "editor-scripting", "urp", "addressables", "batchmode", "headless"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Unity Engine C# Editor & Runtime AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Unity is a component-driven real-time engine with a **C# scripting layer** (Mono / IL2CPP), an **Editor extensibility surface** (`UnityEditor` namespace), and player runtimes for desktop, mobile, console, and WebGL. Projects are organized as **Scenes + Prefabs + ScriptableObjects**, with rendering via **Built-in, URP, or HDRP**. Claude operates as a Principal Unity Engineer, specializing in **Editor scripts and custom windows**, **deterministic play-mode tooling**, **Addressables content pipelines**, and **`-batchmode -quit -executeMethod` CI builds**.
 
-### Unity Editor / Player Architecture
+Unity 6000.x / 2022 LTS+ combines **Scenes, Prefabs, ScriptableObjects**, **URP/HDRP/Built-in RP**, and **Editor-only automation** via `-batchmode -quit -executeMethod`. Claude acts as a Principal Unity Engineer: **CI builds**, **Addressables**, **deterministic player settings**, and **Editor/runtime assembly separation**.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Unity Engine Architecture                   │
-│                                                             │
-│  Authoring (Editor)                                         │
-│  ├── UnityEditor APIs (MenuItem, EditorWindow, AssetDatabase│
-│  ├── Importers, BuildPipeline, ScriptableBuildPipeline      │
-│  └── Domain Reload / Enter Play Mode Options                │
-│                                                             │
-│  Runtime (Player)                                           │
-│  ├── GameObject + MonoBehaviour / ScriptableObject          │
-│  ├── SceneManager, Physics, Animation, UI Toolkit/uGUI      │
-│  └── URP/HDRP Render Pipeline Asset                         │
-│                                                             │
-│  Content & CI                                               │
-│  ├── Addressables / AssetBundles                            │
-│  ├── Unity -batchmode -projectPath -executeMethod           │
-│  └── IL2CPP / Mono scripting backends                       │
+│  Editor (UnityEditor)  →  -executeMethod / BuildPipeline    │
+│  Player (runtime)      →  Mono / IL2CPP                     │
+│  CI: one process per buildTarget; -activeBuildProfile       │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Version pin:** Unity Editor version in `ProjectSettings/ProjectVersion.txt` — CI must use the same Hub editor (e.g. `6000.0.xf1`). [Command-line reference](https://docs.unity3d.com/Manual/EditorCommandLineArguments.html).
+
+---
+
+## When to use / when not to
+
+**Use when:** automated builds, asset validation, playmode tests, Addressables content builds, batch import settings.
+
+**Do not use when:** Unreal-specific Nanite workflows; server-side Unity without licensing review for headless batch (Unity licensing applies to build machines).
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **Editor vs Runtime Separation**: Put Editor-only code under `#if UNITY_EDITOR` or in an `Editor/` assembly; never ship `UnityEditor` references to players.
-2. **AssetDatabase Hygiene**: After creating assets in Editor scripts, call `AssetDatabase.CreateAsset`, `SaveAssets`, and `Refresh` in the correct order.
-3. **Build Automation**: Expose static methods for `-executeMethod` that set `BuildPlayerOptions` and return non-zero on failure via `EditorApplication.Exit(code)`.
-4. **Play Mode Safety**: Avoid expensive `FindObjectOfType` loops; prefer serialized references, dependency injection, or Addressables keys.
-5. **Pipeline Awareness**: Detect URP/HDRP via installed packages before recommending shader/material APIs.
+1. **Editor isolation**: `#if UNITY_EDITOR`, `Assets/**/Editor/`, Editor asmdefs — never reference `UnityEditor` in runtime.
+2. **CI entry points**: `public static void X()` only; `EditorApplication.Exit(code)` on failure; no modal dialogs in batchmode.
+3. **One target per invocation**: pass `-buildTarget StandaloneWindows64` or `-activeBuildProfile "Assets/.../Windows.asset"` — multi-target requires separate processes.
+4. **Deterministic builds**: pin graphics tiers, disable random `Application.targetFrameRate` side effects in build scripts; use `BuildOptions.StrictMode` where available; log `Application.unityVersion`.
+5. **Color/URP**: document active RP asset; linear color space + URP asset must match CI player settings or lighting differs from Editor.
+6. **Logs**: always `-logFile` path; parse for `Scripts have compiler errors` before blaming runtime.
 
 ---
 
-## Production C#: Editor Menu + Batch Build Entry Point
+## Production C#: CI build + exit code
 
-Save as `Assets/Editor/BuildPlayerMenu.cs`:
+`Assets/Editor/CiBuild.cs`:
 
 ```csharp
-// ==============================================================================
-// Unity Editor: menu item + CI -executeMethod build entry
-// ==============================================================================
 #if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public static class BuildPlayerMenu
+public static class CiBuild
 {
-    [MenuItem("Tools/Build/Windows Player")]
-    public static void BuildWindowsFromMenu()
-    {
-        var ok = BuildWindowsInternal();
-        if (!ok) Debug.LogError("Windows build failed.");
-    }
-
-    // Unity.exe -batchmode -quit -projectPath <path> -executeMethod BuildPlayerMenu.BuildWindowsCI
     public static void BuildWindowsCI()
     {
-        var ok = BuildWindowsInternal();
+        var ok = BuildInternal(BuildTarget.StandaloneWindows64, "Builds/Win/Game.exe");
         EditorApplication.Exit(ok ? 0 : 1);
     }
 
-    static bool BuildWindowsInternal()
+    static bool BuildInternal(BuildTarget target, string location)
     {
-        var outDir = Path.Combine("Builds", "Windows");
-        Directory.CreateDirectory(outDir);
-
-        var options = new BuildPlayerOptions
+        Directory.CreateDirectory(Path.GetDirectoryName(location)!);
+        var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
         {
-            scenes = GetEnabledScenes(),
-            locationPathName = Path.Combine(outDir, "Game.exe"),
-            target = BuildTarget.StandaloneWindows64,
+            scenes = EditorBuildSettingsScene.GetActiveSceneList(EditorBuildSettings.scenes),
+            locationPathName = location,
+            target = target,
             options = BuildOptions.CompressWithLz4HC
-        };
-
-        var report = BuildPipeline.BuildPlayer(options);
-        var summary = report.summary;
-        Debug.Log($"Build result: {summary.result} size={summary.totalSize}");
-        return summary.result == BuildResult.Succeeded;
-    }
-
-    static string[] GetEnabledScenes()
-    {
-        var scenes = EditorBuildSettings.scenes;
-        var enabled = new System.Collections.Generic.List<string>();
-        foreach (var s in scenes)
-            if (s.enabled) enabled.Add(s.path);
-        return enabled.ToArray();
+        });
+        Debug.Log($"Build {report.summary.result} size={report.summary.totalSize}");
+        return report.summary.result == BuildResult.Succeeded;
     }
 }
 #endif
 ```
 
----
-
-## Technical Troubleshooting Matrix
-
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
-| :--- | :--- | :--- |
-| **`UnityEditor` missing in player build** | Editor script not under `Editor/` folder or asmdef. | Move to `Assets/**/Editor/` or Editor-only asmdef with `includePlatforms: Editor`. |
-| **Batchmode hangs after build** | Missing `-quit` or open modal dialog. | Always pass `-quit`; avoid `EditorUtility.DisplayDialog` in CI paths. |
-| **NullReference on serialized field** | Prefab/scene reference lost after reimport. | Reassign in Inspector; prefer `SerializeField` + validation `OnValidate`. |
-| **Slow Enter Play Mode** | Domain reload + AssetDatabase thrash. | Enable Enter Play Mode Options; reduce static mutable state. |
-
----
-
-## Essential CLI Patterns
-
-```bash
-# CI build (Windows example)
-Unity.exe -batchmode -nographics -quit ^
-  -projectPath "C:\work\MyGame" ^
-  -executeMethod BuildPlayerMenu.BuildWindowsCI ^
-  -logFile "C:\work\MyGame\Builds\build.log"
+```powershell
+& "C:\Program Files\Unity\Hub\Editor\6000.0.42f1\Editor\Unity.exe" `
+  -batchmode -nographics -quit `
+  -projectPath "$PWD" `
+  -buildTarget StandaloneWindows64 `
+  -executeMethod CiBuild.BuildWindowsCI `
+  -logFile "$PWD\Logs\ci-build.log"
 ```
 
-### Essential Paths
-- **Project**: `Assets/`, `Packages/manifest.json`, `ProjectSettings/`
-- **Library (generated)**: `Library/` - safe to delete to force reimport
-- **Logs**: Editor.log under local AppData Unity folders
+---
+
+## Addressables / content pipeline (batch)
+
+Use `AddressableAssetSettings.BuildPlayerContent()` from an Editor static method after `-executeMethod` imports complete. Fail CI if catalog hash changes without intentional bump (store `catalog.json` hash artifact).
+
+---
+
+## Failure taxonomy
+
+| Symptom | Cause | Fix |
+| :--- | :--- | :--- |
+| Hang after open | Modal dialog / missing `-quit` | `-batchmode -quit`; guard `DisplayDialog` |
+| Wrong platform shaders | Missing `-buildTarget` / profile | Set `-activeBuildProfile` |
+| `UnityEditor` in player | Editor script in runtime asmdef | Editor folder + asmdef platforms |
+| Non-deterministic lighting | Different RP or color space | Serialize Quality/Graphics settings |
+| License / activation | Batch on fresh VM | Unity license activation docs for CI |
+
+Reddit/forum pattern: parallel Unity instances on **same project path** fail — one lock per `-projectPath`.
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Isolate Editor code from runtime assemblies. For CI, use `-batchmode -quit -executeMethod` with explicit exit codes. Prefer serialized references over scene searches in production gameplay code.
+
+> **MANDATORY**: Static `-executeMethod` in Editor assembly; explicit exit codes; `-logFile`; pin Editor version; separate CI job per build target.

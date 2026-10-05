@@ -1,12 +1,12 @@
 ---
 name: clickhouse
-description: "Design ClickHouse MergeTree tables, partitioning, and projections; inspect ingestion and analytical query performance."
+description: "Design ClickHouse MergeTree ORDER BY and partitions; batch inserts; use projections and skip indexes; tune mutations, replication lag, and backups without treating it as OLTP."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["clickhouse", "olap", "mergetree", "analytics", "sql", "claude"]
+tags: ["clickhouse", "olap", "mergetree", "partitions", "projections", "kafka-engine", "backpressure", "backup"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
@@ -14,29 +14,48 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Overview & Engine Architecture
 
-ClickHouse is a columnar OLAP DBMS optimized for high-ingest analytics. MergeTree-family engines store data sorted by primary key; partitions prune scans; background merges compact parts. Agents design ORDER BY for filter/range patterns, avoid finalizing huge `SELECT *`, and prefer batch inserts over tiny single-row writes.
+ClickHouse is a **columnar OLAP** DBMS: data lives in **parts** merged in the background; **ORDER BY** (primary key order) enables sparse indexing—not a traditional PK uniqueness guarantee. **PARTITION BY** prunes scans; tiny inserts create **too many parts** (merge storms). Replication uses ZooKeeper/ClickHouse Keeper; Kafka engine tables buffer ingest.
 
 ```
-Insert batches -> parts on disk
-      -> MergeTree merges
-      -> SELECT with partition + primary-key pruning
+Batch inserts / Kafka engine / S3 insert
+    -> MergeTree parts on disk
+        -> background merges
+        -> SELECT with partition + primary-key pruning
+        -> optional projections / materialized views
 ```
 
-## When to use this skill
+---
 
-- Event/metrics analytics at high cardinality and volume
-- Real-time-ish dashboards over wide denormalized facts
-- Replacing slower row-store aggregations for append-heavy data
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Choose `ORDER BY` for the most selective filters and ranges you actually query.
-2. Partition by time (e.g. month) - not by high-cardinality ids.
-3. Insert in large batches; tiny inserts create part storms.
-4. Use `FINAL` sparingly (ReplacingMergeTree) - prefer dedupe in ETL or `argMax`.
-5. Set quotas/timeouts for ad-hoc users on shared clusters.
+- High-volume event/analytics, append-heavy facts, sub-second aggregations over billions of rows
+- Denormalized wide tables and pre-aggregated rollups (MVs)
 
-## Table + query example
+**Do not use when**
+
+- Frequent row-level updates/deletes are core (`@postgresql`)
+- You need multi-row transactional OLTP
+- Someone wants single-row INSERT loops from app servers—redesign to batches
+
+---
+
+## Operational Capabilities & Agent Directives
+
+1. **Schema**: `ORDER BY` matches filter + group keys; **partition by time** (month/week), never high-cardinality IDs alone.
+2. **Ingest backpressure**: Insert batches (thousands–millions of rows); async_insert/buffer tables where appropriate; monitor `parts_to_merge` and `Too many parts`.
+3. **Indexes**: Data skipping indexes and **projections** for alternate sort paths—measure with `EXPLAIN indexes = 1`.
+4. **Mutations**: `ALTER UPDATE/DELETE` are heavy—prefer append-only + `ReplacingMergeTree`/`CollapsingMergeTree` patterns; use `FINAL` sparingly.
+5. **Auth/TLS**: RBAC users with row policies in multi-tenant setups; TLS between clients and cluster.
+6. **Backup/restore**: `BACKUP`/`RESTORE` (version-dependent) or freeze + object storage; restore to **new** tables/clusters first; verify parts on all replicas.
+7. **Exactly-once myth**: Kafka engine + MV pipelines are at-least-once; dedupe with version columns or downstream idempotent sinks.
+
+---
+
+## Production examples
+
+### MergeTree table
 
 ```sql
 CREATE TABLE events.page_views
@@ -47,7 +66,7 @@ CREATE TABLE events.page_views
   path LowCardinality(String),
   duration_ms UInt32
 )
-ENGINE = MergeTree
+ENGINE = ReplicatedMergeTree('/clickhouse/tables/{shard}/page_views', '{replica}')
 PARTITION BY toYYYYMM(event_date)
 ORDER BY (path, user_id, event_time)
 TTL event_date + INTERVAL 180 DAY;
@@ -55,46 +74,73 @@ TTL event_date + INTERVAL 180 DAY;
 INSERT INTO events.page_views
 SELECT * FROM input('event_date Date, event_time DateTime, user_id UInt64, path String, duration_ms UInt32')
 FORMAT Parquet;
+```
 
+### Query with pruning check
+
+```sql
+EXPLAIN indexes = 1
 SELECT path, count() AS views, avg(duration_ms)
 FROM events.page_views
 WHERE event_date >= today() - 7 AND path = '/pricing'
 GROUP BY path;
 ```
 
-## Useful introspection
+### Batch insert anti-pattern (forbidden in prod)
 
 ```sql
-SHOW CREATE TABLE events.page_views;
-SELECT * FROM system.query_log ORDER BY event_time DESC LIMIT 20;
-EXPLAIN indexes = 1
-SELECT count() FROM events.page_views WHERE path = '/pricing';
+-- DO NOT: millions of single-row INSERTs from app loops
+INSERT INTO events.page_views VALUES (...);
 ```
 
-## Common failures
+---
 
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| Too many parts | small inserts / bad partitions | batch; fix PARTITION BY |
-| Full scan | ORDER BY mismatch | rewrite order; projections |
-| Memory limit | huge GROUP BY | approx functions; limit cardinality |
-| Mutation lag | heavy ALTER UPDATE/DELETE | redesign for append; lightweight deletes carefully |
+## Technical troubleshooting matrix
+
+| Failure signature | Root cause | Diagnostic & fix |
+| :--- | :--- | :--- |
+| `Too many parts` | Tiny inserts / bad partition key | Batch; async_insert; fix PARTITION BY |
+| Full table scan | ORDER BY mismatch | Reorder keys; add projection |
+| Memory limit exceeded | Huge GROUP BY cardinality | Preaggregate; `approx_*`; limit dimensions |
+| Replication lag | Large parts / network | Check system.replicas; disk |
+| Mutation stuck | Mass UPDATE | Redesign append-only; cancel mutation |
+| Duplicate rows in ReplacingMergeTree | Expected without FINAL | Query with `argMax` pattern |
+
+---
 
 ## Best practices
 
-- Use `LowCardinality` for low-entropy strings.
-- Materialized views for rollups when dashboards repeat the same aggregates.
-- Keep dictionaries for dimension lookups when appropriate.
-- Monitor merges, replication queue, and disk in `@docker`/K8s deployments.
+- `LowCardinality(String)` for enums; sensible codecs (`Delta`, `ZSTD`).
+- Materialized views for dashboard rollups; version MV definitions in git.
+- Quotas + `max_execution_time` for ad-hoc SQL users.
+- Monitor merge rate, disk free, ZooKeeper/Keeper health.
+
+---
 
 ## Limitations
 
-- Not a full OLTP replacement; point updates are not its strength.
-- Replication/sharding topologies need dedicated ops design.
-- SQL dialect quirks differ from Postgres - test migrations carefully.
+- SQL dialect differs from Postgres—test migrations.
+- Lightweight deletes (experimental features) vary by version.
+- Not a replacement for interactive BI governance (`@snowflake` features differ).
+
+---
 
 ## Related skills
 
-- `@duckdb` - local OLAP without a server
-- `@dbt` - ClickHouse models via adapters
-- `@kafka`-adjacent pipelines often feed ClickHouse (use project Kafka skill if present)
+- `@duckdb` — local OLAP on files
+- `@kafka` — ingest into Kafka engine tables
+- `@dbt` — ClickHouse adapter models
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: Reject single-row insert loops for high-volume paths. Always pair ORDER BY and PARTITION BY with documented query patterns. Treat ReplacingMergeTree dedupe as merge-time, not transactional exactly-once.
+
+---
+
+## Source anchors (research)
+
+- [ClickHouse MergeTree engine](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/mergetree)
+- [ClickHouse INSERT best practices](https://clickhouse.com/docs/en/guides/inserting-data)
+- [Too many parts troubleshooting](https://clickhouse.com/docs/en/guides/troubleshooting#too-many-parts)

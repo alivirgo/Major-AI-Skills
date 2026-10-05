@@ -63,13 +63,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 <h2>automation</h2>
 <article id="n8n">
 <h3><a href="#n8n">n8n</a></h3>
-<p>Build n8n workflows with nodes, webhooks, credentials, and expression-based data mapping through its editor or REST API.</p>
+<p>Design production n8n workflows with webhook auth, queue-mode scaling, expression mapping, idempotent side effects, and credential hygiene. Use for self-hosted or cloud automation, REST workflow CI, and debugging executions.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill n8n</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/n8n/SKILL.md">Read skill instructions</a>
 </article>
 <article id="zapier">
 <h3><a href="#zapier">zapier</a></h3>
-<p>Build Zapier automations with triggers, actions, filters, paths, and storage; handle mapping and execution errors.</p>
+<p>Design Zapier Zaps with Find-before-Create idempotency, loop guards, Paths branching, credential hygiene, and webhook catch hooks. Use for no-code SaaS wiring, prototypes, and ops automations before custom integration services.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill zapier</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/zapier/SKILL.md">Read skill instructions</a>
 </article>
@@ -726,7 +726,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="nginx">
 <h3><a href="#nginx">nginx</a></h3>
-<p>Configure Nginx web serving, reverse proxies, TLS termination, rate limits, and upstream load balancing; diagnose request failures.</p>
+<p>Configure Nginx reverse proxies with TLS, rate limits, and Docker/K8s-safe upstream DNS; diagnose 502/504, probe kills, and buffering traps agents miss.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill nginx</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/nginx/SKILL.md">Read skill instructions</a>
 </article>
@@ -786,37 +786,37 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 <h2>development</h2>
 <article id="agent-injection-boundary-test">
 <h3><a href="#agent-injection-boundary-test">agent-injection-boundary-test</a></h3>
-<p>Test an authorized AI agent&#39;s handling of instructions embedded in retrieved documents or tool outputs using harmless canaries.</p>
+<p>Test authorized agents against indirect prompt injection in retrieved docs and tool outputs using paired clean/poison fixtures, synthetic canaries, and sandboxed tools. Evidence for these cases—not a claim injection is solved.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill agent-injection-boundary-test</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/agent-injection-boundary-test/SKILL.md">Read skill instructions</a>
 </article>
 <article id="agent-tool-replay-test">
 <h3><a href="#agent-tool-replay-test">agent-tool-replay-test</a></h3>
-<p>Replay recorded AI tool calls against deterministic fixtures to test argument validation, error handling, and side-effect boundaries.</p>
+<p>Replay recorded agent tool/LLM trajectories against deterministic fixtures to test argument validation, errors, idempotency, and side-effect boundaries—separate from live tool-selection quality.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill agent-tool-replay-test</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/agent-tool-replay-test/SKILL.md">Read skill instructions</a>
 </article>
 <article id="ai-citation-verification">
 <h3><a href="#ai-citation-verification">ai-citation-verification</a></h3>
-<p>Check whether an AI answer&#39;s citations actually support its factual claims, with source-location evidence and explicit uncertainty.</p>
+<p>Verify AI citations across structural schema, resolvability (registry/URL/DOI), and semantic support of each claim by the cited span—not the whole context. Use for RAG answers, research agents, and regulated audit trails.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill ai-citation-verification</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/ai-citation-verification/SKILL.md">Read skill instructions</a>
 </article>
 <article id="ai-evaluation-dataset">
 <h3><a href="#ai-evaluation-dataset">ai-evaluation-dataset</a></h3>
-<p>Build a versioned JSONL evaluation dataset for an AI workflow, with acceptance criteria, held-out cases, and leakage checks.</p>
+<p>Build versioned JSONL evaluation datasets for AI workflows with golden/regression/holdout layers, leakage checks, rubrics, and provenance hashes. Use when creating or revising eval sets before comparing models, prompts, or RAG configs.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill ai-evaluation-dataset</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/ai-evaluation-dataset/SKILL.md">Read skill instructions</a>
 </article>
 <article id="ai-human-handoff-contract">
 <h3><a href="#ai-human-handoff-contract">ai-human-handoff-contract</a></h3>
-<p>Define and test when an AI workflow must hand a task to a human, preserving evidence and preventing unapproved continuation.</p>
+<p>Define and test AI→human handoff as a versioned state machine with multi-signal triggers, review packets, approval binding, and no silent consent. Use for escalations, approvals, and irreversible agent actions.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill ai-human-handoff-contract</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/ai-human-handoff-contract/SKILL.md">Read skill instructions</a>
 </article>
 <article id="ai-pii-redaction-review">
 <h3><a href="#ai-pii-redaction-review">ai-pii-redaction-review</a></h3>
-<p>Prepare a privacy-reviewed AI input using field-aware redaction, stable placeholders, and leakage checks before external submission.</p>
+<p>Privacy-review AI payloads with field-aware redaction, typed stable placeholders, leakage scans across prompts/logs/tools/RAG, and residual-risk reporting before external submission. Use before sending data to cloud LLMs or sharing traces.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill ai-pii-redaction-review</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/ai-pii-redaction-review/SKILL.md">Read skill instructions</a>
 </article>
@@ -858,7 +858,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="fastapi">
 <h3><a href="#fastapi">fastapi</a></h3>
-<p>Build and test FastAPI services with Pydantic models, dependency injection, async routes, OpenAPI, and authentication hooks.</p>
+<p>Build production FastAPI services with Pydantic v2 models, async-safe I/O, dependency injection, OpenAPI, webhook raw-body routes, and structured errors. Use for JSON APIs, Stripe webhooks, and TestClient/httpx testing.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill fastapi</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/fastapi/SKILL.md">Read skill instructions</a>
 </article>
@@ -918,13 +918,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="llm-cost-latency-benchmark">
 <h3><a href="#llm-cost-latency-benchmark">llm-cost-latency-benchmark</a></h3>
-<p>Measure an AI workflow&#39;s observed token cost and end-to-end latency across representative cases with reproducible configuration.</p>
+<p>Benchmark AI workflow cost and latency with TTFT/TPOT/ITL/e2e percentiles, cache-aware token billing, goodput under SLOs, and a quality floor. Use before claiming a model, prompt, or infra change is cheaper or faster.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill llm-cost-latency-benchmark</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/llm-cost-latency-benchmark/SKILL.md">Read skill instructions</a>
 </article>
 <article id="llm-json-contract-check">
 <h3><a href="#llm-json-contract-check">llm-json-contract-check</a></h3>
-<p>Validate AI-generated JSON against an application&#39;s schema and business rules, distinguishing refusals and truncation from malformed output.</p>
+<p>Validate AI-generated JSON against schema and business rules, separating refusals, truncation, parse failures, schema violations, and domain invariant breaches. Use before any tool call, DB write, or external side effect consumes model output.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill llm-json-contract-check</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/llm-json-contract-check/SKILL.md">Read skill instructions</a>
 </article>
@@ -936,13 +936,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="nextjs">
 <h3><a href="#nextjs">nextjs</a></h3>
-<p>Build Next.js applications with the App Router, server and client components, route handlers, caching, and deployment configuration.</p>
+<p>Build Next.js App Router apps with explicit server/client boundaries, caching (fetch, revalidate, Cache Components), Route Handlers, and pages-router migration pitfalls. Use for SSR, RSC, deployment prep, and Next 15–16 cache model changes.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill nextjs</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/nextjs/SKILL.md">Read skill instructions</a>
 </article>
 <article id="nodejs">
 <h3><a href="#nodejs">nodejs</a></h3>
-<p>Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling.</p>
+<p>Build Node.js services with ESM/CJS clarity, non-blocking I/O, streams, webhook raw-body handling, graceful shutdown, and pinned engines. Use for HTTP servers, Stripe webhooks on Express/Fastify, and CLI tooling.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill nodejs</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/nodejs/SKILL.md">Read skill instructions</a>
 </article>
@@ -972,7 +972,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="prompt-regression-gate">
 <h3><a href="#prompt-regression-gate">prompt-regression-gate</a></h3>
-<p>Compare prompt revisions on a frozen AI evaluation set with paired runs, slice-level regressions, and explicit release thresholds.</p>
+<p>Gate prompt, model, tool-schema, or packer changes with paired runs on a frozen eval set, slice-level regression checks, relative baselines, and explicit go/no-go thresholds. Use before merging prompt PRs or swapping models.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill prompt-regression-gate</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/prompt-regression-gate/SKILL.md">Read skill instructions</a>
 </article>
@@ -990,7 +990,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="rag-retrieval-audit">
 <h3><a href="#rag-retrieval-audit">rag-retrieval-audit</a></h3>
-<p>Diagnose missing evidence in a retrieval-augmented generation pipeline using labeled queries, chunk inspection, and retrieval metrics.</p>
+<p>Diagnose missing evidence in a RAG pipeline with labeled queries, chunk/trace inspection, Recall@K/MRR/nDCG, and stage-isolated failure taxonomy. Use when retrieval looks fine but answers fail, or when index/chunk/filter/rerank changes need before/after proof.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill rag-retrieval-audit</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/rag-retrieval-audit/SKILL.md">Read skill instructions</a>
 </article>
@@ -1002,7 +1002,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="react">
 <h3><a href="#react">react</a></h3>
-<p>Build accessible React interfaces with function components, hooks, and deliberate state ownership; troubleshoot effects, list keys, and interactive behavior.</p>
+<p>Build accessible React UIs with function components, hooks, derived state, and effect discipline; fix Strict Mode double-invoke, list keys, and concurrent rendering pitfalls. Use for components, forms, and client islands in Next.js or SPA apps.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill react</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/react/SKILL.md">Read skill instructions</a>
 </article>
@@ -1038,7 +1038,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="stripe">
 <h3><a href="#stripe">stripe</a></h3>
-<p>Integrate Stripe Checkout, PaymentIntents, subscriptions, and signed webhooks with idempotency and test-mode checks.</p>
+<p>Integrate Stripe Checkout, PaymentIntents, Billing, and webhooks with signature verification on raw bodies, event.id idempotency, Idempotency-Key on POSTs, and test-mode safety. Use for payments, subscriptions, and fulfillment debugging.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill stripe</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/stripe/SKILL.md">Read skill instructions</a>
 </article>
@@ -1056,7 +1056,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="temporal">
 <h3><a href="#temporal">temporal</a></h3>
-<p>Author and orchestrate Temporal workflows and activities; implement saga compensation, deterministic execution, retries, signals, and queries.</p>
+<p>Author deterministic Temporal workflows and idempotent activities; deploy with versioning/replay tests; configure mTLS auth; understand visibility backup limits and saga compensation—not in-memory orchestration.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill temporal</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/temporal/SKILL.md">Read skill instructions</a>
 </article>
@@ -1113,7 +1113,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="argocd">
 <h3><a href="#argocd">argocd</a></h3>
-<p>Configure Argo CD Applications, AppProjects, and sync policies; inspect health checks and troubleshoot GitOps rollouts.</p>
+<p>Operate Argo CD GitOps with AppProjects, safe automated sync/prune, and RespectIgnoreDifferences—debug OutOfSync/Degraded without kubectl drift that fights the controller.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill argocd</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/argocd/SKILL.md">Read skill instructions</a>
 </article>
@@ -1131,7 +1131,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="clickhouse">
 <h3><a href="#clickhouse">clickhouse</a></h3>
-<p>Design ClickHouse MergeTree tables, partitioning, and projections; inspect ingestion and analytical query performance.</p>
+<p>Design ClickHouse MergeTree ORDER BY and partitions; batch inserts; use projections and skip indexes; tune mutations, replication lag, and backups without treating it as OLTP.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill clickhouse</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/clickhouse/SKILL.md">Read skill instructions</a>
 </article>
@@ -1155,13 +1155,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="docker">
 <h3><a href="#docker">docker</a></h3>
-<p>Build Docker images and Compose environments, optimize multi-stage Dockerfiles with BuildKit, and troubleshoot container networking and runtime failures.</p>
+<p>Build reproducible container images with BuildKit, wire Compose service graphs with real readiness gates, and debug networking, volumes, and layer-cache failures agents routinely miss.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill docker</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/docker/SKILL.md">Read skill instructions</a>
 </article>
 <article id="elasticsearch">
 <h3><a href="#elasticsearch">elasticsearch</a></h3>
-<p>Configure Elasticsearch mappings and ingest pipelines, investigate cluster health and queries, and plan reindexing or lifecycle changes.</p>
+<p>Design Elasticsearch mappings, aliases, and ILM; tune bulk ingest with backpressure; secure API auth; plan reindex cutovers and avoid mapping explosions, red shards, and restore index-name traps.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill elasticsearch</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/elasticsearch/SKILL.md">Read skill instructions</a>
 </article>
@@ -1179,7 +1179,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="github-actions">
 <h3><a href="#github-actions">github-actions</a></h3>
-<p>Build GitHub Actions workflows with job matrices, caching, reusable workflows, OIDC authentication, and protected secrets; diagnose CI failures.</p>
+<p>Design least-privilege GitHub Actions with explicit permissions, OIDC to cloud, cache keys tied to lockfiles, and fork-safe workflows—avoid secret/OIDC footguns agents repeat.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill github-actions</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/github-actions/SKILL.md">Read skill instructions</a>
 </article>
@@ -1197,13 +1197,13 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="grafana">
 <h3><a href="#grafana">grafana</a></h3>
-<p>Build Grafana dashboards and variables, configure data sources and alerting, and provision dashboards as code.</p>
+<p>Build operable Grafana dashboards with template variables, provisioning-as-code, and unified alerts wired to Prometheus/Loki; avoid high-cardinality panels agents love to ship.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill grafana</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/grafana/SKILL.md">Read skill instructions</a>
 </article>
 <article id="helm">
 <h3><a href="#helm">helm</a></h3>
-<p>Package Kubernetes applications as Helm charts, configure values and dependencies, and inspect release upgrades or rollbacks.</p>
+<p>Package Kubernetes apps as Helm charts with lint/template gates, pinned dependencies, and hook-safe upgrades—avoid lookup traps and silent resource deletion on render.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill helm</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/helm/SKILL.md">Read skill instructions</a>
 </article>
@@ -1215,7 +1215,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="kafka">
 <h3><a href="#kafka">kafka</a></h3>
-<p>Configure Kafka topics and consumers, inspect partitions and offsets, and diagnose consumer-group lag.</p>
+<p>Design Kafka topics, keys, and consumer groups; implement idempotent handlers and ordered offset commits; tune producer acks and backpressure; debunk end-to-end exactly-once without app cooperation.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill kafka</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/kafka/SKILL.md">Read skill instructions</a>
 </article>
@@ -1227,7 +1227,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="kubernetes">
 <h3><a href="#kubernetes">kubernetes</a></h3>
-<p>Design and debug Kubernetes Deployments, Services, Ingress, configuration, and rollouts using kubectl.</p>
+<p>Author and debug Kubernetes workloads with correct probes, quotas, and rollout semantics; distinguish OOM, probe-kill loops, and scheduling failures before kubectl guessing.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill kubernetes</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/kubernetes/SKILL.md">Read skill instructions</a>
 </article>
@@ -1245,7 +1245,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="mongodb">
 <h3><a href="#mongodb">mongodb</a></h3>
-<p>Design MongoDB documents and indexes, build aggregation pipelines, and investigate query plans or transaction behavior.</p>
+<p>Model MongoDB documents and compound indexes, tune read/write concern and TLS connection strings, run safe aggregations, and avoid backup/restore and majority-write traps on small replica sets.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill mongodb</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/mongodb/SKILL.md">Read skill instructions</a>
 </article>
@@ -1257,7 +1257,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="nats">
 <h3><a href="#nats">nats</a></h3>
-<p>Configure NATS messaging and JetStream persistence; manage pub/sub subjects, consumer groups, key-value buckets, and distributed clustering.</p>
+<p>Design NATS subjects and JetStream streams; use pull consumers, AckWait, and Nats-Msg-Id dedupe; configure TLS/auth; debunk exactly-once—at-least-once with publish dedupe and idempotent handlers.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill nats</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/nats/SKILL.md">Read skill instructions</a>
 </article>
@@ -1287,7 +1287,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="postgresql">
 <h3><a href="#postgresql">postgresql</a></h3>
-<p>Design PostgreSQL schemas and indexes, investigate slow queries with EXPLAIN ANALYZE, and plan migrations, vacuum maintenance, and operational checks.</p>
+<p>Design PostgreSQL schemas, indexes, and safe online migrations; diagnose locks and slow queries with EXPLAIN; configure pooling, auth, and backup/restore without PgBouncer or invalid-index traps.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill postgresql</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/postgresql/SKILL.md">Read skill instructions</a>
 </article>
@@ -1299,7 +1299,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="prometheus">
 <h3><a href="#prometheus">prometheus</a></h3>
-<p>Configure Prometheus scraping and exporters, write PromQL and alert rules, and control metric cardinality.</p>
+<p>Design Prometheus scrape configs, bounded-label metrics, and alert rules with symptom-first PromQL; avoid cardinality fires and silent relabel collisions agents cause.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill prometheus</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/prometheus/SKILL.md">Read skill instructions</a>
 </article>
@@ -1317,7 +1317,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="redis">
 <h3><a href="#redis">redis</a></h3>
-<p>Design Redis keys and caching with appropriate TTLs, data structures, and eviction behavior; inspect memory or pub/sub issues.</p>
+<p>Design Redis caching, TTLs, and eviction policies; configure ACL auth and persistence (RDB/AOF); avoid KEYS, unbounded memory, and backup-restore windows that lose cache-aside coherency.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill redis</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/redis/SKILL.md">Read skill instructions</a>
 </article>
@@ -1329,7 +1329,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="snowflake">
 <h3><a href="#snowflake">snowflake</a></h3>
-<p>Manage Snowflake warehouses, roles, stages, and COPY workflows; investigate analytical SQL and resource usage.</p>
+<p>Size Snowflake warehouses, design RBAC and stages, run idempotent COPY/MERGE loads, bound ad-hoc SQL cost, and avoid Time Travel/Fail-safe and restore credit surprises.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill snowflake</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/snowflake/SKILL.md">Read skill instructions</a>
 </article>
@@ -1347,7 +1347,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="supabase">
 <h3><a href="#supabase">supabase</a></h3>
-<p>Build Supabase-backed applications with SQL migrations, Auth, row-level security, Edge Functions, the JavaScript client, and CLI development workflows.</p>
+<p>Build Supabase apps with migration-first SQL, RLS policies, auth.uid() performance, SSR cookie clients vs service role, Edge Functions, and JWT troubleshooting. Use for Postgres-backed products with client-side data access under RLS.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill supabase</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/supabase/SKILL.md">Read skill instructions</a>
 </article>
@@ -1359,7 +1359,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="terraform">
 <h3><a href="#terraform">terraform</a></h3>
-<p>Write and review Terraform HCL, configure providers and remote state, and assess plan changes before infrastructure applies.</p>
+<p>Write reviewable Terraform with remote state locks, moved-block refactors, and plan-first applies; catch destructive replaces, drift, and state surgery mistakes before production.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill terraform</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/terraform/SKILL.md">Read skill instructions</a>
 </article>
@@ -1383,7 +1383,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="vault">
 <h3><a href="#vault">vault</a></h3>
-<p>Configure Vault secret engines, policies, AppRole or Kubernetes authentication, and dynamic credential leases.</p>
+<p>Configure Vault auth methods, least-privilege policies, and dynamic secrets with correct K8s TokenReview wiring; never log secret material or treat root tokens as routine.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill vault</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/vault/SKILL.md">Read skill instructions</a>
 </article>
@@ -2376,7 +2376,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="duckdb">
 <h3><a href="#duckdb">duckdb</a></h3>
-<p>Query local CSV and Parquet files with DuckDB SQL, aggregate and join datasets, export analytical results, and troubleshoot schema drift or memory limits.</p>
+<p>Run embedded OLAP SQL on Parquet/CSV locally; configure memory and thread limits; attach remote files safely; export with COPY; avoid multi-writer locks and treating DuckDB as a production server database.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill duckdb</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/duckdb/SKILL.md">Read skill instructions</a>
 </article>
@@ -2463,7 +2463,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 <h2>testing</h2>
 <article id="playwright">
 <h3><a href="#playwright">playwright</a></h3>
-<p>Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows.</p>
+<p>Write resilient Playwright E2E tests with role locators, worker-scoped auth storageState, test isolation for shared DB data, trace-on-retry CI, and web-first assertions. Use for checkout flows, multi-user scenarios, and flaky test diagnosis.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill playwright</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/playwright/SKILL.md">Read skill instructions</a>
 </article>
@@ -2475,7 +2475,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}p,h1,h2,h3,a{overflow-wrap:anywh
 </article>
 <article id="vitest">
 <h3><a href="#vitest">vitest</a></h3>
-<p>Write and optimize Vitest unit and component test suites; configure workspace projects, worker thread pools, mocks, coverage, and instant watch mode.</p>
+<p>Configure Vitest with fork/thread pool isolation, mock lifecycle, fake timers, coverage gates, and CI-friendly concurrency. Use for unit and component tests in Vite/Next projects; diagnose parallel flakiness from shared module state.</p>
 <pre><code>npx skills add alivirgo/Major-AI-Skills --skill vitest</code></pre>
 <a href="https://github.com/alivirgo/Major-AI-Skills/blob/master/skills/vitest/SKILL.md">Read skill instructions</a>
 </article>

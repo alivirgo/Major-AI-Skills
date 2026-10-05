@@ -6,165 +6,106 @@ risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["davinci-resolve", "resolve-scripting-python", "fusion-vfx", "color-grading", "fairlight", "davinci-neural-engine", "claude"]
+tags: ["davinci-resolve", "resolve-scripting", "fusion", "color-management", "deliver", "batch", "studio"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Blackmagic DaVinci Resolve Studio AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Blackmagic Design DaVinci Resolve Studio 19 is an industry-leading post-production platform unifying non-linear editing (Cut/Edit), node-based Hollywood color grading (Color), node-based visual effects (Fusion VFX), professional audio mixing (Fairlight), and multi-format mastering (Deliver). Resolve operates on a **32-bit floating-point YRGB color engine**, supports wide-gamut color management (**ACEScc/ACEScct, DaVinci Wide Gamut Intermediate**), embeds the **DaVinci Neural Engine (AI Magic Mask, SuperScale, Speed Warp)**, and exposes complete pipeline automation via the **DaVinci Resolve Python/Lua Scripting API (`DaVinciResolveScript`)**. Claude operates as a Principal Post-Production Systems Architect and Resolve Pipeline Engineer, specializing in **Python Scripting API automation**, **GPU VRAM & CUDA memory management**, **color management transform pipelines**, and **headless batch delivery rendering**.
 
-### DaVinci Resolve Multi-Page Pipeline & Scripting Stack
+DaVinci Resolve **Studio** (pin e.g. **19.x / 20.x / 21.x**) unifies Edit, Color, Fusion, Fairlight, Deliver. Pipeline automation uses **`DaVinciResolveScript`** (Python/Lua), optional **`fuscript.exe`**, and **Deliver** render queue APIs. Color: **YRGB 32-bit**, **ACES / DWG**, timeline **Color Management** settings drive all outputs.
+
+**License gate (critical):** From **Resolve 19.1+**, **external** scripting (`scriptapp("Resolve")` from a separate Python process) is **Studio-only**. Free edition: Console/Workspace scripts only — plan automation accordingly ([community reports](https://www.reddit.com/r/davinciresolve/comments/17bke61/), BMD docs). AI features may require **Extras** downloads before API calls succeed.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 DaVinci Resolve Architecture                │
-│                                                             │
-│  Post-Production Page Ecosystem                             │
-│  ├── Media & Cut/Edit Pages (Multicam, Smart Bins, Timelines│
-│  ├── Color Page (Node Graph, Serial/Parallel/Layer Nodes)   │
-│  ├── Fusion Page (2D/3D VFX Compositing Node Tree, Particle)│
-│  ├── Fairlight Page (2000-Track Audio Mixer, Bus FlexRouting│
-│  └── Deliver Page (Render Queue, H.265, ProRes, IMF Master) │
-│                                                             │
-│  Compute Engine & Neural Acceleration                       │
-│  ├── 32-bit Floating-Point YRGB & ACES Color Science Engine │
-│  ├── DaVinci Neural Engine (CUDA, Metal, ROCm AI Shaders)   │
-│  └── Multi-GPU Load Balancer & Dedicated Optical Flow Engine│
-│                                                             │
-│  Pipeline Automation & Developer API                        │
-│  ├── DaVinci Resolve Scripting API (Python 3.10-3.12 / Lua) │
-│  ├── `fuscript.exe` Standalone Script Execution Binary      │
-│  └── PostgreSQL / SQLite Project Library Database Core      │
+│  PYTHONPATH → DaVinciResolveScript → Project / MediaPool    │
+│  Deliver: SetCurrentRenderFormatAndCodec + AddRenderJob     │
+│  Headless: Resolve -nogui (API still available)             │
+│  Color: project color science + CST nodes → export tags     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
+## When to use / when not to
+
+**Use when:** batch ingest, timeline assembly, render queue, metadata, Fusion comp batch, OTIO/XML interchange (file-based, not always scripting).
+
+**Do not use when:** Studio license unavailable and external Python is required; expect Free + external process to fail silently.
+
+---
+
 ## Operational Capabilities & Agent Directives
 
-1. **DaVinci Resolve Python Scripting Automation**: Author Python scripts connecting via `DaVinciResolveScript` to inspect Project Managers, import media clips, assemble multi-track timelines, apply LUTs, and trigger Deliver page render queues.
-2. **GPU VRAM & CUDA Memory Triage**: Remediate "GPU Memory Full" exceptions during 4K/8K rendering by tuning Temporal Noise Reduction (TNR) frame radius, configuring Smart Render Cache, and optimizing Fusion memory buffers.
-3. **Color Management & Gamut Mapping Architecture**: Design non-destructive color workflows configuring Color Space Transforms (CST) between Camera RAW (ARRI LogC4, REDWideGamut, Sony S-Log3) and DaVinci Wide Gamut / Rec.709.
-4. **Proxy Generation & Codec Performance**: Configure automated Blackmagic Proxy Generator pipelines converting high-bitrate All-Intra footage into lightweight ProRes Proxy / DNxHR LB media.
+1. **Environment (Windows):** `RESOLVE_SCRIPT_API`, `RESOLVE_SCRIPT_LIB` (path to `fusionscript.dll`), `PYTHONPATH` → `...\Developer\Scripting\Modules`.
+2. **Studio check:** Fail fast if `resolve.GetProductName()` / license APIs indicate Free when external automation is required.
+3. **Deliver pipeline:** Set format/codec → `SetRenderSettings` (`TargetDir`, `CustomName`, `SelectAllFrames`, `ExportVideo`, `ExportAudio`) → `AddRenderJob()` → `StartRendering()`; poll `IsRenderingInProgress()`.
+4. **Color / export:** Match **timeline color science** to deliverable — Rec.709 gamma 2.4 for H.264 web; ACES2065-1 EXR for VFX handoff. Wrong **Color Space Transform** order in nodes causes legal-range clipping in H.264.
+5. **Deterministic stills:** Fixed timeline frame export via `ExportCurrentFrameAsStill` or Deliver with single-frame range; disable noise reduction variance for regression where possible.
+6. **GPU memory:** TNR, Fusion 3D, oversampled comps → VRAM exhaustion — Smart Render Cache, proxy workflow, reduce TNR radius.
+7. **Python version:** Match Resolve-supported Python (check Help → Documentation → Developer); do not mix conda env without matching Resolve's embedded expectations.
 
 ---
 
-## Production Python Automation: Automated Timeline Builder & Deliver Queue Exporter
-
-Save this script as `auto_timeline_render.py` (requires DaVinci Resolve Studio running with Scripting enabled):
+## Production Python: connect + queue H.264 deliverable
 
 ```python
-"""
-DaVinci Resolve Studio: Automated Python Pipeline Client
-Connects to Resolve API, creates a project, imports media, builds timeline, and adds render job.
-"""
+import os, sys
 
-import sys
-import os
-
-# 1. Initialize DaVinci Resolve Scripting API
 def get_resolve():
-    try:
-        import DaVinciResolveScript as bmd
-        return bmd.scriptapp("Resolve")
-    except ImportError:
-        # Standard Environment Fallback for Windows / macOS
-        if sys.platform.startswith("win"):
-            script_module = os.path.expandvars(r"%PROGRAMDATA%\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting\Modules")
-        elif sys.platform.startswith("darwin"):
-            script_module = "/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting/Modules"
-        else:
-            script_module = "/opt/resolve/Developer/Scripting/Modules"
-
-        sys.path.append(script_module)
-        import DaVinciResolveScript as bmd
-        return bmd.scriptapp("Resolve")
-
-def automate_resolve_pipeline(project_name: str, media_folder: str, export_path: str):
-    print("--- [INITIALIZING DAVINCI RESOLVE STUDIO AUTOMATION] ---")
-    resolve = get_resolve()
+    if sys.platform.startswith("win"):
+        api = os.environ.get("RESOLVE_SCRIPT_API") or os.path.expandvars(
+            r"%PROGRAMDATA%\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting"
+        )
+        sys.path.append(os.path.join(api, "Modules"))
+    import DaVinciResolveScript as bmd
+    resolve = bmd.scriptapp("Resolve")
     if not resolve:
-        print("🚨 Error: Could not connect to DaVinci Resolve. Ensure Resolve Studio is open.")
-        return
+        raise RuntimeError("Resolve not running or external scripting unavailable (Studio required)")
+    return resolve
 
-    # 2. Access Project Manager
-    project_manager = resolve.GetProjectManager()
-    project = project_manager.CreateProject(project_name)
-    if not project:
-        project = project_manager.LoadProject(project_name)
-
-    print(f"• Active Project: '{project.GetName()}'")
-
-    # 3. Import Media into Media Pool
-    media_pool = project.GetMediaPool()
-    root_folder = media_pool.GetRootFolder()
-    
-    print(f"Importing media from: {media_folder}...")
-    media_files = [os.path.join(media_folder, f) for f in os.listdir(media_folder) if f.endswith((".mov", ".mp4", ".braw"))]
-    clips = media_pool.ImportMedia(media_files)
-    print(f"• Imported {len(clips)} clip(s) into Media Pool.")
-
-    # 4. Create Timeline
-    timeline_name = "Auto_Sequence_01"
-    timeline = media_pool.CreateEmptyTimeline(timeline_name)
-    print(f"• Created Timeline: '{timeline.GetName()}'")
-
-    # Append clips to Timeline Track 1
-    media_pool.AppendToTimeline(clips)
-
-    # 5. Configure Deliver Page & Queue Render Job
-    print("Configuring Deliver page render settings...")
-    project.SetCurrentRenderFormatAndCodec("mp4", "H264")
+def queue_mp4(project, timeline, out_dir, name):
+    project.SetCurrentTimeline(timeline)
+    project.LoadRenderPreset("H.264 Master")  # or SetCurrentRenderFormatAndCodec
     project.SetRenderSettings({
-        "TargetDir": export_path,
-        "CustomName": f"{project_name}_Master",
+        "TargetDir": out_dir,
+        "CustomName": name,
         "ExportVideo": True,
-        "ExportAudio": True
+        "ExportAudio": True,
     })
-
     project.AddRenderJob()
-    print(f"✅ Successfully queued render job to: {export_path}")
+    project.StartRendering()
+    while project.IsRenderingInProgress():
+        pass
+    if project.GetRenderJobStatus(0).get("JobStatus") != "Complete":
+        raise RuntimeError("Render failed: " + str(project.GetRenderJobStatus(0)))
 
-    # Optional: Start Render Pass
-    # project.StartRendering()
-
-if __name__ == "__main__":
-    automate_resolve_pipeline("DailyReview_Project", "C:\\Footage\\Day01", "C:\\Exports\\ReviewRenders")
+# resolve = get_resolve()
+# pm = resolve.GetProjectManager()
+# project = pm.LoadProject("MyProject")
+# timeline = project.GetTimelineByIndex(1)
+# queue_mp4(project, timeline, r"C:\Exports", "master")
 ```
 
 ---
 
-## Technical Troubleshooting Matrix
+## Failure taxonomy
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Symptom | Cause | Fix |
 | :--- | :--- | :--- |
-| **"GPU Memory Full" Error During Color / Fusion Render** | Temporal Noise Reduction (TNR), Optical Flow Speed Warp, or 3D Fusion nodes exceeded VRAM ceiling. | 1. In *Preferences $\rightarrow$ Memory & GPU*, allocate maximum memory to Resolve.<br>2. Reduce TNR motion estimation radius from 5 to 2.<br>3. Set **Render Cache** to `Smart` (ProRes 422HQ/DNxHR SQ) to pre-bake heavy nodes. |
-| **`ImportError: No module named DaVinciResolveScript`** | Python environment missing `PYTHONPATH` variable pointing to Blackmagic Developer Scripting directory. | Set environment variables:<br>`RESOLVE_SCRIPT_API=%PROGRAMDATA%\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting`<br>`PYTHONPATH=%RESOLVE_SCRIPT_API%\Modules`. |
-| **Timeline Playback Stutters on 4K H.265 (HEVC) Media** | Long-GOP interframe decompression bottlenecking CPU decoding threads. | 1. In *Playback $\rightarrow$ Proxy Handling*, select **Prefer Proxies**.<br>2. Right-click clips in Media Pool $\rightarrow$ Select **Generate Proxy Media** (DNxHR LB / ProRes Proxy). |
-| **Fusion Node Graph Shows Red Output Error** | Upstream `MediaIn` clip frame rate or image aspect ratio does not match timeline composition settings. | Insert a `Resize` or `Set Domain` node before the offending Fusion merge node. |
+| `ImportError: DaVinciResolveScript` | PYTHONPATH | Set env vars; use Resolve-bundled Python |
+| External script no connect | Free edition / 19.1+ gate | Studio license |
+| API returns False | Studio-only function on Free | Guard feature matrix |
+| GPU memory full | TNR / Fusion | Proxies, cache, lower radius |
+| H.264 dull/wrong | Display-referred vs scene-referred | CST + correct output gamma |
+| HEVC edit stutter | Long-GOP | Proxy media (DNxHR LB / ProRes Proxy) |
 
----
-
-## Command Line Syntax & Environment Variables
-
-```bash
-# Windows Environment Variables for DaVinci Resolve Scripting
-set RESOLVE_SCRIPT_API=%PROGRAMDATA%\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting
-set RESOLVE_SCRIPT_LIB=C:\Program Files\Blackmagic Design\DaVinci Resolve\fusionscript.dll
-set PYTHONPATH=%PYTHONPATH%;%RESOLVE_SCRIPT_API%\Modules
-
-# Execute Standalone Fusion / Resolve Script via fuscript CLI
-"C:\Program Files\Blackmagic Design\DaVinci Resolve\fuscript.exe" -l python3 "C:\Scripts\auto_timeline_render.py"
-```
-
-### Essential File Locations
-- **Project Libraries**: PostgreSQL Databases or Local Disk: `%APPDATA%\Blackmagic Design\DaVinci Resolve\Support\Resolve Project Library\`
-- **LUTs Directory**: `...\DaVinci Resolve\LUT\`
-- **Fusion Compositions**: `*.comp` / `.setting`
+**Headless:** `Resolve.exe -nogui` — scripting APIs documented as available without UI ([Scripting API wiki](https://wiki.dvresolve.com/developer-docs/scripting-api)).
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Always configure `PYTHONPATH` and `RESOLVE_SCRIPT_LIB` environment variables before running automated Python pipelines against DaVinci Resolve Studio.
+
+> **MANDATORY**: Confirm Studio + external scripting before building separate-process agents. Set PYTHONPATH every run. Align timeline color science with Deliver codec. Poll render job status; never assume `StartRendering` success without status check.

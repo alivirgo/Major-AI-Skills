@@ -34,6 +34,10 @@ DaVinci Resolve Studio provides a comprehensive visual post-production workspace
 
 ---
 
+## Color deliverable review
+
+From still grabs: lifted blacks → legal range / CST order wrong; neon edges → HDR timeline → H.264 without tone mapping; green cast → ACES IDT mismatch.
+
 ## Operational Capabilities & Agent Directives
 
 1. **Multimodal Color Node Graph Inspection**: Analyze screenshots of the Color Page node tree to detect un-wired alpha keys, improper parallel mixer blending weights, and illogical node sequences (e.g. applying sharpening before noise reduction).

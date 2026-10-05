@@ -1,12 +1,12 @@
 ---
 name: nats
-description: "Configure NATS messaging and JetStream persistence; manage pub/sub subjects, consumer groups, key-value buckets, and distributed clustering."
+description: "Design NATS subjects and JetStream streams; use pull consumers, AckWait, and Nats-Msg-Id dedupe; configure TLS/auth; debunk exactly-once—at-least-once with publish dedupe and idempotent handlers."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-09-13"
-tags: ["nats", "jetstream", "messaging", "pubsub", "microservices", "event-driven", "claude"]
+tags: ["nats", "jetstream", "messaging", "pull-consumer", "deduplication", "ack-wait", "workqueue", "tls", "backpressure"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
@@ -14,149 +14,138 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Overview & Engine Architecture
 
-NATS is a cloud-native, high-performance messaging system designed for microservices, edge devices, and event-driven architectures. While **Core NATS** provides lightweight, in-memory, at-most-once publish-subscribe and request-reply routing, **NATS JetStream** adds distributed persistence, at-least-once delivery, exactly-once message deduplication, time-ordered streams, key-value (KV) stores, and object stores built upon a distributed Raft consensus layer.
-
-Claude operates as a Principal Messaging Architect and Cloud Infrastructure Engineer, specializing in **JetStream stream topologies**, **subject namespace design**, **durable pull consumers**, **message deduplication windows**, and **fault-tolerant multi-cluster superclusters**.
-
-### NATS Core & JetStream Architecture
+**Core NATS** is fire-and-forget pub/sub (at-most-once on lossy paths). **JetStream** adds persistence, replay, consumer acks, KV/Object stores, and Raft-replicated metadata. **Publish deduplication** (`Nats-Msg-Id` + stream `duplicate_window`) prevents duplicate *records in the stream*; **consumer delivery** remains **at-least-once** unless handlers are idempotent and ack timing is correct.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 NATS & JetStream Topology                   │
-│                                                             │
-│  Publishers (Microservices / Edge Devices / Webhooks)       │
-│  └── Subjects: `orders.us.created`, `telemetry.sensors.temp`│
-│                                                             │
-│  NATS Server Cluster (Raft-replicated Metadata & JetStream) │
-│  ├── In-Memory Core NATS (Microsecond Latency Routing)      │
-│  ├── JetStream Stream Storage (File/Memory with Retention)  │
-│  │   ├── Retention Policies: Limits, WorkQueue, Interest    │
-│  │   └── Deduplication Engine (`Nats-Msg-Id` Window)        │
-│  └── Distributed KV & Object Stores                         │
-│                                                             │
-│  Consumers (Pull / Push Consumer Groups)                    │
-│  ├── Durable Pull Consumers (Batch Fetch, Explicit Ack)     │
-│  └── Ephemeral Observers & Real-Time Monitoring             │
-└─────────────────────────────────────────────────────────────┘
+Publishers (TLS, creds/JWT)
+    -> NATS cluster (4222 client / 6222 route)
+        -> JetStream streams (limits/workqueue/interest retention)
+        -> consumers (pull preferred in prod)
+Subscribers ack/nak/in-progress
 ```
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Lightweight cloud-native messaging, request-reply, edge telemetry fanout
+- Work queues with JetStream **WorkQueue** retention (one consumer per filter subject)
+- KV/Object config with TTL and history limits
+
+**Do not use when**
+
+- You need Kafka-grade log retention analytics ecosystem without ops appetite
+- Global ordering across all messages without partition/key design
+- Marketing “exactly-once delivery” without idempotent consumers—correct to **at-least-once + dedupe**
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **Hierarchical Subject Namespaces**: Segment subjects cleanly using dot tokens (`app.region.resource.action`). Use `*` for single-token wildcards and `>` for trailing multi-token wildcards. Never use broad wildcards like `>` in high-throughput JetStream streams without specific subject filters.
-2. **Exactly-Once Delivery via Deduplication**: In payment and order pipelines, always attach the `Nats-Msg-Id` header to published messages and configure the stream's `duplicate_window` (e.g., `2m` or `10m`) to prevent duplicate writes during network retries.
-3. **Prefer Durable Pull Consumers**: In production microservices, use durable pull consumers over push consumers to allow consumers to control their own batch sizes (`fetch()`) and prevent slow-consumer buffer overflow drops.
-4. **Explicit Acknowledgments**: Always configure `AckPolicy: AckExplicit`. Acknowledge messages only after business logic has safely completed (`msg.ack()`), or call `msg.nak()` with backoff when temporary downstream failures occur.
+1. **Subject design**: Hierarchical `app.region.entity.action`; scope stream `subjects` narrowly—avoid catch-all `>` on high-throughput streams without filters.
+2. **Publish dedupe**: Set `Nats-Msg-Id` to stable business IDs; size `duplicate_window` to retry horizon—not a substitute for consumer idempotency ([streams docs](https://github.com/nats-io/nats.docs/blob/master/nats-concepts/jetstream/streams.md)).
+3. **Pull consumers (prod)**: Durable pull with explicit batch/`max_bytes`; keep **`MaxAckPending` ≥ batch size**; avoid huge batches if processing is sequential ([pull consumers](https://docs.nats.io/learn/jetstream/pull-consumers)).
+4. **Ack timing**: `AckWait` must exceed p99 processing or send **in-progress** heartbeats; short AckWait causes double delivery while work still runs ([ack docs](https://docs.nats.io/learn/jetstream/acknowledgment)). **`duplicate_window` ≠ AckWait** ([nats-server #6628](https://github.com/nats-io/nats-server/discussions/6628)).
+5. **Backpressure**: Core NATS **slow consumer** drops—move to JetStream pull; tune fetch batch vs memory; scale consumer workers.
+6. **Auth/TLS**: Operator mode/JWT or NKeys; TLS everywhere; never commit creds files to git.
+7. **Backup/restore**: JetStream file store snapshots / server backup procedures; restore drills on staging; WorkQueue streams delete messages on ack—design retention accordingly.
 
 ---
 
-## Production Node.js / TypeScript Automation: JetStream Stream & Pull Consumer
+## Production examples
 
-### 1. JetStream Stream Setup & Publishing (`src/nats_producer.ts`)
+### Stream + deduped publish (TypeScript)
 
 ```typescript
 import { connect, JSONCodec, headers } from "nats";
 
-interface OrderEvent {
-  orderId: string;
-  customerId: string;
-  total: number;
-}
+const nc = await connect({ servers: ["nats://127.0.0.1:4222"], tls: { /* caFile */ } });
+const jsm = await nc.jetstreamManager();
+await jsm.streams.add({
+  name: "ORDERS",
+  subjects: ["orders.*"],
+  retention: "limits",
+  max_bytes: 1024 ** 3,
+  duplicate_window: 120 * 1e9, // 2m publish dedupe window
+});
 
-async function produceOrder() {
-  const nc = await connect({ servers: ["nats://127.0.0.1:4222"] });
-  const js = nc.jetstream();
-  const jsm = await nc.jetstreamManager();
-  const codec = JSONCodec<OrderEvent>();
-
-  // Ensure Stream exists with limits and deduplication window
-  await jsm.streams.add({
-    name: "ORDERS",
-    subjects: ["orders.*"],
-    retention: "limits" as any,
-    max_bytes: 1024 * 1024 * 1024, // 1 GB
-    max_age: 7 * 24 * 60 * 60 * 1e9, // 7 days in nanoseconds
-    duplicate_window: 120 * 1e9, // 2 minutes deduplication
-  });
-
-  const order: OrderEvent = { orderId: "ord-1042", customerId: "cust-9", total: 249.99 };
-  const hdrs = headers();
-  hdrs.append("Nats-Msg-Id", `order-${order.orderId}`); // Idempotent key
-
-  const pubAck = await js.publish("orders.created", codec.encode(order), { headers: hdrs });
-  console.log(`Published order ${order.orderId} to stream ${pubAck.stream} at seq ${pubAck.seq}`);
-
-  await nc.drain();
-}
-
-produceOrder().catch(console.error);
+const hdrs = headers();
+hdrs.set("Nats-Msg-Id", `order-${order.orderId}`);
+await nc.jetstream().publish("orders.created", codec.encode(order), { headers: hdrs });
 ```
 
-### 2. Resilient Durable Pull Consumer (`src/nats_consumer.ts`)
+### Durable pull consumer
 
 ```typescript
-import { connect, JSONCodec, ackDelay } from "nats";
-
-async function consumeOrders() {
-  const nc = await connect({ servers: ["nats://127.0.0.1:4222"] });
-  const js = nc.jetstream();
-  const codec = JSONCodec();
-
-  // Create or bind durable pull consumer
-  const consumer = await js.consumers.get("ORDERS", "order-worker-group");
-  console.log("Connected to consumer: order-worker-group");
-
-  const messages = await consumer.consume({ max_messages: 10 });
-  for await (const msg of messages) {
-    try {
-      const data = codec.decode(msg.data);
-      console.log(`Processing message seq: ${msg.seq}`, data);
-
-      // Simulate business logic
-      msg.ack();
-    } catch (err) {
-      console.error(`Error processing seq ${msg.seq}, sending NAK:`, err);
-      msg.nak(ackDelay(2000)); // retry in 2 seconds
-    }
+const consumer = await js.consumers.get("ORDERS", "order-worker");
+const iter = await consumer.fetch({ max_messages: 10, expires: 30_000 });
+for await (const msg of iter) {
+  try {
+    await processIdempotent(msg);
+    msg.ack();
+  } catch (e) {
+    msg.nak(millis(2000));
   }
 }
-
-consumeOrders().catch(console.error);
 ```
+
+### Work queue constraints
+
+- **WorkQueue** retention: one durable consumer per overlapping subject filter; message deleted after ack.
 
 ---
 
-## Technical Troubleshooting Matrix
+## Technical troubleshooting matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Failure signature | Root cause | Diagnostic & fix |
 | :--- | :--- | :--- |
-| **`nats: Slow Consumer Detected` error** | Consumer process cannot process messages as fast as they arrive on an in-memory push subject. | 1. Migrate workload to a **JetStream Durable Pull Consumer**.<br>2. Increase consumer worker concurrency.<br>3. Tune client buffer sizes (`max_pending`). |
-| **`ErrNoStorage` or `Maximum Stream Storage Exceeded`** | Stream exceeded `max_bytes` or underlying disk partition is full. | 1. Inspect stream status via `nats stream info ORDERS`.<br>2. Lower stream retention TTL (`max_age`) or change retention to `workqueue` if messages are consumed once.<br>3. Expand disk volume. |
-| **Duplicate processing of messages across restarts** | Consumer is using `AckNone` or failed to call `msg.ack()` before `ack_wait` timeout expired. | 1. Ensure `AckPolicy` is set to `AckExplicit`.<br>2. Tune `ack_wait` to exceed the maximum expected activity execution time.<br>3. Verify consumer uses consistent durable names. |
-| **Cluster leader election failure in JetStream** | Network partition or insufficient nodes to achieve Raft quorum (need $(N/2)+1$). | 1. Check `nats server report jetstream`.<br>2. Ensure cluster has at least 3 nodes with odd-numbered sizing.<br>3. Verify network connectivity on port 6222. |
+| Slow consumer (core) | Push faster than handler | JetStream pull; scale workers |
+| Duplicate deliveries | AckWait too short / no ack | Raise AckWait; in-progress; idempotent handler |
+| Duplicate publishes retried | Missing `Nats-Msg-Id` | Stable msg id + duplicate_window |
+| Stalled pull | `MaxAckPending` too low | Raise pending ≥ batch; ack faster |
+| `No storage` / disk full | Stream limits / volume | `nats stream info`; expand PVC |
+| Raft leader issues | Even-sized cluster / partition | Odd node count; check route mesh |
+| Lost ack redelivery | Network drop after process | Double ack mode for critical ops ([delivery doc](https://docs.nats.io/learn/jetstream/delivery-and-acknowledgment)) |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best practices
 
-```bash
-# 1. Start NATS server with JetStream enabled
-nats-server -js -sd /var/lib/nats/storage -p 4222
+- Use **interest** or **limits** retention for fanout analytics; **workqueue** for job processing.
+- Terminate poison messages (`term()`) after N deliveries with alert.
+- Monitor stream bytes, consumer ack floor lag, and redelivery counts.
+- Supercluster/disaster recovery: document RPO/RTO separately for meta vs file store.
 
-# 2. Inspect active streams and storage statistics
-nats stream ls
-nats stream info ORDERS
+---
 
-# 3. Create a Key-Value bucket with 30-day TTL
-nats kv add app-config --history 5 --ttl 30d
+## Limitations
 
-# 4. Monitor real-time message flow across all subjects
-nats sub ">"
-```
+- Cross-region active/active is non-trivial; expect eventual consistency between sites.
+- JetStream performance depends on disk fsync and batch sizes.
+- Not a drop-in replacement for Kafka log compaction semantics in all cases.
+
+---
+
+## Related skills
+
+- `@kafka` — heavier log-oriented streaming
+- `@rabbitmq` — classic broker queues
+- `@temporal` — durable orchestration over activities
 
 ---
 
 ## Agent Operational Directive
 
-> **MANDATORY**: For any financial, inventory, or transactional workflows, always enforce `duplicate_window` on streams and send deterministic `Nats-Msg-Id` headers to eliminate duplicate execution under network retries.
+> **MANDATORY**: Do not equate `duplicate_window` with exactly-once processing. Use pull consumers with explicit ack after side effects. Set AckWait above processing p99 or use in-progress. Financial flows require idempotent handlers and consider double ack.
+
+---
+
+## Source anchors (research)
+
+- [JetStream streams (dedupe window)](https://github.com/nats-io/nats.docs/blob/master/nats-concepts/jetstream/streams.md)
+- [AckWait vs duplicate_window (#6628)](https://github.com/nats-io/nats-server/discussions/6628)
+- [Pull consumers in depth](https://docs.nats.io/learn/jetstream/pull-consumers)
+- [Acknowledgment & redelivery](https://docs.nats.io/learn/jetstream/acknowledgment)
+- [Delivery and double ack](https://docs.nats.io/learn/jetstream/delivery-and-acknowledgment)

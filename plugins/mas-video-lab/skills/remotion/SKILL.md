@@ -6,132 +6,87 @@ risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["remotion", "react-video", "composition", "render-cli", "remotion-lambda", "claude"]
+tags: ["remotion", "react-video", "render-cli", "deterministic", "lambda", "color"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Remotion React Video Framework AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Remotion renders real MP4/WebM videos from **React compositions** using a frame-accurate runtime (`useCurrentFrame`, `useVideoConfig`), bundling via Webpack/ESBuild, and rendering through the **Remotion CLI** or cloud runners (e.g. **Lambda**). Claude operates as a Principal Programmatic Video Engineer, specializing in **composition props**, **sequence timelines**, **deterministic animations**, and **CLI/SSR render pipelines**.
 
-### Remotion Render Stack
+Remotion (pin **`@remotion/*` version** in `package.json`, e.g. **4.x**) renders **React components per frame** via headless Chromium (`@remotion/renderer`), stitched to MP4/WebM. Claude acts as Programmatic Video Engineer: **frame-based animation**, **deterministic renders**, **CLI/Lambda**, **props schema**.
+
+**Determinism rule:** Output = f(`useCurrentFrame()`, props, `useVideoConfig()`) — no `Math.random()`, `Date.now()`, or unawaited async without `delayRender` / `calculateMetadata`.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Remotion Architecture                       │
-│                                                             │
-│  Authoring (React)                                          │
-│  ├── <Composition> registry in Root                         │
-│  ├── useCurrentFrame / interpolate / Sequence / Series      │
-│  └── Props schema (zod) for parameterized videos            │
-│                                                             │
-│  Bundle & Preview                                           │
-│  ├── remotion studio / webpack bundle                       │
-│  ├── Player for interactive previews                        │
-│  └── calculateMetadata for dynamic length                   │
-│                                                             │
-│  Render                                                     │
-│  ├── @remotion/renderer / `npx remotion render`             │
-│  ├── Still frames / audio / codecs                          │
-│  └── Remotion Lambda (scale-out)                            │
+│  <Composition> registry → bundle → npx remotion render        │
+│  random('seed') not Math.random(); loadFont + delayRender     │
+│  --props JSON; --concurrency; --timeout for delayRender       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
+## When to use / when not to
+
+**Use when:** templated promos, data-driven video, batch MP4 from JSON/CSV props, Lambda scale-out.
+
+**Do not use when:** Long-form NLE editorial; GPU 3D scenes (use Blender/Unreal); non-deterministic live capture.
+
+---
+
 ## Operational Capabilities & Agent Directives
 
-1. **Frame Math First**: Animate with `interpolate(frame, ...)` - never wall-clock timers.
-2. **Determinism**: Avoid nondeterministic randomness unless seeded; renders must be reproducible.
-3. **Props Contracts**: Type composition props; pass JSON via CLI `--props`.
-4. **Sequence Composition**: Prefer `<Sequence>` / `<Series>` for timeline structure.
-5. **Codec Choices**: Pick H.264/WebM intentionally; match fps/resolution to platform targets.
+1. **Time:** `useCurrentFrame()` + `interpolate()` / `spring()`; structure with `<Sequence>` / `<Series>` (child frames relative to sequence start).
+2. **Randomness:** `import { random } from 'remotion'` with string seeds; include `frame` in seed when values must animate.
+3. **Async:** Prefer `calculateMetadata` for fetch-before-render; in-component use `useDelayRender()` + `continueRender(handle)`; CLI `--timeout=120000` for slow fonts.
+4. **Fonts/media:** `loadFont()` / `@remotion/fonts`; wait `document.fonts.ready` before first paint; assets via `staticFile()`.
+5. **Color:** sRGB canvas; embed images in same color profile; for CSS filters document gamma assumptions — compare golden stills at `--scale=0.25` for CI cost.
+6. **Export:** H.264 `-c:v libx264 -pix_fmt yuv420p` in `remotion.config.ts` or codec override; match fps/durationInFrames in Composition registration.
+7. **Lambda limits:** AWS concurrency, memory, timeout — separate from per-frame `--timeout`; pin Chromium version via Remotion lockfile.
 
 ---
 
-## Production React Composition + Render CLI
-
-`src/Promo.tsx`:
+## Composition + render
 
 ```tsx
-// ==============================================================================
-// Remotion: parameterized promo title card composition
-// ==============================================================================
-import React from "react";
-import {
-  AbsoluteFill,
-  interpolate,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
+import { Composition } from "remotion";
+import { Promo, PromoProps } from "./Promo";
 
-export type PromoProps = {
-  title: string;
-  subtitle: string;
-};
-
-export const Promo: React.FC<PromoProps> = ({ title, subtitle }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const opacity = interpolate(frame, [0, fps * 0.5], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-  const translateY = interpolate(frame, [0, fps * 0.5], [24, 0], {
-    extrapolateRight: "clamp",
-  });
-
-  return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: "#0B1220",
-        color: "white",
-        fontFamily: "Inter, system-ui, sans-serif",
-        justifyContent: "center",
-        padding: 80,
-      }}
-    >
-      <div style={{ opacity, transform: `translateY(${translateY}px)` }}>
-        <h1 style={{ fontSize: 72, margin: 0 }}>{title}</h1>
-        <p style={{ fontSize: 32, opacity: 0.85 }}>{subtitle}</p>
-      </div>
-    </AbsoluteFill>
-  );
-};
+export const RemotionRoot = () => (
+  <Composition
+    id="Promo"
+    component={Promo}
+    durationInFrames={150}
+    fps={30}
+    width={1920}
+    height={1080}
+    defaultProps={{ title: "Hello", subtitle: "World" } satisfies PromoProps}
+  />
+);
 ```
-
-Register in `src/Root.tsx` and render:
 
 ```bash
-npx remotion compositions
-npx remotion render Promo out/promo.mp4 --props='{"title":"Launch","subtitle":"Ship faster"}'
+npx remotion compositions src/index.ts
+npx remotion still src/index.ts Promo out/golden.png --frame=75 --scale=0.5
+npx remotion render src/index.ts Promo out/promo.mp4 --props='{"title":"A","subtitle":"B"}' --timeout=120000
 ```
 
 ---
 
-## Technical Troubleshooting Matrix
+## Failure taxonomy
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Symptom | Cause | Fix |
 | :--- | :--- | :--- |
-| **Composition not listed** | Missing `<Composition>` registration. | Register id, component, durationInFrames, fps, size in Root. |
-| **Flicker / non-deterministic** | `Math.random` / network fetch mid-render. | Seed randomness; prefetch via `delayRender`/`continueRender`. |
-| **Fonts missing in render** | Font not loaded before paint. | `loadFont` / ensure `@font-face` ready with delayRender. |
-| **Slow renders** | Oversized assets / no concurrency. | Optimize media; tune `--concurrency`; consider Lambda. |
-
----
-
-## Best Practices
-
-1. Keep side effects out of render path; use Remotion data-loading helpers.
-2. Validate props with Zod + `schema` on `<Composition>`.
-3. Commit a golden still (`remotion still`) for visual regression smoke checks.
-
-### Essential Commands
-- `npx remotion studio`
-- `npx remotion render <id> <out>`
-- `npx remotion still <id> <out.png>`
+| Flicker between workers | Nondeterministic code | Seed random; no Date |
+| Timeout error | Font/network | delayRender + --timeout |
+| Missing composition | Root not registered | Export RemotionRoot |
+| Text blank frame 0 | Font late | fonts.ready gate |
+| Slow render | Concurrency too high/low | Tune `--concurrency` |
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Drive animation from `useCurrentFrame` only. Keep renders deterministic. Pass typed `--props` and register every composition explicitly in Root.
+
+> **MANDATORY**: Frame-driven animation only. `random('seed')` never `Math.random()`. Golden still in CI. Pin Remotion package versions across render farm and Lambda.

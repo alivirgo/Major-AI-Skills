@@ -122,5 +122,12 @@ curl -I https://app.enterprise.io/api/catalog
 
 ---
 
+## Source anchors (research)
+
+- Nginx error log signatures: `upstream timed out`, `connect() failed`, `host not found in upstream`
+- Access log fields: `$upstream_response_time` vs `$request_time` for edge vs origin latency
+
+---
+
 ## Agent Operational Directive
 > **MANDATORY**: For Single Page Applications (React, Vue, Next.js static export), always configure `try_files $uri $uri/ /index.html;` to prevent 404 errors on deep linking. Use micro-caching (`proxy_cache`) to absorb sudden traffic spikes.

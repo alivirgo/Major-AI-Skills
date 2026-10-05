@@ -31,7 +31,8 @@ FFmpeg is the foundational multimedia engine for video and audio processing acro
 
 ## Operational Capabilities & Agent Directives
 
-1. **Multimodal Visual Compression Triage**: Evaluate screenshots and video frame sequences to identify compression artifacts: 8x8 DCT macroblocking, 8-bit color banding, comb-like interlacing lines, and motion judder.
+1. **HDR/SDR visual triage**: Compare reference vs output stills — crushed blacks often mean missing tonemap; magenta/red cast often wrong `color_trc` assumption; neon highlights = HDR tagged as SDR. Ask for `ffprobe` color fields before suggesting filters.
+2. **Multimodal Visual Compression Triage**: Evaluate screenshots and video frame sequences to identify compression artifacts: 8x8 DCT macroblocking, 8-bit color banding, comb-like interlacing lines, and motion judder.
 2. **Deinterlacing & Telecine Remediation**: Configure adaptive deinterlacers (`-vf yadif=mode=1:parity=-1:deint=1` or `bwdif`) and inverse telecine (`pullup`, `decimate`) for broadcast content.
 3. **Complex Filtergraph Construction**: Build multi-stream overlays, Picture-in-Picture (PiP), side-by-side video comparisons, color lut applications, and animated text overlays.
 4. **VMAF Perceptual Quality Benchmarking**: Script automated video quality scoring pipelines comparing encoded video against the uncompressed reference file using `libvmaf`.

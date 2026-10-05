@@ -1,12 +1,12 @@
 ---
 name: kafka
-description: "Configure Kafka topics and consumers, inspect partitions and offsets, and diagnose consumer-group lag."
+description: "Design Kafka topics, keys, and consumer groups; implement idempotent handlers and ordered offset commits; tune producer acks and backpressure; debunk end-to-end exactly-once without app cooperation."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["kafka", "streaming", "events", "consumer-groups", "claude"]
+tags: ["kafka", "streaming", "consumer-groups", "idempotent-producer", "transactions", "lag", "backpressure", "schema-registry"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
@@ -14,75 +14,135 @@ tools: ["claude", "cursor", "gemini", "codex"]
 
 ## Overview & Engine Architecture
 
-Kafka is a distributed commit log. Producers append records to **topics** split into **partitions**; consumers read with offsets, typically as part of a **consumer group** for parallelism. Ordering is per partition key. Agents design keys for ordering needs, monitor lag, and document delivery semantics (at-least-once vs idempotent/exactly-once setups).
+Kafka is a distributed **commit log**: producers append to **topics** partitioned for parallelism; **consumer groups** divide partitions among consumers. Ordering is **per partition** (key-dependent). Brokers replicate partitions (ISR); consumers track **offsets**. Delivery is **at-least-once by default**; idempotent producers and transactions narrow failure modes but **do not replace application idempotency** across external systems.
 
 ```
-Producers -> Kafka brokers (topics/partitions/replicas)
-                 -> Consumer groups (shared partitions)
+Producers (idempotence?, acks, compression)
+    -> brokers (leader/followers, ISR)
+        -> consumer group (poll, process, commit offsets)
+            -> side effects (DB, HTTP) — must be idempotent
 ```
 
-## When to use this skill
+---
 
-- Introducing event-driven integration between services
-- Debugging consumer lag or rebalances
-- Choosing keys, partitions, and retention
-- Designing retry/DLQ patterns around consumers
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Key by entity ID when you need per-entity ordering.
-2. Treat consumers as at-least-once unless idempotent processing is proven.
-3. Make handlers idempotent (dedupe on event id).
-4. Size partitions for throughput, not vanity; more partitions increase fanout cost.
-5. Never commit offsets before side effects succeed (unless intentional).
+- Event-driven integration, log-based replay, stream processing
+- Buffering spikes between services with clear retention policies
+- Changelog/compacted topics for state projection sources
 
-## Topic mental model
+**Do not use when**
 
-| Concept | Meaning |
-| --- | --- |
-| Topic | Named stream of records |
-| Partition | Ordered log segment; unit of parallelism |
-| Offset | Position within a partition |
-| Consumer group | Competing consumers sharing partitions |
+- Simple task queues with few consumers (`@rabbitmq`, `@nats` JetStream work-queue)
+- Request/response latency under tens of ms without careful design
+- Someone claims “Kafka gives exactly-once end-to-end” without transactional outbox or idempotent sinks—correct them
 
-## Producer/consumer notes (conceptual)
+---
 
-```text
-Producer: send(topic, key=userId, value=jsonEvent)
-Consumer: subscribe(topic); process; commit offsets
+## Operational Capabilities & Agent Directives
+
+1. **Keys & partitions**: Key by entity ID for per-entity order; avoid null keys on ordered flows; partition count is costly to change—plan throughput and consumer count up front.
+2. **Producer safety**: `acks=all`, `min.insync.replicas` aligned with replication; `enable.idempotence=true` for deduped broker writes; retries with max.in.flight=1 when ordering matters (trade throughput).
+3. **Consumer safety**: Disable auto-commit; commit offsets **after** side effects succeed; preserve **per-partition offset order** when parallelizing—out-of-order commits skip messages (fs2-kafka, reactor-kafka patterns).
+4. **Backpressure**: `max.poll.interval.ms` and `max.poll.records` sized to handler latency; pause consumption when downstream is saturated; monitor **consumer lag** and rebalance storms.
+5. **Auth/TLS**: SASL/SCRAM or mTLS on managed clusters; ACLs per topic/principal; never embed JAAS secrets in git.
+6. **Schema**: Confluent Schema Registry (or equivalent) for Avro/Protobuf evolution; include schema/version in payload contracts.
+7. **Backup/restore**: MirrorMaker/cluster linking for DR; topic configs and offsets are operational state—document restore runbooks; log compaction retains latest key, not full history.
+
+---
+
+## Production examples
+
+### Producer (Java properties sketch)
+
+```properties
+acks=all
+enable.idempotence=true
+retries=2147483647
+max.in.flight.requests.per.connection=5
+compression.type=lz4
 ```
 
-CLI examples (scripts vary by install):
+### Consumer loop (at-least-once, commit after work)
+
+```java
+while (true) {
+  ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
+  for (ConsumerRecord<String, String> rec : records) {
+    processIdempotent(rec.key(), rec.value()); // dedupe on business key
+  }
+  consumer.commitSync(); // after batch success
+}
+```
+
+### Idempotent sink pattern
+
+```sql
+INSERT INTO processed_events (event_id, payload)
+VALUES ($1, $2)
+ON CONFLICT (event_id) DO NOTHING;
+```
+
+### Lag inspection
 
 ```bash
-kafka-topics.sh --bootstrap-server localhost:9092 --list
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic events --from-beginning
+kafka-consumer-groups.sh --bootstrap-server $BOOTSTRAP \
+  --describe --group order-service
 ```
 
-## Failure modes
+---
 
-| Symptom | Likely cause | Direction |
-| --- | --- | --- |
-| Growing lag | Slow consumer / blocked IO | scale consumers; optimize handler |
-| Hot partition | Skewed keys | redesign key; salt carefully |
-| Dup processing | rebalance + at-least-once | idempotent writes |
-| Poison message | bad payload loops | DLQ + quarantine |
+## Technical troubleshooting matrix
+
+| Failure signature | Root cause | Diagnostic & fix |
+| :--- | :--- | :--- |
+| Growing lag | Slow handler / blocked IO | Scale consumers ≤ partitions; optimize handler; pause upstream |
+| Duplicate processing | Rebalance + at-least-once | Idempotent writes; store offsets with outbox pattern |
+| Lost messages | Commit before process | Commit after effects; transactional consume if justified |
+| Hot partition | Skewed keys | Salt keys; separate topics |
+| Rebalance loop | Long poll interval exceeded | Raise `max.poll.interval.ms`; shrink batch |
+| `OutOfOrderSequenceException` | idempotence + too many in-flight | Reduce in-flight or enable idempotence properly |
+| EOS “works” but DB dupes | External system outside txn | Outbox/inbox; idempotent MERGE |
+
+---
 
 ## Best practices
 
-- Include schema/version fields; consider Schema Registry for Avro/Protobuf.
-- Compacted topics for changelog/state projections.
-- Alert on lag and ISR under-replication.
-- Load-test consumers with realistic event sizes.
+- **DLQ** topic for poison pills with metadata; do not infinite-retry without cap.
+- Alert on **under-replicated partitions** and offline brokers.
+- Load-test with realistic message sizes; compression helps network, not handler CPU.
+- Document retention vs compaction per topic.
+
+---
 
 ## Limitations
 
-- Broker operations (disk, JVM, ISR) need platform expertise.
-- Exactly-once across Kafka + external DB requires transactional design.
-- Managed Kafka (MSK, Confluent Cloud) changes auth and networking.
+- Broker tuning (disk, JVM, network) needs platform expertise.
+- Kafka transactions + DB exactly-once requires **consume-transform-produce** in same transaction or outbox.
+- Managed Kafka (MSK, Confluent Cloud) changes networking and IAM.
+
+---
 
 ## Related skills
 
-- `@rabbitmq` - alternative broker for work queues
-- `@opentelemetry` - tracing produce/consume spans
-- `@postgresql` - projecting events into tables
+- `@postgresql` — projecting events to tables
+- `@temporal` — durable workflows consuming events
+- `@schema` — `@llm-json-contract-check` for event payloads
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: Default consumer designs to at-least-once with idempotent handlers. Never commit offsets before successful side effects unless the user explicitly accepts loss. Explain that exactly-once spans messaging + application + datastore. Size `max.poll.interval.ms` to worst-case handler time.
+
+---
+
+## Source anchors (research)
+
+- [Confluent — Exactly-once semantics](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/)
+- [kafka-node #548 — consumer cannot alone implement EOS](https://github.com/SOHU-Co/kafka-node/issues/548)
+- [fs2-kafka #137 — offset order with parallel processing](https://github.com/fd4s/fs2-kafka/issues/137)
+- [reactor-kafka #243 — out-of-order commits](https://github.com/reactor/reactor-kafka/issues/243)
+- [KIP-98 / KAFKA-4815 transactional producer](https://issues.apache.org/jira/browse/KAFKA-4815)

@@ -65,7 +65,7 @@ The reference tests small synthetic inputs with software encoding. It does not v
 
 **Turn CSV orders into a revenue report**
 
-Query local CSV and Parquet files with DuckDB SQL, aggregate and join datasets, export analytical results, and troubleshoot schema drift or memory limits.
+Run embedded OLAP SQL on Parquet/CSV locally; configure memory and thread limits; attach remote files safely; export with COPY; avoid multi-writer locks and treating DuckDB as a production server database.
 
 Analysts and engineers investigating local tabular data without a database server.
 
@@ -107,7 +107,7 @@ The fixture validates a local aggregation, not warehouse-scale performance, prod
 
 **Test a checkout journey without a live payment**
 
-Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows.
+Write resilient Playwright E2E tests with role locators, worker-scoped auth storageState, test isolation for shared DB data, trace-on-retry CI, and web-first assertions. Use for checkout flows, multi-user scenarios, and flaky test diagnosis.
 
 Developers adding repeatable browser checks to a web application.
 

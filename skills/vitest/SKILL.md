@@ -1,150 +1,88 @@
 ---
 name: vitest
-description: "Write and optimize Vitest unit and component test suites; configure workspace projects, worker thread pools, mocks, coverage, and instant watch mode."
+description: "Configure Vitest with fork/thread pool isolation, mock lifecycle, fake timers, coverage gates, and CI-friendly concurrency. Use for unit and component tests in Vite/Next projects; diagnose parallel flakiness from shared module state."
 category: testing
 risk: safe
 source: self
 source_type: self
 date_added: "2026-09-13"
-tags: ["vitest", "testing", "unit-test", "vite", "typescript", "esm", "coverage", "claude"]
+tags: ["vitest", "testing", "unit-test", "vite", "isolation", "mocks", "coverage", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Vitest High-Performance Testing AI Skill Guide
+# Vitest High-Performance Testing AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Vitest is a blazing-fast, Vite-native testing framework designed for modern JavaScript and TypeScript projects. By sharing Vite's transformation pipeline, plugins, and resolve configuration (`vite.config.ts`), Vitest eliminates the complex dual-bundler overhead (e.g., Babel/ts-jest vs Webpack) common in legacy test suites. Vitest executes test suites across worker thread pools (powered by **Tinypool**), provides Jest-compatible mocking APIs, supports browser-like DOM environments (**happy-dom** / **jsdom**), and delivers sub-second watch mode feedback driven by Vite's Hot Module Replacement (HMR) graph.
+Vitest reuses **Vite's transform pipeline** for fast ESM/TS tests. Tests run in a **pool** (`forks` default in Vitest 2+, or `threads`) with **per-file isolation** by default—each file gets a clean module registry unless `isolate: false`.
 
-Claude operates as a Principal Software Quality Engineer, specializing in **Vitest workspace setups**, **worker pool concurrency optimization**, **deterministic mock isolation (`vi.mock`, `vi.spyOn`)**, **fake timers (`vi.useFakeTimers`)**, and **V8 code coverage thresholds**.
-
-### Vitest Test Engine Architecture
+Claude operates as a Principal Quality Engineer: **mock reset discipline**, **fork isolation vs speed tradeoffs**, **fake timers**, and **coverage thresholds in CI**.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 Vitest Architecture Pipeline                │
-│                                                             │
-│  Test Runner CLI & Watch Engine                             │
-│  ├── Vitest Config (`vitest.config.ts` or `vite.config.ts`) │
-│  └── HMR Module Graph (Re-runs only touched test files)     │
-│                                                             │
-│  Vite Transformation Pipeline (Shared with Dev Server)      │
-│  ├── Native ESM Resolution, TypeScript, JSX Transpilation   │
-│  └── Path Aliases (`@/components/*`) & Asset Loaders        │
-│                                                             │
-│  Execution Pool (Tinypool Worker Threads / Forks)           │
-│  ├── Thread Isolation & Shared Memory Sandboxing           │
-│  ├── DOM Mock Environments (`happy-dom` / `jsdom`)          │
-│  └── Concurrent Test Runners (`test.concurrent`)            │
-│                                                             │
-│  Reporters & Diagnostics                                    │
-│  └── Terminal Spec Reporter | V8/Istanbul Coverage | UI Mode│
-└─────────────────────────────────────────────────────────────┘
+vitest.config.ts
+  → pool (forks | threads | vmThreads)
+  → per-file isolation (default true)
+  → happy-dom/jsdom for components
+  → v8 coverage + thresholds
 ```
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Vite, Vitest-native, or Next.js projects already on Vite tooling.
+- Fast watch mode and ESM-native mocking.
+
+**Do not use when**
+
+- Jest is mandated with custom transformers the team won't migrate—don't dual-run without reason.
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **Shared Vite Configuration**: Leverage `defineConfig` from `vitest/config` to reuse frontend build aliases, environment variables, and plugins, eliminating redundant configuration drift.
-2. **Speed via `happy-dom`**: For frontend component testing, prefer `environment: 'happy-dom'` over `jsdom` to achieve up to 3x faster DOM initialization unless specific unsupported Web API features strictly require jsdom.
-3. **Mandatory Mock Resetting**: Always configure `clearMocks: true`, `mockReset: true`, or invoke `vi.restoreAllMocks()` in `afterEach` hooks to prevent spy pollution and leaked state across tests.
-4. **Deterministic Timers**: When testing debounces, throttle functions, or timeouts, use `vi.useFakeTimers()` and advance time explicitly with `vi.advanceTimersByTime(ms)`. Never use real-time `setTimeout` sleeps in automated unit test assertions.
+1. **Default `pool: 'forks'`** for stability; switch to `threads` only after green CI with isolation on.
+2. **`isolate: false` is opt-in speed**—requires `restoreMocks`, no leaking `vi.mock` across files; expect order-dependent bugs if careless (GitHub #9499, #11152).
+3. **`clearMocks` / `mockReset` / `restoreMocks`** in config or `afterEach`; call `vi.useRealTimers()` after fake timers.
+4. **No real sleeps**—`vi.useFakeTimers()` + `vi.advanceTimersByTime`.
+5. **Path aliases** must match Vite (`resolve.alias` or `vite-tsconfig-paths`).
+6. **CI cores**: cap `poolOptions.forks.maxThreads` on 2-core runners.
+7. **`process.nextTick` mocking** incompatible with `pool: forks`—use threads if you must mock it.
 
 ---
 
-## Production TypeScript Automation: Configuration & Test Suite
-
-### 1. Production Vitest Configuration (`vitest.config.ts`)
+## Production config sketch
 
 ```typescript
 import { defineConfig } from "vitest/config";
 import path from "node:path";
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
+  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
   test: {
-    globals: true,
     environment: "happy-dom",
-    include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    setupFiles: ["./src/test/setup.ts"],
-    pool: "threads",
-    poolOptions: {
-      threads: {
-        singleThread: false,
-        isolate: true,
-      },
-    },
+    pool: "forks",
+    isolate: true,
+    restoreMocks: true,
     coverage: {
       provider: "v8",
-      reporter: ["text", "json-summary", "html"],
-      thresholds: {
-        lines: 85,
-        functions: 85,
-        branches: 80,
-        statements: 85,
-      },
+      thresholds: { lines: 85, branches: 80 },
     },
   },
 });
 ```
 
-### 2. Robust Test Suite with Mocks & Timers (`src/services/billing.spec.ts`)
+Mock + timers:
 
 ```typescript
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { processSubscriptionRenewal } from "./billing";
-import { paymentGateway } from "../clients/gateway";
-
-describe("processSubscriptionRenewal", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.clearAllMocks();
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
-  it("successfully charges active subscription and emits audit log", async () => {
-    const chargeSpy = vi.spyOn(paymentGateway, "charge").mockResolvedValue({
-      transactionId: "tx_12345",
-      success: true,
-    });
-
-    const resultPromise = processSubscriptionRenewal({
-      subscriptionId: "sub_99",
-      customerId: "cust_42",
-      amountCents: 2900,
-    });
-
-    // Advance simulated time forward
-    vi.advanceTimersByTime(100);
-    const result = await resultPromise;
-
-    expect(chargeSpy).toHaveBeenCalledTimes(1);
-    expect(chargeSpy).toHaveBeenCalledWith("cust_42", 2900);
-    expect(result).toEqual({
-      status: "RENEWED",
-      transactionId: "tx_12345",
-    });
-  });
-
-  it("handles payment rejection gracefully", async () => {
-    vi.spyOn(paymentGateway, "charge").mockRejectedValue(new Error("Insufficient funds"));
-
-    await expect(
-      processSubscriptionRenewal({
-        subscriptionId: "sub_99",
-        customerId: "cust_42",
-        amountCents: 2900,
-      })
-    ).rejects.toThrow("Insufficient funds");
-  });
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.clearAllMocks();
+});
+afterEach(() => {
+  vi.useRealTimers();
 });
 ```
 
@@ -152,33 +90,49 @@ describe("processSubscriptionRenewal", () => {
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Issue | Root cause | Fix |
 | :--- | :--- | :--- |
-| **`ReferenceError: document is not defined`** | DOM APIs accessed in a test without configuring the DOM environment. | Set `environment: 'happy-dom'` in `vitest.config.ts` or add `// @vitest-environment happy-dom` docblock to test file. |
-| **Flaky tests passing individually but failing in parallel** | Shared global state, database mutations, or uncleaned mocks leaking between worker threads. | 1. Enable `poolOptions.threads.isolate = true`.<br>2. Add `vi.clearAllMocks()` in `beforeEach`.<br>3. Isolate tenant IDs in test data. |
-| **`Error: Cannot find module '@/...'`** | Vitest configuration missing module path aliases defined in `tsconfig.json`. | Declare path aliases in `vitest.config.ts` using `resolve.alias` or install `vite-tsconfig-paths` plugin. |
-| **High CPU and slow startup on CI runners** | Excessive worker thread contention on low-core virtual machines (e.g., 2-core GitHub Actions runner). | Set `poolOptions.threads.maxThreads = 2` or pass `--no-threads` in resource-constrained CI environments. |
+| **`document is not defined`** | No DOM env | `environment: 'happy-dom'` |
+| **Flaky parallel failures** | Shared module mock with `isolate: false` | Re-enable isolation or fix mock scope |
+| **Wrong mock in unrelated file** | Module cache + `isolate: false` | `pool: forks` + `isolate: true` |
+| **Can't find `@/`** | Missing alias | vitest `resolve.alias` |
+| **CI OOM / slow** | Too many threads | Lower `maxThreads` |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best practices
 
-```bash
-# 1. Run complete test suite once in CI mode with V8 coverage
-npx vitest run --coverage
+- Share Vite plugins with app config via merged `defineConfig`.
+- Prefer `vi.spyOn` for partial mocks when factories leak across files.
+- Component tests: Testing Library + roles.
+- Run `vitest run --coverage` in CI; watch locally.
 
-# 2. Run test suites matching a specific pattern in watch mode
-npx vitest watch src/services/billing
+---
 
-# 3. Launch interactive Vitest graphical Web UI
-npx vitest --ui
+## Limitations
 
-# 4. Update outdated snapshots
-npx vitest -u
-```
+- Not a browser E2E runner—pair with `@playwright`.
+- Native modules may require forks over threads.
+- Snapshot churn—review intentionally, don't blind `-u` in CI.
+
+---
+
+## Related skills
+
+- `@react` — component behavior under test
+- `@nextjs` — vitest + Next monorepo setup
+- `@playwright` — E2E layer above unit tests
 
 ---
 
 ## Agent Operational Directive
 
-> **MANDATORY**: Never introduce manual sleep promises (`await new Promise(r => setTimeout(r, ms))`) into Vitest test cases. Always use `vi.useFakeTimers()` to ensure deterministic, instantaneous test execution.
+> **MANDATORY**: Keep default file isolation unless the suite proves clean teardown. Reset mocks and timers between tests. Never use real `setTimeout` sleeps for assertions. Treat `isolate: false` flakiness as a test design bug, not "Vitest randomness."
+
+---
+
+## Sources
+
+- [Vitest improving performance / isolation](https://vitest.dev/guide/improving-performance)
+- [Vitest 2 migration — default pool forks](https://vitest.dev/guide/migration)
+- GitHub: [#9499 test sequence mocks](https://github.com/vitest-dev/vitest/issues/9499), [#11152 isolate false mock bleed](https://github.com/vitest-dev/vitest/issues/11152)

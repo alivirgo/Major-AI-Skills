@@ -30,6 +30,15 @@ Godot 4.x provides high-performance native extensibility via **GDExtension (C/C+
 
 ---
 
+## CI export template
+
+```yaml
+# excerpt: pin godot executable + templates cache key on editor version
+godot --headless --path . --export-release "Windows Desktop" build/out.exe
+```
+
+Pass `-v` / `--verbose` on first CI run to capture export preset errors.
+
 ## Operational Capabilities & Agent Directives
 
 1. **GDExtension C++ Component Development**: Author high-performance C++ classes inheriting from `godot::Node3D` / `godot::Resource`, binding methods to `godot::ClassDB` for native engine execution.

@@ -30,6 +30,12 @@ Dassault Systèmes SOLIDWORKS provides an extensive Windows COM-based API suppor
 
 ---
 
+## Batch & headless notes
+
+- Document Manager API for metadata-only (separate license).
+- Always read `SaveAs3` error/warning VARIANT byref.
+- Task Scheduler: launch `sldworks.exe /m macro.swp` with dedicated log file.
+
 ## Operational Capabilities & Agent Directives
 
 1. **Python COM Automation**: Author clean, resilient scripts using `win32com.client` with explicit type marshalling (`VARIANT`, `VT_BYREF`) to automate solid modeling, feature extrusion, and assembly mates.

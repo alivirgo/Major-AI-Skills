@@ -30,6 +30,12 @@ DaVinci Resolve Studio exposes dual automation interfaces: the **Resolve Python/
 
 ---
 
+## License & transport
+
+- External `scriptapp("Resolve")` requires **Resolve Studio** (19.1+ gate on Free).
+- Set `RESOLVE_SCRIPT_API`, `RESOLVE_SCRIPT_LIB`, `PYTHONPATH` in CI before Python entry.
+- Poll `IsRenderingInProgress()`; parse `GetRenderJobStatus` JSON.
+
 ## Operational Capabilities & Agent Directives
 
 1. **Resolve Python Scripting API Development**: Author Python scripts connecting via `DaVinciResolveScript` to inspect Project Managers, import media clips, assemble multi-track timelines, apply LUTs, and trigger Deliver page render queues.

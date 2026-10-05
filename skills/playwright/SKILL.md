@@ -1,103 +1,83 @@
 ---
 name: playwright
-description: "Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows."
+description: "Write resilient Playwright E2E tests with role locators, worker-scoped auth storageState, test isolation for shared DB data, trace-on-retry CI, and web-first assertions. Use for checkout flows, multi-user scenarios, and flaky test diagnosis."
 category: testing
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["playwright", "e2e", "trace-viewer", "locators", "fixtures", "ci", "claude"]
+tags: ["playwright", "e2e", "trace-viewer", "locators", "fixtures", "test-isolation", "ci", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Playwright End-to-End Testing AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Playwright is a modern browser automation framework with **first-class Test Runner** (`@playwright/test`), auto-waiting **locators**, multi-browser projects (Chromium/Firefox/WebKit), and rich debugging via **trace**, **video**, and **HTML report**. Claude operates as a Principal QA Automation Engineer, specializing in **resilient locators**, **fixtures**, **storageState auth**, **trace-on-failure CI**, and **parallel project matrices**.
 
-### Playwright Test Architecture
+Playwright Test runs specs in **parallel workers**. Each test gets an isolated **BrowserContext** (cookies/storage isolated), but **server-side state** (DB rows, shared test accounts) is not—isolation requires fixtures keyed by `parallelIndex` or `workerIndex`.
+
+Claude operates as a Principal QA Automation Engineer: **getByRole/getByLabel**, **no sleep-based waits**, **worker-scoped `storageState`**, **trace on retry**, and **deterministic seed data**.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 Playwright Architecture                     │
-│                                                             │
-│  Test Runner                                                │
-│  ├── playwright.config.ts projects/workers/retries          │
-│  ├── Fixtures (page, context, custom)                       │
-│  └── Reporters (list, html, github, blob)                   │
-│                                                             │
-│  Automation Engine                                          │
-│  ├── Browser / Context / Page                               │
-│  ├── Locators + auto-wait + web-first assertions            │
-│  └── Network interception / routing                         │
-│                                                             │
-│  Diagnostics                                                │
-│  ├── Trace Viewer / screenshots / video                     │
-│  ├── UI mode / codegen / inspector                          │
-│  └── CI artifacts                                           │
-└─────────────────────────────────────────────────────────────┘
+playwright.config.ts → projects/workers/retries
+        │
+   fixtures (test / worker scope)
+        │
+   Browser → Context → Page → locators + expect()
+        │
+   artifacts: trace, screenshot, video, HTML report
 ```
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Validating critical user journeys (auth, checkout, onboarding).
+- Regression-proofing UI that unit tests cannot cover.
+- CI gates with artifacts on failure.
+
+**Do not use when**
+
+- Pure logic—use `@vitest`.
+- Tests depend on production data or live payments without test mode.
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **Role/Label Locators First**: Prefer `getByRole`, `getByLabel`, `getByTestId` over CSS/XPath soup.
-2. **Web-First Assertions**: Use `expect(locator).toBeVisible()` - not manual sleeps.
-3. **Isolate Auth**: Reuse `storageState` for logged-in projects; avoid UI login in every test.
-4. **Trace on Retry**: Capture traces for failed/retried tests in CI.
-5. **Deterministic Data**: Seed test users/data; do not depend on volatile production content.
+1. **Locators**: `getByRole`, `getByLabel`, `getByTestId`—avoid brittle CSS/XPath.
+2. **Assertions**: Web-first `expect(locator).toBeVisible()`—no `waitForTimeout`.
+3. **Auth**:
+   - **Read-only tests**: one-time `globalSetup` → shared `storageState` file.
+   - **Mutating tests**: **one account per parallel worker** via worker-scoped fixture (`parallelIndex`).
+4. **Test isolation**: Never share mutable DB users across workers without unique IDs per worker.
+5. **CI**: `trace: 'on-first-retry'`, `npx playwright install --with-deps`, shard large suites.
+6. **Payment tests**: Stripe test mode + test cards only; assert webhook side effects via API/DB, not redirect alone.
 
 ---
 
-## Production Spec + Config Snippets
-
-`tests/checkout.spec.ts`:
+## Spec + config excerpts
 
 ```typescript
-// ==============================================================================
-// Playwright Test: resilient checkout smoke with role locators
-// ==============================================================================
 import { test, expect } from "@playwright/test";
 
-test.describe("checkout", () => {
-  test("adds item and shows confirmation", async ({ page }) => {
-    await page.goto("/products/demo-sku");
-    await page.getByRole("button", { name: "Add to cart" }).click();
-    await page.getByRole("link", { name: "Cart" }).click();
-    await expect(page.getByRole("heading", { name: "Your cart" })).toBeVisible();
-
-    await page.getByRole("button", { name: "Checkout" }).click();
-    await page.getByLabel("Email").fill("qa+playwright@example.com");
-    await page.getByLabel("Card number").fill("4242424242424242");
-    await page.getByRole("button", { name: "Pay now" }).click();
-
-    await expect(
-      page.getByRole("heading", { name: /order confirmed/i })
-    ).toBeVisible();
-  });
+test("checkout smoke", async ({ page }) => {
+  await page.goto("/products/demo-sku");
+  await page.getByRole("button", { name: "Add to cart" }).click();
+  await expect(page.getByRole("heading", { name: "Your cart" })).toBeVisible();
 });
 ```
 
-`playwright.config.ts` excerpt:
-
 ```typescript
-import { defineConfig, devices } from "@playwright/test";
-
+// playwright.config.ts
 export default defineConfig({
-  testDir: "./tests",
-  fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
-  reporter: [["list"], ["html", { open: "never" }]],
   use: {
-    baseURL: process.env.BASE_URL || "http://127.0.0.1:3000",
+    baseURL: process.env.BASE_URL ?? "http://127.0.0.1:3000",
     trace: "on-first-retry",
-    screenshot: "only-on-failure",
   },
-  projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
-  ],
   webServer: {
     command: "npm run dev",
     url: "http://127.0.0.1:3000",
@@ -106,40 +86,55 @@ export default defineConfig({
 });
 ```
 
-CLI:
-
-```bash
-npx playwright install --with-deps
-npx playwright test
-npx playwright show-report
-npx playwright test --ui
-```
+Worker-scoped auth (mutating tests)—see Playwright docs `auth` multi-worker pattern with `.auth/${parallelIndex}.json`.
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Issue | Root cause | Fix |
 | :--- | :--- | :--- |
-| **Strict mode violation** | Locator resolved multiple nodes. | Narrow with role+name; use `.nth` sparingly. |
-| **Flaky timeouts** | Animation/network race. | Prefer auto-wait assertions; wait for response/URL. |
-| **Auth expired mid-suite** | Stale storageState. | Refresh setup project; shorten token TTL handling. |
-| **CI browsers missing** | Install step skipped. | `npx playwright install --with-deps` in pipeline. |
+| **Strict mode violation** | Locator matches multiple | Narrow role+name; filter |
+| **Flaky timeout** | Race on network/animation | `expect` auto-wait; `waitForResponse` |
+| **Auth works locally, fails CI** | Single shared account mutated | Per-worker accounts |
+| **storageState ignored intermittently** | Context reuse bugs (fixed 1.53+) | Upgrade Playwright; fresh context per user |
+| **Parallel collisions** | Same SKU/user/email | Worker-scoped fixtures + unique data |
 
 ---
 
-## Best Practices
+## Best practices
 
-1. One assertion intent per test; share journeys via fixtures.
-2. Use `test.step` for readable traces.
-3. Keep selectors in page objects only if they reduce duplication - don't over-abstract early.
+- `test.step` for readable traces.
+- Page objects only when they reduce duplication—not premature.
+- Seed data via API before UI steps.
+- Quarantine flaky tests; fix isolation before raising retries.
 
-### Essential Paths
-- `playwright.config.ts`
-- `tests/`
-- `test-results/` / `playwright-report/` (artifacts)
+---
+
+## Limitations
+
+- E2E is slower and flakier than unit tests—keep suite lean.
+- Visual regression needs separate tooling/strategy.
+- Cross-browser matrix costs CI time—prioritize Chromium smoke + weekly full matrix.
+
+---
+
+## Related skills
+
+- `@vitest` — component/unit layer beneath E2E
+- `@stripe` — test mode checkout + webhook fulfillment checks
+- `@nextjs` — `webServer` dev command and baseURL
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Prefer role/label locators and web-first assertions. No hard-coded `waitForTimeout` sleeps. Enable trace-on-retry in CI and keep tests deterministic with seeded data.
+
+> **MANDATORY**: No hard-coded sleeps. Use role/label locators. For parallel suites that mutate server state, authenticate with per-worker accounts and storageState. Enable trace-on-retry in CI. Never run payment tests against live keys.
+
+---
+
+## Sources
+
+- [Playwright Authentication](https://playwright.dev/docs/auth)
+- [Parallelism & isolation](https://playwright.dev/docs/test-parallel)
+- GitHub: [storageState context reuse #36563](https://github.com/microsoft/playwright/issues/36563)

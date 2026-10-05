@@ -1,99 +1,115 @@
 ---
 name: n8n
-description: "Build n8n workflows with nodes, webhooks, credentials, and expression-based data mapping through its editor or REST API."
+description: "Design production n8n workflows with webhook auth, queue-mode scaling, expression mapping, idempotent side effects, and credential hygiene. Use for self-hosted or cloud automation, REST workflow CI, and debugging executions."
 category: automation
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["n8n", "workflow-automation", "webhooks", "rest-api", "nodes", "claude"]
+tags: ["n8n", "workflow-automation", "webhooks", "rest-api", "nodes", "idempotency", "queue-mode", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # n8n Workflow Automation AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-n8n is an extensible workflow automation platform (self-hosted or cloud) where **workflows** are graphs of **nodes** connected by data items. Execution is event-driven (webhooks, cron, queues) with credentials stored encrypted. Claude operates as a Principal Automation Architect, specializing in **webhook ingress**, **idempotent writes**, **expression mapping (`{{$json}}`)**, and **REST management API** for CI-managed workflows.
 
-### n8n Runtime & API Stack
+n8n is a workflow automation platform (self-hosted or n8n Cloud) where **workflows** are directed graphs of **nodes**. Data moves as **items** (JSON arrays). Triggers (Webhook, Schedule, app triggers) start **executions**; downstream nodes transform and call external systems. Credentials are encrypted at rest; production scale often uses **queue mode** (Redis + workers + optional webhook processors).
+
+Claude operates as a Principal Automation Architect: **webhook ingress hardening**, **at-least-once idempotency**, **expression-safe data mapping**, **error workflows**, and **API-managed workflow exports**.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 n8n Architecture                            │
+│                 n8n Production Stack                        │
 │                                                             │
-│  Workflow Graph                                             │
-│  ├── Trigger nodes (Webhook, Schedule, App triggers)        │
-│  ├── Transform nodes (Set, Code, IF, Merge, SplitInBatches) │
-│  └── Action nodes (HTTP, Slack, DB, custom)                 │
+│  Ingress                                                    │
+│  ├── Webhook (Header/Basic/JWT auth, IP allowlist)          │
+│  ├── Schedule / app triggers                                │
+│  └── Respond to Webhook (sync) vs async queue handoff       │
 │                                                             │
-│  Execution Engine                                           │
-│  ├── Item-based data flow (array of items)                  │
-│  ├── Credentials + error workflows                          │
-│  └── Queue mode / workers (scale-out)                       │
+│  Execution                                                  │
+│  ├── Item fan-out (1 trigger → N items)                     │
+│  ├── SplitInBatches / rate limits                           │
+│  └── Code / HTTP Request / native app nodes                 │
 │                                                             │
-│  Control Plane                                              │
-│  ├── REST API (/api/v1) + API keys                          │
-│  ├── Source control / workflow export JSON                  │
-│  └── Environment variables & config                         │
+│  Scale-out (optional)                                       │
+│  ├── Redis queue + worker processes                         │
+│  ├── Webhook processors + load balancer                     │
+│  └── Shared N8N_ENCRYPTION_KEY across all nodes             │
+│                                                             │
+│  Control plane                                              │
+│  ├── REST API /api/v1 + API keys                            │
+│  ├── Workflow JSON in git                                   │
+│  └── Credentials vault (never in exported JSON secrets)     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Item Semantics**: Design nodes knowing each input item may fan out; use SplitInBatches for rate limits.
-2. **Idempotency**: Deduplicate webhook deliveries with external IDs before creating records.
-3. **Secrets**: Store tokens in Credentials / env vars - never hardcode in Function nodes committed to git.
-4. **Error Paths**: Attach Error Trigger workflows or node error outputs for alerting.
-5. **API Management**: Export/import workflow JSON for version control; activate via API carefully.
+**Use when**
+
+- Integrating SaaS APIs with visual branching, retries, and ops-friendly execution logs.
+- Self-hosting automations where data residency or custom nodes matter.
+- Webhook-driven pipelines that need quick iteration before a dedicated worker service.
+
+**Do not use when**
+
+- You need **exactly-once** side effects without your own idempotency store (n8n + upstream retries = at-least-once).
+- Sub-100ms synchronous webhook SLAs with heavy transforms (prefer ack-fast + async worker).
+- HIPAA/PCI scope without reviewing n8n deployment, logging, and credential access patterns.
 
 ---
 
-## Production Examples: Webhook + HTTP + Management API
+## Operational Capabilities & Agent Directives
 
-Workflow pattern (conceptual node chain):
+1. **Assume at-least-once delivery**: Stripe, Shopify, and custom clients retry on non-2xx or timeouts. Deduplicate **before** CRM charges, emails, or ledger writes.
+2. **Credential hygiene**: Use n8n **Credentials** or env vars; never commit tokens in Code node source or workflow JSON. Rotate after exports leak.
+3. **Webhook auth by default**: Header auth, Basic, or JWT on production URLs; IP allowlist when provider publishes egress IPs.
+4. **Item semantics**: One input item can become many; use **SplitInBatches** for API rate limits; pin sample data when debugging `$json` paths.
+5. **Queue mode parity**: Share `N8N_ENCRYPTION_KEY` on main, workers, and webhook processors or credentials decrypt fails on workers.
+6. **Fast ack pattern**: Respond 202/200 immediately after idempotency reservation; run heavy steps in a child workflow or queue drain.
+7. **Error visibility**: Wire **Error Trigger** workflows or node error outputs; silent failures are common when Zaps/workflows are inactive.
+
+---
+
+## Production patterns
+
+### Idempotent webhook chain (conceptual)
 
 ```text
-Webhook (POST /hooks/lead) → IF (email present) → HTTP Request (CRM) → Set (normalize) → Respond to Webhook
+Webhook (POST, Header auth)
+  → Set (normalize event_id from body.headers)
+  → HTTP Request OR Redis/Postgres "claim" idempotency key (INSERT … ON CONFLICT / SET NX)
+  → IF duplicate → Respond 200 "already processed"
+  → ELSE side effects (CRM, email)
+  → Respond to Webhook 200
 ```
 
-Code node snippet (JavaScript):
+Code node (normalize + validate):
 
 ```javascript
-// ==============================================================================
-// n8n Code node: normalize lead payload and drop empties
-// ==============================================================================
 const items = $input.all().map((item) => {
-  const j = item.json;
-  const email = String(j.email || "").trim().toLowerCase();
-  if (!email || !email.includes("@")) {
-    return null;
-  }
+  const j = item.json.body ?? item.json;
+  const eventId = String(j.id ?? j.event_id ?? "").trim();
+  if (!eventId) return null;
   return {
     json: {
-      email,
-      name: String(j.name || "").trim(),
-      source: j.source || "webhook",
+      eventId,
+      tenantId: j.tenant_id ?? "default",
+      payload: j,
       receivedAt: new Date().toISOString(),
     },
   };
 }).filter(Boolean);
-
 return items;
 ```
 
-Management API - activate workflow:
+### Management API (CI activate)
 
 ```bash
 curl -X POST "https://n8n.example.com/api/v1/workflows/42/activate" \
-  -H "X-N8N-API-KEY: $N8N_API_KEY"
-```
-
-List executions:
-
-```bash
-curl "https://n8n.example.com/api/v1/executions?limit=20" \
   -H "X-N8N-API-KEY: $N8N_API_KEY"
 ```
 
@@ -101,27 +117,58 @@ curl "https://n8n.example.com/api/v1/executions?limit=20" \
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Issue & signature | Root cause | Fix |
 | :--- | :--- | :--- |
-| **Webhook 404** | Workflow inactive / wrong path. | Activate workflow; verify production URL. |
-| **Expression undefined** | Wrong item path (`$json` vs `$node`). | Use Pin Data; inspect item JSON mid-run. |
-| **Credential test fails** | Scope/URL/base mismatch. | Re-test credential; check env vs cloud host. |
-| **Duplicate CRM records** | Retried webhooks. | Idempotency key / upsert by external id. |
+| **Webhook 404** | Workflow inactive or wrong path/method | Activate; confirm Production URL vs Test URL |
+| **401/403 on webhook** | Auth header/IP allowlist | Match credential; update allowlist |
+| **Duplicate CRM rows** | Provider retries; no idempotency | Claim `event_id` before create; upsert by external ID |
+| **Expression `undefined`** | Wrong path (`$json` vs `$node`) | Pin data; inspect item JSON mid-run |
+| **Credential works in UI, fails on worker** | Missing shared encryption key in queue mode | Align `N8N_ENCRYPTION_KEY` on all processes |
+| **Slow webhook response** | Heavy sync chain | Ack early; async sub-workflow |
+| **HTML webhook response broken** | n8n 1.103+ sandbox iframe | Use absolute URLs; embed short-lived token in HTML |
 
 ---
 
 ## Best Practices
 
-1. Version workflows as JSON in git; document required credentials.
-2. Prefer HTTP Request node over ad-hoc Code for maintainability when possible.
-3. Use binary data nodes carefully; set explicit MIME handling.
+1. Version workflow JSON in git; document required credential types in README.
+2. Prefix idempotency keys: `{tenantId}:evt:{stableId}` with TTL (24–72h typical).
+3. Prefer native nodes over Code when maintainability matters; Code for small transforms only.
+4. In queue mode, consider `endpoints.disableProductionWebhooksOnMainProcess` + dedicated webhook processors behind LB.
+5. Log execution ID + external event ID; never log full PII payloads in production retention.
 
-### Essential Paths
-- **UI**: Workflows / Credentials / Executions
-- **API**: `/api/v1`
-- **Env**: `N8N_API_KEY`, encryption key, webhook URL config
+### Essential paths
+
+- UI: Workflows / Credentials / Executions
+- API: `/api/v1`
+- Env: `N8N_ENCRYPTION_KEY`, `EXECUTIONS_MODE=queue`, Redis URL
+
+---
+
+## Limitations
+
+- No built-in exactly-once semantics for external side effects.
+- Binary/large payloads need explicit handling; relay offload requires n8n ≥ 2.34 on all mains.
+- Complex multi-tenant RBAC is DIY (lookup tables + scoped credentials).
+
+---
+
+## Related skills
+
+- `@zapier` — SaaS-first alternative when self-hosting is unnecessary
+- `@stripe` — signed webhooks + idempotency patterns upstream of n8n
+- `@nodejs` — custom webhook receivers when n8n is bypassed
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Treat credentials as secrets. Design webhook workflows to be idempotent. Validate expressions against pinned sample data before activation.
+
+> **MANDATORY**: Treat all webhook triggers as at-least-once. Persist an idempotency key before irreversible side effects. Store secrets in Credentials/env only. Enable webhook authentication on production URLs. Never disable error alerting to “reduce noise.”
+
+---
+
+## Sources
+
+- n8n docs: [Queue mode](https://docs.n8n.io/hosting/scaling/queue-mode/), [Webhook node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/)
+- Community: [r/n8n webhook retries / idempotency](https://www.reddit.com/r/n8n/comments/1rkuh6x/webhook_retries_can_cause_duplicate_executions_in/)
+- Patterns: production webhook hardening (signature verify, Redis SET NX)

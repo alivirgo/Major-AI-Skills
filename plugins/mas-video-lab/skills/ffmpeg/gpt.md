@@ -32,7 +32,8 @@ FFmpeg is the computational backbone for global media pipelines. GPT/Codex acts 
 
 ## Operational Capabilities & Agent Directives
 
-1. **Real-Time Progress Tracking & Parsing**: Construct asynchronous Python execution wrappers that consume FFmpeg's `-progress pipe:1` stream to calculate encoding FPS, current timestamp, bitrate, and percentage completion.
+1. **Color pipeline guardrails**: Emit `probe_color.py` that JSON-dumps stream color tags; for HDR→SDR always generate zscale+tonemap template; append `format=yuv420p` before NVENC; set output `-color_* bt709` flags explicitly.
+2. **Real-Time Progress Tracking & Parsing**: Construct asynchronous Python execution wrappers that consume FFmpeg's `-progress pipe:1` stream to calculate encoding FPS, current timestamp, bitrate, and percentage completion.
 2. **Dynamic Codec Parameter Allocation**: Build algorithms that compute target bitrates, GOP sizes, and buffer sizes based on resolution, frame rate, and storage constraints.
 3. **Lossless Video Slicing & Concatenation**: Author scripts for fast, keyframe-accurate video cutting (`-ss ... -to ... -c copy`) and demuxer concatenation (`concat -safe 0`).
 4. **Hardware Acceleration Fallback Pipelines**: Implement fallback logic that attempts hardware encoding (NVENC/QSV) and automatically retries with software encoding (`libx264`/`libx265`) on driver failure.

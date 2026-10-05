@@ -1,63 +1,64 @@
 ---
 name: supabase
-description: "Build Supabase-backed applications with SQL migrations, Auth, row-level security, Edge Functions, the JavaScript client, and CLI development workflows."
+description: "Build Supabase apps with migration-first SQL, RLS policies, auth.uid() performance, SSR cookie clients vs service role, Edge Functions, and JWT troubleshooting. Use for Postgres-backed products with client-side data access under RLS."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["supabase", "postgres", "rls", "edge-functions", "auth", "cli", "claude"]
+tags: ["supabase", "postgres", "rls", "edge-functions", "auth", "jwt", "cli", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Supabase Postgres Platform AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Supabase is an open-source backend platform centered on **PostgreSQL**, with **Auth**, **Storage**, **Realtime**, **Edge Functions** (Deno), and auto-generated **PostgREST** APIs. Security hinges on **Row Level Security (RLS)**. Claude operates as a Principal Backend Platform Engineer, specializing in **migration-first schema design**, **RLS policies**, **`@supabase/supabase-js` clients**, and **`supabase` CLI** local/prod workflows.
 
-### Supabase Platform Stack
+Supabase centers on **PostgreSQL** with **PostgREST** auto-API, **GoTrue Auth** (JWT sessions), **Storage**, **Realtime**, and **Edge Functions** (Deno). **Security is RLS**, not hiding the anon/publishable key. **Service role / secret keys** bypass RLS only on the server—and only when no user JWT overrides the Authorization header.
+
+Claude operates as a Principal Backend Platform Engineer: **RLS-by-default**, **policy performance**, **SSR client separation**, and **CLI migrations**.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 Supabase Architecture                       │
-│                                                             │
-│  Data Plane                                                 │
-│  ├── PostgreSQL + extensions (pgcrypto, pgvector, ...)      │
-│  ├── PostgREST (auto API) / Realtime                        │
-│  └── Storage (S3-compatible objects + policies)             │
-│                                                             │
-│  Auth & Edge                                                │
-│  ├── GoTrue Auth (JWT, providers, SSR helpers)              │
-│  ├── Edge Functions (Deno)                                  │
-│  └── Service role vs anon keys                              │
-│                                                             │
-│  Tooling                                                    │
-│  ├── supabase CLI (start, db push, functions deploy)        │
-│  ├── SQL migrations                                         │
-│  └── Dashboard SQL / advisors                               │
-└─────────────────────────────────────────────────────────────┘
+Client (anon/publishable key + user JWT)
+  → PostgREST → Postgres (RLS enforced)
+
+Server (secret/service role, no user session on same client)
+  → admin tasks / webhooks / batch jobs
 ```
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Postgres + auth + storage with client-direct queries under strict RLS.
+- Local dev parity via `supabase start` and SQL migrations.
+
+**Do not use when**
+
+- Every query should go through a custom BFF with no client DB access—RLS still helps but client SDK may be unnecessary.
+- You need complex graph queries without RPC/views—design SQL carefully.
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **RLS by Default**: Enable RLS on user data tables; write explicit policies.
-2. **Key Separation**: Use `anon` key in clients; reserve `service_role` for trusted servers only.
-3. **Migrations First**: Never “click-ops” prod schema without SQL migration files.
-4. **Least Privilege SQL**: Prefer constrained RPCs (`security definer` carefully) over broad policies.
-5. **Local Parity**: Use `supabase start` for local Authed/API testing before push.
+1. **Enable RLS** on every user-data table; explicit policies for `select/insert/update/delete`.
+2. **Never ship `service_role` or secret keys** to browsers or mobile binaries.
+3. **Separate clients**:
+   - Browser/SSR user client: anon/publishable + session cookies.
+   - Server admin client: secret key, **no** shared cookie session from SSR helper on same instance.
+4. **Policy performance**: Prefer `(select auth.uid()) = user_id` over bare `auth.uid() = user_id` per row re-eval (Supabase RLS guide).
+5. **Migrations first**: `supabase/migrations/*.sql`; avoid prod dashboard-only schema drift.
+6. **Debug RLS on live API**, not SQL Editor—`auth.uid()` is NULL in editor context.
+7. **JWT issues (2025–2026)**: If `getUser()` works but REST returns 42501 with NULL `auth.uid()`, decode Authorization on failing request—verify user access token (not apikey) and signing key alignment (see GitHub #46946, #43066).
 
 ---
 
-## Production SQL + JS Client Examples
-
-Migration `supabase/migrations/20260826120000_profiles.sql`:
+## Migration + policies
 
 ```sql
--- ==============================================================================
--- Supabase: profiles table with RLS (user can read/update own row)
--- ==============================================================================
 create table public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   display_name text,
@@ -66,86 +67,89 @@ create table public.profiles (
 
 alter table public.profiles enable row level security;
 
-create policy "Profiles are viewable by owner"
+create policy "profiles_select_own"
   on public.profiles for select
-  using (auth.uid() = id);
+  to authenticated
+  using ((select auth.uid()) = id);
 
-create policy "Profiles are updatable by owner"
+create policy "profiles_update_own"
   on public.profiles for update
-  using (auth.uid() = id)
-  with check (auth.uid() = id);
-
-create policy "Profiles are insertable by owner"
-  on public.profiles for insert
-  with check (auth.uid() = id);
+  to authenticated
+  using ((select auth.uid()) = id)
+  with check ((select auth.uid()) = id);
 ```
 
-Client usage:
+Client (browser—anon key only):
 
 ```typescript
-// ==============================================================================
-// Supabase JS: upsert current user's profile
-// npm i @supabase/supabase-js
-// ==============================================================================
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
-
-export async function upsertMyProfile(displayName: string) {
-  const { data: userData, error: userError } = await supabase.auth.getUser();
-  if (userError) throw userError;
-  const user = userData.user;
-  if (!user) throw new Error("Not authenticated");
-
-  const { data, error } = await supabase
-    .from("profiles")
-    .upsert({ id: user.id, display_name: displayName })
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-}
 ```
 
-CLI:
+---
 
-```bash
-supabase login
-supabase link --project-ref <ref>
-supabase db push
-supabase functions deploy hello
-supabase start
-```
+## Service role gotchas
+
+| Mistake | Symptom | Fix |
+| --- | --- | --- |
+| SSR `@supabase/ssr` client + service key for "admin" | User session overrides Authorization → RLS applies | Separate `createClient(url, secretKey)` without cookies |
+| `signUp` on service client | Returns session; key behaves like user | Use `auth.admin.createUser` for provisioning |
+| Policy `service_role` in USING | Meaningless | Service role bypasses policies entirely |
+| Secret key + user Bearer together | RLS as user, not bypass | Strip user token for admin ops |
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Issue | Root cause | Fix |
 | :--- | :--- | :--- |
-| **JWT / RLS returns empty** | Policy missing or `auth.uid()` null. | Confirm session; test policies with SQL `auth.uid()`. |
-| **`permission denied for table`** | RLS enabled with no policy / wrong role. | Add policies; avoid using service_role in browser. |
-| **Migration drift** | Dashboard edits not captured. | Generate/write migrations; `db pull` carefully. |
-| **CORS / auth on Edge Function** | Missing headers / verify JWT config. | Align function config and gateway JWT settings. |
+| **Empty results, no error** | RLS filters all rows | Policy for role; check `auth.uid()` |
+| **42501 on insert** | `WITH CHECK` fails or NULL uid | JWT on request; policy match |
+| **permission denied** | RLS on but no policy / revoked grant | Add policy; review grants |
+| **Migration drift** | Dashboard edits | Pull/migrate; `db push` from git |
+| **Slow lists** | RLS + missing index | Index filter columns |
 
 ---
 
-## Best Practices
+## Best practices
 
-1. Put secrets in env; never ship `service_role` to browsers.
-2. Add indexes for filter columns used by policies and queries.
-3. Use typed database codegen when the stack supports it.
+- Index columns used in policies (`user_id`, `tenant_id`).
+- Use typed codegen when available.
+- Storage policies mirror table RLS patterns.
+- Edge Functions: verify JWT at gateway; secrets in env.
+- Webhooks (`@stripe`): use server client + service role only after signature verify.
 
-### Essential Paths
-- `supabase/config.toml`
-- `supabase/migrations/`
-- `supabase/functions/`
+---
+
+## Limitations
+
+- PostgREST exposes schema you grant—RLS must match product intent.
+- Realtime payloads still respect RLS.
+- Complex auth flows may need custom RPC (`security definer` reviewed carefully).
+
+---
+
+## Related skills
+
+- `@postgresql` — SQL design and indexes
+- `@nextjs` — cookie-based Supabase SSR
+- `@stripe` — server webhooks updating entitlements
+- `@supabase-rls` — deep RLS-only pass (if installed)
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Enable RLS on user-owned tables and pair with explicit policies. Keep `service_role` server-side only. Manage schema via SQL migrations and the Supabase CLI - not one-off production console edits.
+
+> **MANDATORY**: Enable RLS on user-owned tables with explicit policies. Keep secret/service keys server-side only. Never debug RLS only in SQL Editor—reproduce on live REST with decoded JWT. Manage schema via migrations, not one-off prod clicks.
+
+---
+
+## Sources
+
+- [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security)
+- [Service role troubleshooting](https://supabase.com/docs/guides/troubleshooting/why-is-my-service-role-key-client-getting-rls-errors-or-not-returning-data-7_1K9z)
+- GitHub: [#46946 auth.uid NULL live REST](https://github.com/supabase/supabase/issues/46946), [#43066 JWT claims](https://github.com/supabase/supabase/issues/43066)

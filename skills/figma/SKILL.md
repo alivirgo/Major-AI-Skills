@@ -6,119 +6,91 @@ risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["figma", "plugin-api", "rest-api", "design-tokens", "variables", "components", "claude"]
+tags: ["figma", "plugin-api", "rest-api", "design-tokens", "variables", "rate-limits", "batch-export"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Figma Design Systems & Plugin AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Figma is a collaborative vector design platform with a document model of **Pages → Frames → Nodes**, reusable **Components / Variants**, and **Variables** (design tokens). Automation spans the in-editor **Plugin API** (`figma` global in sandbox) and the cloud **REST API** for file metadata, comments, and exports. Claude operates as a Principal Design Systems Engineer, specializing in **plugin tooling**, **token extraction**, **component audit scripts**, and **REST-based CI export**.
 
-### Figma Document & API Stack
+Figma models **Document → Pages → Nodes** with **Components**, **Variables**, and **Styles**. Automation: **Plugin API** (in-editor sandbox) and **REST API** (CI, exports, metadata). Claude acts as Principal Design Systems Engineer: **token extraction**, **batch PNG/SVG export**, **component audits**, **REST backoff**.
+
+**Rate limits:** Per-user PAT limits depend on **seat** and **file's plan** ([Rate Limits docs](https://developers.figma.com/docs/rest-api/rate-limits/)). Tier 1 `GET /v1/files/:key` — e.g. Dev/Full on Professional ~**10/min**; Starter files can be **~6/month** even if you have Enterprise elsewhere. **429** → honor **Retry-After**, exponential backoff (~60s).
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Figma Architecture                          │
-│                                                             │
-│  Document Graph                                             │
-│  ├── Document / Page / Frame / Group / Text / Vector        │
-│  ├── Components / Component Sets / Instances                │
-│  └── Variables / Styles / Auto Layout                       │
-│                                                             │
-│  In-Editor Automation                                       │
-│  ├── Plugin sandbox (TypeScript/JS) + UI iframe             │
-│  ├── figma.currentPage.selection / node traversal           │
-│  └── clientStorage / notify / exportAsync                   │
-│                                                             │
-│  Cloud REST                                                 │
-│  ├── Files / Nodes / Images / Comments                      │
-│  ├── Variables REST (Enterprise surfaces)                   │
-│  └── Personal access tokens / OAuth                         │
+│  Plugin: figma.* sandbox (mutate live file)                 │
+│  REST: X-Figma-Token → files / images / variables           │
+│  CI: cache file JSON; batch node IDs; respect tier limits     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Plugin vs REST**: Use Plugin API for live canvas mutations; use REST for CI exports and metadata outside the editor.
-2. **Selection Guards**: Always validate `figma.currentPage.selection` length and node types before mutating.
-3. **Token Discipline**: Map Variables → platform tokens (CSS/JSON) with stable names; never invent IDs.
-4. **Component Hygiene**: Prefer instances over detached copies; flag detached instances in audits.
-5. **Permissions**: REST calls require a token with the minimum scopes; never hardcode secrets in plugins.
+**Use when:** design token sync, automated export of frames, design lint (detached instances), REST-driven previews in CI.
+
+**Do not use when:** Pixel-perfect production video (use Remotion); heavy mutation at scale without Plugin (REST is read/export oriented); secrets in client-side plugin bundle.
 
 ---
 
-## Production TypeScript: Figma Plugin - Export Selected Frames as PNG
+## Operational Capabilities & Agent Directives
 
-`code.ts` (plugin main):
+1. **Plugin vs REST:** Mutations → Plugin; scheduled export/metadata → REST `GET /v1/files/:key`, `GET /v1/images/:key?ids=&format=png&scale=2`.
+2. **Token security:** PAT in env `FIGMA_TOKEN` only; Plugin uses `figma.clientStorage` for non-secret prefs; declare `networkAccess` in `manifest.json` for REST from UI iframe if needed.
+3. **Batch export:** Chunk node IDs (REST image endpoint has payload limits); on **400** reduce batch size (large files timeout).
+4. **Variables → tokens:** Use Variables REST where licensed; map `modeId` → platform theme; stable semantic names (`color.bg.default`), not raw node IDs in CSS.
+5. **Deterministic export:** Fixed `scale`, `format`, `svg_outline` / `svg_include_id` flags; same file version (`version` field from file API) for golden diffs.
+6. **Traversal:** `node.findAllWithCriteria` — avoid hard-coded `1:2` paths that break on reorder.
+
+---
+
+## Plugin: export selected frames (PNG @2x)
 
 ```typescript
-// ==============================================================================
-// Figma Plugin API: export selected frames to PNG bytes and message UI
-// ==============================================================================
-async function exportSelectedFrames() {
-  const selection = figma.currentPage.selection;
-  const frames = selection.filter((n) => n.type === "FRAME") as FrameNode[];
-
-  if (frames.length === 0) {
-    figma.notify("Select one or more frames to export.");
+async function exportSelectionPng2x() {
+  const frames = figma.currentPage.selection.filter(
+    (n): n is FrameNode => n.type === "FRAME"
+  );
+  if (!frames.length) {
+    figma.notify("Select frames.");
     return;
   }
-
-  const payloads: { name: string; bytes: Uint8Array }[] = [];
   for (const frame of frames) {
     const bytes = await frame.exportAsync({
       format: "PNG",
       constraint: { type: "SCALE", value: 2 },
     });
-    payloads.push({ name: frame.name.replace(/\s+/g, "_"), bytes });
+    figma.ui.postMessage({ type: "PNG", name: frame.name, bytes });
   }
-
-  figma.ui.postMessage({ type: "EXPORT_READY", payloads });
-  figma.notify(`Exported ${payloads.length} frame(s) @2x`);
 }
-
-figma.showUI(__html__, { width: 360, height: 240 });
-figma.ui.onmessage = async (msg) => {
-  if (msg.type === "RUN_EXPORT") await exportSelectedFrames();
-  if (msg.type === "CLOSE") figma.closePlugin();
-};
 ```
 
-REST export example (CI):
+## REST: image export with backoff
 
 ```bash
-curl -H "X-Figma-Token: $FIGMA_TOKEN" \
-  "https://api.figma.com/v1/images/:file_key?ids=1:2&format=png&scale=2"
+curl -s -H "X-Figma-Token: $FIGMA_TOKEN" \
+  "https://api.figma.com/v1/images/${FILE_KEY}?ids=${NODE_IDS}&format=png&scale=2"
 ```
 
+On 429, sleep `Retry-After` header or 60s; retry max 5.
+
 ---
 
-## Technical Troubleshooting Matrix
+## Failure taxonomy
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Symptom | Cause | Fix |
 | :--- | :--- | :--- |
-| **Plugin `exportAsync` fails** | Node not exportable / too large. | Export frames/components; reduce scale; check bounds. |
-| **REST 403** | Bad token or missing scope. | Regenerate PAT; confirm file access for the user. |
-| **Detached instances proliferate** | Designers detached to override. | Audit + re-instance; use preferred values / variables. |
-| **UI iframe CSP issues** | External scripts blocked. | Bundle UI assets; follow Figma plugin UI rules. |
-
----
-
-## Best Practices
-
-1. Traverse with `node.findAll` / `findAllWithCriteria` instead of brittle absolute paths.
-2. Use `figma.notify` for operator feedback; keep plugin UI minimal.
-3. For design tokens, prefer Variables over hard-coded paint styles when available.
-
-### Essential References
-- Plugin typings: `@figma/plugin-typings`
-- REST base: `https://api.figma.com/v1`
-- Manifest: `manifest.json` (`main`, `ui`, `networkAccess`)
+| 403 | Token scope / file access | Regenerate PAT with file_content read |
+| 429 | Plan/seat/file tier | Backoff; move file to paid plan |
+| 500 on images | Too many/large nodes | Smaller id batches |
+| Detached instances | Local overrides | Audit plugin; re-instance |
+| Plugin network blocked | manifest | `networkAccess.allowedDomains` |
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Never embed Figma access tokens in plugin source committed to git. Validate selection node types before mutation. Prefer Variables/components for system changes over one-off node edits.
+
+> **MANDATORY**: Never commit PATs. Chunk REST exports. Pin file `version` for deterministic asset CI. Prefer Variables for tokens over hard-coded fills.

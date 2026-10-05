@@ -1,44 +1,60 @@
 ---
 name: stripe
-description: "Integrate Stripe Checkout, PaymentIntents, subscriptions, and signed webhooks with idempotency and test-mode checks."
+description: "Integrate Stripe Checkout, PaymentIntents, Billing, and webhooks with signature verification on raw bodies, event.id idempotency, Idempotency-Key on POSTs, and test-mode safety. Use for payments, subscriptions, and fulfillment debugging."
 category: development
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["stripe", "payments", "webhooks", "subscriptions", "checkout", "claude"]
+tags: ["stripe", "payments", "webhooks", "subscriptions", "checkout", "idempotency", "claude"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Stripe Payments Integration AI Skill Guide
+# Stripe Payments Integration AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Stripe provides payment APIs, Checkout UI, Customers, and Billing subscriptions. Clients never trust browser-reported amounts; the server creates PaymentIntents/Checkout Sessions and verifies **webhook signatures**. Agents design idempotent webhook handlers, store Stripe customer/subscription IDs, and keep secret keys server-side only.
+Stripe moves money via **PaymentIntents**, **Checkout Sessions**, and **Billing** objects. **Secret keys** stay server-side; browsers receive publishable keys and client secrets only as Stripe.js/Checkout requires. **Fulfillment authority** is the **signed webhook**, not the success redirect.
+
+Claude operates as a Principal Payments Engineer: **raw-body signature verify**, **event.id deduplication**, **Idempotency-Key** on creates, and **test/live key separation**.
 
 ```
-Browser / app
-   -> Your API (secret key)
-       -> Stripe API (Checkout / PaymentIntents / Billing)
-Stripe  ->  webhooks  ->  Your API (verify signature, update DB)
+Client → Your API (secret key) → Stripe API
+Stripe → POST webhook (signed) → Your API → DB fulfill (idempotent)
 ```
 
-## When to use this skill
+---
 
-- Adding one-time Checkout or PaymentIntent flows
-- Building subscription start/cancel/upgrade paths
-- Implementing webhook receivers safely
-- Debugging test-mode events in the Stripe Dashboard / CLI
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Use **test mode** keys until go-live; never mix live keys in local `.env` committed to git.
-2. Verify `Stripe-Signature` on every webhook; reject on failure.
-3. Process webhook events idempotently (store `event.id`).
-4. Pass `Idempotency-Key` on creating PaymentIntents and other critical POSTs.
-5. Authorize using your own user session; Stripe customer ID is not proof of login alone.
+- One-time Checkout or custom PaymentIntent flows.
+- Subscriptions, Customer Portal, invoice events.
+- Debugging test-mode with CLI `stripe listen`.
 
-## Checkout Session sketch (server)
+**Do not use when**
+
+- Marketplace payouts need Connect onboarding—add Connect-specific flows.
+- Legal/tax compliance is unresolved—Stripe Tax/legal review first.
+
+---
+
+## Operational Capabilities & Agent Directives
+
+1. **Test mode until go-live**; separate `.env` files; never commit `sk_live_`.
+2. **Verify `Stripe-Signature`** on every webhook with endpoint secret; reject on failure (400).
+3. **Raw body only**—no JSON middleware reordering whitespace before verify.
+4. **Idempotency**:
+   - HTTP: `Idempotency-Key` header on critical POSTs to Stripe.
+   - Webhooks: `INSERT event.id` with UNIQUE; duplicate → 200 no-op; handler error → 500 for retry.
+5. **Fulfill on webhook**, not on `success_url` alone.
+6. **AuthZ**: Map Stripe `customer` to your user via server session—customer ID ≠ logged-in proof.
+7. **Amounts/prices** defined server-side (`price_` IDs)—never trust client-submitted amounts.
+
+---
+
+## Checkout Session (server)
 
 ```js
 const session = await stripe.checkout.sessions.create({
@@ -50,57 +66,70 @@ const session = await stripe.checkout.sessions.create({
 });
 ```
 
-## Webhook verification sketch
+Webhook handler (conceptual):
 
 ```js
-const event = stripe.webhooks.constructEvent(
-  rawBody, // must be raw bytes, not parsed JSON
-  signatureHeader,
-  webhookSecret
-);
-
-if (await alreadyProcessed(event.id)) return;
-switch (event.type) {
-  case "checkout.session.completed":
-    await fulfill(event.data.object);
-    break;
-  default:
-    break;
+const event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
+if (await alreadyProcessed(event.id)) return res.sendStatus(200);
+try {
+  await fulfillInTransaction(event);
+  await markProcessed(event.id);
+} catch {
+  return res.sendStatus(500); // Stripe retries
 }
-await markProcessed(event.id);
+return res.sendStatus(200);
 ```
 
-## Commands
+---
 
-```bash
-stripe listen --forward-to localhost:3000/webhooks/stripe
-stripe trigger payment_intent.succeeded
-```
-
-## Common pitfalls
+## Technical Troubleshooting Matrix
 
 | Pitfall | Result | Fix |
 | --- | --- | --- |
-| Parsed JSON body for webhooks | Signature verify fails | Use raw body parser |
-| Fulfill on client redirect only | Missed payments / fraud | Fulfill on webhook |
-| No idempotency | Double charge / double fulfill | Keys + event.id store |
-| Price defined only on client | Price tampering | Server-side price IDs |
+| Parsed JSON before verify | Invalid signature | Raw body route first |
+| Fulfill on redirect only | Missing/fraudulent access | Webhook-driven state |
+| No event.id store | Double ship/charge side effects | UNIQUE + txn |
+| Wrong webhook secret | All events fail | Rotate per endpoint URL |
+| Timestamp tolerance | Replay concerns | Use SDK default; reject old `t` |
+| Mixed test/live keys | Catastrophic mischarge | Key prefix checks in CI |
+
+---
 
 ## Best practices
 
-- Map Stripe objects to internal order rows with clear states (`pending`, `paid`, `failed`).
-- Log event type + id, never full card payloads (you should not receive PANs with Checkout/Elements properly configured).
-- Use Customer Portal for self-serve billing changes when appropriate.
-- Review Radar rules before high-risk launches.
+- Order states: `pending` → `paid` → `fulfilled` with monotonic transitions.
+- Log `event.type` + `event.id` only—no PAN data with proper Checkout/Elements.
+- Use Customer Portal for self-serve plan changes when fit.
+- Review Radar before high-risk launches.
+- Stripe CLI: `stripe listen --forward-to localhost:3000/webhooks/stripe`
+
+---
 
 ## Limitations
 
-- Tax, VAT, and compliance requirements vary by jurisdiction (Stripe Tax may apply).
-- Connect / marketplace money-flows need additional onboarding and payout logic.
-- API versions are pinned per account - read changelogs when upgrading.
+- Tax/VAT varies—Stripe Tax or external calculation.
+- Connect/marketplaces need separate onboarding and payout logic.
+- Account API version pinned—read changelog on upgrade.
+
+---
 
 ## Related skills
 
-- `@nodejs` / `@fastapi` - webhook HTTP servers
-- `@postgresql` - durable order state
-- `@playwright` - checkout UI smoke tests in test mode
+- `@nextjs` / `@fastapi` / `@nodejs` — webhook route raw body
+- `@postgresql` — transactional fulfillment + idempotency table
+- `@playwright` — Checkout UI smoke in test mode
+- `@n8n` / `@zapier` — never replace server verify with no-code alone for money
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: Verify webhook signatures on unmodified raw bytes. Persist and deduplicate on `event.id` before irreversible fulfillment. Keep secret keys server-only. Use test keys in dev/CI. Never fulfill solely from client redirect.
+
+---
+
+## Sources
+
+- [Stripe webhooks](https://docs.stripe.com/webhooks)
+- [Signature verification](https://docs.stripe.com/webhooks/signature)
+- Idempotency patterns (Next.js/FastAPI + UNIQUE event_id)

@@ -30,6 +30,10 @@ Autodesk Fusion provides an accessible yet powerful C++ and Python 3 API for ext
 
 ---
 
+## Deterministic mesh export
+
+Set `meshRefinement` explicitly on STL/3MF exports; sweep `userParameters` via JSON job file for regression matrices.
+
 ## Operational Capabilities & Agent Directives
 
 1. **Event-Driven Python Add-In Development**: Construct production-ready Python add-ins implementing `run(context)` and `stop(context)` with proper command cleanup to avoid lingering UI artifacts.

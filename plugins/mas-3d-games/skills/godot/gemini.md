@@ -30,6 +30,10 @@ Godot 4.x provides intuitive 2D and 3D visual authoring with real-time editing, 
 
 ---
 
+## Headless / export QA
+
+From CI logs: "Could not find export preset" → name mismatch in `export_presets.cfg`. From screenshots: pink shaders → missing import in exported PCK; Web blank → COOP/COEP headers.
+
 ## Operational Capabilities & Agent Directives
 
 1. **Multimodal SceneTree & Hierarchy Inspection**: Analyze screenshots of Godot SceneTree hierarchies to identify anti-patterns (e.g. deep spatial nesting, missing collision shapes, improper Control container sizing).

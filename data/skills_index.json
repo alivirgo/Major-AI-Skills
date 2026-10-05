@@ -235,14 +235,18 @@
     "path": "skills/agent-injection-boundary-test",
     "category": "development",
     "name": "agent-injection-boundary-test",
-    "description": "Test an authorized AI agent's handling of instructions embedded in retrieved documents or tool outputs using harmless canaries.",
+    "description": "Test authorized agents against indirect prompt injection in retrieved docs and tool outputs using paired clean/poison fixtures, synthetic canaries, and sandboxed tools. Evidence for these cases—not a claim injection is solved.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
-      "evaluation",
-      "agent-injection-boundary-test"
+      "security",
+      "prompt-injection",
+      "owasp-llm01",
+      "rag",
+      "indirect-injection",
+      "canary"
     ],
     "tools": [
       "claude",
@@ -251,8 +255,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -260,14 +264,18 @@
     "path": "skills/agent-tool-replay-test",
     "category": "development",
     "name": "agent-tool-replay-test",
-    "description": "Replay recorded AI tool calls against deterministic fixtures to test argument validation, error handling, and side-effect boundaries.",
+    "description": "Replay recorded agent tool/LLM trajectories against deterministic fixtures to test argument validation, errors, idempotency, and side-effect boundaries—separate from live tool-selection quality.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
-      "evaluation",
-      "agent-tool-replay-test"
+      "testing",
+      "tool-calling",
+      "record-replay",
+      "cassette",
+      "idempotency",
+      "ci"
     ],
     "tools": [
       "claude",
@@ -276,8 +284,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -314,14 +322,19 @@
     "path": "skills/ai-citation-verification",
     "category": "development",
     "name": "ai-citation-verification",
-    "description": "Check whether an AI answer's citations actually support its factual claims, with source-location evidence and explicit uncertainty.",
+    "description": "Verify AI citations across structural schema, resolvability (registry/URL/DOI), and semantic support of each claim by the cited span—not the whole context. Use for RAG answers, research agents, and regulated audit trails.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "ai-citation-verification"
+      "citations",
+      "attribution",
+      "groundedness",
+      "faithfulness",
+      "rag",
+      "nli"
     ],
     "tools": [
       "claude",
@@ -330,8 +343,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -339,14 +352,19 @@
     "path": "skills/ai-evaluation-dataset",
     "category": "development",
     "name": "ai-evaluation-dataset",
-    "description": "Build a versioned JSONL evaluation dataset for an AI workflow, with acceptance criteria, held-out cases, and leakage checks.",
+    "description": "Build versioned JSONL evaluation datasets for AI workflows with golden/regression/holdout layers, leakage checks, rubrics, and provenance hashes. Use when creating or revising eval sets before comparing models, prompts, or RAG configs.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "ai-evaluation-dataset"
+      "dataset",
+      "golden-set",
+      "jsonl",
+      "leakage",
+      "versioning",
+      "rubric"
     ],
     "tools": [
       "claude",
@@ -355,8 +373,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -364,14 +382,17 @@
     "path": "skills/ai-human-handoff-contract",
     "category": "development",
     "name": "ai-human-handoff-contract",
-    "description": "Define and test when an AI workflow must hand a task to a human, preserving evidence and preventing unapproved continuation.",
+    "description": "Define and test AI→human handoff as a versioned state machine with multi-signal triggers, review packets, approval binding, and no silent consent. Use for escalations, approvals, and irreversible agent actions.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
-      "evaluation",
-      "ai-human-handoff-contract"
+      "handoff",
+      "escalation",
+      "human-in-the-loop",
+      "approval",
+      "sla"
     ],
     "tools": [
       "claude",
@@ -380,8 +401,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -389,14 +410,19 @@
     "path": "skills/ai-pii-redaction-review",
     "category": "development",
     "name": "ai-pii-redaction-review",
-    "description": "Prepare a privacy-reviewed AI input using field-aware redaction, stable placeholders, and leakage checks before external submission.",
+    "description": "Privacy-review AI payloads with field-aware redaction, typed stable placeholders, leakage scans across prompts/logs/tools/RAG, and residual-risk reporting before external submission. Use before sending data to cloud LLMs or sharing traces.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
-      "evaluation",
-      "ai-pii-redaction-review"
+      "privacy",
+      "pii",
+      "redaction",
+      "gdpr",
+      "hipaa",
+      "dlp",
+      "pseudonymization"
     ],
     "tools": [
       "claude",
@@ -405,8 +431,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -672,7 +698,7 @@
     "path": "skills/argocd",
     "category": "devops",
     "name": "argocd",
-    "description": "Configure Argo CD Applications, AppProjects, and sync policies; inspect health checks and troubleshoot GitOps rollouts.",
+    "description": "Operate Argo CD GitOps with AppProjects, safe automated sync/prune, and RespectIgnoreDifferences—debug OutOfSync/Degraded without kubectl drift that fights the controller.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -680,9 +706,10 @@
       "argocd",
       "gitops",
       "kubernetes",
-      "cd",
       "sync",
-      "helm"
+      "helm",
+      "kustomize",
+      "app-of-apps"
     ],
     "tools": [
       "claude",
@@ -691,8 +718,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -1611,7 +1638,8 @@
       "cycles",
       "eevee",
       "geometry-nodes",
-      "claude"
+      "headless",
+      "batch-render"
     ],
     "tools": [
       "claude",
@@ -1620,8 +1648,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -2121,7 +2149,7 @@
     "path": "skills/clickhouse",
     "category": "devops",
     "name": "clickhouse",
-    "description": "Design ClickHouse MergeTree tables, partitioning, and projections; inspect ingestion and analytical query performance.",
+    "description": "Design ClickHouse MergeTree ORDER BY and partitions; batch inserts; use projections and skip indexes; tune mutations, replication lag, and backups without treating it as OLTP.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -2129,9 +2157,11 @@
       "clickhouse",
       "olap",
       "mergetree",
-      "analytics",
-      "sql",
-      "claude"
+      "partitions",
+      "projections",
+      "kafka-engine",
+      "backpressure",
+      "backup"
     ],
     "tools": [
       "claude",
@@ -2140,8 +2170,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -2906,12 +2936,12 @@
     "date_added": "2026-08-26",
     "tags": [
       "davinci-resolve",
-      "resolve-scripting-python",
-      "fusion-vfx",
-      "color-grading",
-      "fairlight",
-      "davinci-neural-engine",
-      "claude"
+      "resolve-scripting",
+      "fusion",
+      "color-management",
+      "deliver",
+      "batch",
+      "studio"
     ],
     "tools": [
       "claude",
@@ -3130,7 +3160,7 @@
     "path": "skills/docker",
     "category": "devops",
     "name": "docker",
-    "description": "Build Docker images and Compose environments, optimize multi-stage Dockerfiles with BuildKit, and troubleshoot container networking and runtime failures.",
+    "description": "Build reproducible container images with BuildKit, wire Compose service graphs with real readiness gates, and debug networking, volumes, and layer-cache failures agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3140,8 +3170,8 @@
       "compose",
       "buildkit",
       "containers",
-      "cli",
-      "claude"
+      "supply-chain",
+      "healthcheck"
     ],
     "tools": [
       "claude",
@@ -3150,8 +3180,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3391,7 +3421,7 @@
     "path": "skills/duckdb",
     "category": "scientific",
     "name": "duckdb",
-    "description": "Query local CSV and Parquet files with DuckDB SQL, aggregate and join datasets, export analytical results, and troubleshoot schema drift or memory limits.",
+    "description": "Run embedded OLAP SQL on Parquet/CSV locally; configure memory and thread limits; attach remote files safely; export with COPY; avoid multi-writer locks and treating DuckDB as a production server database.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3399,9 +3429,11 @@
       "duckdb",
       "sql",
       "parquet",
-      "analytics",
       "olap",
-      "claude"
+      "embedded",
+      "httpfs",
+      "memory-limit",
+      "analytics"
     ],
     "tools": [
       "claude",
@@ -3410,8 +3442,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3506,17 +3538,20 @@
     "path": "skills/elasticsearch",
     "category": "devops",
     "name": "elasticsearch",
-    "description": "Configure Elasticsearch mappings and ingest pipelines, investigate cluster health and queries, and plan reindexing or lifecycle changes.",
+    "description": "Design Elasticsearch mappings, aliases, and ILM; tune bulk ingest with backpressure; secure API auth; plan reindex cutovers and avoid mapping explosions, red shards, and restore index-name traps.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "elasticsearch",
-      "elastic",
+      "opensearch",
       "search",
       "ilm",
-      "opensearch",
-      "indexing"
+      "reindex",
+      "bulk",
+      "mappings",
+      "security",
+      "backpressure"
     ],
     "tools": [
       "claude",
@@ -3525,8 +3560,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3649,7 +3684,7 @@
     "path": "skills/fastapi",
     "category": "development",
     "name": "fastapi",
-    "description": "Build and test FastAPI services with Pydantic models, dependency injection, async routes, OpenAPI, and authentication hooks.",
+    "description": "Build production FastAPI services with Pydantic v2 models, async-safe I/O, dependency injection, OpenAPI, webhook raw-body routes, and structured errors. Use for JSON APIs, Stripe webhooks, and TestClient/httpx testing.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3658,7 +3693,8 @@
       "python",
       "pydantic",
       "openapi",
-      "api",
+      "async",
+      "webhooks",
       "claude"
     ],
     "tools": [
@@ -3668,8 +3704,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3683,12 +3719,13 @@
     "date_added": "2026-08-26",
     "tags": [
       "ffmpeg",
-      "video-transcoding",
-      "hls-streaming",
-      "nvenc",
       "ffprobe",
-      "filtergraph",
-      "claude"
+      "hls",
+      "nvenc",
+      "colorspace",
+      "hdr",
+      "batch",
+      "deterministic"
     ],
     "tools": [
       "claude",
@@ -3716,8 +3753,8 @@
       "rest-api",
       "design-tokens",
       "variables",
-      "components",
-      "claude"
+      "rate-limits",
+      "batch-export"
     ],
     "tools": [
       "claude",
@@ -3726,8 +3763,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4086,11 +4123,11 @@
     "date_added": "2026-08-26",
     "tags": [
       "fusion-360",
-      "autodesk-fusion",
       "adsk-python",
-      "parametric-cad",
-      "cam-toolpaths",
-      "claude"
+      "parametric",
+      "cam",
+      "batch-export",
+      "cloud-hub"
     ],
     "tools": [
       "claude",
@@ -4167,7 +4204,7 @@
     "path": "skills/github-actions",
     "category": "devops",
     "name": "github-actions",
-    "description": "Build GitHub Actions workflows with job matrices, caching, reusable workflows, OIDC authentication, and protected secrets; diagnose CI failures.",
+    "description": "Design least-privilege GitHub Actions with explicit permissions, OIDC to cloud, cache keys tied to lockfiles, and fork-safe workflows—avoid secret/OIDC footguns agents repeat.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4176,9 +4213,9 @@
       "ci",
       "cd",
       "oidc",
-      "workflows",
-      "yaml",
-      "claude"
+      "reusable-workflows",
+      "permissions",
+      "supply-chain"
     ],
     "tools": [
       "claude",
@@ -4187,8 +4224,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4376,10 +4413,9 @@
       "godot",
       "godot4",
       "gdscript",
-      "gamedev",
-      "scenetree",
-      "characterbody",
-      "claude"
+      "headless",
+      "export",
+      "deterministic"
     ],
     "tools": [
       "claude",
@@ -4425,7 +4461,7 @@
     "path": "skills/grafana",
     "category": "devops",
     "name": "grafana",
-    "description": "Build Grafana dashboards and variables, configure data sources and alerting, and provision dashboards as code.",
+    "description": "Build operable Grafana dashboards with template variables, provisioning-as-code, and unified alerts wired to Prometheus/Loki; avoid high-cardinality panels agents love to ship.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4433,8 +4469,9 @@
       "grafana",
       "dashboards",
       "alerting",
+      "provisioning",
       "observability",
-      "claude"
+      "prometheus"
     ],
     "tools": [
       "claude",
@@ -4443,8 +4480,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4652,7 +4689,7 @@
     "path": "skills/helm",
     "category": "devops",
     "name": "helm",
-    "description": "Package Kubernetes applications as Helm charts, configure values and dependencies, and inspect release upgrades or rollbacks.",
+    "description": "Package Kubernetes apps as Helm charts with lint/template gates, pinned dependencies, and hook-safe upgrades—avoid lookup traps and silent resource deletion on render.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4661,8 +4698,9 @@
       "charts",
       "kubernetes",
       "values",
-      "templating",
-      "claude"
+      "hooks",
+      "oci",
+      "releases"
     ],
     "tools": [
       "claude",
@@ -4671,8 +4709,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5110,16 +5148,19 @@
     "path": "skills/kafka",
     "category": "devops",
     "name": "kafka",
-    "description": "Configure Kafka topics and consumers, inspect partitions and offsets, and diagnose consumer-group lag.",
+    "description": "Design Kafka topics, keys, and consumer groups; implement idempotent handlers and ordered offset commits; tune producer acks and backpressure; debunk end-to-end exactly-once without app cooperation.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "kafka",
       "streaming",
-      "events",
       "consumer-groups",
-      "claude"
+      "idempotent-producer",
+      "transactions",
+      "lag",
+      "backpressure",
+      "schema-registry"
     ],
     "tools": [
       "claude",
@@ -5128,8 +5169,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5310,18 +5351,18 @@
     "path": "skills/kubernetes",
     "category": "devops",
     "name": "kubernetes",
-    "description": "Design and debug Kubernetes Deployments, Services, Ingress, configuration, and rollouts using kubectl.",
+    "description": "Author and debug Kubernetes workloads with correct probes, quotas, and rollout semantics; distinguish OOM, probe-kill loops, and scheduling failures before kubectl guessing.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "kubernetes",
       "kubectl",
-      "k8s",
       "deployments",
-      "ingress",
-      "yaml",
-      "claude"
+      "probes",
+      "rbac",
+      "pod-security",
+      "rollouts"
     ],
     "tools": [
       "claude",
@@ -5330,8 +5371,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5628,14 +5669,21 @@
     "path": "skills/llm-cost-latency-benchmark",
     "category": "development",
     "name": "llm-cost-latency-benchmark",
-    "description": "Measure an AI workflow's observed token cost and end-to-end latency across representative cases with reproducible configuration.",
+    "description": "Benchmark AI workflow cost and latency with TTFT/TPOT/ITL/e2e percentiles, cache-aware token billing, goodput under SLOs, and a quality floor. Use before claiming a model, prompt, or infra change is cheaper or faster.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "llm-cost-latency-benchmark"
+      "latency",
+      "ttft",
+      "tpot",
+      "cost",
+      "tokens",
+      "goodput",
+      "prompt-caching",
+      "slo"
     ],
     "tools": [
       "claude",
@@ -5644,8 +5692,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5653,14 +5701,18 @@
     "path": "skills/llm-json-contract-check",
     "category": "development",
     "name": "llm-json-contract-check",
-    "description": "Validate AI-generated JSON against an application's schema and business rules, distinguishing refusals and truncation from malformed output.",
+    "description": "Validate AI-generated JSON against schema and business rules, separating refusals, truncation, parse failures, schema violations, and domain invariant breaches. Use before any tool call, DB write, or external side effect consumes model output.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "llm-json-contract-check"
+      "json-schema",
+      "structured-outputs",
+      "validation",
+      "pydantic",
+      "zod"
     ],
     "tools": [
       "claude",
@@ -5669,8 +5721,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6169,7 +6221,7 @@
     "path": "skills/mongodb",
     "category": "devops",
     "name": "mongodb",
-    "description": "Design MongoDB documents and indexes, build aggregation pipelines, and investigate query plans or transaction behavior.",
+    "description": "Model MongoDB documents and compound indexes, tune read/write concern and TLS connection strings, run safe aggregations, and avoid backup/restore and majority-write traps on small replica sets.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6177,9 +6229,12 @@
       "mongodb",
       "aggregation",
       "indexes",
-      "nosql",
+      "replica-set",
+      "write-concern",
+      "tls",
+      "backup",
       "atlas",
-      "claude"
+      "schema-validation"
     ],
     "tools": [
       "claude",
@@ -6188,8 +6243,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6254,7 +6309,7 @@
     "path": "skills/n8n",
     "category": "automation",
     "name": "n8n",
-    "description": "Build n8n workflows with nodes, webhooks, credentials, and expression-based data mapping through its editor or REST API.",
+    "description": "Design production n8n workflows with webhook auth, queue-mode scaling, expression mapping, idempotent side effects, and credential hygiene. Use for self-hosted or cloud automation, REST workflow CI, and debugging executions.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6264,6 +6319,8 @@
       "webhooks",
       "rest-api",
       "nodes",
+      "idempotency",
+      "queue-mode",
       "claude"
     ],
     "tools": [
@@ -6273,8 +6330,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6282,7 +6339,7 @@
     "path": "skills/nats",
     "category": "devops",
     "name": "nats",
-    "description": "Configure NATS messaging and JetStream persistence; manage pub/sub subjects, consumer groups, key-value buckets, and distributed clustering.",
+    "description": "Design NATS subjects and JetStream streams; use pull consumers, AckWait, and Nats-Msg-Id dedupe; configure TLS/auth; debunk exactly-once—at-least-once with publish dedupe and idempotent handlers.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
@@ -6290,10 +6347,12 @@
       "nats",
       "jetstream",
       "messaging",
-      "pubsub",
-      "microservices",
-      "event-driven",
-      "claude"
+      "pull-consumer",
+      "deduplication",
+      "ack-wait",
+      "workqueue",
+      "tls",
+      "backpressure"
     ],
     "tools": [
       "claude",
@@ -6302,8 +6361,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6340,7 +6399,7 @@
     "path": "skills/nextjs",
     "category": "development",
     "name": "nextjs",
-    "description": "Build Next.js applications with the App Router, server and client components, route handlers, caching, and deployment configuration.",
+    "description": "Build Next.js App Router apps with explicit server/client boundaries, caching (fetch, revalidate, Cache Components), Route Handlers, and pages-router migration pitfalls. Use for SSR, RSC, deployment prep, and Next 15–16 cache model changes.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6349,7 +6408,8 @@
       "react",
       "app-router",
       "server-components",
-      "frontend",
+      "caching",
+      "route-handlers",
       "claude"
     ],
     "tools": [
@@ -6359,8 +6419,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6368,18 +6428,18 @@
     "path": "skills/nginx",
     "category": "cross-platform",
     "name": "nginx",
-    "description": "Configure Nginx web serving, reverse proxies, TLS termination, rate limits, and upstream load balancing; diagnose request failures.",
+    "description": "Configure Nginx reverse proxies with TLS, rate limits, and Docker/K8s-safe upstream DNS; diagnose 502/504, probe kills, and buffering traps agents miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "nginx",
       "reverse-proxy",
-      "ssl-tls",
+      "tls",
       "load-balancing",
-      "web-server",
-      "http2",
-      "claude"
+      "docker",
+      "ingress",
+      "websocket"
     ],
     "tools": [
       "claude",
@@ -6570,7 +6630,7 @@
     "path": "skills/nodejs",
     "category": "development",
     "name": "nodejs",
-    "description": "Build Node.js modules and services with async I/O, streams, package scripts, and deliberate process-lifecycle handling.",
+    "description": "Build Node.js services with ESM/CJS clarity, non-blocking I/O, streams, webhook raw-body handling, graceful shutdown, and pinned engines. Use for HTTP servers, Stripe webhooks on Express/Fastify, and CLI tooling.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6579,6 +6639,7 @@
       "javascript",
       "esm",
       "streams",
+      "webhooks",
       "runtime",
       "claude"
     ],
@@ -6589,8 +6650,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7203,7 +7264,7 @@
     "path": "skills/playwright",
     "category": "testing",
     "name": "playwright",
-    "description": "Write and debug Playwright end-to-end tests using role and label locators, isolated fixtures, authentication state, and traces for failed browser workflows.",
+    "description": "Write resilient Playwright E2E tests with role locators, worker-scoped auth storageState, test isolation for shared DB data, trace-on-retry CI, and web-first assertions. Use for checkout flows, multi-user scenarios, and flaky test diagnosis.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7213,6 +7274,7 @@
       "trace-viewer",
       "locators",
       "fixtures",
+      "test-isolation",
       "ci",
       "claude"
     ],
@@ -7223,8 +7285,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7288,7 +7350,7 @@
     "path": "skills/postgresql",
     "category": "devops",
     "name": "postgresql",
-    "description": "Design PostgreSQL schemas and indexes, investigate slow queries with EXPLAIN ANALYZE, and plan migrations, vacuum maintenance, and operational checks.",
+    "description": "Design PostgreSQL schemas, indexes, and safe online migrations; diagnose locks and slow queries with EXPLAIN; configure pooling, auth, and backup/restore without PgBouncer or invalid-index traps.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7296,9 +7358,12 @@
       "postgresql",
       "sql",
       "indexes",
-      "explain",
       "migrations",
-      "claude"
+      "pgbouncer",
+      "vacuum",
+      "backup",
+      "connection-pooling",
+      "explain"
     ],
     "tools": [
       "claude",
@@ -7307,8 +7372,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7459,17 +7524,17 @@
     "path": "skills/prometheus",
     "category": "devops",
     "name": "prometheus",
-    "description": "Configure Prometheus scraping and exporters, write PromQL and alert rules, and control metric cardinality.",
+    "description": "Design Prometheus scrape configs, bounded-label metrics, and alert rules with symptom-first PromQL; avoid cardinality fires and silent relabel collisions agents cause.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "prometheus",
       "promql",
-      "alerting",
-      "metrics",
-      "observability",
-      "claude"
+      "alertmanager",
+      "cardinality",
+      "scrape",
+      "observability"
     ],
     "tools": [
       "claude",
@@ -7478,8 +7543,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7516,14 +7581,18 @@
     "path": "skills/prompt-regression-gate",
     "category": "development",
     "name": "prompt-regression-gate",
-    "description": "Compare prompt revisions on a frozen AI evaluation set with paired runs, slice-level regressions, and explicit release thresholds.",
+    "description": "Gate prompt, model, tool-schema, or packer changes with paired runs on a frozen eval set, slice-level regression checks, relative baselines, and explicit go/no-go thresholds. Use before merging prompt PRs or swapping models.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "prompt-regression-gate"
+      "prompt-regression",
+      "ci",
+      "baseline",
+      "promptfoo",
+      "a-b"
     ],
     "tools": [
       "claude",
@@ -7532,8 +7601,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7799,14 +7868,20 @@
     "path": "skills/rag-retrieval-audit",
     "category": "development",
     "name": "rag-retrieval-audit",
-    "description": "Diagnose missing evidence in a retrieval-augmented generation pipeline using labeled queries, chunk inspection, and retrieval metrics.",
+    "description": "Diagnose missing evidence in a RAG pipeline with labeled queries, chunk/trace inspection, Recall@K/MRR/nDCG, and stage-isolated failure taxonomy. Use when retrieval looks fine but answers fail, or when index/chunk/filter/rerank changes need before/after proof.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-11",
     "tags": [
       "ai-workflows",
       "evaluation",
-      "rag-retrieval-audit"
+      "rag",
+      "retrieval",
+      "recall",
+      "mrr",
+      "ndcg",
+      "chunking",
+      "hybrid-search"
     ],
     "tools": [
       "claude",
@@ -7815,8 +7890,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7910,7 +7985,7 @@
     "path": "skills/react",
     "category": "development",
     "name": "react",
-    "description": "Build accessible React interfaces with function components, hooks, and deliberate state ownership; troubleshoot effects, list keys, and interactive behavior.",
+    "description": "Build accessible React UIs with function components, hooks, derived state, and effect discipline; fix Strict Mode double-invoke, list keys, and concurrent rendering pitfalls. Use for components, forms, and client islands in Next.js or SPA apps.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7920,6 +7995,7 @@
       "components",
       "frontend",
       "a11y",
+      "react-19",
       "claude"
     ],
     "tools": [
@@ -7929,8 +8005,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -8024,7 +8100,7 @@
     "path": "skills/redis",
     "category": "devops",
     "name": "redis",
-    "description": "Design Redis keys and caching with appropriate TTLs, data structures, and eviction behavior; inspect memory or pub/sub issues.",
+    "description": "Design Redis caching, TTLs, and eviction policies; configure ACL auth and persistence (RDB/AOF); avoid KEYS, unbounded memory, and backup-restore windows that lose cache-aside coherency.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -8032,9 +8108,13 @@
       "redis",
       "cache",
       "ttl",
-      "datastructures",
-      "sessions",
-      "claude"
+      "eviction",
+      "aof",
+      "rdb",
+      "acl",
+      "cluster",
+      "streams",
+      "backpressure"
     ],
     "tools": [
       "claude",
@@ -8043,8 +8123,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -8145,10 +8225,10 @@
     "tags": [
       "remotion",
       "react-video",
-      "composition",
       "render-cli",
-      "remotion-lambda",
-      "claude"
+      "deterministic",
+      "lambda",
+      "color"
     ],
     "tools": [
       "claude",
@@ -8157,8 +8237,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -9236,17 +9316,19 @@
     "path": "skills/snowflake",
     "category": "devops",
     "name": "snowflake",
-    "description": "Manage Snowflake warehouses, roles, stages, and COPY workflows; investigate analytical SQL and resource usage.",
+    "description": "Size Snowflake warehouses, design RBAC and stages, run idempotent COPY/MERGE loads, bound ad-hoc SQL cost, and avoid Time Travel/Fail-safe and restore credit surprises.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "snowflake",
       "warehouse",
-      "sql",
-      "copy",
       "rbac",
-      "claude"
+      "copy",
+      "merge",
+      "snowpipe",
+      "time-travel",
+      "storage-integration"
     ],
     "tools": [
       "claude",
@@ -9255,8 +9337,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -9299,11 +9381,10 @@
     "tags": [
       "solidworks",
       "sldworks-api",
-      "parametric-cad",
-      "win32com",
-      "assembly-mates",
-      "claude",
-      "cad-automation"
+      "com",
+      "batch-export",
+      "step",
+      "headless"
     ],
     "tools": [
       "claude",
@@ -9666,7 +9747,7 @@
     "path": "skills/stripe",
     "category": "development",
     "name": "stripe",
-    "description": "Integrate Stripe Checkout, PaymentIntents, subscriptions, and signed webhooks with idempotency and test-mode checks.",
+    "description": "Integrate Stripe Checkout, PaymentIntents, Billing, and webhooks with signature verification on raw bodies, event.id idempotency, Idempotency-Key on POSTs, and test-mode safety. Use for payments, subscriptions, and fulfillment debugging.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -9676,6 +9757,7 @@
       "webhooks",
       "subscriptions",
       "checkout",
+      "idempotency",
       "claude"
     ],
     "tools": [
@@ -9685,8 +9767,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -9868,7 +9950,7 @@
     "path": "skills/supabase",
     "category": "devops",
     "name": "supabase",
-    "description": "Build Supabase-backed applications with SQL migrations, Auth, row-level security, Edge Functions, the JavaScript client, and CLI development workflows.",
+    "description": "Build Supabase apps with migration-first SQL, RLS policies, auth.uid() performance, SSR cookie clients vs service role, Edge Functions, and JWT troubleshooting. Use for Postgres-backed products with client-side data access under RLS.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -9878,6 +9960,7 @@
       "rls",
       "edge-functions",
       "auth",
+      "jwt",
       "cli",
       "claude"
     ],
@@ -9888,8 +9971,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -10331,18 +10414,20 @@
     "path": "skills/temporal",
     "category": "development",
     "name": "temporal",
-    "description": "Author and orchestrate Temporal workflows and activities; implement saga compensation, deterministic execution, retries, signals, and queries.",
+    "description": "Author deterministic Temporal workflows and idempotent activities; deploy with versioning/replay tests; configure mTLS auth; understand visibility backup limits and saga compensation—not in-memory orchestration.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
     "tags": [
       "temporal",
-      "orchestration",
       "workflow",
       "activities",
+      "determinism",
       "sagas",
-      "microservices",
-      "claude"
+      "worker-versioning",
+      "replay",
+      "visibility",
+      "backpressure"
     ],
     "tools": [
       "claude",
@@ -10351,8 +10436,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -10389,7 +10474,7 @@
     "path": "skills/terraform",
     "category": "devops",
     "name": "terraform",
-    "description": "Write and review Terraform HCL, configure providers and remote state, and assess plan changes before infrastructure applies.",
+    "description": "Write reviewable Terraform with remote state locks, moved-block refactors, and plan-first applies; catch destructive replaces, drift, and state surgery mistakes before production.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -10397,10 +10482,10 @@
       "terraform",
       "iac",
       "hcl",
-      "modules",
       "state",
-      "cloud",
-      "claude"
+      "modules",
+      "drift",
+      "opentofu"
     ],
     "tools": [
       "claude",
@@ -10409,8 +10494,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -10976,7 +11061,7 @@
       "urp",
       "addressables",
       "batchmode",
-      "claude"
+      "headless"
     ],
     "tools": [
       "claude",
@@ -10985,8 +11070,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11002,10 +11087,10 @@
       "unreal-engine",
       "ue5",
       "unreal-python",
-      "blueprints",
       "uat",
       "buildcookrun",
-      "claude"
+      "headless",
+      "deterministic"
     ],
     "tools": [
       "claude",
@@ -11014,8 +11099,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11226,17 +11311,18 @@
     "path": "skills/vault",
     "category": "devops",
     "name": "vault",
-    "description": "Configure Vault secret engines, policies, AppRole or Kubernetes authentication, and dynamic credential leases.",
+    "description": "Configure Vault auth methods, least-privilege policies, and dynamic secrets with correct K8s TokenReview wiring; never log secret material or treat root tokens as routine.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "vault",
-      "hashicorp",
       "secrets",
+      "kv-v2",
       "approle",
-      "kv",
-      "encryption"
+      "kubernetes-auth",
+      "leases",
+      "transit"
     ],
     "tools": [
       "claude",
@@ -11245,8 +11331,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11398,7 +11484,7 @@
     "path": "skills/vitest",
     "category": "testing",
     "name": "vitest",
-    "description": "Write and optimize Vitest unit and component test suites; configure workspace projects, worker thread pools, mocks, coverage, and instant watch mode.",
+    "description": "Configure Vitest with fork/thread pool isolation, mock lifecycle, fake timers, coverage gates, and CI-friendly concurrency. Use for unit and component tests in Vite/Next projects; diagnose parallel flakiness from shared module state.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
@@ -11407,8 +11493,8 @@
       "testing",
       "unit-test",
       "vite",
-      "typescript",
-      "esm",
+      "isolation",
+      "mocks",
       "coverage",
       "claude"
     ],
@@ -11419,8 +11505,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11686,7 +11772,7 @@
     "path": "skills/zapier",
     "category": "automation",
     "name": "zapier",
-    "description": "Build Zapier automations with triggers, actions, filters, paths, and storage; handle mapping and execution errors.",
+    "description": "Design Zapier Zaps with Find-before-Create idempotency, loop guards, Paths branching, credential hygiene, and webhook catch hooks. Use for no-code SaaS wiring, prototypes, and ops automations before custom integration services.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -11696,6 +11782,7 @@
       "zaps",
       "integration",
       "no-code",
+      "idempotency",
       "claude"
     ],
     "tools": [
@@ -11705,8 +11792,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {

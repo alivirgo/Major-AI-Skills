@@ -150,4 +150,11 @@ docker compose exec nginx nginx -s reload
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: In containerized Docker/Kubernetes environments, resolve upstream services dynamically using internal DNS resolvers (`resolver 127.0.0.11;`) to prevent Nginx startup crashes when downstream services are booting.
+> **MANDATORY**: In containerized Docker/Kubernetes environments, resolve upstream services dynamically using internal DNS resolvers (`resolver 127.0.0.11;`) to prevent Nginx startup crashes when downstream services are booting. Automate `nginx -t` in CI via containerized lint on every config change.
+
+---
+
+## Source anchors (research)
+
+- [ngx_http_proxy_module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)
+- Docker embedded DNS `127.0.0.11` for variable `proxy_pass` patterns

@@ -1,5 +1,13 @@
 ﻿# Changelog
 
+## 2.4.0 - 2026-10-06
+
+- Deepened **50 high-impact skills** across Days 1–5 of the skill improvement backlog (AI workflow stubs, core DevOps, data platforms, app/automation stack, and creative/CAD/video tools).
+- Day 1: production-grade rewrites for RAG retrieval audits, eval datasets, JSON contracts, prompt regression gates, cost/latency benchmarks, citation verification, PII redaction, human handoff, injection boundary tests, and tool replay.
+- Days 2–5: ops-hardened rewrites with `gpt.md` / `gemini.md` variants for Docker/K8s/Terraform/CI/observability, databases & messaging, Next.js/React/Stripe/Playwright/n8n, and Blender/Unity/FFmpeg/Figma/CAD/Remotion (plus plugin mirrors where applicable).
+- Added tracked backlog at `docs/skill-improvement-backlog.md` (412 skills / 10 per day).
+- Synchronized Claude, Codex, Gemini, and plugin manifest versions with the npm release.
+
 ## 2.3.0 - 2026-09-11
 
 - Added read-only task search with bounded JSON results, category filtering, and exact install commands.
@@ -39,8 +47,8 @@
 - **Installable skill library**: flat `skills/<id>/SKILL.md` layout compatible with Claude Code, Cursor, Codex CLI, Gemini CLI, and Antigravity
 - **CLI**: `npx major-ai-skills` with `--dry-run`, `--skills`, `--category`, and host flags
 - **Catalog**: `CATALOG.md` + `skills_index.json` for humans and machines
-- **Plugins & bundles**: specialized packs for CAD, video, design, desktop, efficiency, and common sense
-- **SEO + GEO**: high-intent docs (`best-claude-code-skills-github`, `best-cursor-skills-github`, â€¦), `llms.txt` / `llms-full.txt`, FAQ JSON-LD, AI-crawler-friendly `robots.txt`
+- **Plugins & bundles**: specialized packs for CAD, video, 3D, design, desktop utilities, devops tools, token efficiency, and common-sense habits
+- **SEO + GEO**: high-intent docs, `llms.txt` / `llms-full.txt`, FAQ JSON-LD, AI-crawler-friendly `robots.txt`
 - **New product skills**: Blender, Unity, Unreal, Premiere, After Effects, Photoshop, Figma, Obsidian, Notion, VS Code, Docker, Excel, n8n, Linear, Slack, Remotion, Playwright, Supabase
 
 ### Breaking
@@ -51,4 +59,3 @@
 ## 1.x
 
 Prior releases shipped nested category folders and GitHub Pages catalog only (pre-installer).
-
