@@ -1,9 +1,14 @@
 ﻿# Changelog
 
+## 2.4.2 - 2026-10-06
+
+- Point terminal tip, npm `funding`, and README at the live Whop product: https://whop.com/major-ai-skills/products/buy-ali-a-coffee/
+- Drop Buy Me a Coffee / `bmc.link` (not available for Pakistan payouts)
+
 ## 2.4.1 - 2026-10-06
 
-- Terminal tip after install/search/list: Buy Ali a coffee → https://bmc.link/alivirgo
-- npm `funding` field and README community link for the same short URL
+- Terminal tip after install/search/list: Buy Ali a coffee → https://whop.com/major-ai-skills/products/buy-ali-a-coffee/
+- npm `funding` field and README community link for the same Whop product URL (Pakistan-friendly payouts)
 
 ## 2.4.0 - 2026-10-06
 

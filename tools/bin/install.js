@@ -10,8 +10,8 @@ const os = require("os");
 const root = path.resolve(__dirname, "..", "..");
 const skillsRoot = path.join(root, "skills");
 
-/** Short memorable support link (Buy Me a Coffee → https://bmc.link/<user>). */
-const SUPPORT_URL = "https://bmc.link/alivirgo";
+/** Short memorable support link (Whop — Pakistan-friendly payouts). */
+const SUPPORT_URL = "https://whop.com/major-ai-skills/products/buy-ali-a-coffee/";
 
 function printSupportTip() {
   console.log("");
