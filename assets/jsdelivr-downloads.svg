@@ -5,13 +5,13 @@
   </defs>
   <rect width="820" height="260" rx="14" fill="url(#bg)"/>
   <text x="28" y="35" fill="#f0f6fc" font-family="Arial, sans-serif" font-size="19" font-weight="700">major-ai-skills · daily jsDelivr requests &amp; hits</text>
-  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 28,001 requests · updated 2026-10-05 05:38 UTC</text>
+  <text x="28" y="59" fill="#8b949e" font-family="Arial, sans-serif" font-size="13">Last 30 days · 28,519 requests · updated 2026-10-06 06:19 UTC</text>
   <line x1="52" y1="76" x2="52" y2="204" stroke="#30363d"/>
   <line x1="52" y1="204" x2="790" y2="204" stroke="#30363d"/>
-  <polygon points="52,204 52.0,203.2 77.4,203.1 102.9,201.9 128.3,192.0 153.8,168.5 179.2,168.5 204.7,137.9 230.1,106.3 255.6,128.1 281.0,198.7 306.5,195.9 331.9,167.8 357.4,112.1 382.8,186.8 408.3,174.4 433.7,165.2 459.2,83.8 484.6,171.0 510.1,94.3 535.5,174.8 561.0,186.1 586.4,147.2 611.9,173.4 637.3,190.8 662.8,189.6 688.2,192.0 713.7,76.0 739.1,183.7 764.6,158.3 790.0,121.6 790,204" fill="url(#fill-jsdelivr)"/><polyline points="52.0,203.2 77.4,203.1 102.9,201.9 128.3,192.0 153.8,168.5 179.2,168.5 204.7,137.9 230.1,106.3 255.6,128.1 281.0,198.7 306.5,195.9 331.9,167.8 357.4,112.1 382.8,186.8 408.3,174.4 433.7,165.2 459.2,83.8 484.6,171.0 510.1,94.3 535.5,174.8 561.0,186.1 586.4,147.2 611.9,173.4 637.3,190.8 662.8,189.6 688.2,192.0 713.7,76.0 739.1,183.7 764.6,158.3 790.0,121.6" fill="none" stroke="#e84d3d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <polygon points="52,204 52.0,203.1 77.4,201.9 102.9,192.0 128.3,168.5 153.8,168.5 179.2,137.9 204.7,106.3 230.1,128.1 255.6,198.7 281.0,195.9 306.5,167.8 331.9,112.1 357.4,186.8 382.8,174.4 408.3,165.2 433.7,83.8 459.2,171.0 484.6,94.3 510.1,174.8 535.5,186.1 561.0,147.2 586.4,173.4 611.9,190.8 637.3,189.6 662.8,192.0 688.2,76.0 713.7,183.7 739.1,158.3 764.6,121.6 790.0,179.7 790,204" fill="url(#fill-jsdelivr)"/><polyline points="52.0,203.1 77.4,201.9 102.9,192.0 128.3,168.5 153.8,168.5 179.2,137.9 204.7,106.3 230.1,128.1 255.6,198.7 281.0,195.9 306.5,167.8 331.9,112.1 357.4,186.8 382.8,174.4 408.3,165.2 433.7,83.8 459.2,171.0 484.6,94.3 510.1,174.8 535.5,186.1 561.0,147.2 586.4,173.4 611.9,190.8 637.3,189.6 662.8,192.0 688.2,76.0 713.7,183.7 739.1,158.3 764.6,121.6 790.0,179.7" fill="none" stroke="#e84d3d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
   <text x="16" y="81" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">2829</text>
   <text x="35" y="208" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">0</text>
-  <text x="52" y="230" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">2026-09-04</text>
-  <text x="790" y="230" fill="#8b949e" text-anchor="end" font-family="Arial, sans-serif" font-size="11">2026-10-03</text>
+  <text x="52" y="230" fill="#8b949e" font-family="Arial, sans-serif" font-size="11">2026-09-05</text>
+  <text x="790" y="230" fill="#8b949e" text-anchor="end" font-family="Arial, sans-serif" font-size="11">2026-10-04</text>
   
 </svg>
