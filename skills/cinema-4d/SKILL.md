@@ -1,138 +1,199 @@
 ---
 name: cinema-4d
-description: "Script Cinema 4D scene workflows, configure MoGraph systems, and troubleshoot Redshift rendering."
+description: "Script Cinema 4D scenes with c4dpy and the Maxon API, wire MoGraph/Fields systems, and debug Redshift GPU renders, AOVs, and headless Commandline farm jobs agents routinely miss."
 category: 3d
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["cinema-4d", "mograph", "redshift", "c4dpy", "python-sdk", "claude", "3d-automation"]
+tags: ["cinema-4d", "mograph", "redshift", "c4dpy", "python-sdk", "commandline", "aces", "usd"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Maxon Cinema 4D AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Maxon Cinema 4D (C4D) is an industry-standard 3D motion design, procedural generation, and visual effects package built on the modern **Maxon Core (Neutron/Scene Nodes)** architecture. Claude functions as an expert technical director and automation engineer, specializing in **C4D Python (`c4d`, `maxon` APIs)**, **MoGraph procedural dynamics**, **Redshift GPU rendering optimization**, and **headless CLI batch pipelines**.
 
-### Cinema 4D Runtime & Execution Stack
+Maxon Cinema 4D (C4D 2024/2025+) is a motion-design and VFX DCC. Agents should treat scenes as **versioned project packages** (assets + caches + render settings), MoGraph as **procedural contracts** (cloners + effectors + fields), and Redshift as a **GPU memory budget** problem—not “turn samples up.” Automation runs through **`c4dpy`**, the classic **`c4d`** API, the **`maxon`** graph API (Scene Nodes / Neutron), and headless **`Commandline`** renders.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Cinema 4D Architecture Core                 │
+│                 C4D build → cache → render loop               │
 │                                                             │
-│  Scene Nodes / Neutron Engine (Maxon Core Graph)            │
-│  ├── MoGraph Procedural Subsystem (Cloners, Effectors, Fields)│
-│  ├── Unified Simulation Framework (Pyro, Cloth, Soft Bodies)│
-│  └── Redshift GPU Render Engine (Out-of-Core, ACES OCIO, AOV)│
+│  Authoring                                                  │
+│  ├── Classic OM + Scene Nodes / Neutron                     │
+│  ├── MoGraph: Cloner → Effectors → Fields                   │
+│  └── Unified Sim: Pyro / Cloth / Soft / Rigid               │
 │                                                             │
-│  Automation & Pipeline Interfaces                           │
-│  ├── C4DPy (Headless Python 3 Interpreter & CLI Wrapper)     │
-│  ├── Classic API (`c4d` module) & Maxon API (`maxon` module)│
-│  └── Commandline.exe / Cinema 4D.exe CLI Rendering Pipeline  │
+│  Automation                                                 │
+│  ├── c4dpy (headless Python 3)                              │
+│  ├── c4d + maxon APIs                                       │
+│  └── Commandline.exe farm flags (-render -frame -oimage)    │
+│                                                             │
+│  Redshift                                                   │
+│  ├── GPU VRAM + Out-of-Core + texture streaming             │
+│  └── ACEScg OCIO, AOVs / Cryptomatte, .rs proxies           │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Version pins:** document Cinema 4D **year + build** and Redshift build in every pipeline README. Plugin IDs and Python APIs drift across major releases—never assume R20 snippets still compile.
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Authoring or debugging MoGraph systems, Takes, and Redshift materials/AOVs.
+- Headless batch export (USD/Alembic/FBX) or farm renders via Commandline / c4dpy.
+- Packaging projects, fixing missing textures, or remapping asset paths for a render node.
+
+**Do not use when**
+
+- Heavy procedural FX / USD LOPs / Karma is the center of the pipeline → `@houdini`.
+- Organic high-poly sculpt primary → `@zbrush` then bring mesh into C4D.
+- Real-time game runtime packaging → Unreal/Unity skills after export.
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-When automating or diagnosing Cinema 4D, Claude must execute the following procedures:
-
-1. **C4D Python & Maxon API Scripting**: Write clean, modern Python 3 scripts utilizing `c4d.documents`, `c4d.BaseObject`, and `maxon.GraphModelInterface` for node-based procedural workflows.
-2. **Redshift GPU Render Optimization**: Diagnose VRAM bottlenecks, configure out-of-core memory allocations, automate AOV pass setups, and set up ACEScg color management.
-3. **MoGraph & Dynamic Simulations**: Script procedural matrix transformations, cache complex field dynamics, and configure Alembic/USD export pipelines.
-4. **Headless Batch Automation**: Generate cross-platform command-line rendering scripts for local render nodes and farm dispatchers.
+1. **Pin C4D + Redshift builds** in CI/farm docs; log `c4dpy` / Commandline version at job start.
+2. **Prefer data API** (`documents`, `BaseObject`, tags) over GUI-only ops in headless scripts; call `c4d.EventAdd()` only when a GUI session needs refresh.
+3. **Always `KillDocument(doc)`** after headless work to avoid batch memory leaks.
+4. **Redshift VRAM first**: proxies (`.rs`), texture streaming / TX, Out-of-Core—before raising samples.
+5. **Color**: ACEScg / OCIO must match farm workers; linear EXR for comp, display transforms only for preview.
+6. **MoGraph dynamics**: fix collision shape + steps-per-frame before blaming effectors.
+7. **Exit non-zero** on failed LoadDocument / SaveDocument / render so farm schedulers fail the task.
+8. **Never invent license servers, registry keys, or credentials**—ask for authorized farm paths and existing env.
 
 ---
 
-## Production Python Automation: Batch Asset Exporter (`c4dpy`)
+## Production Example: headless USD export + Redshift still gate
 
-Save and execute this script via `c4dpy` to automate headless scene processing, material assignment verification, and USD/Alembic export:
+`batch_export_usd.py` — run via `c4dpy`:
 
 ```python
+"""Cinema 4D headless USD export.
+Usage: c4dpy batch_export_usd.py <scene.c4d> <output_dir>
 """
-Cinema 4D Batch USD & Alembic Exporter
-Run via: c4dpy.exe batch_export.py <scene_path> <output_dir>
-"""
+from __future__ import annotations
 
-import sys
 import os
-import c4d
-from c4d import documents, plugins
+import sys
 
-def export_scene(scene_path: str, output_dir: str) -> None:
-    if not os.path.exists(scene_path):
-        print(f"Error: Scene file '{scene_path}' does not exist.")
+import c4d
+from c4d import documents
+
+USD_EXPORT_ID = 1040540  # verify against installed C4D build
+
+
+def export_usd(scene_path: str, output_dir: str) -> None:
+    if not os.path.isfile(scene_path):
+        print(f"C4D_PIPELINE_FAIL missing scene: {scene_path}", file=sys.stderr)
         sys.exit(1)
 
-    # Load document without GUI
-    doc = documents.LoadDocument(scene_path, c4d.SCENEFILTER_OBJECTS | c4d.SCENEFILTER_MATERIALS)
+    doc = documents.LoadDocument(
+        scene_path,
+        c4d.SCENEFILTER_OBJECTS | c4d.SCENEFILTER_MATERIALS,
+    )
     if doc is None:
-        print(f"Failed to load document: {scene_path}")
+        print(f"C4D_PIPELINE_FAIL LoadDocument: {scene_path}", file=sys.stderr)
         sys.exit(1)
 
     documents.SetActiveDocument(doc)
-    doc_name = os.path.splitext(os.path.basename(scene_path))[0]
     os.makedirs(output_dir, exist_ok=True)
+    stem = os.path.splitext(os.path.basename(scene_path))[0]
+    usd_path = os.path.join(output_dir, f"{stem}.usd")
 
-    # 1. Export USD File
-    usd_path = os.path.join(output_dir, f"{doc_name}.usd")
-    usd_plugin_id = 1040540 # USD Export Plugin ID
-    
-    # Configure export settings
-    usd_data = plugins.FindPlugin(usd_plugin_id, c4d.PLUGINTYPE_SCENEEPOK)
-    if documents.SaveDocument(doc, usd_path, c4d.SAVEDOCUMENTFLAGS_DONTADDTORECENTLIST, usd_plugin_id):
-        print(f"Successfully exported USD to: {usd_path}")
-    else:
-        print(f"USD export failed for: {usd_path}")
-
-    # 2. Kill document memory
+    ok = documents.SaveDocument(
+        doc,
+        usd_path,
+        c4d.SAVEDOCUMENTFLAGS_DONTADDTORECENTLIST,
+        USD_EXPORT_ID,
+    )
     documents.KillDocument(doc)
-    print("Export pipeline completed successfully.")
+    if not ok:
+        print(f"C4D_PIPELINE_FAIL USD export: {usd_path}", file=sys.stderr)
+        sys.exit(1)
+    print(f"exported {usd_path}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: c4dpy batch_export.py <input.c4d> <output_directory>")
-        sys.exit(1)
-    export_scene(sys.argv[1], sys.argv[2])
+        print("Usage: c4dpy batch_export_usd.py <scene.c4d> <output_dir>", file=sys.stderr)
+        sys.exit(2)
+    export_usd(sys.argv[1], sys.argv[2])
+```
+
+Validation / farm render loop:
+
+```bash
+# Version gate
+"C:\Program Files\Maxon Cinema 4D 2025\c4dpy.exe" -c "import c4d; print(c4d.GetC4DVersion())"
+
+# Asset export
+"C:\Program Files\Maxon Cinema 4D 2025\c4dpy.exe" pipeline\batch_export_usd.py scene.c4d out\
+
+# Headless Redshift stills (paths are install-local — do not invent farm credentials)
+"C:\Program Files\Maxon Cinema 4D 2025\Commandline.exe" -render "D:\Jobs\scene.c4d" -frame 1 1 -oimage "D:\Renders\beauty_####"
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Redshift CUDA Out-of-Memory (`CUDA_ERROR_OUT_OF_MEMORY`)** | Scene textures and tessellated mesh geometry exceed physical GPU VRAM. | 1. Enable **Out-of-Core Memory** in *Redshift Preferences $\rightarrow$ Memory*.<br>2. Enable **Automatic Texture Streaming** (mipmap/tiled EXR/TX conversion).<br>3. Convert dense polygon meshes to Redshift Proxies (`.rs`). |
-| **Alembic/FBX Import Loses Material Assignments** | Source application exported polygon face sets without matching C4D selection tag naming. | 1. Verify face-set names on Alembic node.<br>2. In C4D, attach **Polygon Selection Tags** matching Alembic part names.<br>3. Assign Redshift/Standard materials to the specific selection tags. |
-| **MoGraph Dynamics Explode on Frame 0** | Cloner instances overlap in volume, causing collision solver velocity spikes. | 1. In Cloner Dynamics Body tag, set *Collision $\rightarrow$ Shape* to **Multi-Box** or **Convex Hull**.<br>2. Increase *Collision Margin* and increase *Steps per Frame* in Project Settings $\rightarrow$ Dynamics (e.g. 10-25 steps). |
-| **Python Script Error: `AttributeError: module 'c4d' has no attribute '...'`** | Script is using deprecated R20 API methods instead of the unified 2024/2025 Maxon API. | Update scripts to use `c4d.BaseList2D.GetDataInstance()` or import `maxon` framework modules directly for graph node operations. |
+| `CUDA_ERROR_OUT_OF_MEMORY` / Redshift abort | Textures + tessellation exceed VRAM | Out-of-Core + texture streaming; convert heavy meshes to `.rs` proxies; lower subdivision |
+| Alembic/FBX materials missing | Face sets / selection names do not match | Match Polygon Selection Tags to Alembic part names; reassign RS materials to tags |
+| MoGraph dynamics explode frame 0 | Overlapping cloners / bad collision shape | Multi-Box or Convex Hull; raise collision margin + Project Dynamics steps |
+| `AttributeError` on `c4d.*` | Deprecated R20 API vs 2024/2025 | Prefer current docs; use `maxon` for graph/node work |
+| Farm black frames | Missing camera, lights, or texture paths | Assert active camera; Project Asset Inspector; relative paths + collect assets |
+| OCIO / ACES mismatch local vs farm | Different OCIO config | Pin OCIO path in env on all workers; compare EXR linear vs preview LUT |
+| Commandline ignores frame/output | Wrong flag order / wrong binary | Use `Commandline.exe` (not GUI); verify `-render` `-frame` `-oimage` |
 
 ---
 
-## Command Line Syntax & Headless Rendering
+## Best Practices
 
-### Headless Production Render (Windows / macOS)
+1. Collect assets before farm submit; prefer relative project paths.
+2. Cache MoGraph / sims to disk before long renders; do not recook on every frame if unchanged.
+3. Name Takes and cameras explicitly; pass `-camera` / take flags on the farm.
+4. Export multi-pass EXR AOVs + Cryptomatte for comp—not flattened preview PNG as hero deliverable.
+5. Keep Python scripts idempotent: find objects by name before creating duplicates.
+6. Document required env (Redshift cache dir, OCIO) in the shot README.
 
-```bash
-# Windows Headless CLI Render with Redshift
-"C:\Program Files\Maxon Cinema 4D 2025\Commandline.exe" -render "C:\Projects\Scene.c4d" -frame 0 240 -step 1 -oimage "C:\Renders\output_####" -oresolution 3840 2160
+---
 
-# macOS Headless CLI Render
-/Applications/Maxon\ Cinema\ 4D\ 2025/Commandline.app/Contents/MacOS/Commandline -render "/Projects/Scene.c4d" -frame 0 100 -oimage "/Renders/frame_"
+## Limitations
 
-# Run Custom Pipeline Script via c4dpy
-"C:\Program Files\Maxon Cinema 4D 2025\c4dpy.exe" "C:\Pipeline\auto_rig.py" --input "C:\Assets\model.c4d"
-```
+- Scene Nodes / Neutron Python surfaces differ from classic OM—verify against the installed build’s Maxon API.
+- Redshift feature parity and VRAM behavior depend on GPU vendor/driver; CPU fallback is not a free farm substitute.
+- Plugin IDs (USD export, etc.) can change—resolve via `plugins.FindPlugin` when uncertain.
+- Stop and ask if license/farm credentials, proprietary plugin paths, or client color policies are missing.
 
-### System Configuration & Cache Directories
-- **Windows User Preferences**: `%APPDATA%\Maxon\Cinema 4D 2025_<hash>`
-- **Windows Redshift Cache**: `%LOCALAPPDATA%\Redshift\Cache`
-- **macOS User Preferences**: `~/Library/Preferences/Maxon/Cinema 4D 2025_<hash>`
-- **macOS Redshift Cache**: `~/Library/Application Support/Redshift/Cache`
+---
+
+## Related Skills
+
+- `@houdini` — heavy FX, Solaris/Karma, PDG wedging
+- `@blender` — open-source bpy / Cycles automation
+- `@zbrush` — high-res organic sculpt → retopo into C4D
+- `@substance-painter` — PBR texturing after mesh export
+- `@unreal-engine` / `@unity` — real-time destinations after USD/FBX
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When scripting Cinema 4D automation, always verify compatibility with Cinema 4D 2024/2025 Python 3 APIs. Implement explicit document cleanup (`documents.KillDocument(doc)`) in headless scripts to prevent memory leaks during batch processing.
+
+> **MANDATORY**: Pin C4D and Redshift builds. In headless scripts always `KillDocument` and exit non-zero on failure. Fix Redshift VRAM (proxies, streaming, Out-of-Core) before cranking samples. Match OCIO/ACES on every farm worker. Never invent licenses, registry secrets, or credentialed paths.
+
+---
+
+## Source anchors (research)
+
+- [Cinema 4D Python documentation](https://developers.maxon.net/docs/py/2024_4_0/)
+- [Maxon Command Line rendering](https://developers.maxon.net/docs/Manuals/CommandLine/)
+- [Redshift documentation (memory, AOVs, color)](https://help.maxon.net/r3d/)
+- [USD in Cinema 4D](https://developers.maxon.net/docs/Manuals/)

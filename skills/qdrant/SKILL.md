@@ -1,161 +1,247 @@
 ---
 name: qdrant
-description: "Manage Qdrant vector databases; optimize HNSW indexing, payload filtering, hybrid dense-sparse search, and high-dimensional collection schemas."
+description: "Operate Qdrant collections with query_points, payload indexes, HNSW/quantization tuning, and hybrid dense+sparse fusion agents routinely misconfigure."
 category: development
 risk: safe
 source: self
 source_type: self
 date_added: "2026-09-13"
-tags: ["qdrant", "vector-database", "hnsw", "embeddings", "semantic-search", "rag", "claude"]
+tags: ["qdrant", "vector-database", "hnsw", "hybrid-search", "sparse-vectors", "payload-index", "rag"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Qdrant Vector Database & Similarity Search AI Skill Guide
+# Qdrant Vector Database AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Qdrant is an open-source, high-performance vector search engine and database implemented in Rust. It specializes in approximate nearest neighbor (ANN) search over high-dimensional vectors, paired with rich metadata payload storage. Qdrant combines custom **Hierarchical Navigable Small World (HNSW)** graph indexing with **scalar and product quantization (SQ/PQ)** and hardware-accelerated vector distance SIMD instructions (AVX-512, NEON), enabling millisecond searches over millions of vectors while supporting filtered queries without precision loss.
-
-Claude operates as a Principal AI Data Architect and RAG Specialist, specializing in **collection schema design**, **HNSW graph hyperparameter tuning (`m`, `ef_construct`, `ef_search`)**, **quantization memory optimization**, **payload filtering index configuration**, and **hybrid dense-sparse search pipelines**.
-
-### Qdrant Collection & Segment Architecture
+Qdrant is a Rust vector database for **ANN search** over dense (and sparse) vectors with rich **payload** metadata. Collections hold points (id + vectors + payload); **HNSW** accelerates approximate search; **payload indexes** keep filtered queries fast; **quantization** trades RAM for recall. Prefer the unified **`query_points`** API (replaces deprecated `search`) for dense, recommend, discover, and **hybrid prefetch + RRF/DBSF fusion**. Align distance metric with the embedding model; never invent API keys for Qdrant Cloud.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Qdrant Storage & Index Engine               │
+│                 Qdrant storage & query path                   │
 │                                                             │
-│  Client API Ingress (gRPC Port 6334 / REST Port 6333)       │
-│  ├── Upsert Points | Query Points | Hybrid Score Reranking  │
+│  Client (REST :6333 / gRPC :6334)                           │
+│  ├── upsert / query_points / scroll / snapshots             │
 │                                                             │
-│  Collection ("knowledge_base_v1")                           │
-│  ├── Shard & Segment Pool (Immutable & Appendable Segments) │
-│  │   ├── Vector Storage: Raw FP32 / mmap On-Disk Storage    │
-│  │   ├── Quantized Vectors: Scalar Quantization (1-byte)    │
-│  │   ├── HNSW Graph Index: Fast ANN Multi-Layer Traversal   │
-│  │   └── Payload Index: Inverted B-Tree / Geo / Keyword Map │
-│  └── Segment Background Optimizer (Vacuums & Merges Segments│
+│  Collection                                                 │
+│  ├── Dense vectors (FP32 / on_disk) + optional named vectors│
+│  ├── Sparse vectors (exact inverted index)                  │
+│  ├── HNSW (m, ef_construct) + search hnsw_ef                │
+│  ├── Quantization (scalar INT8 / product)                   │
+│  └── Payload indexes (keyword / integer / text / geo)       │
+│                                                             │
+│  Hybrid                                                     │
+│  └── prefetch dense + sparse → FusionQuery (RRF / DBSF)     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Explicit Distance Metric Alignment**: Choose the distance metric that matches your embedding model: `Cosine` for standard normalized embeddings (e.g., OpenAI, Cohere), `Dot` for pre-normalized vectors to bypass square root overhead, or `Euclid` for spatial data.
-2. **Mandatory Payload Indexing**: Whenever filtering points by metadata fields (e.g., `user_id`, `tenant_id`, `document_type`), always create explicit payload schema indexes (`create_payload_index`). Unindexed payload filtering degrades ANN search into slow full-collection table scans.
-3. **Quantization for Large Datasets**: For collections exceeding 1,000,000 vectors, enable `scalar_quantization` (`INT8`) and set `always_ram: false` to reduce RAM requirements by up to 75% with less than 1% drop in recall.
-4. **Resilient Batch Upserts**: Upsert points in batches (500–2,000 points) with retries, rather than individual one-by-one writes.
+**Use when**
+
+- Production RAG / semantic search needing filtered ANN, hybrid dense+sparse, and snapshots.
+- Multi-tenant retrieval with `tenant_id` (or similar) payload filters at query time.
+- Replacing ad-hoc in-memory stores for multi-process `@langchain` / `@llamaindex` serving.
+
+**Do not use when**
+
+- A tiny local prototype with no filters is enough → `@chromadb` may be simpler.
+- The task is relational OLTP reporting → `@postgresql` (store vectors beside rows only if product requires).
+- Someone asks to skip tenant filters on shared collections → refuse; enforce payload filters + app authZ.
 
 ---
 
-## Production Python Automation: Collection Setup & Filtered Hybrid Search
+## Operational Capabilities & Agent Directives
+
+1. **Match distance to embeddings**: `Cosine` for typical normalized OpenAI/Cohere embeddings; `Dot` only if vectors are already normalized for that metric; `Euclid` for spatial-style use cases.
+2. **Create payload indexes before filtered prod traffic** (`tenant_id`, `document_type`, timestamps)—unindexed filters degrade toward expensive scans.
+3. **Use `query_points`**, not deprecated `client.search`, for new code; use **prefetch + `FusionQuery`** for hybrid.
+4. **Batch upserts** (500–2000 points) with retries; avoid single-point write storms that thrash optimizers.
+5. **Quantize at scale** (≈1M+ vectors): scalar INT8 + `on_disk` dense storage; keep quantized data in RAM when latency-critical (`always_ram=True`).
+6. **Version collections** when embed model or dim changes (`policies_v3_emb3small`); never mix dims in one vector params.
+7. **Snapshots for backup**; pin image tags in Compose (`qdrant/qdrant:<version>`), not only `latest`, for prod.
+
+---
+
+## Production Example: collection, indexes, hybrid `query_points`
 
 ```python
-"""Production Qdrant collection setup and filtered ANN similarity search."""
+"""Production Qdrant setup: payload indexes + hybrid dense/sparse query_points."""
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 
-def setup_production_collection(client: QdrantClient, collection_name: str = "rag_documents"):
-    # 1. Create collection with HNSW tuning and Scalar Quantization
-    if not client.collection_exists(collection_name):
-        client.create_collection(
-            collection_name=collection_name,
-            vectors_config=models.VectorParams(
+COLLECTION = "rag_documents"
+
+
+def setup_production_collection(client: QdrantClient) -> None:
+    if client.collection_exists(COLLECTION):
+        return
+
+    client.create_collection(
+        collection_name=COLLECTION,
+        vectors_config={
+            "dense": models.VectorParams(
                 size=1536,
                 distance=models.Distance.COSINE,
-                on_disk=True, # Vectors stored on disk to conserve RAM
-            ),
-            hnsw_config=models.HnswConfigDiff(
-                m=16,               # Max edges per node in HNSW
-                ef_construct=128,   # Search depth during index building
-                full_scan_threshold=10000,
-            ),
-            quantization_config=models.ScalarQuantization(
-                scalar=models.ScalarQuantizationConfig(
-                    type=models.ScalarType.INT8,
-                    quantile=0.99,
-                    always_ram=True, # Keep quantized vectors in RAM for fast search
-                )
-            ),
-        )
-
-        # 2. Create payload indexes for frequent filter attributes
-        client.create_payload_index(
-            collection_name=collection_name,
-            field_name="tenant_id",
-            field_schema=models.PayloadSchemaType.KEYWORD,
-        )
-        client.create_payload_index(
-            collection_name=collection_name,
-            field_name="published_timestamp",
-            field_schema=models.PayloadSchemaType.INTEGER,
-        )
-        print(f"Collection {collection_name} created with indexes.")
-
-def query_relevant_chunks(
-    client: QdrantClient,
-    query_vector: list[float],
-    tenant_id: str,
-    top_k: int = 5
-) -> list[models.ScoredPoint]:
-    """Execute filtered similarity search with custom search-depth."""
-    search_result = client.search(
-        collection_name="rag_documents",
-        query_vector=query_vector,
-        query_filter=models.Filter(
-            must=[
-                models.FieldCondition(
-                    key="tenant_id",
-                    match=models.MatchValue(value=tenant_id),
-                )
-            ]
+                on_disk=True,
+            )
+        },
+        sparse_vectors_config={
+            "sparse": models.SparseVectorParams(
+                index=models.SparseIndexParams(on_disk=False)
+            )
+        },
+        hnsw_config=models.HnswConfigDiff(
+            m=16,
+            ef_construct=128,
+            full_scan_threshold=10000,
         ),
-        search_params=models.SearchParams(
-            hnsw_ef=64, # High search accuracy
-            exact=False,
+        quantization_config=models.ScalarQuantization(
+            scalar=models.ScalarQuantizationConfig(
+                type=models.ScalarType.INT8,
+                quantile=0.99,
+                always_ram=True,
+            )
         ),
-        limit=top_k,
     )
-    return search_result
+    client.create_payload_index(
+        collection_name=COLLECTION,
+        field_name="tenant_id",
+        field_schema=models.PayloadSchemaType.KEYWORD,
+    )
+    client.create_payload_index(
+        collection_name=COLLECTION,
+        field_name="published_timestamp",
+        field_schema=models.PayloadSchemaType.INTEGER,
+    )
+
+
+def upsert_batch(client: QdrantClient, points: list[models.PointStruct]) -> None:
+    # Prefer 500–2000 points per upsert call
+    client.upsert(collection_name=COLLECTION, points=points, wait=True)
+
+
+def hybrid_query(
+    client: QdrantClient,
+    dense: list[float],
+    sparse_indices: list[int],
+    sparse_values: list[float],
+    tenant_id: str,
+    limit: int = 8,
+) -> models.QueryResponse:
+    return client.query_points(
+        collection_name=COLLECTION,
+        prefetch=[
+            models.Prefetch(
+                query=dense,
+                using="dense",
+                limit=50,
+                filter=models.Filter(
+                    must=[
+                        models.FieldCondition(
+                            key="tenant_id",
+                            match=models.MatchValue(value=tenant_id),
+                        )
+                    ]
+                ),
+            ),
+            models.Prefetch(
+                query=models.SparseVector(indices=sparse_indices, values=sparse_values),
+                using="sparse",
+                limit=50,
+                filter=models.Filter(
+                    must=[
+                        models.FieldCondition(
+                            key="tenant_id",
+                            match=models.MatchValue(value=tenant_id),
+                        )
+                    ]
+                ),
+            ),
+        ],
+        query=models.FusionQuery(fusion=models.Fusion.RRF),
+        limit=limit,
+        with_payload=True,
+        search_params=models.SearchParams(hnsw_ef=64, exact=False),
+    )
+
 
 if __name__ == "__main__":
-    qdrant = QdrantClient(host="localhost", port=6333)
+    qdrant = QdrantClient(url="http://localhost:6333")
     setup_production_collection(qdrant)
+```
+
+### Ops recipes
+
+```bash
+# Pin a version in real deployments; latest only for local experiments
+docker run -d --name qdrant -p 6333:6333 -p 6334:6334 \
+  -v qdrant_storage:/qdrant/storage \
+  qdrant/qdrant:v1.13.2
+
+curl -s http://localhost:6333/collections/rag_documents | jq .
+curl -s -X POST http://localhost:6333/collections/rag_documents/snapshots
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Filtered vector query takes >500ms** | Query filters on unindexed metadata attributes, forcing Qdrant to perform full scans. | Create explicit payload schema index for the filter field using `create_payload_index`. |
-| **Low search recall (<90%)** | `hnsw_ef` parameter during query is too low, or quantization quantile is mismatched. | 1. Increase `search_params.hnsw_ef` to 64 or 128.<br>2. Recalibrate scalar quantization `quantile` to 0.99.<br>3. Verify vectors are normalized if using `Distance.DOT`. |
-| **High memory consumption crashing container** | Raw 32-bit floating point vectors loaded entirely into uncompressed RAM. | 1. Set `vectors_config.on_disk = True`.<br>2. Enable `scalar_quantization` with `always_ram = True` to only store 8-bit quantized representations in memory. |
-| **Segment optimizer thrashing / CPU pinned at 100%** | Continual small single-point upserts keeping background index build loops perpetually active. | 1. Batch upserts into chunks of 500-2,000 points.<br>2. Temporarily pause optimizer during massive bulk ingestion by setting `indexing_threshold = 0`. |
+| Filtered query >100–500ms | Payload field unindexed | `create_payload_index` on filter keys |
+| Low recall | Low `hnsw_ef`; over-aggressive quantization; wrong metric | Raise `hnsw_ef` (64–128); revisit quantile; verify Cosine vs Dot norms |
+| High RAM / OOM | FP32 vectors all in RAM | `on_disk=True` + scalar quantization; size heap appropriately |
+| Optimizer CPU pinned | Tiny single-point upserts | Batch 500–2000; pause indexing during bulk (`indexing_threshold=0`) then restore |
+| Dim / type errors on upsert | Embed model changed | New collection; re-embed; never change `size` in place |
+| Deprecated API warnings | Still calling `client.search` | Migrate to `query_points` |
+| Cross-tenant hits | Filter omitted or wrong key | Mandatory `tenant_id` filter; app authZ |
+| Hybrid returns sparse-only or dense-only | One prefetch empty / bad sparse | Verify sparse indices/values; tune prefetch limits; check fusion |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best Practices
 
-```bash
-# 1. Run production Qdrant container with persistent storage volume
-docker run -d -p 6333:6333 -p 6334:6334 \
-  -v /var/lib/qdrant/storage:/qdrant/storage:z \
-  --name qdrant qdrant/qdrant:latest
+1. Index every high-cardinality filter field used in production queries.
+2. Name vectors (`dense`, `sparse`) when running hybrid; document which embed/sparse model fills each.
+3. Upsert with stable point ids derived from document/chunk ids for idempotent re-ingest.
+4. Take snapshots before destructive rebuilds; test restore in staging.
+5. Pair with `@openai-api` / `@anthropic-api` for embeddings/LLMs; keep embed model id in collection naming.
+6. Measure recall@k on a labeled set (`@ai-evaluation-dataset`) when changing HNSW/quantization.
 
-# 2. Check cluster health and collection statistics
-curl http://localhost:6333/collections/rag_documents
+---
 
-# 3. Trigger immediate on-demand collection snapshot backup
-curl -X POST http://localhost:6333/collections/rag_documents/snapshots
+## Limitations
 
-# 4. Download created snapshot file for disaster recovery
-curl -O http://localhost:6333/collections/rag_documents/snapshots/<snapshot-name>
-```
+- HNSW is approximate—exact mode exists but will not scale the same way.
+- Sparse indexes are exact but still need well-formed indices/values from the sparse model.
+- Single-node Docker is not a multi-region HA plan—use Qdrant Cloud/cluster features for HA.
+- Stop and ask if embed dimensionality, tenancy keys, or Cloud credentials are missing.
+
+---
+
+## Related Skills
+
+- `@chromadb` — lighter local vector store
+- `@llamaindex` / `@langchain` — RAG / agent frameworks using Qdrant
+- `@openai-api` — embeddings generation
+- `@docker` — local Qdrant containers with volumes
+- `@ai-evaluation-dataset` — retrieval golden sets
 
 ---
 
 ## Agent Operational Directive
 
-> **MANDATORY**: Never initiate bulk vector insertion without verifying that payload indexes for your primary tenant, user, or category filtering fields are created first.
+> **MANDATORY**: Create payload indexes for every production filter field before bulk load completes. Use `query_points` (hybrid via prefetch + fusion). Align distance metric and vector size with the embed model; version collections on embed changes. Batch upserts; set tenant filters on every multi-tenant query. Never commit Qdrant Cloud API keys.
+
+---
+
+## Source anchors (research)
+
+- [Query points API](https://api.qdrant.tech/api-reference/search/query-points)
+- [Hybrid queries](https://qdrant.tech/documentation/search/hybrid-queries/)
+- [Hybrid search (dense + BM25/sparse)](https://qdrant.tech/documentation/search/text-search/hybrid-search/)
+- [Indexing (payload & sparse)](https://qdrant.tech/documentation/manage-data/indexing/)
+- [qdrant-client: search → query_points deprecation](https://github.com/qdrant/qdrant-client/compare/v1.11.1...v1.16.2)

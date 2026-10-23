@@ -1,142 +1,194 @@
 ---
 name: traefik
-description: "Deploy Traefik edge router and reverse proxy; configure dynamic Docker/Kubernetes discovery, middleware chains, rate limiting, and automatic ACME TLS."
+description: "Deploy Traefik v3 edge routing with Docker/Kubernetes providers, middleware chains, ACME TLS (acme.json mode 600), and exposedbydefault=false so agents do not accidentally publish every container."
 category: devops
 risk: safe
 source: self
 source_type: self
 date_added: "2026-09-13"
-tags: ["traefik", "reverse-proxy", "ingress", "docker", "kubernetes", "letsencrypt", "claude"]
+tags: ["traefik", "reverse-proxy", "ingress", "docker", "kubernetes", "letsencrypt", "acme", "middleware"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Traefik Cloud-Native Edge Router & Reverse Proxy AI Skill Guide
+# Traefik Cloud-Native Edge Router AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Traefik is a modern HTTP reverse proxy and ingress controller designed for microservices and containerized environments. Unlike traditional proxies that require static configuration files and manual service reloads, Traefik automatically discovers services in real-time by querying infrastructure providers (Docker daemon, Kubernetes API, Consul, Nomad). Its request pipeline is divided into **EntryPoints** (ports), **Routers** (rule-based matching), **Middlewares** (request/response transformations and security), and **Services** (load-balanced upstream targets), paired with automatic **ACME TLS** (Let's Encrypt) certificate management.
-
-Claude operates as a Principal Ingress & Cloud Network Engineer, specializing in **Traefik v3 routing architectures**, **Kubernetes IngressRoute CRDs**, **Docker label discovery**, **middleware security chains (rate limiting, forward auth, security headers)**, and **automated wildcard TLS certificate provisioning**.
-
-### Traefik Request Pipeline Topology
+Traefik is a dynamic HTTP reverse proxy / ingress: **EntryPoints** (ports) → **Routers** (rules + TLS) → **Middlewares** → **Services** (upstreams). Providers (Docker, Kubernetes IngressRoute/CRDs, Consul, Nomad) discover backends without static upstream reloads. ACME (Let's Encrypt) stores certs in **`acme.json` (mode 600)**—persist it or crash-loops burn LE rate limits. Always set **`exposedByDefault=false`** on Docker hosts so unlabeled containers stay private.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Traefik Request Lifecycle                   │
+│                 Traefik request pipeline (v3)               │
 │                                                             │
-│  Client Traffic (HTTPS :443 / HTTP :80)                     │
-│  └── EntryPoints (web, websecure)                           │
+│  Client → EntryPoints (web :80, websecure :443)             │
+│           └── optional HTTP→HTTPS redirect at entrypoint    │
 │                                                             │
-│  Routers (Rules & TLS Termination)                          │
-│  ├── Rule: `Host('api.example.com') && PathPrefix('/v1')`   │
-│  └── TLS Resolver: Automated ACME Let's Encrypt Challenge   │
+│  Routers: Host(`api.example.com`) && PathPrefix(`/v1`)      │
+│           └── TLS certResolver (ACME TLS/HTTP/DNS challenge)│
 │                                                             │
-│  Middleware Pipeline (Chained Filters & Transformations)    │
-│  ├── 1. RateLimiter (Protect against volumetric abuse)      │
-│  ├── 2. SecurityHeaders (HSTS, CSP, X-Frame-Options)        │
-│  └── 3. StripPrefix (Remove '/v1' prefix before upstream)   │
+│  Middlewares (order matters): rateLimit → auth → stripPrefix│
 │                                                             │
-│  Services & Upstream Load Balancers                         │
-│  └── Weighted Round-Robin ──> Container Pods A, B, C        │
+│  Services: LB + healthcheck → container/pod upstreams       │
+│  Providers: Docker labels | K8s CRDs | file | Consul/Nomad  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Strict File Permissions on ACME Storage**: Traefik will refuse to generate or load TLS certificates if `acme.json` has loose permissions. Always initialize `acme.json` with `chmod 600` before starting the container.
-2. **Deterministic Middleware Ordering**: Always apply defensive middlewares in correct sequence: rate-limiting first, followed by authentication/authorization (ForwardAuth or BasicAuth), followed by path/header modifications (StripPrefix, AddPrefix).
-3. **HTTP to HTTPS Global Redirection**: Enforce HTTPS redirection directly at the `web` EntryPoint level rather than duplicating redirect rules on every individual router.
-4. **Resilient Upstream Health Checks**: Configure periodic HTTP health checks on services (`traefik.http.services.<name>.loadbalancer.healthcheck.path`) to automatically eject unhealthy container replicas.
+**Use when**
+
+- Edge routing for Docker Compose / Swarm-style hosts or K8s IngressRoute.
+- Automatic ACME TLS, middleware security chains, and dynamic service discovery.
+- Replacing static `@nginx` upstream files when backends churn often.
+
+**Do not use when**
+
+- You need full service mesh mTLS / intentions as the primary control plane → `@consul` Connect or mesh product.
+- Cluster ingress policy is already standardized on another controller and team runbooks assume it.
+- Someone asks to leave `exposedByDefault=true` on a busy multi-stack host “for convenience” → refuse; require explicit `traefik.enable=true`.
 
 ---
 
-## Production Docker Compose Automation: Edge Gateway with Automated TLS
+## Operational Capabilities & Agent Directives
 
-Save this file as `docker-compose.yml` to launch an enterprise Traefik edge proxy with automated TLS and a protected backend service:
+1. **`providers.docker.exposedbydefault=false`** always; only label intended public services with `traefik.enable=true`.
+2. **Pin a shared Docker network** (`providers.docker.network=proxy`) so Traefik and backends share connectivity; set explicit `loadbalancer.server.port`.
+3. **`acme.json` mode 600** and persist across restarts; use LE **staging** `caServer` while experimenting to avoid rate limits.
+4. **One Traefik owns one acme.json**—do not share the file across replicas (ACME concurrency).
+5. **Middleware order**: rate limit → ForwardAuth/BasicAuth → path/header transforms.
+6. **HTTPS redirect at EntryPoint** (`web` → `websecure`), not duplicated on every router.
+7. **Health checks** on services so unhealthy replicas are ejected.
+8. Never invent Cloudflare/DNS API tokens for DNS challenge—reference env/secret mounts only.
+
+---
+
+## Production Example: Compose edge + ACME + explicit expose
+
+```bash
+mkdir -p letsencrypt
+touch letsencrypt/acme.json && chmod 600 letsencrypt/acme.json
+```
+
+`compose.yaml`:
 
 ```yaml
-version: "3.8"
-
 services:
   traefik:
-    image: traefik:v3.1
-    container_name: traefik
+    image: traefik:v3.4
     restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    ports:
-      - "80:80"
-      - "443:443"
+    security_opt: [no-new-privileges:true]
+    ports: ["80:80", "443:443"]
+    networks: [proxy]
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik-data/acme.json:/acme.json
+      - ./letsencrypt/acme.json:/acme.json
     command:
-      - "--global.checknewversion=false"
-      - "--global.sendanonymoususage=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.websecure.address=:443"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=admin@example.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/acme.json"
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=proxy
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.le.acme.email=admin@example.com
+      - --certificatesresolvers.le.acme.storage=/acme.json
+      - --certificatesresolvers.le.acme.tlschallenge=true
+      # While testing: --certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
     labels:
-      - "traefik.enable=true"
-      # Secure headers middleware
-      - "traefik.http.middlewares.sec-headers.headers.sslredirect=true"
-      - "traefik.http.middlewares.sec-headers.headers.stsseconds=315360000"
-      - "traefik.http.middlewares.sec-headers.headers.browserxssfilter=true"
-      - "traefik.http.middlewares.sec-headers.headers.framedeny=true"
+      - traefik.enable=true
+      - traefik.http.middlewares.sec-headers.headers.stsSeconds=31536000
+      - traefik.http.middlewares.sec-headers.headers.frameDeny=true
+      - traefik.http.middlewares.sec-headers.headers.contentTypeNosniff=true
 
   app:
-    image: nginxdemos/hello:plain-text
-    container_name: demo-app
+    image: traefik/whoami:v1.10
     restart: unless-stopped
+    networks: [proxy]
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`app.example.com`)"
-      - "traefik.http.routers.app.entrypoints=websecure"
-      - "traefik.http.routers.app.tls.certresolver=myresolver"
-      - "traefik.http.routers.app.middlewares=traefik-sec-headers@docker"
-      - "traefik.http.services.app.loadbalancer.server.port=80"
+      - traefik.enable=true
+      - traefik.http.routers.app.rule=Host(`app.example.com`)
+      - traefik.http.routers.app.entrypoints=websecure
+      - traefik.http.routers.app.tls.certresolver=le
+      - traefik.http.routers.app.middlewares=sec-headers
+      - traefik.http.services.app.loadbalancer.server.port=80
+
+networks:
+  proxy:
+    name: proxy
 ```
+
+Validation:
+
+```bash
+docker compose config
+docker compose up -d
+docker logs traefik 2>&1 | tail -n 50
+curl -I http://app.example.com          # expect redirect to https
+openssl s_client -connect app.example.com:443 -servername app.example.com </dev/null
+```
+
+### Kubernetes note
+
+Prefer Traefik **IngressRoute** CRDs (or Ingress) with explicit Entrypoint/TLS; keep dashboard and API bound to internal networks only. Pair with `@kubernetes` / `@helm` chart values—never expose the dashboard publicly without auth middleware.
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **`permissions of acme.json are too open, expected 0600, got 0644`** | Host created `acme.json` with standard file creation umask permissions. | Run `touch acme.json && chmod 600 acme.json` on the host, then restart Traefik. |
-| **`404 Not Found` when browsing to configured domain** | Incoming HTTP `Host` header does not match the Router `Rule` (e.g., mismatched subdomain or port), or container not exposed. | 1. Check Traefik logs for loaded routers.<br>2. Verify `Host('domain.com')` rule matches exactly.<br>3. Ensure `traefik.enable=true` label is present. |
-| **`502 Bad Gateway` returned by Traefik** | Upstream container port is wrong or container is attached to an isolated Docker network. | 1. Explicitly set `traefik.http.services.<name>.loadbalancer.server.port=<internal_port>`.<br>2. Ensure Traefik and upstream containers share a common Docker network. |
-| **ACME TLS challenge fails: timeout on verification** | Port 80/443 blocked by external firewall or ISP, or DNS A/AAAA records point to wrong IP. | 1. Verify external public DNS points to host IP.<br>2. Test port 80 accessibility from outside network (`curl -I http://domain.com`). |
+| `permissions of acme.json are too open` | Host umask created 0644/0660 | `chmod 600 acme.json`; restart Traefik |
+| ACME rate limit / repeated issuance | acme.json not persisted; crash loop | Persist volume; use staging CA while debugging |
+| 404 on configured Host | Rule mismatch / not enabled / wrong entrypoint | Confirm `Host(...)` exact; `traefik.enable=true`; router entrypoints |
+| 502 Bad Gateway | Wrong internal port or networks isolated | Set `loadbalancer.server.port`; join shared `proxy` network |
+| Intermittent 522 / config churn | `exposedbydefault=true` on busy host | Set `false`; enable only public services ([upstream reports](https://github.com/traefik/traefik/issues/13321)) |
+| TLS challenge timeout | Port 80/443 blocked or DNS A/AAAA wrong | Fix DNS/firewall; consider DNS challenge |
+| Middleware conflict | Same middleware name, different params | Unique middleware names; reference once |
+| Cert works then “unknown resolver” | acme.json perms flipped after upgrade | Init/chmod 600 before start |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best Practices
 
-```bash
-# 1. Initialize ACME certificate store with mandatory security permissions
-mkdir -p traefik-data && touch traefik-data/acme.json && chmod 600 traefik-data/acme.json
+1. Disable anonymous usage / version checks in locked-down prod if policy requires.
+2. JSON access logs filtered to 4xx/5xx; keep DEBUG only during incidents.
+3. Trusted forwarded headers only for known CDN/proxy CIDRs.
+4. Prefer DNS challenge behind CDN when HTTP/TLS challenges cannot reach origin.
+5. Pair edge Traefik with `@docker` Compose graphs or `@kubernetes` IngressRoute—not both fighting for :443 on one IP without a plan.
+6. Document every public `Host()` rule in the repo README.
 
-# 2. Inspect active Traefik container logs for dynamic routing updates
-docker logs -f traefik
+---
 
-# 3. Test HTTP to HTTPS redirection using curl
-curl -Iv http://app.example.com
+## Limitations
 
-# 4. Verify SSL certificate expiration and SAN names
-openssl s_client -connect app.example.com:443 -servername app.example.com
-```
+- ACME storage is not multi-writer; HA Traefik needs an external cert strategy or coordinated leader design.
+- Docker socket mount is powerful—prefer read-only and minimize who can start Traefik.
+- Traefik is not a substitute for app authZ; ForwardAuth still needs a real IdP.
+- Stop and ask if domain ownership, DNS challenge credentials, or public expose scope are unclear.
+
+---
+
+## Related Skills
+
+- `@docker` — Compose networks, labels, and socket mounts
+- `@kubernetes` / `@helm` — IngressRoute / chart installs
+- `@consul` / `@nomad` — alternate discovery providers
+- `@nginx` — static reverse-proxy alternative
+- `@vault` — secrets for DNS challenge providers (not in Git)
 
 ---
 
 ## Agent Operational Directive
 
-> **MANDATORY**: Always declare `providers.docker.exposedbydefault=false` in container environments so that newly launched developer or database containers are not inadvertently routed to the public internet.
+> **MANDATORY**: Set `exposedbydefault=false` and explicit `traefik.enable=true` on public services only. Persist `acme.json` with mode 600; use staging ACME while experimenting. Put Traefik and backends on a shared network with explicit upstream ports. Never invent ACME/DNS API credentials.
+
+---
+
+## Source anchors (research)
+
+- [Traefik Docker expose guide (v3.4)](https://doc.traefik.io/traefik/v3.4/expose/docker/)
+- [Docker provider routing reference](https://doc.traefik.io/traefik/v3.5/reference/routing-configuration/other-providers/docker/)
+- [ACME / storage mode 600](https://doc.traefik.io/traefik/https/acme/)
+- [exposedbydefault churn report](https://github.com/traefik/traefik/issues/13321)

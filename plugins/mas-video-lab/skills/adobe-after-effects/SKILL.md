@@ -1,68 +1,86 @@
 ---
 name: adobe-after-effects
-description: "Create and update After Effects compositions, expressions, and render queues using ExtendScript and Essential Graphics workflows."
+description: "Scaffold After Effects comps and expression rigs, queue Render Queue / AME jobs, and export Essential Graphics (.mogrt) with ExtendScript-safe patterns."
 category: video-editing
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["after-effects", "extendscript", "expressions", "render-queue", "mograph", "claude"]
+tags: ["after-effects", "extendscript", "expressions", "render-queue", "mogrt", "ame", "mograph"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Adobe After Effects Motion Graphics AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Adobe After Effects is a layer-based compositing and motion design tool organized around **Projects → Compositions → Layers**, with **expressions** (JavaScript-like), **effects**, **masks/shapes**, **3D cameras**, and the **Render Queue / Media Encoder** delivery path. Automation uses **ExtendScript (JSX)** against the AE DOM (`app.project`, `CompItem`, `AVLayer`). Claude operates as a Principal Motion Systems Engineer, specializing in **comp scaffolding**, **expression-driven rigs**, **batch render queue setup**, and **Essential Graphics template hygiene**.
 
-### After Effects Composition & Scripting Stack
+After Effects is layer-based: **Project → CompItem → Layers → Properties / Keyframes / Expressions**. Automation is primarily **ExtendScript (JSX, ES3 dialect)** against `app.project`, `CompItem`, `AVLayer`, and `renderQueue`. Delivery: **Render Queue** (blocking `render()`), **Queue in AME** (`queueInAME`), or **Essential Graphics → `.mogrt`**. Dynamic Link ties comps into Premiere.
+
+Keep scripts **ES3-compatible** (`var`, no arrow functions/template literals in JSX shipped to AE).
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 After Effects Architecture                  │
+│                 After Effects build → deliver                 │
 │                                                             │
-│  Project Graph                                              │
+│  Project graph                                              │
 │  ├── FootageItem / FolderItem / CompItem                    │
 │  ├── Layer types (AV, Shape, Text, Camera, Light, Null)     │
-│  └── Properties / Keyframes / Expressions                   │
+│  └── Keyframes / Expressions / Effects                      │
 │                                                             │
 │  Automation                                                 │
-│  ├── ExtendScript DOM + JSON polyfills as needed            │
-│  ├── Expressions engine (time, value, thisComp, thisLayer)  │
-│  └── renderQueue items & output modules                     │
+│  ├── ExtendScript DOM + beginUndoGroup                      │
+│  ├── Expressions (thisComp / thisLayer / time)              │
+│  └── Essential Graphics property exposure                   │
 │                                                             │
 │  Delivery                                                   │
-│  ├── Render Queue / AME                                     │
-│  ├── Essential Graphics (.mogrt)                            │
-│  └── Dynamic Link with Premiere                             │
+│  ├── Render Queue + OutputModule templates                  │
+│  ├── queueInAME(false|true)                                 │
+│  └── exportAsMotionGraphicsTemplate → .mogrt                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Comp Spec First**: Define width, height, frame rate, and duration before creating layers.
-2. **Expressions vs Keyframes**: Prefer expressions for procedural/linked motion; keyframes for intentional animation curves.
-3. **Render Queue Automation**: Create `OutputModule` settings explicitly (format, path, post-render actions).
-4. **Null / Parent Rigs**: Build controller nulls for reusable motion systems instead of hardcoding layer indices.
-5. **Version Portability**: Avoid undocumented scripting quirks; test JSX against the studio's AE major version.
+**Use when**
+
+- Creating comps, text/shape layers, null/parent rigs, expressions, or batch render queue items.
+- Packaging lower-thirds / bugs as `.mogrt` for Premiere editors.
+- Diagnosing expression errors, missing fonts, or output module template mismatches.
+
+**Do not use when**
+
+- Long-form cutting / multicam → `@adobe-premiere-pro` / `@final-cut-pro` / `@davinci-resolve`.
+- Lossless stream trim → `@losslesscut` / `@ffmpeg`.
+- Requests to bake licensed font files or Adobe credentials into repos → refuse.
 
 ---
 
-## Production ExtendScript: Build Lower-Third Comp + Queue Render
+## Operational Capabilities & Agent Directives
+
+1. **Comp spec first**: width, height, pixelAspect, duration, frameRate before layers.
+2. **Undo groups**: wrap mutations in `app.beginUndoGroup` / `app.endUndoGroup`.
+3. **Render Queue**: `items.add(comp)` → configure `outputModule(1)` with **file extension** → status `QUEUED` before `render()` (blocks) or `queueInAME(false)` to hand off.
+4. **Templates are local**: `applyTemplate("...")` names differ per machine — catch failures and fall back.
+5. **mogrt exposure**: only Checkbox, Color, single-value Slider, Source Text via `canAddToMotionGraphicsTemplate` / `addToMotionGraphicsTemplate`.
+6. **Expressions vs keyframes**: expressions for linked/procedural motion; keyframes for intentional curves.
+7. **Fonts**: use studio-licensed faces; document substitution risk.
+
+---
+
+## Production Example: lower-third + Render Queue + mogrt notes
 
 ```javascript
-// ==============================================================================
-// After Effects ExtendScript: create a lower-third comp and add to render queue
-// ==============================================================================
+// ExtendScript (ES3) — create lower-third, queue render
 (function () {
   app.beginUndoGroup("Create Lower Third");
 
-  var proj = app.project;
-  var comp = proj.items.addComp("LT_Hero", 1920, 1080, 1.0, 5.0, 30);
+  var comp = app.project.items.addComp("LT_Hero", 1920, 1080, 1.0, 5.0, 30);
   var solid = comp.layers.addSolid([0.05, 0.55, 0.9], "Bar", 640, 96, 1.0);
-  solid.position.setValue([420, 860]);
+  solid.property("Position").setValue([420, 860]);
+  solid.property("Position").expression =
+    "var t = time; [ease(t, 0, 0.6, -200, 420), 860]";
 
   var textLayer = comp.layers.addText("Product Launch");
   var textProp = textLayer.property("Source Text");
@@ -71,55 +89,94 @@ Adobe After Effects is a layer-based compositing and motion design tool organize
   textDoc.fillColor = [1, 1, 1];
   textDoc.font = "Arial-BoldMT";
   textProp.setValue(textDoc);
-  textLayer.position.setValue([420, 860]);
+  textLayer.property("Position").setValue([420, 860]);
 
-  // Simple slide-in via expression on Position
-  solid.property("Position").expression =
-    "var t = time; var x = ease(t, 0, 0.6, -200, 420); [x, 860]";
+  // Optional: expose Source Text to Essential Graphics
+  try {
+    if (textProp.canAddToMotionGraphicsTemplate(comp)) {
+      textProp.addToMotionGraphicsTemplate(comp);
+    }
+    comp.motionGraphicsTemplateName = "LT_Hero";
+  } catch (e) {}
 
   var rq = app.project.renderQueue.items.add(comp);
   var om = rq.outputModule(1);
-  // Apply a named template if present in the user's AE install:
   try {
     om.applyTemplate("H.264 - Match Render Settings - 15 Mbps");
   } catch (e) {
-    // Fallback: leave default module; user picks preset
+    // Template missing — leave default; user picks local preset
   }
-  om.file = new File("~/Desktop/LT_Hero_Out.mp4");
+  om.file = new File("~/Desktop/LT_Hero_Out.mp4"); // extension required
 
   app.endUndoGroup();
-  alert("Lower-third comp created and queued: " + comp.name);
+  alert("Queued: " + comp.name + " status=" + rq.status);
+  // Prefer queueInAME(false) for shared encode farms:
+  // if (app.project.renderQueue.canQueueInAME) app.project.renderQueue.queueInAME(false);
 })();
+```
+
+Validation:
+
+```text
+1. Comp settings match delivery (rate/size)
+2. RQ item status QUEUED; output path has extension
+3. Spot expression editor (no yellow banner)
+4. For mogrt: Essential Graphics shows exposed props; exportAsMotionGraphicsTemplate
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Expression errors (yellow banner)** | Syntax / missing property path. | Open expression editor; use `thisComp.layer("Name")` carefully. |
-| **Render queue template missing** | Output module template name not installed. | Catch applyTemplate errors; instruct user to pick local preset. |
-| **Text font substitution** | Font not on machine. | Use licensed studio fonts; check Character panel font list. |
-| **Dynamic Link stale frames** | Premiere/AE cache desync. | Refresh Dynamic Link / purge memory & disk cache. |
+| Yellow expression banner | Syntax / bad property path | Fix ES expression; use `thisComp.layer("Name")` carefully |
+| `RQItemStatus.NEEDS_OUTPUT` | Missing output path/extension | Set `om.file` with `.mp4`/`.mov` |
+| `applyTemplate` throws | Template not on machine | try/catch; document studio template pack |
+| Font substitution | Face not installed | Install licensed font; avoid random web fonts |
+| Dynamic Link stale | Premiere/AE cache desync | Refresh Link; purge memory & disk cache |
+| `render()` “hangs” | Blocking until done | Expected; use AME queue for async farm |
+| mogrt export false | Unsaved project / bad props | Save project; only expose supported property types |
 
 ---
 
-## Essential Expression Snippets
+## Best Practices
 
-```javascript
-// Smooth follow of another layer's position
-var target = thisComp.layer("Controller");
-ease(time, 0, 1, target.transform.position, target.transform.position)
-// Better: use linear interpolation toward target each frame via loopOut or valueAtTime patterns
-```
+1. Controller **nulls** + parenting over hard-coded layer indices.
+2. One output module per deliverable (ProRes master + H.264 proxy) via `outputModules.add()`.
+3. Keep disk cache on fast local SSD; never on the media SAN root without studio policy.
+4. Version comps (`LT_Hero_v03`); avoid overwriting locked deliveries.
+5. Document AE major version for any API used (`queueInAME` needs AE 14+ / AME 11+).
 
-### Essential Paths
-- **Scripts**: AE `Scripts` / `ScriptUI Panels`
-- **Preferences**: Media & Disk Cache
-- **mogrt**: Essential Graphics export for Premiere
+---
+
+## Limitations
+
+- ExtendScript is ES3 — modern JS tooling must transpile or stay compatible.
+- Output module / render settings template names are environment-specific.
+- Scripting cannot replace every UI-only effect or third-party plugin license check.
+- Stop and ask if delivery codec, safe-title margins, or brand fonts are unspecified.
+
+---
+
+## Related Skills
+
+- `@adobe-premiere-pro` — editorial host for mogrt / Dynamic Link
+- `@ffmpeg` — post-transcode / loudness / package
+- `@davinci-resolve` — color finish after AE pre-comp renders
+- `@remotion` — code-first motion when AE is not the runtime
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: Wrap project mutations in `beginUndoGroup` / `endUndoGroup`. Set comp specs explicitly. Treat output module template names as environment-specific and fail gracefully when missing.
+
+> **MANDATORY**: Use undo groups; set comp specs explicitly; always set output module file paths **with extensions**; treat template names as local; fail gracefully; never embed Adobe credentials or unlicensed fonts in automation.
+
+---
+
+## Source anchors (research)
+
+- [After Effects Scripting Guide — Render Queue](https://ae-scripting.docsforadobe.dev/renderqueue/renderqueue/)
+- [OutputModule](https://ae-scripting.docsforadobe.dev/renderqueue/outputmodule/)
+- [Scripts & Motion Graphics templates (Adobe Help)](https://helpx.adobe.com/after-effects/using/scripts.html)
+- `queueInAME` — AE 14.0+ / AME 11.0+

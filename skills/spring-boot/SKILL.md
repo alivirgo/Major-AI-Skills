@@ -1,45 +1,110 @@
 ---
 name: spring-boot
-description: "Build Spring Boot REST services with validation, profiles, dependency injection, Actuator, and focused test slices."
+description: "Ship Spring Boot 3 services with profiles, Bean Validation, Flyway/Liquibase release migrations, locked-down Actuator, and test slices agents routinely skip."
 category: development
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["spring-boot", "java", "rest", "dependency-injection", "actuator", "claude"]
+tags: ["spring-boot", "java", "flyway", "actuator", "validation", "jpa", "profiles"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# Spring Boot Services AI Skill Guide
+# Spring Boot Services AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-Spring Boot auto-configures a Spring application from starters on the classpath. Components are wired by dependency injection; web apps expose controllers or WebFlux handlers. Agents keep configuration in `application.yml` profiles, validate request bodies with Bean Validation, and use test slices (`@WebMvcTest`, `@DataJpaTest`) instead of only full-context boot tests.
+Spring Boot **auto-configures** a Spring `ApplicationContext` from **starters** on the classpath. Web apps expose **MVC controllers** (embedded Tomcat) or **WebFlux** handlers. Configuration is **profile- and env-driven** (`application.yml` + `SPRING_DATASOURCE_*`). Agents prefer **constructor injection**, **Bean Validation** on DTOs, **Flyway/Liquibase** for schema (ideally as an explicit release step in prod), and **Actuator** limited to health/probes—never open `env`/`heapdump` to the internet.
 
 ```
-Starters -> Auto-config -> ApplicationContext
-                |
-         Controllers / Services / Repositories
-                |
-         Embedded Tomcat (default servlet)
+┌─────────────────────────────────────────────────────────────┐
+│                 Spring Boot request path                      │
+│                                                             │
+│  Client → LB / @nginx                                       │
+│       → embedded Tomcat (servlet) or Netty (WebFlux)        │
+│       → Filter chain / Security                             │
+│       → @RestController → @Service → @Repository / JPA      │
+│            └── @postgresql (+ pool: HikariCP)               │
+│                                                             │
+│  Boot lifecycle                                             │
+│  ├── Auto-config from starters                              │
+│  ├── Flyway/Liquibase (dev migrate / prod validate+job)     │
+│  └── Actuator: health/liveness/readiness (narrow exposure)  │
+│                                                             │
+│  Async: @Async / Spring AMQP / Kafka — not the HTTP thread  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## When to use this skill
+---
 
-- Creating Java REST services with Spring Boot
-- Structuring packages (controller/service/repository)
-- Configuring profiles for local vs prod
-- Writing focused MVC or JPA tests
+## When to use / when not to
 
-## Operational directives
+**Use when**
 
-1. Prefer constructor injection over field `@Autowired`.
-2. Use `@Valid` + constraint annotations on DTOs; return problem details on failure.
-3. Externalize secrets via env / secrets manager - not checked-in YAML.
-4. Enable Actuator carefully; lock down sensitive endpoints in prod.
-5. Match Java LTS version to the Spring Boot generation in use.
+- Building Java (or Kotlin) REST services with Spring Boot 3.x.
+- Structuring controller/service/repository, profiles, and focused tests.
+- Wiring Flyway/Liquibase and production Actuator exposure safely.
 
-## Controller sketch
+**Do not use when**
+
+- The stack is reactive end-to-end and the team is not on WebFlux idioms—do not casually mix blocking JPA on `elastic` threads.
+- Infrastructure-only changes belong in `@terraform` / `@kubernetes` without app code.
+- Someone asks to expose Actuator `env`/`shutdown`/`heapdump` publicly → refuse; lock down or disable.
+
+---
+
+## Operational Capabilities & Agent Directives
+
+1. **Constructor injection only** for components; avoid field `@Autowired` (harder tests, hidden deps).
+2. **Validate at the edge**: `@Valid` + `@NotBlank`/`@Size` on request records; `@ControllerAdvice` → RFC 7807 problem details.
+3. **Secrets via env / secret store**: `SPRING_DATASOURCE_PASSWORD`, etc.—never commit prod passwords in YAML.
+4. **Migrations**: Flyway/Liquibase versioned SQL; in production prefer **migrate in release job**, app profile **validate** (avoid N pods racing long locks on startup).
+5. **Actuator**: `management.endpoints.web.exposure.include=health,info` (add `prometheus` only if scraped privately); secure or disable sensitive endpoints.
+6. **Test slices**: `@WebMvcTest`, `@DataJpaTest` over only `@SpringBootTest` for speed; use `@SpringBootTest` for wiring smoke.
+7. **Java LTS ↔ Boot generation**: Boot 3 requires Java 17+; match toolchain in CI and `@docker` base images.
+
+---
+
+## Production Example: API + Flyway + Actuator
+
+`application.yml` (non-secret defaults):
+
+```yaml
+spring:
+  application:
+    name: items-api
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  flyway:
+    # Prefer CI migrate; app validates schema at boot
+    enabled: true
+```
+
+Controller + DTO:
 
 ```java
 @RestController
@@ -64,39 +129,90 @@ public record ItemRequest(
 ) {}
 ```
 
-## Commands
+Flyway: `src/main/resources/db/migration/V1__items.sql`
 
-```bash
-./mvnw spring-boot:run
-./gradlew bootRun
-./mvnw -Dtest=ItemControllerTest test
-java -jar target/app.jar --spring.profiles.active=prod
+```sql
+CREATE TABLE items (
+  id           BIGSERIAL PRIMARY KEY,
+  sku          VARCHAR(64) NOT NULL UNIQUE,
+  qty          INT NOT NULL CHECK (qty >= 0),
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 ```
 
-## Common pitfalls
+Commands:
 
-| Pitfall | Why it hurts | Fix |
-| --- | --- | --- |
-| Field injection | Hard to test | Constructor injection |
-| God `@SpringBootTest` only | Slow CI | Test slices |
-| Open Actuator in prod | Info leak | Secure / disable |
-| Business logic in controllers | Unmaintainable | Service layer |
+```bash
+./mvnw -DskipTests package
+./mvnw flyway:migrate   # release job against prod URL from CI secrets
+java -jar target/items-api.jar --spring.profiles.active=prod
+./mvnw -Dtest=ItemControllerTest test
+```
 
-## Best practices
+Optional prod-only validate strategy (conceptual):
 
-- Use Flyway/Liquibase for schema migrations.
-- Prefer records or immutable DTOs at API boundaries.
-- Centralize exception handling with `@ControllerAdvice`.
-- Structured logging with correlation IDs for request traces.
+```java
+@Bean
+@Profile("prod")
+public FlywayMigrationStrategy validateOnly() {
+  return Flyway::validate;
+}
+```
+
+---
+
+## Technical Troubleshooting Matrix
+
+| Signature | Likely cause | Fix path |
+| :--- | :--- | :--- |
+| `Failed to configure a DataSource` | Missing JDBC URL/driver starter | Set `SPRING_DATASOURCE_*`; add `postgresql` driver |
+| Flyway checksum mismatch | Edited applied migration | Never edit applied versions; add new `Vn__` repair only with ops approval |
+| Long startup / probe kills pod | Migrate on boot under lock + slow SQL | Move migrate to Job; shorten startup path; tune probes |
+| Actuator leaks config | Broad `exposure.include=*` | Restrict to health/info; authenticate management port |
+| LazyInitializationException | `open-in-view` + lazy nav after session | `open-in-view: false`; fetch joins / DTO queries |
+| Slow CI | Only full `@SpringBootTest` | Add `@WebMvcTest` / `@DataJpaTest` slices |
+| Validation returns empty 400 | Missing `@Valid` / advice | Add `@Valid` + `@ControllerAdvice` ProblemDetail |
+
+---
+
+## Best Practices
+
+1. Immutable API records/DTOs; map to entities in the service layer.
+2. Central `@ControllerAdvice` for exceptions; structured logs with correlation IDs.
+3. Hikari pool sized to DB limits (`@postgresql`); fail fast on migrate validate errors.
+4. Use `@Transactional` on services, not controllers; keep transactions short.
+5. Prefer `@Async` + broker (or queue) for email/webhooks—do not block Tomcat threads.
+6. Native image (GraalVM) needs extra reachability—treat as a separate project track.
+
+---
 
 ## Limitations
 
-- Reactive WebFlux is a different programming model than MVC.
-- Native image (GraalVM) needs extra reachability config.
-- Version upgrades across Boot majors can change defaults - read release notes.
+- MVC vs WebFlux are different programming models; do not mix blocking JPA on event-loop threads.
+- Boot major upgrades change defaults (Jakarta EE, Flyway major)—read migration guides.
+- Multi-module / multi-tenant schemes need explicit design beyond starters.
+- Stop and ask if prod datasource credentials, migrate ownership, or Actuator network exposure is unclear.
 
-## Related skills
+---
 
-- `@kotlin` - Kotlin idioms on Spring Boot
-- `@docker` - packaging Boot jars
-- `@graphql-apis` - Spring GraphQL when needed
+## Related Skills
+
+- `@postgresql` — indexes, locks, pool sizing under Hikari
+- `@docker` — JDK runtime images and healthchecks hitting `/actuator/health`
+- `@kubernetes` — probes using liveness/readiness Actuator paths
+- `@redis` — cache or session when added via Spring Data Redis
+- `@kotlin` — idiomatic Spring Boot on Kotlin
+
+---
+
+## Agent Operational Directive
+
+> **MANDATORY**: Constructor injection, `@Valid` DTOs, and env-backed secrets. Schema via Flyway/Liquibase—prefer release-job migrate + boot validate in prod. Lock Actuator exposure. Prefer test slices. Never invent datasource passwords or open sensitive Actuator endpoints.
+
+---
+
+## Source anchors (research)
+
+- [Spring Boot Actuator endpoints](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
+- [Spring Boot 3 migration guide](https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+- Production pattern: decouple Flyway migrate from multi-replica app startup

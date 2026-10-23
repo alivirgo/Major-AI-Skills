@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## 2.5.0 - 2026-10-23
+
+- Deepened **50 more skills** across Days 6–10 of the skill improvement backlog (now **100/412** completed).
+- Day 6: LangChain, LlamaIndex, OpenAI/Anthropic APIs, Qdrant, ChromaDB, Transformers, vLLM, MLflow, PyTorch — with `gpt.md` / `gemini.md`.
+- Day 7: AWS/Azure/GCP CLIs, Terraform AWS, Pulumi, Ansible, Flux, Traefik, Consul, Nomad.
+- Day 8: Django, Flask, Express, Spring Boot, Rails, Go services, Rust CLI, TypeScript, Prisma, GraphQL APIs.
+- Day 9: Shopify, WordPress, Firebase, Vercel, Cloudflare DNS, Tailscale, WireGuard, Let's Encrypt, rclone, Packer.
+- Day 10: Premiere, After Effects, Final Cut, LosslessCut, VEGAS, Cinema 4D, Houdini, Substance Painter, ZBrush, Photoshop (plugin mirrors updated where applicable).
+
 ## 2.4.2 - 2026-10-06
 
 - Point terminal tip, npm `funding`, and README at the live Whop product: https://whop.com/major-ai-skills/products/buy-ali-a-coffee/

@@ -1,127 +1,191 @@
 ---
 name: tailscale
-description: "Configure Tailscale connectivity, subnet routing, and MagicDNS; troubleshoot WireGuard paths and DERP relay behavior."
+description: "Join devices to a Tailscale mesh, advertise subnet/exit routes with IP forwarding and admin approval, tune MagicDNS, and diagnose DERP-relayed vs direct WireGuard paths."
 category: cross-platform
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["tailscale", "wireguard", "mesh-vpn", "derp-relay", "magicdns", "subnet-router", "claude"]
+tags: ["tailscale", "wireguard", "mesh-vpn", "derp-relay", "magicdns", "subnet-router", "acl"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Tailscale Mesh VPN AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Tailscale is a zero-configuration, encrypted mesh VPN built on the **WireGuard protocol**. Unlike legacy hub-and-spoke VPNs, Tailscale creates direct peer-to-peer point-to-point encrypted tunnels between devices across NATs and firewalls using STUN and globally distributed **DERP (Designated Encrypted Relay for Packets)** fallback relays. Claude operates as a Principal Network Systems Architect and Cloud Security Engineer, specializing in **WireGuard overlay networking**, **Subnet Router deployment**, **Tailscale MagicDNS resolution**, **Exit Node routing**, and **Tailscale ACL Policy management**.
 
-### Tailscale Mesh Architecture & Control Plane
+Tailscale is a **coordination-plane + WireGuard data-plane** mesh VPN. Nodes register with a control server (Tailscale SaaS or self-hosted Headscale), exchange keys and ACL policy, then encrypt traffic peer-to-peer. When UDP hole-punching fails (symmetric NAT, locked-down firewalls), encrypted packets fall back through **DERP** relays (or optional peer relays). Agents should treat **route advertisement** and **admin approval** as a double opt-in, treat MagicDNS as an OS DNS integration problem, and never invent auth keys or ACL principals.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Tailscale Mesh Topology                     │
+│                 Tailscale mesh                              │
 │                                                             │
-│  Control Plane (Tailscale Coordination Server / Headscale)  │
-│  ├── Node Key Exchange & WireGuard Public Key Distribution  │
-│  └── Declarative ACL & Tag-Based Access Control Policies    │
+│  Control plane (coord + ACL + MagicDNS names)               │
+│  ├── Auth / tags / key expiry                               │
+│  ├── autoApprovers for routes & exit nodes                  │
+│  └── Policy: who may reach which tags / CIDRs               │
 │                                                             │
-│  Data Plane (Point-to-Point WireGuard Encryption)           │
-│  ├── Direct Peer-to-Peer Tunnel (Zero-Hop UDP Port 41641)   │
-│  ├── DERP Encrypted Fallback Relay (If symmetric NAT blocks)│
-│  └── Subnet Routers (Expose entire 192.168.x.x LANs to Mesh)│
+│  Data plane (WireGuard)                                     │
+│  ├── Prefer direct UDP (often ListenPort ~41641)            │
+│  ├── Else DERP / peer-relay (encrypted WG still)            │
+│  └── Subnet router / exit node = forward + advertise        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Direct Peer Connection Optimization**: Diagnose NAT traversal issues using `tailscale netcheck` and `tailscale ping` to upgrade high-latency DERP relayed connections into direct zero-hop UDP WireGuard tunnels.
-2. **Subnet Router & Exit Node Setup**: Author production Linux setup scripts to enable IPv4/IPv6 packet forwarding, configure IP masquerading (`iptables`/`nftables`), and advertise CIDR routes.
-3. **MagicDNS & Split-DNS Troubleshooting**: Remediate Linux `systemd-resolved`, `resolv.conf`, and Windows DNS search order conflicts to ensure `.ts.net` and `100.x.y.z` hostnames resolve instantly.
-4. **Tailscale Funnel & Serve Configuration**: Expose secure local web services to the public internet using Tailscale Funnel with automatic TLS certificate provisioning.
+**Use when**
+
+- Joining laptops, CI runners, and cloud VMs into one private overlay without opening inbound WAN ports.
+- Exposing a LAN that cannot run Tailscale via a **subnet router**.
+- Debugging “slow VPN” (DERP relay) vs broken routes / ACL denials.
+- Publishing internal HTTPS with Serve, or carefully exposing with Funnel.
+
+**Do not use when**
+
+- You need a self-managed, no-vendor WireGuard fabric with your own key distribution → `@wireguard`.
+- You need classic site-to-site IPsec / vendor SD-WAN with existing enterprise gear only.
+- Someone asks to paste live **auth keys**, OAuth client secrets, or full ACL with real employee emails into chat/Git → refuse; use env vars / secret stores (`@vault`).
 
 ---
 
-## Production Bash Automation: High-Availability Subnet Router Installer
+## Operational Capabilities & Agent Directives
 
-Save this script as `setup_subnet_router.sh` on Linux to configure an enterprise Tailscale Subnet Router with IP forwarding and firewall NAT rules:
+1. **Persist IP forwarding** on Linux subnet routers / exit nodes via `/etc/sysctl.d/` (`net.ipv4.ip_forward=1`, IPv6 forwarding as needed); do not rely on a one-shot `sysctl -w`.
+2. **Advertise then approve**: `tailscale set --advertise-routes=CIDR` (or `tailscale up …`) is incomplete until routes are approved in Admin Console **or** covered by `autoApprovers` (re-advertise after policy changes—auto-approvers are not retroactive for already-pending routes).
+3. **Clients must `--accept-routes`** (or UI equivalent) to install advertised subnet routes.
+4. **Diagnose path first**: `tailscale netcheck` + `tailscale ping` — distinguish `direct` vs `via DERP(...)` before blaming application latency.
+5. **MagicDNS / Linux DNS**: prefer `systemd-resolved` stub symlink (`/etc/resolv.conf` → stub); use `--accept-dns` intentionally; on Amazon Linux watch for resolv.conf loops.
+6. **SNAT default**: subnet traffic is SNAT’d by default; only disable with `--snat-subnet-routes=false` when the LAN has static routes back to CGNAT/`100.x` ranges.
+7. **Never invent credentials**: auth keys, OAuth tokens, and API keys come from the operator’s secret store; use placeholders like `$TAILSCALE_AUTH_KEY`.
+
+---
+
+## Production Example: Linux subnet router
 
 ```bash
 #!/usr/bin/env bash
-# Production Tailscale Subnet Router Installer
+# Subnet router bootstrap — credentials via env only
 set -euo pipefail
 
-SUBNET_CIDR="192.168.1.0/24"
+SUBNET_CIDR="${SUBNET_CIDR:-192.0.2.0/24}"   # DOCUMENTATION prefix; replace with real LAN
 AUTH_KEY="${TAILSCALE_AUTH_KEY:-}"
 
-echo "[1/4] Enabling Linux Kernel IPv4/IPv6 Forwarding..."
-cat <<EOF | sudo tee /etc/sysctl.d/99-tailscale.conf
+sudo tee /etc/sysctl.d/99-tailscale.conf >/dev/null <<'EOF'
 net.ipv4.ip_forward = 1
 net.ipv6.conf.all.forwarding = 1
 EOF
 sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 
-echo "[2/4] Configuring IP Masquerading (NAT) for Subnet..."
-DEFAULT_IFACE=$(ip route | grep default | awk '{print $5}' | head -n 1)
-sudo iptables -t nat -A POSTROUTING -o "$DEFAULT_IFACE" -j MASQUERADE
+# firewalld hosts may need: firewall-cmd --permanent --add-masquerade && firewall-cmd --reload
+# Prefer nftables/ufw defaults that deny forward unless explicitly allowed.
 
-# Enable UDP Port 41641 for Direct WireGuard P2P
-sudo iptables -A INPUT -p udp --dport 41641 -j ACCEPT
-
-echo "[3/4] Installing Tailscale Package..."
-if ! command -v tailscale &> /dev/null; then
-    curl -fsSL https://tailscale.com/install.sh | sh
+if ! command -v tailscale >/dev/null; then
+  curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
-echo "[4/4] Authenticating and Advertising Subnet Routes..."
-if [ -n "$AUTH_KEY" ]; then
-    sudo tailscale up --authkey="$AUTH_KEY" --advertise-routes="$SUBNET_CIDR" --accept-routes --snat-subnet-routes=false
+if [[ -n "$AUTH_KEY" ]]; then
+  sudo tailscale up --auth-key="$AUTH_KEY" --advertise-routes="$SUBNET_CIDR"
 else
-    echo "Authenticate interactively in your browser:"
-    sudo tailscale up --advertise-routes="$SUBNET_CIDR" --accept-routes --snat-subnet-routes=false
+  sudo tailscale up --advertise-routes="$SUBNET_CIDR"
 fi
 
-echo "--- [Tailscale Subnet Router Configured Successfully] ---"
+echo "Approve routes in Admin Console (or autoApprovers), then on clients:"
+echo "  sudo tailscale set --accept-routes"
 sudo tailscale status
+```
+
+Minimal `autoApprovers` sketch (Admin Console policy — use tags, not invented emails):
+
+```jsonc
+{
+  "tagOwners": {
+    "tag:subnet-router": ["autogroup:admin"]
+  },
+  "autoApprovers": {
+    "routes": {
+      "192.0.2.0/24": ["tag:subnet-router"]
+    },
+    "exitNode": ["tag:exit"]
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": ["autogroup:member"],
+      "dst": ["192.0.2.0/24:*"]
+    }
+  ]
+}
+```
+
+Validation loop:
+
+```bash
+tailscale netcheck
+tailscale status
+tailscale ping --c 5 <peer-or-lan-host>
+# Expect: "direct" for healthy LAN/WAN UDP; "via DERP" explains high RTT
+ip route | grep -E 'tailscale|100\.'
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **High Latency (>150ms) / Slow Speed on Local Network** | Traffic is routing through a distant DERP relay due to symmetric NAT or firewall blocking direct UDP packets. | 1. Run `tailscale netcheck` to diagnose NAT mapping.<br>2. Run `tailscale ping <target-node>` to inspect if connection is `direct` or `via DERP(...)`.<br>3. Open UDP port **41641** on your router/firewall. |
-| **Subnet Router Advertises Route but Devices Cannot Ping LAN IPs** | Linux host has `net.ipv4.ip_forward` disabled, or route approval is pending in Tailscale Admin Console. | 1. Check `sysctl net.ipv4.ip_forward` (must equal 1).<br>2. In **Tailscale Admin Console** $\rightarrow$ *Machines*, click the router node $\rightarrow$ *Edit Route Settings* $\rightarrow$ **Approve Route**.<br>3. On client nodes, ensure `tailscale up --accept-routes` is enabled. |
-| **MagicDNS Fails to Resolve Hostnames on Linux** | Conflict between Tailscale DNS and local `systemd-resolved` or network manager. | 1. Check `/etc/resolv.conf` (should link to `/run/systemd/resolve/stub-resolv.conf`).<br>2. Run `systemctl restart systemd-resolved`.<br>3. Set `tailscale up --accept-dns=true`. |
-| **Windows TUN Adapter Fails: `Wintun error`** | Conflicting VPN drivers (OpenVPN, NordVPN) locked the Wintun network adapter. | 1. Open Device Manager $\rightarrow$ Network Adapters $\rightarrow$ Uninstall **Tailscale Tunnel / Wintun**.<br>2. Restart Tailscale Windows Service (`net stop Tailscale && net start Tailscale`). |
+| High RTT / low throughput; `ping` shows `via DERP` | Symmetric NAT or UDP blocked; stuck on relay | Open/allow UDP (often 41641); check `netcheck` UDP; consider peer relays; accept DERP for hard NAT |
+| Subnet advertised but LAN unreachable | Route not approved; client missing `--accept-routes`; `ip_forward=0` | Approve in Machines → Subnets; `sysctl` forward=1; client `tailscale set --accept-routes` |
+| ACL “connection refused” / timeout to allowed host | Policy `dst` missing tag/CIDR; wrong port | Diff HuJSON ACL; test with broader rule then tighten |
+| MagicDNS works nowhere / intermittent on Linux | `resolv.conf` fight (DHCP vs tailscaled); not using resolved stub | Symlink stub resolv.conf; restart `systemd-resolved` + `tailscaled`; or `--accept-dns=false` and point `*.ts.net` at `100.100.100.100` |
+| DNS broken after exit node | Exit node DNS overrides split DNS | Enable nameserver “Use with exit node” in Admin DNS, or adjust exit usage |
+| Windows TUN / Wintun errors | Conflicting VPN filter drivers | Remove conflicting adapters; restart Tailscale service |
+| Route approval never auto-applies after ACL edit | `autoApprovers` not retroactive | Remove/re-advertise routes after policy change |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best Practices
 
-```bash
-# 1. Inspect Real-Time Connection Topology (Direct vs DERP Relay)
-tailscale status --peers=true
+1. Prefer **tagged** servers (`tag:ci`, `tag:prod`) over user-owned keys for always-on routers; tags disable key expiry by default.
+2. Least-privilege ACLs: grant CIDR/port access to groups/tags, not `*:*` for everyone.
+3. Document whether Funnel (public) vs Serve (tailnet-only) is intentional; Funnel is an internet exposure path.
+4. For HA subnet access, run redundant routers carefully—overlapping CIDRs need clear primary/failover design.
+5. Monitor `tailscale status` / admin for expired nodes and unapproved routes in CI/CD jump hosts.
 
-# 2. Network Latency & Path Diagnostic Check
-tailscale netcheck
+---
 
-# 3. Expose Local HTTP Port 3000 to Public Internet via Tailscale Funnel
-tailscale funnel --bg 3000
+## Limitations
 
-# 4. Configure Machine as High-Bandwidth Exit Node for Full Internet Routing
-sudo tailscale up --advertise-exit-node
-```
+- Control plane trust: SaaS (or your Headscale) sees metadata/coordination; data plane is WireGuard end-to-end, but DERP still relays ciphertext when direct fails.
+- Not a replacement for cloud VPC peering/Transit Gateway at scale without careful subnet and ACL design.
+- Apple platforms and some IoT devices have feature gaps (e.g. subnet advertising constraints).
+- Stop and ask if auth key scopes, ACL ownership, or production CIDRs are unspecified.
 
-### Essential File & State Locations
-- **Linux State Directory**: `/var/lib/tailscale/tailscaled.state`
-- **Linux Daemon Socket**: `/var/run/tailscale/tailscaled.sock`
-- **Windows Configuration**: `%LOCALAPPDATA%\Tailscale`
-- **macOS App Container**: `~/Library/Containers/io.tailscale.ipn.macos`
+---
+
+## Related Skills
+
+- `@wireguard` — raw WG when you own keys/endpoints without Tailscale control plane
+- `@nginx` / `@nginx-hardening` — private apps behind Serve or subnet-only listeners
+- `@vault` — store auth keys / OAuth client secrets for automation
+- `@ansible` — fleet install of `tailscaled` + sysctl
+- `@github-actions` — ephemeral CI nodes with tagged auth keys
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When setting up Subnet Routers or Exit Nodes on Linux, always persist `net.ipv4.ip_forward = 1` in `/etc/sysctl.d/` and remind users to approve advertised routes in the Tailscale Admin Console.
+
+> **MANDATORY**: Persist IP forwarding for routers/exit nodes. Treat advertise + approve (+ client `--accept-routes`) as required steps. Diagnose direct vs DERP before optimizing apps. Never commit or invent Tailscale auth keys; use env/secret references. Fix Linux DNS via resolved/stub patterns rather than silently rewriting `/etc/resolv.conf` forever.
+
+---
+
+## Source anchors (research)
+
+- [Subnet routers](https://tailscale.com/docs/features/subnet-routers)
+- [Configure a subnet router](https://tailscale.com/docs/features/subnet-routers/how-to/setup)
+- [Disable subnet route masquerading (SNAT)](https://tailscale.com/docs/reference/troubleshooting/network-configuration/disable-subnet-route-masquerading)
+- [Policy file / autoApprovers](https://tailscale.com/docs/reference/syntax/policy-file)
+- [Linux DNS / resolv.conf](https://tailscale.com/docs/reference/linux-dns)
+- [DERP servers](https://tailscale.com/docs/reference/derp-servers)

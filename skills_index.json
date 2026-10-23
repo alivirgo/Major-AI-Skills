@@ -149,7 +149,7 @@
     "path": "skills/adobe-after-effects",
     "category": "video-editing",
     "name": "adobe-after-effects",
-    "description": "Create and update After Effects compositions, expressions, and render queues using ExtendScript and Essential Graphics workflows.",
+    "description": "Scaffold After Effects comps and expression rigs, queue Render Queue / AME jobs, and export Essential Graphics (.mogrt) with ExtendScript-safe patterns.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -158,8 +158,9 @@
       "extendscript",
       "expressions",
       "render-queue",
-      "mograph",
-      "claude"
+      "mogrt",
+      "ame",
+      "mograph"
     ],
     "tools": [
       "claude",
@@ -168,8 +169,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -177,7 +178,7 @@
     "path": "skills/adobe-photoshop",
     "category": "design",
     "name": "adobe-photoshop",
-    "description": "Automate Photoshop image-processing tasks with UXP or ExtendScript, Actions, batch jobs, and Smart Objects.",
+    "description": "Automate Photoshop with UXP or ExtendScript, Actions and Batch/Image Processor, Smart Object pipelines, and color-managed exports—catching profile, bit-depth, and headless-DOM failures agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -188,7 +189,8 @@
       "actions",
       "batch",
       "smart-objects",
-      "claude"
+      "color-management",
+      "icc"
     ],
     "tools": [
       "claude",
@@ -197,8 +199,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -206,18 +208,19 @@
     "path": "skills/adobe-premiere-pro",
     "category": "video-editing",
     "name": "adobe-premiere-pro",
-    "description": "Automate Premiere Pro sequences and markers, exchange EDL/XML data, and prepare Media Encoder jobs with scripting workflows.",
+    "description": "Automate Premiere Pro sequences and markers via UXP/ExtendScript, exchange FCPXML/AAF/EDL, and queue Adobe Media Encoder jobs without baking secrets into projects.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "premiere-pro",
-      "extendscript",
       "uxp",
-      "nle",
+      "extendscript",
       "ame",
+      "fcpxml",
+      "aaf",
       "edl",
-      "claude"
+      "productions"
     ],
     "tools": [
       "claude",
@@ -226,8 +229,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -584,7 +587,7 @@
     "path": "skills/ansible",
     "category": "devops",
     "name": "ansible",
-    "description": "Write idempotent Ansible playbooks, inventories, and roles; use check mode and ansible-vault for controlled infrastructure automation.",
+    "description": "Write idempotent Ansible playbooks, FQCN modules, roles, and inventories; gate prod with check/diff, pin collections, and keep ansible-vault secrets out of Git and chat.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -592,9 +595,11 @@
       "ansible",
       "playbooks",
       "roles",
-      "automation",
+      "collections",
       "vault",
-      "claude"
+      "check-mode",
+      "idempotency",
+      "inventory"
     ],
     "tools": [
       "claude",
@@ -603,8 +608,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -612,17 +617,18 @@
     "path": "skills/anthropic-api",
     "category": "development",
     "name": "anthropic-api",
-    "description": "Integrate the Anthropic Messages API with system prompts, tool calls, streaming, and client error handling.",
+    "description": "Integrate Anthropic Messages API with pinned Claude models, required max_tokens, tool_use loops, streaming, and prompt caching agents routinely miswire.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "anthropic",
       "claude",
-      "api",
-      "llm",
-      "python",
-      "claude"
+      "messages-api",
+      "tools",
+      "prompt-caching",
+      "streaming",
+      "python"
     ],
     "tools": [
       "claude",
@@ -631,8 +637,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -1366,18 +1372,19 @@
     "path": "skills/aws-cli",
     "category": "devops",
     "name": "aws-cli",
-    "description": "Use AWS CLI profiles and SSO to inspect and manage S3, EC2, Lambda, IAM, and CloudWatch resources with explicit account and region selection.",
+    "description": "Operate AWS CLI v2 with IAM Identity Center SSO, OIDC/CI roles, and account-scoped S3/EC2/Lambda/IAM/CloudWatch workflows agents routinely mis-target.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "aws",
       "aws-cli",
-      "iam",
+      "iam-identity-center",
+      "sso",
+      "oidc",
       "s3",
       "cloudwatch",
-      "lambda",
-      "claude"
+      "sts"
     ],
     "tools": [
       "claude",
@@ -1386,8 +1393,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -1395,7 +1402,7 @@
     "path": "skills/azure-cli",
     "category": "devops",
     "name": "azure-cli",
-    "description": "Use the Azure CLI to manage subscriptions, resource groups, AKS, App Service, Key Vault, and role assignments.",
+    "description": "Operate Azure CLI (az) with subscription-scoped ARM, managed identities, AKS/App Service/Key Vault workflows, and RBAC patterns agents mis-scope.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -1403,10 +1410,12 @@
       "azure",
       "az",
       "azure-cli",
-      "aks",
-      "rbac",
       "arm",
-      "cli"
+      "rbac",
+      "managed-identity",
+      "aks",
+      "key-vault",
+      "oidc"
     ],
     "tools": [
       "claude",
@@ -1415,8 +1424,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -2034,7 +2043,7 @@
     "path": "skills/chromadb",
     "category": "development",
     "name": "chromadb",
-    "description": "Build local RAG storage with ChromaDB collections, embeddings, metadata filters, and persistent vector indexes.",
+    "description": "Build and operate Chroma collections for RAG: PersistentClient vs HttpClient, embedding-function contracts, metadata/where filters, and dimension-safe upsert/query paths agents routinely break.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -2043,8 +2052,9 @@
       "vector-database",
       "embeddings",
       "rag",
-      "python",
-      "claude"
+      "metadata-filter",
+      "hnsw",
+      "persistent-client"
     ],
     "tools": [
       "claude",
@@ -2053,8 +2063,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -2062,7 +2072,7 @@
     "path": "skills/cinema-4d",
     "category": "3d",
     "name": "cinema-4d",
-    "description": "Script Cinema 4D scene workflows, configure MoGraph systems, and troubleshoot Redshift rendering.",
+    "description": "Script Cinema 4D scenes with c4dpy and the Maxon API, wire MoGraph/Fields systems, and debug Redshift GPU renders, AOVs, and headless Commandline farm jobs agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -2072,8 +2082,9 @@
       "redshift",
       "c4dpy",
       "python-sdk",
-      "claude",
-      "3d-automation"
+      "commandline",
+      "aces",
+      "usd"
     ],
     "tools": [
       "claude",
@@ -2179,7 +2190,7 @@
     "path": "skills/cloudflare-dns",
     "category": "network",
     "name": "cloudflare-dns",
-    "description": "Manage Cloudflare DNS records, proxy status, TTLs, and API tokens while planning and verifying DNS changes.",
+    "description": "Manage Cloudflare DNS with correct proxy (orange/grey) mode, TTL cutovers, zone backups, and scoped API tokens—avoid mail/ACME breakage and mixed proxied-record traps.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -2189,7 +2200,9 @@
       "cdn",
       "records",
       "ttl",
-      "network"
+      "proxy",
+      "dnssec",
+      "api-token"
     ],
     "tools": [
       "claude",
@@ -2198,8 +2211,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -2699,7 +2712,7 @@
     "path": "skills/consul",
     "category": "devops",
     "name": "consul",
-    "description": "Configure Consul service discovery, health checks, key-value settings, and service-mesh intentions.",
+    "description": "Operate HashiCorp Consul service discovery, health checks, KV (non-secrets), ACLs, and Connect intentions; keep odd-sized Raft quorums and never store passwords in KV.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -2708,8 +2721,10 @@
       "hashicorp",
       "service-discovery",
       "service-mesh",
+      "acl",
       "kv",
-      "health-checks"
+      "health-checks",
+      "connect"
     ],
     "tools": [
       "claude",
@@ -2718,8 +2733,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3132,7 +3147,7 @@
     "path": "skills/django",
     "category": "development",
     "name": "django",
-    "description": "Build Django models, views, routes, and admin features; review ORM queries, migrations, and deployment settings.",
+    "description": "Ship Django apps with env-backed secrets, safe migrations, ORM N+1 hygiene, Celery/Redis workers, and gunicorn/ASGI deploy settings agents routinely misconfigure.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3141,8 +3156,10 @@
       "orm",
       "python",
       "migrations",
-      "admin",
-      "claude"
+      "celery",
+      "gunicorn",
+      "postgresql",
+      "security"
     ],
     "tools": [
       "claude",
@@ -3151,8 +3168,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3656,7 +3673,7 @@
     "path": "skills/express",
     "category": "development",
     "name": "express",
-    "description": "Build Express.js routers and middleware with request validation, async error handling, and clear application structure.",
+    "description": "Ship Express.js APIs with ordered middleware, Express 5 async errors, zod validation, safe trust proxy, and Prisma/Postgres workers agents routinely misconfigure.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3665,8 +3682,9 @@
       "nodejs",
       "middleware",
       "http",
-      "api",
-      "claude"
+      "zod",
+      "prisma",
+      "trust-proxy"
     ],
     "tools": [
       "claude",
@@ -3675,8 +3693,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3801,18 +3819,17 @@
     "path": "skills/final-cut-pro",
     "category": "video-editing",
     "name": "final-cut-pro",
-    "description": "Automate Final Cut Pro interchange with FCPXML, prepare Motion or Compressor workflows, and troubleshoot media rendering.",
+    "description": "Author valid FCPXML for Final Cut Pro, manage Library render caches, and drive Apple Compressor CLI delivers without inventing credentials.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "final-cut-pro",
-      "fcpxml-v11",
-      "apple-silicon-media-engine",
-      "prores-raw",
+      "fcpxml",
+      "compressor",
+      "prores",
       "magnetic-timeline",
-      "compressor-cli",
-      "claude"
+      "apple-silicon"
     ],
     "tools": [
       "claude",
@@ -3830,7 +3847,7 @@
     "path": "skills/firebase",
     "category": "development",
     "name": "firebase",
-    "description": "Build Firebase authentication, database rules, Cloud Functions, and messaging workflows; test access boundaries with the Emulator Suite.",
+    "description": "Design Firebase Auth, Firestore Security Rules, Cloud Functions, and FCM with Emulator-first testing—close open rules, keep Admin SDK server-only, and avoid emulator-only index false confidence.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3840,7 +3857,8 @@
       "auth",
       "cloud-functions",
       "fcm",
-      "claude"
+      "security-rules",
+      "emulator"
     ],
     "tools": [
       "claude",
@@ -3849,8 +3867,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -3945,7 +3963,7 @@
     "path": "skills/flask",
     "category": "development",
     "name": "flask",
-    "description": "Build Flask applications with app factories, blueprints, JSON or Jinja responses, extensions, and pytest checks.",
+    "description": "Ship Flask apps with application factories, blueprints, Alembic migrations, env-backed secrets, and gunicorn workers agents routinely miswire.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -3954,8 +3972,9 @@
       "python",
       "blueprints",
       "wsgi",
-      "api",
-      "claude"
+      "alembic",
+      "gunicorn",
+      "sqlalchemy"
     ],
     "tools": [
       "claude",
@@ -3964,8 +3983,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4030,7 +4049,7 @@
     "path": "skills/fluxcd",
     "category": "devops",
     "name": "fluxcd",
-    "description": "Configure Flux CD GitRepository, Kustomization, and HelmRelease resources; troubleshoot reconciliation and image-update automation.",
+    "description": "Operate Flux GitOps with GitRepository, Kustomization, and HelmRelease pipelines; trace Ready conditions, suspend for incidents, and debug reconcile stalls agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4040,7 +4059,9 @@
       "gitops",
       "kubernetes",
       "helmrelease",
-      "kustomization"
+      "kustomization",
+      "image-automation",
+      "reconcile"
     ],
     "tools": [
       "claude",
@@ -4049,8 +4070,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4145,7 +4166,7 @@
     "path": "skills/gcloud-cli",
     "category": "devops",
     "name": "gcloud-cli",
-    "description": "Manage Google Cloud projects, IAM, GKE, Cloud Run, and storage with gcloud while checking the active project and deployment target.",
+    "description": "Operate gcloud with named configurations, ADC vs CLI auth, Workload Identity Federation, and project-scoped GKE/Cloud Run/GCS workflows agents mis-target.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4153,10 +4174,11 @@
       "gcloud",
       "gcp",
       "google-cloud",
-      "iam",
+      "workload-identity",
+      "adc",
       "gke",
       "cloud-run",
-      "cli"
+      "iam"
     ],
     "tools": [
       "claude",
@@ -4165,8 +4187,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4377,17 +4399,19 @@
     "path": "skills/go-services",
     "category": "development",
     "name": "go-services",
-    "description": "Build Go HTTP services with contextual cancellation, middleware, tests, and compact deployable binaries.",
+    "description": "Build production Go HTTP services with Go 1.22+ ServeMux patterns, context cancellation, graceful Shutdown deadlines, middleware, race-safe tests, and multi-stage Docker binaries.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "go",
       "golang",
-      "http",
-      "modules",
-      "services",
-      "claude"
+      "net-http",
+      "servemux",
+      "context",
+      "graceful-shutdown",
+      "middleware",
+      "testing"
     ],
     "tools": [
       "claude",
@@ -4396,8 +4420,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4489,17 +4513,18 @@
     "path": "skills/graphql-apis",
     "category": "development",
     "name": "graphql-apis",
-    "description": "Design GraphQL schemas and resolvers with authorization checks and N+1 query prevention.",
+    "description": "Design production GraphQL schemas and resolvers with field-level authz, per-request DataLoader batching, cursor pagination, depth/complexity limits, and safe schema evolution.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "graphql",
-      "api",
       "schema",
       "resolvers",
       "dataloader",
-      "claude"
+      "authorization",
+      "pagination",
+      "persisted-queries"
     ],
     "tools": [
       "claude",
@@ -4508,8 +4533,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -4776,7 +4801,7 @@
     "path": "skills/houdini",
     "category": "3d",
     "name": "houdini",
-    "description": "Automate Houdini procedural workflows with VEX, the hou Python API, PDG/TOPs, and Solaris/Karma rendering.",
+    "description": "Automate Houdini with VEX and hou/hython, cook PDG/TOPs graphs, tune Vellum/FLIP/Pyro solvers, and debug Solaris/Karma XPU renders agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -4784,10 +4809,12 @@
       "houdini",
       "vex",
       "hou-python",
+      "hython",
       "solaris-karma",
       "pdg-tops",
       "vellum",
-      "flip-fluids"
+      "flip",
+      "materialx"
     ],
     "tools": [
       "claude",
@@ -4833,17 +4860,18 @@
     "path": "skills/huggingface-transformers",
     "category": "scientific",
     "name": "huggingface-transformers",
-    "description": "Use Hugging Face Transformers pipelines, tokenizers, and AutoModel interfaces for inference and fine-tuning workflows.",
+    "description": "Load Hub models with pinned revisions, run pipelines or AutoModel inference, apply chat templates correctly, and fine-tune with Trainer using current TrainingArguments (eval_strategy, safetensors).",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "huggingface",
       "transformers",
-      "nlp",
-      "fine-tuning",
-      "pytorch",
-      "claude"
+      "tokenizer",
+      "chat-template",
+      "trainer",
+      "safetensors",
+      "pipeline"
     ],
     "tools": [
       "claude",
@@ -4852,8 +4880,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5410,17 +5438,19 @@
     "path": "skills/langchain",
     "category": "development",
     "name": "langchain",
-    "description": "Build LangChain LCEL, tool, and retrieval workflows with explicit memory boundaries and application structure.",
+    "description": "Build production LangChain LCEL pipelines and LangGraph agents with create_agent, bounded tools, checkpointing, middleware guardrails, and retrieval grounding agents routinely skip.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "langchain",
-      "llm",
+      "langgraph",
+      "lcel",
       "agents",
       "rag",
+      "tools",
       "python",
-      "claude"
+      "middleware"
     ],
     "tools": [
       "claude",
@@ -5429,8 +5459,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5496,7 +5526,7 @@
     "path": "skills/lets-encrypt",
     "category": "devops",
     "name": "lets-encrypt",
-    "description": "Issue and renew Let's Encrypt certificates with certbot or acme.sh, configure ACME challenges, and diagnose renewal failures.",
+    "description": "Issue and renew Let's Encrypt DV certs with certbot/acme.sh; choose HTTP-01 vs DNS-01; use staging to avoid rate limits; wire reload hooks and monitor expiry.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -5505,8 +5535,9 @@
       "acme",
       "tls",
       "certbot",
-      "certificates",
-      "https"
+      "dns-01",
+      "http-01",
+      "rate-limits"
     ],
     "tools": [
       "claude",
@@ -5515,8 +5546,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5641,17 +5672,18 @@
     "path": "skills/llamaindex",
     "category": "development",
     "name": "llamaindex",
-    "description": "Build LlamaIndex ingestion, retrieval, and query pipelines and evaluate RAG behavior on task-relevant examples.",
+    "description": "Build production LlamaIndex ingestion, VectorStoreIndex, and query engines with chunk/metadata discipline, idempotent pipelines, and retrieval eval agents miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "llamaindex",
       "rag",
+      "ingestion",
       "retrieval",
-      "llm",
-      "python",
-      "claude"
+      "embeddings",
+      "query-engine",
+      "python"
     ],
     "tools": [
       "claude",
@@ -5660,8 +5692,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -5818,17 +5850,17 @@
     "path": "skills/losslesscut",
     "category": "cross-platform",
     "name": "losslesscut",
-    "description": "Trim and join media with LosslessCut, inspect keyframe boundaries, and choose between stream copying and smart-cut rendering.",
+    "description": "Trim and join media with LosslessCut using keyframe-aligned stream copy, Smart Cut when needed, and .llc v2 segment projects backed by FFmpeg.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "losslesscut",
-      "keyframe-cutting",
-      "stream-copy",
       "ffmpeg",
-      "gop-alignment",
-      "claude"
+      "keyframe",
+      "smart-cut",
+      "llc",
+      "stream-copy"
     ],
     "tools": [
       "claude",
@@ -6163,7 +6195,7 @@
     "path": "skills/mlflow",
     "category": "scientific",
     "name": "mlflow",
-    "description": "Track machine-learning experiments, parameters, metrics, artifacts, and model-registry changes with MLflow.",
+    "description": "Track ML experiments and promote models with MLflow 3 patterns: runs/params/metrics/artifacts, proxied artifact stores, and Model Registry aliases (champion) instead of deprecated stages.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6171,9 +6203,10 @@
       "mlflow",
       "experiment-tracking",
       "model-registry",
+      "aliases",
       "mlops",
-      "python",
-      "claude"
+      "artifacts",
+      "autolog"
     ],
     "tools": [
       "claude",
@@ -6182,8 +6215,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6659,7 +6692,7 @@
     "path": "skills/nomad",
     "category": "devops",
     "name": "nomad",
-    "description": "Write Nomad jobspecs and task groups, configure networking and variables, and manage workload rollouts.",
+    "description": "Author Nomad jobspecs with resource limits, canary/auto-revert updates, and Consul/Vault integrations; always nomad job plan before run and debug blocked evaluations agents miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -6669,7 +6702,9 @@
       "scheduler",
       "jobs",
       "hcl",
-      "orchestration"
+      "canary",
+      "allocations",
+      "docker-driver"
     ],
     "tools": [
       "claude",
@@ -6678,8 +6713,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -6863,17 +6898,18 @@
     "path": "skills/openai-api",
     "category": "development",
     "name": "openai-api",
-    "description": "Integrate OpenAI Responses or Chat Completions, tools, and embeddings with retry handling and clear client boundaries.",
+    "description": "Integrate OpenAI Responses (preferred) and Chat Completions with structured outputs, tools, embeddings, retries, and store/privacy controls agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "openai",
-      "api",
-      "llm",
+      "responses-api",
+      "chat-completions",
       "embeddings",
-      "python",
-      "claude"
+      "structured-outputs",
+      "tools",
+      "python"
     ],
     "tools": [
       "claude",
@@ -6882,8 +6918,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7179,7 +7215,7 @@
     "path": "skills/packer",
     "category": "devops",
     "name": "packer",
-    "description": "Build machine images with Packer templates, builders, and provisioners as part of an immutable deployment workflow.",
+    "description": "Build reproducible golden machine images with Packer HCL2: init/validate/build, pin source AMIs, provisioners, manifests, and cleanup on failure—without baking long-lived credentials.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7187,9 +7223,9 @@
       "packer",
       "hashicorp",
       "ami",
-      "images",
+      "hcl2",
       "golden-image",
-      "hcl"
+      "immutable"
     ],
     "tools": [
       "claude",
@@ -7198,8 +7234,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7466,17 +7502,18 @@
     "path": "skills/prisma",
     "category": "development",
     "name": "prisma",
-    "description": "Model data with Prisma, manage migrations and transactions, and review relation queries for N+1 behavior.",
+    "description": "Operate Prisma schema, migrate dev/deploy, typed Client queries, transactions, and pooled vs direct DB URLs—avoiding serverless connection exhaustion and N+1 relation loads.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "prisma",
       "orm",
-      "typescript",
       "migrations",
-      "postgres",
-      "claude"
+      "postgresql",
+      "typescript",
+      "connection-pooling",
+      "transactions"
     ],
     "tools": [
       "claude",
@@ -7485,8 +7522,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7697,7 +7734,7 @@
     "path": "skills/pulumi",
     "category": "devops",
     "name": "pulumi",
-    "description": "Manage Pulumi stacks, providers, secrets, and infrastructure previews before applying reviewed changes.",
+    "description": "Operate Pulumi stacks with preview gates, encrypted config secrets, protect/retainOnDelete, and replace-aware ups agents routinely mishandle.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7705,10 +7742,11 @@
       "pulumi",
       "iac",
       "stacks",
+      "preview",
+      "secrets",
       "typescript",
       "python",
-      "cloud",
-      "devops"
+      "oidc"
     ],
     "tools": [
       "claude",
@@ -7717,8 +7755,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7754,17 +7792,18 @@
     "path": "skills/pytorch",
     "category": "scientific",
     "name": "pytorch",
-    "description": "Build PyTorch models and training loops, manage devices and checkpoints, and verify evaluation or inference behavior.",
+    "description": "Build reliable PyTorch training and inference loops: device placement, train/eval modes, AMP with torch.amp, safe torch.load (weights_only), checkpoints, and torch.compile caveats.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "pytorch",
       "deep-learning",
-      "tensors",
-      "training",
-      "python",
-      "claude"
+      "amp",
+      "checkpoints",
+      "torch-compile",
+      "autograd",
+      "cuda"
     ],
     "tools": [
       "claude",
@@ -7773,8 +7812,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7782,7 +7821,7 @@
     "path": "skills/qdrant",
     "category": "development",
     "name": "qdrant",
-    "description": "Manage Qdrant vector databases; optimize HNSW indexing, payload filtering, hybrid dense-sparse search, and high-dimensional collection schemas.",
+    "description": "Operate Qdrant collections with query_points, payload indexes, HNSW/quantization tuning, and hybrid dense+sparse fusion agents routinely misconfigure.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
@@ -7790,10 +7829,10 @@
       "qdrant",
       "vector-database",
       "hnsw",
-      "embeddings",
-      "semantic-search",
-      "rag",
-      "claude"
+      "hybrid-search",
+      "sparse-vectors",
+      "payload-index",
+      "rag"
     ],
     "tools": [
       "claude",
@@ -7802,8 +7841,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7899,7 +7938,7 @@
     "path": "skills/rails",
     "category": "development",
     "name": "rails",
-    "description": "Build Rails applications with Active Record, migrations, controllers, strong parameters, and framework conventions.",
+    "description": "Ship Rails 8 apps with Active Record migrations, strong parameters, credentials/ENV secrets, Solid Queue workers, and Puma deploy patterns agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -7907,9 +7946,10 @@
       "rails",
       "ruby",
       "activerecord",
-      "mvc",
-      "api",
-      "claude"
+      "solid-queue",
+      "migrations",
+      "puma",
+      "credentials"
     ],
     "tools": [
       "claude",
@@ -7918,8 +7958,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -7956,18 +7996,18 @@
     "path": "skills/rclone",
     "category": "cross-platform",
     "name": "rclone",
-    "description": "Plan and run Rclone cloud transfers, synchronization, encrypted remotes, and mounts while checking source and destination behavior.",
+    "description": "Sync, copy, check, crypt, and mount cloud remotes with rclone; prefer dry-run before sync deletions; tune VFS cache and avoid bisync lockouts.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "rclone",
-      "cloud-storage",
-      "fuse-mount",
       "s3",
-      "google-drive",
-      "vfs-cache",
-      "claude"
+      "cloud-storage",
+      "sync",
+      "vfs",
+      "crypt",
+      "bisync"
     ],
     "tools": [
       "claude",
@@ -8421,7 +8461,7 @@
     "path": "skills/rust-cli",
     "category": "development",
     "name": "rust-cli",
-    "description": "Build Rust command-line tools with clap, structured errors, Cargo workspaces, and distributable binaries.",
+    "description": "Build production Rust CLIs with clap derive, anyhow/thiserror boundaries, script-friendly stdout/stderr, ExitCode mapping, assert_cmd tests, and release Cargo workspaces.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -8430,8 +8470,10 @@
       "cli",
       "clap",
       "cargo",
-      "binaries",
-      "claude"
+      "anyhow",
+      "thiserror",
+      "assert-cmd",
+      "exit-codes"
     ],
     "tools": [
       "claude",
@@ -8440,8 +8482,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -8881,7 +8923,7 @@
     "path": "skills/shopify-app",
     "category": "development",
     "name": "shopify-app",
-    "description": "Build Shopify apps with OAuth or session tokens, Admin GraphQL, extensions, webhooks, and billing integration.",
+    "description": "Ship Shopify apps with session-token auth, HMAC-verified webhooks, cost-aware Admin GraphQL, least-privilege scopes, and uninstall-safe token lifecycle—patterns agents routinely get wrong.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -8891,7 +8933,9 @@
       "graphql",
       "webhooks",
       "oauth",
-      "claude"
+      "session-tokens",
+      "billing",
+      "hmac"
     ],
     "tools": [
       "claude",
@@ -8900,8 +8944,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -9546,17 +9590,18 @@
     "path": "skills/spring-boot",
     "category": "development",
     "name": "spring-boot",
-    "description": "Build Spring Boot REST services with validation, profiles, dependency injection, Actuator, and focused test slices.",
+    "description": "Ship Spring Boot 3 services with profiles, Bean Validation, Flyway/Liquibase release migrations, locked-down Actuator, and test slices agents routinely skip.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "spring-boot",
       "java",
-      "rest",
-      "dependency-injection",
+      "flyway",
       "actuator",
-      "claude"
+      "validation",
+      "jpa",
+      "profiles"
     ],
     "tools": [
       "claude",
@@ -9565,8 +9610,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -9864,17 +9909,19 @@
     "path": "skills/substance-painter",
     "category": "3d",
     "name": "substance-painter",
-    "description": "Automate Substance 3D Painter texturing and mesh-map baking with Python and batch tools; inspect PBR export workflows.",
+    "description": "Automate Substance 3D Painter texturing with the Python API, bake mesh maps safely, pack PBR exports for Unreal/Unity, and debug UDIM, TDR, and color-space failures agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "substance-painter",
-      "pbr-texturing",
-      "substance-api",
-      "substance-automation-toolkit",
+      "pbr",
       "mesh-baking",
-      "claude"
+      "udim",
+      "substance-api",
+      "sbsrender",
+      "unreal",
+      "unity"
     ],
     "tools": [
       "claude",
@@ -10181,7 +10228,7 @@
     "path": "skills/tailscale",
     "category": "cross-platform",
     "name": "tailscale",
-    "description": "Configure Tailscale connectivity, subnet routing, and MagicDNS; troubleshoot WireGuard paths and DERP relay behavior.",
+    "description": "Join devices to a Tailscale mesh, advertise subnet/exit routes with IP forwarding and admin approval, tune MagicDNS, and diagnose DERP-relayed vs direct WireGuard paths.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -10192,7 +10239,7 @@
       "derp-relay",
       "magicdns",
       "subnet-router",
-      "claude"
+      "acl"
     ],
     "tools": [
       "claude",
@@ -10503,17 +10550,19 @@
     "path": "skills/terraform-aws",
     "category": "devops",
     "name": "terraform-aws",
-    "description": "Design AWS Terraform modules, IAM permissions, providers, and state backends; review AWS-specific infrastructure plans.",
+    "description": "Design AWS Terraform with pinned providers, S3 remote state (native lockfile), least-privilege IAM, and OIDC CI apply gates agents routinely get wrong.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "terraform",
       "aws",
-      "modules",
+      "s3-backend",
+      "state-locking",
       "iam",
-      "infrastructure",
-      "claude"
+      "oidc",
+      "modules",
+      "vpc"
     ],
     "tools": [
       "claude",
@@ -10522,8 +10571,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -10763,7 +10812,7 @@
     "path": "skills/traefik",
     "category": "devops",
     "name": "traefik",
-    "description": "Deploy Traefik edge router and reverse proxy; configure dynamic Docker/Kubernetes discovery, middleware chains, rate limiting, and automatic ACME TLS.",
+    "description": "Deploy Traefik v3 edge routing with Docker/Kubernetes providers, middleware chains, ACME TLS (acme.json mode 600), and exposedbydefault=false so agents do not accidentally publish every container.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
@@ -10774,7 +10823,8 @@
       "docker",
       "kubernetes",
       "letsencrypt",
-      "claude"
+      "acme",
+      "middleware"
     ],
     "tools": [
       "claude",
@@ -10783,8 +10833,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11022,17 +11072,18 @@
     "path": "skills/typescript",
     "category": "development",
     "name": "typescript",
-    "description": "Model TypeScript data with strict types, narrowing, and generics; configure tsconfig and migrate JavaScript while checking untyped boundaries.",
+    "description": "Ship strict TypeScript with sound tsconfig (NodeNext/Bundler), unknown-at-boundaries narrowing, discriminated unions, satisfies, and runtime validation—without silencing errors with any or unsafe assertions.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "typescript",
-      "types",
-      "generics",
       "tsconfig",
-      "javascript",
-      "claude"
+      "strict",
+      "nodenext",
+      "generics",
+      "narrowing",
+      "zod"
     ],
     "tools": [
       "claude",
@@ -11041,8 +11092,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11340,18 +11391,17 @@
     "path": "skills/vegas-pro",
     "category": "video-editing",
     "name": "vegas-pro",
-    "description": "Automate VEGAS Pro timelines and rendering with its C# scripting API; troubleshoot OpenFX and hardware encoding.",
+    "description": "Automate MAGIX VEGAS Pro timelines with ScriptPortal.Vegas C# scripting, batch region renders, and NVENC/OFX crash triage without inventing licenses.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "vegas-pro",
-      "scriptportal-vegas",
-      "csharp-scripting",
-      "openfx-ofx",
-      "nvenc-acceleration",
-      "video-editing",
-      "claude"
+      "scriptportal",
+      "csharp",
+      "openfx",
+      "nvenc",
+      "windows-nle"
     ],
     "tools": [
       "claude",
@@ -11427,7 +11477,7 @@
     "path": "skills/vercel",
     "category": "development",
     "name": "vercel",
-    "description": "Configure Vercel projects, environment variables, build settings, and preview deployments before a production rollout.",
+    "description": "Configure Vercel projects with scoped env vars, preview vs production deploys, Node/framework build settings, and log-driven failure triage—avoid NEXT_PUBLIC_ secret leaks and runtime mismatches.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -11437,7 +11487,8 @@
       "deploy",
       "edge",
       "preview",
-      "claude"
+      "environment-variables",
+      "serverless"
     ],
     "tools": [
       "claude",
@@ -11446,8 +11497,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11514,7 +11565,7 @@
     "path": "skills/vllm",
     "category": "development",
     "name": "vllm",
-    "description": "Deploy, tune, and query vLLM high-throughput inference engines; configure PagedAttention, continuous batching, chunked prefill, and multi-GPU tensor parallelism.",
+    "description": "Deploy and tune vLLM OpenAI-compatible servers: PagedAttention KV budgeting, continuous batching, chunked prefill, tensor parallel, quantization, and preemption/OOM failure modes.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-09-13",
@@ -11525,7 +11576,7 @@
       "continuous-batching",
       "tensor-parallel",
       "openai-api",
-      "claude"
+      "kv-cache"
     ],
     "tools": [
       "claude",
@@ -11534,8 +11585,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11572,7 +11623,7 @@
     "path": "skills/wireguard",
     "category": "network",
     "name": "wireguard",
-    "description": "Configure WireGuard keys, peers, interfaces, and AllowedIPs; troubleshoot routing and NAT traversal.",
+    "description": "Design WireGuard interfaces with cryptokey routing (AllowedIPs), PersistentKeepalive for NAT, and forwarding/NAT only when intended; debug handshake vs routing failures.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -11580,9 +11631,9 @@
       "wireguard",
       "vpn",
       "networking",
-      "wg",
-      "tunnel",
-      "security"
+      "wg-quick",
+      "allowedips",
+      "cryptokey-routing"
     ],
     "tools": [
       "claude",
@@ -11591,8 +11642,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11658,7 +11709,7 @@
     "path": "skills/wordpress",
     "category": "development",
     "name": "wordpress",
-    "description": "Build WordPress themes and plugins, automate tasks with WP-CLI, and review hooks, REST integration, and common security issues.",
+    "description": "Build and harden WordPress themes/plugins with escape-on-output, capability+nonce gates, prepared SQL, REST permission_callback, and WP-CLI-safe cutovers—security failures agents routinely ship.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
@@ -11668,7 +11719,9 @@
       "plugins",
       "themes",
       "wp-cli",
-      "claude"
+      "rest-api",
+      "security",
+      "hooks"
     ],
     "tools": [
       "claude",
@@ -11677,8 +11730,8 @@
       "codex"
     ],
     "variants": {
-      "gpt": false,
-      "gemini": false
+      "gpt": true,
+      "gemini": true
     }
   },
   {
@@ -11801,17 +11854,19 @@
     "path": "skills/zbrush",
     "category": "3d",
     "name": "zbrush",
-    "description": "Automate ZBrush sculpting workflows with ZScript, prepare retopology with ZRemesher, and manage mesh decimation or exports.",
+    "description": "Automate ZBrush with ZScript macros, run ZRemesher and Decimation Master safely, extract 32-bit displacement/normals, and debug GoZ and multi-million-poly viewport failures agents routinely miss.",
     "risk": "safe",
     "source": "self",
     "date_added": "2026-08-26",
     "tags": [
       "zbrush",
-      "digital-sculpting",
       "zscript",
       "zremesher",
       "decimation-master",
-      "claude"
+      "displacement",
+      "goz",
+      "sculpting",
+      "udim"
     ],
     "tools": [
       "claude",

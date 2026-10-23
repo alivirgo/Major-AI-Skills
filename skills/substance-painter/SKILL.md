@@ -1,147 +1,194 @@
 ---
 name: substance-painter
-description: "Automate Substance 3D Painter texturing and mesh-map baking with Python and batch tools; inspect PBR export workflows."
+description: "Automate Substance 3D Painter texturing with the Python API, bake mesh maps safely, pack PBR exports for Unreal/Unity, and debug UDIM, TDR, and color-space failures agents routinely miss."
 category: 3d
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["substance-painter", "pbr-texturing", "substance-api", "substance-automation-toolkit", "mesh-baking", "claude"]
+tags: ["substance-painter", "pbr", "mesh-baking", "udim", "substance-api", "sbsrender", "unreal", "unity"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Adobe Substance 3D Painter AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Adobe Substance 3D Painter is the industry-standard PBR material authoring and 3D texture painting application. Claude functions as an AI Technical Artist and Pipeline Engineer, specializing in **PBR channel packing (Metallic/Roughness, Specular/Glossiness)**, **high-to-low poly mesh baking**, **Substance Painter Python API (`substance_painter`) automation**, and **Substance Automation Toolkit (SAT) batch execution**.
 
-### Substance 3D Painter Technical Architecture
+Adobe Substance 3D Painter is a PBR texture-painting DCC. Agents should treat `.spp` projects as **layer stacks bound to texture sets / UDIMs**, bakes as **high→low ray contracts** (`_low`/`_high` or cages), and exports as **engine-specific channel packs** with explicit **color spaces** (sRGB vs linear). Automation runs through the in-app **`substance_painter` Python API** and, for Designer graphs, the **Substance Automation Toolkit** (`sbscooker` / `sbsrender`)—not the same binary.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Substance 3D Painter Engine                 │
+│                 Painter bake → paint → export               │
 │                                                             │
-│  Painting & Projection Engine                               │
-│  ├── Layer Stack (Fill Layers, Paint Layers, Anchor Points) │
-│  ├── UV / Triplanar Projection & UV Tile / UDIM Painting    │
-│  └── GPU Raytraced Baker (Curvature, AO, Thickness, Normal) │
+│  Mesh I/O                                                   │
+│  ├── Texture sets from materials / UDIMs                    │
+│  └── Low / high / cage naming for baker                     │
 │                                                             │
-│  Pipeline & Automation Stack                                │
-│  ├── `substance_painter` Python API (In-app Python 3 engine)│
-│  ├── Substance Automation Toolkit (SAT - CLI `sbsrender`)   │
-│  └── JSON-based Export Presets (Unreal, Unity, Arnold, USD) │
+│  Authoring                                                  │
+│  ├── Fill / Paint layers, masks, anchor points              │
+│  └── Triplanar / UV / Projection                            │
+│                                                             │
+│  Pipeline                                                   │
+│  ├── substance_painter Python (in-app)                      │
+│  ├── Export presets (UE5 packed, Unity, Arnold, USD)        │
+│  └── SAT: sbscooker / sbsrender (Designer .sbs/.sbsar)      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Version pins:** document Painter major version and export preset name in the asset README. Preset URLs and Python module shapes drift—resolve presets by search, do not hardcode fragile internal IDs when a name lookup exists.
+
+---
+
+## When to use / when not to
+
+**Use when**
+
+- Baking mesh maps, painting PBR stacks, packing ORM/MRA maps for Unreal/Unity.
+- Scripting project open/export, resolution changes, or batch export of texture sets.
+- Diagnosing normal Y-flip, UDIM gaps, or baker ray misses.
+
+**Do not use when**
+
+- Authoring procedural .sbs graphs end-to-end without Painter → Designer + SAT (`sbsrender`) is primary.
+- High-res sculpt primary → `@zbrush` then retopo/UV before Painter.
+- Full lookdev lighting in-engine → Unreal/Unity material skills after export.
 
 ---
 
 ## Operational Capabilities & Agent Directives
 
-1. **Python API Automation (`substance_painter`)**: Write scripts to automate project creation, texture set resolution adjustment, channel packing, and batch texture export.
-2. **Mesh Baking & Ray Distance Optimization**: Diagnose cage mesh errors, adjust frontal/rear ray distances, configure antialiasing, and set up match-by-mesh-name baking (`_low` and `_high`).
-3. **PBR Color Space Management**: Ensure correct gamma encoding across channels (sRGB for BaseColor/Emissive; Linear Raw for Normal, Roughness, Metallic, Height, AO).
-4. **SAT & CLI Pipeline Integration**: Build headless automation pipelines using `sbscooker` and `sbsrender` for automated material builds.
+1. **Color roles**: BaseColor/Emissive → sRGB; Normal/Roughness/Metallic/Height/AO → linear/raw.
+2. **Normal convention**: DirectX (Y−) for Unreal; OpenGL (Y+) for Unity/Blender—set project + preset together.
+3. **Bake naming**: `*_low` / `*_high` + Match by Mesh Name; or supply an explicit cage.
+4. **Export scripts**: require an open project; resolve presets via `ResourceSearch`; check `ExportStatus`.
+5. **Padding**: infinite padding for mip-friendly game exports unless packing atlases deliberately.
+6. **TDR on Windows**: long 4K/8K bakes can trip GPU TDR—bake maps individually or raise delay via **authorized IT policy** (do not invent registry credentials; document the DWORD only when the user asks for the known OS knob).
+7. **Never invent Adobe IDs, license tokens, or cloud credentials.**
 
 ---
 
-## Production Python Automation: Batch Texture Exporter Plugin
+## Production Example: batch export via Python API
 
-Run this script within Substance Painter's Python scripting environment to programmatically export all texture sets using a specified export preset:
+Run inside Painter’s Python environment (Plugins / Scripts):
 
 ```python
-"""
-Substance 3D Painter: Automated Batch Texture Exporter
-Exports all texture sets to target directory using Unreal Engine 5 Packed Preset.
-"""
+"""Export all texture sets with a named preset."""
+from __future__ import annotations
 
 import os
-import substance_painter.project
-import substance_painter.export
-import substance_painter.resource
 
-def batch_export_textures(output_dir: str, preset_name: str = "Unreal Engine 5 (Packed)", resolution: int = 2048):
+import substance_painter.export
+import substance_painter.project
+import substance_painter.resource
+import substance_painter.textureset
+
+
+def batch_export(
+    output_dir: str,
+    preset_name: str = "Unreal Engine 5 (Packed)",
+    resolution: int = 2048,
+) -> None:
     if not substance_painter.project.is_open():
-        print("Error: No project is currently open in Substance Painter.")
-        return
+        raise RuntimeError("PAINTER_PIPELINE_FAIL: no project open")
 
     os.makedirs(output_dir, exist_ok=True)
-    
-    # 1. Locate Export Preset Resource
-    url = substance_painter.resource.ResourceSearch(preset_name).next()
-    if not url:
-        print(f"Error: Export preset '{preset_name}' not found.")
-        return
+    search = substance_painter.resource.ResourceSearch(preset_name)
+    preset = next(search, None)
+    if preset is None:
+        raise RuntimeError(f"PAINTER_PIPELINE_FAIL: preset not found: {preset_name}")
 
-    # 2. Build Export Configuration
-    export_config = {
+    preset_url = preset.as_url()
+    export_list = []
+    for texture_set in substance_painter.textureset.all():
+        export_list.append(
+            {
+                "rootPath": texture_set.name(),
+                "exportPreset": preset_url,
+                "exportParameters": [
+                    {
+                        "parameters": {
+                            "padding": "infinite",
+                            "dithering": True,
+                            "resolution": [resolution, resolution],
+                        }
+                    }
+                ],
+            }
+        )
+
+    config = {
         "exportShaderParams": False,
         "exportPath": output_dir,
-        "defaultExportPreset": url.as_url(),
-        "exportList": []
+        "defaultExportPreset": preset_url,
+        "exportList": export_list,
     }
+    result = substance_painter.export.export_project_textures(config)
+    if result.status != substance_painter.export.ExportStatus.Success:
+        raise RuntimeError(f"PAINTER_PIPELINE_FAIL: {result.message}")
+    print(f"exported {len(result.textures)} maps → {output_dir}")
 
-    # Add all texture sets in project
-    for texture_set in substance_painter.textureset.all():
-        export_config["exportList"].append({
-            "rootPath": texture_set.name(),
-            "exportPreset": url.as_url(),
-            "exportParameters": [
-                {
-                    "parameters": {
-                        "padding": "infinite",
-                        "dithering": True,
-                        "resolution": [resolution, resolution]
-                    }
-                }
-            ]
-        })
 
-    # 3. Trigger Asynchronous Export
-    print(f"Exporting textures to {output_dir} at {resolution}x{resolution}...")
-    result = substance_painter.export.export_project_textures(export_config)
-    
-    if result.status == substance_painter.export.ExportStatus.Success:
-        print(f"Successfully exported {len(result.textures)} texture maps.")
-    else:
-        print(f"Export failed: {result.message}")
+# Example call — paths supplied by artist/pipeline, not invented secrets
+# batch_export(r"D:\Project\Exported_Textures", resolution=4096)
+```
 
-if __name__ == "__main__":
-    batch_export_textures("C:/Project/Exported_Textures", resolution=4096)
+SAT (Designer assets, separate toolkit):
+
+```bash
+sbscooker --inputs "D:\Materials\metal_damaged.sbs" --output-path "D:\Materials\Compiled" --output-name "metal_damaged"
+sbsrender render --input "D:\Materials\Compiled\metal_damaged.sbsar" --output-path "D:\Textures\Batch" --set-value "$outputsize@11,11"
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Normal Map Baking Artifacts (Ray Misses & Inverted Seams)** | Frontal/Rear ray distances too small, or low/high poly mesh names do not match suffix naming conventions. | 1. Ensure object naming follows `*_low` and `*_high` pattern.<br>2. In Baker settings, set **Match** to `By Mesh Name`.<br>3. Increase **Max Frontal/Rear Distance** or supply an explicit cage mesh file (`.fbx`). |
-| **GPU TDR Crash during 4K/8K Baking (`Display driver stopped responding`)** | Windows GPU Timeout Detection and Recovery (TDR) aborts long raytracing compute kernels. | 1. In Windows Registry (`HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers`), create `TdrDelay` (DWORD) and set value to `60` (seconds).<br>2. Restart workstation.<br>3. Bake maps individually or lower Antialiasing to 2x2. |
-| **Unreal Engine Normal Map Inverted (Green Channel Y-)** | DirectX vs OpenGL normal map standard mismatch (DirectX uses Y-, OpenGL uses Y+). | 1. In Project Settings, verify Normal Map format is set to **DirectX** (for Unreal) or **OpenGL** (for Unity/Blender).<br>2. Alternatively, invert the Green channel in the Export Preset configuration. |
-| **Missing Texture Set after Mesh Reimport** | Reimported FBX modified material slot names, breaking layer stack associations. | 1. In 3D DCC, preserve exact material slot assignment names.<br>2. In Painter, use *Edit $\rightarrow$ Re-project Layer Stack* to transfer painted layers to new geometry. |
+| Normal bake seams / ray misses | Ray distance or name mismatch | Match by Mesh Name; raise frontal/rear; add cage |
+| UE normals look inverted | OpenGL vs DirectX | Project normal format DirectX; invert G in preset if needed |
+| Unity looks too glossy/metallic | Wrong pack / sRGB on data maps | Linear for R/M/AO; verify ORM swizzles |
+| Texture set missing after reimport | Material slot rename | Preserve slot names; Re-project Layer Stack |
+| GPU TDR mid-bake | Long kernel vs Windows TDR | Bake per-map; lower AA; IT-approved TdrDelay if needed |
+| UDIM gaps | Missing tiles / wrong UV | Verify UDIM layout in DCC; per-tile texture sets |
 
 ---
 
-## Command Line Syntax & Substance Automation Toolkit (SAT)
+## Best Practices
 
-```bash
-# Windows CLI: Launch Substance Painter with Mesh and Project
-"C:\Program Files\Adobe\Adobe Substance 3D Painter\Adobe Substance 3D Painter.exe" --mesh "C:\Assets\Robot_Low.fbx"
+1. Lock texel density and resolution per asset class (hero 4K, prop 2K) in the naming README.
+2. Bake once, paint on stable mesh maps; re-bake only when geo changes.
+3. Keep export presets in version control (JSON) for studio-standard packs.
+4. Name exports `{asset}_{set}_{channel}` for engine importers.
+5. Document engine target (UE5 Packed vs Unity) on the `.spp` shot note.
 
-# Substance Automation Toolkit: Compile SBS to SBSAR via CLI
-sbscooker.exe --inputs "C:\Materials\metal_damaged.sbs" --output-path "C:\Materials\Compiled" --output-name "metal_damaged"
+---
 
-# Substance Automation Toolkit: Headless Batch Texture Rendering
-sbsrender.exe render --input "C:\Materials\metal_damaged.sbsar" --output-path "C:\Textures\Batch" --set-value "$outputsize@11,11"
-```
+## Limitations
 
-### Key Configuration Locations
-- **Windows User Preferences**: `%USERPROFILE%\Documents\Adobe\Adobe Substance 3D Painter`
-- **Windows Python Plugins**: `%USERPROFILE%\Documents\Adobe\Adobe Substance 3D Painter\python\plugins`
-- **Windows Shelf & Assets**: `%USERPROFILE%\Documents\Adobe\Adobe Substance 3D Painter\assets`
-- **macOS User Preferences**: `~/Library/Application Support/Adobe/Adobe Substance 3D Painter`
+- In-app Python is not a headless farm daemon; batch still expects Painter (or SAT for .sbsar).
+- Baker quality depends on cage/UV integrity from the upstream DCC.
+- Stop and ask if Adobe login, floating license servers, or proprietary presets are missing.
+
+---
+
+## Related Skills
+
+- `@zbrush` — sculpt source for high poly
+- `@blender` / `@cinema-4d` / `@houdini` — mesh/UV upstream
+- `@unreal-engine` / `@unity` — consume packed maps
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When configuring export presets for game engines, ensure normal maps match the target API (DirectX for Unreal, OpenGL for Unity) and non-color data (Roughness, Metallic, AO) is exported with Linear gamma encoding.
+
+> **MANDATORY**: Match normal map API (DirectX vs OpenGL) to the target engine. Export non-color data as linear. Resolve export presets by name and fail loudly on `ExportStatus` errors. Never invent Adobe credentials or unauthorized registry changes.
+
+---
+
+## Source anchors (research)
+
+- [Substance 3D Painter Python API](https://helpx.adobe.com/substance-3d-painter/scripting.html)
+- [Baking documentation](https://helpx.adobe.com/substance-3d-painter/painting/baking.html)
+- [Export and channel packing](https://helpx.adobe.com/substance-3d-painter/export.html)
+- [Substance Automation Toolkit](https://helpx.adobe.com/substance-3d-automation-toolkit.html)

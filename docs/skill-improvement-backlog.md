@@ -14,7 +14,7 @@
 
 - Total skills: 412
 - Days: 42
-- Completed: 50
+- Completed: 100
 
 ## Day 1
 
@@ -83,68 +83,68 @@
 
 ## Day 6
 
-- [ ] 1. langchain (development)
-- [ ] 2. llamaindex (development)
-- [ ] 3. openai-api (development)
-- [ ] 4. anthropic-api (development)
-- [ ] 5. qdrant (development)
-- [ ] 6. chromadb (development)
-- [ ] 7. huggingface-transformers (scientific)
-- [ ] 8. vllm (development)
-- [ ] 9. mlflow (scientific)
-- [ ] 10. pytorch (scientific)
+- [x] 1. langchain (development)
+- [x] 2. llamaindex (development)
+- [x] 3. openai-api (development)
+- [x] 4. anthropic-api (development)
+- [x] 5. qdrant (development)
+- [x] 6. chromadb (development)
+- [x] 7. huggingface-transformers (scientific)
+- [x] 8. vllm (development)
+- [x] 9. mlflow (scientific)
+- [x] 10. pytorch (scientific)
 
 ## Day 7
 
-- [ ] 1. aws-cli (devops)
-- [ ] 2. azure-cli (devops)
-- [ ] 3. gcloud-cli (devops)
-- [ ] 4. terraform-aws (devops)
-- [ ] 5. pulumi (devops)
-- [ ] 6. ansible (devops)
-- [ ] 7. fluxcd (devops)
-- [ ] 8. traefik (devops)
-- [ ] 9. consul (devops)
-- [ ] 10. nomad (devops)
+- [x] 1. aws-cli (devops)
+- [x] 2. azure-cli (devops)
+- [x] 3. gcloud-cli (devops)
+- [x] 4. terraform-aws (devops)
+- [x] 5. pulumi (devops)
+- [x] 6. ansible (devops)
+- [x] 7. fluxcd (devops)
+- [x] 8. traefik (devops)
+- [x] 9. consul (devops)
+- [x] 10. nomad (devops)
 
 ## Day 8
 
-- [ ] 1. django (development)
-- [ ] 2. flask (development)
-- [ ] 3. express (development)
-- [ ] 4. spring-boot (development)
-- [ ] 5. rails (development)
-- [ ] 6. go-services (development)
-- [ ] 7. rust-cli (development)
-- [ ] 8. typescript (development)
-- [ ] 9. prisma (development)
-- [ ] 10. graphql-apis (development)
+- [x] 1. django (development)
+- [x] 2. flask (development)
+- [x] 3. express (development)
+- [x] 4. spring-boot (development)
+- [x] 5. rails (development)
+- [x] 6. go-services (development)
+- [x] 7. rust-cli (development)
+- [x] 8. typescript (development)
+- [x] 9. prisma (development)
+- [x] 10. graphql-apis (development)
 
 ## Day 9
 
-- [ ] 1. shopify-app (development)
-- [ ] 2. wordpress (development)
-- [ ] 3. firebase (development)
-- [ ] 4. vercel (development)
-- [ ] 5. cloudflare-dns (network)
-- [ ] 6. tailscale (cross-platform)
-- [ ] 7. wireguard (network)
-- [ ] 8. lets-encrypt (devops)
-- [ ] 9. rclone (cross-platform)
-- [ ] 10. packer (devops)
+- [x] 1. shopify-app (development)
+- [x] 2. wordpress (development)
+- [x] 3. firebase (development)
+- [x] 4. vercel (development)
+- [x] 5. cloudflare-dns (network)
+- [x] 6. tailscale (cross-platform)
+- [x] 7. wireguard (network)
+- [x] 8. lets-encrypt (devops)
+- [x] 9. rclone (cross-platform)
+- [x] 10. packer (devops)
 
 ## Day 10
 
-- [ ] 1. adobe-premiere-pro (video-editing)
-- [ ] 2. adobe-after-effects (video-editing)
-- [ ] 3. final-cut-pro (video-editing)
-- [ ] 4. losslesscut (cross-platform)
-- [ ] 5. vegas-pro (video-editing)
-- [ ] 6. cinema-4d (3d)
-- [ ] 7. houdini (3d)
-- [ ] 8. substance-painter (3d)
-- [ ] 9. zbrush (3d)
-- [ ] 10. adobe-photoshop (design)
+- [x] 1. adobe-premiere-pro (video-editing)
+- [x] 2. adobe-after-effects (video-editing)
+- [x] 3. final-cut-pro (video-editing)
+- [x] 4. losslesscut (cross-platform)
+- [x] 5. vegas-pro (video-editing)
+- [x] 6. cinema-4d (3d)
+- [x] 7. houdini (3d)
+- [x] 8. substance-painter (3d)
+- [x] 9. zbrush (3d)
+- [x] 10. adobe-photoshop (design)
 
 ## Day 11
 

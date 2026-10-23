@@ -1,30 +1,21 @@
 ---
 title: "Maxon ZBrush AI Skill Guide (GPT & Codex)"
-description: "Comprehensive operational skill specification for OpenAI GPT and Codex to automate, script, troubleshoot, and optimize Maxon ZBrush pipelines, ZScript macros, Multi-Map Exporter, and GoZ bridges."
-category: "Digital Sculpting & High-Poly Modeling"
-tags: ["zbrush", "zscript", "multi-map-exporter", "goz", "gpt-codex", "3d-pipeline"]
+description: "Operational skill for GPT/Codex to author ZScript batch macros, decimation/export pipelines, and map-extraction checklists with version-safe UI paths and no invented credentials."
+category: "3D / Digital Sculpting"
+tags: ["zbrush", "zscript", "decimation-master", "zremesher", "gpt-codex", "goz"]
 ---
 
 # Maxon ZBrush AI Skill Guide (GPT & Codex)
 
 ## Overview & Engine Architecture
-Maxon ZBrush is the definitive digital sculpting software for visual effects, game asset creation, and 3D concept design. GPT/Codex acts as a Principal Tools Developer and Pipeline TD, delivering **ZScript macros and plugins**, **Multi-Map Exporter (MME) configuration generators**, **automated SubTool processing scripts**, and **GoZ inter-application bridge handlers**.
 
-### Pipeline Architecture & Tooling Stack
+GPT/Codex acts as a **Sculpt Pipeline TD**: emit **ZScript macros** with `[IFreeze]` loops, **parameterized export roots**, and **checklists** for 32-bit map extraction. Prefer `.txt` sources checked into git; compile to `.zsc` in the pinned ZBrush build.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 ZBrush Pipeline Architecture                │
-│                                                             │
-│  Sculpting Engine                                           │
-│  ├── Multi-Resolution Mesh Representation (SDiv 1..7)       │
-│  ├── DynaMesh & Sculptris Pro Adaptive Geometry Modifiers   │
-│  └── Decimation Master (Edge-Collapse Polygon Reduction)    │
-│                                                             │
-│  Pipeline & Bridge Framework                                │
-│  ├── ZScript Command Syntax (`[IPress]`, `[ISet]`, `[Loop]`)│
-│  ├── Multi-Map Exporter (Batch 32-bit EXR & Normal Maps)    │
-│  └── GoZ Object Interchange Specification (Binary File I/O) │
+│                 ZBrush automation stack                     │
+│  ZScript → SubTool loop → Decimate/Export/Maps              │
+│  GoZ path config → DCC validate                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -32,45 +23,23 @@ Maxon ZBrush is the definitive digital sculpting software for visual effects, ga
 
 ## Operational Capabilities & Agent Directives
 
-1. **ZScript Plugin & Button Development**: Develop automated ZScript utilities (`.txt` source compiled to `.zsc`), configuring UI menus, button triggers, variable arrays, and loop iterations across SubTools.
-2. **Multi-Map Exporter (MME) Automation**: Configure automated texture baking for displacement, normal, ambient occlusion, cavity, and vector displacement maps across multiple UV tiles (UDIMs).
-3. **Decimation Master Batch Processing**: Author batch decimation routines to pre-process, calculate, and export lightweight mesh proxies with preserved PolyGroups and UV coordinates.
-4. **GoZ Bridge Configuration**: Remediate GoZ configuration files, fixing broken application paths and resolving socket connection errors between ZBrush and Maya/Blender/C4D.
+1. **Parameterize export directory** via `[FileNameSetNext]` using studio-provided roots only.
+2. **Guard visibility** with `SubToolGetStatus` before processing.
+3. **Re-record UI paths** when targeting a new ZBrush year—do not assume 2023 menu strings.
+4. **Emit map SOP**: bit depth, mid value, SDiv high/low, UDIM on/off.
+5. **No license keys** or activation workarounds in macros.
 
 ---
 
-## Production ZScript Automation: Multi-Map Exporter UDIM Batch Baker
-
-Execute this ZScript macro to configure and launch Multi-Map Exporter for 32-bit Displacement and Tangent Normal maps across all UDIM tiles:
+## Production ZScript: rename-safe export stub
 
 ```zscript
-// ZScript: Multi-Map Exporter UDIM Batch Configuration
-[IButton, "ZPlugin:Pipeline:BakeUDIMMaps", "Configures and exports 4K 32-bit Displacement and Normal maps",
-    [IFreeze,
-        // 1. Enable Displacement and Normal Map Exports in MME
-        [ISet, "ZPlugin:Multi Map Exporter:Displacement", 1]
-        [ISet, "ZPlugin:Multi Map Exporter:Normal", 1]
-        [ISet, "ZPlugin:Multi Map Exporter:Vector Displacement", 0]
-        [ISet, "ZPlugin:Multi Map Exporter:Ambient Occlusion", 0]
-        
-        // 2. Set Map Resolution to 4096 (4K)
-        [ISet, "ZPlugin:Multi Map Exporter:Map size", 4096]
-        
-        // 3. Configure Displacement: 32-bit Floating Point, Smooth UVs, SubDiv Level 1
-        [ISet, "ZPlugin:Multi Map Exporter:SubPix", 2]
-        [ISet, "ZPlugin:Multi Map Exporter:SmoothUV", 1]
-        [ISet, "ZPlugin:Multi Map Exporter:3Channel", 0]
-        [ISet, "ZPlugin:Multi Map Exporter:32Bit", 1]
-        
-        // 4. Configure Normal Map: Tangent Space, Flip Green Channel (DirectX/Unreal standard)
-        [ISet, "ZPlugin:Multi Map Exporter:Tangent", 1]
-        [ISet, "ZPlugin:Multi Map Exporter:FlipG", 1]
-        
-        // 5. Trigger Multi-Map Export
-        [FileNameSetNext, "C:/Bakes/Hero_Asset"]
-        [IPress, "ZPlugin:Multi Map Exporter:Create All Maps"]
-    ]
-    [Note, "Multi-Map Exporter UDIM baking process triggered successfully!", , 2]
+// Export active SubTool OBJ to a caller-set next filename
+[IButton, "ZPlugin:Pipeline:ExportActiveOBJ", "Export active SubTool as OBJ",
+    [VarSet, name, [IGetTitle, "Tool:ItemInfo"]]
+    [FileNameSetNext, [StrMerge, "D:/Export/", name, ".obj"]]
+    [IPress, "Tool:Export"]
+    [Note, [StrMerge, "Exported ", name], , 1]
 ]
 ```
 
@@ -78,32 +47,29 @@ Execute this ZScript macro to configure and launch Multi-Map Exporter for 32-bit
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Automation signature | Check | Fix |
 | :--- | :--- | :--- |
-| **`ZScript Error: Command not recognized: [XYZ]`** | Syntax error in ZScript macro (e.g. missing brackets, unquoted string paths, or misspelled API name). | 1. Check matching brackets `[` and `]` across all commands.<br>2. Verify exact case-sensitive path using *Preferences $\rightarrow$ Custom UI $\rightarrow$ Ctrl+Alt Click* on target UI button to view path. |
-| **Multi-Map Exporter Skips Certain UDIM Tiles** | UV coordinates contain faces outside the 0-1 or standard UDIM coordinate bounding box. | 1. In 3D DCC, verify UV islands are snapped cleanly within UDIM tile bounds (`1001`, `1002`, etc.).<br>2. Check for overlapping zero-area UV polygons using *Tool $\rightarrow$ UV Map $\rightarrow$ Morph UV*. |
-| **Decimation Master Out-of-Memory Crash** | Pre-processing dense 80M polygon mesh exceeded system RAM buffer. | 1. Split tool into 2-4 SubTools before running pre-processing.<br>2. In *Preferences $\rightarrow$ Mem*, increase **Compact Mem** allocation to 80% of physical RAM.<br>3. Enable *Pre-process Current* instead of *Pre-process All*. |
-| **SubTool Renaming Fails via ZScript** | SubTool rename command invoked while renaming prompt dialog was already active. | Use `[IPress, "Tool:SubTool:Rename"]` followed immediately by `[FileNameSetNext, "NewName"]` to pass name directly without blocking GUI prompt. |
+| Button not found | UI path | Rebind to current ZPlugin menu |
+| Empty OBJ | Hidden / wrong SubTool | Select + status check |
+| Displacement banding | Bit depth | Force 32-bit EXR in MME settings |
 
 ---
 
-## Command Line Syntax & Batch Processing
+## Best Practices
 
-```bash
-# Windows CLI: Launch ZBrush with Initial Model
-"C:\Program Files\Maxon ZBrush 2025\ZBrush.exe" "C:\Models\Base_Mesh.zpr"
+1. Keep macros small and composable (decimate ≠ map extract).
+2. Log SubTool names with `[Note]` for farm operators.
+3. Pair every proxy export with archive of full-res tool.
 
-# Auto-compile and execute ZScript
-"C:\Program Files\Maxon ZBrush 2025\ZBrush.exe" "C:\Scripts\BakeUDIMMaps.txt"
-```
+---
 
-### Essential File Locations
-- **Windows ZScript Plugins**: `C:\Program Files\Maxon ZBrush 2025\ZStartup\ZPlugs64`
-- **Windows User Hotkeys**: `%APPDATA%\Maxon\ZBrush 2025\ZStartup\CustomUserHotkeys.txt`
-- **Windows User UI Config**: `%APPDATA%\Maxon\ZBrush 2025\ZStartup\CustomUserInterface.cfg`
-- **macOS User Preferences**: `~/Library/Application Support/Maxon/ZBrush 2025`
+## Limitations
+
+- ZScript cannot replace a true headless geometry API.
+- GoZ targets must already have plugins installed.
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When authoring ZScript macros, verify all UI paths against ZBrush button definitions and wrap execution in `[IFreeze, ...]` to avoid UI redraw bottlenecks. Always use Multi-Map Exporter (MME) for multi-tile UDIM displacement extractions.
+
+> **MANDATORY**: Freeze redraws in loops, pin ZBrush version for UI paths, require 32-bit displacement for hero maps. Never invent credentials or serial numbers.

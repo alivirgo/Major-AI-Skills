@@ -1,161 +1,209 @@
 ---
 name: vllm
-description: "Deploy, tune, and query vLLM high-throughput inference engines; configure PagedAttention, continuous batching, chunked prefill, and multi-GPU tensor parallelism."
+description: "Deploy and tune vLLM OpenAI-compatible servers: PagedAttention KV budgeting, continuous batching, chunked prefill, tensor parallel, quantization, and preemption/OOM failure modes."
 category: development
 risk: safe
 source: self
 source_type: self
 date_added: "2026-09-13"
-tags: ["vllm", "llm-inference", "paged-attention", "continuous-batching", "tensor-parallel", "openai-api", "claude"]
+tags: ["vllm", "llm-inference", "paged-attention", "continuous-batching", "tensor-parallel", "openai-api", "kv-cache"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
-# vLLM High-Throughput Inference Engine AI Skill Guide
+# vLLM High-Throughput Inference Engine AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
 
-vLLM is an open-source, high-throughput, and low-latency LLM serving engine designed to maximize GPU utilization. Its core breakthrough is **PagedAttention**, which manages attention key-value (KV) cache memory in non-contiguous virtual memory blocks (analogous to virtual memory pages in operating systems), virtually eliminating KV cache memory fragmentation. Together with **continuous batching** (iteration-level scheduling) and **chunked prefill**, vLLM delivers up to 24x higher throughput than standard HuggingFace Transformers.
-
-Claude operates as a Principal AI Infrastructure & LLM Platform Engineer, specializing in **vLLM multi-GPU tensor parallelism**, **KV cache memory sizing (`gpu_memory_utilization`)**, **quantization engines (AWQ, GPTQ, FP8)**, **speculative decoding**, and **OpenAI-compatible REST API deployments**.
-
-### vLLM PagedAttention & Serving Topology
+vLLM is an open-source **high-throughput LLM serving engine**. **PagedAttention** stores KV cache in non-contiguous blocks (OS-page analogy), cutting fragmentation. **Continuous batching** schedules at iteration granularity; **chunked prefill** (default on V1 when possible) interleaves long prefills with decode so TTFT spikes do not starve live streams. Agents size **GPU memory utilization vs max model length vs concurrency**, expose the **OpenAI-compatible** HTTP API, and treat preemption warnings as capacity signals—not noise.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    vLLM Engine Topology                     │
+│                    vLLM engine topology                       │
 │                                                             │
-│  Client Ingress (OpenAI-Compatible REST / gRPC API)         │
-│  ├── /v1/chat/completions | /v1/completions | /v1/embeddings│
-│  └── Streaming Server-Sent Events (SSE) Token Emitter       │
+│  Ingress: OpenAI-compatible HTTP                            │
+│  ├── /v1/chat/completions | /v1/completions | /v1/models    │
+│  ├── /health  (+ metrics / Prometheus in prod)              │
+│  └── SSE token streaming                                    │
 │                                                             │
-│  Scheduler & Cache Engine (PagedAttention)                  │
-│  ├── Iteration-Level Continuous Batching (Preempt/Schedule) │
-│  ├── Virtual Block Table: Logical Tokens ──> Physical Blocks│
-│  └── KV Cache Memory Manager (Near-Zero Allocation Waste)   │
+│  Scheduler + PagedAttention                                 │
+│  ├── Continuous batching (preempt / recompute when KV full) │
+│  ├── Block table: logical tokens → physical KV blocks       │
+│  └── Chunked prefill + max_num_batched_tokens budget        │
 │                                                             │
-│  Execution Engine (Model Runner / Worker Pool)              │
-│  ├── Tensor Parallelism (Ray / PyTorch Distributed NCCL)    │
-│  ├── Chunked Prefill (Interleave Prefill & Decode Passes)   │
-│  └── Optimized Kernels (FlashAttention-2 / FlashInfer / CUTLASS)│
+│  Workers                                                    │
+│  ├── Tensor parallel (NCCL) / optional pipeline parallel    │
+│  ├── Quantization: awq | gptq | fp8 | bitsandbytes          │
+│  └── FlashAttention / FlashInfer kernels                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Optimal GPU Memory Budgeting**: Always calculate `gpu-memory-utilization` based on available VRAM, context window (`max-model-len`), and expected concurrency. Never leave default memory allocation unmonitored in production containers.
-2. **Multi-GPU Tensor Parallel Scaling**: Scale across multiple local GPUs using `--tensor-parallel-size <N>`. Ensure NCCL environment flags (`NCCL_DEBUG=INFO`, `NCCL_IGNORE_DISABLED_P2P=1` when on non-NVLink consumer GPUs) are configured properly.
-3. **Quantization & Prefill Tuning**: Match model architecture to optimal quantization (`awq`, `gptq`, `fp8`, `bitsandbytes`). For high-concurrency or long-prompt workloads, enable `--enable-chunked-prefill` to prevent time-to-first-token (TTFT) spikes from stalling running decodes.
-4. **Resilient Production Health Checks**: Probe `/health` and `/v1/models` endpoints to verify engine readiness before routing user traffic.
+**Use when**
+
+- Serving one or few dense LLMs with high concurrency on NVIDIA (or supported) GPUs.
+- Drop-in OpenAI API compatibility for apps already on `@openai-api` clients.
+- Need continuous batching + KV paging beyond naïve `@huggingface-transformers` `generate`.
+
+**Do not use when**
+
+- No GPU / tiny CPU-only demos → Transformers pipeline or cloud API.
+- Training or LoRA research loops → `@pytorch` / `@huggingface-transformers` Trainer.
+- Multi-model routing, auth, and quotas are the product → put a gateway in front; vLLM is the engine, not the full platform.
 
 ---
 
-## Production Python & Bash Automation: vLLM Server Deployment
+## Operational Capabilities & Agent Directives
 
-### 1. Production Docker / Shell Startup Script (`start_vllm.sh`)
+1. Prefer **`vllm serve <model>`** (current CLI) over ad-hoc imports for production processes.
+2. Size **`--gpu-memory-utilization`** (default **0.92**) with headroom for CUDA graphs / NCCL; do **not** push ≥0.95 on multi-tenant boxes.
+3. Cap **`--max-model-len`** to the product context you actually serve—unused context burns KV.
+4. On multi-GPU: `--tensor-parallel-size N` with Docker `--ipc=host` and adequate `--shm-size`; debug hangs with `NCCL_DEBUG=INFO`.
+5. Tune **`--max-num-batched-tokens`**: lower (~2048) favors ITL; higher (>8192) favors throughput/TTFT on small models / large GPUs. Chunked prefill is on by default in V1 when possible.
+6. Treat **preemption** logs as KV pressure: raise util / TP, or lower `max_num_seqs` / context—not as a silent retry loop.
+7. Health-gate traffic: `curl -f /health` and `/v1/models` before attaching load balancers.
+8. Gated Hub weights: pass token via env (`HF_TOKEN`)—never commit credentials; local OpenAI clients may use a placeholder api_key only when the server does not auth.
+
+---
+
+## Production Example: serve + streaming client
+
+`start_vllm.sh`:
 
 ```bash
 #!/usr/bin/env bash
-# Production vLLM Deployment Script with Tensor Parallelism & Memory Guards
 set -euo pipefail
 
-MODEL_NAME="${MODEL_NAME:-mistralai/Mistral-7B-Instruct-v0.3}"
-SERVED_MODEL_NAME="${SERVED_MODEL_NAME:-mistral-7b}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}"
+SERVED_MODEL_NAME="${SERVED_MODEL_NAME:-qwen2.5-7b}"
 PORT="${PORT:-8000}"
 TP_SIZE="${TP_SIZE:-1}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.90}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
 
-echo "[1/3] Validating NVIDIA GPU & CUDA environment..."
 nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader
+export VLLM_LOGGING_LEVEL="${VLLM_LOGGING_LEVEL:-INFO}"
 
-echo "[2/3] Configuring NCCL for optimal communication..."
-export NCCL_BUFFSIZE=2097152
-export VLLM_LOGGING_LEVEL=INFO
-
-echo "[3/3] Launching vLLM OpenAI-compatible server..."
-exec python3 -m vllm.entrypoints.openai.api_server \
-  --model "$MODEL_NAME" \
+exec vllm serve "$MODEL_NAME" \
   --served-model-name "$SERVED_MODEL_NAME" \
   --host 0.0.0.0 \
   --port "$PORT" \
   --tensor-parallel-size "$TP_SIZE" \
   --gpu-memory-utilization "$GPU_MEM_UTIL" \
   --max-model-len "$MAX_MODEL_LEN" \
-  --enable-chunked-prefill \
-  --trust-remote-code
+  --dtype auto
 ```
 
-### 2. High-Throughput Streaming Client (`vllm_client.py`)
+Streaming client:
 
 ```python
-"""Async OpenAI-compatible streaming client for vLLM inference."""
+"""Async OpenAI-compatible client against a local vLLM server."""
+from __future__ import annotations
+
 import asyncio
+import os
+
 from openai import AsyncOpenAI
 
-async def stream_chat(prompt: str, base_url: str = "http://localhost:8000/v1") -> str:
-    client = AsyncOpenAI(base_url=base_url, api_key="EMPTY")
-    
-    response = await client.chat.completions.create(
-        model="mistral-7b",
+
+async def stream_chat(prompt: str) -> str:
+    base = os.environ.get("VLLM_BASE_URL", "http://127.0.0.1:8000/v1")
+    # Server without auth: placeholder key required by SDK shape only
+    client = AsyncOpenAI(base_url=base, api_key=os.environ.get("VLLM_API_KEY", "EMPTY"))
+    model = os.environ.get("VLLM_MODEL", "qwen2.5-7b")
+
+    stream = await client.chat.completions.create(
+        model=model,
         messages=[
-            {"role": "system", "content": "You are a concise, high-efficiency assistant."},
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": "You are a concise assistant."},
+            {"role": "user", "content": prompt},
         ],
         temperature=0.2,
         max_tokens=512,
-        stream=True
+        stream=True,
     )
-    
-    collected_tokens = []
-    async for chunk in response:
+    parts: list[str] = []
+    async for chunk in stream:
         delta = chunk.choices[0].delta.content or ""
         print(delta, end="", flush=True)
-        collected_tokens.append(delta)
+        parts.append(delta)
     print()
-    return "".join(collected_tokens)
+    return "".join(parts)
+
 
 if __name__ == "__main__":
-    asyncio.run(stream_chat("Explain PagedAttention in three crisp bullet points."))
+    asyncio.run(stream_chat("Explain PagedAttention in three bullets."))
+```
+
+Recipes:
+
+```bash
+# FP8 / quantized path when weights support it
+vllm serve Qwen/Qwen2.5-7B-Instruct --quantization fp8 --gpu-memory-utilization 0.85
+
+# 4-GPU TP for larger instruct weights
+vllm serve meta-llama/Llama-3.1-70B-Instruct --tensor-parallel-size 4 --max-model-len 16384
+
+curl -f http://127.0.0.1:8000/health
+curl -s http://127.0.0.1:8000/v1/models | head
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **`CUDA out of memory (OOM)` during model load** | Model weights + initial KV cache allocation exceed `gpu_memory_utilization * total_VRAM`. | 1. Decrease `--gpu-memory-utilization` (e.g., from `0.90` to `0.80`).<br>2. Restrict context window with `--max-model-len 4096`.<br>3. Switch to quantized model (`--quantization awq` or `fp8`). |
-| **`ValueError: The model's max seq len is X, but --max-model-len is Y`** | Requested sequence length exceeds architectural or positional limits of the tokenizer/model. | Align `--max-model-len` with model specifications or explicitly pass `--rope-scaling` when extending context. |
-| **Multi-GPU hang / NCCL timeout on startup** | P2P communication blocked between PCIe lanes or container missing IPC flags. | 1. Launch Docker with `--ipc=host --shm-size=16g`.<br>2. Set `export NCCL_P2P_DISABLE=1` if PCIe topologies do not support direct peer access.<br>3. Verify all GPUs share identical architectures. |
-| **High Time-to-First-Token (TTFT) during concurrent load** | Massive prefill requests saturate GPU compute, starving decode phases of existing streams. | Pass `--enable-chunked-prefill` and configure `--max-num-batched-tokens 2048` to chop long prompts into manageable prefill slices. |
+| CUDA OOM at load | Weights + KV reserve > util × VRAM | Lower `--gpu-memory-utilization`; shorten `--max-model-len`; quantize; increase TP |
+| OOM / `ncclUnhandledCudaError` without `OutOfMemoryError` | NCCL buffers after KV pool filled | Lower blocks override / util; ensure NCCL init accounted; upgrade vLLM/NCCL |
+| Preemption warnings / latency spikes | KV cache thrash under concurrency | Lower `max_num_seqs`; raise util/TP; confirm chunked prefill; watch KV metrics |
+| High TTFT under load | Long prefills starving decode | Keep chunked prefill; tune `max_num_batched_tokens` |
+| Multi-GPU hang / NCCL timeout | Missing IPC/shm or bad P2P topology | Docker `--ipc=host --shm-size=16g`; `NCCL_P2P_DISABLE=1` on broken PCIe; matching GPU SKUs |
+| `max-model-len` ValueError | Requested len > model / rope limit | Align with model card; use documented rope-scaling only when supported |
+| Hub 401 on gated model | Missing HF token | `HF_TOKEN` from secret store; accept license |
+| Client 404 model name | `--served-model-name` ≠ client `model` | Align names in `/v1/models` |
 
 ---
 
-## Command Line Syntax & Operational Recipes
+## Best Practices
 
-```bash
-# 1. Start single-GPU FP8 quantized server with high-performance metrics
-vllm serve Qwen/Qwen2.5-7B-Instruct --dtype auto --quantization fp8 --gpu-memory-utilization 0.85
+1. Log startup line for `# GPU blocks` — that is your KV budget.
+2. Pin model revision / snapshot for reproducibility; record vLLM version in deploy manifests (`@docker` / `@kubernetes`).
+3. Load-test with realistic prompt/decode lengths before raising concurrency SLOs.
+4. Separate staging TP/util experiments from prod; change one capacity knob at a time.
+5. Put auth, quotas, and TLS at the gateway—do not assume open `0.0.0.0` is safe.
 
-# 2. Start multi-GPU tensor parallel server on 4 GPUs
-vllm serve meta-llama/Llama-3.1-70B-Instruct --tensor-parallel-size 4 --max-model-len 16384
+---
 
-# 3. Query engine health and readiness
-curl -f http://localhost:8000/health
+## Limitations
 
-# 4. Benchmarking inference throughput with synthetic traffic
-python3 -m vllm.entrypoints.openai.benchmarks.benchmark_serving \
-  --backend vllm \
-  --model mistral-7b \
-  --dataset-name sharegpt \
-  --num-prompts 200 \
-  --request-rate 10
-```
+- Engine quality tracks model + tokenizer chat template parity from training (`@huggingface-transformers`).
+- Not a training framework; not a multi-model control plane.
+- Hardware/driver/NCCL skew causes non-portable flags across fleets.
+- Stop and ask if GPU SKU count, target context, or concurrency SLO are unspecified.
+
+---
+
+## Related Skills
+
+- `@huggingface-transformers` — model export, chat templates, fine-tunes
+- `@pytorch` — CUDA/AMP fundamentals and NCCL-adjacent debugging context
+- `@openai-api` — client patterns against compatible servers
+- `@docker` — GPU container flags (`ipc`, `shm-size`, device mounts)
+- `@mlflow` — record serving config experiments / eval metrics
 
 ---
 
 ## Agent Operational Directive
 
-> **MANDATORY**: When provisioning vLLM instances in multi-tenant environments, never set `gpu-memory-utilization` above `0.95`. Always reserve VRAM headroom for runtime CUDA kernel spikes and dynamic KV cache expansion.
+> **MANDATORY**: Budget KV with `gpu-memory-utilization` and `max-model-len` before promising concurrency. Prefer `vllm serve`. Health-check before routing traffic. Treat preemption as capacity failure. Never embed Hub or API secrets in scripts—read from the environment. Keep served model name aligned with clients.
+
+---
+
+## Source anchors (research)
+
+- [vLLM `serve` CLI / CacheConfig](https://docs.vllm.ai/en/stable/cli/serve/)
+- [Optimization: preemption & chunked prefill](https://docs.vllm.ai/en/latest/configuration/optimization/)
+- [Troubleshooting OOM / NCCL notes](https://docs.vllm.ai/en/latest/usage/troubleshooting/)

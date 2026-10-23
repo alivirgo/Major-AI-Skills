@@ -1,62 +1,76 @@
 ---
 name: vegas-pro
-description: "Automate VEGAS Pro timelines and rendering with its C# scripting API; troubleshoot OpenFX and hardware encoding."
+description: "Automate MAGIX VEGAS Pro timelines with ScriptPortal.Vegas C# scripting, batch region renders, and NVENC/OFX crash triage without inventing licenses."
 category: video-editing
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["vegas-pro", "scriptportal-vegas", "csharp-scripting", "openfx-ofx", "nvenc-acceleration", "video-editing", "claude"]
+tags: ["vegas-pro", "scriptportal", "csharp", "openfx", "nvenc", "windows-nle"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # MAGIX VEGAS Pro NLE & Automation AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-MAGIX VEGAS Pro 21/22 is a high-speed non-linear editing (NLE) and audio-visual post-production platform for Windows. Built on an asynchronous timeline architecture, VEGAS Pro combines **32-bit floating-point video processing**, the **OpenFX (OFX) plugin standard**, hardware-accelerated **NVENC / Intel QSV / AMD VCE encoding**, **ASIO multi-channel audio routing**, and the **VEGAS .NET Scripting API (`ScriptPortal.Vegas.dll`)**. Claude operates as a Principal Video Systems Architect and VEGAS Pro Automation Specialist, specializing in **C# / .NET Scripting API development**, **GPU memory & NVENC render crash diagnostics**, **Variable Frame Rate (VFR) remediation**, and **automated batch export workflows**.
 
-### VEGAS Pro Engine & ScriptPortal .NET Stack
+MAGIX **VEGAS Pro** (pin e.g. **21 / 22 / 23**) on Windows combines a multi-track timeline, **32-bit float** processing, **OpenFX (OFX)** effects, hardware encoders (**NVENC / QSV / VCE**), and **`.NET` scripting** via **`ScriptPortal.Vegas`**. Entry point: `EntryPoint.FromVegas(Vegas vegas)` in compile-on-demand `.cs` under the Script Menu, or `/SCRIPT` CLI launch. Prefer **Studio/driver** discipline for GPU renders.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 VEGAS Pro System Architecture               │
+│                 VEGAS Pro edit → script → render              │
 │                                                             │
-│  Timeline & Media Organization Layer                        │
-│  ├── Multi-Track Timeline (A/B Roll, Ripple, Nested Projects│
-│  ├── Project Media Pool (Bins, Smart Collections, Tags)     │
-│  └── Trimmer & Event Pan/Crop (Keyframed Bézier Masking)    │
+│  Timeline                                                   │
+│  ├── Tracks / Events / Regions / Markers                    │
+│  ├── Media Pool / nested projects                           │
+│  └── Pan/Crop, OFX, audio (ASIO capable)                    │
 │                                                             │
-│  Processing Engine & Hardware Acceleration                  │
-│  ├── 32-bit Float Video Engine & ACES 1.2 Color Management  │
-│  ├── OpenFX (OFX) Video Effects & Transitions Host          │
-│  └── Hardware Encoders (NVIDIA NVENC, Intel QSV, AMD VCE)   │
+│  Automation                                                 │
+│  ├── ScriptPortal.Vegas (C# compile-on-demand)              │
+│  ├── RenderArgs + RenderTemplate enumeration                │
+│  └── vegaspro.exe /SCRIPT:"…" [/SCRIPTARGS]                 │
 │                                                             │
-│  Automation & .NET Scripting Core                           │
-│  ├── `ScriptPortal.Vegas.dll` (.NET Framework 4.8 / C# / JS)│
-│  └── CLI Script Execution (`vegaspro.exe -SCRIPT:...`)      │
+│  Hardware                                                   │
+│  ├── GPU OFX + Dynamic RAM Preview                          │
+│  └── NVENC/QSV/VCE encode paths                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **`ScriptPortal.Vegas` C# Script Development**: Author compiled C# scripts for VEGAS Pro automating track creation, marker generation, batch region rendering, and event alignment.
-2. **GPU Hardware Acceleration & Render Crash Triage**: Resolve access violations (`0x80004005`) and freeze anomalies during NVENC renders by calibrating Dynamic RAM Preview buffers and updating to NVIDIA Studio Drivers.
-3. **Variable Frame Rate (VFR) Audio Sync Triage**: Identify smartphone and OBS screen recordings with unstable frame timings and script automated FFmpeg Constant Frame Rate (CFR) transcodes.
-4. **Batch Rendering Automation**: Construct automated scripts iterating over all timeline Regions and exporting them into distinct MP4/ProRes media files.
+**Use when**
+
+- Batch region/marker renders, track scaffolding, event alignment via C#.
+- Triaging NVENC/OFX crashes, VFR sync drift, corrupted prefs.
+- Windows-centric NLE automation where Premiere/FCP are not the house tool.
+
+**Do not use when**
+
+- macOS Final Cut / Compressor pipelines → `@final-cut-pro`.
+- Lossless GOP trim only → `@losslesscut`.
+- Requests for cracked OFX licenses or serial keys → refuse.
 
 ---
 
-## Production C# Automation: Automated Region Batch Exporter Script (`ScriptPortal.Vegas`)
+## Operational Capabilities & Agent Directives
 
-Save this script as `BatchRenderRegions.cs` inside `%USERPROFILE%\Documents\Vegas Script Menu\`:
+1. **Script entry**: `public class EntryPoint { public void FromVegas(Vegas vegas) { … } }` with `using ScriptPortal.Vegas;`.
+2. **Templates by enumeration**: never hardcode a single template string without scanning `vegas.Renderers` / `Templates` and failing clearly if missing.
+3. **Region batch**: iterate `vegas.Project.Regions` with `RenderArgs.Start/Length`.
+4. **VFR hygiene**: smartphone/OBS/Zoom sources → CFR transcode (`@ffmpeg`) before editorial sync trust.
+5. **Render crash triage**: set **Dynamic RAM Preview max = 0 MB** during heavy NVENC/OFX renders; prefer NVIDIA **Studio** drivers.
+6. **Prefs reset**: Ctrl+Shift at launch → clear cached application data when stuck on “Creating Windows…”.
+7. **Version paths**: Script Menu `%USERPROFILE%\Documents\Vegas Script Menu\`; prefs under `%APPDATA%\VEGAS Pro\<ver>\` — parameterize major version.
+
+---
+
+## Production Example: region batch exporter (C#)
+
+Save as `BatchRenderRegions.cs` in the Vegas Script Menu:
 
 ```csharp
-// ==============================================================================
-// MAGIX VEGAS Pro .NET C# Automation Script: Automated Region Batch Exporter
-// Iterates through all Timeline Regions and renders each to an MP4 video file.
-// ==============================================================================
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -64,18 +78,18 @@ using ScriptPortal.Vegas;
 
 public class EntryPoint {
     public void FromVegas(Vegas vegas) {
-        string outputDirectory = @"C:\Exports\BatchRegions\";
+        string outputDirectory = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "VegasExports", "BatchRegions");
         Directory.CreateDirectory(outputDirectory);
 
-        // 1. Find Target Render Template (e.g. MAGIX AVC/AAC MP4 - Internet HD 1080p 29.97fps)
         Renderer targetRenderer = null;
         RenderTemplate targetTemplate = null;
-
         foreach (Renderer r in vegas.Renderers) {
-            if (r.FileTypeName.Contains("MAGIX AVC/AAC MP4")) {
+            if (r.FileTypeName != null && r.FileTypeName.IndexOf("MAGIX AVC/AAC MP4", StringComparison.OrdinalIgnoreCase) >= 0) {
                 targetRenderer = r;
                 foreach (RenderTemplate t in r.Templates) {
-                    if (t.Name.Contains("Internet HD 1080p")) {
+                    if (t.Name != null && t.Name.IndexOf("Internet HD 1080p", StringComparison.OrdinalIgnoreCase) >= 0) {
                         targetTemplate = t;
                         break;
                     }
@@ -83,71 +97,99 @@ public class EntryPoint {
                 break;
             }
         }
-
         if (targetRenderer == null || targetTemplate == null) {
-            MessageBox.Show("Error: MAGIX AVC 1080p render template not found.");
+            MessageBox.Show("MAGIX AVC 1080p template not found. Pick a local template name.");
+            return;
+        }
+        if (vegas.Project.Regions.Count == 0) {
+            MessageBox.Show("No regions. Mark regions first (R).");
             return;
         }
 
-        // 2. Iterate Over All Timeline Regions
-        int regionCount = vegas.Project.Regions.Count;
-        if (regionCount == 0) {
-            MessageBox.Show("No regions found on timeline. Mark regions first (press R).");
-            return;
-        }
-
-        int successCount = 0;
+        int ok = 0;
         foreach (Region region in vegas.Project.Regions) {
-            string sanitizedLabel = string.IsNullOrEmpty(region.Label) ? "Region_" + successCount : region.Label;
-            string outputPath = Path.Combine(outputDirectory, sanitizedLabel + ".mp4");
-
-            // Execute Region Render
-            RenderArgs args = new RenderArgs();
-            args.OutputFile = outputPath;
-            args.RenderTemplate = targetTemplate;
-            args.Start = region.Position;
-            args.Length = region.Length;
-
-            RenderStatus status = vegas.Render(args);
-            if (status == RenderStatus.Complete) {
-                successCount++;
-            }
+            string label = string.IsNullOrEmpty(region.Label) ? ("Region_" + ok) : region.Label;
+            foreach (char c in Path.GetInvalidFileNameChars())
+                label = label.Replace(c, '_');
+            var args = new RenderArgs {
+                OutputFile = Path.Combine(outputDirectory, label + ".mp4"),
+                RenderTemplate = targetTemplate,
+                Start = region.Position,
+                Length = region.Length
+            };
+            if (vegas.Render(args) == RenderStatus.Complete) ok++;
         }
-
-        MessageBox.Show(string.Format("Successfully rendered {0} of {1} regions to {2}", successCount, regionCount, outputDirectory));
+        MessageBox.Show(string.Format("Rendered {0}/{1} → {2}", ok, vegas.Project.Regions.Count, outputDirectory));
     }
 }
+```
+
+CLI pattern (versioned install path varies):
+
+```bat
+"C:\Program Files\VEGAS\VEGAS Pro 23.0\Vegas230.exe" /SCRIPT:"%USERPROFILE%\Documents\Vegas Script Menu\BatchRenderRegions.cs"
+```
+
+Validation:
+
+```text
+1. Place regions; confirm template exists in File → Render As list
+2. Dynamic RAM Preview = 0 for stress renders
+3. Spot-check A/V sync on phone/OBS footage (CFR?)
+4. Re-scan OFX if plugins missing after crash
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Render Crashes with `Access Violation (0x80004005)`** | Outdated GPU driver or conflict between Dynamic RAM Preview and OpenFX GPU processing. | 1. In *Options $\rightarrow$ Preferences $\rightarrow$ Video*, set **Dynamic RAM Preview max** to `0 MB` during rendering.<br>2. Update GPU to the latest **NVIDIA Studio Driver**.<br>3. In Preferences $\rightarrow$ File I/O, enable **Legacy AVC decoding**. |
-| **Audio and Video Drift Out of Sync on MP4 Clips** | Source footage was recorded with Variable Frame Rate (VFR) (e.g. iPhone, Zoom, OBS). | Pre-transcode media to CFR using FFmpeg:<br>`ffmpeg -i input.mp4 -c:v libx264 -crf 18 -preset fast -vsync cfr -c:a aac output_cfr.mp4`. |
-| **VEGAS Pro Hangs on Startup: `Creating Windows...`** | Corrupted user preferences cache or broken VST/OFX plugin scan. | Launch VEGAS Pro while holding `Ctrl + Shift` $\rightarrow$ Check **Delete all cached application data** $\rightarrow$ Click Yes. |
-| **OFX Plugin Throws Missing License Watermark** | OpenFX licensing daemon not recognized by host process. | In VEGAS Pro $\rightarrow$ Tools $\rightarrow$ Re-scan OFX Plugins. |
+| Access violation / NVENC crash | VRAM fight with RAM Preview / OFX | Dynamic RAM Preview 0 MB; Studio driver; simplify GPU FX |
+| A/V drift on phone/OBS clips | Variable frame rate | `ffmpeg … -vsync cfr` (or fps filter) pre-transcode |
+| Hang “Creating Windows…” | Corrupt prefs / plugin scan | Ctrl+Shift launch → delete cached app data |
+| OFX watermark / missing | License daemon / scan | Tools → Re-scan OFX; valid license (no cracks) |
+| Template not found in script | Localized/renamed template | Enumerate and match; let operator pick |
+| Script won’t compile | Missing `ScriptPortal.Vegas` ref | Run as `.cs` in Script Menu or reference DLL from install dir |
 
 ---
 
-## Command Line Syntax & Batch Processing
+## Best Practices
 
-```bash
-# 1. Execute C# Script via VEGAS Pro Command Line
-"C:\Program Files\VEGAS\VEGAS Pro 22.0\vegaspro.exe" -SCRIPT:"C:\Scripts\BatchRenderRegions.cs"
+1. Sanitize region labels for filenames; refuse overwrite unless flagged.
+2. Log `RenderStatus` and HRESULT/`ErrorMessage` when using progress events.
+3. Keep project media on fast local/SSD for timeline scrub; network for archive.
+4. Document VEGAS major version beside every script.
+5. Prefer hardware encode presets the studio validates; soft-fail if missing.
 
-# 2. Reset VEGAS Pro Preferences via CLI (Delete Cache Folder)
-rmdir /s /q "%LOCALAPPDATA%\VEGAS Pro\22.0"
-```
+---
 
-### Essential File Locations
-- **Scripting Directory**: `%USERPROFILE%\Documents\Vegas Script Menu\`
-- **Project Files**: `*.veg`
-- **Application Preferences**: `%APPDATA%\VEGAS Pro\22.0\`
+## Limitations
+
+- Scripting API surface evolves per major version — verify against installed Scripting API summary.
+- Not a substitute for Premiere Productions / FCP Libraries collaboration models.
+- GPU encode quality/compatibility varies by driver and template.
+- Stop and ask if render template name, GPU vendor, or project frame rate is unknown.
+
+---
+
+## Related Skills
+
+- `@ffmpeg` — CFR fixes, proxies, loudness
+- `@adobe-premiere-pro` — alternate Windows/mac NLE
+- `@davinci-resolve` — color finish
+- `@losslesscut` — lossless selects before VEGAS ingest
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When rendering long or complex timelines in VEGAS Pro, set "Dynamic RAM Preview max" to 0 MB in Video Preferences to release GPU VRAM for the hardware NVENC encoder and prevent render crashes.
+
+> **MANDATORY**: Enumerate render templates and fail clearly if missing. For heavy GPU renders, zero Dynamic RAM Preview. Preflight VFR sources to CFR. Never provide cracked serials or OFX license bypasses.
+
+---
+
+## Source anchors (research)
+
+- [VEGAS Pro 23 — Using Scripting](https://help.magix-hub.com/video/vegas/23/en/content/topics/11-autoscript/scripting_vegas.htm)
+- [Scripting FAQ](https://help.magix-hub.com/video/vegas/23/en/content/topics/external/scriptfaq_general.htm)
+- [VEGAS Pro Scripting API Summary (22)](https://help.magix-hub.com/video/vegas/22/en/content/topics/external/vegasscriptapi.html)

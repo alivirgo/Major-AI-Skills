@@ -1,176 +1,226 @@
 ---
 name: final-cut-pro
-description: "Automate Final Cut Pro interchange with FCPXML, prepare Motion or Compressor workflows, and troubleshoot media rendering."
+description: "Author valid FCPXML for Final Cut Pro, manage Library render caches, and drive Apple Compressor CLI delivers without inventing credentials."
 category: video-editing
 risk: safe
 source: self
 source_type: self
 date_added: "2026-08-26"
-tags: ["final-cut-pro", "fcpxml-v11", "apple-silicon-media-engine", "prores-raw", "magnetic-timeline", "compressor-cli", "claude"]
+tags: ["final-cut-pro", "fcpxml", "compressor", "prores", "magnetic-timeline", "apple-silicon"]
 tools: ["claude", "cursor", "gemini", "codex"]
 ---
 
 # Apple Final Cut Pro NLE AI Skill Guide (Claude)
 
 ## Overview & Engine Architecture
-Apple Final Cut Pro is a non-linear video editing (NLE) application engineered exclusively for macOS, Metal, and the Apple Silicon Media Engine (dedicated hardware ProRes/HEVC encode/decode accelerators). Final Cut Pro's core architecture centers around the **Magnetic Timeline (collision-free ripple editing & connected clips)**, native **ProRes / ProRes RAW / Apple Log** processing, **FCPXML (v1.11 / v1.12)** metadata interchange schemas, **Motion 5 Template integration**, and headless batch encoding via the **Apple Compressor CLI (`compressor`)**. Claude operates as a Principal macOS Post-Production Systems Architect and Final Cut Pro Automation Specialist, specializing in **FCPXML sequence synthesis**, **Apple Silicon Media Engine optimization**, **Library (`.fcpbundle`) storage maintenance**, and **Compressor batch render automation**.
 
-### Final Cut Pro Engine & FCPXML Dataflow Stack
+Final Cut Pro (macOS) centers on the **Magnetic Timeline** (primary storyline + connected clips), **Libraries (`.fcpbundle`)**, Roles, and Apple Silicon Media Engine (ProRes/HEVC). Programmatic authoring is **file-based FCPXML** (versioned DTD — e.g. **1.11 → 1.12 (FCP 10.8)** → **1.13 (FCP 11)**; newer hosts may export still higher). Headless encodes use **Apple Compressor CLI**. Motion templates live under `~/Movies/Motion Templates.localized/`.
+
+FCP 11+ highlights agents should know: **Magnetic Mask**, **Transcribe to Captions** (Apple silicon + Sequoia+), **spatial video**, higher timeline fps (90/100/120).
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Final Cut Pro Architecture                  │
+│                 Final Cut Pro interchange loop                │
 │                                                             │
-│  Magnetic Timeline & Editing Core                           │
-│  ├── Primary Storyline & Connected B-Roll Audio/Video Clips │
-│  ├── Compound Clips, Multicam Sync (Up to 64 Angles)        │
-│  └── Object Tracker & Cinematic Mode AI Depth Maps          │
+│  Editorial                                                  │
+│  ├── Library.fcpbundle → Events → Projects                  │
+│  ├── Magnetic Timeline / Multicam / Compound clips          │
+│  └── Roles, captions, Motion titles                         │
 │                                                             │
-│  Apple Silicon & Metal Hardware Pipeline                    │
-│  ├── Apple Silicon Media Engine (Hardware ProRes Accelerator│
-│  ├── Metal 3 Shaders & Wide Gamut HDR (Rec.2020 PQ / HLG)   │
-│  └── Background Render Cache & Automatic Optical Flow Warp  │
+│  Automation                                                 │
+│  ├── FCPXML (rational times, resources, spine)              │
+│  ├── DTD gate via xmllint against host DTD                  │
+│  └── Compressor CLI (.cmprstng / batch)                     │
 │                                                             │
-│  Interchange & Automation Subsystem                         │
-│  ├── FCPXML Interchange Engine (DTD v1.11 / v1.12 XML)      │
-│  ├── Apple Compressor Command Line (`compressor -batchname`)│
-│  └── Motion 5 Template Pipeline (`~/Movies/Motion Templates`)│
+│  Media engine                                               │
+│  ├── ProRes / ProRes RAW / proxy media                      │
+│  └── Background render + optical flow caches                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Operational Capabilities & Agent Directives
+## When to use / when not to
 
-1. **Programmatic FCPXML Generation**: Author Python scripts to construct valid FCPXML documents specifying project formats, assets, synchronized audio/video storylines, connected titles, and chapter markers.
-2. **Library (`.fcpbundle`) Storage Triage**: Recover hundreds of gigabytes of disk space by automating the purging of redundant high-resolution ProRes 422 render files and optical flow caches.
-3. **Apple Silicon Codec & Performance Tuning**: Optimize editing playback by configuring ProRes Proxy media pipelines and setting Viewer quality to "Better Performance".
-4. **Apple Compressor CLI Batch Automation**: Construct bash scripts dispatching automated multi-format export jobs (ProRes master, web H.264, YouTube 4K) using the `compressor` command line tool.
+**Use when**
+
+- Generating/validating FCPXML for assembly, markers, roles, or captions handoff.
+- Library hygiene (delete generated render files) and proxy workflows.
+- Batch delivery via Compressor presets.
+
+**Do not use when**
+
+- Windows-only NLE automation → `@vegas-pro` / `@adobe-premiere-pro` / `@davinci-resolve`.
+- Lossless GOP cutting without Magnetic Timeline → `@losslesscut`.
+- Inventing Apple ID / App Store credentials for Compressor entitlement prompts → refuse; operator signs in locally.
 
 ---
 
-## Production Python Automation: Automated FCPXML v1.11 Timeline Generator
+## Operational Capabilities & Agent Directives
 
-Save this script as `generate_fcpxml.py` to programmatically build an importable Final Cut Pro project XML file:
+1. **Match FCPXML `version` to target FCP**; newer XML will not import into older FCP (“DTD not recognized”). Prefer exporting from the oldest required host or a known converter.
+2. **Rational times**: use frame fractions (`100/2400s` for 24fps family, `100/3000s` for 30fps family)—avoid float seconds for editorial accuracy when possible.
+3. **Resources first**: `format` + `asset` IDs, then `library` → `event` → `project` → `sequence` → `spine`.
+4. **Library size**: purge render/optimized/proxy via **File → Delete Generated Library Files**; disable background render when disk is constrained.
+5. **Compressor CLI**: encode with documented `-settingpath` `.cmprstng` and output dir; expect first-run App Store entitlement UI on some machines.
+6. **Proxies**: Proxy Preferred for ProRes RAW / 8K when storage bandwidth saturates.
+7. **Motion templates**: missing titles → check `~/Movies/Motion Templates.localized/` paths.
+
+---
+
+## Production Example: FCPXML 1.11-compatible assembly generator
 
 ```python
-"""
-Apple Final Cut Pro: Automated FCPXML v1.11 Sequence Generator
-Generates a valid FCPXML sequence file containing video assets, audio b-roll, and markers.
-"""
+"""Generate a minimal importable FCPXML (declare version your target FCP accepts)."""
+from __future__ import annotations
 
 import sys
 import xml.etree.ElementTree as ET
 
-def generate_fcpxml_project(project_name: str, output_xml_path: str):
-    print(f"--- [GENERATING APPLE FCPXML PROJECT: {project_name}] ---")
 
-    # 1. Root Element & DTD Version
-    root = ET.Element("fcpxml", {"version": "1.11"})
-
-    # 2. Resources Element (Formats and Media Assets)
+def generate_fcpxml(project_name: str, asset_uri: str, out_path: str, version: str = "1.11") -> None:
+    root = ET.Element("fcpxml", {"version": version})
     resources = ET.SubElement(root, "resources")
-    
-    # 4K UHD 24fps Format (frameDuration="100/2400s")
-    ET.SubElement(resources, "format", {
-        "id": "r1",
-        "name": "FFVideoFormat3840x2160p24",
-        "frameDuration": "100/2400s",
-        "width": "3840",
-        "height": "2160",
-        "colorSpace": "1-1-1 (Rec. 709)"
-    })
-
-    # Asset Definition
-    asset = ET.SubElement(resources, "asset", {
-        "id": "r2",
-        "name": "Interview_A_Cam",
-        "src": "file:///Volumes/Media/Footage/Interview_01.mov",
-        "start": "0s",
-        "duration": "600s",
-        "hasVideo": "1",
-        "hasAudio": "1",
-        "format": "r1"
-    })
-
-    # 3. Library & Event Hierarchy
+    ET.SubElement(
+        resources,
+        "format",
+        {
+            "id": "r1",
+            "name": "FFVideoFormat3840x2160p24",
+            "frameDuration": "100/2400s",
+            "width": "3840",
+            "height": "2160",
+            "colorSpace": "1-1-1 (Rec. 709)",
+        },
+    )
+    ET.SubElement(
+        resources,
+        "asset",
+        {
+            "id": "r2",
+            "name": "Interview_A_Cam",
+            "src": asset_uri,  # file:///Volumes/...
+            "start": "0s",
+            "duration": "600s",
+            "hasVideo": "1",
+            "hasAudio": "1",
+            "format": "r1",
+        },
+    )
     library = ET.SubElement(root, "library", {"location": "file:///Volumes/Media/AutoLibrary.fcpbundle"})
     event = ET.SubElement(library, "event", {"name": "Automated_Assembly"})
     project = ET.SubElement(event, "project", {"name": project_name})
-
-    # 4. Sequence & Spine (Primary Storyline)
-    sequence = ET.SubElement(project, "sequence", {
-        "format": "r1",
-        "duration": "120s",
-        "tcStart": "0s",
-        "tcFormat": "NDF"
-    })
-
+    sequence = ET.SubElement(
+        project,
+        "sequence",
+        {"format": "r1", "duration": "60s", "tcStart": "0s", "tcFormat": "NDF"},
+    )
     spine = ET.SubElement(sequence, "spine")
-
-    # Primary Storyline Video Clip
-    clip = ET.SubElement(spine, "asset-clip", {
-        "ref": "r2",
-        "offset": "0s",
-        "name": "Interview_A_Cam_Take1",
-        "start": "10s",
-        "duration": "60s",
-        "format": "r1"
-    })
-
-    # Add Marker on Clip
-    ET.SubElement(clip, "marker", {
-        "start": "25s",
-        "duration": "100/2400s",
-        "value": "Subject begins intro statement",
-        "completed": "0"
-    })
-
-    # Write Output XML
+    clip = ET.SubElement(
+        spine,
+        "asset-clip",
+        {
+            "ref": "r2",
+            "offset": "0s",
+            "name": "Interview_A_Cam_Take1",
+            "start": "10s",
+            "duration": "60s",
+            "format": "r1",
+        },
+    )
+    ET.SubElement(
+        clip,
+        "marker",
+        {
+            "start": "25s",
+            "duration": "100/2400s",
+            "value": "Subject intro",
+            "completed": "0",
+        },
+    )
     tree = ET.ElementTree(root)
-    ET.indent(tree, space="  ", level=0)
-    tree.write(output_xml_path, encoding="utf-8", xml_declaration=True)
+    ET.indent(tree, space="  ")
+    tree.write(out_path, encoding="utf-8", xml_declaration=True)
 
-    print(f"✅ Successfully generated Final Cut Pro XML: {output_xml_path}")
-    print("To import: In Final Cut Pro, select File -> Import -> XML -> select this file.")
 
 if __name__ == "__main__":
-    out = sys.argv[1] if len(sys.argv) > 1 else "AutoAssembly_Project.fcpxml"
-    generate_fcpxml_project("Review_Assembly_V1", out)
+    out = sys.argv[1] if len(sys.argv) > 1 else "AutoAssembly.fcpxml"
+    generate_fcpxml(
+        "Review_Assembly_V1",
+        "file:///Volumes/Media/Footage/Interview_01.mov",
+        out,
+    )
+```
+
+Validation loop:
+
+```bash
+# Prefer DTD from the installed Final Cut Pro.app (do not redistribute Apple DTDs)
+# xmllint --dtdvalid /path/to/FCPXMLv1_11.dtd AutoAssembly.fcpxml
+open -a "Final Cut Pro"  # then File → Import → XML into a disposable Library
+```
+
+Compressor (illustrative; flags vary by Compressor version — confirm with `man compressor` / Help):
+
+```bash
+# Example pattern: setting file + job media + output directory
+compressor -batchname "WebDailyMaster" \
+  -jobpath "/Volumes/Media/Exports/master.mov" \
+  -settingpath "$HOME/Movies/Compressor Settings/ProRes422_4K.cmprstng" \
+  -destinationpath "/Volumes/Media/Exports/Web"
 ```
 
 ---
 
 ## Technical Troubleshooting Matrix
 
-| Issue & Failure Signature | Root Cause Analysis | Diagnostic & Resolution Pathway |
+| Signature | Likely cause | Fix path |
 | :--- | :--- | :--- |
-| **Library (`.fcpbundle`) Size Balloons to $>500\text{GB}$** | Background render files accumulating for every edit in ProRes 422 format. | 1. In Final Cut Pro, select Library in sidebar.<br>2. Select *File $\rightarrow$ Delete Generated Library Files*.<br>3. Check **Delete Render Files (All)** and click OK.<br>4. In Preferences $\rightarrow$ Playback, uncheck **Background render**. |
-| **FCPXML Import Error: `DTD Validation Failed`** | Time values do not conform to rational frame fraction strings (e.g. `100/2400s` for 24fps or `100/3000s` for 30fps). | Ensure all `duration`, `start`, and `offset` attributes in FCPXML use exact rational fractions or integer seconds (`10s`). |
-| **Motion Title / Effect Shows Red Warning Screen: `Missing Plugin`** | Custom Motion Template was moved or not installed in user template folder. | Verify template is located in `~/Movies/Motion Templates.localized/Titles/` with `.localized` extension intact. |
-| **ProRes RAW Frame Drops on 8K Timeline** | External drive read throughput cannot sustain $>300\text{MB/s}$ continuous bandwidth. | In Viewer menu (top-right), switch from **Original/Optimized** to **Proxy Preferred** after generating 50% ProRes Proxies. |
+| DTD version not recognized | XML newer than host FCP | Export/generate older FCPXML version or upgrade FCP |
+| Import fails time attributes | Non-rational / bad fractions | Use `N/Ds` frameDuration-aligned values |
+| `.fcpbundle` hundreds of GB | Render/optimized caches | Delete Generated Library Files; pause background render |
+| Red missing effect/title | Motion template path | Restore under `Motion Templates.localized` |
+| ProRes RAW playback drops | Disk bandwidth | Generate proxies; Viewer → Proxy Preferred |
+| Compressor CLI no-ops / prompts | Entitlement / wrong paths | Sign in on machine; verify `.cmprstng` and media paths |
 
 ---
 
-## Command Line Syntax & Apple Compressor Recipes
+## Best Practices
 
-```bash
-# 1. Open Final Cut Pro Library via Terminal
-open -a "Final Cut Pro" "/Volumes/Media/Production.fcpbundle"
+1. Author against a **disposable Library** until XML imports cleanly.
+2. Keep media on fast storage; Libraries can live on shared volumes with studio path conventions.
+3. Assign **Roles** (Dialogue/Music/Effects) before stems export.
+4. Document FCP + FCPXML version in every generator README.
+5. Prefer Proxy + Optimized selectively — both consume disk.
 
-# 2. Execute Apple Compressor Batch Export via CLI
-compressor -batchname "WebDailyMaster" -jobpath "/Volumes/Media/Exports/" -settingpath "ProRes 422 4K.cmprstng"
+---
 
-# 3. Read Final Cut Pro User Preferences
-defaults read com.apple.FinalCut
-```
+## Limitations
 
-### Essential File Locations
-- **FCP Libraries**: `*.fcpbundle` (macOS Packages)
-- **Motion Templates**: `~/Movies/Motion Templates.localized/`
-- **User Preferences**: `~/Library/Preferences/com.apple.FinalCut.plist`
+- AppleScript control of FCP is limited; **FCPXML import is the reliable authoring surface**.
+- DTD validation ≠ media/semantics validation — always import once.
+- AI features (Magnetic Mask, Transcribe) need Apple silicon / OS version gates.
+- Stop and ask if target FCP version, media URI scheme, or delivery preset is unknown.
+
+---
+
+## Related Skills
+
+- `@adobe-premiere-pro` — cross-NLE via FCPXML/AAF where supported
+- `@compressor` / Apple Compressor docs — batch encodes
+- `@ffmpeg` — CFR/proxy prep before import
+- `@losslesscut` — rough lossless selects before FCP ingest
 
 ---
 
 ## Agent Operational Directive
-> **MANDATORY**: When generating FCPXML documents, always express frame durations as exact rational fractions (e.g. `100/2400s` for 23.976/24fps) to prevent timeline timecode drift across NLE roundtrips.
+
+> **MANDATORY**: Emit FCPXML with a declared version compatible with the target Final Cut Pro. Prefer rational frame durations. Validate with DTD when available and always with a disposable Library import. Never invent Apple ID credentials for Compressor.
+
+---
+
+## Source anchors (research)
+
+- [Final Cut Pro release notes](https://support.apple.com/en-us/102825) (FCP 10.8 / 11.x feature & XML era)
+- [Legacy FCPXML DTDs archive](https://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/LegacyDTDsFinalCutPro/Introduction/Introduction.html)
+- Compressor CLI — local `man compressor` / Apple Help on the build machine
